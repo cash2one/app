@@ -1,0 +1,174 @@
+<extend name="Public/base" />
+<block name="body">
+<style type="text/css">
+.data-source { overflow: hidden; margin: 10px 0; }
+.data-source li { float: left; width: 200px; margin-right: 10px; }
+.c-item { margin: 10px 0; overflow: hidden; }
+.c-item span { width: 80px; display: inline-block; font-weight: bold; float: left; }
+.c-item label {margin-right:10px;}
+.progressBar {position:relative; height: 20px; line-height: 20px; border: 1px solid #09F; width: 1100px; float: left; margin-right: 10px; }
+.m-html-percent span.percent { color: #333; float: left; display: inline-block; font-size: 14px; }
+.progressBar .htmlPercent { color: #FFF; background-color: #8CD1FF; font-size: 14px; width: 100%; width: 0px; height: 20px; line-height: 20px; }
+.progressBar span { z-index: 5; width: 100%; font-size: 13px; height: 20px; line-height: 20px; display: inline-block; position: absolute; left: 0px; top: 0; color: #FF8040; font-weight: bold; text-align: center; }
+.spider-btn-wrap { margin: 30px 0 0 80px; }
+</style>
+<h2>数据采集</h2>
+<ul class="data-source">
+  <li>
+    <input type="radio" id="webId1" name="webId" value="1" checked data-url="http://zhushou.360.cn/list/index/cid/2/order/newest" data-tpl="http://zhushou.360.cn/list/index/cid/2/order/newest?page={page}" />
+    <label for="webId1">360手机助手游戏</label>
+  </li>
+  <li>
+    <input type="radio" id="webId2" name="webId" value="2"  data-url="http://zhushou.360.cn/list/index/cid/1/order/newest" data-tpl="http://zhushou.360.cn/list/index/cid/1/order/newest?page={page}" />
+    <label for="webId2">360手机助手软件</label>
+  </li>
+  <li>
+    <input type="radio" id="webId3" name="webId" value="3"  data-url="http://app.mi.com/category/0" data-tpl="http://app.mi.com/category/0#page={page}" />
+    <label for="webId3">小米应用商店</label>
+  </li>
+  <li>
+    <input type="radio" id="webId8" name="webId" value="8"  data-url="http://apk.91.com/game/0_1_5"  data-tpl="http://apk.91.com/game/0_{page}_5" />
+    <label for="webId8">91手机助手游戏</label>
+  </li>
+  <li>
+    <input type="radio" id="webId9" name="webId" value="9"  data-url="http://apk.91.com/soft/0_1_5" data-tpl="http://apk.91.com/soft/0_{page}_5" />
+    <label for="webId9">91手机助手软件</label>
+  </li>
+  <li>
+    <input type="radio" id="webId4" name="webId" value="4"  data-url="http://ios.25pp.com/game/"  data-tpl="http://ios.25pp.com/game/6_0_0_1_0_{page}/" />
+    <label for="webId4">25PP网站iOS游戏</label>
+  </li>
+  <li>
+    <input type="radio" id="webId5" name="webId" value="5"  data-url="http://ios.25pp.com/software/" data-tpl="http://ios.25pp.com/software/6_0_0_1_0_{page}/" />
+    <label for="webId5">25PP网站iOS软件</label>
+  </li>
+  <li>
+    <input type="radio" id="webId6" name="webId" value="6"  data-url="http://www.xyzs.com/app/soft/iphone_all_time" data-tpl="http://www.xyzs.com/app/soft/iphone_all_time_{page}/" />
+    <label for="webId6">XY苹果助手iPhone软件</label>
+  </li>
+  <li>
+    <input type="radio" id="webId7" name="webId" value="7"  data-url="http://www.xyzs.com/app/soft/ipad_all_time/" data-tpl="http://www.xyzs.com/app/soft/ipad_all_time_{page}/" />
+    <label for="webId7">XY苹果助手iPad软件</label>
+  </li>
+  <li>
+    <input type="radio" id="webId10" name="webId" value="10"  data-url="http://www.eoemarket.com/soft/1_new_unofficial_hasad_1_1.html" data-tpl="http://www.eoemarket.com/soft/1_hot_unofficial_hasad_1_{page}.html" />
+    <label for="webId10">优亿市场安卓软件</label>
+  </li>
+  <li>
+    <input type="radio" id="webId11" name="webId" value="11"  data-url="http://www.eoemarket.com/game/2_new_unofficial_hasad_2_1.html" data-tpl="http://www.eoemarket.com/game/2_new_unofficial_hasad_2_{page}.html" />
+    <label for="webId11">优亿市场安卓游戏</label>
+  </li>
+  <li>
+    <input type="radio" id="webId12" name="webId" value="12"  data-url="http://www.9game.cn/danji/2_0_0_1_1/" data-tpl="http://www.9game.cn/danji/2_0_0_1_{page}/" />
+    <label for="webId12">九游手机单机游戏安卓</label>
+  </li>
+  <li>
+    <input type="radio" id="webId13" name="webId" value="13"  data-url="http://apk.hiapk.com/apps?sort=9&pi=1" data-tpl="http://apk.hiapk.com/apps?sort=9&pi={page}" />
+    <label for="webId13">安卓市场</label>
+  </li>
+  <li>
+    <input type="radio" id="webId14" name="webId" value="14"  data-url="http://app.youxibaba.cn/soft/applist/cid/9" data-tpl="http://app.youxibaba.cn/soft/applist/cid/9/page/{page}" />
+    <label for="webId14">安贝市场</label>
+  </li>
+</ul>
+<div class="c-item"><span>保存分类</span><label for="soft"><input class="radio" id="soft" name="cate" type="radio" value="{$sid}" data-type="1" checked>软件</label><label for="game"><input class="radio" id="game" name="cate" type="radio" data-type="2" value="{$gid}">游戏</label></div>
+<div class="c-item"><span>地址预览</span><a class="url" href="http://zhushou.360.cn/list/index/cid/2/order/newest" target="_blank">http://zhushou.360.cn/list/index/cid/2/order/newest</a></div>
+<div class="c-item"><span>采集页码</span>
+  <input name="start" type="text" value="1">
+  -
+  <input name="end" type="text" value="1">
+</div>
+<div class="c-item"><span>采集详情</span>
+  <div class="progressBar"> <span class="tips"></span>
+    <div class="htmlPercent" style="width:0%;"></div>
+  </div>
+</div>
+<div class="spider-btn-wrap">
+  <button class="btn submit-btn hidden" id="startSpider" type="submit" target-form="form-horizontal">开始采集</button>
+</div>
+</block>
+<block name="script"> 
+  <script type="text/javascript">
+        $(function(){
+			
+			$("input[name='webId']").click(function(){
+				var url=$(this).attr('data-url');
+				$(".url").attr("href",url);
+				$(".url").html(url);
+			});
+			
+		  $("#startSpider").click(function(){
+			  var url = $("input[name='webId']:checked").attr("data-tpl");
+			  var webid = $("input[name='webId']:checked").val();
+			  var startPage = $("input[name='start']").val();
+			  var endPage = $("input[name='end']").val();
+			  var type = $("input[name='cate']:checked").attr("data-type")
+			  $(this).attr("disabled","disabled");
+			  if(startPage==""){
+				  alert("请输入开始页码");
+				  return;
+			  }
+			   if(endPage==""){
+				  alert("请输入结束页码");
+				  return;
+			  }
+			  $(".progressBar .tips").html("开始采集,请勿刷新页面...")
+			  for(var i = startPage;i<= endPage;i++){
+				 getOnePage(url,i,webid,type);
+		      }
+
+	  });
+	  var total = 0 ;
+	  var cur = 0;
+	  //抓取单一页码
+	  function getOnePage(url,page,webid,dtype){
+		   var category_id= $("input[name='cate']:checked").val();
+		   $.getJSON("/admin.php?c=Spider&a=getCategory&url=" + encodeURIComponent(url) + "&page=" + page+ "&webid=" + webid+ "&random=" + new Date().getTime(), function(data){
+			    $.each(data, function(i,t){
+					total++;
+					getDetail(webid,t,category_id,dtype);
+                });
+	       });
+		  
+	   }
+		
+	  //抓取详情页面
+	   function getDetail(webid,detailUrl,categoryid,dtype){
+		    $.getJSON("/admin.php?c=Spider&a=getDetail&url=" + encodeURIComponent(detailUrl) + "&webid=" + webid+ "&cid=" + categoryid+ "&type=" + dtype   + "&random=" + new Date().getTime(), function(data){	
+			            cur++; 
+					   var percent = parseInt(cur/total*100)+"%";  
+					   $(".htmlPercent").css("width",percent);  
+					   if(parseInt(cur/total*100) == "100"){$(".progressBar .tips").html("采集完毕...");$("#startSpider").removeAttr("disabled")}else{ $(".progressBar .tips").html(data+"   进度:"+percent);}
+ 
+	       });
+	   }
+		
+		
+		
+		
+            //点击排序
+            $('.list_sort').click(function(){
+                var url = $(this).attr('url');
+                var ids = $('.ids:checked');
+                var param = '';
+                if(ids.length > 0){
+                    var str = new Array();
+                    ids.each(function(){
+                        str.push($(this).val());
+                    });
+                    param = str.join(',');
+                }
+
+                if(url != undefined && url != ''){
+                    window.location.href = url + '/ids/' + param;
+                }
+            });
+            //回车自动提交
+            $('.search-form').find('input').keyup(function(event){
+                if(event.keyCode===13){
+                    $("#search").click();
+                }
+            });
+        });
+    </script> 
+</block>

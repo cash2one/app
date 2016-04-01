@@ -1,0 +1,19 @@
+<if condition="$ids"> 
+	<div class="left">
+			<ul class="left-ul">	
+			<document model="2" id="$ids" limit="3">
+			<li>
+				<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '257x355')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a>
+			</li>
+			</document>
+		</ul>
+	</div>
+
+	<div class="right">
+		<ul class="right-ul">
+			<document model="2" id="$ids" limit="3,5">
+				<li><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a><p class="info">{$document.description}</p></li>
+			</document>
+		</ul>
+	</div>
+</if>

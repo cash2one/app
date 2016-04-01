@@ -1,0 +1,43 @@
+<extend name="Home@gfwmobile/Base/commonIndex" />
+<block name="body">
+    <!--section class="scroll" data-sudaclick="main_focus">
+        <ul class="slide" id="slide">
+            <Think:article basename="Down" name="" limit="3" where="home_position & 1" order="create_time desc">
+             <php>$previewimg = explode(',', $vo['previewimg']);</php>
+            <li><a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" alt="{$article.title}"></a></li>
+            </Think:article>
+        </ul>
+        <div class="slide_dot" id="slide_dot"></div>
+    </section-->
+    <include file="Home@gfwmobile/Public/search" />
+    <nav>
+        {:W('Down/Gfwmobile/nav')}
+    </nav>
+    <section class="news">
+        <php>$cate = I('cate');</php>
+        <empty name="cate">
+            <div class="art">
+                <div class="title"><h2>热门产品</h2></div>
+                <ul class="art-list company">
+                    <Think:article basename="Down" limit="5" where="position & 1" order="create_time ASC">
+                    <li><a href="{:staticUrlMobile('detail',$article['id'],'Down')}">{$article['title']}</a>
+                        <if condition="$i elt 3">
+                        <span></span>
+                    </if></li>
+                    </Think:article>
+                </ul>
+            </div>
+        </empty>
+        {:W('Down/Gfwmobile/cateList')}
+        <empty name="cate">
+            <div class="product" id="product-info">
+                <div class="title"><h2>热门产品分类</h2></div>
+                <ul class="product-list">
+                    <Think:article basename="down_category" limit="15" where="position & 1" order="sort ASC">
+                        <li><a href="{:staticUrlMobile('lists',$article['id'],'Down')}" style=" height: 40px; line-height: 40px;">{$article['title']}</a></li>
+                    </Think:article>
+                </ul>
+            </div>
+        </empty>
+    </section>
+</block>

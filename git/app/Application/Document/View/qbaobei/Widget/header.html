@@ -1,0 +1,90 @@
+<div class="wrap channel-head">
+    <div class="wrap adv1200_103">
+        <center><script type="text/javascript">BAIDU_CLB_fillSlot("1135447");</script></center>
+    </div>
+    <div class="head-main">
+        <div class="left">
+            <a href="{:C('STATIC_URL')}" class="logo">亲亲宝贝网</a>
+            <h1>{$title}</h1>
+        </div>
+        <php>if($mbx !== 'no'){</php>
+        <div class="middle"><p class="goback"><span>您的位置：</span><a href="{:C('STATIC_URL')}">亲亲宝贝网</a>&gt;<span>{$title}</span></p></div>
+        <php>}</php>
+        <php>if($tag){</php>
+        <div class="right">
+            <span class="right-l">
+                <volist name="tag" id="val">
+                <php>if($i > 1) echo'|';</php><a href="http://www.qbaobei.com/tag/{$val['name']}" target="_blank">{$val['title']}</a>
+                </volist>
+            </span>
+            <form action="http://s.qbaobei.com/cse/search" method="get" id="Search_form" name="Search_form" target="_blank">
+                <input type="hidden" name="s" value="9283565739734765726">
+                <input type="text" name="q" id="searchBox" autocomplete="off" placeholder="请输入关键字..." />
+                <button type="submit" id="searchBtn" class="btn-submit">开始搜索</button>
+            </form>
+        </div>
+        <php>}else{</php>
+        <include file="Home@qbaobei/Public/PC2/search" />
+        <php>}</php>
+
+    </div>
+</div>
+<php>if($pid && $nav){
+    if($pid == 4){
+</php>
+<div class="channel-nav show-channel-nav">
+    <div class=" wrap nav-main">
+        <ul class="nav-ul">
+            <li><a href="{:getWidgetPath('65',true)}" target="_blank">怀孕首页</a></li>
+            {:W('Qbaobei/navChild',array(19,'备孕'))}
+            {:W('Qbaobei/navChild',array(21,'孕中'))}
+            {:W('Qbaobei/navChild',array(192,'分娩'))}
+            {:W('Qbaobei/navChild',array(22,'产后'))}
+        </ul>
+        {:W('Qbaobei/navTag',array(4))}
+    </div>
+</div>
+<php>}elseif($pid == 5){</php>
+<div class="channel-nav show-channel-nav">
+    <div class=" wrap nav-main">
+        <ul class="nav-ul">
+            <li><a href="{:getWidgetPath('67',true)}" target="_blank">早教首页</a></li>
+            {:W('Qbaobei/navChild',array(198,'教育资讯'))}
+            {:W('Qbaobei/navChild',array(205,'宝宝早教'))}
+            {:W('Qbaobei/navChild',array(197,'特色教育'))}
+            {:W('Qbaobei/navChild',array(741,'幼儿故事'))}
+            {:W('Qbaobei/navChild',array(1144,'起名'))}
+            <li><a href="{:C('STATIC_URL')}/zuowen/" target="_blank">作文</a></li>
+        </ul>
+        {:W('Qbaobei/navTag',array(5))}
+    </div>
+</div>
+<php>}elseif($pid == 145){</php>
+<div class="channel-nav show-channel-nav">
+    <div class=" wrap nav-main">
+        <ul class="nav-ul">
+            <li><a href="{:getWidgetPath('66',true)}" target="_blank">育儿首页</a></li>
+            {:W('Qbaobei/navChild',array(934,'新生儿'))}
+            {:W('Qbaobei/navChild',array(129,'0-1岁'))}
+            {:W('Qbaobei/navChild',array(130,'1-3岁'))}
+            {:W('Qbaobei/navChild',array(131,'3-6岁'))}
+        </ul>
+        {:W('Qbaobei/navTag',array(145))}
+    </div>
+</div>
+<php>}elseif($pid == 685){</php>
+<div class="channel-nav show-channel-nav">
+    <div class=" wrap nav-main">
+        <ul class="nav-ul">
+            <li><a href="{:getWidgetPath('68',true)}" target="_blank">营养首页</a></li>
+            {:W('Qbaobei/navChild',array(688,'美食资讯'))}
+            {:W('Qbaobei/navChild',array(690,'妈妈食谱'))}
+            {:W('Qbaobei/navChild',array(691,'宝宝食谱'))}
+            {:W('Qbaobei/navChild',array(209,'奶粉'))}
+            {:W('Qbaobei/navChild',array(1213,'烘焙'))}
+            {:W('Qbaobei/navChild',array(686,'美食养生'))}
+        </ul>
+        {:W('Qbaobei/navTag',array(145))}
+    </div>
+</div>
+<php>}}</php>

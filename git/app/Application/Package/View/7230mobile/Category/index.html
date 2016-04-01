@@ -1,0 +1,48 @@
+<extend name="Home@7230mobile/Base/common2"/>
+
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230mobile2/css/package.css"/></block>
+<block name="body">
+
+<section class="tags_head">
+    <div class="page_title"><span><a href="javascript:void(0);" class="back"></a></span><h2>{$info['title']}</h2></div>
+    <ul class="pack_lists">
+        <volist name="lists" id="val">
+        <li>
+            <a href="{:staticUrlMobile('detail',$val['id'],'Package')}">
+                <div class="pack_left"><img src="{:get_cover($val['cover_id'],'path')}"></div>
+                <div card_id="{$val['id']}" class="pack_middle">
+                    <h3>{$val.title}</h3>
+                    <span>剩余：30个</span>
+                </div>
+                <div class="pack_right"><span>领号</span></div>
+                <div class="pack_date">有效期至：{:date('Y-m-d',$val['end_time'])}</div>
+            </a>
+        </li>
+        </volist>
+    </ul>
+    <div class="page">{$page}</div>
+</section>
+</block>
+<block name="script">
+<script>
+$(document).ready(function() {
+    var card_ids = {};
+    $('.pack_middle').each(function(){ card_ids[$(this).attr('card_id')]= 0});
+    $.ajax({
+        dataType:"jsonp",
+        jsonp:"callback",
+        url: DYNAMIC_SERVER_URL + '/dynamic.php?s=/Card/API_surplus',
+        data: {surplus_ids : card_ids},
+        success: function(data){
+            if(data){
+                $('.pack_middle').each(function(){
+                    var i = $(this).attr('card_id');
+
+                    $(this).find('span').text('剩余：'+data[i]+'个');
+                });
+            }
+        }
+    });
+});
+</script>
+</block>

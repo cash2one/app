@@ -1,0 +1,67 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/content.css" /></block>
+<block name="body">
+<!--head部分-->
+<div class="wrap channel-head">
+    <div class="wrap adv1200_103"><center><script type="text/javascript">BAIDU_CLB_fillSlot("1135455");</script></center></div>
+    <div class="head-main">
+        <div class="left">
+            <a href="{:C('STATIC_URL')}" class="logo">亲亲宝贝网</a>
+            <h1>怀孕百科</h1>
+        </div>
+        <include file="Home@qbaobei/Public/PC2/search" />
+    </div>
+</div>
+<!--内容主体部分 start-->
+<div class="channel-main detailBox">
+    <div class="wrap channel-wraper">
+    <div class="cont-goback"><span>您的位置：</span><a href="{:C('STATIC_URL')}">首页</a>>{:W('Qbaobei/currentPosition',array($info['category_id']))}><span>{$info['title']}</span></div>
+    <div class="baike-main">
+        <div class="detail-main-l baikeScroll">
+            <div class="baike-detailTop">
+                <div class="baike-detailTop-l">
+                    <div class="baike-nav">
+                        <h1>{$info['title']}</h1>
+                         {~W('Document/Qbaobei/baikeCatalog',array($info['content']))}
+                    </div>
+                    <div class="baike-pic"><div class="baike-pic-main"><img src="{:get_cover($info['smallimg'],'path')}" alt="{$info['title']}"></div><p class="pic-title">{$info['title']}</p></div>
+                <input name="author" id="tj-user" type="hidden" value="{$info['uid']}" />
+                <input type="hidden" id="doc-id" name="doc-id" value="{$info['id']}"/>
+                <input type="hidden" id="doc-cid" name="doc-cid" value="{$info['category_id']}"/>
+                </div>
+            </div>
+            <div class="baike-detail">
+                <div class="detail-box">
+                    {~W('Document/Qbaobei/baikeContent',array($info['content']))}
+                </div>
+            </div>
+            <!-- 二维码-->
+            <div id="weixin-code">
+            </div>
+            <!--广告-->
+            <div class="adv927_103"><!-- 广告位：资讯详情Bannber -->
+<!-- 广告位：资讯详情Bannber -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1135933");</script>
+</div>
+            <!--精彩百科推荐-->       
+             {~W('Document/Qbaobei/relateBaike',array($info['id']))}
+        </div>
+        <div class="baike-main-r">
+            <!--热门词条-->
+       
+              {~W('Document/Qbaobei/baikeChannelTags')}
+       
+            <!--热门文章-->
+          
+                 {~W('Document/Qbaobei/commendedBaike')}
+          
+            <!--广告-->
+            <div class="adv259_193"><!-- 广告位：资讯详情右侧广告3 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1135930");</script></div>
+          {~W('Document/Qbaobei/relateVideo',array($info['category_id']))}
+        </div>
+    </div>
+ </div>
+</div>
+<!--内容主体部分 end-->
+</block>

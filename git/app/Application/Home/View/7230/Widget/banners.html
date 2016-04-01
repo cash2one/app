@@ -1,0 +1,39 @@
+<div id="index-banner">
+
+    <volist name="bannerW" id="val" offset="0" length="1">
+        <div class="wrap">
+            <div class="hsb">
+                <a href="{:staticUrl('detail',$val['id'],$val['type'])}" target="_blank"><img src="{:get_cover($val['vertical_pic'],'path')}"></a>
+                <div class="jj"><h3><a href="" target="_blank">{$val.title}</a></h3><b>{$val.description}</b><b id="star" class="star{:round(get_score($val['id'],$val['type'])/20)}">推荐指数：</b><s></s></div>
+            </div>
+        </div>
+    </volist>
+
+    <div class="middle wrap">
+        <volist name="bannerH" id="val" offset="0" length="2">
+            <div class="hsb top">
+                <a target="_blank" href="{:staticUrl('detail',$val['id'],$val['type'])}"><img src="{:get_cover($val['vertical_pic'],'path')}"></a>
+                <div class="jj"><h3><a href="" target="_blank">{$val.title}</a></h3><b>{$val.description}</b><b id="star" class="star{:round(get_score($val['id'],$val['type'])/20)}">推荐指数：</b><s></s></div>
+            </div>
+        </volist>
+    </div>
+
+    <div class="middle wrap">
+        <volist name="bannerH" id="val" offset="2" length="2">
+            <div class="hsb top">
+                <a target="_blank" href="{:staticUrl('detail',$val['id'],$val['type'])}"><img src="{:get_cover($val['vertical_pic'],'path')}"></a>
+                <div class="jj"><h3><a href="" target="_blank">{$val.title}</a></h3><b>{$val.description}</b><b id="star" class="star{:round(get_score($val['id'],$val['type'])/20)}">推荐指数：</b><s></s></div>
+            </div>
+        </volist>
+    </div>
+
+    <volist name="bannerW" id="val" offset="1" length="1">
+        <div class="wrap">
+            <div class="hsb">
+                <a href="{:staticUrl('detail',$val['id'],$val['type'])}" target="_blank"><img src="{:get_cover($val['vertical_pic'],'path')}"></a>
+                <div class="jj"><h3><a href="" target="_blank">{$val.title}</a></h3><b>{$val.description}</b><b id="star" class="star{:round(get_score($val['id'],$val['type'])/20)}">推荐指数：</b><s></s></div>
+            </div>
+        </div>
+    </volist>
+
+</div>

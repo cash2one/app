@@ -1,0 +1,10 @@
+<div class="cata-news wrap">
+  <div class="mid-tit">
+    <h3>最新动态</h3>
+    <a href="/news/" target="_blank" class="more">更多</a></div>
+  <ul class="tab-cont current">
+        <volist name="lists" id="vo">
+                <li><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+       </volist>
+  </ul>
+</div>

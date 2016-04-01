@@ -1,0 +1,16 @@
+<notempty name="game_lists">
+<div class="about-game-box2">
+  <div class="box2-game box2-game-top"> <a href="{:str_replace('index.html','',staticUrlMobile('detail', $game_lists['id'],'Down'))}" title="{$game_lists['title']}"><img src="{:get_cover($game_lists['smallimg'],'path')}" alt="{$game_lists['title']}"></a>
+    <div class="text"><a href="{:str_replace('index.html','',staticUrlMobile('detail', $game_lists['id'],'Down'))}" title="{$game_lists['title']}" class="title">{$game_lists['title']}</a><a href="{:str_replace('index.html','',staticUrlMobile('detail', $game_lists['id'],'Down'))}" class="down">下载</a></div>
+  </div>
+  <volist name="lists" id="vo">
+  <eq name="vo['system']" value="1">
+  <div class="box2-game box2-game-bot adr"><a href="{:str_replace('index.html','',staticUrlMobile('detail', $vo['id'],'Down'))}" title="{$vo['title']}" class="title">{$vo['title']}</a><a href="{:str_replace('index.html','',staticUrlMobile('detail', $vo['id'],'Down'))}" class="down">下载</a></div>
+  </eq>
+  <eq name="vo['system']" value="2">
+  <div class="box2-game box2-game-bot iph"><a href="{:str_replace('index.html','',staticUrlMobile('detail', $vo['id'],'Down'))}" title="{$vo['title']}" class="title">{$vo['title']}</a><a href="{:str_replace('index.html','',staticUrlMobile('detail', $vo['id'],'Down'))}" class="down">下载</a></div>
+  </eq>
+ </volist> 
+  
+</div>
+</notempty>

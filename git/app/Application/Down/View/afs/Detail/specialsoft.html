@@ -1,0 +1,172 @@
+<extend name="Home@afs/Base/common_zt"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afs/css/zafs.css"/>
+</block>
+<block name="body">
+
+    <div class="head afs-w">
+
+        <div class="app-pic"><img src="http://8.pic.anfensi.com/Uploads/Picture/2015-10-09/5617272976931.jpg"
+                                  alt="360安全卫士6.2.9公测版"></div>
+        <div class="app-text">
+            <h1>{$info.title}</h1>
+            <ul class="app-text-info">
+                <li><span>更新日期：</span>{$info.update_time|date='Y-m-d',###}</li>
+                <li><span>文件大小：</span>{$info.size}</li>
+                <li><span>文件类型：</span>{$info.filetype}</li>
+                <li><span>收费标准：</span>{$info.is_fee}</li>
+            </ul>
+            <p class="info">
+                <if condition="mb_strlen($info.description,'utf-8') lt 30">{$info.description}
+                    <else/>
+                    {$info.description|mb_substr=###,'0','30','utf-8'}...
+                </if>
+            </p>
+        </div>
+        <!-- down -->
+        <div class="app-down">
+            <neq name="relation_down.az" value="">
+            <a href="{:staticUrl('detail',$relation_down['az'][0],'Down')}"  target="_blank" class="adr">{$relation_down.az.1}</a>
+            </neq>
+            <neq name="relation_down.pg" value="">
+                <a href="{:staticUrl('detail',$relation_down['pg'][0],'Down')}" target="_blank" class="iph">{$relation_down.pg.1}</a>
+            </neq>
+            <neq name="relation_down.pc" value="">
+                <a href="{:staticUrl('detail',$relation_down['pc'][0],'Down')}"  target="_blank" class="wp8">{$relation_down.pc.1}</a>
+            </neq>
+        </div>
+        <!-- down -->
+    </div>
+
+    <!--list nav -->
+    <div class="nav">
+        <div class="nav-main afs-w">
+            <ul class="afs-w-ul">
+                <li class="active"><span>{$info.title}首页
+                </span>
+                </li>
+                <li><span>关于我们</span></li>
+                <li><span>版本日志</span></li>
+                <li><span>使用帮助</span></li>
+            </ul>
+        </div>
+    </div>
+    <!-- end -->
+
+    <div class="afs-wrap afs-w">
+        <div class="afs-wrapp-left">
+            <div class="wrapp-artbody">
+                <div class="wrapp-artbody-main">
+                    <div class="wrapp-tab">
+                        <h4>软件简介</h4>
+
+                        <p>{$info.description}</p>
+                        <h4>功能介绍</h4>
+
+                        <p>{$info.contents}</p>
+
+                        <h4>使用说明</h4>
+
+                        <p>{$info.use_intro}</p>
+                    </div>
+                    <div class="wrapp-tab">
+                        <h4>关于我们</h4>
+
+                        <p>{$info.abouts}</p>
+                    </div>
+                    <div class="wrapp-tab">
+                        <h4>版本日志</h4>
+
+                        <p>{$info.version_logs}</p>
+                    </div>
+                    <div class="wrapp-tab">
+                        <h4>使用帮助</h4>
+
+                        <p>{$info.use_help}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-news-wrap">
+                <!--相关阅读-->
+                {:W('Down/Afs/relationRead',array('productTags'=>$info['productTags']))}
+                <!--相关阅读-->
+            </div>
+
+            <!--评论-->
+            <div id="pinglun" name="pinglun">
+                <h3>评论</h3>
+
+                <form action="" method="" name="" id="pl" data-id="{$info['id']}" data-model="down">
+                    <input name="author" id="tj-user" type="hidden" value="{$info['uid']}"/>
+
+                    <p><input type="text" placeholder="请输入用户名" id="user"></p>
+
+                    <p><textarea></textarea></p>
+
+                    <p class="bot"><b>本站为防止低俗内容出现，用户发表的评论需经过审核，谢谢 ！</b>
+                        <input type="button" value="发表评论" id="btn"></p>
+                </form>
+                <h4><i>热门评论</i></h4>
+                <ul class="comment_lists" data-id="{$info['id']}" data-model="down">
+                    <p style="text-align:center;display:block;padding:10px 0;">暂无评论</p>
+                </ul>
+
+            </div>
+
+        </div>
+        <div class="afs-wrapp-right">
+            <!--其他版本-->
+            {:W('Down/Afs/otherVersion',array('productTags'=>$info['productTags'],'id'=>$info['id'],'title'=>$info['title']))}
+            <!--其他版本-->
+
+            <!--广告-->
+            <div class="adv"><img src="http://9.pic.anfensi.com/uploads/allimg/140626/1980-140626112342.jpg"></div>
+            <!--广告-->
+
+            <!--相关专题-->
+            {:W('Down/Afs/relationSpecial',array('category_id'=>$info['category_id']))}
+            <!--相关专题-->
+        </div>
+    </div>
+
+
+    <!--左右箭头-->
+    <div class="page">
+        <span class="prev"></span>
+        <span class="next"></span>
+    </div>
+    <!--左右箭头-->
+</block>
+
+<block name="script">
+    <script src="__PUBLIC__/Down/afs/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var odiv = $('.wrapp-tab'), obtn = $('.afs-w-ul li'), i = 0;
+            $('.wrapp-artbody-main').width(odiv.outerWidth(true) * odiv.length);
+
+            //滚动函数
+            function auto(nub) {
+                obtn.eq(nub).addClass('active').siblings().removeClass('active');
+                $('.wrapp-artbody-main').animate({'left': -nub * 772})
+            };
+
+            obtn.each(function (index) {
+                $(this).click(function () {
+                    i = index;
+                    auto(index)
+                });
+            });
+            $('.page .next').click(function () {
+                i >= odiv.length - 1 ? i = 0 : i++;
+                auto(i)
+            });
+            $('.page .prev').click(function () {
+                i <= 0 ? i = odiv.length - 1 : i--;
+                auto(i)
+            });
+
+        });
+    </script>
+</block>

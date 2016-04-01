@@ -1,0 +1,11 @@
+<div class="mlife gf-border">
+    <h3 class="yule-title" title="热门推荐"><img src="__PUBLIC__/Home/gfw/images/yueleiicon23.png" width="18" height="16">热门推荐</h3>
+    <ul class="mlife-icon">
+        <volist name="hotcate" id="vo">
+            <li>
+                <a href="{:staticUrl('lists',$vo['id'],'Down')}"><img src="{:get_cover($vo['icon'],'path')}" width="29" height="29"></a>
+                <a href="{:staticUrl('lists',$vo['id'],'Down')}">{$vo.title}</a>
+            </li>
+        </volist>
+    </ul>
+</div>

@@ -1,0 +1,19 @@
+<extend name="Home@afsmobile/Base/commonDown"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/afsmobile/css/libao.css"/>
+</block>
+<block name="body">
+   <!--libao-->
+   <section class="libao-list" id="libao">
+       <ul>
+       <volist name="lists" id="vo">
+           <li><a href="{:staticUrlMobile('detail', $vo['id'],'Package')}" class="pic"><img src="{:get_cover($vo['cover_id'],'path')}"></a><span class="left"><a href="{:staticUrlMobile('detail', $vo['id'],'Package')}">{$vo.title}</a><b>截止：{:date('Y.m.d',$vo['end_time'])}</b></span><span class="right"><b>库存0%</b> <strong class="card_all" card-id="{$vo['id']}" style="display:none;"></strong> 
+ <strong class="card_surplus" card-id="{$vo['id']}" style="display:none;"></strong><a href="{:staticUrlMobile('detail', $vo['id'],'Package')}" class="lq">领取</a></span></li>
+           </volist>
+       </ul>
+   </section>
+   <div class="page">{$page}</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/common.js"></script>
+</block>

@@ -1,0 +1,31 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/kpage.css"/>
+</block>
+
+<block name="body">
+  <div id="kpage">
+    <p class="page-nav">当前位置：<a href="/">首页</a>图片库</p>
+
+    <div id="xetj">
+      <p class="nav">共有<i>{$count}</i>张图片</p>      
+      {$filter}
+      </div>
+      <ul id="piclist">
+        <volist name="lists" id="val">
+          <li>
+            <a href="{:staticUrl('detail',$val['id'],'Down')}"><img src="{:get_cover($val['cover_id'],'path')}"></a>
+            <p>
+              <b class="top">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val.title}</a>
+                <!--<em>2000</em></b><b><i>动物</i><i>1024x980</i><i>静态</i>-->
+              </b>
+            </p>
+          </li>
+        </volist>
+      </ul>
+      <div style=" clear:both"></div>
+      <p class="page">{$page}</p>
+    </div>
+  </block>

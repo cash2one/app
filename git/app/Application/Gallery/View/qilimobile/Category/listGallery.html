@@ -1,0 +1,29 @@
+<extend name="Home@qilimobile/Base/common" />
+
+<block name="body">
+<div class="mui-content">
+	<include file="Home@qilimobile/Base/nav" />
+
+	<section class="y7-sec-2">
+		<div class="y7-sec-title mui-clearfix">
+			<div id="segmentedControl" class="mui-segmented-control mui-pull-right">
+				<a class="mui-control-item mui-active" href="#item1mobile">最新</a>
+				<a class="mui-control-item" href="#item2mobile">最热</a>
+			</div>
+		</div>
+
+		<div class="y7-sec-body">
+			<ul class="y7-media-list mui-clearfix">
+				
+					<li class="y7-media-list-item">
+						<a href="#">
+							<img src="img/pic-1@2x.png">
+							<div class="y7-media-list-item-body mui-ellipsis-2">{$article.title}</div>
+						</a>
+					</li>
+				
+			</ul>
+		</div>
+	</section>
+</div>
+</block>

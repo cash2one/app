@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Home@afsmobile/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/afsmobile/css/yxzq.css" />
+</head>
+
+<body>
+<header id="inpage_head">
+    <span class="back"></span>
+    <b>{$batch['title']}</b>
+    <em id="head-nav"></em>
+</header>
+<!--弹出菜单-->
+<div id="case-main">
+    <include file="Home@afsmobile/Public/popup" />
+</div>
+<!--zq-->
+<section class="zqsy">
+    <!--news-->
+    <ul class="tips news_tip">
+
+        <li><a href="{$batch['url_token']}">全部</a></li>
+        <volist name="tags" id="val">
+        <li class="{$tag==$val['id']?'cur':''}"><a href="{$val['url']}">{$val['title']}</a></li>
+        </volist>
+    </ul>
+    <div class="wrap zqgl">
+        <ul class="new_list">
+            <volist name="list" id="val">
+            <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a><em>{:date('m-d',$val['create_time'])}</em></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="page">{$page}</div>
+</section>
+<!--footer-->
+<!--footer-->
+<include file="Home@afsmobile/Public/zq/foot"/>
+</body>
+</html>

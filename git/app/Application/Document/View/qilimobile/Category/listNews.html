@@ -1,0 +1,66 @@
+<extend name="Home@qilimobile/Base/common" />
+
+<block name="body">
+<include file="Home@qilimobile/Base/nav" />
+
+<div class="mui-content">
+	<div class="y7-sec-body">
+        <ul class="mui-table-view">
+			{~W('Home/qilimobile/aggregation', array($cid))}
+        </ul>
+    </div>
+</block>
+
+<block name="script">
+<script src="__PUBLIC__/Home/qilimobile/js/index.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	$('.mui-table-view li').click(function(){
+		var href = $(this).attr('href');
+		if(href != null){
+			window.location.href=""+$(this).attr('href')+""; 
+		}
+	});	
+
+	var lock = false;
+	
+	var page = 1;
+
+	$(window).scroll(function () {
+		if (($(window).height() + $(window).scrollTop()) >= $("body").height() && lock == false) {
+			lock = true;
+			
+			$.ajax({  
+				type:'get',
+				url:'/dynamic.php?s=Qilimobile/aggregation/typeid/{$cid}/page/'+page++,
+				dataType:'json',
+				success:function(params){
+					if(params.status == '1'){
+						var html = '';
+						$.each(params.data, function(i, val){
+							html += '<li class="mui-table-view-cell mui-media call" onclick="window.location.href=\''+val.url+'\'">';
+							html += '<img class="mui-media-object mui-pull-left" src="'+ val.atlas_a +'">';
+							html += '<div class="mui-media-body">';
+							html += '<p class="title">'+ val.title +'</p>';
+							html += '<p class="mui-text-mute"><time>' + val.create_time + '</time><span class="vis">' + val.view + '次浏览</span></p>';
+							html += '</div></li>';
+						});
+						
+						$('.mui-table-view').append(html);
+						var oli = $('.y7-sec-body li').slice($('.y7-sec-body li').size() - 10);
+						
+						oli.each(function(){
+							var otime=$(this).find('time').text();
+							gap (otime, $(this).find('time'));
+						});
+
+						lock = false;
+					}
+				}  
+			 });
+		}
+	});
+});
+</script>
+</block>

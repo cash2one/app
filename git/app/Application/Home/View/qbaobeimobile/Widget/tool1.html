@@ -1,0 +1,296 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/tools.css">
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > <a href="/tools/">工具</a> > 排卵期计算器</block>
+<block name="body">
+    <section class="tool-detail dis-bot">
+        <h1>排卵期和安全期计算器</h1>
+        <style>
+            table th,table td{border:none;padding:5px;}
+            table th{font-weight:inherit;border:none;}
+            .Calendar{margin:10px 0 0;overflow:hidden;}
+            .Calendar td{text-align:center;color:#333;}
+            .Calendar .th{height:30px;line-height:30px;text-align:center;border:1px solid #7CD3C7;color:#fff;font-size:18px;background:#7CD3C7;border-radius: 3px 3px 0 0 ;}
+            .Calendar .tb{border:1px solid #7CD3C7;}
+            .Calendar .thB{background:#7CD3C7;color:#fff;}
+            .Calendar .thB td{color:#fff;}
+            .Calendar .anquan{color:#7DB8D3;}
+            .Calendar .pairuan{color:#FF6884;}
+            .Calendar .yuejing{}
+            .Calendar .anquan i{display:block;width:8px;height:8px;background:#7DB8D3;border-radius:4px;margin:0px auto;}
+            .Calendar .pairuan i{display:block;width:8px;height:8px;background:#FF6884;border-radius:4px;margin:0px auto;}
+            .Calendar .yuejing i{display:block;width:8px;height:8px;background:transparent;border-radius:4px;margin:0px auto;}
+            .CalendarFoot{text-align:center;border:1px solid #7CD3C7;border-top:none;border-radius:0 0 3px 3px;height:40px;line-height:40px;}
+            .CalendarFoot em{margin:0 5px;}
+            .CalendarFoot .pairuan{color:#FF6884;}
+            .CalendarFoot .anquan{color:#7DB8D3;}
+            .CalendarFoot .yuejing{color:#333;}
+            .CalendarFoot .anquan:before{content:""; display:inline-block;width:8px;height:8px;background:#7DB8D3;border-radius:4px;margin-right:5px;}
+            .CalendarFoot .pairuan:before{content:"";display:inline-block;width:8px;height:8px;background:#FF6884;border-radius:4px;margin-right:5px;}
+            .CalendarFoot .yuejing:before{content:"";display:inline-block;width:8px;height:8px;background:#333;border-radius:4px;margin-right:5px;}
+        </style>
+        <div class="m-section">最短月经周期(天)</div>
+        <div class="itemA" id="JitemA">
+            <a class="l">-</a>
+            <span class="m" id="txtMinMensesCyc">28</span>
+            <a class="r">+</a>
+        </div>
+        <div class="m-section">最长月经周期(天)</div>
+        <div class="itemA" id="JitemB">
+            <a class="l">-</a>
+            <span class="m" id="txtMaxMensesCyc">28</span>
+            <a class="r">+</a>
+        </div>
+        <div class="m-section">最后一次月经</div>
+        <div class="m-input"><input type="date" name="" id="Jdata"/></div>
+        <div class="m-work"><input type="submit" id="JworkOut" value="点击计算" onclick="javascript:DisplayCalendar();" /></div>
+        <div class="m-result" id="Jresult">
+            <div class="m-result-tit">查询结果</div>
+            <p id="aaa" style="color:#333;font-size:16px;">~</p>
+            <div id="Calendar1"></div>
+            <div class="CalendarFoot" id="JCalendarFootA" style="display:none">
+                <em class="pairuan">排卵期</em>
+                <em class="anquan">安全期</em>
+                <em class="yuejing">月经期</em>
+            </div>
+            <div id="Calendar2"></div>
+            <div class="CalendarFoot" id="JCalendarFootB" style="display:none">
+                <em class="pairuan">排卵期</em>
+                <em class="anquan">安全期</em>
+                <em class="yuejing">月经期</em>
+            </div>
+        </div>
+    </section>
+</block>
+<!--工具详情-->
+
+<block name="script">
+<script type="text/javascript">
+function $$(id) {
+return (typeof id == "object") ? id : document.getElementById(id);
+}
+//写入当前如期
+function checkTime(num){
+if (num < 10) {
+num = "0" + num;
+}
+return num;
+}
+$(function(){
+    var d = new Date();
+	var year = d.getFullYear();
+	var month = d.getMonth()+1;
+	var date = d.getDate();
+	var bIsi9300 = navigator.userAgent.toLowerCase().match(/i9300/i) == "i9300";
+	if (!bIsi9300) {
+		$("#Jdata").val(year + '-' + checkTime(month) + '-' + checkTime(date));
+	};
+	$("#Jdata").attr("placeholder",'请输入日期，格式：' + year + '-' + checkTime(month) + '-' + checkTime(date));
+});
+// var Jdata = $$("Jdata");
+var itemA = document.querySelector('#JitemA'),
+itemB = document.querySelector('#JitemB');
+var minusA = document.querySelectorAll('#JitemA a')[0],
+addsA = document.querySelectorAll('#JitemA a')[1],
+numsA = document.querySelectorAll('#JitemA span')[0],
+minusB = document.querySelectorAll('#JitemB a')[0],
+addsB = document.querySelectorAll('#JitemB a')[1],
+numsB = document.querySelectorAll('#JitemB span')[0],
+input = document.querySelector('#Jdata'),
+txtMinMensesCyc = parseInt(numsA.innerHTML),
+txtMaxMensesCyc = parseInt(numsB.innerHTML);
+function touchEvent(elm, fn) {
+if ("ontouchstart" in document.documentElement) {
+elm.addEventListener("touchstart", fn, false);
+} else {
+elm.addEventListener("click", fn, false);
+}
+}
+touchEvent(minusA, function() {
+if (txtMinMensesCyc > 0) {
+txtMinMensesCyc--;
+numsA.innerHTML = txtMinMensesCyc;
+}
+});
+touchEvent(addsA, function() {
+txtMinMensesCyc++;
+numsA.innerHTML = txtMinMensesCyc;
+});
+touchEvent(minusB, function() {
+if (txtMaxMensesCyc > 0) {
+txtMaxMensesCyc--;
+numsB.innerHTML = txtMaxMensesCyc;
+}
+});
+touchEvent(addsB, function() {
+txtMaxMensesCyc++;
+numsB.innerHTML = txtMaxMensesCyc;
+});
+var CalendarOuterHTML = '';
+var Today = new Date();
+var DaysPerMonth = 0;
+function montharr(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11) {
+this[0] = m0;
+this[1] = m1;
+this[2] = m2;
+this[3] = m3;
+this[4] = m4;
+this[5] = m5;
+this[6] = m6;
+this[7] = m7;
+this[8] = m8;
+this[9] = m9;
+this[10] = m10;
+this[11] = m11;
+}
+//Get the number of day in some month
+function GetDayPerMonth(year, month) {
+var monthDays = new montharr(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+monthDays[1] = 29;
+DaysPerMonth = monthDays[month];
+}
+function GetCalendarOuterHTML(CalendarIndex, HaveLayer) {
+CalendarOuterHTML = '';
+var thisYear = Y;
+var thisMonth = M * 1 + CalendarIndex - 1;
+//when thisMonth beyond 12
+if (thisMonth > 12) {
+thisYear = parseInt(thisYear) + 1;
+thisMonth = thisMonth % 12;
+}
+//title of the calendar
+CalendarOuterHTML = CalendarOuterHTML + "<div class='Calendar' id='Calendar" + CalendarIndex + "'>";
+CalendarOuterHTML = CalendarOuterHTML + "<div class='th'>";
+CalendarOuterHTML = CalendarOuterHTML + thisYear + ' 年 ';
+CalendarOuterHTML = CalendarOuterHTML + thisMonth + ' 月</div>';
+CalendarOuterHTML = CalendarOuterHTML + "<div class='tb'><table align='center' width='100%'><tr class='thB'><td>日<td>一<td>二<td>三<td>四<td>五<td>六";
+CalendarOuterHTML = CalendarOuterHTML + "<tr>";
+//Get the day of the first Day
+var firstDay = new Date(Date.UTC(Y, (parseInt(M) - 2 + CalendarIndex), 1));
+testMe = firstDay.getDate();
+if (testMe == 2)
+firstDay.setDate(0);
+startDay = firstDay.getDay();
+//display empty cells  before the first day of the month                
+column = 0;
+for (i = 0; i < startDay; i++) {
+CalendarOuterHTML = CalendarOuterHTML + "<td>";
+column++;
+}
+//display the grids in the calendar
+var Lastday = new Date(Date.UTC(Y, (parseInt(M) - 1), D))
+GetDayPerMonth(thisYear, thisMonth - 1)
+for (i = 1; i <= DaysPerMonth; i++) {
+var className = "anquan";
+//Get layer HTML
+if (HaveLayer) {
+var ThisDay = new Date(Date.UTC(thisYear, thisMonth - 1, i))
+var msPerDay = 24 * 60 * 60 * 1000;
+var mensesCyc = parseInt(txtMinMensesCyc); //Min menses Cycle
+var msDiff = ThisDay.getTime() - Lastday.getTime();
+dayDiff = Math.floor(msDiff / msPerDay); //get the days between thisday and lastday
+dayRemainder = (dayDiff % mensesCyc + mensesCyc) % mensesCyc;
+var tooltips = ""; //content of layer
+if (dayRemainder >= 0 && dayRemainder <= 4) {
+className = "yuejing";
+tooltips = "这是月经期，要注意经期卫生，当然也要'节欲'，避免性事哦！"
+}
+if (dayRemainder >= 5 && dayRemainder <= (mensesCyc - 20)) {
+className = "anquan";
+tooltips = "这是安全期，性事一般不会受孕，您放心吧！";
+}
+if (dayRemainder >= (mensesCyc - 19) && dayRemainder <= (mensesCyc - 10)) {
+className = "pairuan";
+tooltips = "这是危险期，亦称排卵期，性事受孕可能性大，千万要注意哦！";
+}
+if (dayRemainder >= (mensesCyc - 9) && dayRemainder <= (mensesCyc - 1)) {
+className = "anquan";
+tooltips = "这是安全期，性事一般不会受孕，您放心吧！";
+}
+iLayerIndex = 40 * CalendarIndex + i; //index of layer
+}
+CalendarOuterHTML = CalendarOuterHTML + "<td class='" + className + "'>" + i + "<i></i>";
+column++;
+if (column == 7) {
+CalendarOuterHTML = CalendarOuterHTML + "<tr>";
+column = 0;
+}
+}
+//display empty cells  after the final day of the month
+var FinalDay = new Date(Date.UTC(Y, (parseInt(M) - 2 + CalendarIndex), DaysPerMonth));
+testMe = FinalDay.getDate();
+if (testMe == 2)
+FinalDay.setDate(0);
+EndDay = FinalDay.getDay();
+for (i = EndDay; i < 6; i++) {
+CalendarOuterHTML = CalendarOuterHTML + "<td>";
+}
+CalendarOuterHTML = CalendarOuterHTML + "</table></div></div>";
+}
+//to check input errors and display both calendars
+function DisplayCalendar() {
+$$("Jresult").style.display = "block";
+Y = input.value.split("-")[0]; //年
+M = input.value.split("-")[1]; //月
+D = input.value.split("-")[2]; //日
+//check whether the date is legal
+if (Y < 1900 || isNaN(Y)) {
+showTopTip("请输入日期！");
+hideTopTip();
+return false;
+}
+var Lastday = new Date(Date.UTC(Y, (parseInt(M) - 1), D))
+if ((Today.getTime() - Lastday.getTime()) < 0) {
+showTopTip("上次月经的日期不能晚于当前日期!");
+hideTopTip();
+return false;
+}
+if (parseInt(txtMinMensesCyc) > 40 || parseInt(txtMinMensesCyc) < 22) {
+showTopTip("您输入的最短月经周期与标准月经周期相差太大，程序无法测试，请仔细核对。\n\n如输入确无问题请咨询医生！");
+hideTopTip();
+return false;
+}
+if (isNaN(txtMaxMensesCyc) || parseInt(txtMaxMensesCyc) < parseInt(txtMinMensesCyc)) {
+showTopTip("输入错误，请仔细核对您的输入周期！");
+hideTopTip();
+return false;
+}
+//display calendars
+GetCalendarOuterHTML(1, 1);
+document.getElementById('Calendar1').outerHTML = CalendarOuterHTML;
+GetCalendarOuterHTML(2, 1);
+document.getElementById('Calendar2').outerHTML = CalendarOuterHTML;
+$$("JCalendarFootA").style.display = "block";
+$$("JCalendarFootB").style.display = "block";
+$$("aaa").style.display = "none";
+scrollTo(0, 320);
+}
+function showTopTip(msg) {
+var tipEle = document.getElementById("JtopTipMsg");
+if (!tipEle) {
+tipEle = document.createElement("div");
+tipEle.id = "JtopTipMsg";
+tipEle.style.cssText = "display:none;width:120px;padding:10px;line-height:20px;font-size:12px;background-color:rgba(000,000,000,0.9);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;color:#fff;text-align:center;-webkit-transition:all 0.3s ease-in;transition:all 0.3s ease-in;position:fixed;top:50%;left:50%;margin-left:-70px;margin-top:-20px;opacity:1;z-index:999;";
+document.body.appendChild(tipEle);
+}
+tipEle.innerHTML = msg;
+tipEle.style.display = "block";
+setTimeout(function() {
+tipEle.style.opacity = "1";
+}, 0);
+}
+function hideTopTip() {
+var tipEle = document.getElementById("JtopTipMsg");
+if (tipEle) {
+setTimeout(function() {
+tipEle.style.opacity = "0";
+setTimeout(function() {
+tipEle.style.display = "none";
+}, 300);
+}, 1500);
+}
+}
+</script>
+</block>

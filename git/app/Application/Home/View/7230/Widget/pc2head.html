@@ -1,0 +1,14 @@
+<div class="rjhj-info">
+    <div class="hj-info-m">
+        <div class="pic"><img src="http://pic.7230.com/Uploads/Picture/2015-03-12/5500ecac86af9.png"></a></div>
+        <div class="yxbt" style="width: 210px">
+            <div class="zq-head"><h1>{$tid['title']}</h1></div>
+            <span>
+                <volist name="tags" id="val">
+                    <a href="{:W('Home/P7230/tagsUrl',array($val['name']))}" target="_blank">{$val['title']}</a>
+                </volist>
+            </span>
+        </div>
+        <div class="info" style="width: 800px;"><b>软件介绍：</b>{$tid['description']}</div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<extend name="Home@qbaobeimobile/Base/common" xmlns:Think="http://www.w3.org/1999/html"/>
+<block name="body">
+    <!---body--->
+    <!-- 分类 -->
+    <section class="meau" id="hide-meau" style="height: 68px; display: none;">
+        <div id="wraper1" style="overflow: hidden;">
+            <ul style="width: 1560px; -webkit-transition-property: -webkit-transform; transition-property: -webkit-transform; -webkit-transform-origin: 0px 0px 0px; -webkit-transform: translate3d(0px, 0px, 0px);">
+                <li><a href="http://m.qbaobei.com/list/26/">学知识</a></li><li><a href="http://m.qbaobei.com/list/27/">动画</a></li><li><a href="http://m.qbaobei.com/list/126/">幻灯中心</a></li><li><a href="http://m.qbaobei.com/list/320/">感冒</a></li><li><a href="http://m.qbaobei.com/list/360/">宝宝图库</a></li><li><a href="http://m.qbaobei.com/list/365/">孕产图库</a></li><li><a href="http://m.qbaobei.com/list/369/">儿童摄影</a></li><li><a href="http://m.qbaobei.com/list/145/">育儿导航</a></li><li><a href="http://m.qbaobei.com/list/209/">奶粉</a></li><li><a href="http://m.qbaobei.com/list/374/">明星亲子</a></li><li><a href="http://m.qbaobei.com/list/377/">生活图库</a></li><li><a href="http://m.qbaobei.com/list/685/">母婴食谱</a></li><li><a href="http://m.qbaobei.com/list/686/">四季养生</a></li><li><a href="http://m.qbaobei.com/list/687/">饮食健康</a></li><li><a href="http://m.qbaobei.com/list/688/">美食资讯</a></li><li><a href="http://m.qbaobei.com/list/689/">饮食文化</a></li><li><a href="http://m.qbaobei.com/list/746/">怀孕百科</a></li><li><a href="http://m.qbaobei.com/list/747/">育儿百科</a></li><li><a href="http://m.qbaobei.com/list/748/">早教百科</a></li><li><a href="http://m.qbaobei.com/list/749/">营养美食百科</a></li><li><a href="http://m.qbaobei.com/list/750/">保健养生百科</a></li><li><a href="http://m.qbaobei.com/list/751/">生活用品百科</a></li><li><a href="http://m.qbaobei.com/list/964/">亲子文化节</a></li><li><a href="http://m.qbaobei.com/list/392/">作文专区</a></li><li><a href="http://m.qbaobei.com/list/4/">母婴健康</a></li><li><a href="http://m.qbaobei.com/list/5/">早期教育</a></li><li><a href="http://m.qbaobei.com/list/6/">听儿歌</a></li><li><a href="http://m.qbaobei.com/list/7/">讲故事</a></li><li><a href="http://m.qbaobei.com/list/8/">玩游戏</a></li><li><a href="http://m.qbaobei.com/list/1213/">烘焙</a></li><li><a href="http://m.qbaobei.com/list/1306/">专家说早教</a></li>        </ul>
+        </div>
+    </section>
+    <section class="news">
+        <div class="index-news" id="hot-list">
+            <div class="title"><h3>{$info['title']}</h3></div>
+            <ul class="index-ul">
+                <volist name="lists" id="val">
+                    <li><div class="n-info">
+                        <a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a>
+                        <span><a target="_blank" href="{:staticUrlMobile('lists',$val['cid'],'Document')}">[{$val['cate']}]</a></span>
+                    </div></li>
+                </volist>
+            </ul>
+            <div class="page">{$page}</div>
+        </div>
+    </section>
+    <!---bodyEND--->
+</block>
+<block name="script">
+    <script type="text/javascript">
+        /**返回前一页**/
+        var onowurl=document.domain;//当前域名
+        var str = document.referrer;//来源域名
+        if(str.indexOf(onowurl) != -1){
+            $(".back").bind('tap',function(){
+                window.history.length<=1?window.location.href="http://m.qbaobei.com":window.history.go(-1);
+            });
+        }
+        else
+        {
+            $(".back").bind('tap',function(){
+                window.location.href="http://m.qbaobei.com";
+            });
+        };
+    </script>
+</block>

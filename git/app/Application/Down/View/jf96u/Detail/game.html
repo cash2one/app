@@ -1,0 +1,154 @@
+<extend name="Home@jf96u/Base/common" />
+
+
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/yxk.css">
+ </block>
+
+<block name="body">
+
+<div class="main1200">
+    <input type="hidden"  id="hitid"   name="id"  value="{$info.id}">
+    <input type="hidden"  id="hituid"  name="uid"  value="{$info.uid}">
+    <input type="hidden"  id="hittype"  name="type"  value="{:MODULE_NAME}">
+    <div class="goback">当前位置：      <position />
+        > {$info.title}</div>
+    <div class="container">
+        <div class="down-detail">
+            <div class="fl detail-l">
+                <h1>{$info.title}</h1>
+                <div class="pic"><img src="{:get_cover($info['smallimg'],'path')}" alt="{$info.title}"></div>
+                <p class="score"><b>{$info['soft_socre']*2}</b>.0</p>
+                <div class="down">
+<php>$flag=0;</php>
+<volist name="info[downAll]" id="v">
+    <php>$flag=1;</php>
+    <if condition="($v['site_id'] eq 19)">
+        <div class="btn down-adr">
+            <a href="{$v.url}">{$v.title}<span class="bg">
+
+            </span></a>
+            <span class="ewm"><img src="{$v.qrcode}"></span>
+        </div>
+    <elseif condition="$v['site_id'] eq 18" />
+            <div class="btn down-pc">
+                <a href="{$v.url}">{$v.title}<span class="bg">
+
+            </span></a>
+                <span class="ewm"><img src="{$v.qrcode}"></span>
+            </div>
+    <elseif condition="$v['site_id'] eq 20"/>
+                <div class="btn down-ios">
+                    <a href="{$v.url}">{$v.title}<span class="bg">
+            </span></a>
+                    <span class="ewm"><img src="{$v.qrcode}"></span>
+                </div>
+    </if>
+</volist>
+<if condition="$flag eq 0">
+    <if condition="($info['system'] eq 1)">
+        <div class="btn down-adr">
+            <a href="javascript:void(0)">正在上传中...</a>
+        </div>
+    <elseif condition="$info['system'] eq 2" />
+        <div class="btn down-ios">
+            <a href="javascript:void(0)">正在上传中...</a>
+        </div>
+    <else/>
+        <div class="btn down-pc">
+            <a href="javascript:void(0)">正在上传中...</a>
+        </div>
+    </if>
+</if>
+
+
+                </div>
+                <div class="info">
+                    <p><span>游戏类型：</span>{:C(FIELD_GAME_TYPE)[($info['game_type'])]}</p>
+                    <p><span>游戏版本：</span>{$info.version}<if condition="$info['version'] eq '' ">1.0</if></p>
+                    <p><span>游戏大小：</span>{:format_size($info['size'])}<if condition="$info['size'] eq 0 ">未知</if></p>
+                    <p><span>游戏平台：</span>
+                        <if condition="($info['system'] eq 1)">
+                        <em class="adr"></em>
+                            <elseif condition="$info['system'] eq 2" />
+                         <em class="iph"></em>
+                         </if>
+                    </p>
+                    <p><span>游戏特征：</span>{:C(FIELD_GAME_IMAGE)[($info['game_image'])]}</p>
+                    <p><span>运营状态：</span>{:C(FIELD_DOWN_RANK)[($info['rank'])]}</p>
+                    <php>
+                        if((int)$info['company_id'] > 0){
+                        $cs = M('Company')->field('name,path')->where('status = 1 AND id = '.$info['company_id'])->find();
+                        if($cs){
+                    </php>
+                    <p><span>运营平台：</span><a href="{:C('STATIC_URL')}/{$cs['path']}" target="_blank" >{$cs['name']}</a></p>
+                    <php>}}</php>
+                </div>
+            </div>
+            <div class="fr detail-r">
+                <div class="main-nav">
+                    <a href="" class="active">游戏介绍</a>
+                    <a href="#news">游戏资讯</a>
+                    <a href="#gongl">游戏攻略</a>
+                    <a href="#gift">游戏礼包</a>
+                    <a href="#video">游戏视频</a>
+                    <a href="#pingl">我要评论</a>
+                </div>
+                <!--游戏简介-->
+                <div class="dx game-intro">
+                    <div class="intro-wrap">
+                        {$info.content}
+                    </div>
+                    <div class="get_more"><span>展开内容+</span></div>
+                </div>
+                <!--游戏截图-->
+                <if condition="($info['previewimg'] NEQ 0)">
+
+                    <div class="dx game-pic">
+                        <div class="game-pic-main">
+                            <span class=" btn prev"></span>
+                            <ul class="gameMain-ul">
+                                <foreach name="info['previewimg']" item="vo" >
+                                    <li><img src="{:get_cover($vo,'path')}" alt="游戏截图"></li>
+                                </foreach>
+                            </ul>
+                            <span class="btn next"></span>
+                        </div>
+                    </div>
+                    <!--截图查看-->
+                    <div id="big-pic">
+                        <span class="close">close</span>
+                        <div class="big-ul"><ul></ul></div>
+                        <div class="small-ul"><ul></ul></div>
+                        <span class="btn prev"></span>
+                        <span class="btn next"></span>
+                    </div>
+                </if>
+                <!--游戏版本-->
+                {:W('jf96u/downbanben',array($info['id'],$info['system'],'down_dmain'))}
+
+
+
+                {:W('jf96u/downtag',array($info['id']))}
+                <div class="dx comment">
+                    <div class="pingl" id="pingl" ><h3>玩家评论</h3></div>
+                    <form action="" method="" name="" id="pl" data-id="{$info['id']}" data-model="down">
+                        <input name="author" id="tj-user" type="hidden" value="{$info['uid']}">
+                        <p><input type="text" placeholder="请输入用户名" id="user"></p>
+                        <p><textarea placeholder="这里输入您想和大家说的，也可以是对我们的建议……"></textarea></p>
+                        <p class="bot"><span>本站为防止低俗内容出现，用户发表的评论需经过审核，谢谢 ！</span><input type="button" value="发表评论" id="btn"></p>
+                    </form>
+                    <ul class="comment-list" data-id="{$info['id']}" data-model="down">
+                        <p id="no-comment" style="text-align:center;">暂无评论</p>
+                    </ul>
+                    <div class="gdmore">查看更多 ↓</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+ </block>
+<block name="script">
+    <script src="__PUBLIC__/Home/jf96umobile/js/down.cnzz.js"></script>
+</block>

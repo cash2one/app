@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Home@7230mobile/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230mobile/css/k.css"/>
+</head>
+
+<body id="kc">
+<include file="Home@7230mobile/Public/header"/>
+<div class="dragable" widget="hjztsj" style="display: none;"></div>
+<div class="g">
+    <header style=" background-color:#fff; height:46px; border-bottom:1px solid #e7e7e7;">
+        <div class="dragable" widget="base" style="display: none;">
+        <span style="background-color:#fff;color:#333;height:46px;line-height:46px;text-align:center;">{$base['title']}</span>
+        </div>
+        <a href="javascript:history.go(-1)" class="back" style="background: url(http://m.7230.com/Public/Home/7230mobile/images/sprite2.png) -5px 0px no-repeat;"></a> </header>
+    <section id="ztc" class="cfix" style="padding-bottom:0px;">
+        <dl id="ztinfo">
+            <dt>
+            <div class="dragable" widget="base" style="width: 100%; height: 210px; border: 1px solid #FF0000;">
+                <img src="http://pic.7230.com/Uploads/Picture/2015-03-20/550bf78557e4b.jpg">
+            </div>
+            </dt>
+            <dd><img src="{$author['icon']}"><span>{$author['description']}</span></dd>
+        </dl>
+        <div class="hj-main">
+            <div class="hj-title"><span class="cur">安卓</span><span>苹果</span></div>
+            <div class="hj-list showcurrent">
+                <volist name="cate" id="val">
+                <p id="acount">{$val['cate']}</p>
+                <ul class="heapp">
+                    <volist name="val['data']" id="rel">
+                    <li> <a href="{:staticUrlMobile('detail',$rel['adr'],'Down')}" class="img"> <img src="{:get_cover($rel['smallimg'],'path')}" /> </a>
+                        <p> <a href="{:staticUrlMobile('detail',$rel['adr'],'Down')}">{$rel['title']}</a> <span> <i>{$rel['cate']}</i></span>
+                            <span>
+                                <volist name="rel['tags']" id="vo">
+                                    <a href="{:mobileTagUrl($vo['name'])}">{$vo['title']}</a>
+                                </volist>
+                            </span> </p>
+                        <a href="{:staticUrlMobile('detail',$rel['adr'],'Down')}" class="bxz">下载<i>{$rel['size']}</i></a></li>
+                    </volist>
+                </ul>
+                </volist>
+            </div>
+
+            <div class="hj-list">
+                <volist name="cate" id="val">
+                    <p id="acount">{$val['cate']}</p>
+                    <ul class="heapp">
+                        <volist name="val['data']" id="rel">
+                            <li> <a href="{:staticUrlMobile('detail',$rel['ios'],'Down')}" class="img"> <img src="{:get_cover($rel['smallimg'],'path')}" /> </a>
+                                <p> <a href="{:staticUrlMobile('detail',$rel['ios'],'Down')}">{$rel['title']}</a> <span> <i>{$rel['cate']}</i></span>
+                                <span>
+                                <volist name="rel['tags']" id="vo">
+                                <a href="{:mobileTagUrl($vo['name'])}">{$vo['title']}</a>
+                                </volist>
+                                </span></p>
+                                <a href="{:staticUrlMobile('detail',$rel['ios'],'Down')}" class="bxz ios_down">下载<i>{$rel['size']}</i></a></li>
+                        </volist>
+                    </ul>
+                </volist>
+            </div>
+        </div>
+        <p class="more-tags"> <em>更多集合:</em>
+            <span>
+                <div class="dragable" widget="special__tags" style="width: 162px; height: 128px; border: 1px solid #FF0000;">
+                <volist name="lists" id="val">
+                <a href="{:C('MOBILE_STATIC_URL')}{$val['url']}"> <img src="{:get_cover($val['icon'],'path')}" /> <b>{$val['title']}</b> </a>
+                </volist>
+                </div>
+            </span>
+        </p>
+    </section>
+</div>
+<include file="Home@7230mobile/Public/footer"/>
+</body>
+</html>

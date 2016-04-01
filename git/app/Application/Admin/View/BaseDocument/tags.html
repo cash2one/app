@@ -1,0 +1,457 @@
+<eq name="key" value="1">
+        <!--标签**************************start-->
+            <!-- 标签tags选取，使用关联表，无法加入模型 -->
+            <div class="form-item cf">
+                    <label class="item-label">
+                        <div  class="fl">标签</div>
+                        <div class="search-form fl check-tips tags_combotree_search">
+                            <div class="sleft tags_combotree_search">
+                                <input type="text" id="Tags_Title" name="Tags_Title" class="search-input" value="" placeholder="请输入标签名称" data-type="Tags" data-category="{$model['tags_category']}">
+                                <a class="sch-btn"  href="javascript:;" ><i class="btn-search"></i></a>
+                                <div class="ajax-rs-list">
+                                    <ul class="hidden"></ul>
+                                </div>
+                            </div>
+                            <!-- 搜索树节点 -->
+                            <div id="treeContent_Tags_Title" class="treeContent" style="display: none; position: absolute;z-index:100000;">
+							    <ul id="treeDemo_Tags_Title" class="ztree" style="margin-top: 0; width: 160px;"></ul>
+							</div>
+                        </div>
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="Tags" name ="Tags" value="" class="tagTree text input-large" readonly />
+                    </div>
+                    <!-- 树节点 -->
+					<div id="treeContent_Tags" class="treeContent" style="display: none; position: absolute;z-index:100000;">
+				        <ul id="treeDemo_Tags" class="ztree" style="margin-top: 0; width: 160px;">
+				        </ul>
+				    </div>
+            </div>
+			
+
+            <!-- 产品标签tags_product选取，使用关联表，无法加入模型 -->
+            <div class="form-item cf">
+                    <label class="item-label">
+                        <div  class="fl">产品标签</div>
+                        <div class="search-form fl check-tips">
+                            <div class="sleft tags_combotree_search">
+                                <input type="text" id="ProductTags_Title" name="ProductTags_Title" class="search-input" value="" placeholder="请输入标签名称" data-type="ProductTags" data-category="{$model['product_tags_category']}">
+                                <a class="sch-btn" href="javascript:;" ><i class="btn-search"></i></a>
+                                <div class="ajax-rs-list">
+                                    <ul class="hidden"></ul>
+                                </div>
+                            </div>
+                            <!-- 搜索树节点 -->
+                            <div id="treeContent_ProductTags_Title" class="treeContent" style="display: none; position: absolute;z-index:100000;">
+							    <ul id="treeDemo_ProductTags_Title" class="ztree" style="margin-top: 0; width: 160px;"></ul>
+							</div>
+                        </div>
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="ProductTags"  name="ProductTags" class="tagTree text input-large" readonly />
+                    </div>
+                    <!-- 树节点 -->
+					<div id="treeContent_ProductTags" class="treeContent" style="display: none; position: absolute;z-index:100000;">
+				        <ul id="treeDemo_ProductTags" class="ztree" style="margin-top: 0; width: 160px;">
+				        </ul>
+				    </div>
+            </div>
+
+        <!-- 副分类sub_category选取，使用关联表，无法加入模型 -->
+        <php>if( C('SUB_CATEGORY') == '1' && $cateTable != 'FeatureCategory'){</php>
+        <div class="form-item cf">
+            <label class="item-label">
+                <div  class="fl">副分类</div>
+                <div class="search-form fl check-tips">
+                    <div class="sleft tags_combotree_search">
+                        <input type="text" id="Category_Title" name="Category_Title" class="search-input" value="" placeholder="请输入分类名称" data-type="{$cateTable}" data-category="0">
+                        <a class="sch-btn" href="javascript:;" ><i class="btn-search"></i></a>
+                        <div class="ajax-rs-list">
+                            <ul class="hidden"></ul>
+                        </div>
+                    </div>
+                    <!-- 搜索树节点 -->
+                    <div id="treeContent_Category_Title" class="treeContent" style="display: none; position: absolute;z-index:100000;">
+                        <ul id="treeDemo_Category_Title" class="ztree" style="margin-top: 0; width: 160px;"></ul>
+                    </div>
+                </div>
+            </label>
+            <div class="controls">
+                <input type="text" id="Category"  name="Category" class="tagTree text input-large" readonly />
+            </div>
+            <!-- 树节点 -->
+            <div id="treeContent_Category" class="treeContent" style="display: none; position: absolute;z-index:100000;">
+                <ul id="treeDemo_Category" class="ztree" style="margin-top: 0; width: 160px;">
+                </ul>
+            </div>
+        </div>
+        <PHP>}</PHP>
+
+	<script type="text/javascript">
+    	var setting = {
+    			check: {
+					enable: true,
+					chkboxType:{ "Y" : "", "N" : "" },//不关联父类和子类
+				},
+				view: {
+					selectedMulti: false, //是否允许多选
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+		};
+    	var zNodes = [];
+    	var objData = new Array();//选择的值
+    	var defaultData = new Array();//默认值
+    	var sortData = new Array();//默认值
+    	var treeContent = 'treeContent';
+    	var treeDemo = 'treeDemo';
+    	
+    	var tags_init = {
+                even : function(){
+                	$(".tagTree").bind("click",function(){
+						var textId = $(this).attr('id');
+						showMenu(textId);//显示or隐藏
+					});
+                	// 搜索
+                	$('.tags_combotree_search a.sch-btn').click(function(){
+                		var num = $('.tags_combotree_search a.sch-btn').index(this);
+                		var keywords = $('.tags_combotree_search :text').eq(num);
+                		var type = $('.tags_combotree_search :text').eq(num).attr('data-type');
+                		var category = $('.tags_combotree_search :text').eq(num).attr('data-category');
+                		if(keywords.val().length <= 0){
+                			//alert("请输入关键字");
+                			keywords.focus();
+                			return false;
+                		}
+						
+                		var ajax_url = 'admin.php?s=/api/getTagsSearch/category/'+category+'/type/'+type+'/keywords/'+keywords.val();
+                		$.ajax({
+                            url: ajax_url,
+                            type: 'GET',
+                            dataType: 'json',
+                        })
+                        .done(function(data) {
+                        	var textId = $('.tags_combotree_search :text').eq(num).attr('id');
+    						showMenu(textId);//显示or隐藏
+    						
+    						var settingSearch = setting;
+    						settingSearch['async'] = {enable: false};
+    						settingSearch['callback'] ={
+                            		onClick: function(event, treeId, treeNode){clickSetData(treeId,treeNode,true);},
+                            	    onCheck: function(event, treeId, treeNode){checkSetData(treeId,treeNode,true);},
+                            };
+                            
+                        	var zNodesSearch = new Array();//初始化数据
+                        	for(var i in data){
+                        		data[i]['pId'] = data[i].pid;
+                        		zNodesSearch.push(data[i]);
+                        	}
+                        	$.fn.zTree.init(jQuery("#treeDemo_"+textId), settingSearch,zNodesSearch);//设置默认值
+                        	//设置默认选中
+                        	var treeId = textId.split('_');
+                        	treeId = treeId[0];
+    						var objIds = objData[treeId]['ids'];
+    						var treeObj = $.fn.zTree.getZTreeObj("treeDemo_"+textId);
+    				  		treeObj.expandAll(true);//展开节点
+    						for(var i=0;i<data.length;i++){
+    							if($.inArray(data[i].id,objIds) > -1){
+    								treeObj.checkNode(treeObj.getNodeByParam("id", data[i].id, null), true, true);//设置选中
+    							}
+    						}
+                        });
+                		
+                	});
+                },
+                init : function(ajax_url,dom_name,if_default){
+                	setting['async'] = {
+            				enable: true, //启用异步加载
+            				url: ajax_url, //调用的后台的方法
+            				dataFilter: filter,
+            			};
+                	setting['callback'] ={
+                			onAsyncSuccess: function(event, treeId, treeNode, msg){zTreeOnAsyncSuccess(event, treeId, treeNode, msg,dom_name);},
+                			onClick: function(event, treeId, treeNode){clickSetData(treeId,treeNode);},
+                	        onCheck: function(event, treeId, treeNode){checkSetData(treeId,treeNode);},
+                		};
+                	$.fn.zTree.init(jQuery("#treeDemo_"+dom_name), setting);//设置默认值
+                	$.fn.zTree.getZTreeObj("treeDemo_"+dom_name).expandAll(true);//展开节点
+                },
+    	};
+    	
+    	//初始化
+        <foreach name="tags_url" item="vo" key="k" >
+           objData['{$k}'] = {"ids":[],"names":[]};
+           defaultData['{$k}'] = [];
+           sortData['{$k}'] = [];//排序大小
+           jQuery('#'+'{$k}').val('');
+           tags_init.init('{$vo}','{$k}',{$ifEdit});
+        </foreach>
+        
+        tags_init.even();
+        
+		//显示or隐藏
+	    function showMenu(textId) {
+	    	treeContent = 'treeContent_'+textId;
+	    	treeDemo = 'treeDemo_'+textId;
+	    	
+	        var target = jQuery('#'+textId);
+	        var targetOffset = target.offset();
+	        $('#'+treeContent).css({ left: targetOffset.left + 'px', top: targetOffset.top + target.outerHeight() + 'px' }).slideDown('fast');
+	        $('body').bind('mousedown', onBodyDown);
+	    }
+	    function hideMenu() {
+	    	$('#'+treeContent).fadeOut("fast");
+	        $('body').unbind('mousedown', onBodyDown);
+	    }        
+	    function onBodyDown(event) {
+	        if (!(event.target.id == 'menuBtn' || event.target.id == treeContent || $(event.target).parents('#'+treeContent).length > 0)) {
+	            hideMenu();
+	        }
+	    }
+	    
+	  	//异步加载数据处理
+		function filter(treeId, parentNode, childNodes) {
+			var textId = jQuery('#'+treeId).parent('div').prev().find('input:first').attr('id');
+			if (!childNodes) return null;
+			var data = childNodes.json;
+			defaultData[textId] = childNodes.default_tags;//默认选中的值
+			for (var i=0, l=data.length; i<l; i++) {
+				data[i].sort = 0;//自定义排序字段
+			}
+			return data;
+		}
+	  	
+		//异步记载成功后设置默认值
+	  	function zTreeOnAsyncSuccess(event, treeId, treeNode, msg,dom_name){
+	  		var textId = jQuery('#'+treeId).parent('div').prev().find('input:first').attr('id');
+			var treeObj = $.fn.zTree.getZTreeObj(treeId);
+			var nodes = treeObj.getNodes();
+	  		var objIds = new Array();
+	  		var objNames = new Array();
+	  		var defaultNode = defaultData[textId]; //选中的节点数据
+	  		var sort = 0;
+	  		
+			//默认数据处理
+	  		for(var i=0;i<defaultNode.length;i++){
+				var text = '<input type="hidden" id="'+ textId +'_'+ defaultNode[i].id +'" name ="'+ textId +'[]" value="'+ defaultNode[i].id +'" />';//生成文本框
+			 	jQuery('#'+textId).parent('div').append(text);
+				
+  				objIds.push(defaultNode[i].id);
+				objNames.push(defaultNode[i].name);
+				
+				var node = treeObj.getNodeByParam("id", defaultNode[i].id, null);
+				if(!node){
+					sort = sort+1;
+					defaultNode[i].sort = sort;//插入排序字段
+  					treeObj.addNodes(false,defaultNode[i]);//不存在动态添加节点
+  					treeObj.checkNode(treeObj.getNodeByParam("id", defaultNode[i].id, null), true, true);//设置选中
+  				}else{
+  					treeObj.checkNode(node, true, true);//存在设置选中
+  				}
+			}
+	  		
+	  		objData[textId]['ids'] = objIds;
+  			objData[textId]['names'] = objNames;
+  			jQuery('#'+textId).val(objNames);//写入文本框
+  			
+	  		if(!$.isEmptyObject(nodes) && defaultNode.length > 0){
+	  			setDataTop(treeId,false);//排序
+	  		}else{
+	  			treeObj.expandAll(true);//展开节点
+	  		}
+	  	}
+	    
+		//点击checkbox 设置值
+		function checkSetData(treeId,treeNode,isSearch){
+			isSearch = isSearch?isSearch:false;
+			if(isSearch){
+				var t = treeId.split('_');
+				var textId = t[1];
+				var treeObj = $.fn.zTree.getZTreeObj('treeDemo_'+textId);
+				setTagsSearch(textId,treeNode);
+			}else{
+				var textId = jQuery('#'+treeId).parent('div').prev().find('input:first').attr('id');
+				var treeObj = $.fn.zTree.getZTreeObj('treeDemo_'+textId);
+			}
+			var objIds = objData[textId]['ids'];
+		   	var objNames = objData[textId]['names'];
+		   	
+		   	var isChecked = treeNode.checked;//当前是否选中
+		   	var checkId = treeNode.id.toString();//选中的Id
+		   	var checkName = treeNode.name.toString();//选中的name
+		   	
+		   	if(isChecked && $.inArray(checkId,objIds) <= -1){
+		   		//选择
+				objIds.push(checkId);
+				objNames.push(checkName);
+				treeObj.checkNode(treeObj.getNodeByParam("id", checkId, null), true, true);//设置选中
+			   	setText(textId,checkId,true);//添加
+		   	}else{
+		   		//取消
+				objIds.splice($.inArray(checkId,objIds),1);
+				objNames.splice($.inArray(checkName,objNames),1);
+				treeObj.checkNode(treeObj.getNodeByParam("id", checkId, null), false, false);//取消选中
+				setText(textId,checkId,false);//删除
+		   	}
+		   	
+		   	objData[textId]['ids'] = objIds;
+	  		objData[textId]['names'] = objNames;
+		   	
+		   	setDataTop(treeId,isSearch);
+		}
+		
+		//点击name设置值
+		function clickSetData(treeId,treeNode,isSearch){
+			isSearch = isSearch?isSearch:false;
+			if(isSearch){
+				var t = treeId.split('_');
+				var textId = t[1];
+				var treeObj = $.fn.zTree.getZTreeObj(treeId);
+				setTagsSearch(textId,treeNode);
+			}else{
+				var textId = jQuery('#'+treeId).parent('div').prev().find('input:first').attr('id');
+				var treeObj = $.fn.zTree.getZTreeObj('treeDemo_'+textId);
+			}
+			var objIds = objData[textId]['ids'];
+		   	var objNames = objData[textId]['names'];
+		   	
+		   	var isChecked = treeNode.checked;
+		   	var checkId = treeNode.id.toString();//选中的Id
+		   	var checkName = treeNode.name.toString();//选中的name
+		   	
+		  	//选中则取消；取消则选中
+		   	if(isChecked){
+		   		objIds.splice($.inArray(checkId,objIds),1);
+				objNames.splice($.inArray(checkName,objNames),1);
+				treeObj.checkNode(treeObj.getNodeByParam("id", checkId, null), false, false);//取消选中
+				setText(textId,checkId,false);//删除
+				if(isSearch){
+					var treeObj = $.fn.zTree.getZTreeObj("treeDemo_"+textId);
+					treeObj.checkNode(treeObj.getNodeByParam("id", checkId, null), false, false);//取消选中
+				}
+		   	}else{
+				objIds.push(checkId);
+				objNames.push(checkName);
+				treeObj.checkNode(treeObj.getNodeByParam("id", checkId, null), true, true);//设置选中
+			 	setText(textId,checkId,true);//添加
+			 	
+			 	if(isSearch){
+			 		var treeObj = $.fn.zTree.getZTreeObj("treeDemo_"+textId);
+					treeObj.checkNode(treeObj.getNodeByParam("id", checkId, null), true, true);//设置选中
+				}
+		   	}
+		   	
+		   	setDataTop(treeId,isSearch);
+		}
+		
+		//添加删除文本框
+		function setText(textId,checkId,isAdd){
+			var objNames = objData[textId]['names'];
+			if(isAdd){
+				var text = '<input type="hidden" id="'+ textId +'_'+ checkId +'" name ="'+ textId +'[]" value="'+ checkId +'" />';//生成文本框
+		 		jQuery('#'+textId).parent('div').append(text);
+			}else{
+				jQuery('#'+textId+'_'+checkId).remove();
+			}
+	   		jQuery('#'+textId).val(objNames);//写入文本框
+		}
+		
+		//已选中的排在最前面
+		function setDataTop(treeId,isSearch){
+			isSearch = isSearch?isSearch:false;
+			if(isSearch){
+				var t = treeId.split('_');
+				var textId = t[1];
+			}else{
+				var t = treeId.split('_');
+				var textId = t[1];
+			}
+			var objIds = objData[textId]['ids'];
+		   	var objNames = objData[textId]['names'];
+		   	var treeObj = $.fn.zTree.getZTreeObj("treeDemo_"+textId);
+		   	var nodes = treeObj.getNodes();
+		   	var topArr = new Array();
+			var pIds = new Array();
+		   	
+		   	//获取子类的pid
+		   	for (var i = 0; i < treeObj.getNodes().length; i++) {
+		   		var pNodes = treeObj.getNodeByParam("id", nodes[i].id, null);
+		   		var children = treeObj.transformToArray(pNodes.children);
+		   		for(var c = 0;c < children.length;c++){
+		   			if($.inArray(children[c].pid,pIds) <= -1 && $.inArray(children[c].id,objIds) > -1){
+		   				pIds.push(children[c].pid);
+		   			}
+		   		}
+		   	}
+		   	
+		   	//获取置顶的节点
+		   	for(var i=0;i<objIds.length;i++){
+		   		var id = objIds[i];
+		   		var node = treeObj.getNodeByParam("id",id, null);
+  				if(node != null){
+  					var pid = node.pid;
+  					if(pid > 0){
+  						var pNodes = treeObj.getNodeByParam("id", pid, null);
+  					}else{
+  						var pNodes = treeObj.getNodeByParam("id", id, null);
+  					}
+
+                    if(!pNodes){
+                        treeObj.checkNode(treeObj.getNodeByParam("id", id, null), true, true);//设置选中
+                        topArr.push(node);//添加到数组
+                        treeObj.removeNode(node);//删除节点
+                        continue;
+                    }//作者xiao 当 PNodes 为空时 防止报错
+
+  					//存在子类的节点
+  					if(pNodes.children){
+  						var childrenTop = setChildrenTop(textId,pNodes.children);//处理子节点排序
+			   			pNodes.children = childrenTop;
+			   			topArr.push(pNodes);//添加到数组
+			   			treeObj.removeNode(pNodes);//删除节点
+  					}else{
+			   			treeObj.checkNode(treeObj.getNodeByParam("id", id, null), true, true);//设置选中
+			   			topArr.push(node);//添加到数组
+	   					treeObj.removeNode(node);//删除节点
+  					}
+  				}
+		   	}
+		   	
+		   	var nodes = treeObj.getNodes();
+	  		$.fn.zTree.init(jQuery("#treeDemo_"+textId), setting, $.merge(topArr,nodes));//设置默认值
+	  		$.fn.zTree.getZTreeObj("treeDemo_"+textId).expandAll(true);//展开节点
+		}
+		//处理子节点排序
+		function setChildrenTop(textId,children){
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo_"+textId);
+			var objIds = objData[textId]['ids'];
+		   	var childrenTop = new Array();
+		   	
+   			if(children.length > 1){
+   				for(var j=0;j<objIds.length;j++){
+   					for(var c=0;c<children.length;c++){
+   	   					if(objIds[j] == children[c].id){
+   	   						childrenTop.push(children[c]);
+   	   						treeObj.removeNode(children[c]);//删除节点
+   	   						break;
+   	   					}
+   	   				}
+   				}
+   			}
+   			var rs = $.merge(childrenTop,children);
+   			return rs;
+		}
+		//搜索时不存在的节点添加
+		function setTagsSearch(textId,treeNode){
+		   	var treeObj = $.fn.zTree.getZTreeObj('treeDemo_'+textId);
+		   	var node = treeObj.getNodeByParam("id", treeNode.id, null);
+		   	if(node == null){
+		   		treeObj.addNodes(null, treeNode, true);//添加节点
+		   	}
+		}
+	</script>
+    <!--标签**************************end-->
+</eq>

@@ -1,0 +1,11 @@
+<volist name="ranks"  id="f" >
+              <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>>
+                      <em></em>
+                      <p class="xs"><i class="tit">{$f['title']}</i><i class="fenl">{:getCateName($f['id'],'Down')}</i><i class="adr"></i><i class="app"></i><i class="down"></i></p>
+                      <p class="jj">
+                          <a href="{:staticUrl('detail', $f['id'],'Down')}" target="_blank"><img src="{:get_cover($f['smallimg'],'path')}"></a>
+                          <span><a href="{:staticUrl('detail', $f['id'],'Down')}" target="_blank" class="tit">{$f['title']}</a><b><i>{$f['size']}</i><i>{:getCateName($f['id'],'Down')}</i><i class="adr"></i><i class="app"></i><a href="{:staticUrl('detail', $f['id'],'Down')}">游戏下载</a></b>
+                          <b class="info">{$f['description']}</b></span>
+                      </p>
+                  </li>
+</volist>

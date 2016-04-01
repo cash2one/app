@@ -1,0 +1,153 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/gift.css"/>
+</block>
+<block name="body">
+<div class="main1200 gift-detail">
+    <div class="goback">当前位置：<position /> > {$info['title']}  </div>
+    <div class="container">
+        <div class="cata-l wrap">
+            <!--最新礼包-->
+            <div class="mid-tit"><h1>{$info['title']}</h1></div>
+            <div class="gift-detail-xx">
+                <div class="gift-xx-l fl">
+                    <p class="time"><span class="tit">领取时间：</span>{:date('Y-m-d H:i:s',$info['start_time'])} 至 {:date('Y-m-d H:i:s',$info['end_time'])}</p>
+                    <!--绑定class="xxxx-yes",非绑定class=“xxxx-no”-->
+                    <div class="lqtj"><span class="tit">领取条件：</span>
+                    <switch name="info['use_condition']">
+                      <case value="1|3"><span class="bd-btn dl-yes">需要登录</span></case>
+                      <default /><span class="bd-btn dl-no">需要登录</span>
+                    </switch>
+                    <switch name="info['use_condition']">
+                      <case value="2|3"> <span class="bd-btn sj-yes">绑定手机</span></case>
+                      <default /><span class="bd-btn sj-no">绑定手机</span>
+                    </switch>
+                    </div>
+                    <div class="lq-btn"><a href="javascript:void(0)" class="lq">领取</a>
+                       {~W('Package/Jf96u/relateLink',array($info['id']))}
+                                      
+                    </div>
+                </div>
+                <div class="gift-xx-r fr">
+                     <Think:article basename="package" name="particle" limit="1" where="category_id = 4" order="create_time DESC">
+                        <p class="data"><span class="tit">最新开服：</span>{$article['title']}[{:date('Y-m-d H:i:s',$article['create_time'])}]</p>
+                     </Think:article>
+                    <div class="gift-xx-load"><span class="shyu tit">剩余：</span><div class="all-width"><div class="now-width" style="width:50px;"></div></div><span class="nub">0%</span></div>
+                    <strong class="card_all" card-id="{$info['id']}" style="display:none;"></strong> 
+                    <strong class="card_surplus" card-id="{$info['id']}" style="display:none;"></strong>
+                </div>
+            </div>
+            <div class="gift-detail-jj">
+                <div class="gift-tit"><h3>礼包详情</h3></div>
+                <div class="gift-jj-main">
+                    {$info['content']}
+                </div>  
+            </div>
+            <div class="gift-detail-ff">
+                <div class="gift-tit"><h3>使用方法</h3></div>
+                <div class="gift-jj-main">
+                     {$info['activation']}
+                </div>
+            </div>
+           {~W('Package/Jf96u/relatePackage',array($info['id']))}
+        </div>
+        <div class="cata-r">
+           {~W('Package/Jf96u/relateGame',array($info['id']))}
+           {~W('Package/Jf96u/relateNews',array($info['id']))}
+        </div>
+    </div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__STATIC__/artdialog/jquery.artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="__STATIC__/artdialog/iframeTools.source.js"></script>
+<script language="javascript"> 
+    $(function(){ 
+        artDialog.alert = function (content,title,icon, callback) {
+            return artDialog({
+                id: 'Alert',
+                icon: icon,
+        		title:title,
+                fixed: true,
+                lock: true,
+                content: content,
+        		ok: function () {
+                window.location.reload();
+                return false;
+               },
+                close: callback
+        		
+             });
+        };
+	   if((".gift-xx-load").length>0){
+		    //ajax获取总数和剩余数
+			var all_ids = {};
+			$('.card_all').each(function(){
+				all_ids[$(this).attr('card-id')] = 0;
+			});
+			var surplus_ids = {};
+			$('.card_surplus').each(function(){
+				surplus_ids[$(this).attr('card-id')] = 0;
+			});
+		    $.ajax({
+            type : "post",
+            dataType:"jsonp",
+            jsonp:"callback",
+            jsonpCallback:"batchAjax",
+            url: DYNAMIC_SERVER_URL + '/Card/batchAjax',
+            data: {surplus_ids : surplus_ids, all_ids : all_ids},
+            success: function(data){
+                if(data){
+                    data = eval(data);
+                    //读取所有卡数
+					
+                    all_ids = data.all_ids;
+                    $('.card_all').each(function(){
+                        var card_id = $(this).attr('card-id');
+                        $(this).html(all_ids[card_id]);
+                    });     
+                    //读取剩余卡数
+                    surplus_ids = data.surplus_ids;
+					
+                    $('.card_surplus').each(function(){
+                        var card_id = $(this).attr('card-id');
+                        $(this).html(surplus_ids[card_id]);
+                    });
+				 //计算百分比
+				 $('.card_surplus').each(function(i){
+					 var card_id = $(this).attr('card-id');
+					 var w =  Math.round(surplus_ids[card_id] / all_ids[card_id] * 10000) / 100.00;
+			
+					 if(isNaN(w)) w=0;
+					 $(".gift-xx-load .now-width").css("width",w +"%");
+					 $('.gift-xx-load span.nub').eq(i).html(w +"%");
+				 });
+                }
+            }
+         });
+		 
+	   }
+        //领取
+        $('.gift-detail-xx .lq-btn .lq').click(function() {
+            $.ajax({
+                type : "get",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonpCallback:"drawCard",
+                url: DYNAMIC_SERVER_URL + '/Card/drawCard/id/{$info.id}.html',
+                //data: {id : draw_id},
+                success: function(data){
+                    if(data){
+                        data = eval(data);
+                        if(data.error){
+                            art.dialog.alert(data.error,"温馨提示",'warning');
+                        }else{
+                            art.dialog.alert('请记住卡号： <span class=\'card_decorate\'>'+ data.row +'<span>',"温馨提示",'succeed');
+                        }
+                    }
+                }
+            });
+        });       
+    }); 
+    </script>
+</block>

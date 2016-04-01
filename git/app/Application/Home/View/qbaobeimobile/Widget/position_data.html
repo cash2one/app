@@ -1,0 +1,12 @@
+<section class="news-list dis-bot beiyun-news">
+    <div class="news-list-ul first-page-ul">
+        <volist name="lists" id="list">
+            <if condition="$list['images'] gt 0">
+                <div class="middle_mode"><a href="{:staticUrlMobile('detail',$list['id'],'Document')}"><div class="mid-text"><p class="mid-tit">{$list.title}</p><p class="mid-info">{$list.description}</p></div><div class="mid-pic"><ul class="mid-ul pic-adaptive-wrap2"><li class="pic-adaptive2"><img src="{:get_cover($list['smallimg1'],'path',1,200,100)}"></li><li class="pic-adaptive2"><img src="{:get_cover($list['smallimg2'],'path',1,200,100)}"></li><li class="pic-adaptive2"><img src="{:get_cover($list['smallimg3'],'path',1,200,100)}"></li></ul></div></a></div>
+            <else/>
+                <div class="has-action"><a href="{:staticUrlMobile('detail',$list['id'],'Document')}"><div class="pic"><img src="{:get_cover($list['smallimg'],'path',1,200,100)}"></div><div class="text"><p class="tit">{$list.title}</p><p class="info">{$list.description}</p></div></a></div>
+            </if>
+        </volist>
+    </div>
+    <div class="loading first-page-loading">拼命加载中...</div>
+</section>

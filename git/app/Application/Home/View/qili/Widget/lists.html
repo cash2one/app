@@ -1,0 +1,207 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/detail.css"/></block>
+
+<block name="header">
+	<include file="Home@qili/Public/header" />
+</block>
+
+<block name="body">
+<div class="tupage-nav">
+    <div class="qnx1200">
+        <div class="tupage-left">
+			<h3>{$params['name']}</h3>
+			<php>$count = count(explode(',', $params[id]));</php>
+			
+			<if condition="$params[id]"> 
+				<classify model="2" id="$params[id]">
+					<if condition="$key eq $count"> 
+						<a href="{$classify.url}">{$classify.title}</a>
+					<else />
+						<a href="{$classify.url}">{$classify.title}</a><em>|</em>
+					</if>
+				</classify>
+			</if>
+        </div>
+
+        <div class="tupage-right">
+			<document model="2" typeid="$params[id]" limit="1" order="desc" flag="list_recom,1">
+				<span>热点：</span>     
+				<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+            </document>
+        </div>
+    </div>
+</div>
+
+<div class="qnx1200 rec-list">
+    <div class="location">
+		<a href="/">首页</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+		
+		<if condition="$site eq 1"> 
+			<a href="/shishang.html">时尚</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+		<elseif condition="$site eq 2"/>
+			<a href="/meirong.html">美容</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+		<elseif condition="$site eq 3"/>
+			<a href="/shenghuo.html">生活</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+		<elseif condition="$site eq 4"/>
+			<a href="/yule.html">娱乐</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+		</if>
+
+		<a href="/{$board}/">{$params['name']}</a>&nbsp;&nbsp;
+	</div>
+
+	{~W('Home/qili/listTop', array($params[id]))}
+</div>
+
+<div class="qnx1200 detail news-list">
+    <div class="detail-left">
+        <ul class="news-ul">
+			<?php
+				if(strrpos($_SERVER['REQUEST_URI'], '.html')){
+					$url = dirname($_SERVER['REQUEST_URI']).'/';
+				}else{
+					$url = $_SERVER['REQUEST_URI'];
+				}
+
+				$count = M('document')->where("status = 1 AND category_id IN(".$params[id].")")->count();
+				$page  = new \Think\Page($count,7,array(),false, $url.'index_{page}.html');
+				$page->setConfig('prev',"上一页");
+				$page->setConfig('next','下一页');
+				$page->setConfig('theme','%UP_PAGE% %LINK_PAGE% %DOWN_PAGE%');
+				$pages = $page->show();
+				$limit = $page->firstRow.',7';
+			?>
+
+			<if condition="$params['id']"> 
+				<document model="2" typeid="$params[id]" limit="$limit" order="desc" callback="classify" index="listid">
+				<li>
+					<a href="{$document.url}" target="_blank"><img src="{:get_thumb($document[atlas_a], $document[atlas], '285x271')}" alt="{$document.title}"></a>
+
+					<div class="info">
+						<div class="top"><a href="{$document.url}" target="_blank" class="title">{$document.title}</a><span class="vis">{$document.view}</span></div>
+						<p class="jj">{$document.description}</p>
+
+						<div class="bot">
+							<div class="bot-l">
+								<volist name="document.classify" id="project" offset="0" length='3'>
+									<a href="{$project.url}">{$project.title}</a>
+								</volist>
+							</div>
+
+							<div class="bot-r">
+								<div class="bdsharebuttonbox">
+									<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+									<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+									<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+									<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				</document>
+			</if>
+        </ul>
+
+        <div class="page-box">
+			{$pages}
+		</div>   
+    </div>
+
+    <div class="detail-right">
+        <div class="focus5">
+            <ul class="focus5-ul">
+				<php>$i = 0;</php>
+				<document model="2" typeid="$params[id]" limit="4" order="edit" flag="list_recom,2" index="noid" key="i">
+					<li><a href="{$document.url}" target="_blank" title="{$document.title}">
+						<img src="{:get_thumb($document[atlas_a], $document[atlas], '381x430')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a>
+					</li>
+                </document>
+
+				<if condition="$i LT 4">
+					<php>$limit = 4 - $i;</php>
+					{~W('Home/qili/listsGraphic', array($params[id], $limit, $noid))}
+				</if>
+            </ul>
+            <div class="circle"></div>
+        </div>
+
+        <div class="right tab-nub news-tab div-tab">
+            <p class="tab-tit"><span class="active">今日热门<em></em></span><span>阅读排行<em></em></span></p>
+            <ul class="right-ul current">
+				{~W('Home/qili/hot', array($params[id], 1))}
+            </ul>
+
+            <ul class="right-ul">
+				{~W('Home/qili/hot', array($params[id], 7))}
+            </ul>
+       </div>
+
+       <div class="djdzk">
+           <div class="det-title"><h3>大家都在看</h3></div>
+           <ul class="djdzk-ul">
+				<php>$e = 0;</php>
+				<document model="2" typeid="$params[id]" limit="4" flag="list_recom,4" key="e" index="ids">
+                <li>
+					<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}">
+						<img src="{:get_thumb($document[atlas_b], $document[atlas], '138x190')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span>
+					</a>
+
+					<div class="info"><a href="{$document.url}" target="_blank">{$document.title}</a><p>{$document.description|msubstr=0,45}</p></div>
+			    </li>
+				</document>
+
+				<if condition="$e LT 4">
+					<php>
+						$limit  = 4 - $e;
+						$listid = $ids ? $ids.','.$listid : $listid;
+					</php>
+
+					<document model="2" typeid="$params[id]" limit="$limit" notin="$listid">
+					<li>
+						<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}">
+							<img src="{:get_thumb($document[atlas_b], $document[atlas], '138x190')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span>
+						</a>
+
+						<div class="info"><a href="{$document.url}" target="_blank">{$document.title}</a><p>{$document.description|msubstr=0,45}</p></div>
+					</li>
+					</document>
+				</if>
+           </ul>
+       </div>
+
+		<div class="adv"><img src="__PUBLIC__/Home/qili/images/adv.jpg"></div>    
+		
+		{~W('Home/qili/listsSearch', array($params[id]))}
+    </div>
+</div>
+
+<div class="qnx1200 pic4">
+<div class="tit">
+    <div class="det-title"><h3>猜你喜欢</h3></div>
+        <div class="rec-links">
+			<classify model="2" typeid="$params['typeid']" limit="9" index="id">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a><em>|</em>
+			</classify>
+        </div>
+    </div>
+
+    <div class="autopic">
+      <span class="btn prev">prev</span>
+      <span class="btn next">next</span>
+      <div class="img-list">
+        <ul class="clearfix">
+			<if condition="$id"> 
+				{~W('Home/qili/guess', array($id, 7))}
+			</if>
+        </ul>
+      </div>
+    </div>
+</div>
+</block>
+<block name="script">
+<script>
+$(document).ready(function(){
+	$('.rec-links em').eq(-1).empty();
+});
+</script>
+</block>

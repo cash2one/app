@@ -1,0 +1,242 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/yxk.css">
+</block>
+<block name="body">
+<div class="main1200">
+    <div class="goback">   
+当前位置： <position /> > 新手游</div>
+    <div class="container">
+        <div class="yxk-top dis-bot">
+            <div class="title">新游推荐</div>
+            <div class="yxk-top-wrap">
+                <div class="yxk-top-text">
+                    <volist name="topnewa" id="vo">
+                    <a href="{:str_replace('index.html','',staticUrl('detail',$vo['id'],'Down'))}" target="_blank" title="{$vo.title}">{$vo.title}</a><em>|</em>
+                    </volist>
+                </div>
+                <ul class="yxk-top-ul">
+
+            <volist name="topnew" id="vo">
+                    <li>
+                        <a href="{:str_replace('index.html','',staticUrl('detail',$vo['id'],'Down'))}" target="_blank" title="{$vo.title}"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo.title}"></a>
+                        <span>
+                            <a href="{:str_replace('index.html','',staticUrl('detail',$vo['id'],'Down'))}" target="_blank" title="{$vo.title}" class="tit">{$vo.title}</a><em class="cata">{:get_game_type($vo['game_type'])}</em>
+                        </span>
+                    </li>
+            </volist>
+                </ul>
+            </div>
+        </div>
+        <!--mid1-->
+        <div class="mid1 dis-bot wrap">
+
+<volist name="new" id="vo">
+            <div class="left fl">
+                <img src="{:get_cover($vo['previewimg'],'path')}">
+                <div class="pic-text">
+                    <div class="text-l">
+                        <a href="{:staticUrl('detail',$vo['id'],'Down')}" target="_blank" title="{$vo.title}" class="pic"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo.title}"></a>
+                        <div class="info">
+                            <p class="bt"><a href="{:staticUrl('detail',$vo['id'],'Down')}" target="_blank" title="{$vo.title}">{$vo.title}</a><span class="star star{:round($vo['soft_socre'])}"> </span></p>
+                            <p class="xx">{:format_size($vo['size'])} |{:get_game_type($vo['game_type'])}</p>
+                            <a href="{:staticUrl('detail',$vo['id'],'Down')}" target="_blank" class="down">立即下载</a>
+                        </div>
+                    </div>
+                    <div class="shouc"><em class="bg"></em>收藏</div>
+                </div>
+                <p class="title"><em class="arr"></em><a href="{:staticUrl('detail',$vo['id'],'Down')}" target="_blank" title="{$vo.title}">{$vo.title}</a></p>
+            </div>
+</volist>
+
+
+            <div class="area-m">
+                <ul class="m-ul1">
+
+                    <li>
+                        <document model="2"  order="update_time desc" limit="1"   flag="home_position,32">
+                     <a class="tit" href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+                        </document>
+                        <if condition="$key eq 0">
+                            <document model="2"  order="update_time desc" limit="1">
+                                <a class="tit" href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+                            </document>
+                        </if>
+                      <p class="info">
+                          <document model="2"  order="update_time desc" limit="1,2" extend="start"  flag="home_position,32">
+                          <a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+                       </document>
+                          <if condition="$key eq 0">
+                              <document model="2"  order="update_time desc" limit="1,2">
+                                  <a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+                              </document>
+                          </if>
+                      </p>
+                  </li>
+                  <li>
+                      <document model="2"  order="update_time desc" limit="3,1" extend="start"  flag="home_position,32">
+                          <a class="tit" href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+                      </document>
+                      <if condition="$key eq 0">
+                          <document model="2"  order="update_time desc" limit="3,1">
+                              <a class="tit" href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+                          </document>
+                      </if>
+                      <p class="info">
+                          <document model="2"  order="update_time desc" limit="4,2" extend="start"  flag="home_position,32">
+                              <a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+                          </document>
+                          <if condition="$key eq 0">
+                              <document model="2"  order="update_time desc" limit="4,2">
+                                  <a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+                              </document>
+                          </if>
+                      </p>
+                  </li> 
+                 
+                </ul>
+                <ul class="m-ul2">
+                    <php>$key=0;</php>
+                    <document model="2"  order="update_time desc" limit="5" flag="home_position,64">
+                    <li><span>{$document.update_time|date="m-d",###}</span>
+                        <a href="{$document.url}" target="_blank" title="{$document.title}">
+                            {$document.title}
+                        </a>
+                    </li>
+                    </document>
+                    <php>$limit = 5 -$key; </php>
+                    <if condition="$limit gt 0">
+                        <document model="2"  order="update_time desc" limit="$key,$limit" >
+                            <li><span>{$document.update_time|date="m-d",###}</span>
+                                <a href="{$document.url}" target="_blank" title="{$document.title}">
+                                    {$document.title}
+                                </a>
+                            </li>
+                        </document>
+                    </if>
+                </ul>
+            </div>
+            <div class="fr wrap">
+                <div class="mid-tit">
+                    <h3>热门手游专区</h3>
+                    <a href="{:C('STATIC_URL')}{:getWidgetPath(77)}" target="_blank" class="more">更多</a>
+                </div>
+                <ul class="fr-ul">
+                    <IndexTag:collection name="f" limit="2" where="Interface=0">
+
+                        <li><a href="{:getCPath($f['id'],'batch')}" target="_blank" title="{$f.title}" class="pic">
+
+                            <img src="{:get_cover($f['horizontalimg'],'path')}" alt="{$f.title}">
+                            <span class="tit">{$f.title}</span></a>
+                            <em class="bg"></em>
+                        </li>
+                    </IndexTag:collection>
+                </ul>
+            </div>
+        </div>
+        <!--mid2-->
+        <div class="mid2 dis-bot wrap">
+            <div class="fl">
+                <div class="mid-tit"><h3>热门手游评测</h3><a href="{:staticUrl('lists',1589, 'document')}" target="_blank" class="more">更多</a></div>
+                <ul class="mid2-list">
+
+                     <document model="2"  typeid="1589"   limit="0,6"    key="k">
+  <li>
+                        <a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_cover($document['smallimg'],'path')}" alt="{$document.title}"></a>
+                        <div class="text">
+                            <a href="{$document.url}" target="_blank" title="{$document.title}" class="tit">{$document.title}</a>
+                            <p class="info">{$document.description|msubstr=0,50} </p>
+                        </div>
+                        <div class="score">
+                             <tag><b><php>$f=get_soft_socre($tag['tid']);
+                            echo "$f";
+                            </php></b>.0</tag>
+                        </div>
+                    </li>
+                  </document>
+
+                </ul>
+            </div>
+
+            <div class="fr">
+                <div class="mid-tit"><h3>手游开服表</h3><a href="{:C('STATIC_URL')}{:getWidgetPath(74)}" target="_blank" class="more">更多</a></div>
+                <div class="kckf-hd"><span>时间</span><span class="tit">名称</span><span>区服</span><span>下载</span></div>
+                <ul class="kaice">
+                   
+                {:W('Jf96u/kaifu')}
+                </ul>
+            </div>
+        </div>
+        <!--mid3-->
+        <div class="mid2 mid3 dis-bot wrap">
+            <div class="fl">
+                <div class="mid-tit"><h3>新游视频</h3><a href="{:staticUrl('lists',1591, 'document')}" target="_blank" class="more">更多</a></div>
+                <div class="video-fl">
+                      <document model="2"  typeid="1591"  limit="0,1"    key="k"> 
+                    <a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_cover($document['smallimg'],'path')}" alt="《{$document.title}">
+                        <span class="tit">{$document.title}</span>
+                        <em class="play"></em>
+                    </a>
+                      </document>
+                    <b class="bg"></b>
+                </div>
+                <ul class="video-list">
+                        <document model="2"  typeid="1591"  limit="1,4"    key="k"> 
+                    <li>
+                        <a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_cover($document['smallimg'],'path')}" alt="{$document.title}"><span class="tit">{$document.title}</span><em class="play"></em></a>
+                        <b class="bg"></b>
+                    </li>
+                      </document>
+                </ul>
+            </div>
+            <div class="fr">
+                <div class="mid-tit"><h3>手游开测表</h3><a href="{:C('STATIC_URL')}{:getWidgetPath(73)}" target="_blank" class="more">更多</a></div>
+                <div class="kckf-hd"><span>时间</span><span class="tit">名称</span><span>状态</span><span>下载</span></div>
+                <ul class="kaice">
+                     {:W('Jf96u/kaice')}
+                </ul>
+            </div>
+        </div>
+        <!--新游入库-->
+        <div class="mid4 dis-bot wrap">
+            <div class="mid-tit"><h3>新游入库</h3><a href="{:staticUrl('lists',1645, 'down')}" target="_blank" class="more">更多</a></div>
+            <ul class="mid4-ul">
+
+
+    <document model="21"    limit="0,22"    key="k">
+         
+      <li>
+          <a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_cover($document['smallimg'],'path')}" alt="{$document.title}">
+               <span class="tit">{$document.title}</span></a>
+          </li>
+      </document>
+
+ 
+ 
+     
+
+            </ul>
+        </div>
+
+        <!--links-->
+        <div class="links dis-bot">
+            <div class="fl">友情链接</div>
+            <div class="fr">
+                <ul class="links-cont">
+                   <Think:article basename="link" order='id' >  
+                    <li><a href="{$article.url_token}" target="_blank">{$article.title}</a></li>
+                   </Think:article>
+                    
+                </ul>
+            </div>
+            <div class="btn">
+                <span class="btn-t"></span>
+                <span class="btn-b"></span>
+            </div>
+               
+
+
+        </div>
+    </div>
+</div>
+</block>

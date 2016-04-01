@@ -1,0 +1,35 @@
+<extend name="Home@gfw/Base/commonUcent" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+
+<block name="body">
+
+    <div class="user-wraper-right" id="product">
+        <div class="user-right-chapter">
+            <h3>发布产品</h3>
+            <div class="product-nav">
+                <ul>
+                    <li class="yes"><span>1</span>填写产品标题与分类</li>
+                    <li class="yes"><span>2</span>产品详细介绍</li>
+                    <li class="yes"><span>3</span>提交成功</li>
+                </ul>
+            </div>
+            <!--产品发布成功 start-->
+            <div class="product-success">
+                <div class="product-success-img">恭喜您！提交成功，等待审核结果。</div>
+                <div class="product-success-tip">
+                    <p>温馨提示：</p>
+                    <p class="info">您的产品成功提交后，将在24小时内为您审核。如果您在贵站上添加官方网站的友情链接，将提高审核通过的机会。</p>
+                </div>
+            </div>
+            <!--产品发布成功 end-->
+        </div>
+    </div>
+
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+</block>

@@ -1,0 +1,22 @@
+<include file="Home@afs/Public/zq/swheader"/>
+<!--main-->
+<div id="main" class="yxzq">
+  <!--页面左边-->
+  <div class="yxzq-left" id="bg-w">
+    <div class="dragable" widget="download"></div>
+    <p class="nav-zone"><a href="{:C('STATIC_URL')}" target="_blank">安粉丝</a>><a href="{$home['url_token']}" target="_blank">{$home['title']}</a>>{$info['title']}</p>
+    <!--banner-->
+    <div class="list-top">
+      <h1>{$info['title']}</h1>
+      <span><b><i>来源：{$info['source']}</i><i>时间：{$info['create_time']|time_format="Y-m-d H:i:s"}</i><i>作者：{$info['author']}</i></b></span>
+    </div>
+    <div class="main-xq">
+      {~W('Home/P7230/contentProcess',array($info['content']))}
+    </div>
+    <!--新闻点赞  BLOCK-->
+    <!--分页 BLOCK-->
+  </div>
+  <!--页面右边-->
+  <include file="Home@afs/Public/zq/swright"/>
+</div>
+<include file="Home@afs/Public/foot"/>

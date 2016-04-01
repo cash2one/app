@@ -1,0 +1,8 @@
+   <section id="wraper" class="tags">
+       <p class="title"><span>游戏标签 <b>TAG</b></span></p>
+       <div>    
+            <volist name="tags" id="vo">                                       
+              <a href="{:C('MOBILE_STATIC_URL')}/tag/{$vo['name']}/">{$vo.title}</a>
+             </volist>
+       </div>
+   </section>

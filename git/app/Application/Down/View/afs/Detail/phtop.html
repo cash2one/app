@@ -1,0 +1,71 @@
+<extend name="Home@afs/Base/common_dpage"/>
+<block name="head">
+    <title>最新安卓软件下载_最新安卓app下载_安粉丝手游网</title>
+    <meta name="keywords" content="最新安卓软件,最新更新,最新安卓app"/>
+    <meta name="description"
+          content="安粉丝手游网记录了网上最新发布的安卓手机应用和安卓手机游戏，这里提供最新的安卓软件和安卓游戏下载，喜欢追求最新最潮的安卓手机玩家可以在这里找到自己想要的安卓软件或者安卓游戏。"/>
+    <meta property="qc:admins" content="5511606777616375"/>
+</block>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afs/css/phb.css"/>
+</block>
+<block name="body">
+    <div id="main" style="margin-top:0; position:relative">
+        <!--导航屑 -->
+        <p id="main-title"><a href="http://www.anfensi.com">首页</a>&gt;<a href="http://www.anfensi.com/zuixin/">最新软件</a>
+        </p>
+        <!--导航屑 -->
+
+        <!-- 左侧分类-->
+        <div id="main-left" class="mrgxwrap">
+            <p class="title">分类</p>
+            {~W('Down/Afs/newTop')}
+        </div>
+        <!-- 左侧分类-->
+
+        <!-- 右侧内容-->
+        <div id="main-right" style="position:relative">
+            <p class="title"><b class="name">软件名称</b><b class="zcd">支持度</b><b class="time">更新时间</b><b>软件语言</b><b
+                    class="down">软件授权</b><b class="daxiao">文件大小</b></p>
+            {~W('Down/Afs/rankTop')}
+        </div>
+        <!-- 右侧内容-->
+
+        <div>
+            <div style="clear:both"></div>
+            <!--分页 star-->
+            <p id="fenye">
+
+            </p>
+            <!--分页 end-->
+        </div>
+
+    </div>
+
+    <div style=" clear:both"></div>
+    <input type="hidden" id="category_ord" value="1"/>
+
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Down/afs/js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Down/afs/js/anfans.js"></script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+    <script type="text/javascript" src="__PUBLIC__/Down/afs/js/jspage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            init_p();
+        });
+        //用于初始化分页
+        function init_p() {
+            //当前点击栏目序号，已序号作为匹配
+            category_ord = $('#category_ord').val();
+            //显示总条数
+            total = $('ul').eq(category_ord).find('li').size();
+            //每页显示数量s
+            pagesize = '30';
+            //共多少页
+            pagenum = Math.ceil(total / pagesize);
+            goToPage(1);
+        }
+    </script>
+</block>

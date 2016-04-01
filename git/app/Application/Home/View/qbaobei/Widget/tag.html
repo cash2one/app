@@ -1,0 +1,184 @@
+<extend name="Home@qbaobei/Base/commonYuer" xmlns:Think="http://www.w3.org/1999/html"/>
+<block name="body">
+<script type="text/javascript">
+    //导航 =====================================
+
+    $(".mainnav li a").hover(function() {
+        if ($(this).parent().find("div.mnavpop").length == 0)
+            return;
+        $(this).parent().find("div.mnavpop").show();
+        $(this).addClass("current");
+        $(this).parent().hover(function() {
+        }, function() {
+            $(this).parent().find("div.mnavpop").hide(); //slideUp('slow');
+            $(this).parent().find("li a").removeClass("current");
+        });
+    });
+    //搜索 ========================================
+    $(".searchBtn").click(function() {
+        var keyword = $(".searchText").val();
+        if (keyword == "") {
+            alert("请输入关键字");
+            return;
+        } else {
+            this.target = "_blank";
+            this.href = "http://www.qbaobei.com/search.aspx?keyword=" + escape(keyword);
+            this.click();
+        }
+    });
+</script>
+<div class="w boxB">
+    <div class="boxB1">
+        <script type='text/javascript'>
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+            (function() {
+                var gads = document.createElement('script');
+                gads.async = true;
+                gads.type = 'text/javascript';
+                var useSSL = 'https:' == document.location.protocol;
+                gads.src = (useSSL ? 'https:' : 'http:') +
+                '//www.googletagservices.com/tag/js/gpt.js';
+                var node = document.getElementsByTagName('script')[0];
+                node.parentNode.insertBefore(gads, node);
+            })();
+
+        </script>
+        <script type='text/javascript'>
+            googletag.cmd.push(function() {
+                googletag.defineSlot('/16015957/qbaobei_oyako_column_left_728x90', [728, 90], 'div-gpt-ad-1335334129187-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+
+        </script>
+
+        <!-- qbaobei_oyako_column_left_728x90 -->
+
+        <div id='div-gpt-ad-1335334129187-0' style='width:728px; height:90px;'>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1335334129187-0'); });
+            </script>
+        </div>
+    </div>
+    <div class="boxB2">
+        <script type='text/javascript'>
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+            (function() {
+                var gads = document.createElement('script');
+                gads.async = true;
+                gads.type = 'text/javascript';
+                var useSSL = 'https:' == document.location.protocol;
+                gads.src = (useSSL ? 'https:' : 'http:') +
+                '//www.googletagservices.com/tag/js/gpt.js';
+                var node = document.getElementsByTagName('script')[0];
+                node.parentNode.insertBefore(gads, node);
+            })();
+
+        </script>
+        <script type='text/javascript'>
+            googletag.cmd.push(function() {
+                googletag.defineSlot('/16015957/qbaobei_oyako_column_right_220x90', [220, 90], 'div-gpt-ad-1335334265617-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+
+        </script>
+
+        <!-- qbaobei_oyako_column_right_220x90 -->
+
+        <div id='div-gpt-ad-1335334265617-0' style='width:220px; height:90px;'>
+            <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1335334265617-0'); });
+
+            </script>
+        </div>
+    </div>
+</div>
+<div class="w boxA searchpage">
+    <div class="boxAL">
+        <div class="searchResult">
+            <div class="top">找到<strong>{$count}</strong> 个结果。</div>
+
+
+            <volist name="lists" id="val">
+                <h3><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" title="{$val['title']}">{$val['title']}</a></h3>
+                <p>{$val['description']}</p>
+                <cite><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{:staticUrl('detail',$val['id'],'Document')}</a></cite>
+                <h6>时间：<label>{:date('Y-m-d',$val['update_time'])}</label>
+                    分类：<a href="{:staticUrl('lists',$val['pid'],'Document')}" target="_blank">{$val['pcate']}</a> &gt;
+                    <a href="{:staticUrl('lists',$val['cid'],'Document')}" target="_blank">{$val['cate']}</a></h6>
+            </volist>
+
+
+            <div id="tag_page">{$page}</div>
+        </div>
+
+
+    </div>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei/js/subscription.js"></script>
+    <div class="boxAR">
+
+        <div class="boxAR_box">
+            <div class="t"> </div>
+            <h2> <strong>教育</strong>热门文章</h2>
+            <ul class="list1">
+                <li> <a target="_blank" title="8种蔬果助准妈妈夏季养生" href="/sjys/xjys/mmys/20140423_300253.html">8种蔬果助准妈妈夏季养生</a> </li>
+                <li> <a target="_blank" title="儿童饮食要忌偏食挑食" href="/mysp/bysjj/ert/20140423_300210.html">儿童饮食要忌偏食挑食</a> </li>
+                <li> <a target="_blank" title="会让孩子变笨的10种常见食物" href="/mysp/bysjj/ert/20140423_300206.html">会让孩子变笨的10种常见食物</a> </li>
+                <li> <a target="_blank" title="幼儿吃蔬菜的几个注意事项" href="/mysp/bysjj/youer/20140423_300172.html">幼儿吃蔬菜的几个注意事项</a> </li>
+                <li> <a target="_blank" title="儿童不能吃什么？八大饮食禁忌要注意" href="/mysp/bysjj/ert/20140423_300168.html">儿童不能吃什么？八大饮食禁忌要注意</a> </li>
+                <li> <a target="_blank" title="女性孕前要避开的饮食禁忌" href="/mysp/mysjj/yqian/20140422_300125.html">女性孕前要避开的饮食禁忌</a> </li>
+                <li> <a target="_blank" title="孕妇要避开哪些不健康的甜食" href="/mysp/mysjj/yqi/20140422_300120.html">孕妇要避开哪些不健康的甜食</a> </li>
+                <li> <a target="_blank" title="专家提醒：产后勿过早喝母鸡汤" href="/mysp/mysjj/ch/20140422_300114.html">专家提醒：产后勿过早喝母鸡汤</a> </li>
+                <li> <a target="_blank" title="哺乳期妈妈的3类饮食禁忌" href="/mysp/mysjj/brq/20140422_300107.html">哺乳期妈妈的3类饮食禁忌</a> </li>
+                <li> <a target="_blank" title="儿童十款营养的美食推荐" href="/mysp/bbsp/ert/20140422_300086.html">儿童十款营养的美食推荐</a> </li>
+            </ul>
+            <div class="b"> </div>
+        </div>
+        <div class="boxAR_box"> </div>
+        <div class="boxAR_box">
+            <div class="t"> </div>
+            <h2> <strong>教育</strong>专题精选</h2>
+            <h3> <a target="_blank" href="/sjys/xjys/mmys/20140423_300253.html">8种蔬果助准妈妈夏季养生</a> </h3>
+            <p>一到夏季，人们比较容易没有食欲，准妈妈更是如此，但准妈妈又急需营养补充，因此，…<span>[ <a target="_blank" href="/sjys/xjys/mmys/20140423_300253.html">进入专题</a>]</span></p>
+            <div class="flower"> </div>
+            <ul class="list2">
+                <li> <a target="_blank" title="8种蔬果助准妈妈夏季养生" href="/sjys/xjys/mmys/20140423_300253.html">8种蔬果助准妈妈夏季养生</a> </li>
+                <li> <a target="_blank" title="儿童饮食要忌偏食挑食" href="/mysp/bysjj/ert/20140423_300210.html">儿童饮食要忌偏食挑食</a> </li>
+                <li> <a target="_blank" title="会让孩子变笨的10种常见食物" href="/mysp/bysjj/ert/20140423_300206.html">会让孩子变笨的10种常见食物</a> </li>
+                <li> <a target="_blank" title="幼儿吃蔬菜的几个注意事项" href="/mysp/bysjj/youer/20140423_300172.html">幼儿吃蔬菜的几个注意事项</a> </li>
+                <li> <a target="_blank" title="儿童不能吃什么？八大饮食禁忌要注意" href="/mysp/bysjj/ert/20140423_300168.html">儿童不能吃什么？八大饮食禁忌要注意</a> </li>
+            </ul>
+            <div class="b"> </div>
+        </div>
+        <div class="boxAR_box">
+            <div class="t"> </div>
+            <h2> <strong>教育</strong>编辑推荐</h2>
+            <dl>
+                <dt> <a href="/sjys/xjys/mmys/20140423_300253.html"> <img src="http://www.qbaobei.com//UploadFiles/sjys/2014/4/201404231550592860.jpg" alt="8种蔬果助准妈妈夏季养生" /> </a> </dt>
+                <dd> <a target="_blank" title="8种蔬果助准妈妈夏季养生" href="/sjys/xjys/mmys/20140423_300253.html">8种蔬果助准妈妈夏季养生</a> </dd>
+            </dl>
+            <dl>
+                <dt> <a href="/mysp/bysjj/ert/20140423_300210.html"> <img src="http://www.qbaobei.com//UploadFiles/mysp/2014/4/201404231411367157.jpg" alt="儿童饮食要忌偏食挑食" /> </a> </dt>
+                <dd> <a target="_blank" title="儿童饮食要忌偏食挑食" href="/mysp/bysjj/ert/20140423_300210.html">儿童饮食要忌偏食挑食</a> </dd>
+            </dl>
+            <dl>
+                <dt> <a href="/mysp/bysjj/ert/20140423_300206.html"> <img src="http://www.qbaobei.com//UploadFiles/mysp/2014/4/201404231400305845.jpg" alt="会让孩子变笨的10种常见食物" /> </a> </dt>
+                <dd> <a target="_blank" title="会让孩子变笨的10种常见食物" href="/mysp/bysjj/ert/20140423_300206.html">会让孩子变笨的10种常见食物</a> </dd>
+            </dl>
+            <dl>
+                <dt> <a href="/mysp/bysjj/youer/20140423_300172.html"> <img src="http://www.qbaobei.com//UploadFiles/mysp/2014/4/201404231052024709.jpg" alt="幼儿吃蔬菜的几个注意事项" /> </a> </dt>
+                <dd> <a target="_blank" title="幼儿吃蔬菜的几个注意事项" href="/mysp/bysjj/youer/20140423_300172.html">幼儿吃蔬菜的几个注意事项</a> </dd>
+            </dl>
+            <div class="b"> </div>
+        </div>
+        <div class="boxAR_box">
+            <div class="t"> </div>
+            <h2> <strong>教育</strong>论坛新帖</h2>
+            <div class="b"> </div>
+        </div>
+    </div>
+</div>
+</block>

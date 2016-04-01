@@ -1,0 +1,3 @@
+<volist name="relateArticle" id="vo">
+<li><i>时间：{$vo['create_time']|time_format="Y-m-d"}</i><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a></li>
+</volist>

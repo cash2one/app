@@ -1,0 +1,15 @@
+   <!--猜你喜欢-->
+<div class="xgwz gameQtbb" id="cnxh">
+       <div class="downWrap">
+           <div class="downTit"><p>猜你喜欢</p><a href="javascript:;">换一批</a></div>
+       <volist name="result" id="vo" offset="0" length='12'>   
+        <switch name="key">
+        <case value="0"><ul class="current"><li><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}"><img src="{:get_cover($vo['smallimg'],'path')}"></a><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="tit">{$vo['title']}</a><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="down">下载</a></li></case>
+        <case value="4"></ul></case>
+        <case value="5|11"><ul></case>
+        <case value="10|15"></ul></case>
+        <default /><li><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}"><img src="{:get_cover($vo['smallimg'],'path')}"></a><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="tit">{$vo['title']}</a><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="down">下载</a></li>
+        </switch>
+    </volist>
+      </div>
+ </div>

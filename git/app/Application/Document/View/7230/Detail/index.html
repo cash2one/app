@@ -1,0 +1,53 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/detail.css"/></block>
+<block name="body">
+   <div id="zixun-main">
+<p class="page-nav">当前位置：{:getCrumbs(array('detail',$info['id'],'Document'))}</p>
+<div id="xq-left">
+    <h1>{$info['title']}</h1>
+    <span class="art-title">文章作者：{$info['author']}　发布时间：{$info['create_time']|time_format="Y-m-d H:i:s"}　来源：<a href="http://{$info['source_url']}" target="_blank">{$info['source_url']}</a></span>
+    <span class="info">主评推荐：{$info['description']}</span>
+    {~W('Home/P7230/contentProcess',array($info['content']))}
+    <div class="dig">赞(<i class="zan praise_api" data-id="{$info.id}" data-model="Document"></i>)</div>
+
+    <php>
+        //获取产品标签
+        $productID = get_tags($info['id'],'document','product');
+    </php>
+    <p class="pagelist">
+    <i>上一篇：<a href="<php>if(empty($priv['title'])){echo "javascript:void(0);";}else{echo staticUrl('detail',$priv['id'],'Document');}</php>"><php>if(empty($priv['title'])){echo "没有了...";}else{echo $priv['title'];}</php></a></i>
+    <i>下一篇：<a href="<php>if(empty($next['title'])){echo "javascript:void(0);";}else{echo staticUrl('detail',$next['id'],'Document');}</php>"><php>if(empty($next['title'])){echo "没有了...";}else{echo $next['title'];}</php></a></i>
+    <i>文章标签：
+        <volist name="tags" id="vo">
+        <a class="tag" href="{~W('Home/P7230/tagsUrl',array($vo['name']))}" target="_blank">{$vo['title']}</a>
+        </volist>
+    </i>
+    </p>
+
+    {:W('P7230/relateGuide',array($info['id'],$productID[0]['id']))}
+
+    <div style=" clear:both"></div>
+    <div id="pinglun">
+        <b class="title">评论</b>
+        <form action="" method="" name="" id="pl"  data-id="{$info['id']}" data-model="document">
+            <p><input type="text" value="游客" id="user"><span><i class="qd">值得期待，赞！</i><i class="jy"> 打个酱油！</i><i class="ca">踩一脚！</i></span></p>
+            <p class="bot"><b></b><textarea></textarea><input type="button" value="发表评论" id="btn"></p>
+        </form>
+        <ul class="comment_lists" data-id="{$info['id']}" data-model="document"></ul>
+        <p class="more"><a href="{:C('STATIC_URL')}/P7230/commentIndex/id/{$info['id']}/model/document" target="_blank">点击查看更多评论</a></p>
+    </div>
+</div>
+<!----left -END-->
+<div id="zx-right">
+    <!--#include virtual="{:getWidgetPath('4')}"-->
+    <!---今日推荐(recommended) END---->
+    {:W('P7230/relateDown',array($productID))}
+</div>
+</div>
+<div style="clear:both"></div>
+<script type="text/javascript"> var _webInfo = {};_webInfo={ Username:"{$info['uid']}",Type:"1",DateTime:"{:specialDate($info['update_time'])}",Id:"{$info['id']}" };</script>
+</block>
+<block name="Commonscript">
+<script type="text/javascript" src="__PUBLIC__/Document/7230/js/common.js"></script>
+</block>

@@ -1,0 +1,26 @@
+<ul class="current">
+    <volist name="res1" id="val">
+        <li style="display: block;"><a href='<php> $SURL = C('STATIC_URL'); $SURL =substr($SURL, -1) == '/' ? substr($SURL, 0, strrpos($SURL,'/')) : $SURL;echo $SURL."/game/1_".$val['category_id']."_0_1_1.html"; </php> ' class="version"
+                                       target="_blank">[{$val.category_name}]</a><a href="{:staticUrl('detail',$val['id'],'Down')}" class="title"
+                                                                    target="_blank">{$val.title}</a><i
+                class="star{$val.soft_socre}"></i><b><font color="red">{$val.update_time|date='Y-m-d',###}</font></b><i
+                class="zw">{$val.language}</i><u><if condition="$val.licence gt 0">免费软件 <else/> 未知 </if></u><span><if condition="$val.size gt 0">{$val.size}M <else/> 未知 </if></span></li>
+    </volist>
+</ul>
+
+<ul>
+    <volist name="res2" id="val">
+        <li style="display: block;"><a href='<php> $SURL = C('STATIC_URL'); $SURL =substr($SURL, -1) == '/' ? substr($SURL, 0, strrpos($SURL,'/')) : $SURL;echo $SURL."/game/2_".$val['category_id']."_0_1_1.html"; </php> ' class="version"
+                                       target="_blank">[{$val.category_name}]</a><a href="{:staticUrl('detail',$val['id'],'Down')}" class="title"
+                                                                                    target="_blank">{$val.title}</a><i
+                class="star{$val.soft_socre}"></i><b><font color="red">{$val.update_time|date='Y-m-d',###}</font></b><i
+                class="zw">{$val.language}</i><u><if condition="$val.licence gt 0">免费软件 <else/> 未知 </if></u><span><if condition="$val.size gt 0">{$val.size}M <else/> 未知 </if></span></li>
+    </volist>
+</ul>
+
+<ul>
+    <volist name="res3" id="val">
+        <li style="display: block;"><a href='<php> $SURL = C('STATIC_URL'); $SURL =substr($SURL, -1) == '/' ? substr($SURL, 0, strrpos($SURL,'/')) : $SURL;echo $SURL."/soft/".$val['category_id']."_1_1.html"; </php> ' class="version" target="_blank">[{$val.category_name}]</a><a href="{:staticUrl('detail',$val['id'],'Down')}" class="title" target="_blank">{$val.title}</a><i class="star{$val.soft_socre}"></i><b><font color="red">{$val.update_time|date='Y-m-d',###}</font></b><i
+                class="zw">{$val.language}</i><u><if condition="$val.licence gt 0">免费软件 <else/> 未知 </if></u><span><if condition="$val.size gt 0">{$val.size}M <else/> 未知 </if></span></li>
+    </volist>
+</ul>

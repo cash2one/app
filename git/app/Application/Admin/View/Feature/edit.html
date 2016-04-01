@@ -1,0 +1,414 @@
+<extend name="Public/base" />
+
+<!-- style -->
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/jquery-easyui-1.4/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/jquery-easyui-1.4/themes/icon.css">
+    <script type="text/javascript" src="__STATIC__/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/zTree_v3/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/zTree_v3/zTreeStyle/demo.css">
+    <script type="text/javascript" src="__STATIC__/zTree_v3/jquery.ztree.core-3.5.js"></script>
+    <script type="text/javascript" src="__STATIC__/zTree_v3/jquery.ztree.excheck-3.5.js"></script>
+</block>
+
+<!-- 子导航 -->
+
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>
+			{$data['id']?'编辑':'新增'}{$main_title}
+			<notempty name="pid">
+				[&nbsp;父专题：<a href="{:U('index','pid='.$pid)}">{$parent.title}</a>&nbsp;]
+			</notempty>
+		</h2>
+	</div>
+ <!-- 标签页导航 -->
+ <div class="tab-wrap">
+   <ul class="tab-nav nav">
+      <volist name=":parse_config_attr($models['field_group'])" id="group">
+         <li data-tab="tab{$key}" <eq name="key" value="1">class="current"</eq>><a href="javascript:void(0);">{$group}</a></li>
+     </volist>
+     <li {$data['interface']?'class="current"':''}><a href="{:U('mobile?id='.$data['id'])}" > 创建手机版</a></li>
+ </ul>
+ <div class="tab-content">
+   <!-- 表单 -->
+	<form action="{:U()}" method="post" class="form-horizontal">
+      <!-- 基础文档模型 -->
+      <div class="form-item cf">
+            <label class="item-label">分类<span class="check-tips"></span></label>
+            <select id="category_1" onchange="cat(this);get_cat_rootid(this);">
+            	<option value="0" >请选择分类</option>
+                <volist name="categorys" id="vo" >
+                    <option value="{$vo.id}" <eq name="data['category_id']" value="$vo.id">selected</eq>>{$vo.title}</option>
+                </volist>
+            </select>
+      </div>
+      <volist name=":parse_config_attr($models['field_group'])" id="group">
+        <div id="tab{$key}" class="tab-pane <eq name="key" value="1">in</eq> tab{$key}">
+          <!-- 标签 -->
+          <include file="BaseDocument/tags"/>
+            <volist name="fields[$key]" id="field">
+                <if condition="$field['is_show'] == 1 || $field['is_show'] == 3">
+                    <div class="form-item cf">
+                        <label class="item-label">{$field['title']}<span class="check-tips"><notempty name="field['remark']">（{$field['remark']}）</notempty></span></label>
+                        <div class="controls">
+                            <switch name="field.type">
+                                <case value="num">
+                                    <input type="text" class="text input-mid" name="{$field.name}" value="{$data[$field['name']]}">
+                                </case>
+                                <case value="string">
+                                    <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}">
+                                </case>
+                                <case value="stringForConfig">
+                                    <div class="stringForConfig">
+                                        <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}">
+                                            <volist name=":C($field['extra'])" id="vo">
+                                                <a href="javascript:;" style="margin:0 5px">{$vo}</a>
+                                            </volist>
+                                    </div>
+                                </case>
+                                <case value="textarea">
+                                    <label class="textarea input-large">
+                                        <textarea name="{$field.name}">{$data[$field['name']]}</textarea>
+                                    </label>
+                                </case>
+                                <case value="date">
+                                    <input type="text" name="{$field.name}" class="text date" value="{$data[$field['name']]|date='Y-m-d',###}" placeholder="请选择日期" />
+                                </case>
+                                <case value="datetime">
+                                    <input type="text" name="{$field.name}" class="text time" value="{$data[$field['name']]|time_format}" placeholder="请选择时间" />
+                                </case>
+                                <case value="bool">
+                                    <select name="{$field.name}">
+                                        <volist name=":parse_field_attr($field['extra'])" id="vo">
+                                            <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected</eq>>{$vo}</option>
+                                        </volist>
+                                    </select>
+                                </case>
+                                <case value="select">
+                                    <select name="{$field.name}" onchange="template(this)">
+                                        <volist name=":parse_field_attr($field['extra'])" id="vo">
+                                            <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected</eq>>{$vo}</option>
+                                        </volist>
+                                    </select>
+                                </case>
+                                <case value="radio">
+                                    <volist name=":parse_field_attr($field['extra'])" id="vo">
+                                       <label class="radio">
+                                        <input type="radio" value="{$key}" name="{$field.name}" <eq name="data[$field['name']]" value="$key">checked="checked"</eq>>{$vo}
+                                    </label>
+                                </volist>
+                            </case>
+                            <case value="checkbox">
+                                <volist name=":parse_field_attr($field['extra'])" id="vo">
+                                 <label class="checkbox">
+                                    <input type="checkbox" value="{$key}" name="{$field.name}[]" <if condition="check_document_position($data[$field['name']],$key)">checked="checked"</if>>{$vo}
+                                </label>
+                            </volist>
+                        </case>
+                        <case value="editor">
+                            <label class="textarea">
+                                <textarea name="{$field.name}">{$data[$field['name']]}</textarea>
+                                {:hook('adminArticleEdit', array('name'=>$field['name'],'value'=>$data[$field['name']]))}
+                            </label>
+                        </case>
+                        <case value="picture">
+                            <div class="controls">
+                               <input type="file" id="upload_picture_{$field.name}">
+                               <input type="hidden" name="{$field.name}" id="cover_id_{$field.name}" value="{$data[$field['name']]}"/>
+                               <div class="upload-img-box">
+                                   <notempty name="data[$field['name']]">
+                                      <div class="upload-pre-item"><img src="{$data[$field['name']]|get_cover='path'}"/></div>
+                                  </notempty>
+                              </div>
+                          </div>
+                          <script type="text/javascript">
+								//上传图片
+                             /* 初始化上传插件 */
+                             $("#upload_picture_{$field.name}").uploadify({
+                                 "height"          : 30,
+                                 "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                                 "fileObjName"     : "download",
+                                 "buttonText"      : "上传图片",
+                                 "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                                 "width"           : 120,
+                                 'removeTimeout'	  : 1,
+                                 'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+                                 "onUploadSuccess" : uploadPicture{$field.name},
+                                 'onFallback' : function() {
+                                     alert('未检测到兼容版本的Flash.');
+                                 }
+                             });
+                             function uploadPicture{$field.name}(file, data){
+                                var data = $.parseJSON(data);
+                                var src = '';
+                                if(data.status){
+                                    $("#cover_id_{$field.name}").val(data.id);
+                                    src = data.url || '__ROOT__' + data.path
+                                    $("#cover_id_{$field.name}").parent().find('.upload-img-box').html(
+                                       '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                                       );
+                                } else {
+                                    updateAlert(data.info);
+                                    setTimeout(function(){
+                                     $('#top-alert').find('button').click();
+                                     $(that).removeClass('disabled').prop('disabled',false);
+                                 },1500);
+                                }
+                            }
+                            </script>
+                        </case>
+                        <case value="file">
+                            <div class="controls">
+                               <input type="file" id="upload_file_{$field.name}">
+                               <input type="hidden" name="{$field.name}" value="{:think_encrypt(json_encode(get_table_field($data[$field['name']],'id','','File')))}"/>
+                               <div class="upload-img-box">
+                                  <present name="data[$field['name']]">
+                                     <div class="upload-pre-file"><span class="upload_icon_all"></span>{$data[$field['name']]|get_table_field=###,'id','name','File'}</div>
+                                 </present>
+                             </div>
+                         </div>
+                         <script type="text/javascript">
+								//上传图片
+                             /* 初始化上传插件 */
+                             $("#upload_file_{$field.name}").uploadify({
+                                 "height"          : 30,
+                                 "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                                 "fileObjName"     : "download",
+                                 "buttonText"      : "上传附件",
+                                 "uploader"        : "{:U('File/upload',array('session_id'=>session_id()))}",
+                                 "width"           : 120,
+                                 'removeTimeout'	  : 1,
+                                 "onUploadSuccess" : uploadFile{$field.name},
+                                 'onFallback' : function() {
+                                     alert('未检测到兼容版本的Flash.');
+                                 }
+                             });
+                             function uploadFile{$field.name}(file, data){
+                               var data = $.parseJSON(data);
+                               if(data.status){
+                                var name = "{$field.name}";
+                                $("input[name="+name+"]").val(data.data);
+                                $("input[name="+name+"]").parent().find('.upload-img-box').html(
+                                   "<div class=\"upload-pre-file\"><span class=\"upload_icon_all\"></span>" + data.info + "</div>"
+                                   );
+                            } else {
+                                updateAlert(data.info);
+                                setTimeout(function(){
+                                 $('#top-alert').find('button').click();
+                                 $(that).removeClass('disabled').prop('disabled',false);
+                             },1500);
+                            }
+                        }
+                        </script>
+                    </case>
+                    <default/>
+                    <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}">
+                </switch>
+            </div>
+        </div>
+    </if>
+</volist>
+</div>
+</volist>
+
+<div class="form-item cf">
+ <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+ <a class="btn btn-return" href="{$Think.cookie.__forward__}">返 回</a>
+ <if condition="C('OPEN_DRAFTBOX') and (ACTION_NAME eq 'add' or $data['status'] eq 3)">
+     <!--button class="btn save-btn" url="{:U('article/autoSave')}" target-form="form-horizontal" id="autoSave">
+        存草稿
+    </button-->
+</if>
+<input type="hidden" name="id" value="{$data.id|default=''}"/>
+<input type="hidden" class="text input-mid" name="label" value="">
+<!--input type="hidden" name="pid" value="{$data.pid|default=''}"/>
+<input type="hidden" name="model_id" value="{$data.model_id|default=''}"/>-->
+<input type="hidden" name="category_id" value="{$data.category_id|default=''}">
+<input type="hidden" name="category_rootid" value="{$data.category_rootid|default=''}">
+</div>
+</form>
+</div>
+</div>
+</block>
+
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+    var step =0;
+    function get_cat_rootid(obj)
+    {
+        $('input[name=category_rootid]').val(obj.options[obj.selectedIndex].value);
+    }
+    var cat=function(obj){
+    	$('input[name=category_id]').val(obj.options[obj.selectedIndex].value);
+		$.ajax({
+	        type: "GET",
+	        url: "/admin.php?s=/api/getCat",
+	        dataType:"json",
+	        data: {fun:obj.options[obj.selectedIndex].value},
+	        success: function(data){
+	        		while(obj.nextSibling){
+	    				obj.parentNode.removeChild(obj.nextSibling);
+	    			}
+					var option='<option value="0" selected>请选择分类</option>';
+		    		for(var i in data){
+		    			//console.dir(obj.parentNode);
+		    			option+='<option value="'+data[i].id+'">'+data[i].title+'</option>';
+		    		}
+		    		if(data) $(obj).after('<select onchange="cat(this)" >'+option+'</select>');
+	        	}
+	        });
+    }
+            <foreach name="category_array" item="v">
+               // alert({$v});
+                if(step == 0)
+                {
+                    $("#category_1").val({$v});
+                    step ++;
+                }
+                else
+                {
+                    var obj  = $("#category_"+step);
+                    $.ajax({
+                        type: "GET",
+                        url: "/admin.php?s=/api/getCat",
+                        dataType:"json",
+                        async:false,
+                        data: {fun:obj.val()},
+                        success: function(data){
+
+                            var ids = step + 1;
+                            step ++;
+                            while(obj.nextSibling){
+                                obj.parentNode.removeChild(obj.nextSibling);
+                            }
+                            var option='<option value="0" selected>请选择分类</option>';
+                            for(var i in data){
+                                //console.dir(obj.parentNode);
+                                option+='<option value="'+data[i].id+'">'+data[i].title+'</option>';
+                            }
+                            if(data)  obj.after('<select id="category_'+ids+'"  onchange="cat(this)" >'+option+'</select>');
+                            $("#category_"+ids).val({$v});
+                        }
+                    });
+
+                }
+           </foreach>
+	function template(obj){
+		if('layout'==obj.name){
+			$.ajax({
+		        type: "GET",
+		        url: "/admin.php?s=/api/getLayout",
+		        dataType:"json",
+		        data: {fun:obj.options[obj.selectedIndex].value},
+		        success: function(data){
+		                    //$('#response').html(data);
+		                    editor_content.html(data.content);
+		                   	$('.dragable',editor_content.edit.iframe.get(0).contentDocument.body).bind('click',function(e){
+		                   		$('.edit',editor_content.edit.iframe.get(0).contentDocument.body).remove();
+								editor_content.loadPlugin('widget', function() {});
+							});
+
+							if(data.select){
+								if(!$('input[name="ProductTags[]"]').val()){
+									alert('专区模版请选择产品标签！');
+									//showModalDialog('专区模版请选择产品标签！','example','dialogWidth:400px;dialogHeight:300px;dialogLeft:200px;dialogTop:150px;center:yes');
+									$('.combo-arrow').click();
+								}
+								$('input[name="label"]').val(data.select.menu);
+								return;
+								var tag=$('input[name="ProductTags[]"]').val();
+								while(obj.nextSibling){
+		    						obj.parentNode.removeChild(obj.nextSibling);
+		    					}
+		    					var option='<option value="0" selected>请选择'+data.select.name+'</option>';
+		    					//console.log(data.select.tags);
+					    		for(var i in data.select.tags){
+					    			//console.dir(obj.parentNode);
+					    			option+='<option value="'+data.select.tags[i].id+'">'+data.select.tags[i].title+'</option>';
+					    			//checkbox+=data[i].title+'<input name="cat[]" onclick="check(this)" value="'+data[i].id+'" type="checkbox"/>';
+					    		}
+					    		$('input[name="css"]').val(data.select.menu);
+					    		$(obj).after('<select  onchange="$(\'input[name=title]\').val(this.options[this.selectedIndex].text);" name="'+data.select.table+'">'+option+'</select>');
+
+							}
+		                 }
+		    });
+	    }else if('interface'==obj.name){
+	    	var selected=obj.options[obj.selectedIndex].value;
+	    	$("select[name='layout'] option").each(function(){
+	    		var options=$(this).text().split('zq');
+	    		//console.log(options);
+			   	if('1'==selected){
+			   		if('sj'==options[0]){
+			    		$(this).show();
+			   		}else{
+			   			if(options[1]) $(this).hide();
+			   		}
+			   	}else{
+			   		if('sj'==options[0]){
+			    		if(options[1]) $(this).hide();
+			   		}else{
+			   			$(this).show();
+			   		}
+			   	}
+			  });
+	    }
+	}
+	$("select[name='interface']").trigger('change');
+	if($("input[name='id']").val()){
+        $("select[name='interface']").attr('disabled',true);
+        $("select[name='layout'] option").each(
+          function(){
+              var str =$(this).val();
+              if(str.substr(-5) !== '.html'){
+                  $(this).val(str + '/index.html');
+              }
+          }
+        );
+    }
+
+    Think.setValue("type", {$data.type|default='""'});
+    Think.setValue("display", {$data.display|default=0});
+    Think.setValue("enabled", {$data.enabled|default=1});
+
+    $('#submit').click(function(){
+       $('#form').submit();
+   });
+
+    $(function(){
+        $('.date').datetimepicker({
+            format: 'yyyy-mm-dd',
+            language:"zh-CN",
+            minView:2,
+            autoclose:true
+        });
+
+        $('.time').datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            language:"zh-CN",
+            minView:2,
+            autoclose:true
+        });
+
+        showTab();
+
+
+    //预配置的字符串配套JS
+     $('.stringForConfig').each(function() {
+        var p = $(this);
+        p.find('a').click(function() {
+            p.find('input:text').val($(this).html());
+        });
+     });
+
+});
+</script>
+</block>

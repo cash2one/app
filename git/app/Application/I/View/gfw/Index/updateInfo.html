@@ -1,0 +1,29 @@
+<extend name="Home@gfw/Base/commonUcent" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/validate.css"/>
+</block>
+
+<block name="body">
+    <div class="user-wraper-right">
+        <div class="user-right-chapter" id="modify">
+            <h3>修改资料</h3>
+            <form action="{:U('Api/updateInfo')}" method="post" class="modify-form" id="uc-editInfo">
+                <div class="info_list"><em>昵称：</em><input name="nick" type="text" id="nick" placeholder="新用户" value="{$user.nickname}"></div>
+                <div class="info_list"><em>联系人：</em><input name="contact" type="text" id="contact" value="{$user.contacts}"></div>
+                <div class="info_list"><em>联系电话：</em><input name="telephone" type="text" id="telephone" value="{$user.mobile}"></div>
+                <div class="info_list"><em>邮箱：</em><input name="email" type="text" id="email" value="{$user.email}"></div>
+                <div class="info_list"><em>公司名称：</em><input name="company" type="text" id="company" value="{$user.company_name}"></div>
+                <div class="info_list"><em>公司地址：</em><input name="address" type="text" id="address" value="{$user.company_address}"></div>
+                <input name="uid" type="hidden" value="{$uid}" />
+                <div class="info_list btn"><input type="submit" value="提交"></div>
+            </form>
+        </div>
+    </div>
+</div>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+</block>

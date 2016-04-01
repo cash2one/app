@@ -1,0 +1,43 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/afs/css/news.css"/>
+</block>
+<block name="body">
+    <!--main-->
+  <div id="main">
+        <p id="main-title">{~W('Home/Afs/wbreadCrumb',array($info['id'],'Document','cate'))}</p>
+        <div class="news-left">                       
+            <h2><i>{$categoryName}</i>
+            <b><a href="{:staticUrl('lists',182, 'Document')}" <php>if($cid=='182'){echo "class='cur'";}</php>>新闻</a>
+            <a href="{:staticUrl('lists',192, 'Document')}" <php>if($cid=='192'){echo "class='cur'";}</php>>资料</a>
+            <a href="{:staticUrl('lists',81, 'Document')}" <php>if($cid=='81'){echo "class='cur'";}</php>>预告</a>
+            <a href="{:staticUrl('lists',184, 'Document')}" <php>if($cid=='184'){echo "class='cur'";}</php>>评测</a>
+            <a href="{:staticUrl('lists',191, 'Document')}" <php>if($cid=='191'){echo "class='cur'";}</php>>问答</a>
+            <a href="{:staticUrl('lists',181, 'Document')}" <php>if($cid=='181'){echo "class='cur'";}</php>>攻略</a>
+            </b></h2>
+            <ul>
+            <volist  name="lists" id="article">
+                <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><img src="{:get_cover($article['cover_id'],'path',1,200,135)}" alt="{$article.title}"></a><span><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a><b><i class="time">{$article.create_time|time_format="Y-m-d"}</i><i class="uesr">作者：{$article['author']}</i></b>
+                <em>{:clean_str($article['description'])}</em></span></li>
+                    </volist>
+            </ul>
+            <p id="fenye">{$page}</p>
+        </div>
+        <div class="news-right">
+        <!--相关阅读-->
+        {~W('Document/afs/cateCommended',array($info['id']))}
+        <!--热门专区-->
+        <div class="wrap-r" id="hot">
+            <h2><i>热门专区</i></h2>
+            <ul>
+                <IndexTag:collection name="f" limit="10" where="Interface=0">
+                <li><a href="{:getCPath($f['id'],'batch')}" target="_blank"><img src="{:get_cover($f['icon'],'path',1,100,100)}"></a><a href="{:getCPath($f['id'],'batch')}" target="_blank" class="tit">{$f.title}</a></li>
+                </IndexTag:collection>
+            </ul>
+        </div>
+         <!--开服开测-->
+{~W('Home/Afs/kaifu')}  
+     </div>
+ </div>
+ <div style=" clear:both"></div>
+</block>

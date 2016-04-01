@@ -1,0 +1,31 @@
+<extend name="Home@gfw/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+<block name="body">
+<!--注册-->
+<div class="main" id="pass-wraper">
+    <div class="pass-login">已有官方网账户了？<a href="{:U('Index/login')}" target="_blank">立即登录</a></div>
+    <div class="pass-inwraper">
+        <div class="pass-inwraper-title">找回密码<span></span></div>
+        <div class="pass-inwraper-main">
+            <ul class="pass-ul-title">
+                <li class="yes"><span>1</span>填写用户名</li>
+                <li class="yes"><span>2</span>验证身份</li>
+                <li><span>3</span>重置密码</li>
+                <li><span>4</span>成功找回</li>
+            </ul>
+            <div class="pass-inwraper-input">
+                <p class="message">您好，官方网已经向您的邮箱{$email}发送“找回密码”邮件，请查收！</p>
+                <p class="login-email"><a href="{$emailUrl}" target="_blank" class="ck-email">登录邮箱查收</a></p>
+                <div class="tip">如果您没有收到邮件提醒，建议您看看您的邮件垃圾箱，或点击<a href="" target="_blank">重新发送邮件</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+</block>

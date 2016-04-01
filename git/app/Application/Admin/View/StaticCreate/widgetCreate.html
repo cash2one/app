@@ -1,0 +1,16 @@
+<extend name="Public/base"/>
+
+<block name="body">
+  <volist name="groups" id="group">
+    <div class="main-title"> <h2> {$key} </h2> </div>
+    <div class="cf">
+      <div class="fl">
+        <volist name="group" id="g">        
+          <a  class="btn"  href="{:U("widgetSub",array("id"=>$g['id']))}">{$g.name}</a>
+        </volist>        
+      </div>
+    </div>
+    </br>
+  </volist>
+</block>
+

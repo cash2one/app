@@ -1,0 +1,26 @@
+<div class="dragable" widget="zq1_gl"></div>
+{:W('Home/Jf96ubatch/zq1_header',array($SEO,$nav,$info['id'],$nav_index))}
+<div class="wraper">
+    {:W('Home/Jf96ubatch/zq1_top',array($base,$tag))}
+    <!--主题左右分块-->
+    <div class="wraper-main">
+        <div class="goback">您的位置：<a href="{$staticUrl}">首页</a>-><a href="{$zqUrl}">专区合集</a>-><a href="{$baseUrl}">{$base['title']}</a>->{$nav2['gl']['title']}</div>
+        <div class="wraper-left">
+            <div class="mid-tit"><h2>游戏攻略</h2></div>
+            <ul class="list-ul">
+                <php>if($lists){</php>
+                <volist name="lists" id="val">
+                    <li><div class="bt"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" title="{$val['title']}">{$val['title']}</a><span class="time">{:date('Y-m-d',$val['update_time'])}</span></div><p class="info">{:msubstr($val['description'],0,120)}<a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" style="color:orange" class="xq">[详情]</a></p></li>
+                </volist>
+                <php>}else{</php>
+                <li style="text-align: center;color: #999; font-size: 22px; font-weight: bold; line-height: 100px;">暂时没有数据！</li>
+                <php>}</php>
+            </ul>
+            <div class="page">{$page}</div>
+        </div>
+        <!--right部分-->
+        {:W('Home/Jf96ubatch/zq1_right',array($tag,$nav2['gl']['url']))}
+        <!--right end-->
+    </div>
+</div>
+{:W('Home/Jf96ubatch/zq1_footer')}

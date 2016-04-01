@@ -1,0 +1,49 @@
+<extend name="Home@7230mobile/Base/commonDown"/>
+
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/7230mobile/css/libao.css"/>
+</block>
+
+<block name="body">
+    <header class="wytop">
+     <span class="back"></span>
+     <b>特色、分类排行榜</b>
+     <a href="{:C('MOBILE_STATIC_URL')}/search.html" class="search"></a>
+ </header>
+ <!-- 首页搜索 和 新闻-->
+ <section class="news_wrap" id="syxw">
+  <!-- 搜索 -->
+  <div class="search_wrap">
+     <form method="get" action="{:C('MOBILE_STATIC_URL')}/search.html"  class="search" id="sub">
+        <input type="text" name="keyword" class="sipt" id="sipt" placeholder="搜礼包" value="">
+        <input type="hidden" name="type" value="package">
+        <a href="javascript:void(0)" class="sbtn" id="sbtn" ></a>
+    </form>
+</div>
+<div class="glnav" id="phb">
+    <i class="cur">特色游戏合集</i>
+    <i>分类游戏排行</i>
+</div>
+<div>
+    <ul class="paih showcurrent">	
+    <volist name="tags" id="article">
+        <li><a href="phxq.html"><h6><a href="{:C('MOBILE_STATIC_URL')}/tag/{$article.name}">{$article.title}</a></h6><p>{$article.num_count}个资源</p></li>
+    </volist>
+    </ul>
+    <ul class="paih">	
+    <volist name="categorys" id="article">
+        <li><a href="phxq.html"><h6><a href="{:C('MOBILE_STATIC_URL')}/cat{$article.id}/">{$article.title}</a></h6><p>{$article.num_count}个资源</p></li>
+    </volist>
+    </ul>
+</div>
+</section>	
+<!-- 搜索 -->
+<section class="search_wrap">
+    <form method="get" action="{:C('MOBILE_STATIC_URL')}/search.html" class="search" style="margin-top:0px;margin-bottom: 15px;">
+        <input type="text" name="keyword" class="sipt" id="sipt" placeholder="搜游戏" value="">
+        <input type="hidden" name="type" value="down">
+        <a href="javascript:void(0)" class="sbtn"></a>
+    </form>
+</section>
+{~W('Home/p7230mobile/tools')}
+</block>

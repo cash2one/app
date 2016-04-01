@@ -1,0 +1,170 @@
+<extend name="Home@qilimobile/Base/common" />
+
+<block name="body">
+<include file="Home@qilimobile/Public/header" />
+
+<div class="mui-content">
+	<section class="y7-article-pic">
+		<div id="slider" class="mui-slider j-y7-slider">
+			<php>$count = count($info['imgpack']);</php>
+			<div class="mui-slider-group">
+				<volist name="info.imgpack" id="image">
+					<div class="mui-slider-item <if condition="($key+1) == 1 OR ($key+1) == $count">mui-slider-item-duplicate</if>">
+						<img src="{$image.image}">
+					</div>
+				</volist>
+			</div>
+
+			<div class="y7-article-pic-desc">
+				<span class="y7-article-pic-step"><i>1</i>/<i>{$count}</i></span>
+				<span class="y7-article-pic-like"><i>{$info.view}</i><a href="javascript:void(0)"></a></span>
+
+				<section>
+					<volist name="info.imgpack" id="image">
+					<div <neq name="key" value="0">style="display:none"</neq>>
+						<h3>LOOK {$key+1}：{$image.title}</h3>
+						<p>搭配看点：{$image.mark}</p>
+					</div>
+					</volist>
+				</section>
+			</div>
+		</div>
+	</section>
+
+	<section id="related" class="y7-sec y7-sec-3">
+		<document model="4" id="$info[id]" limit="1" callback="classify"><php>$empty = !empty($document['classify']);</php></document>
+		
+		<if condition="$empty"> 
+		<div class="y7-sec-title mui-clearfix">
+			<div class="side-tabs">
+				<php>$typeid = array()</php>
+				<document model="4" id="$info[id]" limit="1" callback="classify" key="i" notin="$info[id]">
+					<volist name="document.classify" id="project">
+						<php>$typeid[] = $project['id']</php>
+						<if condition="$i == 1">
+							<a href="javascript:void(0)" class="active">{$project.title}</a>
+						<else />
+							<a href="javascript:void(0)">{$project.title}</a>
+						</if>
+					</volist>
+				</document>
+			</div>
+		</div>
+
+		<div class="y7-sec-body">
+			<ul class="mui-table-view">
+				<if condition="isset($typeid[0])"> 
+					<document model="4" typeid="$typeid[0]" limit="5">
+						<li class="mui-table-view-cell mui-media" href="{$document.url}" notin="$info[id]">
+							<a href="{$document.url}">
+								<img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+								<div class="mui-media-body">
+									<p class="title">{$document.title}</p>
+									<p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document.view}次浏览</span></p>
+								</div>
+							</a>
+						</li>
+					</document>
+				</if>
+			</ul>
+
+			<ul class="mui-table-view" style="display:none">
+				<if condition="isset($typeid[1])"> 
+					<document model="4" typeid="$typeid[1]" limit="5">
+						<li class="mui-table-view-cell mui-media" href="{$document.url}">
+							<a href="{$document.url}">
+								<img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+								<div class="mui-media-body">
+									<p class="title">{$document.title}</p>
+									<p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document.view}次浏览</span></p>
+								</div>
+							</a>
+						</li>
+					</document>
+				</if>
+			</ul>
+		</div>
+		</if>
+	</section>
+</div>
+
+</block>
+
+<block name="script">
+<script src="__PUBLIC__/Home/qilimobile/js/index.js"></script>
+<script>
+$(document).ready(function(){
+	window.setTimeout(function(){
+		var sliderEl = document.querySelector('.j-y7-slider');
+		var totalNumber = sliderEl.querySelectorAll('.mui-slider-item').length;
+		var stepiIdetiEl = sliderEl.querySelector('.y7-article-pic-step i:first-child');
+		var descEls = sliderEl.querySelectorAll('.y7-article-pic-desc section>div');
+		var currentIndex = 1;
+		sliderEl.querySelector('.y7-article-pic-step i:last-child').innerText = totalNumber;
+		sliderEl.addEventListener('slide', function(event) {
+			//注意slideNumber是从0开始的；
+			descEls[currentIndex - 1].style.display = 'none';
+			currentIndex = event.detail.slideNumber + 1;
+			stepiIdetiEl.innerText =currentIndex;
+			descEls[currentIndex - 1].style.display = 'block';
+		});
+	}, 200);
+
+	var status = false;
+
+	$('.y7-article-pic-like').click(function(){
+		if(status == false){
+			status = true;
+			$.get('/dynamic.php?s=Qilimobile/addView/modelid/{$info.model_id}/id/{$info.id}', {}, function(view){
+				$('.y7-article-pic-like i').text(view);
+			});
+		}
+	});
+
+	var count = '{$info.imgpack|count}';
+	var index = 1;
+
+	if(count == 0){
+		$('.mui-btn-grey2').hide();
+	}else{
+		$('.mui-btn-grey2').click(function(){
+			if(index+1 > count){
+				location.reload();
+			}else{
+				$('.y7-article-pic-desc section div').hide();
+				$('.y7-article-pic-desc section div').eq(index).show();
+
+				$('.mui-slider-item').hide();
+				$('.mui-slider-item').eq(index++).show();
+		
+				$('.y7-article-pic-step i').first().text(index);
+
+				if(index == count){
+					$('.mui-btn-grey2').text('返回');
+				}
+			}
+		});
+	}
+
+	$('.mui-table-view li').click(function(){
+		window.location.href=""+$(this).attr('href')+""; 
+	});	
+
+	$('#related .side-tabs a').click(function(){
+		$('#related .side-tabs a').removeClass('active');
+		$(this).addClass('active');
+		var index = $('#related .side-tabs a').index($(this));
+		$('#related ul').hide();
+		$('#related ul').eq(index).show();
+	});	
+	
+	$('#theme .side-tabs a').click(function(){
+		$('#theme .side-tabs a').removeClass('active');
+		$(this).addClass('active');
+		var index = $('#theme .side-tabs a').index($(this));
+		$('#theme .y7-topic-list').hide();
+		$('#theme .y7-topic-list').eq(index).show();
+	});	
+});
+</script>
+</block>

@@ -1,0 +1,39 @@
+<include file="Home@afs/Public/zq/swheader"/>
+<!--main-->
+<div id="main" class="yxzq">
+    <!--页面左边-->
+    <div class="yxzq-left zqdown" id="bg-w">
+        <p class="nav-zone" style="color:#999"><a href="{$home['url_token']}" target="_blank">{$home['title']}</a>>&nbsp;{$batch['title']}</p>
+        <!--游戏下载-->
+        <div class="yxdown">
+            <a href="" target="_blank" class="pic"><img src="{:get_cover($game['smallimg'],path)}"></a>
+            <div class="yxxx">
+                <div class="dragable" widget="download">
+                <h1><a href="{:staticUrl('detail',$game['id'],'Down')}" target="_blank">{$game['title']}</a></h1>
+                <b><i>游戏大小：{$game['size']}</i><i>游戏资费：免费</i><i>下载次数：{$game['hits']}</i><i>游戏类型：{$game['category']}</i>
+                    <i>
+                        <em>游戏平台：</em>
+                        <php>if($game['androidUrl']){</php>
+                        <em class="adr"></em>
+                        <php>} if($game['IOSUrl']){</php>
+                        <em class="app"></em>
+                        <php>}</php>
+                    </i>
+                    <i>语言：{:showText($game['language'],'language',false,'Down')}</i><i>更新时间：{:date('Y-m-d',$game['create_time'])}</i><i>游戏版本：{$game['version']}</i></b>
+                </div>
+            </div>
+              <span id="game-down">
+                  <php>if($game['IOSUrl']){</php>
+                  <b class="app"><a href="{:staticUrl('detail',$game['iosId'],'Down')}" target="_blank">苹果下载</a><i></i><em><img src="{:builtQrcode(staticUrlMobile('detail',$game['iosId'],'Down'))}"></em></b>
+                  <php>} if($game['androidUrl']){</php>
+                  <b class="adr" style="margin-top: 0px;"><a href="{:staticUrl('detail',$game['adrId'],'Down')}" target="_blank">安卓下载</a><i></i><em><img src="{:builtQrcode(staticUrlMobile('detail',$game['adrId'],'Down'))}"></em></b>
+                  <php>}</php>
+              </span>
+        </div>
+    </div>
+    <!--页面右边-->
+    <include file="Home@afs/Public/zq/swright"/>
+</div>
+<include file="Home@afs/Public/foot"/>
+</body>
+</html>

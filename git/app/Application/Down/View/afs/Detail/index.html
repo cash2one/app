@@ -1,0 +1,161 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afs/css/yxdq.css"/>
+</block>
+<block name="body">
+    <!--main-->
+    <div id="main" class="game_xq">
+        <p id="main-title">{~W('Home/Afs/wbreadCrumb',array($info['id'],'Down','detail'))}</p>
+        <div class="yxxq-left">
+            <h1>{$info['title']}</h1>
+            <img src="{:get_cover($info['smallimg'],'path')}">
+            <p id="game-down">
+                <php>
+                    $info['downAll'] = M('downAddress')->alias('a')->field('a.url,a.site_id,b.site_name title')->join('__PRESET_SITE__ b ON a.site_id = b.id','left')->where('did = '.$info['id'])->order('b.level DESC')->select();
+                    foreach($info['downAll'] as $k=>&$v){
+                    $v['url'] = formatAddress($v['url'],$v['site_id']);
+                    $v['qrcode'] = builtQrcode($v['url']);
+                    }
+                    unset($v);
+                </php>
+                <php>if($info['system']==1){ if($info['downAll']){</php>
+                <volist name="info['downAll']" id="val">
+                <php>if($val['url']){</php>
+                <b class="adr"><a href="{$val['url']}">{$val['title']}</a><i></i><em><img src="{$val['qrcode']}"></em></b>
+                <php>}else{</php>
+                <b class="adr adr_no"><a>正在上传</a><i></i></b>
+                <php>}</php>
+                </volist>
+                <php>}else{</php>
+                <b class="adr adr_no"><a>正在上传</a><i></i></b>
+                <php>}} if($info['system']==2){if($info['down']){</php>
+                <volist name="info['downAll']" id="val">
+                <php>if($val['url']){</php>
+                <b class="app"><a href="{$val['url']}">{$val['title']}</a><i></i><em><img src="{$val['qrcode']}"></em></b>
+                <php>}else{</php>
+                <b class="app app_no"><a>正在上传</a><i></i></b>
+                <php>}</php>
+                </volist>
+                <php>}else{</php>
+                <b class="app app_no"><a>正在上传</a><i></i></b>
+                <php>}}</php>
+                {:W('Afs/otherDown',array($info['id'],$info['system']))}
+            </p>
+            <p class="info">
+                <b><i>类　别：</i>{:get_category_title($info['category_id'],MODULE_NAME.'Category')}</b>
+                <b><i>语　言：</i>{:showText($info['language'],'language')}</b>
+                <b><i>版　本：</i>{$info['version']}</b>
+                <b><i>大　小：</i>{$info['size']}</b>
+                <b><i>平　台：</i>{:showText($info['system'],'system')}</b>
+
+                <php>if($info['tags']){</php>
+                <b><i>标　签：</i>
+                    <volist name="info['tags']" id="val">
+                        <a href="{:C('STATIC_URL')}/tag/{$val['name']}/">{$val['title']}</a>&nbsp;&nbsp;
+                    </volist>
+                </b>
+                <php>} $softneed = C('FIELD_DOWN_SOFTNEED');</php>
+                <if condition="$info['softneed'] neq '0'">
+                <b><i>检　查：</i>
+                    <php>
+                        $info['softneed']   =   (int)$info['softneed'];
+                        foreach($softneed as $k=>$v){
+                            if($info['softneed'] & $k){
+                                echo $v."&nbsp;&nbsp;";
+                            }
+                        }
+                    </php>
+                </b>
+                </if>
+                <php>
+                    if((int)$info['company_id'] > 0){
+                        $cs = M('Company')->field('name,path')->where('status = 1 AND id = '.$info['company_id'])->find();
+                        if($cs){
+                </php>
+                <b><i>开发商：</i><a href="{:C('STATIC_URL')}/{$cs['path']}" target="_blank" >{$cs['name']}</a></b>
+                <php>}else{</php>
+                <b><i>开发商：</i>{$info['company']}</b>
+                <php>}}</php>
+
+                <if condition="$info['category_rootid'] neq '1'"><b><i>运营状态：</i>{:showText($info['rank'],'rank')}</b></if>
+                <b><i>更新时间：</i>{:date('Y-m-d',$info['update_time'])}</b>
+                {:W('Afs/detailPackage',array($info['id']))}
+            </p>
+        </div>
+        <div class="yxxq-right">
+            <php>
+                $tid = get_tags($info['id'],'down','product')[0]['id'];
+                if($tid){
+                    $batch = M('productTagsMap')->alias('a')->field('b.url_token')->join('__BATCH__ b ON a.did = b.id')->where("a.tid = $tid AND a.type = 'batch' AND b.pid = 0 AND interface =0 AND enabled = 1 ")->find();
+                    if($batch){
+                        $zq = C(FEATURE_ZQ_DIR);
+                        $batch = C('STATIC_URL') . ($zq?'/'.$zq.'/':'/').$batch['url_token'];
+            </php>
+            <div class="jrzq">{$info['title']}<a href="{$batch}" target="_blank">进入专区</a></div>
+            <php>}}</php>
+            <!--游戏简介-->
+            <div class="jj">
+                <h3>游戏介绍</h3>
+                <php>
+                    $info['keytext'] = str_replace('*','',$info['keytext']);
+                    $info['keytext'] = str_replace("\r","\n",$info['keytext']);
+                    $info['keytext'] = str_replace("|","\n",$info['keytext']);
+                    $info['keytext'] = array_filter(explode("\n",$info['keytext']));
+                    if(!empty($info['keytext'])){
+                </php>
+                <ul class="xbtj">
+                    <volist name="info['keytext']" id="val">
+                        <li>{$val}</li>
+                    </volist>
+                </ul>
+                <php>}</php>
+                <div class="jj-main">
+                    {$info['content']}
+                </div>
+                <b class="get_more">更多</b>
+            </div>
+            <!--游戏图片-->
+            <div class="yxpic">
+                <ul>
+                    <?php $empty = '<li style="display: block; color: #666; margin-top:85px;  text-align: center; line-height: 30px; height: 30px; width: 850px">暂时没有图片</li>'; ?>
+                    <volist name="info['previewimg']" id="img" empty="$empty">
+                        <li><img src="{:get_cover($img,'path')}" alt="{$info['sub_title']}游戏截图"></li>
+                    </volist>
+                </ul>
+                <div class="gdt"><p><b></b></p></div>
+            </div>
+            <!---Widget  相似游戏--->
+            {:W('Afs/DetailRight',array($info['id'],$info['company_id'],$info['category_id']))}
+
+            <!--评论-->
+            <div id="pinglun" name="pinglun">
+                <h3>评论</h3>
+                 <form action="" method="" name="" id="pl"  data-id="{$info['id']}" data-model="down">
+                 <input name="author" id="tj-user" type="hidden" value="{$info['uid']}" />
+                    <p><input type="text" placeholder="请输入用户名" id="user"></p>
+                    <p><textarea></textarea></p>
+                    <p class="bot"><b>本站为防止低俗内容出现，用户发表的评论需经过审核，谢谢 ！</b>
+                    <input type="button" value="发表评论" id="btn"></p>
+                </form>
+                <h4><i>热门评论</i></h4>
+                <ul class="comment_lists" data-id="{$info['id']}" data-model="down">
+                <p style="text-align:center;display:block;padding:10px 0;">暂无评论</p>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <!--右飘菜单-->
+    <div id="right-nav">
+        <p>
+            <b class="jj">介绍</b>
+            <b class="gl">攻略</b>
+            <b class="pc">评测</b>
+            <b class="xw">新闻</b>
+            <b class="lb">礼包</b>
+        </p>
+        <p id="go_bot"></p>
+    </div>
+    <!--返回顶部-->
+    <div id="go_top"><b></b></div>
+</block>

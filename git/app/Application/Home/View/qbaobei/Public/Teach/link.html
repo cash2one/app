@@ -1,0 +1,19 @@
+<div align="center"> ﻿
+    <style>
+        .friends{font-family: '宋体';font-size: 12px;height: 120px;background: url('__PUBLIC__/Home/qbaobei/images/friends.gif') no-repeat;color: #444;margin: 10px 0;display: inline-block;text-align:left; width:961px;}
+        .friends .links {width: 660px;padding: 16px 0 0 53px;line-height: 24px;float: left;}
+        .friends .contact {width: 240px;padding-top: 14px;float: right;}
+        .contact .sTitle {display: block;height: 26px;font-weight: bold;}
+        .friends .links a {display: inline-block;margin-right: 24px;white-space: nowrap; }
+    </style>
+    <div class="friends">
+        <div class="links">
+            <IndexTag:friendlink name="n" group="1" count="100">
+                <a href="{$n['url_token']}" target="_blank" title="{$n['title']}">{$n['title']}</a>
+            </IndexTag:friendlink>
+            </div>
+        <div class="contact"> <span class="sTitle">联系编辑</span>
+            <p> </p>
+        </div>
+    </div>
+</div>

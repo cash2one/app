@@ -1,0 +1,55 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Home@afs/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/afs/css/kfkc.css"/>
+</head>
+<body>
+<include file="Home@afs/Public/header"/>
+<!-----head-END----->
+<div id="main" class="kpage">
+    <p id="main-title"><a href="{:C('STATIC_URL')}/">首页</a>><a href="{:C('STATIC_URL')}/{:C('FEATURE_K_DIR')}/">K页面合集</a>>{$info['title']}</p>
+    <div id="banner">
+        <div class="dragable" widget="image" style="width: 767px;"><img src="__PUBLIC__/Home/afs/images/zq-banner.jpg"></div>
+        <div class="banner_r">
+            <div class="dragable" widget="html">
+            <h1>这是转区可修改的标题</h1>
+            <i class="info">数据库积分卡浪费浪费家乐福开发贷款方式减肥的事了咖款方式减肥的事了咖款方式减肥的事了咖啡减肥的事了放假了交流交流看了看米兰昆德拉刚看了个考虑考虑可怜的狂蜂浪蝶开发力度...</i>
+            </div>
+            <i class="more"><a href="{:C('STATIC_URL')}/{:C('FEATURE_K_DIR')}/" target="_blank">更多合集>></a></i>
+        </div>
+    </div>
+    <ul class="klb">
+        <div class="dragable" widget="down__product_tags">
+        <volist name="lists" id="val">
+        <li>
+            <p><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['size']}</i><i>{$val['title']}</i><a href="{$val['url']}" class="down">下载</a></span></p>
+            <b>{$val['description']}</b>
+        </li>
+        </volist>
+            <php>unset($lists);</php>
+        </div>
+    </ul>
+    <!----底部轮播---->
+    <div id="lunbo">
+        <p class="title">推荐合集<a href="{:C('STATIC_URL')}/{:C('FEATURE_K_DIR')}/" target="_blank" class="more">更多>></a></p>
+        <div class="lbmain">
+            <span class="prev"></span>
+            <div class="lunbo-m">
+                <ul>
+                    <div class="dragable" widget="batch__product_tags">
+                    <volist name="lists" id="val">
+                    <li><a href="{:C('STATIC_URL')}/{:C('FEATURE_K_DIR')}/{:$val['url_token']}" target="_blank"><img src="{:get_cover($val['icon'],'path')}"></a><a href="{:C('STATIC_URL')}/{:C('FEATURE_K_DIR')}/{:$val['url_token']}" target="_blank" class="title">{$val['title']}</a></li>
+                    </volist>
+                    </div>
+                </ul>
+            </div>
+            <span class="next"></span>
+        </div>
+    </div>
+</div>
+<div class="dragable" widget="base"></div>
+<include file="Home@afs/Public/foot"/>
+</body>
+</html>

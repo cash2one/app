@@ -1,0 +1,4 @@
+                                <b><font>最新发号信息</font></b>
+                                <volist name="list" id="data">
+                                    <i><s><a href="{:staticUrl('detail', $data['id'])}">领取</a></s><a href="{:staticUrl('detail', $data['id'])}">{$data.title|msubstr=###,0,8,'utf-8',false}</a><em>{$data.id|showCardAll} /{$data.id|showCardSur}</em></i>
+                                </volist>

@@ -1,0 +1,240 @@
+<!--卡号管理-->
+<div id="tabCard" class="tab-pane tabCard">
+    <div class="form-item cf">
+        <label class="item-label">获取全部数据<span class="check-tips">（从礼包中心获取全部数据）</span></label>
+        <div class="controls" id="PackageSource_all">
+            <a href="javascript:;" class="btn">获取</a>
+        </div>
+
+        <label class="item-label">搜索数据<span class="check-tips">（标签为数据选择的产品标签或者说游戏标签）</span></label>
+        <div id="PackageSource_search">
+            <div class="controls">
+                <input type="radio" value="title" checked name="PackageSource_stype">标题
+                <input type="radio" value="tags" name="PackageSource_stype">标签
+            </div>
+            <div class="search-form  check-tips">
+                 <div class="sleft">
+                     <input type="text" name="PackageSource_stext" class="search-input" value="" placeholder="请输入内容">
+                     <a class="sch-btn" href="javascript:;"><i class="btn-search"></i></a>
+                 </div>
+            </div>
+        </div>
+
+        <div class="controls" style="clear:both"></div>
+
+        <label class="item-label">数据列表<span class="check-tips">（双击选取某个数据导入）</span><span class="check-tips">[当前获取卡数-<strong color="red" id="card_number_show">0</strong>]</span></label>
+        <!--卡号-->
+        <input type="hidden" id="card_number" name="card_number" value=''>
+        <input type="hidden" id="center_did" name="center_did" value=''>
+        <!--数据表格-->
+        <div id="PackageSource"></div>
+        <!--对话框-->
+        <div id="PackageSource_dialog" style="display:none">
+            <div style="text-align: center;padding:20px 0;">
+                    <label style="padding:0 20px;">申请卡号数目 </label>
+                    <input style="width:70px" type="text" class="text input-large" value="">
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var PackageSource = {
+                formatDate : function(t){
+                    var now = new Date(parseInt(t) * 1000);
+                    return now.getFullYear()+ '-' + (now.getMonth()+1) + '-' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes();
+                },
+                url : "{:C('PACKAGE_API_URL')}",
+                key : {:json_encode(C('PACKAGE_API_KEY'))},
+                param : {
+                        width:'808px',
+                        height:'450px',
+                        title:'礼包数据',
+                        rownumbers:true,
+                        pagination:true,
+                        columns:[[
+                            {field:'id',title:'ID',width:80,align:'center'},
+                            {field:'title',title:'卡号名称',width:120,align:'center'},
+                            {field:'platform',title:'运营平台',width:120,align:'center'},
+                            {field:'card_type',title:'卡号类型',width:80,align:'center'},
+                            {field:'conditions',title:'运行环境',width:80,align:'center'},
+                            {field:'number_surplus',title:'剩余',width:80,align:'center'},
+                            {field:'start_time',title:'开始时间',width:110,align:'center'},
+                            {field:'end_time',title:'结束时间',width:110,align:'center'},
+                            //{title:'卡号数目',colspan:4,align:'center'}
+                            // [
+                            //     {field:'number_all',title:'总数',width:80,align:'center'},
+                            //     {field:'number_surplus',title:'剩余',width:80,align:'center'}
+                            // ]
+                        ]],
+                        // toolbar: [{
+                        //     text: '显示全部',
+                        //     handler: function(){
+                        //         $('#PackageSource').datagrid({url:my.url_all});
+                        //         $('#PackageSource').datagrid('reload');
+                        //     }
+                        // }],
+                        //数据处理
+                        loadFilter: function(data){
+                            var rows = data.rows;
+                            if (!rows || !data.total) {
+                                return data;
+                            }
+                            var conditions = {:json_encode(C('PACKAGE_CARD_CONDITIONS'))};
+                            var card_type = {:json_encode(C('PACKAGE_CARD_TYPE'))};
+                            for (var i = rows.length - 1; i >= 0; i--) {
+                                //card_type单选
+                               rows[i].card_type = card_type[rows[i].card_type];
+                               //conditions多选
+                               var val = '';
+                               var con = rows[i].conditions.split(',');
+                               for (var n = 0; n < con.length; n++) {
+                                    val += conditions[con[n]]+',';
+                               };
+                               rows[i].conditions = val.substring(0, val.length-1);
+                                //start_time 和 end_time 时间
+                                                    console.log(rows[i].title);
+                               rows[i].start_time = PackageSource.formatDate(rows[i].start_time);
+                               rows[i].end_time = PackageSource.formatDate(rows[i].end_time);
+
+                            };
+                            data.rows = rows;
+                            return data;
+                        },
+                        //数据双击导入
+                        onDblClickRow: function(i, data){
+                            PackageSource.dialog({
+                                data:data
+                            });
+                        }
+                },
+                init : function(){
+                    this.search();
+                    this.all();
+                },
+                //搜索
+                search : function(){
+                    $('#PackageSource_search a').click(function() {
+                        var type = $('#PackageSource_search input:radio').val();
+                        var text = $('#PackageSource_search input:text').val();
+                        PackageSource.param.url = PackageSource.url;
+                        var obj = {};
+                        obj[type] = text;
+                        obj['c'] = 'index';
+                        obj['a'] = 'getPackageList';
+                        obj = PackageSource.urlParams(obj);
+                        PackageSource.param.queryParams = obj;
+                        $('#PackageSource').datagrid(PackageSource.param);
+                    });
+                },
+                //获取全部
+                all : function(){
+                    $('#PackageSource_all a').click(function() {
+                        PackageSource.param.url = PackageSource.url;
+                        var obj = {};
+                        obj['c'] = 'index';
+                        obj['a'] = 'getPackageList';
+                        obj = PackageSource.urlParams(obj);
+                        PackageSource.param.queryParams = obj;
+                        $('#PackageSource').datagrid(PackageSource.param);
+                    });
+                },
+                //地址参数 key domain
+                urlParams: function(obj){
+                    obj['domain'] = PackageSource.key.domain;
+                    obj['key'] = PackageSource.key.key;
+                    return obj;
+                },
+                //对话框
+                dialog : function(param){
+                    var data = param.data;
+                    if(data.id<0){
+                        alert('参数错误');
+                        return;
+                    }
+                    $('#PackageSource_dialog').css('display', '');
+                    $('#PackageSource_dialog').dialog({
+                        title:'导入',
+                        width:400,
+                        height:150,
+                        modal:true,
+                        closed: false,
+                        cache: false,
+                        buttons:[{
+                                        text:'获取',
+                                        handler:function(){
+                                            <eq name="ACTION_NAME" value="add">PackageSource.insertData(data);</eq>
+
+                                            var num = $('#PackageSource_dialog input:text').val();
+                                            if (isNaN(num)){
+                                                alert('请填入数字');
+                                                return;
+                                            }
+                                            if (parseInt(num)>parseInt(data.number_surplus)){
+                                                alert('剩余卡数不足！剩余卡数为'+data.number_surplus);
+                                                return;
+                                            }
+                                            $('#card_number').val(num);
+                                            $('#center_did').val(data.id);
+                                            $('#card_number_show').html(num);
+                                            $('#PackageSource_dialog').dialog('close');
+
+                                        }
+                                    },{
+                                        text:'取消',
+                                        handler:function(){$('#PackageSource_dialog').dialog('close')}
+                                    }]
+
+                    });
+                },
+                //数据插入
+                insertData: function(data){
+                    var conditions = {:json_encode(C('PACKAGE_CARD_CONDITIONS'))};
+                    var card_type = {:json_encode(C('PACKAGE_CARD_TYPE'))};
+                    for(p in data){
+                        if (p!='id'){
+                            var type = $('[name="'+p+'"]').attr('type');
+                            if(!type) type = $('[name="'+p+'[]"]').attr('type');
+                            //取不到类型说明为textarea或者没有这个项目，直接赋值
+                            if(!type){
+                                KindEditor.html('textarea[name="'+p+'"]', data[p]);
+                                $('[name="'+p+'"]').val(data[p]);
+                                continue;
+                            }
+                            //获取到类型分别处理
+                            if(type=='text'){
+                                $('[name="'+p+'"]').val(data[p]);
+                                continue;
+                            }
+
+                            var current = eval(p);
+                            if(!current) continue;
+                            if(type=='radio' || type=='select'){
+                                for (var i = 0; i < current.length; i++) {
+                                    if(data[p] == current[i])  $('[name="'+p+'"][value="'+i+'"]').prop('checked',true);
+                                };
+                                continue;
+                            }
+
+                            if(type=='checkbox'){
+                                $('[name="'+p+'[]"]').each(function(){
+                                    $(this).prop('checked',false);
+                                });
+                                var arr = data[p].split(',');
+                                for (i in current) {
+                                    if($.inArray(current[i], arr)!=-1){
+                                       // console.log(p+' '+i);
+                                        $('[name="'+p+'[]"][value="'+i+'"]').prop('checked',true);
+                                    }
+                                };
+                                continue;
+                            }
+                        }
+                    }
+
+                }
+            };
+            PackageSource.init();
+
+        </script>
+
+    </div>
+</div>

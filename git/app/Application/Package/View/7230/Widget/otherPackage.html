@@ -1,0 +1,3 @@
+<volist name="package" id="val" empty="$empty">
+    <li><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank" class="pic"><b>礼</b><i></i><img src="{:get_cover($val['cover_id'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank">{$val.title}</a></li>
+</volist>

@@ -1,0 +1,11 @@
+<volist name="lists" id="vo" offset="0" length="1">
+    <div class="rec-news">
+      <h2><a href="{$vo['url']}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></h2>
+      <p class="info">{$vo['description']}</p>
+    </div>
+</volist>
+<ul class="rec-list">
+<volist name="clists" id="vo" offset="0" length="5">
+  <li><span>{:date('m-d',$vo['update_time'])}</span><a href="{$vo['url']}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+</volist>
+</ul>

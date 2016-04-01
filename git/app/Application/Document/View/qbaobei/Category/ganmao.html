@@ -1,0 +1,31 @@
+<extend name="Home@qbaobei/Base/commonGanmao"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/common1.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/top.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/subscibe.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/commonlist.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/newnav.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/newhead.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/ganmaohead.css"/>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/newnavigation.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#list2 li:first").hide();
+
+            $("#currentPage").text($(".pageBar b").find("a").text());
+            var count = Math.ceil(parseFloat($("#pageCount").text() / 20));
+            if (count <= 0) {
+                count = 1;
+            }
+            $("#pageCount").text(count);
+        });
+    </script>
+</block>
+<block name="body">
+    {:W('Qbaobei/compositionLists',array($info,$lists))}
+</block>

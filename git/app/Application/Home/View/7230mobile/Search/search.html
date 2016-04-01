@@ -1,0 +1,40 @@
+<extend name="Home@7230mobile/Base/commonDown" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/7230mobile/css/libao.css"/>
+</block>
+
+<block name="body">
+<header class="wytop">
+   <span class="back"></span>
+   <b class="sear">
+    <form method="get" action="{:C('MOBILE_STATIC_URL')}/search.html"  class="search" id="sepage">
+        <input type="text" name="keyword" class="sipt" id="sipt" placeholder="搜游戏" value="">
+        <input type="hidden" name="type" value="down">
+    </form>
+    </b>
+   <a href="javascript:void(0);" class="search" id="searchSub"></a>
+</header>       
+<!-- 推荐热门游戏 -->
+<section class="commend_wrap">
+    <div class="commend clear">
+        <php>$where="category_rootid=1&&cover_id!=0".$system;</php>
+        <Think:article basename="Down" name="dmain"  where="" order="hits_today" limit="12">
+            <a href="{:staticUrlMobile('detail', $article['id'],'Down')}">
+                <p>{$article.title}</p>
+                <gt name="article.position" value="0">
+                    <span class="com">荐</span>
+                <else/>
+                    <gt name="article.home_position" value="0">
+                        <span class="com">荐</span>
+                    <else/>
+                        <span class="hot">热</span>
+                    </gt>                 
+                </gt> 
+            </a>
+        </Think:article>
+    </div>
+</section>
+
+{~W('Home/P7230mobile/tools')}
+</block>

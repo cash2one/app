@@ -1,0 +1,45 @@
+<extend name="Home@afsmobile/Base/commonDown"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/afsmobile/css/news.css"/>
+</block>
+<block name="body">
+<!--game_rec-->
+<section class="news_xq"> 
+  <!--详情部分-->
+  <div class="wzxq">
+    <div class="title">
+      <h1>{$info['title']}</h1>
+      <p>作者：{$info['author']} 时间：{$info['create_time']|time_format="Y-m-d H:i:s"} </p>
+    </div>
+    <!-- 广告位：文章详情标题下广告位 -->
+  <script src="__PUBLIC__/Home/afsmobile/js/detail-doc-ad1.js" type="text/javascript"></script>
+    <div class="jc-main"> {~W('Home/P7230/contentProcess',array($info['content']))} </div>
+  </div>
+  <!--猜你喜欢--> 
+  {~W('Document/afsmobile/sameStyle',array($info['id']))} 
+  <!-- 广告位：文章详情猜你喜欢下广告 -->
+<script src="__PUBLIC__/Home/afsmobile/js/m_ad_1.js" type="text/javascript"></script>
+  <!--相关文章--> 
+  {~W('Document/afsmobile/relateArticle',array($info['id']))}
+  <div class="xgwz">
+   <!--评论-->
+    <p class="title"><span>评论列表<b>COMMENT</b></span></p>
+    <div id="pinglun" name="pinglun">
+            <form action="" method="" name="" id="pl"  data-id="{$info['id']}" data-model="document">
+             <p><input type="text"  placeholder="游客" id="user" class="commentUserForm"></p>
+             <p><textarea class="con" ></textarea></p>
+             <p><input type="button" value="发表评论" class="btn" id="btn"></p>
+        </form>
+         <p class="newset_list">最新评论</p>
+      <div class="m-comment-lists" data-id="{$info['id']}" data-model="document">
+        <p style="text-align:center;display:block;padding:10px 0;">暂无评论</p>
+      </div>
+    </div>
+    <!--评论结束-->
+  </div>
+</section>
+  {~W('Document/afsmobile/floatBox',array($info['id']))}
+</block>
+<block name="script"> 
+  <script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/common.js"></script> 
+</block>

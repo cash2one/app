@@ -1,0 +1,31 @@
+<div id="banner">
+    <div class="lunbo">
+        <ul>
+            <volist name="slide" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path',1,908,276)}" alt="{$val['title']}" title="{$val['description']}"></a></li>
+            </volist>
+        </ul>
+        <div class="cont"></div>
+    </div>
+    <div class="new_game">
+        <div class="title"><i>新游戏</i></div>
+        <div class="new_game_wrap">
+            <ul class="new_game_m">
+                <volist name="today" id="val">
+                <li class="app">
+                    <div class="app-main">
+                        <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path',1,95,95)}" alt="{$val['title']}"></a>
+                        <div class="info">
+                            <i>名称：<a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['title']}</a></i>
+                            <i>类型：<em><volist name=":get_tags($val['id'],'Down')" id="rel">{$rel['title']}&nbsp;&nbsp;</volist></em></i>
+                            <i class="hot"><s>热度：</s><em class="star4"></em></i>
+                        </div>
+                    </div>
+                    <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="apk">立即下载</a>
+                </li>
+                </volist>
+            </ul>
+        </div>
+        <div class="circle"></div>
+    </div>
+</div>

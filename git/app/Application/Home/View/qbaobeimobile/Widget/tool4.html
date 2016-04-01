@@ -1,0 +1,726 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/tools.css">
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > <a href="/tools/">工具</a> > 胎儿发育过程图</block>
+<block name="body">
+<!--工具详情-->
+<section class="tool-detail dis-bot">
+<h1>胎儿发育过程图</h1>
+<style>
+/* 焦点图 */
+.slider-top{width:100%;margin:0 auto;overflow:hidden;position:relative;}
+.slider-top .prev{width:30px;height:30px;position:absolute;top:7px;left:0px;color:#777;line-height:30px;text-align:center;}
+.slider-top .next{width:30px;height:30px;position:absolute;top:7px;right:0px;color:#777;line-height:30px;text-align:center;}
+.slider-top-wrap{overflow:hidden;position:relative;}
+.slider-top-pic{position:relative;overflow:hidden;}
+.slider-top-pic li{position:relative;float:left;width:100%;overflow:hidden;}
+.slider-top-pic li:not(:first-child){display:none;}
+.slider-top-pic li p{font-weight:bold;color:#333;line-height:35px;text-align:center;font-size:15px;padding:5px 0;}
+.slider-top-pic li img{float:left;width:120px;margin-right:10px;}
+.slider-top-pic li span{overflow:hidden;display:block;color:#333;font-size:13px;line-height:20px;}
+</style>
+<div class="m-section">末次月经的第一天</div>
+<div class="m-input"><input type="date" name="" id="Jdata"/></div>
+<div class="m-work"><input type="submit" id="JworkOut" value="点击计算" /></div>
+<div class="m-result" style="display:block">
+<div class="m-result-tit">查询结果</div>
+<p style="font-size:16px;display:none;">今天：<em id="Jtoday">~</em></p>
+<p style="font-size:16px;display:none;">您已怀孕：<em id="Jdays">~</em></p>
+<p style="font-size:16px;display:none;">距离预产期：<em id="JdayOut">~</em></p>
+<p style="font-size:16px;display:none;">产检建卡日：<em id="JbuildTime">~</em></p>
+<div class="slider-top">
+<div class="slider-top-wrap" id="JsliderTopWrap">
+<ul class="slider-top-pic">
+<li><a href="http://m.qbaobei.com/a/223264.html"><p class="">怀孕1周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/01.jpg" alt="" /><span class="des">怀孕期一般都以你末次月经的第一天为起始时间，这时的你，还处于月经期。 如果你已决定怀孕，请放松心情吧！</span></a></li>
+<li><a href="http://m.qbaobei.com/a/223265.html"><p class="">怀孕2周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/02.jpg" alt="" class="lazy_img"/><span class="des">从这周起，你的排卵期就会开始，在月经前第13—20天时是你的最佳怀孕期，你需要与丈夫共同调整身体健康状态。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/223266.html"><p class="">怀孕3周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/03.jpg" alt="" class="lazy_img"/><span class="des">这周，你已经进入排卵期，这周你最有可能受孕，一旦排卵和受精发生，你就能确定怀孕了。现在起你生命中会增加一份责任。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/223267.html"><p class="">怀孕4周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/04.jpg" alt="" class="lazy_img"/><span class="des">这时候生命的种子已经开始在你体内生根发芽，开始孕育生命的路程。10月怀胎的过程有辛苦有忐忑，但更多的是奇妙与甜蜜。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/223267.html"><p class="">怀孕5周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/05.jpg" alt="" class="lazy_img"/><span class="des">在你的子宫内现在正发生着巨大的变化，一个小生命已经入住了。小胚胎大约长0.6厘米，有苹果籽那么大，外观很像“小海马”</span></a></li>
+<li><a href="http://m.qbaobei.com/a/223269.html"><p class="">怀孕6周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/06.jpg" alt="" class="lazy_img"/><span class="des">现在胚胎的长度有0.6厘米，象一颗小松籽仁。你的妊娠反应也开始明显起来。最好不要外出旅行，过度劳累有可能引起流产。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/223270.html"><p class="">怀孕7周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/07.jpg" alt="" class="lazy_img"/><span class="des">怀孕7周时，胚胎有1.3厘米长。胚胎手臂和腿开始伸出嫩芽，手指开始发育。心脏划分成左心房和右心室，胎儿有一个尾巴。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/223271.html"><p class="">怀孕8周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/08.jpg" alt="" class="lazy_img"/><span class="des">胎儿长到1.66厘米，胎形已定，可分出胎头、体及四肢。B超可见胎囊约占宫腔一半，可见卵黄囊。胎宝宝的心脏开始跳动了。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/223272.html"><p class="">怀孕9周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/09.jpg" alt="" class="lazy_img"/><span class="des">9周的胎儿已经长到2.15厘米了，胎儿头大于胎体，各部表现更清晰，头颅开始钙化、胎盘开始发育。B超可见胎儿轮廓更清晰。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/223273.html"><p class="">怀孕10周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/10.jpg" alt="" class="lazy_img"/><span class="des">此时胎儿长到2.83厘米了，胎儿各器官均已形成，胎盘雏形形成。B超可见胎囊开始消失，月芽形胎盘可见，胎儿活跃在羊水中。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/222142.html"><p class="">怀孕11周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/11.jpg" alt="" class="lazy_img"/><span class="des">胎儿长到3.62厘米，胎儿各器官进一步发育，胎盘发育。B超可见胎囊完全消失，胎盘清晰可见。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/222421.html"><p class="">怀孕12周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/12.jpg" alt="" class="lazy_img"/><span class="des">胎儿长到4.58厘米，外生殖器初步发育，可测双顶径，可诊断是否畸形，此后各脏器趋向完善，胎儿眼睛已经形成了。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224487.html"><p class="">怀孕13周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/13.jpg" alt="" class="lazy_img"/><span class="des">胎儿的肝脏开始制造胆汁，肾脏开始分泌尿液。<br />双顶径:2.52±0.25<br />腹围:6.90±l.65<br />股骨长：1.17±0.31。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224489.html"><p class="">怀孕14周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/14.jpg" alt="" class="lazy_img"/><span class="des">胎儿手指出现指纹印。<br />双顶径：2.83±0.57<br />腹围：7.77±1.82<br />股骨长：1.38±0.48。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224490.html"><p class="">怀孕15周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/15.jpg" alt="" class="lazy_img"/><span class="des">胎儿的眉毛和头发开始生长。<br />双顶径：3.23±0.51<br />腹围：9.13±1.56<br />股骨长：1.74±0.58。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224491.html"><p class="">怀孕16周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/16.jpg" alt="" class="lazy_img"/><span class="des">胎儿生殖器官已形成，用B超可分辨出胎儿的性别了。<br />双顶径：3.62±0.58<br />腹围：10.32±1.92<br />股骨长：2.10±0.51。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224492.html"><p class="">怀孕17周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/17.jpg" alt="" class="lazy_img"/><span class="des">胎儿的肺开始工作，能够不断地吸入和呼出羊水。<br />双顶径：3.97±0.44<br />腹围：11.49±1.62<br />股骨长：2.52±0.44。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224494.html"><p class="">怀孕18周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/18.jpg" alt="" class="lazy_img"/><span class="des">胎儿的身长接近14厘米，体重大约200克。<br />双顶径：4.25±0.53<br />腹围：12.41±l.89<br />股骨长：2.71±0.46。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224496.html"><p class="">怀孕19周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/19.jpg" alt="" class="lazy_img"/><span class="des">胎儿大约有15厘米长，羊水在胎儿的口腔里流动。<br />双顶径：4.52±0.53<br />腹围：13.59±2.30<br />股骨长：3.03±0.50。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224498.html"><p class="">怀孕20周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/20.jpg" alt="" class="lazy_img"/><span class="des">胎儿开始能吞咽羊水，肾脏已能够制造尿液。<br />双顶径：4.88±0.58<br />腹围：14.80±l.89<br />股骨长：3.35±0.47。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224614.html"><p class="">怀孕21周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/21.jpg" alt="" class="lazy_img"/><span class="des">胎儿身长约16-18厘米，体重300克，开始长出指甲。<br />双顶径：5.22±0.42<br />腹围：15.62±1.84<br />股骨长：3.64±0.40。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224616.html"><p class="">怀孕22周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/22.jpg" alt="" class="lazy_img"/><span class="des">体重约350g，长19cm。胎儿眉眼已清晰可辨。<br />双顶径：5.45±0.57<br />腹围：16.70±2.23<br />股骨长：3.82±0.47。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224618.html"><p class="">怀孕23周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/23.jpg" alt="" class="lazy_img"/><span class="des">身长约20cm，体重约450g。皮肤红红的，皱巴巴的。<br />双顶径：5.80±0.44<br />腹围：17.90±1.85<br />股骨长：4.21±0.41。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224630.html"><p class="">怀孕24周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/24.jpg" alt="" class="lazy_img"/><span class="des">身长约25厘米，体重500多克。他的听力已经形成。<br />双顶径：6.05±0.50<br />腹围：18.74±2.23<br />股骨长：4.36±0.51。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224634.html"><p class="">怀孕25周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/25.jpg" alt="" class="lazy_img"/><span class="des">胎儿约30cm长，570g，身体比例均称，味蕾正形成。<br />双顶径：6.39±0.70<br />腹围：19.64±2.20<br />股骨长：4.65±0.42。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224638.html"><p class="">怀孕26周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/26.jpg" alt="" class="lazy_img"/><span class="des">胎儿重约800g，身高34cm。肺部尚未发育完全。<br />双顶径：6.68±0.61<br />腹围：21.62±2.30<br />股骨长：4.87±O.41。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224640.html"><p class="">怀孕27周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/27.jpg" alt="" class="lazy_img"/><span class="des">体重约900克，长38厘米。生殖器官明显。<br />双顶径：6.98±0.57<br />腹围：21.81±2.12<br />股骨长：5.10±0.41。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224641.html"><p class="">怀孕28周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/28.jpg" alt="" class="lazy_img"/><span class="des">重约1100克，高约40厘米，形成了自己的睡眠周期。<br />双顶径：7.24±O.65<br />腹围：22.86±2.41<br />股骨长：5.35±0.55。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224646.html"><p class="">怀孕29周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/29.jpg" alt="" class="lazy_img"/><span class="des">皮下脂肪已初步形成，指甲清晰，视觉发育完善。<br />双顶径：7.50±0.65<br />腹围：23.71±1.50<br />股骨长：5.61±0.44。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224650.html"><p class="">怀孕30周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/30.jpg" alt="" class="lazy_img"/><span class="des">男孩睾丸从腹腔向阴囊下降，女孩阴蒂突出。<br />双顶径：7.83±0.62<br />腹围：24.88±2.03<br />股骨长：5.77±0.47。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/222355.html"><p class="">怀孕31周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/31.jpg" alt="" class="lazy_img"/><span class="des">肺部和消化系统基本发育完，身长增长减慢。<br />双顶径：8.06±0.60腹围：25.78±2.32股骨长：6.03±0.38。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224368.html"><p class="">怀孕32周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/32.jpg" alt="" class="lazy_img"/><span class="des">胎盘已形成，肺胃肠功能接近成熟，可用膀胱排泄。<br />双顶径：8.17±0.65<br />腹围：26.20±2.33<br />股骨长：6.43±0.49。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224719.html"><p class="">怀孕33周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/33.jpg" alt="" class="lazy_img"/><span class="des">皮下脂肪增加，皱纹减少，头部开始降入骨盆。<br />双顶径：8.50±0.47<br />腹围：27.78：±2.30<br />股骨长：6.52±0.46。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224957.html"><p class="">怀孕34周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/34.jpg" alt="" class="lazy_img"/><span class="des">胎儿头骨很柔软，身体其它部位骨骼变得结实。<br />双顶径：8.61±0.63<br />腹围：27.99±2.55<br />股骨长：6.62±0.43。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/224964.html"><p class="">怀孕35周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/35.jpg" alt="" class="lazy_img"/><span class="des">胎儿听力已发育充分，越长越胖，变得圆滚滚。<br />双顶径：8.70±0.55<br />腹围：28.74±2.88<br />股骨长：6.71±0.45。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/225192.html"><p class="">怀孕36周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/36.jpg" alt="" class="lazy_img"/><span class="des">胎儿的肾脏已发育完全，肝脏已能处理一些代谢物。<br />双顶径：8.81±0.57<br />腹围：29.44±2.83<br />股骨长：6.95±0.47。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/225194.html"><p class="">怀孕37周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/37.jpg" alt="" class="lazy_img"/><span class="des">胎儿在母腹中的位置下降，重量约3kg，长约51cm。<br />双顶径：9.00±0.63<br />腹围：30.14±2017<br />股骨长：7.10±0.52。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/225377.html"><p class="">怀孕38周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/38.jpg" alt="" class="lazy_img"/><span class="des">绒毛和白色胎脂逐渐脱落消失，皮肤变得光滑。<br />双顶径：9.08±0.59<br />腹围：30.63±2.83<br />股骨长：7.20±0.43。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/225380.html"><p class="">怀孕39周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/39.jpg" alt="" class="lazy_img"/><span class="des">体重应该已有3200—3400克，已经准备好分娩了。<br />双顶径：9.21±0.59<br />腹围：31.34±3.12<br />股骨长：7.34±0.53。</span></a></li>
+<li><a href="http://m.qbaobei.com/a/225533.html"><p class="">怀孕40周胎儿图</p><img src="__PUBLIC__/Home/qbaobeimobile2/images/40.jpg" alt="" class="lazy_img"/><span class="des">胎儿周围的羊水变浑浊，呈乳白色，胎盘功能退化。<br />双顶径：9.28±0.50<br />腹围：31.49±2.79<br />股骨长：7.4±0.53。</span></a></li>
+</ul>
+</div>
+<div class="prev" onclick="slider.prev()"><</div>
+<div class="next" onclick="slider.next()">></div>
+</div>
+</div>
+</section>
+</block>
+<block name="script">
+<script type="text/javascript">
+function Swipe(container, options) {
+"use strict";
+// utilities
+var noop = function() {}; // simple no operation function
+var offloadFn = function(fn) {
+setTimeout(fn || noop, 0)
+}; // offload a functions execution
+// check browser capabilities
+var browser = {
+addEventListener: !!window.addEventListener,
+touch: ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch,
+transitions: (function(temp) {
+var props = ['transformProperty', 'WebkitTransform', 'MozTransform', 'OTransform', 'msTransform'];
+for (var i in props)
+if (temp.style[props[i]] !== undefined) return true;
+return false;
+})(document.createElement('swipe'))
+};
+// quit if no root element
+if (!container) return;
+var element = container.children[0],
+slides=element.children,
+length = slides.length;
+var index = parseInt(options.startSlide, 10) || 0,
+speed = options.speed || 300,
+isContinuous = options.continuous,
+vertical = options.vertical || false;
+if(isContinuous){
+var html = element.innerHTML;
+if(length==2){
+element.innerHTML = html + html ;
+}else if(length== 1){
+element.innerHTML = html + html + html;
+}
+}
+var lIndex = index-1,
+rIndex = index+1,
+isTransitionStart,slidePos,client,width,height;
+var size = vertical ? "height":"width",
+offset = vertical ? "top":"left",
+xy = vertical ? "y":"x";
+function reset() {
+// create an array to store current positions of each slide
+slidePos = new Array(slides.length);
+container.style.overflow = "hidden";
+// determine width or height of each slide
+client = container.getBoundingClientRect()[size] || (vertical ? container.offsetHeight:container.offsetWidth);
+element.style[size] = (slides.length * client) + 'px';
+var pos = slides.length;
+while (pos--) {
+var slide = slides[pos];
+slide.style[size] = client + 'px';
+slide.style.display = "inline";
+slide.style.cssFloat = "left";
+slide.style.position = "relative";
+slide.style[offset] = (pos * -client) + 'px';
+slide.setAttribute('data-sindex', pos);
+if(length>2){
+slide.setAttribute('data-index', pos);
+}else if(length==2){
+slide.setAttribute('data-index', pos%2);
+}else if(length== 1){
+slide.setAttribute('data-index', 0);
+}
+if (browser.transitions) {
+var dist = index > pos  ? -client : (index < pos) ? client : 0;
+if (isContinuous) {
+if(index == slides.length - 1 && pos == 0){
+dist = client;
+rIndex = 0;
+}
+if(!index && pos == slides.length - 1){
+dist = -client;
+lIndex = pos;
+}
+}
+//当前项目不滑动，解决页面加载时的空白问题
+if(pos!=index){
+move(pos, dist, 0); 
+}else{
+slidePos[index] = 0;
+}
+}
+}
+if (!browser.transitions) element.style[offset] = (index * -client) + 'px';
+}
+function setup(){
+element = container.children[0],
+slides=element.children,
+length = slides.length;
+reset();
+}
+function init(){
+reset();
+var callbackIndex = parseInt(slides[index].getAttribute('data-index'));
+offloadFn(options.callback && options.callback(callbackIndex, slides[index])); 
+container.style.visibility = 'visible';
+}
+function updataPos(){
+// stack elements
+var pos = slides.length;
+while (pos--) {
+if (browser.transitions) {
+var dist = index > pos  ? -client : (index < pos) ? client : 0;
+if (isContinuous) {
+if(index == slides.length - 1 && pos == 0){
+dist = client;
+rIndex = 0;
+}
+if(!index && pos == slides.length - 1){
+dist = -client;
+lIndex = pos;
+}
+}
+move(pos, dist, 0);
+}
+}
+}
+function prev() {
+if (index)  slide(lIndex,speed,-1);
+else if (isContinuous)  slide(lIndex,speed,-1);
+}
+function next() {
+if (index < slides.length - 1)  slide(rIndex,speed,1);
+else if (isContinuous)  slide(rIndex,speed,1);
+}
+function slide(to, slideSpeed,direction) {
+if (index == to || to <0 || to>slides.length-1) return;
+//避免多次执行
+if(!isTransitionStart){
+var callbackIndex = parseInt(slides[to].getAttribute('data-index'));
+offloadFn(options.transitionStart && options.transitionStart(callbackIndex, slides[to]));
+}
+// do nothing if already on requested slide
+if (browser.transitions) {
+if(!direction) direction = -Math.abs(index-to) / (index-to);
+if (direction>0) {
+// next()
+move(lIndex, -client, 0);
+move(index, slidePos[index] - client, speed);
+move( rIndex, slidePos[rIndex] - client, speed);
+index = rIndex;
+} else {
+// prev
+move(rIndex, +client, 0);
+move(index, slidePos[index] + client, speed);
+move(lIndex, slidePos[lIndex] + client, speed);
+index = lIndex;
+}
+} else {
+animate(index * -client, to * -client, slideSpeed || speed);
+}
+lIndex = to-1;
+index = to;
+rIndex = to+1;
+var callbackIndex = parseInt(slides[index].getAttribute('data-index'));
+offloadFn(options.callback && options.callback(callbackIndex, slides[index]));
+}
+function move(index, dist, speed) {
+translate(index, dist, speed);
+slidePos[index] = dist;
+}
+function translate(index, dist, speed) {
+var slide = slides[index];
+var style = slide && slide.style;
+if (!style) return;
+var distX = vertical ? 0:dist,
+distY = vertical ? dist:0;
+style.webkitTransitionDuration =
+style.MozTransitionDuration =
+style.msTransitionDuration =
+style.OTransitionDuration =
+style.transitionDuration = speed + 'ms';
+style.webkitTransform = 'translate(' + distX + 'px,'+distY+'px)' + 'translateZ(0)';
+style.msTransform =
+style.MozTransform =
+style.OTransform = vertical ? 'translateY(' + dist + 'px)':'translateX(' + dist + 'px)';
+}
+function animate(from, to, speed) {
+// if not an animation, just reposition
+if (!speed) {
+element.style[offset] = to + 'px';
+return;
+}
+var start = +new Date;
+var timer = setInterval(function() {
+var timeElap = +new Date - start;
+if (timeElap > speed) {
+element.style[offset] = to + 'px';
+if (delay) begin();
+var callbackIndex = parseInt(slides[index].getAttribute('data-index'));
+options.transitionEnd && options.transitionEnd.call(event, callbackIndex, slides[index]);
+clearInterval(timer);
+return;
+}
+element.style[offset] = (((to - from) * (Math.floor((timeElap / speed) * 100) / 100)) + from) + 'px';
+}, 4);
+}
+// setup auto slideshow
+var delay = options.auto || 0;
+var interval;
+function begin() {
+interval = setTimeout(next, delay);
+}
+function stop() {
+//edit by guoxuemin
+//delay = 0;
+clearTimeout(interval);
+}
+// setup initial vars
+var start = {};
+var delta = {};
+var isScrolling;
+// setup event capturing
+var events = {
+handleEvent: function(event) {
+switch (event.type) {
+case 'touchstart':
+this.start(event);
+break;
+case 'touchmove':
+this.move(event);
+break;
+case 'touchend':
+offloadFn(this.end(event));
+break;
+case 'webkitTransitionEnd':
+case 'msTransitionEnd':
+case 'oTransitionEnd':
+case 'otransitionend':
+case 'transitionend':
+offloadFn(this.transitionEnd(event));
+break;
+case 'resize':
+offloadFn(reset.call());
+break;
+}
+if (options.stopPropagation) event.stopPropagation();
+},
+start: function(event) {
+updataPos();
+var touches = event.touches[0];
+// measure start values
+start = {
+// get initial touch coords
+x: touches.pageX,
+y: touches.pageY,
+// store time to determine touch duration
+time: +new Date
+};
+// used for testing first move event
+isScrolling = undefined;
+// reset delta and end measurements
+delta = {};
+isTransitionStart = false;
+// attach touchmove and touchend listeners
+element.addEventListener('touchmove', this, false);
+element.addEventListener('touchend', this, false);
+},
+move: function(event) { 
+//添加disableSlide属性不滑动
+if(slides[index].getAttribute("disableSlide")!=null) return;
+// ensure swiping with one touch and not pinching
+if (event.touches.length > 1 || event.scale && event.scale !== 1) return
+if (options.disableScroll) event.preventDefault();
+var touches = event.touches[0];
+// measure change in x and y
+delta = {
+x: touches.pageX - start.x,
+y: touches.pageY - start.y
+}
+// determine if scrolling test has run - one time test
+if (typeof isScrolling == 'undefined') {
+isScrolling = !!(isScrolling || Math.abs(delta[vertical ? 'y':'x']) < Math.abs(delta[vertical ? 'x':'y'])*1.2);
+}
+// if user is not trying to scroll vertically
+if (!isScrolling) {
+// prevent native scrolling 
+event.preventDefault();
+// stop slideshow
+stop();
+// increase resistance if first or last slide
+if(!isContinuous){
+delta[xy] =
+delta[xy] /
+((!index && delta[xy] > 0 // if first slide and sliding left
+|| index == slides.length - 1 // or if last slide and sliding right
+&& delta[xy] < 0 // and if sliding at all
+) ?
+(Math.abs(delta[xy]) / client + 1) // determine resistance level
+: 1); // no resistance if false
+}
+// translate 1:1
+translate(lIndex, delta[xy] + slidePos[lIndex], 0);
+translate(index, delta[xy] + slidePos[index], 0);
+translate(rIndex, delta[xy] + slidePos[rIndex], 0);
+var _index = delta[xy] > 0 ? lIndex:rIndex ;
+if(!isTransitionStart && slides[_index]){
+var callbackIndex = parseInt(slides[_index].getAttribute('data-index'));
+offloadFn( options.transitionStart && options.transitionStart(callbackIndex, slides[_index]));
+}
+isTransitionStart = true;
+}
+},
+end: function(event) {
+// measure duration
+var duration = +new Date - start.time;
+// determine if slide attempt triggers next/prev slide
+var isValidSlide =
+Number(duration) < 250 // if slide duration is less than 250ms
+&& Math.abs(delta[xy]) > 20 // and if slide amt is greater than 20px
+|| Math.abs(delta[xy]) > client / 2; // or if slide amt is greater than half the client
+var isPastStart = (!index && delta[xy] > 0),// if first slide and slide amt is greater than 0
+isPastEnd = (index == slides.length - 1 && delta[xy] < 0); // or if last slide and slide amt is less than 0
+// determine if slide attempt is past start and end
+var isPastBounds =  isContinuous ? false:isPastStart|| isPastEnd;
+// determine direction of swipe (true:right, false:left)
+var direction = delta[xy] < 0;
+// if not scrolling vertically
+if (!isScrolling) {
+if (isValidSlide && !isPastBounds) {
+if (direction) {
+//next
+next()
+// move(lIndex, -client, 0);
+// move(index, slidePos[index] - client, speed);
+// move( rIndex, slidePos[rIndex] - client, speed);
+// index = rIndex;
+} else {
+// prev
+prev();
+// move(rIndex, +client, 0);
+// move(index, slidePos[index] + client, speed);
+// move(lIndex, slidePos[lIndex] + client, speed);
+// index = lIndex;
+}
+} else {
+move(lIndex, -client, speed);
+move(index, 0, speed);
+move(rIndex, client, speed);
+if(!isContinuous){
+if(isPastStart){
+offloadFn( options.pastStart && options.pastStart(index, slides[index]));
+}
+if(isPastEnd){
+offloadFn( options.pastEnd && options.pastEnd(index, slides[index]));
+}
+}
+}
+}
+// kill touchmove and touchend event listeners until touchstart called again
+element.removeEventListener('touchmove', events, false)
+element.removeEventListener('touchend', events, false)
+},
+transitionEnd: function(event) {
+updataPos();
+//确保执行一次
+var dataIndex = parseInt(event.target.getAttribute('data-sindex'), 10);
+if (dataIndex == index) {
+if (delay) begin();
+options.transitionEnd && options.transitionEnd.call(event, dataIndex, slides[index]);
+}
+}
+}
+// trigger init
+init()
+// start auto slideshow if applicable
+if (delay) begin();
+// add event listeners
+if (browser.addEventListener) {
+// set touchstart event on element    
+if (browser.touch) element.addEventListener('touchstart', events, false);
+if (browser.transitions) {
+element.addEventListener('webkitTransitionEnd', events, false);
+element.addEventListener('msTransitionEnd', events, false);
+element.addEventListener('oTransitionEnd', events, false);
+element.addEventListener('otransitionend', events, false);
+element.addEventListener('transitionend', events, false);
+}
+// set resize event on window
+window.addEventListener('resize', events, false);
+} else {
+window.onresize = function() {
+reset()
+}; // to play nice with old IE
+}
+// expose the Swipe API
+return {
+setup: function() {
+setup();
+},
+slide: function(to, speed) {
+slide(to, speed);
+},
+prev: function() {
+// cancel slideshow
+stop();
+prev();
+},
+next: function() {
+stop();
+next();
+},
+getPos: function() {
+// return current index position
+return index;
+},
+stop: function() {
+stop();
+},
+start: function() {
+begin();
+},
+getNumSlides:function(){
+return length;
+},
+kill: function() {
+// cancel slideshow
+stop();
+// reset element
+element.style[size] = 'auto';
+element.style[offset] = 0;
+// reset slides
+var pos = slides.length;
+while (pos--) {
+var slide = slides[pos];
+slide.style[size] = '100%';
+slide.style[offset] = 0;
+if (browser.transitions) translate(pos, 0, 0);
+}
+// removed event listeners
+if (browser.addEventListener) {
+// remove current event listeners
+element.removeEventListener('touchstart', events, false);
+element.removeEventListener('webkitTransitionEnd', events, false);
+element.removeEventListener('msTransitionEnd', events, false);
+element.removeEventListener('oTransitionEnd', events, false);
+element.removeEventListener('otransitionend', events, false);
+element.removeEventListener('transitionend', events, false);
+window.removeEventListener('resize', events, false);
+} else {
+window.onresize = null;
+}
+}
+}
+}
+if (window.jQuery || window.Zepto) {
+(function($) {
+$.fn.Swipe = function(params) {
+return this.each(function() {
+$(this).data('Swipe', new Swipe($(this)[0], params));
+});
+}
+})(window.jQuery || window.Zepto)
+}
+/*
+*基于swipe2.0进行扩展：
+*
+*1、nav：[element]导航DOM节点，如果是空元素，则自动生成。
+*2、transitionStart：[fn(index,elem)]开始滑动回调函数，对应transitionEnd。
+*3、图片按需功能，默认将图片src2属性替换为真实路径。其他按需，可在transitionStart函数中处理。
+*
+*edit by guoxuemin 2014-03-24
+*
+*/
+function swipe(container, options){
+var noop = function() {};
+var options = options || {},
+index = parseInt(options.startSlide, 10) || 0,
+speed = options.speed||0,
+transitionStart = options.transitionStart || noop,
+callback = options.callback || noop,
+nav = options.nav || null,
+navs = nav && nav.children;
+var element = container.children[0],
+slides = element.children;
+if(nav){
+if(navs.length>0){
+navs[index].className="current";
+}else{
+var temp = '';
+each(slides,function(i,v){
+temp+="<span class="+(i==index ? "current":"")+">"+(i+1)+"</span>";
+});
+nav.innerHTML = temp;
+navs = nav.children;
+}
+}
+options.callback = function(i,elem){
+if(nav){
+navs[index].className = "";
+navs[i].className="current";
+index = i;
+}
+callback(i,elem);
+loadImg(elem);
+}
+options.transitionStart = function(to,elem){
+loadImg(elem);
+transitionStart(to,elem);
+}
+var _swipe = new Swipe(container, options);
+navs&&each(navs,function(i,v){
+v.addEventListener("click",function(){
+_swipe.stop();
+_swipe.slide(i,speed);
+},false);
+});
+function each(elems,callback){
+for(var i=0,len = elems.length;i<len;i++){
+callback.call(this,i,elems[i]);
+}
+}
+function loadImg(context){
+var imgs = context.querySelectorAll("img[src2]");
+if(!imgs) return;
+each(imgs,function(i,o){
+var src2 = o.getAttribute("src2"),_img = new Image();
+_img.onload = function(){
+o.style.cssText = "filter:alpha(opacity=30);opacity:0.3;";
+o.setAttribute("src", src2);
+o.removeAttribute("src2");
+setTimeout(function(){
+o.style.cssText = "filter:alpha(opacity=100);opacity:1;-webkit-transition:250ms;-moz-transition:250ms;transition:250ms;";
+}, 5);
+}
+_img.src = src2;
+});
+}
+return _swipe; 
+}</script>
+<script type="text/javascript">
+function $$(id) {
+return (typeof id == "object") ? id : document.getElementById(id);
+}
+slider = swipe($$("JsliderTopWrap"), {
+speed: 100,
+continuous: true
+});
+var Jdata = $$("Jdata");
+//写入当前如期
+function checkTime(num){
+if (num < 10) {
+num = "0" + num;
+}
+return num;
+}
+$(function(){
+    var d = new Date();
+	var year = d.getFullYear();
+	var month = d.getMonth()+1;
+	var date = d.getDate();
+	var bIsi9300 = navigator.userAgent.toLowerCase().match(/i9300/i) == "i9300";
+	if (!bIsi9300) {
+		$("#Jdata").val(year + '-' + checkTime(month) + '-' + checkTime(date));
+	};
+	$("#Jdata").attr("placeholder",'请输入日期，格式：' + year + '-' + checkTime(month) + '-' + checkTime(date));
+});
+function touchEvent(elm, fn) {
+if ("ontouchstart" in document.documentElement) {
+elm.addEventListener("touchstart", fn, false);
+} else {
+elm.addEventListener("click", fn, false);
+}
+}
+touchEvent(JworkOut, function() {
+var y = Jdata.value.split("-")[0],
+m = Jdata.value.split("-")[1],
+da = Jdata.value.split("-")[2];
+if (Jdata.value == "") {
+showTopTip("请输入完整日期!");
+hideTopTip();
+return false;
+};
+if (y == "" || m == "" || da == "") {
+showTopTip("请输入完整日期!");
+hideTopTip();
+return false;
+}
+var today = new Date();//今天
+var yjTime = new Date(y + "/" + m + "/" + da).getTime();//末次月经的毫秒数
+var ts = 3600*24*281;//到期的秒数
+var hasHY = (today - yjTime)/1000;//已经怀孕的秒数
+var ycq = ts - hasHY;//距离预产期的秒数
+var week = parseInt(hasHY / 3600 / 24 / 7),//计算周数
+day = checkTime(parseInt(hasHY / 3600 / 24));//计算剩余的天数
+var day2 = checkTime(parseInt(ycq / 3600 / 24));//计算剩余的天数
+var year3 = today.getFullYear();//今年
+var month3 = today.getMonth()+1;//今天月份
+var day3 = today.getDate();//今天日期
+if (hasHY > ts) {
+showTopTip("您填写的日期已经超过了预产期，请查正。");
+hideTopTip();
+return false;
+}
+if (hasHY <= 0) {
+showTopTip("不能填写今天以及以后的日期。");
+hideTopTip();
+return false;
+};
+if (week == 0) {
+$$("Jdays").parentNode.style.display = "block";
+$$("Jdays").innerHTML = day + "天";
+}else {
+$$("Jdays").parentNode.style.display = "block";
+$$("Jdays").innerHTML = day + "天" + week + "周";
+window.slider.slide(week-1, 300);
+};
+$$("Jtoday").parentNode.style.display = "block";
+$$("Jtoday").innerHTML = year3 + "-" + checkTime(month3) + "-" + checkTime(day3);
+$$("JdayOut").parentNode.style.display = "block";
+$$("JdayOut").innerHTML = day2 + "天";
+$$("JbuildTime").parentNode.style.display = "block";
+$$("JbuildTime").innerHTML = Jdata.value;
+});
+function showTopTip(msg) {
+var tipEle = document.getElementById("JtopTipMsg");
+if (!tipEle) {
+tipEle = document.createElement("div");
+tipEle.id = "JtopTipMsg";
+tipEle.style.cssText = "display:none;width:120px;padding:10px;line-height:20px;font-size:12px;background-color:rgba(000,000,000,0.9);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;color:#fff;text-align:center;-webkit-transition:all 0.3s ease-in;transition:all 0.3s ease-in;position:fixed;top:50%;left:50%;margin-left:-70px;margin-top:-20px;opacity:1;z-index:999;";
+document.body.appendChild(tipEle);
+}
+tipEle.innerHTML = msg;
+tipEle.style.display = "block";
+setTimeout(function() {
+tipEle.style.opacity = "1";
+}, 0);
+}
+function hideTopTip() {
+var tipEle = document.getElementById("JtopTipMsg");
+if (tipEle) {
+setTimeout(function() {
+tipEle.style.opacity = "0";
+setTimeout(function() {
+tipEle.style.display = "none";
+}, 300);
+}, 1500);
+}
+}
+</script>
+</block>

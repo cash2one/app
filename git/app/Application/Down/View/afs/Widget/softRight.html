@@ -1,0 +1,49 @@
+<!--相关版本-->
+<notempty name="versions">
+<div class="version">
+    <h3>相关版本下载</h3>
+    <div class="ver">
+        <ul class="verUl">
+            <volist name="versions" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="xq">查看详情</a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit"><img src="{:get_cover($val['smallimg'],'path')}">{$val['title']}</a>{$val['version']}<span class="dx">{$val['size']}</span><span class="star star3"></span></li>
+            </volist>
+        </ul>
+    </div>
+</div>
+</notempty>
+<!--相关集合-->
+<notempty name="tags">
+<div class="aboutZT">
+    <h3>相关集合</h3>
+    <div class="aboutZT-info">
+        <a href="{:C('STATIC_URL')}/tag/{$tags['name']}/" target="_blank"><img src="{:get_cover($tags['icon'],'path',1,290,140)}" alt="{$tags['title']}"></a>
+        <div class="ZTinfo"><a href="{:C('STATIC_URL')}/tag/{$tags['name']}/" class="tit">{$tags['title']}</a><p>{$tags['description']}</p><a href="{:C('STATIC_URL')}/tag/{$tags['name']}/" class="clickXq" target="_blank">查看详情</a></div>
+    </div>
+    <div class="aboutGame">
+        <ul class="aboutGame-ul">
+            <volist name="tags['data']" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"></a><div class="info"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['title']}</a><span><i>{$val['cate']}</i><i>{$val['size']}</i></span><span class="star stars{:is_int($val['soft_socre'])?$val['soft_socre']:intval($val['soft_socre']).'_5'}"></span></div></li>
+            </volist>
+        </ul>
+    </div>
+</div>
+</notempty>
+<!--相似软件-->
+<div class="yxcs">
+    <h3>相似软件</h3>
+    <ul style="overflow: visible;">
+        <volist name="soft" id="val">
+        <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+
+<!--最新软件-->
+<div class="yxcs">
+    <h3>最新软件</h3>
+    <ul style="overflow: visible;">
+        <volist name="newsoft" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>

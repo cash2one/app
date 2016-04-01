@@ -1,0 +1,37 @@
+<extend name="Home@dongdong/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/dongdong/css/index.css"/>
+</block>
+<block name="body">
+<input type="hidden" id="nav_cur" value="sf">
+<div class="page_main">
+    <!--当前位置-->
+    <div class="go_home">当前位置：<a href="{:C('STATIC_URL')}">首页</a> > {$cateName}</div>
+    <!--#include virtual="{:getWidgetPath('14')}"-->
+    <!--网络游戏推荐-->
+    <div class="wraper game_rec" id="xytj">
+        <div class="wraper_left">
+            <div class="wytj">
+                <div class="title">
+                    <a href="{:C('STATIC_URL')}{:getWidgetPath('9')}" <php> if($cate == 'all'){echo 'class="cur"';}</php> >最新首发</a><a href="{:C('STATIC_URL')}{:getWidgetPath('10')}" <php> if($cate == 'game'){echo 'class="cur"';}</php>>游戏首发</a><a href="{:C('STATIC_URL')}{:getWidgetPath('11')}" <php> if($cate == 'soft'){echo 'class="cur"';}</php>>软件首发</a>
+                </div>
+                <ul class="tj_game current">
+                    <volist name="lists" id="val">
+                    <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],path,1,72,72)}"><b>{$val['title']}</b><i>{$val['cate']}</i></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="down">立即下载</a></li>
+                    </volist>
+                </ul>
+            </div>
+            <div style="clear: both"></div>
+            <div class="page">{$page}</div>
+        </div>
+        <div class="wyxz">
+            <h3>相关推荐</h3>
+            <ul class="current">
+                <volist name="relate" id="val">
+                    <li {$key == 0?'class="cur"':''}><em>1</em><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val['title']}</a><span class="num">{$val['hits']}次下载</span>
+                    <p><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover(($val['sfimg']?$val['sfimg']:$val['smallimg']),'path',1,60,60)}"><b>{$val['title']}</b></a><br>{$val['hits']}次下载<a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="down">下载</a></p></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</block>

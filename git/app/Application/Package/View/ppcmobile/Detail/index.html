@@ -1,0 +1,80 @@
+<extend name="Package@ppcmobile/Base/common" />
+<block name="body">
+<article class="content">
+    <article class="content">
+        <section class="col-box">
+            <ul class="mod-app-intro">
+                <li>
+                    <figure> <img src="{:get_cover($info['cover_id'],'path')}">
+                        <figcaption class="figcaption">
+                            <h3 class="tit">{$info.title}</h3>
+                            <div class="syspuls">
+                                剩余：
+                                <div class="c">
+                                    <span><code style="width:78.6%;"></code><i>78.6%</i></span>
+                                     <strong class="card_all" card-id="{$info['id']}" style="display:none;"></strong> 
+                                    <strong class="card_surplus" card-id="{$info['id']}" style="display:none;"></strong>
+                                </div>
+                            </div>
+                            <p>领取资格：注册会员均可参与</p>
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
+            <div class="usage-time">有效时间：<i>{:date('Y.m.d',$info['start_time'])} 至  {:date('Y.m.d',$info['end_time'])}</i></div>
+            <div class="libao_con"></div>
+            <div class="pd-10">
+                <span id="taoBtn" class="btn btn-k lqhl">领取好礼</span>
+                 <notempty name="info['game_url']">
+                <a class="btn btn-l" href="{$info.game_url}" target="_blank">游戏下载</a>
+                </notempty>
+            </div>
+
+            <div class="usage-time-1">
+                <i>友情提示：</i>{$info['activation']}
+            </div>
+        </section>
+        <section class="col-box">
+            <ul class="mod-tab">
+                 <li><a onClick="tabShow('menu_','con_',1,2);" id="menu_1" class="cur">礼包内容</a></li>
+                 <li><a onClick="tabShow('menu_','con_',2,2);" id="menu_2" class="">相关礼包</a>   </li>
+            </ul>
+            <div id="con_1" class="package-info">
+               {$info['content']}
+                </div>
+            <div id="con_2" style="display: none;">
+              	 {~W('Package/p9htmobile/relatePackage',array($info['id']))}
+            </div>
+        </section>
+    </article></article>
+</block>
+<block name="script">
+    <script language="javascript"> 
+    $(function(){ 
+        //领取
+        $('#taoBtn').click(function() {
+            $.ajax({
+                type : "get",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonpCallback:"drawCard",
+                url: DYNAMIC_SERVER_URL + '/Card/drawCard/id/{$info.id}.html',
+                success: function(data){
+                    if(data){
+                        $(".libao_con").css("display",'block');
+	                   // $(".cardCon").slideDown("slow");
+                        data = eval(data);
+                        if(data.error){
+                            $('.libao_con').html('<b>'+data.error+'<b>');
+                        }else{
+                            $('.libao_con').html('你领取的卡号为：'+ data.row);
+                        }
+                        $('.libao_con').slideDown();                        
+                        $('#taoBtn').unbind("click");
+                    }
+                }
+            });
+        });       
+    }); 
+    </script>
+</block>

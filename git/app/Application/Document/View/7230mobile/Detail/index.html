@@ -1,0 +1,69 @@
+ 
+<extend name="Home@7230mobile/Base/common2"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230mobile2/css/article.css"/>
+</block>
+<block name="body">
+
+<section>
+    <article>
+    <div class="art_head">
+        <h3>{$info['title']}</h3>
+        <span>作者:{$info['author']}      时间:{$info['create_time']|time_format="Y-m-d"} </span>
+    </div>
+
+    <div class="art_cont">
+        
+   {~W('Home/P7230/contentProcess',array($info['content']))}
+    </div>
+    </article>
+</section>
+
+
+<php>
+    //获取产品标签
+    $productID = get_tags($info['id'],'document','product');
+</php>
+
+{:W('P7230mobile/cLike',array($productID[0]['id']))}
+
+<php>if($productID[0]['id'] && $productID[0]['category'] != '2'){</php>
+<!-- 相关礼包 -->
+<section>
+    <div class="top_tit"><span>相关礼包</span></div>
+    {:W('Down/P7230mobile/relatePackage',array($productID[0]['id']))}
+</section>
+<php>}</php>
+
+<!-- 相关手游推荐 -->
+{:W('P7230mobile/relateDown',array($productID[0]['id']))}
+
+<!-- 相关攻略资讯 -->
+{:W('Down/P7230mobile/relateArticle',array($productID[0]['id'],'b.id !='.$info['id']))}
+
+<!-- 相关评论 -->
+<section>
+    <div class="top_tit"><span>相关评论</span></div>
+    <div data_id="{$info['id']}" data_type="document" id="comment">
+        <div class="art_pl">
+            <form id="pl" method="post" onsubmit="return pl_comment()">
+            <div class="pl_txt"><textarea placeholder="我要评论！" rows="2" id="pl_info" name="message"></textarea></div>
+            <div class="pl_btn"><input type="submit" value="发表"> </div>
+            </form>
+        </div>
+        <div class="pl_head">
+            <span class="pl_tit">最新评论</span><span class="pl_count">(0条)</span>
+        </div>
+        <ul id="pl_ul">
+            <li>
+                <div class="pl_empty">暂无评论</div>
+            </li>
+        </ul>
+
+    </div>
+</section>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/7230mobile2/js/iscroll.js"></script>
+<script type="text/javascript"> var _webInfo = {};_webInfo={ Username:"{$info['uid']}",Type:"1",DateTime:"{:specialDate($info['update_time'])}",Id:"{$info['id']}" };</script>
+</block>

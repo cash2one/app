@@ -1,0 +1,34 @@
+<!-- 导航条
+    ================================================== -->
+    <dl id="header">
+        <dd class="aztop IE6FIXED">
+            <ul class="menu">
+                <li><a href="http://www.pc6.com" target="_blank" title="首页">首页</a><s><i><a href="#">网游</a></i><i><a href="#">领号</a></i><i><a href="#">攻略</a></i><i><a href="#">资讯</a></i><i><a href="#">apps</a></i><i><a href="#">单机</a></i><i><a href="#">排行榜</a></i></s></li>
+                <li><a href="http://az.pc6.com/" target="_blank" title="安卓下载">安卓下载</a><s><i><a href="#">iOS游戏</a></i><i><a href="#">iOS软件</a></i><i><a href="#">iOS资讯</a></i></s></li>
+                <li><a href="http://www.pc6.com/iphone/" target="_blank" title="苹果下载">苹果下载</a><s><i><a href="#">游戏攻略</a></i><i><a href="#">安卓资讯</a></i><i><a href="#">安卓教程</a></i><i><a href="#">苹果资讯</a></i></s></li>
+                <li><a href="http://yx.pc6.com/" target="_blank" title="单机游戏">单机游戏</a><s><i><a href="#">安卓合集</a></i><i><a href="#">苹果合集</a></i></s></li>
+                <li><a href="http://www.pc6.com/z/azgk/" target="_blank" title="游戏合集">游戏合集</a><s><i><a href="#">安卓排行榜</a></i><i><a href="#">苹果排行榜</a></i></s></li>
+            </ul>
+        </dd>
+        <dd class="ls"><a href="/" class="logo"><img src="__PUBLIC__/Package/pc6/images/logo.png" ></a><div class="search">
+          <form action="{:C('DYNAMIC_SERVER_URL')}?s=/Search/package.html" method="post"  id="searchForm" name="Search_form">
+            <fieldset>
+               <legend>请输入您要查找的内容...</legend><input type="text" name="keyword" id="searchBox" class="input-bg grey9" value="请输入您要查找的内容..." onfocus="this.value=''" onblur="if(this.value==''){this.value='请输入您要查找的内容...'}" >                
+               <button type="submit" id="searchBtn" class="btn-submit">搜索</button>
+               <input name="searchType" type="hidden" value="card">
+               <input name="theme" type="hidden" value="pc6">
+            </fieldset>
+          </form>
+     </div><!--end search--> 
+   </dd>
+   <dt class="nav"><p>
+   <a href="{:staticUrl('index', '', $static_url_params)}" <php>if(CONTROLLER_NAME=='Index'||CONTROLLER_NAME=='PC6'){echo "class='cur'";}</php>>发号首页</a>
+   <a href="{:staticUrl('lists', 1, $static_url_params)}" <php>if(CONTROLLER_NAME=='Category'&&$cid=='1'){echo "class='cur'";}</php>>大礼包</a>
+   <a href="{:staticUrl('lists', 2, $static_url_params)}" <php>if(CONTROLLER_NAME=='Category'&&$cid=='2'){echo "class='cur'";}</php>>激活码</a>
+   <a href="{:staticUrl('lists', 4, $static_url_params)}" <php>if(CONTROLLER_NAME=='Category'&&$cid=='4'){echo "class='cur'";}</php>>新手卡</a>
+   <a href="{:staticUrl('lists', 3, $static_url_params)}" <php>if(CONTROLLER_NAME=='Category'&&$cid=='3'){echo "class='cur'";}</php>>开服表</a>
+   </p>
+   
+   
+   </dt>
+</dl>

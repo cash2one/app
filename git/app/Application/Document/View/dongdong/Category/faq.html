@@ -1,0 +1,25 @@
+<extend name="Home@dongdong/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/dongdong/css/wenda.css"/></block>
+<block name="body">
+<div class="page_main">
+    <!--当前位置-->
+    <div class="go_home">当前位置：<a href="{:C('STATIC_URL')}">首页</a> > 常见问题</div>
+   <!--网络游戏推荐-->
+   <div class="wraper" id="wenda">
+       <div class="title">
+           <h3>常见问题</h3>
+           <span><a href="{:getWidgetPath('3')}" target="_blank">东东手游助手帮助</a><a href="{:getWidgetPath('4')}" target="_blank" class="fk">意见反馈</a></span>
+       </div>
+       <ul class="wenda_detail">
+           <Think:article basename="Document" name="article" cate="3" order="update_time desc">
+            <li><a href="{:staticUrl('detail', $article['id'],'Document')}#dt{$key}">{$article.title}</a></li>
+          </Think:article>
+       </ul>
+       <dl class="answer">
+        <Think:article basename="Document" name="article" cate="3" order="update_time desc">
+           <dt><a name="dt{$key}">{$article['title']}</a></dt>
+           <dd>{$article['content']}</dd>
+          </Think:article>
+       </dl>
+   </div>   
+</block>

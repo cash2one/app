@@ -1,0 +1,155 @@
+<section class="slides">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <volist name="slide" id="val" offset="0" length="6">
+            <div class="swiper-slide"><a href="{:staticUrlMobile('detail',$val['id'],$val['model'])}"><img src="{:get_cover($val['cover_id'],'path')}"><div class="txt">{$val['title']}</div></a></div>
+            </volist>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+<section>
+    <div class="cate">
+        <ul>
+            <li><a href="{$url}{:getWidgetPath(62)}"><span class="icon1"></span><span class="title">单机</span></a></li>
+            <li><a href="{$url}{:getWidgetPath(63)}"><span class="icon2"></span><span class="title">网游</span></a></li>
+            <li><a href="{$url}{:getWidgetPath(37)}"><span class="icon3"></span><span class="title">排行</span></a></li>
+            <li><a href="{$url}{:getWidgetPath(69)}"><span class="icon4"></span><span class="title">礼包</span></a></li>
+            <li><a href="{$url}{:getWidgetPath(58)}"><span class="icon5"></span><span class="title">合集</span></a></li>
+            <li><a href="{$url}/cs/"><span class="icon6"></span><span class="title">厂商</span></a></li>
+        </ul>
+    </div>
+</section>
+
+<!-- 小编精选 -->
+<section>
+{:W('P7230mobile/jx')}
+</section>
+
+<!-- 热门网游 -->
+<section>
+    <div class="rm">
+        <div class="yx"></div>
+        <ul class="down_list">
+            {:W('P7230mobile/down_list',array(1,2))}
+            <li class="yx_more">
+                <a href="{$url}{:getWidgetPath(63)}">查看更多>></a>
+            </li>
+            <li class="yx_tags">
+                <span class="tags_tit">标签:</span>
+                <volist name="gameTags" id="val">
+                <span><a href="{$url}/tag/{$val['name']}">{$val['title']}</a></span>
+                </volist>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- 排行 -->
+<section>
+    <div class="ph">
+        <div><a href="{:staticUrlMobile('detail',31845,'Down')}" class="wy">网游排行</a></div>
+        <div class="fg"><span></span></div>
+        <div><a href="{:staticUrlMobile('lists',95,'Document')}" class="fl">网游攻略</a></div>
+    </div>
+</section>
+
+<!--大图片-->
+<section>
+    <div class="dtp">
+        <a href="{$url}/tag/{$img1['name']}"><img src="{:get_cover($img1['img'],'path')}"></a>
+        <div><span>{$img1['title']}</span></div>
+    </div>
+</section>
+
+<!-- 好玩的单机 -->
+<section>
+    <div class="rm">
+        <div class="dj"></div>
+        <ul class="down_list">
+            {:W('P7230mobile/down_list',array(1,1))}
+            <li class="yx_more">
+                <a href="{$url}{:getWidgetPath(62)}">查看更多>></a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- 单机排行 -->
+<section>
+    <div class="ph">
+        <div><a href="{:staticUrlMobile('detail',31846,'Down')}" class="dj">单机排行</a></div>
+        <div class="fg"><span></span></div>
+        <div><a href="{$url}/tag/pjie" class="pj">内购破解</a></div>
+    </div>
+</section>
+
+<!-- 专题 -->
+<section>
+    <div class="dtp">
+        <a href="{$url}/tag/{$img2['name']}"><img src="{:get_cover($img2['img'],'path')}"></a>
+        <div><span>{$img2['title']}</span></div>
+        <b class="zt">专题</b>
+    </div>
+</section>
+
+<!--善用佳件-->
+<section>
+    <div class="rm">
+        <div class="rj"></div>
+        <ul class="down_list">
+            {:W('P7230mobile/down_list',array(2))}
+            <li class="yx_more">
+                <a href="{$url}{:getWidgetPath(65)}">查看更多>></a>
+            </li>
+            <li class="yx_tags">
+                <span class="tags_tit">标签:</span>
+                <volist name="softTags" id="val">
+                <span><a href="{$url}/tag/{$val['name']}">{$val['title']}</a></span>
+                </volist>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- 软件排行 -->
+<section>
+    <div class="ph">
+        <div><a href="{$url}/top/ruanjian" class="rj">软件排行</a></div>
+        <div class="fg"><span></span></div>
+        <div><a href="{$url}/tag/hanhuaapp" class="hh">汉化去AD</a></div>
+    </div>
+</section>
+
+<!-- 应用分类 -->
+<section>
+    <div class="yyfl">
+        <span>应用分类</span>
+    </div>
+    <div class="y_cont">
+        <ul>
+            <li class="yx"><span>手机游戏</span></li>
+            <volist name="gameCate" id="val"><li><a href="{$url}/cat{$val['id']}">{$val['title']}</a></li></volist>
+        </ul>
+        <ul>
+            <li class="rj"><span>手机软件</span></li>
+            <volist name="softCate" id="val"><li><a href="{$url}/cat{$val['id']}">{$val['title']}</a></li></volist>
+        </ul>
+    </div>
+</section>
+
+<!-- 应用分类 -->
+<section>
+    <div class="yyfl">
+        <span>友情链接</span>
+    </div>
+    <div class="link">
+        <ul>
+            <volist name="link" id="val">
+            <li><a href="{$val['url_token']}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+</section>

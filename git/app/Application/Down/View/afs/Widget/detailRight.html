@@ -1,0 +1,87 @@
+<!--游戏评测-->
+<php>if(!empty($test)) {</php>
+<div class="pc">
+    <h3>游戏评测</h3>
+    {$test['description']}
+    <a href="{:staticUrl('detail',$test['id'],'Document')}">查看>></a>
+</div>
+<php>}</php>
+<!--游戏礼包-->
+<php>/** 现在要把这块注释掉 **/ if(!$soft && false){</php>
+<div class="lbkf">
+    <div class="lb">
+        <h3>游戏礼包</h3>
+        <ul>
+            <volist name="package" id="val" offset="0" length="5">
+                <li><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank" class="title">{$val['title']}</a><b>2014-10-10 至 2014-10-29</b><b><i class="app"></i><i class="adr"></i></b><b>库存：30%</b><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank" class="lq cur">领取</a></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="kf">
+        <h3><i>游戏开服表</i><b>（已经开服）</b></h3>
+        <ul>
+            <volist name="server" id="val" offset="0" length="5">
+            <li><b class="title">{$val['server']}</b><b class="condition">{:showText($val['conditions'],'conditions',false,'package')}</b><b>{:date('Y-m-d H:i:s',$val['start_time'])}</b></li>
+            </volist>
+        </ul>
+    </div>
+</div>
+<php>}</php>
+<!--游戏攻略-->
+<php>if(!empty($strategy)){</php>
+<div class="yxgl gl">
+    <h3><i>游戏攻略</i></h3>
+    <ul>
+        <volist name="strategy" id="val">
+        <li><i>{:date('Y-m-d',$val['create_time'])}</i><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+<php>}</php>
+<!--游戏新闻-->
+<php>if(!empty($news)) {</php>
+<div class="yxgl xw">
+    <h3><i>游戏新闻</i></h3>
+    <ul>
+        <volist name="news" id="val">
+        <li><i>{:date('Y-m-d',$val['create_time'])}</i><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+<php>}</php>
+<!--相同厂商-->
+<php>if(!$soft && !empty($company) && $companyGame){</php>
+<div class="yxcs">
+    <h3><php>if($company['status'] == '1'){</php><a href="{$company['url']}" target="_blank">{$company['name']}</a><php>}else{echo $company['name'];}</php></h3>
+    <ul>
+        <volist name="companyGame" id="val">
+        <li><a href="{:staticUrl('detail',$val['id'],'Down')}" alt="{$val['title']}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+<php>}</php>
+<!--相似游戏-->
+<div class="yxcs">
+    <h3>{$soft?'相似软件':'相似游戏'}</h3>
+    <ul {$soft?'style="overflow: visible"':''} >
+        <php>if($soft){</php>
+        <volist name="tagGame" id="val" offset="0" length="12">
+            <li><a href="{:staticUrl('detail',$val['id'],'Down')}" alt="{$val['title']}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val['title']}</a></li>
+        </volist>
+        <php>}else{</php>
+        <volist name="tagGame" id="val" offset="0" length="6">
+            <li><a href="{:staticUrl('detail',$val['id'],'Down')}" alt="{$val['title']}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val['title']}</a></li>
+        </volist>
+        <php>}</php>
+    </ul>
+</div>
+
+<!--最新 xx -->
+<div class="yxcs">
+    <h3>{$title_flag}</h3>
+    <ul>
+    <volist name="new_arr" id="val" offset="0" length="6">
+        <li><a href="{:staticUrl('detail',$val['id'],'Down')}" alt="{$val['title']}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val['title']}</a></li>
+    </volist>
+    </ul>
+</div>

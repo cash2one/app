@@ -1,0 +1,15 @@
+<if condition="$liferecomid">
+	<document model="2" id="$liferecomid">
+	<li>
+		<img src="{:get_thumb($document[atlas_a], $document[atlas], '282x275')}" alt="{$document.title}">
+		<div class="text">
+			<a href="{$document.typeurl}" target="_blank" class="cata">{$document.typename}</a>
+			<a href="{$document.url}" target="_blank">{$document.title}</a>
+			<p>{$document.description}</p>
+			<em class="left-arr"></em>
+			<em class="right-arr"></em>
+			<b class="bg"></b>
+		</div>
+	</li>
+	</document>
+</if>

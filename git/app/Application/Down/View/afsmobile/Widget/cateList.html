@@ -1,0 +1,22 @@
+<extend name="Home@afsmobile/Base/commonDown" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+   <!--game_rec-->
+   <section id="game_rec" class="game">
+           <ul>
+           <volist name="lists" id="vo">
+               <li>
+                   <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="pic"><img src="{:get_cover($vo['smallimg'],'path','1','66','66')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">{$vo['title']}</a></div>
+                       <div><i>{:getCateName($vo['id'],'Down')}</i><i>{$vo.size}</i><i>{:getLanguage($vo['id'])}</i></div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="down">下载</a>
+               </li>
+              </volist>
+           </ul>
+   </section>
+ <div class="page">{$page}</div>
+</block>

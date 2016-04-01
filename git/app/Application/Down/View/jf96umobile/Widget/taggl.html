@@ -1,0 +1,57 @@
+
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css">
+</block>
+<block name="title">
+{$title}
+</block>
+<block name="body">
+
+<section class="news-list-wrap">
+	<ul class="news-list-ul">
+		<volist name="data" id="v">
+		<li>
+			<a href="{:staticUrlMobile('detail',$v['id'],'Document')}" class="pic">
+				<img src="{:get_cover($v['smallimg'],'path')}">
+			</a>
+			<div class="text">
+				<a href="{:staticUrlMobile('detail',$v['id'],'Document')}">{$v.title}</a>
+				<p class="info">{$v.description}</p>
+			</div>
+		</li>
+		</volist>
+ 	</ul>
+
+	<p class="mid-more" id="more"  onclick="more()"><span>点击查看更多</span><em class="arr"></em></p>
+	<script>
+		var page=0;
+
+		function more(){
+			page=page+10;
+
+			$.ajax({
+				dataType:"jsonp",
+				jsonp:"callback",
+				url: '/index.php?s=/Down/Widget/index/theme/Jf96umobile/cate/1590/method/tajax/tid/'+"{$aid}"+'/page/' +page,
+				success:function(data){
+
+					var html = '';
+					if(data){
+						for(i in data){
+							html+= "<li><a href=/"+data[i].url+'" title="'+data[i].title+'" class="pic">'+
+									'<img src='+data[i].smallimg+" alt='"+data[i].title+"'></a> <div class='text'>" +
+									"<a href='"+data[i].url+"' title=' "+data[i].title+"' >"+data[i].title+'</a><p class="info">'+
+									data[i].description+'</p></div></li>'
+
+						}
+						$(".news-list-ul").append(html);
+					}else{
+						$('#more').html("没有更多数据了");
+						$('#more').removeAttr('onclick');
+					}
+				}
+			});
+		}
+	</script>
+</block>

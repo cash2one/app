@@ -1,0 +1,19 @@
+<div class="rank-list">
+                <div class="rank-tit"><a href="{$href}" target="" class="more">+更多</a><h2>{$title}</h2></div>
+                <ul class="rank-ul">
+                <volist name="ranks"  id="f" >
+                    <li <PHP>if($key=='0'){echo "class='active'";}</PHP>><em></em>
+                        <a href="{:str_replace('index.html','',staticUrl('detail',$f['id'],'Down'))}" target="_blank" class="title" title="{$f['title']}">{$f['title']}</a>
+                        <div class="game-cont">
+                            <a href="{:str_replace('index.html','',staticUrl('detail',$f['id'],'Down'))}" target="_blank" title="{$f['title']}"><img src="{:get_cover($f['smallimg'],'path')}" alt="{$f['title']}"></a>
+                            <div class="text">
+                                <a href="{:str_replace('index.html','',staticUrl('detail',$f['id'],'Down'))}" target="">{$f['title']}</a>
+                                <span class="star star0"></span>
+                                <span class="cata">{:getCateName($f['id'],'Down')}</span>
+                            </div>
+                            <a href="{:str_replace('index.html','',staticUrl('detail',$f['id'],'Down'))}" target="_blank" class="down">下载</a>
+                        </div>
+                    </li>
+                  </volist> 
+                </ul>
+</div>

@@ -1,0 +1,20 @@
+<p class="tab">
+    <p id="focus">
+        <em>
+            <i>
+                <Think:article basename="Package" name="pmain" limit="3" where="position & 2">
+                <s><a href="{:staticUrl('detail', $article['id'], $static_url_params)}"><img src="{:get_cover($article['cover_id'],'path')}"><u>{$article.title|msubstr=###,0,8,'utf-8',false}</u></a>{$article.start_time|time_format="m-d"} 至 {$article.end_time|time_format="m-d"}<br/><strong style="display:none;" class="card_all" card-id="{$article.id}"></strong>  剩余：<strong class="card_surplus" card-id="{$article.id}"></strong></s>
+            </Think:article>
+        </i>
+    </em>
+</p>
+</p>
+<include file="Widget/djdw"/>
+<p class="yxzt">
+    <b><u class="cur">游戏开测</u></b>
+    <i class="on">
+        <Think:article basename="Package"  cate="4" limit="10">
+        <span><em>{$article.start_time|time_format="m-d"}</em><a href="{$article.link|formatUrl}">{$article.title}</a><u>{$article.server}</u>{$article.game_type|showCheckbox="card_type", 1}</span>
+    </Think:article>
+</i>
+</p>

@@ -1,0 +1,116 @@
+<include file="Home@7230/Public/zqHeader"/>
+<script language="javascript"> window.DYNAMIC_SERVER_URL = '{:C('DYNAMIC_SERVER_URL')}';</script>
+<!---------------------------------------------------------------------------->
+<div class="nav_zq">
+    <div>
+        <div class="dragable" widget="menus">
+            <span class="left">
+                <a href="{:'/'.C(FEATURE_ZQ_DIR)}/{$home['url_token']}" target="_blank" class="cur">首页</a>|
+                <volist name="menus" id="v">
+                    <a href="{:'/'.C(FEATURE_ZQ_DIR)}{$v.url_token}" target="_blank">{$v['title']}</a>|
+                </volist>
+            </span>
+        </div>
+        <form  action="{:C('STATIC_URL')}/search.html" method="get" id="Search_form" name="Search_form" target="_blank" class="">
+            <input type="text" name="keyword" id="searchBox" autocomplete="off" class="" value="输入你想搜索的游戏..." >
+            <button type="submit" id="searchBtn" class="btn-submit"></button>
+        </form>
+
+        <div class="share">分享
+            <!-- JiaThis Button BEGIN -->
+            <div class="jiathis_style_24x24">
+                <a class="jiathis_button_qzone"></a>
+                <a class="jiathis_button_tsina"></a>
+                <a class="jiathis_button_tqq"></a>
+                <a class="jiathis_button_weixin"></a>
+                <a class="jiathis_button_renren"></a>
+                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                <a class="jiathis_counter_style"></a>
+            </div>
+            <!-- JiaThis Button END -->
+        </div>
+
+    </div>
+</div>
+
+<div id="zqmain">
+  <p class="page-nav">当前位置：<a href="{:'/'.C(FEATURE_ZQ_DIR)}/{$home['url_token']}">首页</a>->攻略</p>
+  <div class="zqmain-left">
+      <div class="zqgl-top">
+          <p><b class="blue">新手指南</b><div class="dragable" widget="novice"><volist name="novice" id="val"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val.sub_title}</a></volist></div></p>
+          <p><b class="green">热点速递</b><div class="dragable" widget="hotArticle"><volist name="hotArticle" id="val"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val.sub_title}</a></volist></div></p>
+      </div>
+      <div class="zqgl-bottom">
+            <p class="title">全部攻略</p>
+          <div class="dragable" widget="guide">
+              <ul>
+                  <volist name="guide" id="val" empty="$empty">
+                      <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="pic"><img src="{:get_cover($val['cover_id'],'path')}"></a><span><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val.title}</a><b class="info">{$val.description}</b>
+            <b class="jj"><i>编辑：<s>{$val.author}</s></i><i>时间：<s>{:date('m-d',$val['create_time'])}</s></i><i>标签：<s>手游</s></i><i>来源：<s>{$val.source}</s></i><i>赞<s>{$val.ding}</s></i><i>分享+</i></b></span></li>
+                  </volist>
+              </ul>
+          </div>
+            <div style=" clear:both"></div>
+            <!----分页--->
+            <div class="page">{$page}</div>
+            <!---分页END---->
+      </div>
+  </div>
+    <!-----右边开始----->
+
+    <div class="zqmain-right" id="nm-right">
+        <!----游戏下载---->
+        <div class="zqmain-rm">
+            <p class="game_down">
+                <b>游戏下载</b>
+            <div class="dragable" widget="down">
+            <notempty name="down[0]['down']">
+                <a href="{$down[0]['down']}" class="andro">安卓版</a>
+            </notempty>
+            <notempty name="down[1]['down']">
+                <a href="{$down[1]['down']}" target="_blank" class="apple">苹果版</a>
+            </notempty>
+            <notempty name="down[2]['down']">
+                <a href="{$down[2]['down']}" class="pc">电脑版</a>
+            </notempty>
+            </div>
+            </p>
+        </div>
+        <div class="xslb_zq zdcd">
+            <b>新手礼包<i class="zqzd"></i></b>
+            <div class="zdcd-m">
+                <php> if($packIsNull){</php>
+                <span class="yxtz">该游戏目前没有可用礼包，点击查看更多<a href="{:staticUrl('lists',1,'Package')}" target="_blank">新手礼包</a></span>
+                <php>}</php>
+                <volist name="packList" id="val">
+                    <p><a href="{:staticUrl('detail',$val['id'],'package')}" target="_blank">{$val.title}</a><a href="{:staticUrl('detail',$val['id'],'package')}" target="_blank" class="{$i%3==1?'lq':($i%3==2?'yd':'th')}">领取</a></p>
+                </volist>
+            </div>
+        </div>
+
+        <div class="xslb_kfb zdcd">
+            <b>开服表<i class="zqzd"></i></b>
+            <div class="zdcd-m">
+                <php>if($serIsNull){</php>
+                <span class="yxtz">该游戏目前没有开服表，点击查看更多<a href="{:staticUrl('lists',3,'Package')}" target="_blank">开服表</a></span>
+                <php>}</php>
+
+                <volist name="serList" id="val">
+                    <p><a href="{:$val['gameId']?staticUrl('detail',$val['gameId'],'Down'):'javascript:void(0);'}" target="{:$val['gameId']?'_blank':'_self'}">{$val['title']}</a><i>{:date('m-d',$val['start_time'])}</i><a href="javascript:void(0)">{$val.server}</a><a href="{$val['batchUrl']?$val['batchUrl']:'javascript:void(0);'}" target="{:$val['batchUrl']?'_blank':'_self'}" class="zq">专区</a></p>
+                </volist>
+            </div>
+        </div>
+
+        <!---最新入库游戏(new games)---->
+        <div class="newgame" id="zq-newgame">
+            <p class="title">最新入库游戏<a href="{:getWidgetPath('17', true)}" target="_blank" class="more"></a></p>
+
+            <ul>
+                <volist name="newGame" id="val">
+                    <li><a href="{:'/'.C(FEATURE_ZQ_DIR)}/{$val['url_token']}" target="_blank" class="pic3"><img src="{:$val['gameLogo']?get_cover($val['gameLogo'],'path'):get_cover($val['icon'],'path')}"></a><a href="{:'/'.C(FEATURE_ZQ_DIR)}/{$val['url_token']}" target="_blank" class="title">{$val['title']}</a></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</div>
+<include file="Home@7230/Public/zqFooter"/>

@@ -1,0 +1,109 @@
+<extend name="Home@gfw/Base/commonIndex" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/map.css"/>
+</block>
+
+<block name="body">
+<div class="page-nav"><div class="page-left"><span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">&gt;</span>网站地图</div><span class="sum"></span></div>
+<div id="map" class="gf-border">
+    <div class="title">
+        <h2>网站大全</h2>
+    </div>
+    <div class="map-main">
+        <div class="mapb">
+            <volist name="wzdq" id="val" key="k">
+            <php>if($val['sort']==1){</php>
+            <div class="maps">
+                <dl class="subclass">
+                    <dt class="subclass-title"><h3>{$val['title']}</h3></dt>
+                    <dd>
+                        <volist name="val['_']" id="rel" key="k">
+                        <php>if($k != 1){</php><i>|</i><php>}</php><a href="{:staticUrl('lists',$rel['id'],'Package')}" target="_blank">{$rel['title']}</a>
+                        </volist>
+                    </dd>
+                </dl>
+            </div>
+            <php>}else{</php>
+            <dl class="subclass">
+                <dt class="subclass-title"><h3>{$val['title']}</h3></dt>
+                <dd>
+                    <volist name="val['_']" id="rel" key="k">
+                    <php>if($k != 1){</php><i>|</i><php>}</php><a href="{:staticUrl('lists',$rel['id'],'Package')}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </dd>
+            </dl>
+            <php>}</php>
+            </volist>
+        </div>
+    </div>
+
+</div>
+<!-----网站大全-end----->
+
+<div id="map" class="gf-border">
+    <div class="title">
+        <h2>产品信息</h2>
+    </div>
+    <div class="map-main">
+        <volist name="cpxx" id="val">
+        <dl class="subclass">
+            <dt class="subclass-title"><h3>{$val['title']}</h3></dt>
+            <dd>
+                <volist name="val['_']" id="rel" key="k"><php>if($k != 1){</php><i>|</i><php>}</php><a href="{:staticUrl('lists',$rel['id'],'Down')}" target="_blank">{$rel['title']}</a></volist>
+            </dd>
+        </dl>
+        </volist>
+    </div>
+</div>
+
+<!-----专题合集-end----->
+<div id="map" class="gf-border">
+    <div class="title">
+        <h2>专题合集</h2>
+    </div>
+    <div class="map-main">
+            <dl class="subclass">
+                <dt class="subclass-title"><h3>专题合集</h3></dt>
+                <dd>
+                    <volist name="zthj" id="val" key="k"><php>if($k != 1){</php><i>|</i><php>}</php><a href="{:staticUrl('lists',$val['id'],'Feature')}" target="_blank">{$val['title']}</a></volist>
+                </dd>
+            </dl>
+    </div>
+</div>
+<!-----产品信息-end----->
+<div id="map" class="gf-border">
+    <div class="title">
+        <h2>官网百科</h2>
+    </div>
+    <div class="map-main">
+        <div class="mapb">
+            <volist name="gwbk" id="val" key="k">
+                <php>if($val['sort']==1){</php>
+                <div class="maps">
+                    <dl class="subclass">
+                        <dt class="subclass-title"><h3>{$val['title']}</h3></dt>
+                        <dd>
+                            <volist name="val['_']" id="rel" key="k">
+                            <php>if($k != 1){</php><i>|</i><php>}</php><a href="{:staticUrl('lists',$rel['id'],'Document')}" target="_blank">{$rel['title']}</a>
+                            </volist>
+                        </dd>
+                    </dl>
+                </div>
+                <php>}else{</php>
+                <dl class="subclass">
+                    <dt class="subclass-title"><h3>{$val['title']}</h3></dt>
+                    <dd>
+                        <volist name="val['_']" id="rel" key="k">
+                        <php>if($k != 1){</php><i>|</i><php>}</php><a href="{:staticUrl('lists',$rel['id'],'Document')}" target="_blank">{$rel['title']}</a>
+                        </volist>
+                    </dd>
+                </dl>
+                <php>}</php>
+            </volist>
+        </div>
+    </div>
+
+</div>
+<!-----官网百科-end----->
+</block>

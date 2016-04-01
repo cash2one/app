@@ -1,0 +1,12 @@
+<div class="right baike-dataBox">
+  <div class="fn-title"><a href="{:C('STATIC_URL')}/video/" target="_blank" class="more">更多</a>
+    <h2>热门视频</h2>
+  </div>
+  <div class="fn-ul-list">
+    <ul class="fn-pic-list fn-video">
+         <volist name="lists" id="vo">
+      <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}"><span>{$vo['title']}</span><em></em><b></b></a></li>
+         </volist>
+    </ul>
+  </div>
+</div>

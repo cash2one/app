@@ -1,0 +1,22 @@
+    <div class="xq-ltop" id="xq_crn">
+        <span>
+            <b class="pic"><img src="{:get_cover($info['smallimg'],'path')}"><s class="title"><a href="{:staticUrl('detail',$info['id'],'Down')}" target="_blank">{$info.title}</a></s><s>评分：{$info.soft_socre}分</s><s class="star{$info.soft_socre}"></s></b>
+            <b><u>类型：<i class="star{$info.picture_score}">{$info['cate']}</i></u>
+                <u>平台：
+                <i class="star{$info.feature_score}">
+                    <switch name="info.version">
+                        <case value="1">安卓</case>
+                        <case value="2">苹果</case>
+                        <case value="3">WINDOWS</case>
+                        <case value="4">WP</case>
+                        <case value="5">HTML5</case>
+                        <default />安卓
+                    </switch>
+                </i>
+                </u>
+            </b>
+            <b><u>版本：<i class="star{$info.music_score}"><empty name="info.version">v1.0.0<else />{$info.version}</empty></i></u><u>大小：<i class="star{$info.run_score}">{:strtoupper($info['size'])}</i></u></b>
+            <a href="{$info['down']}" class="down">安全下载</a>
+        </span>
+        <span class="pingyu">评语：{$info.conductor}</span>
+    </div>

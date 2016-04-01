@@ -1,0 +1,36 @@
+	<div class="nav-left">
+		<if condition="!empty($cateList['0'])">
+			<a href="{:getWidgetPath('83')}" class="hywz top p1">
+				<p>{:$cateList['0']['title']}</p>
+			</a>
+		</if>
+		<div class="hywz">
+			<if condition="!empty($cateList['1'])">
+			<a href="{:getWidgetPath('79')}" class="ylxx p1">
+				<p>{:$cateList['1']['title']}</p>
+			</a>
+			</if>
+			<if condition="!empty($cateList['2'])">
+			<a href="{:getWidgetPath('80')}" class="shfw p2">
+				<p><span></span>{:$cateList['2']['title']}</p>
+			</a>
+			</if>
+		</div>
+	</div>
+	<div class="nav-main">
+		<if condition="!empty($cateList['3'])">
+			<a href="{:getWidgetPath('81')}" class="whjy p2">
+				<p><span></span>{:$cateList['3']['title']}</p>
+			</a>
+		</if>
+		<if condition="!empty($cateList['4'])">
+			<a href="{:getWidgetPath('84')}" class="zthj p2">
+				<p><span></span>{:$cateList['4']['title']}</p>
+			</a>
+		</if>
+	</div>
+	<if condition="!empty($cateList['5'])">
+		<a href="{:getWidgetPath('82')}" class="nav-right">
+			<p><span></span>{:$cateList['5']['title']}</p>
+		</a>
+	</if>

@@ -1,0 +1,45 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/news.css"/>
+</block>
+<block name="body">
+<div class="main1200">
+    <div class="goback">当前位置：<a href="{:C('STATIC_URL')}">首页</a> > {$categoryName}</div>
+    <div class="container">
+        <div class="cata-l">
+            <div class="news-list">
+                <div class="mid-tit"><h3>{$categoryName}</h3></div>
+                <div class="news-nav">
+                    <eq name="cid" value="1586"><a href="/news/" class="active">全部资讯</a><else/><a href="/news/">全部资讯</a></eq>
+                    <eq name="cid" value="1622"> <a href="{:staticUrl('lists','1622','Document')}"  class="active">手游资讯</a><else/><a href="{:staticUrl('lists','1622','Document')} ">手游资讯</a></eq>
+                    <eq name="cid" value="1764"> <a href="{:staticUrl('lists','1764','Document')}"  class="active">游戏问答</a><else/><a href="{:staticUrl('lists','1764','Document')} ">游戏问答</a></eq>
+                    <eq name="cid" value="1589"> <a href="{:staticUrl('lists','1589','Document')}"  class="active">游戏评测</a><else/><a href="{:staticUrl('lists','1589','Document')} ">游戏评测</a></eq>
+                    <eq name="cid" value="1591"> <a href="{:staticUrl('lists','1591','Document')}"  class="active">游戏视频</a><else/><a href="{:staticUrl('lists','1591','Document')} ">游戏视频</a></eq>
+                    <eq name="cid" value="1587"> <a href="{:staticUrl('lists','1587','Document')}"  class="active">游戏新闻</a><else/><a href="{:staticUrl('lists','1587','Document')} ">游戏新闻</a></eq>
+                    <eq name="cid" value="1590"> <a href="{:staticUrl('lists','1590','Document')}"  class="active">游戏攻略</a><else/><a href="{:staticUrl('lists','1590','Document')} ">游戏攻略</a></eq>
+                    <eq name="cid" value="1588"> <a href="{:staticUrl('lists','1588','Document')}"  class="active">手游攻略</a><else/><a href="{:staticUrl('lists','1588','Document')} ">手游攻略</a></eq>
+                </div>
+                <ul class="news-list-ul">
+                  <volist  name="lists" id="article">
+                    <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" title=""><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a>
+                        <div class="text">
+                            <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a>
+                            <p class="time">发布时间：<span> {$article.create_time|time_format="Y-m-d"} </span>作者：<span>{$article['author']}</span></p>
+                            <p class="info">{:clean_str($article['description'])}</p>
+                        </div>
+                    </li>
+                  </volist>
+                </ul>
+                <div class="page">
+                   {$page}
+                </div>
+            </div>
+        </div>
+        <div class="cata-r">
+         {~W('Document/Jf96u/gameVideo')}
+         {~W('Document/Jf96u/gamePingce')}
+          {~W('Document/Jf96u/gameRank')}
+        </div>
+    </div>
+</div>
+</block>

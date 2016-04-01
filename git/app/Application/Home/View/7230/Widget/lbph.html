@@ -1,0 +1,14 @@
+<div class="sykc">
+    <p class="title"><a href="" target="_blank">更多+</a><i>礼包排行</i></p>
+    <span class="nav"><i class="cur">安卓</i><i>IOS</i></span>
+    <ul class="current">
+        <Think:article basename="package" name="pmain" where="category_id = 1 AND conditions IN (0,1)" order="create_time desc" limit="10">
+        <li><i class="fenl">{$article['card_type']==1?'卡':($article['card_type']==2?'礼':'码')}</i><i class="time">{:date('Y-m-d',$article['create_time'])}</i><a href="{:U('PackageDetail/detail',array('id'=>$article['id']))}" target="_blank">{$article.title}</a><i>公测</i></li>
+        </Think:article>
+    </ul>
+    <ul>
+        <Think:article basename="package" name="pmain" where="category_id = 1 AND conditions IN (0,2)" order="create_time desc" limit="10">
+        <li><i class="fenl">{$article['card_type']==1?'卡':($article['card_type']==2?'礼':'码')}</i><i class="time">{:date('Y-m-d',$article['create_time'])}</i><a href="{:U('PackageDetail/detail',array('id'=>$article['id']))}" target="_blank">{$article.title}</a><i>公测</i></li>
+        </Think:article>
+    </ul>
+</div>

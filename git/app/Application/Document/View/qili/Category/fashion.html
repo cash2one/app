@@ -1,0 +1,247 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/channel.css"/></block>
+<block name="header">
+    <include file="Home@qili/Public/header" />
+</block>
+
+<block name="body">
+<classify model="2" typeid="1507" index="fashion"></classify>
+<classify model="2" typeid="1" index="match"></classify>
+<classify model="2" typeid="214" index="street"></classify>
+<classify model="2" typeid="1510" index="star"></classify>
+<classify model="2" typeid="1500" index="blogger"></classify>
+<classify model="2" typeid="1501" index="superio"></classify>
+<classify model="2" typeid="1509" index="show"></classify>
+<classify model="2" typeid="1508" index="large"></classify>
+<php>$fashionid = $fashion.','.$match.','.$street.','.$star.','.$blogger.','.$superio.','.$show.','.$large;</php>
+
+<div class="qnx1200 banner">
+	<div class="focus6">
+        <ul class="focus6-ul">
+            <document model="2" typeid="$fashionid" flag="fashion_recom,1" limit="5" order="update_time DESC,level DESC">
+				<li><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '791x471')}" alt="{$document.title}"></a></li>
+            </document>
+        </ul>
+        <div class="focus-info"><a href="javascript:;" target="_blank"></a><div class="circle"></div><div class="bg"></div></div>
+    </div>
+
+    <div class="right tab-nub">
+        <p class="tab-tit"><span>TOP LINE<em></em></span><span class="active">今日头条<em></em></span></p>
+        <ul class="right-ul current">   
+             <document model="2" typeid="$fashionid" flag="fashion_recom,2" limit="12"  order="edit">
+            <li><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a></li>
+          </document>
+        </ul>
+        <div class="fresh"><span><i></i>换一组</span></div>
+    </div>
+</div>
+
+<div class="qnx1200 channel hufu star starer">
+    <div class="title">
+        <h3><a href="/mingxing/" target="_blank">明星</a></h3>
+        <div class="rec-tags">
+			<document model="2" rootid="1510" limit="1" flag="fashion_recom,32" order="edit" >
+				 <a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+			</document>
+		</div>
+
+        <div class="rec-links">
+			<classify model="2" id="202,213,1528,1013">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 4">
+					<em>|</em>
+				</if>
+			</classify>
+        </div>
+    </div>
+
+    <div class="channel-l">
+        <div class="left-one">
+			<document model="2" rootid="1510" limit="1" flag="fashion_recom,8" order="edit">
+				<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_a], $document[atlas], '440x430')}" alt="{$document.title|msubstr=0,18}"><span class="tit">{$document.title}</span></a>
+			</document>
+
+            <ul class="about-list">
+                <document model="2" rootid="1510" limit="1,4" flag="fashion_recom,8" order="edit">
+					<li><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a></li>
+                </document>
+            </ul>
+        </div>
+
+        <div class="left-two">
+			<document model="2" rootid="1510" limit="2" flag="fashion_recom,4" order="edit">
+				<div class="hjzb">
+					<a href="{$document.url}" target="_blank" title="{$document.title}">
+						<img src="{:get_thumb($document[atlas_b], $document[atlas], '336x252')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span>
+					</a>
+				</div>
+            </document>
+        </div>
+    </div>
+
+    <div class="channel-r">
+        <ul class="channel-tab">
+			<document model="2" rootid="1510" limit="3" flag="fashion_recom,16" order="edit">
+				<li <eq name="key" value="1">class="active"</eq>><a href="{$document.url}" target="_blank" title="{$document.title}"><span class="tit">{$document.title}</span><img src="{:get_thumb($document[atlas_e], $document[atlas], '360x255')}" alt="{$document.title}"></a></li>
+            </document>
+        </ul>
+
+        <ul class="starer-ul">
+            <classify model="2" typeid="293,1510" limit="4" flag="position,128" order="edit">
+				<li><a href="{$classify.url}" target="_blank"><img src="<pic name="$classify.icon" />" alt="{$classify.title}">{$classify.title}</a></li>
+            </classify>
+        </ul>
+    </div>
+</div>
+
+<div class="qnx1200 chaoliu">
+    <div class="title">
+        <h3><a href="/shizhuang/" target="_blank">时装</a></h3>
+
+        <div class="rec-links">
+			<classify model="2" id="1529,1530,1531,1532">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 4">
+					<em>|</em>
+				</if>
+			</classify>
+        </div>
+    </div>
+
+    <div class="focus5">
+        <ul class="focus5-ul">
+			 <document model="2" rootid="1507" limit="3" order="edit" flag="fashion_recom,64">
+				<li>
+					<a href="{$document.url}" target="_blank" title="{$document.title}">
+						<img src="{:get_thumb($document[atlas_a], $document[atlas], '460x470')}" alt="{$document.title}"><span class="tit">{$document.title}</span>
+						<em class="info">{$document.description}</em><b class="bg"></b>
+					</a>
+				</li>
+             </document>
+        </ul>
+
+        <span class="btn prev"></span><span class="btn next"></span>
+    </div>
+
+    <document model="2" rootid="1507" limit="3" order="edit" flag="fashion_recom,4">
+		<div class="chao-box">
+            <a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '345x460')}" alt="{$document.title}"></a>
+            <p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" target="_blank" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p>
+		</div>
+	</document>
+</div>
+
+<div class="qnx1200 channel tuku">
+    <div class="title">
+        <h3><a href="/dapei/" target="_blank">搭配</a></h3>
+        <div class="rec-links">
+			<classify model="2" id="331,330,347,404,1017,1186">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 6">
+					<em>|</em>
+				</if>
+			</classify>
+        </div>
+    </div>
+
+    <ul class="tuku-ul cl-dapei">
+		<document model="2" rootid="1" limit="1" order="edit" flag="fashion_recom,8">
+			<li>
+				<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '380x490')}" alt="{$document.title}"></a>
+				<p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" target="_blank" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p>
+			</li>
+        </document>
+
+		<document model="2" rootid="1" limit="1,4" order="edit" flag="fashion_recom,4">
+			<li>
+				<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '390x234')}" alt="{$document.title}"></a>
+				<p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" target="_blank" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p>
+			</li>
+        </document>
+    </ul>
+</div>
+
+<div class="qnx1200 channel meifa cl-bozhu">
+    <div class="title"><h3><a href="/bozhu/" target="_blank">博主</a></h3></div>
+    <ul class="meifa-ul pdpic4">
+		<php>$blogger = array();</php>
+		<document model="2" rootid="1500" limit="5" order="edit" flag="fashion_recom,4"><php>$blogger[] = $document;</php></document>
+		
+		<volist name="blogger" id="document">
+			<li>
+				<div class="bz-pic">
+					<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '220x285')}" alt="{$document.title}"></a>
+					<p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" target="_blank" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p>
+				</div>
+				
+				<classify model="2" id="$document[category_id]">
+					<div class="bz-user">
+						<a href="{$classify.url}" target="_blank"><img src="<pic name="$classify.icon" />" alt="{$classify.title}"></a>
+						<div class="bzxq">
+							<a href="{$classify.url}" target="_blank" class="tit">{$classify.title}</a>
+							<p class="info">{$classify.description}</p>
+						</div>
+					</div>
+				</classify>
+			</li>
+		</volist>
+	</ul>
+</div>
+
+<div class="qnx1200 channel tuku">
+    <div class="title">
+        <h3><a href="/jiepai/" target="_blank">街拍</a></h3>
+        <div class="rec-links">
+			<classify model="2" id="604,618,613,1533,986,217,219,216,215">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 8">
+					<em>|</em>
+				</if>
+			</classify>
+		 </div>
+    </div>
+
+    <ul class="tuku-ul cl-dapei">
+		<document model="2" rootid="214" limit="1" order="edit" flag="fashion_recom,8">
+			<li class="one">
+				<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '380x490')}" alt="{$document.title}"></a><p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" class="text" target="_blank">{$document.title}</a>
+				<em class="right-arr"></em><b class="bg"></b></p>
+			</li>
+		</document>
+		
+		<document model="2" rootid="214" limit="4" order="edit" flag="fashion_recom,4">
+			<li>
+				<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '390x234')}" alt="{$document.title}"></a><p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" class="text" target="_blank">{$document.title}</a>
+				<em class="right-arr"></em><b class="bg"></b></p>
+			</li>
+		</document>
+    </ul>
+</div>
+
+<div class="qnxauto showTime">
+    <div class="qnx1200">
+        <div class="title">
+            <h3><a href="/xiuchang/" target="_blank">秀场</a></h3>
+            <div class="sub-links"><span>时装周秀场：</span>
+				<classify model="2" id="1522,1523">
+					<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+					<if condition="$key lt 2">
+						<em>|</em>
+					</if>
+				</classify>
+			</div>
+        </div>
+        <div id="showbox">
+            <pre class="prev">prev</pre>
+            <pre class="next">next</pre>
+            <ul>
+				<document model="2" rootid="1509" limit="6" order="edit" flag="fashion_recom,4">
+					<li><a href="{$document.url}" target="_blank"><img src="{:get_thumb($document[atlas_f], $document[atlas], '380x615')}" alt="{$document.title}"></a><b class="bg"></b></li>
+                </document>
+            </ul>
+
+            <a href="" target="_blank" id="show-title"></a>
+        </div>
+    </div>
+</div>
+</block>

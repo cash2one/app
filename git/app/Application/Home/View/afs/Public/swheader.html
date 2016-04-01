@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$SEO.title}</title>
+    <meta name="keywords" content="{$SEO.keywords}"/>
+    <meta name="description" content="{$SEO.description}"/>
+    <link rel="4" type="text/css" href="__PUBLIC__/Home/afs/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/afs/css/zqzt.css"/>
+</head>
+
+<body>
+<div id="top">
+    <div class="top-main"><p class="left"><a href="" target="_blank" class="logo"><img src="__PUBLIC__/Home/afs/images/zq-logo.jpg"></a><a href="">手机版</a></p><p class="right"><a href="">设为主页</a>|<a href="">收藏本站</a></p></div>
+</div>
+<!--专区nav-->
+<div id="zq-nav">
+    <div class="zq-nav-img"><img src="{:get_cover($home['themeimg'],'path')}" alt="{$home['title']}"></div>
+    <div class="nav-main">
+        <div class="nav-main-hx">
+            <div class="nav-top">
+                <p>
+                    <a href="{:'/'.C(FEATURE_ZQ_DIR)}/{$home['url_token']}" target="_blank">专区首页</a>
+                    <volist name="nav" id="val">
+                        <a href="{:'/'.C(FEATURE_ZQ_DIR)}/{$val['url_token']}" target="_blank">{$val['title']}</a>
+                    </volist>
+                </p>
+                <form action="http://zhannei.baidu.com/cse/search" method="get" id="Search_form" name="Search_form" target="_blank" class="">
+                    <input type="hidden" name="s" value="10366954480845088817">
+                    <input type="text" name="q" id="searchBox" autocomplete="off" class="" value="输入你想搜索的游戏...">
+                    <button type="submit" id="searchBtn" class="btn-submit"></button>
+                </form>
+            </div>
+            <div class="nav-bot">
+                <i class="tit">热点推荐</i>
+                <volist name="batchHot" id="val">
+                    <php>if($key != 0){</php>
+                    <i>|</i>
+                    <php>}</php>
+                    <a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['sub_title']}</a>
+                </volist>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

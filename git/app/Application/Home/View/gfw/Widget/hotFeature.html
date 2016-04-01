@@ -1,0 +1,10 @@
+<div class="hot gf-border">
+    <h3 class="hot-icon{$class}">{$title}专题</h3>
+    <ul>
+        <volist name="lists" id="val">
+        <li>
+            <a href="{:C('STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$val['url_token']}" target="_blank" class="hot-img"><img src="{:get_cover($val['icon'],'path')}" width="177" height="99"><span class="hot-title"><em>{$val['title']}</em></span></a>
+        </li>
+        </volist>
+    </ul>
+</div>

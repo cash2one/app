@@ -1,0 +1,16 @@
+<eq name="d" value="">
+<else/>
+ <div class="newsGame">
+           <a href="{:staticUrlMobile('detail', $d[0]['id'],'Down')}"><img src="{:get_cover($d[0]['smallimg'],'path','1','50','50')}"></a>
+           <div class="newsInfo">
+               <p class="top"><a href="{:staticUrlMobile('detail', $d[0]['id'],'Down')}" class="tit">{$d[0]['title']}</a><a href="{:staticUrlMobile('detail', $d[0]['id'],'Down')}" class="down">下载</a></p>
+               <p class="cent">{$d[0]['size']}</p>
+               <p class="bot">
+                      <volist name="tags" id="vo">
+                             <a href="{:C('MOBILE_STATIC_URL')}/tag/{$vo['name']}/">{$vo.title}</a>
+                      </volist>
+               </p>
+           </div>
+       </div>
+</eq>
+

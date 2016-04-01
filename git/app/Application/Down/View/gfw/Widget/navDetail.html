@@ -1,0 +1,8 @@
+<div class="page-left">
+    <span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">&gt;</span>
+    <volist name="here" id="vo">
+        <a href="{:staticUrl('lists',$vo['id'],'Down')}">{$vo.title}</a>
+        <span class="grey">&gt;</span>
+    </volist>
+    {$info.title}
+</div>

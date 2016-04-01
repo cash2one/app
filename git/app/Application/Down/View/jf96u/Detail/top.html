@@ -1,0 +1,25 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/kfkc.css">
+</block>
+<block name="body">
+<div class="main1200">
+    <input type="hidden"  id="hitid"   name="id"  value="{$info.id}">
+    <input type="hidden"  id="hituid"  name="uid"  value="{$info.uid}">
+    <input type="hidden"  id="hittype"  name="type"  value="{:MODULE_NAME}">
+    <div class="goback">当前位置：<a href="{:C('STATIC_URL')}">首页</a> > 排行榜</div>
+    <div class="container">
+        <div class="rank-nav wrap fl">
+           <Think:article basename="Down" name="paihang"  cate="1856" order="level desc" limit="25">
+            <a <PHP>if($info['id']==$article['id']){echo "class='active'";}</PHP> href="{:str_replace("index.html","",staticUrl('detail', $article['id'],'Down'))}" >{$article.title}</a>
+        </Think:article>
+        </div>
+        <div class="rank-list-cont wrap fr">
+            <ul class="ul">
+                  {~W('Down/Jf96u/rankCon',array($info['id'],'0'))}
+            </ul>
+        </div>
+
+    </div>
+</div>
+ </block>

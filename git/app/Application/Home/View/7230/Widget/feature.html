@@ -1,0 +1,25 @@
+<extend name="Base/common"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/jxhj.css"/>
+</block>
+<block name="body">
+<div id="down-main">
+    <p class="page-nav">当前位置：<a href="{:C('STATIC_URL')}">首页</a>-><a href="{:getWidgetPath('16')}">专题</a>->机型</p>
+    <div id="jxhj-left">
+        <volist name="type" id="val">
+            <p class="title"><i>{$val.title}</i></p>
+        <span>
+            <volist name="val['feature']" id="son">
+                <a href="/{:C(FEATURE_ZT_DIR)}/{$son['url_token']}" target="_blank">{$son.title}</a>
+            </volist>
+        </span>
+        </volist>
+    </div>
+    <!----left -END-->
+    <div id="zx-right">
+        {~W('P7230/hotGame')}
+        {~W('P7230/hotType')}
+        <!---热点资讯(hot) END---->
+    </div>
+</div>
+</block>

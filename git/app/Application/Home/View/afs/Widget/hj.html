@@ -1,0 +1,16 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/afs/css/zqzt.css"/>
+</block>
+<block name="body">
+<!--main-->
+<div id="main" class="yxzt">
+    <p id="main-title"><a href="{:C('STATIC_URL')}">首页</a>><a>{$crumbs}</a></p>
+    <ul class="ztlb">
+        <volist name="lists" id="val">
+        <li><a href="{$val['staticUrl']}" target="_blank" class="title">{$val['title']}</a><a href="{$val['staticUrl']}" target="_blank"><img src="{:get_cover($val['icon'],'path')}" alt="{$val['title']}"></a><p>{$val['description']}</p></li>
+        </volist>
+    </ul>
+    <p id="fenye">{$page}</p>
+</div>
+</block>

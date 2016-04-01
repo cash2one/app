@@ -1,0 +1,50 @@
+<extend name="Home@afsmobile/Base/commonDown" />
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+<div id="wrapper4">
+  <div id="scroller4">
+    <ul id="thelist4">
+        <Think:article basename="Down" name="paihang"  cate="20" limit="100" order="create_time desc">
+          <switch name="key">
+             <case value="0|11|21|31|41|51|61|71|81|91"><li></case>
+             <case value="10|21|31|41|51|61|71|81|91"></li></case>
+             <default /><a href="{~W('Home/Afsmobile/rankUrl',array($article['path_detail']))}">{$article.title}</a>
+           </switch>
+        </Think:article>
+    </ul>
+  </div>
+  <div class="pagenum"></div>
+</div>
+<!--game_rec-->
+<div class="padding_box2">
+  <div class="cont paihang_border">
+    <ul class="n_gameul">
+      <volist name="ranks" id="vo" offset="0" length="10">
+        <li>
+          <div class="n_gameli">
+            <div class="n_g_l"><img src="{:get_cover($vo['smallimg'],'path','1','66','66')}"></div>
+            <div class="n_g_r">
+              <div class="n_g_rt">
+                <div class="n_g_rtl">
+                  <div class="n_g_rtlt"><em>{$key+1}</em><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">
+                    <h3>{$vo['title']}</h3>
+                    </a><i class="{~W('Down/Afsmobile/viewTrend',array($vo['view']))}"></i></div>
+                  <div class="n_g_rtlb"><i></i><span>{~W('Down/Afsmobile/viewHot',array($vo['view']))}万</span>热度&nbsp;&nbsp;{$vo['size']} </div>
+                </div>
+                <div class="yd_btn"> <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="btn" rel="nofollow">下载</a> </div>
+              </div>
+              <div class="n_g_rb">{$vo['description']}</div>
+            </div>
+          </div>
+        </li>
+      </volist>
+    </ul>
+  </div>
+  <a href="javascript:void(0)" id="get_more" data-id="{$rankID}" style="display:none;">点击加载更多</a> </div>
+</block>
+<block name="script"> 
+  <script type="text/javascript" src="__PUBLIC__/Down/afsmobile/js/iscrollc.js"></script> 
+    <script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/ajax_load.js"></script> 
+</block>

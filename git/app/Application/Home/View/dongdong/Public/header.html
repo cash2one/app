@@ -1,0 +1,50 @@
+		<script language="javascript"> window.DYNAMIC_SERVER_URL = '{:C('DYNAMIC_SERVER_URL')}';</script>
+		
+		<div id="page_top">
+			<div class="main">
+				<p>欢迎来到东东手游网</p>
+                <p><a href="{:getWidgetPath(1)}" class="dd" target="_blank">东东助手</a></p>
+				<a class="setup" href="javascript:void(0);" onclick="SetHome(this)">设为首页</a></div>
+		</div>
+		<div id="head">
+			<div class="head_main"> <a href="{:C('STATIC_URL')}" class="logo"><img src="/Public/Home/dongdong/images/logo.jpg" alt="东东手游网"></a>
+				<div class="head-main">
+					<div class="search">
+						<form action="{:C('STATIC_URL')}/search.html" method="get" id="Search_form0" name="Search_form" target="_blank" class="searchform">
+							<input type="text" name="keyword" id="searchbox" class="searchbox" autocomplete="off" value="在此搜索游戏或资讯...">
+							<button type="submit" id="searchBtn" class="btn-submit"></button>
+						</form>
+						<p class="hot_tags"><b>热词搜索：</b>
+							<Think:article basename="Down" name="dmain"  where="position & 32" order="update_time desc" limit="4"> <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank">{$article.title}</a> </Think:article>
+						</p>
+					</div>
+					<div class="down"> <a href="{:getWidgetPath('1')}" target="_blank"><img src="/Public/Home/dongdong/images/zs_logo.jpg" alt="东东助手"></a> <span> <a href="{:getWidgetPath('1')}" target="_blank">东东助手</a> <em>让手游无处不在！</em> </span> <a href="{:getWidgetPath('1')}" class="xiaz">立即下载</a> </div>
+				</div>
+			</div>
+		</div>
+		<!--nav-->
+        <div id="nav">
+            <ul class="nav-first">
+                <li nav="sy"><a href="{:C('STATIC_URL')}">首页</a></li>
+                <li nav="sf"><a href="{:C('STATIC_URL')}{:getWidgetPath('9')}">最新首发</a></li>
+                <li class="active" nav="1">
+                    <a href="{:C('STATIC_URL')}{:getWidgetPath('7')}">网络游戏</a>
+                    <div>
+                        {:W('Down/Dongdong/childMenu',array(1))}
+                    </div>
+                </li>
+                <li class="active" nav="116">
+                    <a href="{:C('STATIC_URL')}{:getWidgetPath('8')}">单机游戏</a>
+                    <div>
+                        {:W('Down/Dongdong/childMenu',array(116))}
+                    </div>
+                </li>
+                <li class="active" nav="12">
+                    <a href="{:C('STATIC_URL')}{:getWidgetPath('12')}">软件汇集</a>
+                    <div>
+                        {:W('Down/Dongdong/childMenu',array(12))}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="nav_child" class="nav-second"></div>

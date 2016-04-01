@@ -1,0 +1,63 @@
+<div class="layoutMain">
+  <div class="layoutBox current">
+<!--            <div class="layoutBox-left">
+                        <div class="bigPic-pic">
+                            <div class="bigPic-wrap"><a href="" target="_blank"><img src="images/adv3.jpg"><span>孕妇喝的奶粉怎么冲泡出来效果最佳</span><b></b></a></div>
+                            <div class="bigPic-wrap"><a href="" target="_blank"><img src="images/adv3.jpg"><span>孕妇喝的奶粉怎么冲泡出来效果最佳</span><b></b></a></div>
+                        </div>
+                        <div class="layoutBox-ul">
+                            <a href="" target="_blank">宝宝左右脑优势小测试</a>
+                            <a href="" target="_blank">宝宝左右脑优势小测试</a>
+                            <a href="" target="_blank">宝宝左右脑优势小测试</a>
+                            <a href="" target="_blank">宝宝左右脑优势小测试</a>
+                            <a href="" target="_blank">宝宝左右脑优势小测试</a>
+                            <a href="" target="_blank">宝宝左右脑优势小测试</a>
+                        </div>
+                        <div class="bigPic-pic">
+                            <div class="bigPic-wrap"><a href="" target="_blank"><img src="images/adv3.jpg"><span>孕妇喝的奶粉怎么冲泡出来效果最佳</span><b></b></a></div>
+                            <div class="bigPic-wrap"><a href="" target="_blank"><img src="images/adv3.jpg"><span>孕妇喝的奶粉怎么冲泡出来效果最佳</span><b></b></a></div>
+                        </div>
+                    </div>-->
+    <div class="layoutBox-left">
+         <volist name="headline" id="vo">
+                <switch name="key" >
+                <case value="0">
+                <div class="bigPic-pic">
+                            <div class="bigPic-wrap"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}"><span>{$vo['title']}</span><b></b></a></div>
+                </case>
+                <case value="1">
+                   <div class="bigPic-wrap"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}"><span>{$vo['title']}</span><b></b></a></div>
+                        </div>
+                        <div class="layoutBox-ul">
+                </case>
+                <case value="8"></div> </case>
+                <case value="9">
+                 <div class="bigPic-pic">
+                            <div class="bigPic-wrap"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}"><span>{$vo['title']}</span><b></b></a></div>
+                </case>
+                <case value="10">
+                    <div class="bigPic-wrap"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}"><span>{$vo['title']}</span><b></b></a></div>
+                        </div>
+                 </case>
+                <default /> <a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a>
+                </switch>
+         </volist>
+      </div>
+    <div class="layoutBox-right">
+      <div class="zaoj-con1-wrap">
+        <volist name="commended" id="vo">
+        <div class="zaoj-con1-top">
+          <div class="top-title"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="title">{$vo['title']}</a></div>
+          <p class="info">{$vo['description']}</p>
+        </div>
+       </volist>
+        <ul class="news-con1-ul yuerFgx">
+           <volist name="lists" id="vo">
+                 <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a></li>
+          </volist>
+        </ul>
+      </div>
+      <div class="zaoj-con2-wrap"><a href="#" target="_blank"><img src="__PUBLIC__/Home/qbaobei2/images/adv2.jpg" alt="广告"></a></div>
+    </div>
+  </div>
+</div>

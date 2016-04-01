@@ -1,0 +1,46 @@
+<if condition="$type eq '1'">
+<volist name="list" id="document">
+<div class="food-mini-top">
+	<div class="food-mini-top-tit"><a target="_blank" href="{:staticUrl('detail',$document['id'],'Document')}">{:msubstr($document['title'],0,17,'utf-8',false)}</a></div>
+	<div class="food-mini-top-nr">
+		<p>	
+			{:msubstr(strip_tags($document['content']),0,135,'utf-8',false)}
+			<span class="food-mini-top-nr-more"><a target="_blank" href="{:staticUrl('detail',$document['id'],'Document')}">[全文阅读] </a></span>
+		</p>
+		<a target="_blank" href="{:staticUrl('detail',$document['id'],'Document')}" title="{:$document['title']}">
+			<img src="{:getContentFirstImg($document['smallimg'],$document['content'])}" alt="{:$document['title']}" width="141" height="125" />
+		</a>
+	</div>
+</div>
+</volist>
+</if>
+<if condition="$type eq '2'">
+	<if condition="!empty($cateInfo)">
+	<a href="{:staticUrl('lists',$cateInfo['id'],'Document')}" target="_blank">
+		<img border="0" src="{:get_cover($cateInfo['vertical_pic'],'path')}" alt="{:$cateInfo['title']}" title="{:$cateInfo['title']}" />
+	</a>
+	</if>
+</if>
+<if condition="$type eq '3'">
+	<if condition="!empty($list)">
+	<ul class="food-right-rmwztj">
+		<volist name="list" id="document">
+			<li> <a href="{:staticUrl('detail',$document['id'],'Document')}" title="{:$document['title']}" target="_blank">{:msubstr($document['title'],0,16,'utf-8',false)}</a> </li>
+		</volist>
+	</ul>
+	</if>
+</if>
+
+<if condition="$type eq 'detail_hot' and !empty($list)">
+	<ul>
+		<volist name="list" id="document">
+			<li><a target="_blank" href="{:staticUrl('detail',$document['id'],'Document')}" title="{:$document['title']}">{:$document['title']}</a></li>
+		</volist>
+	</ul>
+</if>
+<if condition="$type eq 'current_cate' and !empty($list)">
+	<volist name="list" id="cate">
+		<neq name="i" value="1"><span> &gt; </span></neq>
+		<a href="{:staticUrl('lists',$cate['id'],'Document')}" target="_self">{:$cate['title']}</a>
+	</volist>
+</if>

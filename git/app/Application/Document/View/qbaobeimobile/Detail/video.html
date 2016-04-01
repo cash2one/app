@@ -1,0 +1,60 @@
+<extend name="Home@qbaobeimobile/Base/common2d" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/index.css"/>
+</block>
+<block name="breadcrumbnav">{~W('Home/Qbaobeimobile/wbreadCrumb',array($info['id']))}</block>
+<block name="body">
+<!--播放器-->
+<section class="video-wrap dis-bot">
+ <embed src="{$info['mobile_url']}" />
+  <script>a();</script>
+    <div class="info">
+        <h1>{$info['title']}</h1>
+         <div class="introd">
+      <div class="introd-wrap">{$info['description']}</div>
+    </div>
+    <p class="get-more"><span>全文<em class="arr"></em></span></p>
+    </div>
+    <div class="add-tags">
+        <div class="ico"></div>
+        <div class="ico-tags-main">
+            <div class="swiper-container6">
+                <div class="swiper-wrapper">
+                    <volist name="tags" id="val"><a href="{:C('MOBILE_STATIC_URL')}/tag/{$val['name']}/" class="swiper-slide">{$val['title']}</a></volist>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="share">
+         <div id="nativeShare"><span class="nativeShare-tit">分享：</span></div>
+        <div class="bdsharebuttonbox">
+            <a href="#" class="sina bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="qq bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+            <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+        </div>
+    </div>
+</section>
+<script>b();</script>
+<section class="ship-cata dis-bot video-list video-list-top video-detail-wrap">
+    <nav class="channel-nav">
+        <span class="active">同类</span>
+        <span>推荐</span>
+    </nav>
+    <ul class="ship-cata-ul pic-adaptive-wrap2 current">
+        {~W('Document/Qbaobeimobile/videoDetailSame',array($info['category_id'],$info['id']))}
+    </ul>
+     <ul class="ship-cata-ul pic-adaptive-wrap2">
+        {~W('Document/Qbaobeimobile/videoDetailCommended',array($info['category_id'],$info['id']))}
+    </ul>
+</section>
+<script>c();</script>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><h3>热播</h3></div>
+    <ul class="ship-cata-ul pic-adaptive-wrap2">
+        {~W('Document/Qbaobeimobile/videoDetailHot',array($info['category_id']))}
+    </ul>
+</section>
+<script>d();</script>
+<input type="hidden" id="tj-user" name="tj-user" value="{$info['uid']}"/>
+</block>
+<block name="script"><script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.js"></script></block>

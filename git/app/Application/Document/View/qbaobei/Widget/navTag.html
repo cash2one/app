@@ -1,0 +1,7 @@
+<div class="fl-nav-r">
+    <ul class="fl-r-ul">
+        <volist name="tags" id="val">
+        <li><a href="{:C('STATIC_URL')}/tag/{$val['name']}/" target="_blank">{$val['title']}</a><php>if($i!=3){</php><em>/</em><php>}</php></li>
+        </volist>
+    </ul>
+</div>

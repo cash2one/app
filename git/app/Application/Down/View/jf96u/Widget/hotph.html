@@ -1,0 +1,16 @@
+
+<volist name="data" id="v">
+
+	<li>
+		<a href="{:str_replace('index.html','',staticUrl('detail',$v['id'],'Down'))}" target="_blank" title="{$v.title}">
+			<img src="{:get_cover($v['smallimg'],'path')}" alt="{$v.title}">
+		</a>
+		<div class="text">
+			<a href="{:str_replace('index.html','',staticUrl('detail',$v['id'],'Down'))}" target="_blank" title="{$v.title}">{$v.title}</a>
+			<p class="star star{:round($v['soft_socre'])}"></p>
+			<p class="cata">{:get_game_type($v['game_type'])}</p>
+		</div>
+	</li>
+</volist>
+
+ 

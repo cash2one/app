@@ -1,0 +1,24 @@
+<extend name="Home@gfw/Base/commonIndex" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/about.css"/>
+</block>
+
+<block name="body">
+<div class="page-nav"><div class="page-left"><span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">&gt;</span>帮助中心</div><span class="sum"></span></div>
+<div id="about" class="gf1000">
+    <ul class="nav-gw gf-border">
+        <volist name="tree" id="val">
+        <li {$val['id'] == $info['id']?'class="gray"':''}><a href="{:getWidgetPath($val['id'], true)}"><i class="nav-icon4"></i>{$val['name']}</a></li>
+        </volist>
+    </ul>
+    <!-----nav-gy-end----->
+    <div class="statement gf-border">
+        <h1 class="title">{$info['name']}</h1>
+        <div>{$info['custom_content']}</div>
+    </div>
+    <!-----about-content-end----->
+
+</div>
+<!-----about-end----->
+</block>

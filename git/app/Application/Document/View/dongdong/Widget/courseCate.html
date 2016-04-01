@@ -1,0 +1,7 @@
+<div class="newsList">
+    <ul class="newsList-nav">
+        <volist name="lists" id="val">
+        <li {$cate == $val['id']?'class="cur"':''}><a href="{:staticUrl('lists',$val['id'],'Document')}">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>

@@ -1,0 +1,19 @@
+<if condition="!empty($productList)">
+	<div class="referral1">
+		<ul class="model">
+			<volist name="productList" id="product">
+			<li>
+				<a href="{:staticUrl('detail',$product['id'],'Down')}" target="_blank" title="{:$product['title']}">
+					<img src="{:get_cover($product['img_id'],'path')}" width="150" height="150" />
+				</a>
+				<p class="m-title">
+					<a href="{:staticUrl('detail',$product['id'],'Down')}" target="_blank" title="{:$product['title']}">{$product['title']|msubstr=0,10,'utf-8',false}</a>
+				</p>
+			</li>
+			</volist>
+		</ul>
+	</div>
+	<div class="more"><a target="_blank" href="{:C('STATIC_URL')}/company_products/{:$info['id']}/">》 查看更多  {:$info['title']}产品</a></div>
+<else/>
+	<div class="referral">暂无相关产品记录</div>
+</if>

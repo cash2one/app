@@ -1,0 +1,42 @@
+<extend name="Home@dongdong/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/dongdong/css/yxlist.css"/>
+</block>
+
+<block name="body">
+<div class="page_main">
+   <!--flsy-->
+   <div class="wraper">
+        <div class="flsy_l">
+		<!-- 分类树 -->
+		<volist name="tree" id="val">
+
+		<dl class="<?php if($val['id'] == $cate['id'] || $val['id'] == $cate['pid']) { echo 'cur'; } ?>">
+			<dt>{$val['title']}</dt>
+			<dd>
+				<ul>
+					<volist name="val['_']" id="rel">
+					<li><a <?php if($rel['id'] == $cate['id']) { echo ' class="cur"'; } ?> href="{$rel['url']}">{$rel['title']}</a></li>
+					</volist>
+				</ul>
+			</dd>
+		</dl>
+		</volist>
+       </div>
+
+       <div class="flsy_r">
+           <ul>
+               <!-- begin 下载软件列表 -->
+               <volist name="lists" id="val">
+               	<li>
+               		<a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" title="{$val['title']}">
+               			<img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"><span>{$val['title']}</span>
+               		</a>
+               	</li>
+               </volist>
+               <!-- end 下载软件列表 -->
+           </ul>
+          <div class="paging">{$page}</div>
+       </div>
+   </div>
+</block>

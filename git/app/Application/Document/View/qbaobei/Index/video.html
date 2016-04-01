@@ -1,0 +1,80 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/channel.css" /></block>
+<block name="body">
+<!--head部分-->
+<div class="wrap channel-head">
+    <div class="wrap adv1200_103"><!-- 广告位：频道页横幅广告 -->
+<center><script type="text/javascript">BAIDU_CLB_fillSlot("1135455");</script></center></div>
+    <div class="head-main">
+        <div class="left">
+            <a href="{:C('STATIC_URL')}" class="logo">亲亲宝贝网</a>
+            <h1>视频</h1>
+        </div>
+        <div class="middle"><p class="goback"><span>您的位置：</span><a href="{:C('STATIC_URL')}">亲亲宝贝网</a>><span>视频</span></p></div>
+        <include file="Home@qbaobei/Public/PC2/search" />
+    </div>
+</div>
+<div class="channel-nav  show-channel-nav">
+  <div class="wrap nav-main">
+        <ul class="nav-ul">                                                         
+            <li><a href="{:C('STATIC_URL')}/video/">视频首页</a></li>
+            <li><a href="{:staticUrl('lists',1308,'Document')}">备孕</a>
+                {~W('Document/Qbaobei/showChildMenu',array('1308'))}
+            </li>
+            <li><a href="{:staticUrl('lists',1315,'Document')}">孕中</a>
+                {~W('Document/Qbaobei/showChildMenu',array('1315'))}
+            </li>
+            <li><a href="{:staticUrl('lists',1318,'Document')}">分娩</a>
+              {~W('Document/Qbaobei/showChildMenu',array('1318'))}
+            </li>
+            <li><a href="{:staticUrl('lists',1342,'Document')}">营养</a>
+              {~W('Document/Qbaobei/showChildMenu',array('1342'))}
+            </li>
+            <li><a href="{:staticUrl('lists',1334,'Document')}">幼儿</a>
+              {~W('Document/Qbaobei/showChildMenu',array('1334'))}
+            </li>
+            <li><a href="http://www.qbaobei.com/baobaoleyuan/">早教</a>
+            </li>
+        </ul>
+            {~W('Document/Qbaobei/showMenuTagVideo')}
+    </div>
+
+</div>
+<!--频道主体部分 start-->
+<div class="channel-main">
+    <div class="wrap baike-list-wrap">
+    <!--chanbox-->
+    <div class="fn-area chanbox1">
+             {~W('Document/Qbaobei/videoHeadline')}
+             {~W('Document/Qbaobei/videoIndexRank')}
+    </div>
+    <div class="baike-main">
+        <div class="baike-main-l">
+            <!--广告-->
+            <div class="adv927_103"><!-- 广告位：频道页横幅广告 -->
+          <center> <script type="text/javascript">BAIDU_CLB_fillSlot("1135455");</script></center></div>
+            <!--图库list-->
+            {~W('Document/Qbaobei/videoIndexZaojiao',array('360','1','早教','one'))}
+            <!--图库list-->
+            {~W('Document/Qbaobei/videoIndexList',array('1308','2','备孕','two'))}
+            <!--图库list-->
+            {~W('Document/Qbaobei/videoIndexList',array('1315','1','孕中','three'))}
+            <!--图库list-->
+            {~W('Document/Qbaobei/videoIndexList',array('1318','2','分娩','four'))}
+            <!--图库list-->
+            {~W('Document/Qbaobei/videoIndexList',array('1322','1','产后','five'))}
+            <!--图库list-->
+            {~W('Document/Qbaobei/videoIndexList',array('1326','2','新生儿','six'))}
+             <!--图库list-->
+            {~W('Document/Qbaobei/videoIndexList',array('1330','1','婴儿','seven'))}
+             <!--图库list-->
+            {~W('Document/Qbaobei/videoIndexList',array('1334','2','幼儿','eight'))}
+             <!--图库list-->
+            {~W('Document/Qbaobei/videoIndexList',array('1338','1','学龄前','nine'))}
+        </div>
+    </div>
+ </div>
+</div>
+<!--频道主体部分 end-->
+<!--footer-->
+</block>

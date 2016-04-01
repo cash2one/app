@@ -1,0 +1,8 @@
+<div class="yxgl">
+  <h3><i>相关问答</i></h3>
+  <ul>
+   <volist name="p" id="f" offset="0" length='5' >
+    <li><i>{$f['create_time']|time_format="Y-m-d"}</i><a href="{:staticUrl('detail', $f['id'],'Document')}" target="_blank">{$f['title']}</a></li>
+    </volist>
+  </ul>
+</div>

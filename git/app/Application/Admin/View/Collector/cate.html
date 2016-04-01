@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JF采集器</title>
+</head>
+<script type="text/javascript" src="http://www.7230.com/Public/static/jquery.min.js"></script>
+<!--<script type="text/javascript" src="http://localhost/cate2.js"></script>-->
+<style>
+*{ padding:0; margin:0; font-family:"微软雅黑"; color:#333; font-size:12px;}
+.catabox{ width:1000px; margin:50px auto 0 auto}
+.catabox .catawrap{ width:100%;display:none; overflow:hidden;zoom:1;}
+.catabox .current{ display:block}
+ul li{ list-style:none; border:1px solid #cce5fa; overflow:hidden;zoom:1; border-radius:5px; margin-top:15px; padding:5px 10px;}
+ul li a{ text-decoration:none; padding:0 10px;transition: all .4s ease-in-out; line-height:25px; margin:5px 0; display:inline-block; float:left}
+a:hover{text-decoration:underline}
+.font3:hover{color:#337ab7;}
+.font1{ font-size:14px; background-color:#5cb85c; color:#fff;}
+.font2{ font-size:14px; background-color:#85bdf4; color:#fff; margin-left:10px;}
+.font3{ font-size:12px; color:#999; margin-left:15px; padding:0}
+.cata-tit{ height:35px; border-bottom:1px solid #cce5fa;}
+.cata-tit span{ border:1px solid #cce5fa; margin-right:10px; border-bottom:none; float:left; cursor:pointer;transition: all .4s ease-in-out; border-radius:5px 5px 0 0; display:inline-block; height:35px; line-height:35px; padding:0 20px; font-size:14px; color:#337ab7}
+.cata-tit .active,.cata-tit span:hover{ border:1px solid #4598e0; border-bottom:none; background-color:#4598e0; color:#fff;}
+.nav-left{float:left; width:800px;}
+.nav-right{ padding-top:5px; float:right; width:200px;}
+.nav-right em{ margin-left:5px; font-style:normal}
+.nav-right label{ margin-right:20px;}
+.cata-btn{ width:330px; margin:0 auto;}
+.cata-btn input{transition: all .4s ease-in-out; cursor:pointer; border:1px solid #cce5fa; color:#337ab7; border-radius:5px;background:none; font-size:14px; height:35px; width:120px; text-align:center; margin:20px;}
+.cata-btn input:hover{background:#4598e0; color:#fff;}
+.catabox-wrap{ overflow:hidden;zoom:1;}
+</style>
+<body style=" background-color:#fff">
+
+<div class="catabox">
+    <form action="{:U('insert')}" method="post" name="form1" id="form1">
+        <div class="cata-tit">
+            <div class="nav-left"></div>
+            <div class="nav-right">
+                <label><input name="is_session" type="checkbox" value="1" /><em>是否缓存</em></label>
+                <select name="session_time"><option value="600">10分钟</option><option value="1200" selected>20分钟</option><option value="1800">30分钟</option></select>
+            </div>
+        </div>
+        <div class="catabox-wrap">
+
+        </div>
+        <input name="model_name" id="model_name" type="hidden" value=""/>
+        <input name="cate_id" id="cate_id" type="hidden" value=""/>
+        <input name="site_id" id="site_id" type="hidden" value="{$siteid}"/>
+        <input name="site_url" id="site_url" type="hidden" value="{$url}"/>
+    </form>
+</div>
+<script type="application/javascript" src="__PUBLIC__/static/jquery-2.0.3.min.js"></script>
+<script>
+function jump(cateid,modle)
+{
+    $("#model_name").val(modle);
+    $("#cate_id").val(cateid);
+    $("#form1").submit();
+}
+$(function(){
+    //获取接口
+    function getCateApiUrl(siteid)
+    {
+        var str;
+        switch(parseInt(siteid))
+        {
+            case 1:str='7230';break;
+            case 2:str='anfensi';break;
+            case 3:
+                str='guanfang123';
+                break;
+            case 4:str='qbaobei';break;
+            case 5:str='pc6';break;
+            case 6:str='paopaoche';break;
+            case 7:str='9ht';break;
+            case 8:str='idongdong';break;
+            case 9:str='96u';break;
+            default:break;
+        }
+        if(str != '')
+            url = 'http://iapi.' + str + '.2016qq.com/v1/class/get.json';
+        if(parseInt(siteid) == 8 && str!='')  url = 'http://iapi.' + str + '.com/v1/class/get.json';
+        return url;
+    }
+    //提交
+
+    //获取分类信息
+    function getCate()
+    {
+        var url = getCateApiUrl({$siteid}); //获取分类数据API接口链接
+        var classJson;  //分类数据变量
+        var modelHtml;
+        var cateHtml;
+        var model = function(){
+            $.each(classJson,function(i,vmodel){  //模块类型
+                var str;
+                if(vmodel.m == "document")  //
+                {
+                    str = '文章';
+                }
+                else if(vmodel.m == "down")
+                {
+                    str = '下载';
+                }
+                else if(vmodel.m == 'package')
+                {
+                    str = '礼包';
+                }
+                else
+                {
+                    str = '图库';
+                }
+                if(i==0)  //模块html代码
+                {
+                    modelHtml='<span class="active">'+str+'</span>';
+                    cateHtml='<ul class="catawrap current">';
+
+                }
+                else
+                {
+                    modelHtml+='<span>'+str+'</span>';
+                    cateHtml+='<ul class="catawrap">';
+                }
+                var tempHtml='';
+                if(typeof(classJson[i].class) != "undefined")
+                {
+                    $.each(classJson[i].class,function(j,vfirst){
+                        if(typeof(classJson[i].class[j].child) != "undefined"){
+                            tempHtml+='<li><a href="javascript:void(0);" ';
+                            if(parseInt(vfirst.allow_publish) >0)
+                            {
+                                tempHtml+='onclick="jump(\''+ vfirst.id+'\',\''+vmodel.m+'\')"';
+                            }
+                            tempHtml+=' class="font1">'+vfirst.title+'</a>';
+                            $.each(classJson[i].class[j].child,function(k,vsecond){
+
+                                tempHtml+='<a href="javascript:void(0);" ';
+                                if(parseInt(vsecond.allow_publish)>0)
+                                {
+                                    tempHtml+='onclick="jump(\''+ vsecond.id+'\',\''+vmodel.m+'\')" ';
+                                }
+                                tempHtml+='class="font2">'+vsecond.title+'</a>';
+                                if(typeof(classJson[i].class[j].child[k].child) != "undefined")
+                                {
+                                    $.each(classJson[i].class[j].child[k].child,function(n,vthird){
+                                        tempHtml+='<a href="javascript:void(0);" ';
+                                        if(parseInt(vthird.allow_publish) >0)
+                                        {
+                                            tempHtml+='onclick="jump(\''+ vthird.id+'\',\''+vmodel.m+'\')" ';
+                                        }
+                                        tempHtml+='class="font3">'+vthird.title+'</a>';
+                                    });
+                                }
+
+                            });
+                            tempHtml+='</li>';
+                        }
+                        else
+                        {
+                            tempHtml+='<li><a href="javascript:void(0);" ';
+                            if(parseInt(vfirst.allow_publish) >0)
+                            {
+                                tempHtml+='onclick="jump(\''+ vfirst.id+'\',\''+vmodel.m+'\')"';
+                            }
+                            tempHtml+=' class="font1">'+vfirst.title+'</a>';
+                            tempHtml+='</li>';
+                        }
+
+                    });
+                }
+                cateHtml+=tempHtml+'</ul>';
+            });
+            $(".nav-left").html(modelHtml);
+            $(".catabox-wrap").html(cateHtml);
+        };
+        $.ajax({
+            dataType:"jsonp",
+            jsonp:"callback",
+            jsonpCallback:"get_class",
+            url:url,
+            success: function(data){
+                classJson = data;
+                model();
+            }
+        });
+    }
+    getCate();
+    function tabWrap(){
+        $('.nav-left').on('click','span',function(){
+            oIndex=$(this).index();
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.catabox .catawrap').eq(oIndex).addClass('current').siblings().removeClass('current');
+        });
+    };
+    tabWrap();
+});
+</script>
+</body>
+</html>

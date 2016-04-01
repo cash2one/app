@@ -1,0 +1,110 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/channel.css">
+</block>
+<block name="body">
+<!--head部分-->
+<div class="wrap channel-head">
+    <div class="wrap adv1200_103"><center><script type="text/javascript">BAIDU_CLB_fillSlot("1135447");</script></center></div>
+    <div class="head-main">
+        <div class="left">
+            <a href="{:C('STATIC_URL')}" class="logo">亲亲宝贝网</a>
+            <h1></h1>
+        </div>
+        <div id="search" class="right">
+            <span class="right-l"><a href="http://s.qbaobei.com/cse/search?s=9283565739734765726&q=怀孕前的准备" target="_blank">怀孕前的准备</a>|<a href="http://s.qbaobei.com/cse/search?s=9283565739734765726&q=排卵期" target="_blank">排卵期</a>|<a href="http://s.qbaobei.com/cse/search?s=9283565739734765726&q=排卵" target="_blank">排卵</a>|<a href="http://s.qbaobei.com/cse/search?s=9283565739734765726&q=安全期" target="_blank">安全期</a></span>
+            <form action="http://s.qbaobei.com/cse/search" target="_blank" method="get" id="Search_form" name="Search_form" class="">
+                <input type="hidden" name="s" value="9283565739734765726">
+                <input type="text" name="q" id="searchBox" autocomplete="off" class="" value="请输入关键词">
+                <button type="submit" id="searchBtn" class="btn-submit">开始搜索</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="channel-nav">
+    <div class=" wrap nav-main">
+        <ul class="nav-ul">
+            <li><a href="{:C('STATIC_URL')}">首页</a></li>
+            <li><a href="{:getWidgetPath('65',true)}" target="_blank">怀孕</a></li>
+            <li><a href="{:getWidgetPath('66',true)}" target="_blank">育儿</a></li>
+            <li><a href="{:getWidgetPath('67',true)}" target="_blank">早教</a></li>
+            <li><a href="{:getWidgetPath('68',true)}" target="_blank">营养</a></li>
+        </ul>
+    </div>
+</div>
+<!--频道主体部分 start-->
+<div class="channel-main">
+<div class="wrap list-wraper">
+<div class="tag_result">搜索一下“<h2>{$info['title']}</h2>”找到{$count}个结果</div>
+<div class="list-area">
+    <div class="list-leftBox">
+        <div class="list-conBox">
+            <ul class="list-conBox-ul">
+                <volist name="lists" id="val">
+                <li>
+                    <a href="{:staticUrl('detail',$val['id'],'Gallery')}" target="_blank">
+                        <img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}">
+                    </a>
+                    <div class="right">
+                        <a href="{:staticUrl('detail',$val['id'],'Gallery')}" target="_blank" class="title">{$val['title']}</a>
+                        <p class="info">{$val['content']}</p>
+                        <div class="tips"><span class="tit">标签：</span><span class="tipsm"><volist name="val['tags']" id="vo"><a href="{:C('STATIC_URL')}/imgtag/{$vo['name']}/" target="_blank">{$vo['title']}</a></volist></span></div>
+                    </div>
+                </li>
+                </volist>
+            </ul>
+            <!--分页 start-->
+            <div class="page">{$page}</div>
+            <!--分页 end-->
+        </div>
+    </div>
+    <div class="list-rightBox">
+        <!--广告-->
+        <div class="adv259_193"><img src="/Public/Home/qbaobei2/images/adv3.jpg"></div>
+        <!-- 妈妈交流 -->
+        <div class="right">
+            <div class="fn-title"><a href="http://bbs.qbaobei.com" target="_blank" class="more">更多</a><h2>妈妈交流</h2></div>
+            <div class="recNews-wraper">
+                <div class="recNews">
+                    <div class="disBox-top">
+                        <a href="http://bbs.qbaobei.com/thread-246177-1-1.html" target="_blank" class="name">6个纠正孩子暴脾气的小方法 专治熊孩子任性发飙 </a>
+                        <p>孩子脾气暴躁，父母应当及早进行纠正。但是，父母在纠正孩子暴脾气的时候……</p>
+                    </div>
+                    <div class="disBox-top">
+                        <a href="http://bbs.qbaobei.com/thread-242063-1-4.html" target="_blank" class="name">孕晚期吃什么</a>
+                        <p>孕妈妈们在怀孕的晚期，为了给宝宝更多的营养，妈妈们需要补充更多的东西……</p>
+                    </div>
+                    <div class="disBox-top">
+                        <a href="http://bbs.qbaobei.com/thread-241282-1-4.html" target="_blank" class="name">产后肚腩大？</a>
+                        <p>我没怀孕时96斤，怀孕长了32斤的样子，宝宝生出来是6.6斤，月子里就瘦到……</p></div>
+                    <div class="disBox-top">
+                        <a href="http://bbs.qbaobei.com/thread-246006-1-1.html" target="_blank" class="name">喜大普奔，明天就是9月了，最长假期你要这么做 </a>
+                        <p>过完今天就到9月了，这是个好月份9月对孩子们来说是开学季，但对今年的……</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 专题 -->
+        <div class="right">
+            <div class="fn-title"><a href="http://www.qbaobei.com/plans/" target="_blank" class="more">更多</a><h2>热门专题</h2></div>
+            <div class="fn-ul-list">
+                <ul class="fn-pic-list">
+                    <li><a href="http://www.qbaobei.com/plans/xinshengerhuli/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2012/10/201210291623107353.jpg"><span>新生儿该如何护理</span></a></li>
+                    <li><a href="http://www.qbaobei.com/plans/tonghua/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/9/201309171514317292.jpg"><span>童话故事大全</span></a></li>
+                    <li><a href="http://www.qbaobei.com/plans/buruqiganmao/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/plans/2012/12/201212121152341426.jpg"><span>哺乳期感冒吃什么药</span></a></li>
+                    <li><a href="http://www.qbaobei.com/plans/boluo/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/4/201404181800418215.jpg"><span>菠萝的营养价值</span></a></li>
+                    <li><a href="http://www.qbaobei.com/plans/baobaotunai/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/6/201406041714249040.jpg"><span>宝宝吐奶怎么办</span></a></li>
+                    <li><a href="http://www.qbaobei.com/plans/yunchuqiys/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/3/201403281428483141.jpg"><span>怀孕初期吃什么好</span></a></li>
+                    <li><a href="http://www.qbaobei.com/plans/chanfushipu/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/1/201401231401131570.jpg"><span>产妇食谱大全</span></a></li>
+                    <li><a href="http://www.qbaobei.com/plans/shejian2/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/4/201404281518212791.jpg"><span>舌尖上的中国第二季</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--广告-->
+<div class="wrap adv1200_103"><script type="text/javascript">BAIDU_CLB_fillSlot("1135975");</script></div>
+</div>
+</div>
+<!--频道主体部分 end-->
+</block>

@@ -1,0 +1,9 @@
+<ul class="ranking">
+   <volist name="lists" id="article">
+        <lt name="key" value="3">
+            <li><em class="orange">{$key+1}</em><a href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a><i class="arrows"></i></li>
+            <else/>
+            <li><em class="blue">{$key+1}</em><a href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a><i class="arrows"></i></li>
+        </lt>
+   </volist>
+</ul>

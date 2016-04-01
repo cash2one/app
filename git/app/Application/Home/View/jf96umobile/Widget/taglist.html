@@ -1,0 +1,60 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css">
+</block>
+<block name="title">{$info.title}</block>
+<block name="body">
+    <section class="down-list">
+        <ul class="down-game-ul">
+            <volist name="lists" id="list">
+                <li><a href="{:staticUrlMobile('detail',$list['id'],'Down')}" title="{$list.title}" class="pic"><img src='<pic name="$list.smallimg"/>' alt="{$list.title}"></a>
+                    <div class="text">
+                        <a href="{:staticUrlMobile('detail',$list['id'],'Down')}" title="{$list.title}">{$list.title}</a>
+                        <p>{$list.size}</p>
+                    </div>
+                    <a href="{:staticUrlMobile('detail',$list['id'],'Down')}" class="down">下载</a>
+                </li>
+            </volist>
+        </ul>
+        <if condition="$is_more eq 1 ">
+        <p class="mid-more"><a href="javascript:void(0);"><span>点击查看更多</span><em class="arr"></em></a></p>
+        </if>
+    </section>
+</block>
+<block name="script">
+    <if condition="$is_more eq 1 ">
+        <script type="application/javascript">
+            $(function(){
+                var p=1;
+                var tag={$tid};
+                $(".mid-more").click(function(){
+                    $.ajax({
+                        type:"GET",
+                        async:false,
+                        url:DYNAMIC_SERVER_URL +"/dynamic.php?s=Jf96umobile/API_productTagsList",
+                        dataType:"jsonp",
+                        jsonp:"callback",
+                        jsonCallback:"callback",
+                        data:{p:p,tag:tag},
+                        success: function(json){
+                            if(json){
+                                var html=new Array();
+                                $.each(json,function(index,data){
+                                    html.push( "<li><a href=\""+data.url+"\" title=\""+data.title+"\" class=\"pic\"><img src=\""+data.path+"\" alt=\""+data.title+"\"/></a><div class=\"text\"><a href=\""+data.url+"\" title=\""+data.title+"\">"+data.title+"</a> <p>"+data.size+"</p></div><a href=\""+data.url+"\" class=\"down\">下载</a></li>");
+                                });
+                                p++;
+                                $(".down-game-ul").append(html.join(''));
+                            }else{
+                                alert("没有数据了!");
+                                return false;
+                            }
+
+                        }
+
+                    });
+                });
+            });
+
+        </script>
+    </if>
+</block>

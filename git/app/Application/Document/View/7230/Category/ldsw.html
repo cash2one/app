@@ -1,0 +1,24 @@
+<extend name="Home@7230/Base/common"/>
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/ycpd.css"/>
+</block>
+<!-----head-END----->
+<block name="body">
+<!-----head-END----->
+<div id="zixun-main">
+    <p class="page-nav">当前位置：<a href="{:staticUrl('index')}">首页</a>->{$categoryName}</p>
+    <div id="ldsw">
+    
+     <volist  name="lists" id="article">
+       <div class="ycwz"><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i class="demo3"><em></em><input class="knob" value="{:get_score_other($article['id'],'document',true)}"></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit"><h4>{$article.title}</h4></a>
+        <i class="info">{:clean_str($article['description'])}</i><b><s>{$article.view}</s>{$article.start_time|time_format="Y-m-d H:i:s"}</b></div>
+     </volist>
+    </div>
+<div style=" clear:both"></div>
+<!----fenye--->
+<div class="page">{$page}</div>
+<!---fenye---->
+    <!----left -END-->
+</div>
+</block>
+<div style="clear:both"></div>

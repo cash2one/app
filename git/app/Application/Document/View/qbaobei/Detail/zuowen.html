@@ -1,0 +1,13 @@
+<extend name="Home@qbaobei/Base/commonComposition"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/common1.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/healthdetail.css"/>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/information-details.js"></script>
+    <script type="text/javascript">
+        var siteSetup = { sitePath: '/', ajaxPath: '/ajax.aspx', skinPath: '/Template/Qbaobei/Skin/' };
+    </script>
+</block>
+<block name="body">
+{:W('Qbaobei/compositionDetail',array($info,$tags))}
+</block>

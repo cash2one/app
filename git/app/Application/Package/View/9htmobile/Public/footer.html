@@ -1,0 +1,39 @@
+<footer class="footer" id="j_foot_nav">
+    <div class="foot_u">
+        <ul class="n_c">
+            <li data-url="http://m.9ht.com/rjp.html">安卓软件</li>
+            <li data-url="http://m.9ht.com/yxc.html">安卓游戏</li>
+            <li data-url="http://m.9ht.com/yxw.html">游戏攻略</li>
+            <li data-url="http://m.9ht.com/hj.html">软件合集</li>
+        </ul>
+    </div>
+    <menu class="d-menu" style="display:none;"></menu>
+    <div class="ft-copy">
+        <p><a data-url="http://libao.9ht.com">电脑版</a>|<em>触屏版</em></p>
+        <div class="btn-top" style="display:none;"><a id="j_back_top" data-pvtag="foot.back" data-nogo="1"></a></div>
+    </div>
+</footer>
+<script src="__PUBLIC__/Package/9htmobile/js/base.js" type="text/javascript"></script>
+<script src="__PUBLIC__/Package/9htmobile/js/package.js" type="text/javascript"></script>
+<script>
+    seajs.use('common.js', function(init){
+        init();
+    });
+</script> 
+<script src="__STATIC__/jquery-2.0.3.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/Package/9htmobile/js/common.js" type="text/javascript"></script>
+<block name="script"></block>
+<script type="text/javascript">
+    tabShow=function(m,c,n,t){;
+        //m为导航统一名称，c为对应内容统一名称，n为对应序号,t为数量（比如这个切换效果有三块内容则为3）
+        for(i=1;i<=t;i++){
+            document.getElementById(m+i).className = "";
+            document.getElementById(c+i).style.display = "none";
+        }
+        document.getElementById(m+n).className = "cur";
+        document.getElementById(c+n).style.display = "";
+    };
+</script>
+</body>
+
+</html>

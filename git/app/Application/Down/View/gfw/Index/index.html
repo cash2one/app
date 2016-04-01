@@ -1,0 +1,62 @@
+<extend name="Home@gfw/Base/commonProductIndex" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/product.css"/>
+    <link href="__PUBLIC__/Home/gfw/css/index.css" rel="stylesheet" type="text/css" />
+</block>
+
+<block name="body">
+    <div class="h10"></div>
+    <div class="p-novel">
+        {:W('Down/Gfw/indexHot')}
+        <!-----mlife   -end----->
+        <div class="newsp gf-border">
+            <div class="release-title">
+                <h2 class="cfl">最新产品</h2><i class="release-icon cfl"></i>
+            </div>
+            <ul class="newsp-main">
+                <Think:article basename="Down" name="dmain" limit="30" order="create_time DESC">
+                    <li>
+                        <a href="{:staticUrl('detail', $article['id'],'Down')}">{$article.title}</a>
+                        <php>if($article['position']&8){echo '<span class="gif-news1"></span>';}</php>
+                        <php>if($article['position']&1 and !($article['position']&8)){echo '<span class="gif-news"></span>';}</php>
+
+                    </li>
+                </Think:article>
+            </ul>
+        </div>
+        <!-----newsp-end----->
+        <div class="main-right cfr">
+            {:W('Home/Gfw/rightUser',array('all'))}
+        </div>
+        <!-----main-right-end----->
+        <div id="banner-1" class="gf1000"><!-- 广告位：产品大全首页Banner*3 -->
+              <center><script type="text/javascript">BAIDU_CLB_fillSlot("1123296");</script></center>
+         </div>
+        <!-----banner-1-end----->
+        <div class="novel-left">
+            {:W('Down/Gfw/indexLTree')}
+        </div>
+        {:W('Down/Gfw/indexRTree')}
+        <!-----novel-con  -end----->
+    </div>
+    <!-----m-novel   -end----->
+    <div id="pc-hot" class="top10">
+        <div class="hot-icon"></div>
+        <Think:article basename="Down" name="product" where="position&8" order="create_time DESC" limit="5">
+            <php>$previewimg = explode(',', $article['previewimg']);</php>
+            <dl class="hot-main">
+                <dt class="hot-pic" <empty name="key">style="left: 175px; top: 76px;"}</empty>>
+                <a href="{:staticUrl('Detail',$article['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" width="150" height="150" title="{$article.title}" /></a></dt>
+                <dd class="hot-title"><a href="{:staticUrl('Detail',$article['id'],'Down')}">{$article.title}</a></dd>
+                <dd class="price"><span class="red">{:sprintf("%01.2f", $article['price'])}</span><em>{:sprintf("%01.2f", $article['market_price'])}</em></dd>
+            </dl>
+        </Think:article>
+
+
+    </div>
+    <!-----热门产品-end----->
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/lrtk.js"></script>
+</block>

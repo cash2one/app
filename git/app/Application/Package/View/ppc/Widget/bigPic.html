@@ -1,0 +1,10 @@
+                <i class="switchBigPic">
+                    <Think:article basename="Package" name="pmain" limit="3" where="position & 1">
+                        <span><a href="{:staticUrl('detail', $article['id'], $static_url_params)}"><img src="{:get_cover($article['brecom_id'],'path')}"/></a><u></u><strong>{$article.title}</strong></span>
+                    </Think:article>
+                </i>
+                <s class="simg">
+                    <Think:article basename="Package"  name="pmain" limit="3" where="position & 1">
+                        <em><img src="{:get_cover($article['brecom_id'],'path')}"/></em>
+                    </Think:article>
+                </s>

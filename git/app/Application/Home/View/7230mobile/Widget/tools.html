@@ -1,0 +1,17 @@
+	<!-- 热门工具 -->
+	<section class="tool_wrap">
+        <h3><i>热门工具</i></h3>
+        <div class="tool_box" data-sudaclick="main_hottool">
+			<ul>
+                <php>$where="category_rootid=2&&cover_id!=0&&position & 1".$system</php>
+     <Think:article basename="Down" name="dmain"  where="" order="update_time desc" limit="2">
+	<li>
+		<a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img alt="{$article.title}" src="{:get_cover($article['smallimg'],'path')}"></a>
+		<h6><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></h6>
+		<p>{:mb_substr(clean_str($article['conductor']),0,45)}...</p>
+		<a class="tool_btn" href="{:staticUrlMobile('detail', $article['id'],'Down')}"></a>
+	</li>
+        </Think:article>
+			</ul>
+		</div>
+	</section>

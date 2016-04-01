@@ -1,0 +1,31 @@
+<extend name="Home@gfwmobile/Base/commonWebsite" />
+
+<block name="body">
+    <nav>
+    	{:W('Home/GfwMobile/getWebSiteParentCateById')}
+    </nav>
+    <section class="news">
+        <div class="product" id="product-info">
+			<div class="title">
+				<h2 style="font-color:#ff8800;">{:W('Package/Gfw/categoryPosition',array($category_id))}</h2>
+			</div>
+			<ul class="product-list">
+				<if condition="!empty($cateTree['_'])">
+					<volist name="cateTree['_']" id="cate1" key="i">
+						<li>
+							<a href="{:staticUrlMobile('lists',$cate1['id'],'Package')}" title="{:$cate1['title']}">{:$cate1['title']}</font></a>
+						</li>
+						<if condition="!empty($cateTree['_'])">
+						<volist name="cate1['_']" id="cate2" key="j">
+							<li>
+								<a href="{:staticUrlMobile('lists',$cate2['id'],'Package')}" title="{:$cate2['title']}">{:$cate2['title']}</a>
+							</li>
+						</volist>
+						</if>
+					</volist>
+				</if>
+			</ul>
+		</div>
+    </section>
+</block>
+

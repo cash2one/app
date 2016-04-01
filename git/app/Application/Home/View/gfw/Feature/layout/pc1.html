@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Home@gfw/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/subject.css"/>
+</head>
+
+<body>
+<include file="Home@gfw/Public/headerTop"/>
+<div id="header">
+    <include file="Home@gfw/Public/headerSearch"/>
+    <div id="baike-nav">
+        <ul class="nav" id="navZt">
+            <li class="red"><a href="{:getWidgetPath('66',ture)}">专题合集</a></li>
+            <!--#include virtual="{:getWidgetPath('77')}"-->
+        </ul>
+    </div>
+</div>
+<!-----header-end----->
+<div class="dragable" widget="zt1" style="display: none;"></div>
+<input id="navId" type="hidden" value="{$base['category_rootid']}">
+<div class="page-nav"><div class="page-left"><span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">&gt;</span><a href="{:getWidgetPath('66', true)}">专题合集</a><span class="grey">&gt;</span><a href="{:staticUrl('lists',$base['category_rootid'],'Feature')}">{$cate}</a><span class="grey">&gt;</span>{$base['title']}</div><span class="sum"></span></div>
+<div id="subject" class="gf1000">
+    <div class="subject-left1 cfl">
+        <div class="header-top gf-border">
+            <div class="pic1"><img src="{:get_cover($base['icon'],'path')}" width="242" height="135"></div><h2>{$base['title']}</h2>{$base['description']}
+            <div class="clear"></div>
+        </div>
+
+        <div class="h10"></div>
+        <ul class="introduce-list flclr gf-border">
+            <volist name="lists" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank" class="in-img"><img src="{:get_cover($val['cover_id'],'path')}"></a><p class="in-ct"><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank" class="in-title">{$val['title']}</a><span class="in-about">品牌简介：</span><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank" class="in-rule">{$val['description']}</a></p></li>
+            </volist>
+        </ul>
+        <div id="fenye">{$page}</div>
+    </div>
+    <!-----subject-left-end----->
+    <div class="subject-right cfr">
+        <!--#include virtual="{:getWidgetPath('67')}"-->
+        {:W('Home/Gfw/otherFeature',array($base['category_rootid']))}
+        <!--#include virtual="{:getWidgetPath('68')}"-->
+    </div>
+    <!-----subject-right-end----->
+
+</div>
+<!-----about-end----->
+
+<include file="Home@gfw/Public/foot"/>
+
+</body>
+</html>

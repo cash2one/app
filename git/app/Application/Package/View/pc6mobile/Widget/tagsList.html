@@ -1,0 +1,31 @@
+<extend name="Package@pc6mobile/Base/common" />
+<block name="body">
+  <article class="content">
+    <section class="app-intro">
+      <div class="tab_main" id="yw0">
+        <div class="tag-info">
+                  <h2 class="title">热门标签列表</h2>
+        </div>
+        <ul class="mod-app-intro tags-list">
+          <volist name="hlists" id="vo">
+            <li>
+              <h3 class="tit"><a href="/tag/{$vo['name']}/">{$vo.title}</a></h3>
+            </li>
+          </volist>
+        </ul>
+       <div class="tag-info">
+                  <h2 class="title">标签列表</h2>
+        </div>
+        <ul class="mod-app-intro tags-list">
+          <volist name="lists" id="vo">
+            <li>
+              <h3 class="tit"><a href="/tag/{$vo['name']}/">{$vo.title}</a></h3>
+            </li>
+          </volist>
+        </ul>
+        <div class="page">{$page}</div>
+      </div>
+    </section>
+    <div class="clear"></div>
+  </article>
+</block>

@@ -1,0 +1,619 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<include file="Home@7230/Public/head"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/kpage.css"/>
+</head>
+<body>
+
+<include file="Home@7230/Public/header"/>
+
+<div id="kpage">
+    <p class="page-nav">当前位置：<a href="{:C('STATIC_URL')}">首页</a>-><a href="{:getWidgetPath('18', true)}">专题</a>->游戏合集</p>
+    <div class="dragable" widget="base" style="display: none;"></div>
+    <div id="banner">
+    <div class="dragable" widget="image" style="width: 768px; height: 358px; border: 1px solid #FF0000;display: inline-block;overflow: hidden; float: left;"><img src="__PUBLIC__/Home/7230/images/pic4.jpg" alt="主题"></div>
+        <div class="xbzx">
+        <div class="dragable" widget="image" style="width: 98px; height: 103px; border: 1px solid #FF0000; display: inline-block; float: left;"><img src="__PUBLIC__/Home/7230/images/pic3.jpg" alt="小编真相"></div>
+            <b>小编有话说：</b>
+            <i class="info"><div class="dragable" widget="html" style="width: 384px; height: 180px; border: 1px solid #FF0000;display: inline-block; float: left;">嗨！小编，有话来这里说。嗨！小编。有话来这里说。嗨！小编。有话来这里说。小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……</div></i>
+            <i class="more"><a href="{:getWidgetPath('18', true)}" target="_blank">更多合集>></a></i>
+        </div>
+    </div>
+    <div class="yxhj-main">
+        <div class="hj-title"><em></em><div class="dragable" widget="html" style="width: 120px; height: 38px; border: 1px solid #FF0000;">益智解谜</div></div>
+        <div class="xghj-info"><div class="dragable" widget="html" style="width: 1000px; height: 50px; border: 1px solid #FF0000;">就是东风科技弗雷斯科发了多少看来封建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑到了康师傅离开对方离开大风大浪法律的反垄断法就是东风科技弗雷斯科发了多少看来封建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑到了康师傅离开对方离开大风大浪法律的反垄断法。</div></div>
+        <ul class="klb">
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+        </ul>
+        <!-- 这是一个大分类 -->
+        <div class="hj-title"><em></em><div class="dragable" widget="html" style="width: 120px; height: 38px; border: 1px solid #FF0000;">射击游戏</div></div>
+        <div class="xghj-info"><div class="dragable" widget="html" style="width: 1000px; height: 50px; border: 1px solid #FF0000;">就是东风科技弗雷斯科发了多少看来封建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑到了康师傅离开对方离开大风大浪法律的反垄断法就是东风科技弗雷斯科发了多少看来封建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑到了康师傅离开对方离开大风大浪法律的反垄断法。</div></div>
+        <ul class="klb">
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+        </ul>
+        <!--大分类结束-->
+        <!-- 这是一个大分类 -->
+        <div class="hj-title"><em></em><div class="dragable" widget="html" style="width: 120px; height: 38px; border: 1px solid #FF0000;">射击游戏</div></div>
+        <div class="xghj-info"><div class="dragable" widget="html" style="width: 1000px; height: 50px; border: 1px solid #FF0000;">就是东风科技弗雷斯科发了多少看来封建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑到了康师傅离开对方离开大风大浪法律的反垄断法就是东风科技弗雷斯科发了多少看来封建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑建时代封疆虑到了康师傅离开对方离开大风大浪法律的反垄断法。</div></div>
+        <ul class="klb">
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+
+            <!-- 这里是li的分割线，不需要也可删除 -->
+            <li>
+                <div class="dragable" widget="down__product_tags" style="width: 350px; height: 80px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left; position: relative; overflow: hidden;">
+                    <volist name="lists" id="val" offset="0" length="1">
+                <span class="list-info">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <span class="yxjj"><span class="jj-l"><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['name']}</a><i>{$val['title']}</i><i>
+                    <volist name="val['tags']" id="rel">
+                        <a href="{~W('Home/P7230/tagsUrl',array($rel['name']))}" target="_blank">{$rel['title']}</a>
+                    </volist>
+                </i>
+                </span>
+                   <span class="jj-r">
+                       <php>if(!empty($val['adr'])){ </php>
+                       <a href="{:staticUrl('detail',$val['adr'],'Down')}" target="_blank" class="down adr">安卓下载<s>{$val[adrSize]}</s></a>
+                       <php> } if(!empty($val['ios'])){ </php>
+                       <a href="{:staticUrl('detail',$val['ios'],'Down')}" target="_blank" class="down app">苹果下载<s>{$val[iosSize]}</s></a>
+                       <php> } </php>
+                   </span>
+                </span>
+                </span>
+                    </volist>
+                    <php>unset($lists);</php>
+                </div>
+                <i class="content"><em>推荐理由：</em>
+                    <div class="dragable" widget="html" style="width: 350px; height: 52px; border: 1px solid #FF0000; margin: 0px 12px 12px 0px; float: left;">
+                        小程一直在努力，争取做更好……小程一直在努力，争取做更好……小程一直在努力，争取做更好……
+                    </div>
+                </i>
+            </li>
+        </ul>
+        <!--大分类结束-->
+
+    </div>
+    <!----底部轮播---->
+    <div id="lunbo">
+        <p class="title"><i></i>推荐合集<a href="{:getWidgetPath('18', true)}" target="_blank" class="more"></a></p>
+        <div class="lbmain">
+            <span class="prev"></span>
+            <div class="lunbo-m">
+                <ul>
+                    <div class="dragable" widget="special__tags" style="width: 280px; height: 156px; border: 1px solid #FF0000; float: left;">
+                    <volist name="lists" id="val">
+                    <li><a href="{:C('STATIC_URL')}{$val['url']}" target="_blank"><img src="{:get_cover($val['icon'],'path')}"></a><a href="{:C('STATIC_URL')}{$val['url']}" target="_blank" class="title">{$val['title']}</a></li>
+                    </volist>
+                    </div>
+                </ul>
+            </div>
+            <span class="next"></span>
+        </div>
+    </div>
+</div>
+<include file="Home@7230/Public/footer"/>
+</body>
+</html>

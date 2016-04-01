@@ -1,0 +1,18 @@
+<!--hotwords-->
+<div class="baike-con">
+    <div class="wrap baike-main">
+        <div class="fn-title fn-title-l"><a href="{:staticUrl('lists',$header['cate'],'Document')}" target="_blank" class="more">更多</a><h2>{$header['title']}</h2></div>
+        <ul class="baike-main-ul current">
+            <volist name="hotWord" id="val">
+                <li class="{$number[$key]}">
+                    <p class="title">{$val['title']}</p>
+                    <div class="info">
+                        <volist name="val['child']" id="vo">
+                            <a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" title="{$vo['title']}">{$vo['title']}</a>
+                        </volist>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+    </div>
+</div>

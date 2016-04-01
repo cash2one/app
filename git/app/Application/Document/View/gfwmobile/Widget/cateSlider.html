@@ -1,0 +1,6 @@
+<ul class="slide" id="slide">
+<volist name="lists" id="vo">
+    <li><a href="{:staticUrlMobile('detail', $vo['id'],'Document')}"><img src="{:get_cover($vo['cover_id'],'path')}" alt="{$vo['title']}"></a></li>
+ </volist>
+</ul>
+<div class="slide_dot" id="slide_dot"></div>

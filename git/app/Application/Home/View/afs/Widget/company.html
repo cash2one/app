@@ -1,0 +1,16 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/afs/css/zqzt.css"/>
+</block>
+<block name="body">
+<!--main-->
+<div id="main" class="yxzt">
+    <p id="main-title"><a href="{:C('STATIC_URL')}">首页</a>><a>厂商</a></p>
+    <ul class="ztlb" id="cshj-list">
+        <volist name="lists" id="val">
+        <li><a href="{:C('STATIC_URL')}/{$val['path']}" target="_blank" class="title">{$val['name']}</a><a href="{:C('STATIC_URL')}/{$val['path']}" target="_blank"><img src="{:get_cover($val['img'],'path')}" alt="{$val['name']}"></a><p>{$val['intro']}</p></li>
+        </volist>
+    </ul>
+    <div id="fenye">{$page}</div>
+</div>
+</block>

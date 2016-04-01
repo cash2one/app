@@ -1,0 +1,10 @@
+<notempty name="lists">
+<section class="game-xtcs dis-bot">
+    <div class="mid-title"><h2>同类游戏</h2></div>
+    <ul class="xtcs-ul">
+     <volist name="lists" id="vo" offset="0" length="4">
+        <li><a href="{:str_replace('index.html','',staticUrlMobile('detail', $vo['id'],'Down'))}" title="{$vo['title']}"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><span class="tit">{$vo['title']}</span></a><a href="{:str_replace('index.html','',staticUrlMobile('detail', $vo['id'],'Down'))}" class="down">下载</a></li>
+       </volist>
+    </ul>
+</section>
+</notempty>

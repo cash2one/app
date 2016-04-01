@@ -1,0 +1,115 @@
+<extend name="Home@jf96u/Base/common" />
+
+
+<block name="style">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/yxk.css">
+</block>
+
+<block name="body">
+
+	<div class="main1200">
+		<input type="hidden"  id="hitid"   name="id"  value="{$info.id}">
+		<input type="hidden"  id="hituid"  name="uid"  value="{$info.uid}">
+		<input type="hidden"  id="hittype"  name="type"  value="{:MODULE_NAME}">
+		<div class="goback">当前位置：      <position /></div>
+			> {$info.title}</div>
+		<div class="container">
+			<div class="down-detail">
+				<div class="fl detail-l">
+					<h1>{$info.title}</h1>
+					<div class="pic"><img src="{:get_cover($info['smallimg'],'path')}" alt="{$info.title}"></div>
+					<p class="score"><b>{$info['soft_socre']*2}</b>.0</p>
+					<div class="down">
+						<volist name="info[downAll]" id="v">
+							<if condition="($v['site_id'] eq 19)">
+								<div class="btn down-adr">
+									<elseif condition="$v['site_id'] eq 18" />
+									<div class="btn down-pc">
+										<elseif condition="$v['site_id'] eq 20"/>
+										<div class="btn down-ios">
+							</if>
+							<a href="{$v.url}">{$v.title}<span class="bg">
+            </span></a>
+							<span class="ewm"><img src="{$v.qrcode}"></span>
+					</div>
+
+
+
+					</volist>
+
+				</div>
+				<div class="info">
+					<p><span>游戏类型：</span>{$info.cate}</p>
+					<p><span>游戏版本：</span>{$info.version}<if condition="$info['version'] eq 0 ">1.0</if></p>
+					<p><span>游戏大小：</span>{:format_size($info['size'])}<if condition="$info['size'] eq 0 ">未知</if></p>
+					<p><span>游戏平台：</span>
+						<if condition="($info['system'] eq 1)">
+							<em class="adr"></em>
+							<elseif condition="$info['system'] eq 2" />
+							<em class="iph"></em>
+						</if>
+					</p>
+
+
+				</div>
+			</div>
+			<div class="fr detail-r">
+				<div class="main-nav">
+					<a href="" class="active">游戏介绍</a>
+					<a href="#news">游戏资讯</a>
+					<a href="#gongl">游戏攻略</a>
+					<a href="#gift">游戏礼包</a>
+					<a href="#video">游戏视频</a>
+					<a href="#pingl">我要评论</a>
+				</div>
+				<!--游戏简介-->
+				<div class="dx game-intro">
+					<div class="intro-wrap">
+						{$info.content}
+					</div>
+					<div class="get_more"><span>展开内容+</span></div>
+				</div>
+				<!--游戏截图-->
+				<if condition="($info['previewimg'] NEQ 0)">
+
+					<div class="dx game-pics">
+						<ul class="pics-ul">
+							<foreach name="info['previewimg']" item="vo" >
+								<li><img src="{:get_cover($vo,'path')}" alt="游戏截图"></li>
+							</foreach>
+
+
+
+						</ul>
+						<div class="pics-gdt"><p><b></b></p></div>
+					</div>
+				</if>
+				<!--游戏版本-->
+				{:W('jf96u/downbanben',array($info['id'],$info['system']))}
+
+
+
+				{:W('jf96u/downtag',array($info['id']))}
+				<div class="dx comment">
+					<div class="pingl" id="pingl" ><h3>玩家评论</h3></div>
+					<form action="" method="" name="" id="pl" data-id="{$info['id']}" data-model="down">
+						<input name="author" id="tj-user" type="hidden" value="{$info['uid']}">
+						<p><input type="text" placeholder="请输入用户名" id="user"></p>
+						<p><textarea placeholder="这里输入您想和大家说的，也可以是对我们的建议……"></textarea></p>
+						<p class="bot"><span>本站为防止低俗内容出现，用户发表的评论需经过审核，谢谢 ！</span><input type="button" value="发表评论" id="btn"></p>
+					</form>
+					<ul class="comment-list" data-id="{$info['id']}" data-model="down">
+						<p id="no-comment" style="text-align:center;">暂无评论</p>
+					</ul>
+					<div class="gdmore">查看更多 ↓</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	</div>
+</block>
+<block name="script">
+    <script src="__PUBLIC__/Home/jf96umobile/js/down.cnzz.js"></script>
+</block>

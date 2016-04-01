@@ -1,0 +1,95 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/channel.css">
+</block>
+<block name="body">
+<!--head部分-->
+{:W('Qbaobei/header',array(685))}
+<!--频道主体部分 start-->
+<div class="channel-main">
+<div class="wrap channel-wraper">
+<!--chanbox-->
+{:W('Qbaobei/channelPosition',array(array(688,690,691,209,686,1213,685),685))}
+<!--chanbox 美食资讯-->
+<div class="fn-area chanbox2">
+    <div class="left">
+        <div class="fn-title fn-title-l"><span class="fn-about-title"><volist name="one['tags']" id="val"><a href="http://www.qbaobei.com/tag/{$val['name']}/" target="_blank">{$val['title']}</a></volist></span><h2>美食资讯</h2></div>
+        <ul class="meishi-pic">
+            <volist name="one['img']" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"><span class="info"><i>{$val['title']}</i><em>{$val['description']}</em></span></a></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="right">
+        <div class="fn-title"><a href="{:staticUrl('lists',688,'Document')}" target="_blank" class="more">更多</a><h2>最新资讯</h2></div>
+        <div class="fn-ul-list">
+            <ul class="meishi-news">
+                <volist name="one['new']" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a><p class="info">{$val['description']}</p></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--chanbox 妈妈食谱-->
+<div class="fn-area chanbox2">
+    {:W('Qbaobei/channelCate',array($two,'妈妈食谱'))}
+    <div class="right">
+        <div class="fn-title"><a href="http://www.qbaobei.com/plans/yingyang/" target="_blank" class="more">更多</a><h2>营养专题</h2></div>
+        <div class="fn-ul-list">
+            <ul class="fn-pic-list">
+                <li><a href="http://www.qbaobei.com/plans/guochannaifen/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/4/201404211602198308.jpg"><span>国产奶粉排行榜10强</span></a></li>
+                <li><a href="http://www.qbaobei.com/plans/naifenchongtiaogonglue/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/4/201404081546268514.jpg"><span>奶粉冲调攻略</span></a></li>
+                <li><a href="http://www.qbaobei.com/plans/baobaotunai/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/6/201406041714249040.jpg"><span>宝宝吐奶怎么办</span></a></li>
+                <li><a href="http://www.qbaobei.com/plans/sixfoods/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/4/201404041804408693.jpg"><span>6个月宝宝辅食食谱</span></a></li>
+                <li><a href="http://www.qbaobei.com/plans/nfwy/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/12/201312061555292350.jpg"><span>奶粉喂养注意事项</span></a></li>
+                <li><a href="http://www.qbaobei.com/plans/naizhang/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/1/201401231627455574.jpg"><span>断奶奶涨怎么办</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--chanbox 宝宝食谱-->
+<div class="fn-area chanbox2">
+    {:W('Qbaobei/channelCate',array($three,'宝宝食谱'))}
+    <div class="right" id="meishi-dis">
+        <div class="fn-title"><h2><span class="active">美食日记</span><span>美食交流</span></h2></div>
+        <div class="recNews-wraper">
+            <div class="recNews current">
+                <volist name="three['ms']" id="val">
+                <div class="disBox-top">
+                    <a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="userPic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                    <div class="info"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="name">{$val['title']}</a><p>{$val['description']}</p></div>
+                </div>
+                </volist>
+            </div>
+            <div class="recNews">
+                <div class="disBox-top"><a href="http://bbs.qbaobei.com/thread-245910-1-1.html" target="_blank" class="name">面包机做的肉松，速度快效果也不错</a><p>这是宝宝的口粮，我闲外面的肉松不好，就自己动手做了，还不错哦。也很方便 全瘦肉煮的时候加点八角，桂皮增香......</p></div>
+                <div class="disBox-top"><a href="http://bbs.qbaobei.com/thread-245835-1-1.html" target="_blank" class="name">喂爱坚守的秘密，我的移动哺乳室</a><p>我远嫁，miumiu的降生，并没有给我们这个家庭增加多少快乐。随之而来的是爷爷奶奶可怕的重男轻女，无知的养育知识让我更加产后抑郁，曾经因为婆婆婚姻走到过崩溃的边缘，曾经因为婆婆......</p></div>
+                <div class="disBox-top"><a href="http://bbs.qbaobei.com/thread-245814-1-1.html" target="_blank" class="name">七夕美食秀+经典贵妃鸡，不要流口水哦</a><p>哈哈，公司福利还是不错滴，今天七夕给我们放了半天假。回到家就开动了，美食什么的不要太多，千万别流口水哦。贵妃鸡又叫清平鸡，我家都喜欢吃，不过平时做的比较少......</p></div>
+                <div class="disBox-top"><a href="http://bbs.qbaobei.com/thread-245788-1-1.html" target="_blank" class="name">朋友圈里朋友给女儿做的早餐图，你下得了口吗？</a><p>太漂亮了，要我肯定下不了口的。给老公看，没想到直接跟我说，你看，学学别人家罗，这样的才叫早餐啊。好吧，我确实该学学了......</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--chanbox 奶粉-->
+<div class="fn-area chanbox2">
+    {:W('Qbaobei/channelCate',array($four,'奶粉'))}
+    <div class="right">
+        <div class="fn-title"><a href="{:staticUrl('lists',213,'Document')}" target="_blank" class="more">更多</a><h2>奶粉排行榜</h2></div>
+        <div class="recNews milk-rank">
+            <ul>
+                <volist name="four['ph']" id="val">
+                <li <php>if($i == 1) echo 'class="active"';</php>><span>1</span><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="title">{$val['title']}</a><div class="info"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a><p><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a><b class="star star5">评分：</b></p></div></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--广告-->
+<div class="wrap adv1200_103"><script type="text/javascript">BAIDU_CLB_fillSlot("1135975");</script></div>
+<!--hotwords-->
+{:W('Qbaobei/hotWord',array(749,'营养美食'))}
+</div>
+</div>
+<!--频道主体部分 end-->
+</block>

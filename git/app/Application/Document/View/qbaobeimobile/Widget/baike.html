@@ -1,0 +1,24 @@
+<extend name="Home@qbaobeimobile/Base/common2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/channel.css"/>
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > 百科</block>
+<block name="body">
+<!--百科列表-->
+<section class="baike-list dis-bot">
+        {~W('Document/Qbaobeimobile/baikePCate',array('746'))}
+        {~W('Document/Qbaobeimobile/baikePCate',array('747'))}
+        {~W('Document/Qbaobeimobile/baikePCate',array('748'))}
+        {~W('Document/Qbaobeimobile/baikePCate',array('749'))}
+        {~W('Document/Qbaobeimobile/baikePCate',array('750'))}
+        {~W('Document/Qbaobeimobile/baikePCate',array('751'))}
+</section>
+<section class="hotwrap">
+    <div class="wrap-tit"><h3>备孕热点</h3></div>
+    <div class="hotwrap-main">
+        <Think:article basename="Document" name="baike" limit="15" order="view desc"> 
+                    <a href="{:staticUrlMobile('detail', $article['id'],'Document')}" title="{$article.title}">{$article.title}</a><em>|</em>
+         </Think:article>
+    </div>
+</section>
+</block>

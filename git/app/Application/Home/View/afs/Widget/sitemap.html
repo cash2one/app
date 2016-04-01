@@ -1,0 +1,32 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afs/css/copy.css"/>
+</block>
+<block name="body">
+    <!--main-->
+  <div id="main" class="map">
+      <div class="map_left">
+        <ul class="nav">     
+            <li><a href="{:getWidgetPath('35')}">关于我们</a><i></i></li>
+            <li><a href="{:getWidgetPath('36')}">联系我们</a><i></i></li>
+            <li class="on"><a href="{:getWidgetPath('34')}">网站地图</a><i></i></li>
+        </ul>
+      </div>
+      <div class="map_right">
+         <div class="title">网站地图</div>
+            <ul class="news">
+            <volist name="news" id="vo">
+             <li><span>[{$vo.create_time|time_format="Y-m-d"}]</span><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank">{$vo['seo_title']}</a></li>
+            </volist>
+                 
+            </ul>  
+            
+            <ul class="down">
+            <volist name="down" id="vo">
+             <li><span>[{$vo.create_time|time_format="Y-m-d"}]</span><a href="{:staticUrl('detail', $vo['id'],'Down')}" target="_blank">{$vo['seo_title']}</a></li>
+            </volist> 
+            </ul>       
+      </div>
+  </div>
+  <div style=" clear:both"></div>
+</block>

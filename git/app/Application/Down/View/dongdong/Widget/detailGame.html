@@ -1,0 +1,32 @@
+<!--相关游戏-->
+<div class="wrap down_xq2">
+    <div class="title"><h3>同类游戏</h3><a href="{:staticUrl('lists',$cate,'Down')}" target="_blank"  class="more">+更多</a></div>
+    <ul>
+        <volist name="cateGame" id="val">
+        <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path',1,75,75)}" alt="{$val['title']}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+<!--最近更新-->
+<div class="wrap down_xq2">
+    <div class="title"><h3>最近更新</h3></div>
+    <ul>
+        <volist name="newGame" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path',1,75,75)}" alt="{$val['title']}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+<!--游戏软件-->
+<div class="wrap down_xq2" id="down_list4">
+    <div class="title"><span><i class="cur">热门游戏</i><i>热门软件</i></span></div>
+    <ul class="current">
+        <volist name="hotGame" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path',1,75,75)}" alt="{$val['title']}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val['title']}</a></li>
+        </volist>
+    </ul>
+    <ul>
+        <volist name="hotSoft" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path',1,75,75)}" alt="{$val['title']}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>

@@ -1,0 +1,150 @@
+<extend name="Home@qilimobile/Base/common" />
+
+<block name="body">
+<include file="Home@qilimobile/Public/header" />
+
+<div class="mui-content" style="padding-top: 40px;">
+	<article class="y7-article">
+		<h1>{$info['title']}</h1>
+		<cite class="mui-clearfix">
+			<span class="mui-pull-left">{$info['create_time']|time_format="Y-m-d H:i:s"}</span>
+			<span class="mui-pull-right">阅读({$info.view_sc})</span>
+		</cite>
+		<blockquote>
+			{$info['description']}
+		</blockquote>
+
+		<section>
+			<if condition="$info['content']"> 
+				<php>
+					$info['content'] = preg_replace('/<([a-zA-Z]+) class="sys_label_linker"[^>]*>/',"", $info['content']);
+				</php>
+			</document>
+
+			{$info['content']}
+		</section>
+	</article>
+
+	<div class="y7-banner">
+		
+	</div>
+	
+	<section id="related" class="y7-sec y7-sec-3">
+		<document model="2" id="$info[id]" limit="1" callback="classify"><php>$empty = !empty($document['classify']);</php></document>
+		
+		<if condition="$empty"> 
+		<div class="y7-sec-title mui-clearfix">
+			<div class="side-tabs">
+				<php>$typeid = array()</php>
+				<document model="2" id="$info[id]" limit="1" callback="classify" key="i">
+					<volist name="document.classify" id="project">
+						<php>$typeid[] = $project['id']</php>
+						<if condition="$i == 1">
+							<a href="javascript:void(0)" class="active">{$project.title}</a>
+						<else />
+							<a href="javascript:void(0)">{$project.title}</a>
+						</if>
+					</volist>
+				</document>
+			</div>
+		</div>
+
+		<div class="y7-sec-body">
+			<ul class="mui-table-view">
+				<if condition="isset($typeid[0])"> 
+					<document model="2" typeid="$typeid[0]" limit="5" notin="$info[id]">
+						<li class="mui-table-view-cell mui-media" href="{$document.url}">
+							<a href="{$document.url}">
+								<img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+								<div class="mui-media-body">
+									<p class="title">{$document.title}</p>
+									<p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document.view}次浏览</span></p>
+								</div>
+							</a>
+						</li>
+					</document>
+				</if>
+			</ul>
+
+			<ul class="mui-table-view" style="display:none">
+				<if condition="isset($typeid[1])"> 
+					<document model="2" typeid="$typeid[1]" limit="5" notin="$info[id]">
+					<li class="mui-table-view-cell mui-media" href="{$document.url}">
+						<a href="{$document.url}">
+							<img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+							<div class="mui-media-body">
+								<p class="title">{$document.title}</p>
+								<p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document.view}次浏览</span></p>
+							</div>
+						</a>
+					</li>
+					</document>
+				</if>
+			</ul>
+		</div>
+		</if>
+	</section>
+
+	<section id="theme" class="y7-sec">
+		<div class="y7-sec-title mui-clearfix">
+			<div class="side-tabs">
+				<a href="javascript:void(0)" class="active">相关主题</a>
+				<a href="javascript:void(0)">大家都在看</a>
+			</div>
+		</div>
+
+		<div class="y7-sec-body">
+			<dl class="mui-clearfix y7-topic-list j-y7-topic-list">
+				{~W('Home/qilimobile/newstopic', array($info['category_id']))}
+			</dl>
+		</div>
+
+		<div class="y7-djdzk" style="display:none">
+			<div class="dzk-ul">
+				{~W('Home/qilimobile/newslook', array($info['category_id']))}
+			</div>
+		</div>
+	</section>
+</div>
+</block>
+
+<block name="script">
+<script src="__PUBLIC__/Home/qilimobile/js/index.js"></script>
+<script>
+$(document).ready(function(){
+	$('.mui-table-view li').click(function(){
+		window.location.href=""+$(this).attr('href')+""; 
+	});	
+
+	$('#related .side-tabs a').click(function(){
+		$('#related .side-tabs a').removeClass('active');
+		$(this).addClass('active');
+		var index = $('#related .side-tabs a').index($(this));
+		$('#related ul').hide();
+		$('#related ul').eq(index).show();
+	});	
+	
+	$('#theme .side-tabs a').click(function(){
+		$('#theme .side-tabs a').removeClass('active');
+		$(this).addClass('active');
+		var index = $('#theme .side-tabs a').index($(this));
+		if(index == '1'){
+			$('#theme .y7-topic-list').hide();
+			$('.y7-djdzk').show();
+		}else{
+			$('.y7-djdzk').hide();
+			$('#theme .y7-topic-list').eq(index).show();
+		}
+	});	
+
+	$('.mui-table-view .mui-text-mute').each(function(){
+		gap($(this).find('time').text(), $(this).find('time'));
+	});
+
+	$('.j-y7-topic-list').on('touchend', '.hideShow', function(ev){
+		ev.preventDefault();
+		$(ev.target).parents('dd').toggleClass('on');
+	});
+});
+</script>
+</block>

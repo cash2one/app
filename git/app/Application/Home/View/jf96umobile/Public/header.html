@@ -1,0 +1,23 @@
+<div class="topbar">
+    <div class="tip-nav"><span class="nav"></span></div>
+    <div class="logo"><a href="{$Think.config.MOBILE_STATIC_URL}"><img src="__PUBLIC__/Home/jf96umobile/images/logo.png" alt="96u手游网"></a></div>
+    <div class="sear-box"><span class="search"></span></div>
+    <div class="searbox">
+        <form action="http://s.96u.com/cse/search" method="GET" id="bdcs-search-form">
+            <input type="hidden" class="sear-input" name="s" value="5693182300236230235" id="sear-input">
+            <input type="hidden" class="sear-input" name="nsid" value="3">
+            <input type="hidden" class="sear-input" name="entry" value="1">
+            <input type="hidden" class="sear-input" name="ie" value="utf8">
+            <input type="text" class="sear-input" name="q" id="bdcs-search-form-input" placeholder="请输入搜索词..." autocomplete="off">
+            <input type="submit" class="sear_btn" value="">
+        </form>
+    </div>
+</div>
+{~W('Home/Jf96umobile/popNav')}
+<nav class="main-nav">
+    <a href="{$Think.config.MOBILE_STATIC_URL}" <if condition="$class eq 'index'">class="active"</if>>首页</a>
+    <a href="{:staticUrlMobile('lists',1645, 'Down')}" <if condition="$cid eq 1645">class="active"</if>>游戏库</a>
+    <a href="{$Think.config.MOBILE_STATIC_URL}/top/">排行</a>
+    <a href="{:staticUrlMobile('lists',1831, 'Down')}" <if condition="$cid eq 1831">class="active"</if>>下载</a>
+    <a href="{:staticUrlMobile('lists',1622, 'Document')}" <if condition="$cid eq 1622">class="active"</if>>资讯</a>
+</nav>

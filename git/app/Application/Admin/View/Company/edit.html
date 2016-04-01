@@ -1,0 +1,223 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>{:isset($info['id'])?'编辑':'新增'}{$name}</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);">基 础</a></li>
+			
+		</ul>
+		<div class="tab-content">
+			<form action="{:U()}" method="post" class="form-horizontal">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item">
+						<label class="item-label">
+							厂商名字<span class="check-tips">（厂商名字不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="name" class="text input-large" value="{$info.name|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							英文名
+						</label>
+						<div class="controls">
+							<input type="text" name="name_e" class="text input-large" value="{$info.name_e|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							主页
+						</label>
+						<div class="controls">
+							<input type="text" name="homepage" class="text input-large" value="{$info.homepage|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							生成路径
+						</label>
+						<div class="controls">
+							<input type="text" name="path" class="text input-large" value="{$info.path|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							标题<span class="check-tips">（网页title）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="title" class="text input-large" value="{$info.title|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							关键词<span class="check-tips">（网页keywords）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="keywords" class="text input-large" value="{$info.keywords|default=''}">
+						</div>
+					</div>
+                    <div class="form-item">
+                        <label class="item-label">
+                            简介<span class="check-tips">（厂商简介）</span>
+                        </label>
+                        <div class="controls">
+                            <label class="textarea">
+                                <textarea  name="intro">{$info.intro|default=''}</textarea>
+                            </label>
+                        </div>
+                    </div>
+					<div class="form-item">
+						<label class="item-label">
+							描述<span class="check-tips">（网页description）</span>
+						</label>
+						<div class="controls">
+							<label class="textarea">
+								<textarea  name="description">{$info.description|default=''}</textarea>
+							</label>
+						</div>
+					</div>
+                    <div class="form-item">
+    <label class="item-label">
+        是否禁用<span class="check-tips">（是否禁用）</span>
+    </label>
+    <div class="controls">
+        <label class="radio">
+            <input type="radio" value="0" name="status" <eq name="info['status']|default='0'" value="0" >checked="checked"</eq>>禁用
+        </label>
+        <label class="radio">
+            <input type="radio" value="1" name="status" <eq name="info['status']" value="1" >checked="checked"</eq>>启用
+        </label>
+    </div>
+</div>
+                    <if condition="$position gt 0">
+                    <div class="form-item">
+                        <label class="item-label">
+                            推荐<span class="check-tips">（用于推荐数据）</span>
+                        </label>
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox" value="1" name="position[]" <if condition="check_document_position($info['position'],1)">checked="checked"</if>>首页推荐
+                            </label>
+                        </div>
+                    </div>
+                    </if>
+					<div class="controls">
+						<label class="item-label">图片</label>
+						<input type="file" id="upload_picture">
+						<input type="hidden" name="img" id="img" value="{$info['img']|default=''}"/>
+						<div class="upload-img-box">
+							<notempty name="info['img']">
+								<div class="upload-pre-item"><img src="{$info.img|get_cover='path'}"/></div>
+							</notempty>
+						</div>
+					</div>
+					<script type="text/javascript">
+						//上传图片
+						/* 初始化上传插件 */
+						$("#upload_picture").uploadify({
+							"height"          : 30,
+							"swf"             : "__STATIC__/uploadify/uploadify.swf",
+							"fileObjName"     : "download",
+							"buttonText"      : "上传图片",
+							"uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+							"width"           : 120,
+							'removeTimeout'	  : 1,
+							'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+							"onUploadSuccess" : uploadPictureImg,
+							'onFallback' : function() {
+								alert('未检测到兼容版本的Flash.');
+							}
+						});
+						function uploadPictureImg(file, data){
+							var data = $.parseJSON(data);
+							var src = '';
+							if(data.status){
+								$("#img").val(data.id);
+								src = data.url || '__ROOT__' + data.path;
+								$("#img").parent().find('.upload-img-box').html(
+									'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+									);
+							} else {
+								updateAlert(data.info);
+								setTimeout(function(){
+									$('#top-alert').find('button').click();
+									$(that).removeClass('disabled').prop('disabled',false);
+								},1500);
+							}
+						}
+					</script>
+
+					<div class="controls">
+						<label class="item-label">推荐图</label>
+						<input type="file" id="upload_picture_position_img">
+						<input type="hidden" name="position_img" id="position_img" value="{$info['position_img']|default=''}"/>
+						<div class="upload-img-box">
+							<notempty name="info['position_img']">
+								<div class="upload-pre-item"><img src="{$info.position_img|get_cover='path'}"/></div>
+							</notempty>
+						</div>
+					</div>
+					<script type="text/javascript">
+						//上传图片
+						/* 初始化上传插件 */
+						$("#upload_picture_position_img").uploadify({
+							"height"          : 30,
+							"swf"             : "__STATIC__/uploadify/uploadify.swf",
+							"fileObjName"     : "download",
+							"buttonText"      : "上传图片",
+							"uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+							"width"           : 120,
+							'removeTimeout'	  : 1,
+							'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+							"onUploadSuccess" : uploadPictureposition_img,
+							'onFallback' : function() {
+								alert('未检测到兼容版本的Flash.');
+							}
+						});
+						function uploadPictureposition_img(file, data){
+							var data = $.parseJSON(data);
+							var src = '';
+							if(data.status){
+								$("#position_img").val(data.id);
+								src = data.url || '__ROOT__' + data.path;
+								$("#position_img").parent().find('.upload-img-box').html(
+									'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+									);
+							} else {
+								updateAlert(data.info);
+								setTimeout(function(){
+									$('#top-alert').find('button').click();
+									$(that).removeClass('disabled').prop('disabled',false);
+								},1500);
+							}
+						}
+					</script>
+                </div>
+
+
+					<div class="form-item">
+						<input type="hidden" name="id" value="{$info.id|default=''}">
+						<button type="submit" id="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+						<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</block>
+
+	<block name="script">
+		<script type="text/javascript">
+		
+		$(function(){
+			showTab();
+		});
+		//导航高亮
+		highlight_subnav('{:U('PresetSite/index')}');
+		</script>
+	</block>

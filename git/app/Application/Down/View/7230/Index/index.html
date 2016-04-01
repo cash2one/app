@@ -1,0 +1,44 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/7230/css/down.css"/>
+</block>
+
+<block name="body">
+  <div id="down-main">
+    <p class="page-nav">当前位置：<a href="{:staticUrl('Index')}">首页</a>->下载</p>
+    {$filter}
+
+    <!--精品推荐-->
+    <p class="title">推荐精品手游<a href="/tj/page_1.html" target="_blank">更多+</a></p>
+    <div class="jptj">
+      <Think:article basename="Down" name="dmain" limit="4" order="update_time" where=' position & 1'>
+        <p><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="pic2"><img src="{:get_cover($article['smallimg'],'path')}"><php>if($article['iconcorner'] == '1'){</php><em class="jiaob-jp"></em><php>}</php></a>
+            <span><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="tit">{$article.title}</a><b class="star{:get_score($article['id'])}"></b><b>{$article.view}人下载过</b><b class="zan">{$article.abet}</b></span>
+          <s class="info">{$article.description}</s>
+        </p>
+     </Think:article>
+    </div>
+
+    <!--最近更新-->
+    <p class="zjgx-title">{$html_sort}</p>
+    <div class="zjgx" id="down-zjgx">
+      <div class="current">
+        <volist name="lists" id="val">
+          <p><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic2">
+              <img src="{:get_cover($val['smallimg'],'path')}"></a>
+              <php>if($val['iconcorner'] == '1'){</php><em class="jiaob-jp"></em><php>}</php><span>
+              <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val.title}</a>
+              <b class="star{:get_score($val['id'])}"></b><b>{$val.view}人下载过</b><b class="zan">{$val.abet}</b></span>
+            <s class="info">{$val.description}</s>
+          </p>
+        </volist>
+      </div>
+      <div style=" clear:both"></div>
+      <!--fenye-->
+      <p class="page">{$page}</p>
+        <!--fenye-->
+      </div>
+
+    </div>
+  </block>

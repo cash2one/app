@@ -1,0 +1,115 @@
+<extend name="Package@ppc/Base/common"/>
+
+<block name="style">
+<link href="__PUBLIC__/Package/ppc/css/cardinfo.css" rel="stylesheet" type="text/css">
+</block>
+
+<block name="body">
+    <dl class="con">
+        <dd class="left">
+            <p id="picshow">
+             <include file="Package@ppc/Widget/bigPic"/>
+            </p>
+            <dl class="content">
+                <dt>当前位置：<a href="/">首页</a> →　{$info.title}</dt>
+                <dd class="dinfo clearfix"><img src="{:get_cover($info['cover_id'],'path')}"><p class="xinfo"><u>{$info.title}</u><em style="display:none;">卡号数量：<span class="card_all" card-id="{$info.id}"></span>个</em><em>发布时间：{$info.create_time|time_format="Y-m-d"}</em><em>使用期限：{$info.start_time|time_format="m-d"} 至 {$info.end_time|time_format="m-d"} </em><em>运营平台：{$info.platform|msubstr=###,0,8,'utf-8',false}</em><em>适用设备：{:showText($info['conditions'],'conditions',true)}</em><em>已领取：<span id="people_count"></span></em></p>
+                    <div class="barbg"><b>发号情况：</b>
+                        <div class="barbg_xs">
+                            <em card-id="{$info.id}" class="card_per" id="countper"><span></span></em>
+                        </div>
+                        <div id="shengyu">剩余：<span style="display:none;" class="card_surplus" card-id="{$info.id}"></span><span class="per"></span></div>
+                    </div>
+                     <div class="test"></div>
+                    <p class="lhtg"> <a id="draw" href="javascript:void(0);" class="qh_bnt">领 号</a>
+                    <notempty name="info['game_url']">
+                      <a href="{$info.game_url}" target="_blank" class="down_bnt">下载</a>
+                    </notempty>
+                     <span class="qrcode"></span>
+                    </p>
+                    <p class="lhlc"><i>点击<br/>"领号"按钮</i><i>同一个IP只能领取同一个礼包一次</i><i>有效期内使用{$info.start_time|time_format="m-d"} 至 {$info.end_time|time_format="m-d"}</i></p>
+                </dd>
+                <dd class="title">
+                    <font>礼包详情</font>
+                    <dd class="cardtext">
+                        <p>{$info.content}</p>
+                        </br>
+                        <p>{$info.activation}</p>
+                        </br>
+                    </dd>
+                        <dd class="lqqk"><h3>领取情况</h3>
+                        <div id="rightlink">
+                        <ul>
+                        <li>剩余：<span class="card_surplus" card-id="{$info.id}"></span>个</li>
+                        <li>总量：<span class="card_all" card-id="{$info.id}"></span>个</li>
+                        </ul>
+                        </div>
+                        </dd>
+                        <div id="listinfo">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="zxrk_table_box zxrk_table card_draw_lists" card-id="{$info.id}">
+                                <tr class="zxrk_title"><td class="td11">序号</td><td class="td2t">激活码</td><td class="td33">领取人</td><td class="td44">领取时间</td></tr>
+                            </table>
+                        </div>
+                        <dd class="xglist">
+                            <p style="margin-right: 30px;">
+                                {~W('Ppc/packageNewList')} 
+                            </p>
+                            <p>
+                                {~W('Ppc/packageHotList')} 
+                            </p>
+                        </dd>
+                    </dl>
+                </dd>
+                <dt class="right"> 
+                    <include file="Package@ppc/Public/sideR"/>
+                </dt>
+            </dl>
+</block>
+
+<block name="script">
+    <script language="javascript"> 
+    $(function(){ 
+        artDialog.alert = function (content,title,icon, callback) {
+            return artDialog({
+                id: 'Alert',
+                icon: icon,
+        		title:title,
+                fixed: true,
+                lock: true,
+                content: content,
+        		ok: function () {
+                window.location.reload();
+                return false;
+               },
+                close: callback
+        		
+             });
+        };
+        //领取
+        $('#draw').click(function() {
+            $.ajax({
+                type : "get",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonpCallback:"drawCard",
+                url: DYNAMIC_SERVER_URL + '/Card/drawCard/id/{$info.id}.html',
+                //data: {id : draw_id},
+                success: function(data){
+                    if(data){
+                        data = eval(data);
+                        if(data.error){
+                            art.dialog.alert(data.error,"温馨提示",'warning');
+                        }else{
+                            art.dialog.alert('请记住卡号： <span class=\'card_decorate\'>'+ data.row +'<span>',"温馨提示",'succeed');
+                        }
+                    }
+                }
+            });
+        });       
+    }); 
+    </script>
+
+</block>
+<block name="dialog">
+<script type="text/javascript" src="__STATIC__/artdialog/jquery.artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="__STATIC__/artdialog/iframeTools.source.js"></script>
+</block>

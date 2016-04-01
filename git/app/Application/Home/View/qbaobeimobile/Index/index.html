@@ -1,0 +1,19 @@
+<extend name="Home@qbaobeimobile/Base/commonIndex2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/index.css">
+</block>
+<block name="body">
+    <section class="fast-nav dis-bot">
+        <div class="fast-nav-box">
+            <a href="{$Think.config.MOBILE_STATIC_URL}/tag/ertai/" title="二胎"><span class="ico"></span>二胎</a><a href="{$Think.config.MOBILE_STATIC_URL}/list/5/index_jiaoyu.html" title="早教"><span class="ico"></span>早教</a>
+            <a href="{$Think.config.MOBILE_STATIC_URL}/list/209/" title="奶粉"><span class="ico"></span>奶粉</a><a href="{$Think.config.MOBILE_STATIC_URL}/list/80/" title="生活"><span class="ico"></span>生活</a>
+            <a href="{$Think.config.MOBILE_STATIC_URL}/food/" title="食谱"><span class="ico"></span>食谱</a><a href="{$Think.config.MOBILE_STATIC_URL}/video/" title="视频"><span class="ico"></span>视频</a>
+            <a href="{$Think.config.MOBILE_STATIC_URL}/baike/" title="百科"><span class="ico"></span>百科</a><a href="{$Think.config.MOBILE_STATIC_URL}/tools/" title="工具"><span class="ico"></span>工具</a>
+        </div>
+    </section>
+    {~W('Home/Qbaobeimobile/getPositionData')}
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.first.js"></script>
+</block>

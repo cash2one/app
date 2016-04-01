@@ -1,0 +1,29 @@
+<extend name="Home@gfwmobile/Base/commonProduct" />
+<block name="body">
+<section class="news">
+    <div class="art">
+        <div class="title" id="prroduct-tit"><span>{$categoryName}</span></div>
+        <notempty name="lists">
+            <ul class="product-ul">
+                <volist name="lists" id="vo">
+                    <php>
+                        $previewimg = explode(',', $vo['previewimg']);
+                    </php>
+                    <li><a href="{:staticUrlMobile('Detail',$vo['id'],'Down')}" class="pic"><img src="{:get_cover($previewimg[0],'path')}" alt="{$vo.title}"></a>
+                        <div class="info">
+                            <a href="{:staticUrlMobile('Detail',$vo['id'],'Down')}">{$vo.title}</a>
+                            <p><span>品牌/型号：{$vo.brand}<notempty name="vo['model']">/{$vo.model}</notempty></span> | <span>材质：{$vo.material}</span></p>
+                            <p class="use"><span>供应商：{$vo.supplier}</span><b>￥{:sprintf("%01.2f", $vo['price'])}</b></p>
+                        </div></li>
+                </volist>
+
+            </ul>
+            <else />
+            <ul class="product-ul" style="line-height: 32px;">
+                暂无产品信息!
+            </ul>
+        </notempty>
+    </div>
+    {~W('Down/Gfwmobile/categoryPage',array('row'=>$info['list_row'],'count'=>$count,'cate'=>$cid))}
+</section>
+</block>

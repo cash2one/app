@@ -1,0 +1,50 @@
+<extend name="Home@7230mobile/Base/commonDown" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/7230mobile/css/game.css"/>
+</block>
+
+<block name="body">
+<header class="wytop">
+   <span class="back"></span>
+   <b>{$type_name}排行榜</b>
+   <a href="" class="search"></a>
+</header>
+<!-- 首页搜索 和 新闻-->
+<section class="news_wrap" id="syxw">
+    <div class="glnav">
+        <i  <eq name="sort" value="0">class="cur"</eq>>下载排行</i>
+        <i  <eq name="sort" value="1">class="cur"</eq>>热门推荐</i>
+        <i  <eq name="sort" value="2">class="cur"</eq>>最新上架</i>
+    </div>
+    <div data-sudaclick="main_rnews">
+          <div  class="rank_box <eq name="sort" value="0">showcurrent</eq>">
+           <ul> 
+           <volist name="view" id="article"> 
+               <li><a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a><a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down_btn">下载</a><h6><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></h6><p>评分：<span>{:get_score($article['id'],true)}分</span></p><p>{:get_category_title($article['category_id'],'DownCategory')} <i>|</i> {:showText($article['licence'],'licence',false,'Down')} <i>|</i> {:format_size($article['size'])}MB</p></li>
+           </volist>        
+           </ul>
+           <p class="page">{$page_0}</p>
+         </div>
+
+          <div  class="rank_box <eq name="sort" value="1">showcurrent</eq>">
+           <ul> 
+           <volist name="hits_today" id="article"> 
+               <li><a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a><a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down_btn">下载</a><h6><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></h6><p>评分：<span>{:get_score($article['id'],true)}分</span></p><p>{:get_category_title($article['category_id'],'DownCategory')} <i>|</i> {:showText($article['licence'],'licence',false,'Down')} <i>|</i> {:format_size($article['size'])}MB</p></li>
+           </volist>        
+           </ul>
+           <p class="page">{$page_1}</p>
+         </div>
+
+         <div  class="rank_box  <eq name="sort" value="2">showcurrent</eq>">
+          <ul>	
+          <volist name="update_time" id="article"> 
+              <li><a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a><a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down_btn">下载</a><h6><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></h6><p>评分：<span>{:get_score($article['id'],true)}分</span></p><p>{:get_category_title($article['category_id'],'DownCategory')} <i>|</i> {:showText($article['licence'],'licence',false,'Down')} <i>|</i> {:format_size($article['size'])}MB</p></li>
+          </volist>        
+          </ul>
+          <p class="page">{$page_2}</p>
+        </div>
+    </div>
+</section>	
+{~W('Home/P7230mobile/tools')}
+</block>

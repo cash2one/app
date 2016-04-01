@@ -1,0 +1,14 @@
+<div class="sykc">
+    <p class="title"><a href="" target="_blank">更多+</a><i>新手开测</i></p>
+    <span class="nav"><i class="cur">开测表</i><i>开服表</i></span>
+    <ul class="current">
+        <Think:article basename="package" where="category_id = 5"  order="create_time desc" limit="10">
+        <li><i class="fenl">{$article['card_type']==1?'卡':($article['card_type']==2?'礼':'码')}</i><i class="time">{:date('Y-m-d',$article['create_time'])}</i><a href="{:U('PackageDetail/detail',array('id'=>$article['id']))}" target="_blank">{$article.title}</a><i>公测</i></li>
+        </Think:article>
+    </ul>
+    <ul>
+        <Think:article basename="package" where="category_id = 3"  order="create_time desc" limit="10">
+        <li><i class="fenl">{$article['card_type']==1?'卡':($article['card_type']==2?'礼':'码')}</i><i class="time">{:date('Y-m-d',$article['create_time'])}</i><a href="{:U('PackageDetail/detail',array('id'=>$article['id']))}" target="_blank">{$article.title}</a><i>公测</i></li>
+        </Think:article>
+    </ul>
+</div>

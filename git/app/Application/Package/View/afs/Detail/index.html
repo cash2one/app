@@ -1,0 +1,129 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/afs/css/yxlb.css"/>
+</block>
+<block name="body">
+<!--main-->
+<div id="main" class="lbxq">
+    <p id="main-title">{~W('Home/Afs/wbreadCrumb',array($info['id'],'Package','detail'))}</p>
+    <!--礼包详情-->
+    <div class="lb-time">
+        <div class="jjks">总量：<strong style="font-size: 17px;" class="card_all" card-id="{$info.id}"></strong>  / 剩余：<strong style="font-size: 17px;" class="card_surplus" card-id="{$info.id}"></strong></div>
+        <div class="lbtx"><i></i><img src="{:get_cover($info['cover_id'],'path')}" alt="{$info['title']}"></div>
+        <div class="lbjj">
+            <h1>{$info['title']}</h1>
+                <span>
+                    <b><i class="kssj">开始时间</i><i>{:date('Y-m-d H:i:s',$info['start_time'])}</i></b>
+                    <b><i class="kssj">结束时间</i><i>{:date('Y-m-d H:i:s',$info['end_time'])}</i></b>
+                    <b>
+                        <i class="kssj">适用平台</i>
+                        <php>if(1&$info['conditions']){</php>
+                        <i class="adr"></i>
+                        <php>} if(2&$info['conditions']){</php>
+                        <i class="app"></i>
+                        <php>}</php>
+                    </b>
+                </span>
+        </div>
+        <div class="fxbf">
+            <div class="fxan">
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                    <a class="jiathis_button_qzone"></a>
+                    <a class="jiathis_button_tsina"></a>
+                    <a class="jiathis_button_tqq"></a>
+                    <a class="jiathis_button_weixin"></a>
+                    <a class="jiathis_button_renren"></a>
+                    <a class="jiathis_button_xiaoyou"></a>
+                    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                    <a class="jiathis_counter_style"></a>
+                </div>
+                <!-- JiaThis Button END -->
+            </div>
+               <span class="lblq">
+                   <a href="javascript:void(0);" class="lq">领 取</a>
+                   <b>礼包将于{:date('Y-m-d H:i:s',$info['start_time'])}准时开启</b>
+                    {:W('Afs/packageGame',array($info['id']))}
+               </span>
+        </div>
+    </div>
+    <!--礼包内容和礼包说明-->
+    <div class="lbnrsm">
+        <div class="lbnr">
+            <h3>礼包内容</h3>
+            {$info['content']}
+        </div>
+        <div class="lbsm">
+            <h3>使用说明</h3>
+            {$info['activation']}
+        </div>
+    </div>
+    <!--相关礼包-->
+    {:W('Afs/DetailOtherPackage',array($info['id']))}
+    <div class="news-right">
+        <!--广告-->
+        <div id="gg01">
+            <a href="" target="_blank"><img src="__PUBLIC__/Home/afs/images/gg.jpg"></a>
+        </div>
+        
+         <input name="author" id="tj-user" type="hidden" value="{$info['uid']}" />
+    </div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__STATIC__/artdialog/jquery.artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="__STATIC__/artdialog/iframeTools.source.js"></script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<script language="javascript"> 
+    $(function(){ 
+        artDialog.alert = function (content,title,icon, callback) {
+            return artDialog({
+                id: 'Alert',
+                icon: icon,
+        		title:title,
+                fixed: true,
+                lock: true,
+                content: content,
+        		ok: function () {
+                window.location.reload();
+                return false;
+               },
+                close: callback
+        		
+             });
+        };
+        //领取
+        $('.lq').click(function() {
+            $.ajax({
+                type : "get",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonpCallback:"drawCard",
+                url: DYNAMIC_SERVER_URL + '/Card/drawCard/id/{$info.id}.html',
+                //data: {id : draw_id},
+                success: function(data){
+                    if(data){
+                        data = eval(data);
+                        if(data.error){
+                            art.dialog.alert(data.error,"温馨提示",'warning');
+                        }else{
+                            art.dialog.alert('请记住卡号： <span class=\'card_decorate\'>'+ data.row +'<span>',"温馨提示",'succeed');
+                        }
+                    }
+                }
+            });
+        });       
+    }); 
+    </script>
+<!--<script>
+    $(function(){
+        var info  = $('.jjks');
+        var start = {$info['start_time']};
+        var end   = {$info['end_time']};
+        var now   = (Date.parse(new Date()))/1000;
+        if(now > start){
+            now>end?info.html('已经结束'):info.html('已经开始')
+        }
+    });
+</script>-->
+</block>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <include file="Home@gfwmobile/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfwmobile/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfwmobile/css/gfw.css">
+</head>
+
+<body>
+<include file="Home@gfwmobile/Public/search" />
+<div class="dragable" widget="sj1" style="display: none;"></div>
+<section class="baike-list">
+    <div class="Introd">
+        <div class="title"><span>{$base['title']}</span></div>
+        <div class="baike-banner-pic"><img src="{:get_cover($base['icon'],'path')}" alt="{$base['title']}"></div>
+        <div class="baike-info">{$base['description']}</div>
+    </div>
+</section>
+<section class="brand">
+    <div class="art">
+        <div class="title"><h2>{$base['title']}</h2></div>
+        <ul class="product-ul">
+            <volist name="lists" id="val">
+            <li><a href="{:staticUrlMobile('detail',$val['id'],'Package')}" class="pic"><img src="{:get_cover($val['cover_id'],'path')}" alt="{$val['title']}"></a>
+                <div class="info">
+                    <a href="{:staticUrlMobile('detail',$val['id'],'Package')}">{$val['title']}</a>
+                    <p>{$val['description']}</p>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    <p class="page">{$page}</p>
+</section>
+{:W('Home/Gfwmobile/zttj',array($base['category_rootid']))}
+<include file="Home@gfwmobile/Public/foot"/>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/afs/css/yxlb.css"/>
+</block>
+<block name="body">
+<!--main-->
+<div id="main" class="dglb">
+    <p id="main-title"><a href="">首页</a>><a href="">游戏资讯</a>><a href="">新闻</a></p>
+    <div class="game_info">
+        <a href="{:staticUrl('detail',$game['id'],'Down')}" target="_blank"><img src="{:get_cover($game['smallimg'],'path')}"></a>
+        <div class="xx">
+            <h1><a href="{:staticUrl('detail',$game['id'],'Down')}" target="_blank">{$game['title']}</a><i>（共{$count}款礼包）</i></h1>
+            <b><em>
+                <i>
+                    <s>游戏平台：</s>
+                    <php>if($game['IOSUrl']){</php>
+                    <s class="app"></s>
+                    <php>} if($game['androidUrl']){</php>
+                    <s class="adr"></s>
+                    <php>}</php>
+                </i>
+                <i>游戏大小：{$game['size']}</i></em>
+                <php>if($batch){</php>
+                <em class="zqlt"><a href="{$batch['url_token']}" target="_blank">专区</a></em></b>
+                <php>}</php>
+        </div>
+          <span id="game-down">
+              <php>if($game['IOSUrl']){</php>
+              <b class="app"><a href="{$game['IOSUrl']}">苹果下载</a><i></i><em><img src="{:C('STATIC_URL')}/{$game['IOSCode']}"></em></b>
+              <php>} if($game['androidUrl']){</php>
+              <b class="adr" style="margin-top: 0px;"><a href="{$game['androidUrl']}">安卓下载</a><i></i><em><img src="{:C('STATIC_URL')}/{$game['androidCode']}"></em></b>
+              <php>}</php>
+          </span>
+    </div>
+    <div class="dglb-u">
+        <ul>
+            <volist name="package" id="val">
+            <li><span><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank">{$val['title']}</a><i>{$val['content']}</i></span><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank" class="down">领取</a></li>
+            </volist>
+        </ul>
+        <p id="fenye">{$page}</p>
+    </div>
+</div>
+</block>

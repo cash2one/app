@@ -1,0 +1,107 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/kpage.css"/>
+</block>
+
+<block name="body">
+  <div id="search">
+    <p class="page-nav">当前位置：首页 > 全站搜索 {$keyword}</p>
+    <div class="zqdown-nav"><i class="cur">全部</i><!--<i>下载</i><i>资讯</i><i>攻略</i><i>视频</i>--></div>
+    <div class="search-m">
+      <notempty name="down">
+        <volist name="down" id="v">
+        <div class="searchItem">
+          <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank"><img src="{:get_cover($v['smallimg'],'path')}"></a>
+          <div class="search_c">
+             <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" class="tit">{$v.title}</a>
+             <p class="content">
+              {$v.description}
+            </p>
+           </div>
+            <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" class="jrzq">进入下载</a>
+        </div>
+        
+        
+        
+       <!--   <p class="yxjj">
+          <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank"><img src="{:get_cover($v['smallimg'],'path')}"></a>
+          <span class="yxxq">
+            <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" class="tit">{$v.title}</a>
+            <p class="content">-->
+             <!-- {$v.description}-->
+              <!--
+                <a href="" target="_blank">资讯</a>
+                <a href="" target="_blank">攻略</a>
+                <a href="" target="_blank">资料</a>
+                <a href="" target="_blank">视频</a>
+                <a href="" target="_blank">问答</a>
+                <a href="" target="_blank">下载</a>
+                <a href="" target="_blank">评测</a>
+                -->
+          <!-- </p> -->           
+         <!-- </span>
+            <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" class="jrzq">进入下载</a>
+          </p>
+          -->
+          
+          
+        </volist>
+      </notempty>
+
+      <!--游戏礼包
+      <div id="qz_yxlb">
+        <p><i>天天风之旅礼包</i></p>
+        <b class="nav"><i>礼包名</i><i>礼包剩余量</i><i>礼包领取</i></b>
+        <b><a href="" target="_blank">天天风之旅国庆礼包</a><i>礼包剩余量90%</i><a href="" target="_blank" class="lq"></a></b>
+        <b><a href="" target="_blank">天天风之旅国庆礼包</a><i>礼包剩余量90%</i><a href="" target="_blank" class="lq"></a></b>
+        <b><a href="" target="_blank">天天风之旅国庆礼包</a><i>礼包剩余量90%</i><a href="" target="_blank" class="lq"></a></b>
+        <span class="more"><a href="">点击查看更多礼包信息>></a></span>
+      </div>-->
+      <!--游戏开服表
+      <div class="qz_kfb">
+        <p class="nav"><i>天天风之旅开服表</i></p>
+        <p class="yxxx"><i>测试时间</i><i class="tb">图标</i><i>游戏名</i><i>测试状态</i><i>游戏分类</i><i>评分</i><i>下载</i><i>礼包</i><i>厂商</i><i>玩家关注</i></p>
+        <ul class="current">
+          <li><i>2014-10-10</i><a href="" target="_blank" class="pic"><img src="images/pic3.jpg"></a><a href="" target="_blank" class="tit">这是游戏标题</a><i>公测</i><i>动作</i><i>9.0分</i><i class="down"><a href="" target="_blank" class="anzhuo"></a><a href="" target="_blank" class="apple"></a></i>
+            <i class="lb"></i><i>某某知名厂家</i><i>3000人关注</i></li>
+            <li><i>2014-10-10</i><a href="" target="_blank" class="pic"><img src="images/pic3.jpg"></a><a href="" target="_blank" class="tit">这知名知名知名知名知名戏标题</a><i>公测</i><i>动作</i><i>9.0分</i><i class="down"><a href="" target="_blank" class="anzhuo"></a><a href="" target="_blank" class="apple"></a></i>
+              <i class="lb"></i><i>某某知名知名知名知名知名厂家</i><i>3000人关注</i></li>
+              <li><i>2014-10-10</i><a href="" target="_blank" class="pic"><img src="images/pic3.jpg"></a><a href="" target="_blank" class="tit">这是游戏标题</a><i>公测</i><i>动作</i><i>9.0分</i><i class="down"><a href="" target="_blank" class="anzhuo"></a><a href="" target="_blank" class="apple"></a></i>
+                <i class="lb"></i><i>某某知名厂家</i><i>3000人关注</i></li>
+                <li><i>2014-10-10</i><a href="" target="_blank" class="pic"><img src="images/pic3.jpg"></a><a href="" target="_blank" class="tit">这是游戏标题</a><i>公测</i><i>动作</i><i>9.0分</i><i class="down"><a href="" target="_blank" class="anzhuo"></a><a href="" target="_blank" class="apple"></a></i>
+                  <i class="lb"></i><i>某某知名厂家</i><i>3000人关注</i></li>
+                  <li><i>2014-10-10</i><a href="" target="_blank" class="pic"><img src="images/pic3.jpg"></a><a href="" target="_blank" class="tit">这知名知名知名知名知名戏标题</a><i>公测</i><i>动作</i><i>9.0分</i><i class="down"><a href="" target="_blank" class="anzhuo"></a><a href="" target="_blank" class="apple"></a></i>
+                    <i class="lb"></i><i>某某知名知名知名知名知名厂家</i><i>3000人关注</i></li>
+                    <li><i>2014-10-10</i><a href="" target="_blank" class="pic"><img src="images/pic3.jpg"></a><a href="" target="_blank" class="tit">这是游戏标题</a><i>公测</i><i>动作</i><i>9.0分</i><i class="down"><a href="" target="_blank" class="anzhuo"></a><a href="" target="_blank" class="apple"></a></i>
+                      <i class="lb"></i><i>某某知名厂家</i><i>3000人关注</i></li>
+                    </ul>
+                    <span class="more"><a href="">点击查看更多开服信息>></a></span>
+                  </div>-->
+                  <!--游戏视频
+                  <div class="qz_xgsp">
+                    <p><i>天天风之旅相关视频</i></p>
+                    <ul>
+                      <li><a href="" target="_blank"><img src="images/pic1.jpg"><i></i></a><a href="" class="tit">愤怒的小鸟</a></li>
+                      <li><a href="" target="_blank"><img src="images/pic1.jpg"><i></i></a><a href="" class="tit">愤怒的小鸟</a></li>
+                      <li><a href="" target="_blank"><img src="images/pic1.jpg"><i></i></a><a href="" class="tit">愤怒的小鸟</a></li>
+                      <li><a href="" target="_blank"><img src="images/pic1.jpg"><i></i></a><a href="" class="tit">愤怒的小鸟</a></li>
+                    </ul>
+                    <span class="more"><a href="">点击查看更多相关视频>></a></span>
+                  </div>-->
+
+                  <!--游戏相关文章-->
+                  <notempty name="document">
+                    <div class="qz_xgwz">
+                      <b class="nav"><i>"{$keyword}" 相关文章</i></b>
+                      <volist name="document" id="v">
+                      <p><span class="titinfo"><em><b>[荐]</b><a href="{:staticUrl('detail',$v['id'],'Document')}" target="_blank">{$v.title}</a></em><i>{$v.description}</i><em class="lb"><!--<s>类别：</s>攻略心得--></em></span>
+                        <span class="timore"><i>{:date('Y-m-d',$v['update_time'])}</i><a href="{:staticUrl('detail',$v['id'],'Document')}" target="_blank">》阅读原文</a></span>
+                      </p>
+                      </volist>
+                    </div>
+                   </notempty>
+
+                  </div>
+                </div>
+              </block>

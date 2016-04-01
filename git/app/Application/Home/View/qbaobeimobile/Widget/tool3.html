@@ -1,0 +1,968 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/tools.css">
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > <a href="/tools/">工具</a> > 怀孕日历表</block>
+<block name="body">
+<section class="tool-detail dis-bot">
+<h1>怀孕日历表</h1>
+<style>
+    /* 焦点图 */
+    .slider-top{margin:10px;overflow:hidden;position:relative;}
+    .slider-top .prev{color:#777;position:absolute;top:17px;left:10px; font-size:16px;}
+    .slider-top .next{color:#777;position:absolute;top:17px;right:10px; font-size:16px;}
+    .slider-top-wrap{overflow:hidden;position:relative;}
+    .slider-top-pic{position:relative;overflow:hidden;}
+    .slider-top-pic li{position:relative;float:left;width:100%;overflow:hidden;}
+    .slider-top-pic li:not(:first-child){display:none;}
+    .slider-top-pic li p{font-weight:bold;color:#333;line-height:25px;text-align:center;font-size:15px;padding:5px 0;}
+    .slider-top-pic li img{float:left;width:120px;margin-right:10px;}
+    .slider-top-pic li span{overflow:hidden;display:block;color:#333;font-size:13px;line-height:20px;}
+    i,em{font-style:normal;}
+    .Calendar{margin:10px 0 0;overflow:hidden;}
+    .Calendar .th{height:30px;line-height:30px;text-align:center;font-size:18px;}
+    .Calendar .tb{overflow:hidden;}
+    .week{float:left;width:12%;text-align:center;}
+    .week dt{overflow:hidden;font-size:0px;width:100%;}
+    .week dt i{display:block; line-height:40px;height:40px;color:#777; background:#F9F9F9;font-weight:bold;font-size:14px;border-bottom:1px solid #F5F5F5;-webkit-box-sizing:border-box;}
+    .week dd{font-size:0px;overflow:hidden;width:100%;}
+    .week dd a{line-height:40px;height:40px;display:block;color:#777;font-size:12px;border-bottom:1px solid #F5F5F5;background:#F9F9F9;-webkit-box-sizing:border-box;}
+    .day{float:left;width:88%;text-align:center;overflow:hidden;}
+    .day dt{overflow:hidden;font-size:0px;width:100%;}
+    .day dt i{float:left;line-height:40px;height:40px;color:#777;background:#F9F9F9;width:13.9%;font-size:14px;border-left:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;font-weight:bold;-webkit-box-sizing:border-box;}
+    .day dd{font-size:0px;overflow:hidden;width:100%;}
+    .day dd a{float:left;line-height:20px;height:40px;width:13.9%;font-size:12px;background:#E5F6F4;border-left:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;color:#777;-webkit-box-sizing:border-box;color:#56B5A8;}
+    .day dd .over{background:#FFE6E6;color:#f60;}
+    .day dd .chanjian a{background-color:#FD8181;color:#fff;}
+    .Calendar .tf{text-align:center;height:40px;line-height:40px;border-top:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;}
+    .Calendar .tf em{margin:0 5px;}
+    .Calendar .tf .past{color:#f60;}
+    .Calendar .tf .left{color:#56B5A8;}
+    .Calendar .tf .cj{color:#FD8181;}
+    .Calendar .tf .past:before{content:""; display:inline-block;width:8px;height:8px;background:#f60;border-radius:4px;margin-right:5px;}
+    .Calendar .tf .left:before{content:"";display:inline-block;width:8px;height:8px;background:#56B5A8;border-radius:4px;margin-right:5px;}
+    .Calendar .tf .cj:before{content:"";display:inline-block;width:8px;height:8px;background:#FD8181;border-radius:4px;margin-right:5px;}
+    .ext-tit{line-height:40px;height:40px;}
+    .ext a{display:block;line-height:40px;white-space:nowrap;-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;border-top:1px solid #DEF5F2;color:#333;position:relative;padding-right:20px;}
+    .ext a:after{position:absolute;right:0px;top:15px;content:"";display:block;width:0;height:0;border-width:6px;overflow:hidden;border-color:transparent transparent transparent #f6bfc9;border-style:solid;_border-style:dotted dotted dotted solid;}
+</style>
+<div class="m-section">末次月经的第一天</div>
+<div class="m-input"><input type="date" name="" id="Jdata"/></div>
+<div class="m-work"><input type="submit" id="JworkOut" value="点击计算" /></div>
+<div class="m-result" id="Jresult">
+    <div class="m-result-tit">查询结果</div>
+    <p style="font-size:16px;margin:10px 10px 0;">今天：<em id="Jtoday">~</em></p>
+    <p style="font-size:16px;margin:0px 10px;">您已怀孕：<em id="Jhy">~</em><em id="Jweeks"></em></p>
+    <p style="font-size:16px;margin:0px 10px;">距离预产期：<em id="JdayOut">~</em></p>
+    <p style="font-size:16px;margin:0px 10px;">产检建卡日：<em id="JbuildTime">~</em></p>
+</div>
+<div class="slider-top">
+<div class="slider-top-wrap" id="JsliderTopWrap">
+<ul class="slider-top-pic">
+<li>
+    <div class="Calendar">
+        <div class="th">孕1月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd>
+                    <a title="孕0周指导">00</a>
+                    <a title="孕1周指导" href="http://m.qbaobei.com/a/223264.html">01</a>
+                    <a title="孕2周指导" href="http://m.qbaobei.com/a/223265.html">02</a>
+                    <a title="孕3周指导" href="http://m.qbaobei.com/a/223266.html">03</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <a href="http://m.qbaobei.com/a/223264.html" title="怀孕1天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223264.html" title="怀孕2天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223264.html" title="怀孕3天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223264.html" title="怀孕4天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223264.html" title="怀孕5天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223264.html" title="怀孕6天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223264.html" title="怀孕7天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223265.html" title="怀孕8天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223265.html" title="怀孕9天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223265.html" title="怀孕10天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223265.html" title="怀孕11天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223265.html" title="怀孕12天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223265.html" title="怀孕13天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223265.html" title="怀孕14天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223266.html" title="怀孕15天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223266.html" title="怀孕16天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223266.html" title="怀孕17天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223266.html" title="怀孕18天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223266.html" title="怀孕19天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223266.html" title="怀孕20天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223266.html" title="怀孕21天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223267.html" title="怀孕22天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223267.html" title="怀孕23天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223267.html" title="怀孕24天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223267.html" title="怀孕25天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223267.html" title="怀孕26天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223267.html" title="怀孕27天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223267.html" title="怀孕28天指导"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <a href="http://m.qbaobei.com/a/223267.html">0~5周：确定妊娠</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="Calendar">
+        <div class="th">孕2月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd>
+                    <a title="孕4周指导" href="http://m.qbaobei.com/a/223267.html">04</a>
+                    <a title="孕5周指导" href="http://m.qbaobei.com/a/223268.html">05</a>
+                    <a title="孕6周指导" href="http://m.qbaobei.com/a/223269.html">06</a>
+                    <a title="孕7周指导" href="http://m.qbaobei.com/a/223270.html">07</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <a href="http://m.qbaobei.com/a/223268.html" title="怀孕29天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223268.html" title="怀孕30天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223268.html" title="怀孕31天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223268.html" title="怀孕32天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223268.html" title="怀孕33天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223268.html" title="怀孕34天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223268.html" title="怀孕35天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223269.html" title="怀孕36天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223269.html" title="怀孕37天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223269.html" title="怀孕38天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223269.html" title="怀孕39天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223269.html" title="怀孕40天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223269.html" title="怀孕41天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223269.html" title="怀孕42天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223270.html" title="怀孕43天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223270.html" title="怀孕44天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223270.html" title="怀孕45天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223270.html" title="怀孕46天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223270.html" title="怀孕47天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223270.html" title="怀孕48天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223270.html" title="怀孕49天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223271.html" title="怀孕50天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223271.html" title="怀孕51天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223271.html" title="怀孕52天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223271.html" title="怀孕53天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223271.html" title="怀孕54天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223271.html" title="怀孕55天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223271.html" title="怀孕56天指导"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <a href="http://m.qbaobei.com/a/223271.html">5~6周：黑白B超监测 &#12539; 看胚胎数</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="Calendar">
+        <div class="th">孕3月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd>
+                    <a title="孕8周指导" href="http://m.qbaobei.com/a/223271.html">08</a>
+                    <a title="孕9周指导" href="http://m.qbaobei.com/a/223272.html">09</a>
+                    <a title="孕10周指导" href="http://m.qbaobei.com/a/223273.html">10</a>
+                    <a title="孕11周指导" href="http://m.qbaobei.com/a/222142.html">11</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <a href="http://m.qbaobei.com/a/223272.html" title="怀孕57天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223272.html" title="怀孕58天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223272.html" title="怀孕59天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223272.html" title="怀孕60天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223272.html" title="怀孕61天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223272.html" title="怀孕62天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223272.html" title="怀孕63天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223273.html" title="怀孕64天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223273.html" title="怀孕65天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223273.html" title="怀孕66天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223273.html" title="怀孕67天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223273.html" title="怀孕68天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223273.html" title="怀孕69天指导"></a>
+                    <a href="http://m.qbaobei.com/a/223273.html" title="怀孕70天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222142.html" title="怀孕71天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222142.html" title="怀孕72天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222142.html" title="怀孕73天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222142.html" title="怀孕74天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222142.html" title="怀孕75天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222142.html" title="怀孕76天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222142.html" title="怀孕77天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222421.html" title="怀孕78天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222421.html" title="怀孕79天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222421.html" title="怀孕80天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222421.html" title="怀孕81天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222421.html" title="怀孕82天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222421.html" title="怀孕83天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222421.html" title="怀孕84天指导"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <dd>
+                <a href="http://m.qbaobei.com/a/223271.html">8周：听胎心&#12539; 卵黄囊</a>
+                <a href="http://m.qbaobei.com/a/223272.html">9~11周：绒毛膜采样</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="Calendar">
+        <div class="th">孕4月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd>
+                    <a title="孕12周指导" href="http://m.qbaobei.com/a/222421.html">12</a>
+                    <a title="孕13周指导" href="http://m.qbaobei.com/a/224487.html">13</a>
+                    <a title="孕14周指导" href="http://m.qbaobei.com/a/224489.html">14</a>
+                    <a title="孕15周指导" href="http://m.qbaobei.com/a/224490.html">15</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <strong class="chanjian"><a href="http://m.qbaobei.com/a/224487.html" title="怀孕85天指导"></a></strong>
+                    <a href="http://m.qbaobei.com/a/224487.html" title="怀孕86天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224487.html" title="怀孕87天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224487.html" title="怀孕88天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224487.html" title="怀孕89天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224487.html" title="怀孕90天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224487.html" title="怀孕91天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224489.html" title="怀孕92天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224489.html" title="怀孕93天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224489.html" title="怀孕94天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224489.html" title="怀孕95天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224489.html" title="怀孕96天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224489.html" title="怀孕97天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224489.html" title="怀孕98天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224490.html" title="怀孕99天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224490.html" title="怀孕100天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224490.html" title="怀孕101天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224490.html" title="怀孕102天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224490.html" title="怀孕103天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224490.html" title="怀孕104天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224490.html" title="怀孕105天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224491.html" title="怀孕106天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224491.html" title="怀孕107天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224491.html" title="怀孕108天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224491.html" title="怀孕109天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224491.html" title="怀孕110天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224491.html" title="怀孕111天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224491.html" title="怀孕112天指导"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <a href="http://m.qbaobei.com/a/222421.html">12周：第一次产检，量体重和血压 &#12539;胎心 &#12539; 验尿 &#12539; 抽血 &#12539; 子宫大小 &#12539; 颈后透明带</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="Calendar">
+        <div class="th">孕5月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd>
+                    <a title="孕16周指导" href="http://m.qbaobei.com/a/224491.html">16</a>
+                    <a title="孕17周指导" href="http://m.qbaobei.com/a/224492.html">17</a>
+                    <a title="孕18周指导" href="http://m.qbaobei.com/a/224494.html">18</a>
+                    <a title="孕19周指导" href="http://m.qbaobei.com/a/224496.html">19</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <strong class="chanjian"><a href="http://m.qbaobei.com/a/224492.html" title="怀孕113天指导"></a></strong>
+                    <a href="http://m.qbaobei.com/a/224492.html" title="怀孕114天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224492.html" title="怀孕115天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224492.html" title="怀孕116天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224492.html" title="怀孕117天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224492.html" title="怀孕118天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224492.html" title="怀孕119天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224494.html" title="怀孕120天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224494.html" title="怀孕121天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224494.html" title="怀孕122天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224494.html" title="怀孕123天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224494.html" title="怀孕124天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224494.html" title="怀孕125天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224494.html" title="怀孕126天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224496.html" title="怀孕127天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224496.html" title="怀孕128天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224496.html" title="怀孕129天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224496.html" title="怀孕130天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224496.html" title="怀孕131天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224496.html" title="怀孕132天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224496.html" title="怀孕133天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224498.html" title="怀孕134天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224498.html" title="怀孕135天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224498.html" title="怀孕136天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224498.html" title="怀孕137天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224498.html" title="怀孕138天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224498.html" title="怀孕139天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224498.html" title="怀孕140天指导"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <a href="http://m.qbaobei.com/a/224491.html">16周：唐氏症筛检 &#12539;羊膜穿刺</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="Calendar">
+        <div class="th">孕6月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd>
+                    <a title="孕20周指导" href="http://m.qbaobei.com/a/224498.html">20</a>
+                    <a title="孕21周指导" href="http://m.qbaobei.com/a/224614.html">21</a>
+                    <a title="孕22周指导" href="http://m.qbaobei.com/a/224616.html">22</a>
+                    <a title="孕23周指导" href="http://m.qbaobei.com/a/224618.html">23</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <strong class="chanjian"><a href="http://m.qbaobei.com/a/224614.html" title="怀孕141天指导"></a></strong>
+                    <a href="http://m.qbaobei.com/a/224614.html" title="怀孕142天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224614.html" title="怀孕143天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224614.html" title="怀孕144天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224614.html" title="怀孕145天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224614.html" title="怀孕146天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224614.html" title="怀孕147天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224616.html" title="怀孕148天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224616.html" title="怀孕149天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224616.html" title="怀孕150天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224616.html" title="怀孕151天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224616.html" title="怀孕152天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224616.html" title="怀孕153天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224616.html" title="怀孕154天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224618.html" title="怀孕155天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224618.html" title="怀孕156天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224618.html" title="怀孕157天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224618.html" title="怀孕158天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224618.html" title="怀孕159天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224618.html" title="怀孕160天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224618.html" title="怀孕161天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224630.html" title="怀孕162天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224630.html" title="怀孕163天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224630.html" title="怀孕164天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224630.html" title="怀孕165天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224630.html" title="怀孕166天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224630.html" title="怀孕167天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224630.html" title="怀孕168天指导"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <a href="http://m.qbaobei.com/a/224498.html">20周：彩超 &#12539;首次胎动</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="Calendar">
+        <div class="th">孕7月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd>
+                    <a title="孕24周指导" href="http://m.qbaobei.com/a/224630.html">24</a>
+                    <a title="孕25周指导" href="http://m.qbaobei.com/a/224634.html">25</a>
+                    <a title="孕26周指导" href="http://m.qbaobei.com/a/224638.html">26</a>
+                    <a title="孕27周指导" href="http://m.qbaobei.com/a/224640.html">27</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <strong class="chanjian"><a href="http://m.qbaobei.com/a/224634.html" title="怀孕169天指导"></a></strong>
+                    <a href="http://m.qbaobei.com/a/224634.html" title="怀孕170天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224634.html" title="怀孕171天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224634.html" title="怀孕172天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224634.html" title="怀孕173天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224634.html" title="怀孕174天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224634.html" title="怀孕175天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224638.html" title="怀孕176天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224638.html" title="怀孕177天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224638.html" title="怀孕178天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224638.html" title="怀孕179天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224638.html" title="怀孕180天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224638.html" title="怀孕181天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224638.html" title="怀孕182天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224640.html" title="怀孕183天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224640.html" title="怀孕184天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224640.html" title="怀孕185天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224640.html" title="怀孕186天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224640.html" title="怀孕187天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224640.html" title="怀孕188天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224640.html" title="怀孕189天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224641.html" title="怀孕190天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224641.html" title="怀孕191天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224641.html" title="怀孕192天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224641.html" title="怀孕193天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224641.html" title="怀孕194天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224641.html" title="怀孕195天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224641.html" title="怀孕196天指导"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <a href="http://m.qbaobei.com/a/224630.html">24周：妊娠糖尿病筛检</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="Calendar">
+        <div class="th">孕8月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd>
+                    <a title="孕28周指导" href="http://m.qbaobei.com/a/224641.html">28</a>
+                    <a title="孕29周指导" href="http://m.qbaobei.com/a/224646.html">29</a>
+                    <a title="孕30周指导" href="http://m.qbaobei.com/a/224650.html">30</a>
+                    <a title="孕31周指导" href="http://m.qbaobei.com/a/222355.html">31</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <strong class="chanjian"><a href="http://m.qbaobei.com/a/224646.html" title="怀孕197天指导"></a></strong>
+                    <a href="http://m.qbaobei.com/a/224646.html" title="怀孕198天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224646.html" title="怀孕199天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224646.html" title="怀孕200天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224646.html" title="怀孕201天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224646.html" title="怀孕202天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224646.html" title="怀孕203天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224650.html" title="怀孕204天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224650.html" title="怀孕205天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224650.html" title="怀孕206天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224650.html" title="怀孕207天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224650.html" title="怀孕208天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224650.html" title="怀孕209天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224650.html" title="怀孕210天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222355.html" title="怀孕211天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222355.html" title="怀孕212天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222355.html" title="怀孕213天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222355.html" title="怀孕214天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222355.html" title="怀孕215天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222355.html" title="怀孕216天指导"></a>
+                    <a href="http://m.qbaobei.com/a/222355.html" title="怀孕217天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224368.html" title="怀孕218天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224368.html" title="怀孕219天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224368.html" title="怀孕220天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224368.html" title="怀孕221天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224368.html" title="怀孕222天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224368.html" title="怀孕223天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224368.html" title="怀孕224天指导"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <a href="http://m.qbaobei.com/a/224641.html">28周：乙型肝炎抗原 &#12539; 梅毒血清试验 &#12539; 德国麻疹</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="Calendar">
+        <div class="th">孕9月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd>
+                    <a title="孕32周指导" href="http://m.qbaobei.com/a/224368.html">32</a>
+                    <a title="孕33周指导" href="http://m.qbaobei.com/a/224719.html">33</a>
+                    <a title="孕34周指导" href="http://m.qbaobei.com/a/224957.html">34</a>
+                    <a title="孕35周指导" href="http://m.qbaobei.com/a/224964.html">35</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <strong class="chanjian"><a href="http://m.qbaobei.com/a/224719.html" title="怀孕225天指导"></a></strong>
+                    <a href="http://m.qbaobei.com/a/224719.html" title="怀孕226天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224719.html" title="怀孕227天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224719.html" title="怀孕228天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224719.html" title="怀孕229天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224719.html" title="怀孕230天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224719.html" title="怀孕231天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224957.html" title="怀孕232天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224957.html" title="怀孕233天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224957.html" title="怀孕234天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224957.html" title="怀孕235天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224957.html" title="怀孕236天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224957.html" title="怀孕237天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224957.html" title="怀孕238天指导"></a>
+                    <strong class="chanjian"><a href="http://m.qbaobei.com/a/224964.html" title="怀孕239天指导"></a></strong>
+                    <a href="http://m.qbaobei.com/a/224964.html" title="怀孕240天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224964.html" title="怀孕241天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224964.html" title="怀孕242天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224964.html" title="怀孕243天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224964.html" title="怀孕244天指导"></a>
+                    <a href="http://m.qbaobei.com/a/224964.html" title="怀孕245天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225192.html" title="怀孕246天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225192.html" title="怀孕247天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225192.html" title="怀孕248天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225192.html" title="怀孕249天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225192.html" title="怀孕250天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225192.html" title="怀孕251天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225192.html" title="怀孕252天指导"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <dd>
+                <a href="http://m.qbaobei.com/a/224368.html">32周：下肢水肿 &#12539; 子痫前症的发生 &#12539;预防早产</a>
+                <a href="http://m.qbaobei.com/a/224957.html">34周：黑白B超 &#12539; 评估胎儿体重</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="Calendar">
+        <div class="th">孕10月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd>
+                    <a title="孕36周指导" href="http://m.qbaobei.com/a/225192.html">36</a>
+                    <a title="孕37周指导" href="http://m.qbaobei.com/a/225194.html">37</a>
+                    <a title="孕38周指导" href="http://m.qbaobei.com/a/225377.html">38</a>
+                    <a title="孕39周指导" href="http://m.qbaobei.com/a/225380.html">39</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <strong class="chanjian"><a href="http://m.qbaobei.com/a/225194.html" title="怀孕253天指导"></a></strong>
+                    <a href="http://m.qbaobei.com/a/225194.html" title="怀孕254天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225194.html" title="怀孕255天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225194.html" title="怀孕256天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225194.html" title="怀孕257天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225194.html" title="怀孕258天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225194.html" title="怀孕259天指导"></a>
+                    <strong class="chanjian"><a href="http://m.qbaobei.com/a/225377.html" title="怀孕260天指导"></a></strong>
+                    <a href="http://m.qbaobei.com/a/225377.html" title="怀孕261天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225377.html" title="怀孕262天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225377.html" title="怀孕263天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225377.html" title="怀孕264天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225377.html" title="怀孕265天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225377.html" title="怀孕266天指导"></a>
+                    <strong class="chanjian"><a href="http://m.qbaobei.com/a/225380.html" title="怀孕267天指导"></a></strong>
+                    <a href="http://m.qbaobei.com/a/225380.html" title="怀孕268天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225380.html" title="怀孕269天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225380.html" title="怀孕270天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225380.html" title="怀孕271天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225380.html" title="怀孕272天指导"></a>
+                    <a href="http://m.qbaobei.com/a/225380.html" title="怀孕273天指导"></a>
+                    <strong class="chanjian"><a href="http://m.pcbaby.com.cn/x/103/1030658.html?fromPcbabyApp" title="怀孕274天指导"></a></strong>
+                    <a href="http://m.pcbaby.com.cn/x/103/1030658_1.html?fromPcbabyApp" title="怀孕275天指导"></a>
+                    <a href="http://m.pcbaby.com.cn/x/103/1030658_2.html?fromPcbabyApp" title="怀孕276天指导"></a>
+                    <a href="http://m.pcbaby.com.cn/x/103/1030658_3.html?fromPcbabyApp" title="怀孕277天指导"></a>
+                    <a href="http://m.pcbaby.com.cn/x/103/1030658_4.html?fromPcbabyApp" title="怀孕278天指导"></a>
+                    <a href="http://m.pcbaby.com.cn/x/103/1030658_5.html?fromPcbabyApp" title="怀孕279天指导"></a>
+                    <a href="http://m.pcbaby.com.cn/x/103/1030658_6.html?fromPcbabyApp" title="怀孕280天指导"></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <a href="http://m.qbaobei.com/a/225192.html">36周：常规体检：为生产事宜做准备</a>
+            <a href="http://m.qbaobei.com/a/225194.html">37周：常规体检：注意胎动</a>
+            <a href="http://m.qbaobei.com/a/225377.html">38周：常规体检：胎头入盆&#12539; 准备生产</a>
+            <a href="http://m.qbaobei.com/a/225380.html">39周：常规体检</a>
+        </div>
+    </div>
+</li>
+<li>
+    <div class="Calendar">
+        <div class="th">孕11月</div>
+        <div class="tb">
+            <dl class="week">
+                <dt><i class="">孕周</i></dt>
+                <dd class="last">
+                    <a title="孕40周指导" href="http://m.qbaobei.com/a/225533.html">40</a>
+                </dd>
+            </dl>
+            <dl class="day">
+                <dt>
+                    <i>一</i>
+                    <i>二</i>
+                    <i>三</i>
+                    <i>四</i>
+                    <i>五</i>
+                    <i>六</i>
+                    <i>日</i>
+                </dt>
+                <dd>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                    <a></a>
+                </dd>
+            </dl>
+        </div>
+        <div class="tf">
+            <em class="past">已过孕期</em>
+            <em class="left">未过孕期</em><em class="cj">产检日期</em>
+        </div>
+        <div class="ext-tit">每周产检</div>
+        <div class="ext">
+            <a href="http://m.qbaobei.com/a/225533.html">40周：预产期</a>
+        </div>
+    </div>
+</li>
+</ul>
+</div>
+<div class="prev" onclick="slider.prev()"><</div>
+<div class="next" onclick="slider.next()">></div>
+</div>
+</section>
+</block>
+<block name="script">
+    <script type="text/javascript">function Swipe(E,w){var O=function(){};var k=function(P){setTimeout(P||O,0);};var i={addEventListener:!!window.addEventListener,touch:("ontouchstart" in window)||window.DocumentTouch&&document instanceof DocumentTouch,transitions:(function(P){var R=["transformProperty","WebkitTransform","MozTransform","OTransform","msTransform"];for(var Q in R){if(P.style[R[Q]]!==undefined){return true;}}return false;})(document.createElement("swipe"))};if(!E){return;}var q=E.children[0],l=q.children,u=l.length;var C=parseInt(w.startSlide,10)||0,J=w.speed||300,I=w.continuous,v=w.vertical||false;if(I){var z=q.innerHTML;if(u==2){q.innerHTML=z+z;}else{if(u==1){q.innerHTML=z+z+z;}}}var j=C-1,o=C+1,c,L,K,a,e;var m=v?"height":"width",G=v?"top":"left",A=v?"y":"x";function H(){L=new Array(l.length);E.style.overflow="hidden";K=E.getBoundingClientRect()[m]||(v?E.offsetHeight:E.offsetWidth);q.style[m]=(l.length*K)+"px";var R=l.length;while(R--){var P=l[R];P.style[m]=K+"px";P.style.display="inline";P.style.cssFloat="left";P.style.position="relative";P.style[G]=(R*-K)+"px";P.setAttribute("data-sindex",R);if(u>2){P.setAttribute("data-index",R);}else{if(u==2){P.setAttribute("data-index",R%2);}else{if(u==1){P.setAttribute("data-index",0);}}}if(i.transitions){var Q=C>R?-K:(C<R)?K:0;if(I){if(C==l.length-1&&R==0){Q=K;o=0;}if(!C&&R==l.length-1){Q=-K;j=R;}}if(R!=C){s(R,Q,0);}else{L[C]=0;}}}if(!i.transitions){q.style[G]=(C*-K)+"px";}}function n(){q=E.children[0],l=q.children,u=l.length;H();}function N(){H();var P=parseInt(l[C].getAttribute("data-index"));k(w.callback&&w.callback(P,l[C]));E.style.visibility="visible";}function r(){var Q=l.length;while(Q--){if(i.transitions){var P=C>Q?-K:(C<Q)?K:0;if(I){if(C==l.length-1&&Q==0){P=K;o=0;}if(!C&&Q==l.length-1){P=-K;j=Q;}}s(Q,P,0);}}}function B(){if(C){b(j,J,-1);}else{if(I){b(j,J,-1);}}}function h(){if(C<l.length-1){b(o,J,1);}else{if(I){b(o,J,1);}}}function b(S,P,Q){if(C==S||S<0||S>l.length-1){return;}if(!c){var R=parseInt(l[S].getAttribute("data-index"));k(w.transitionStart&&w.transitionStart(R,l[S]));}if(i.transitions){if(!Q){Q=-Math.abs(C-S)/(C-S);}if(Q>0){s(j,-K,0);s(C,L[C]-K,J);s(o,L[o]-K,J);C=o;}else{s(o,+K,0);s(C,L[C]+K,J);s(j,L[j]+K,J);C=j;}}else{M(C*-K,S*-K,P||J);}j=S-1;C=S;o=S+1;var R=parseInt(l[C].getAttribute("data-index"));k(w.callback&&w.callback(R,l[C]));}function s(P,R,Q){g(P,R,Q);L[P]=R;}function g(S,V,U){var Q=l[S];var T=Q&&Q.style;if(!T){return;}var R=v?0:V,P=v?V:0;T.webkitTransitionDuration=T.MozTransitionDuration=T.msTransitionDuration=T.OTransitionDuration=T.transitionDuration=U+"ms";T.webkitTransform="translate("+R+"px,"+P+"px)translateZ(0)";T.msTransform=T.MozTransform=T.OTransform=v?"translateY("+V+"px)":"translateX("+V+"px)";}function M(T,S,P){if(!P){q.style[G]=S+"px";return;}var R=+new Date;var Q=setInterval(function(){var U=+new Date-R;if(U>P){q.style[G]=S+"px";if(D){p();}var V=parseInt(l[C].getAttribute("data-index"));w.transitionEnd&&w.transitionEnd.call(event,V,l[C]);clearInterval(Q);return;}q.style[G]=(((S-T)*(Math.floor((U/P)*100)/100))+T)+"px";},4);}var D=w.auto||0;var f;function p(){f=setTimeout(h,D);}function t(){clearTimeout(f);}var y={};var F={};var d;var x={handleEvent:function(P){switch(P.type){case"touchstart":this.start(P);break;case"touchmove":this.move(P);break;case"touchend":k(this.end(P));break;case"webkitTransitionEnd":case"msTransitionEnd":case"oTransitionEnd":case"otransitionend":case"transitionend":k(this.transitionEnd(P));break;case"resize":k(H.call());break;}if(w.stopPropagation){P.stopPropagation();}},start:function(P){r();var Q=P.touches[0];y={x:Q.pageX,y:Q.pageY,time:+new Date};d=undefined;F={};c=false;q.addEventListener("touchmove",this,false);q.addEventListener("touchend",this,false);},move:function(P){if(l[C].getAttribute("disableSlide")!=null){return;}if(P.touches.length>1||P.scale&&P.scale!==1){return;}if(w.disableScroll){P.preventDefault();}var Q=P.touches[0];F={x:Q.pageX-y.x,y:Q.pageY-y.y};if(typeof d=="undefined"){d=!!(d||Math.abs(F[v?"y":"x"])<Math.abs(F[v?"x":"y"])*1.2);}if(!d){P.preventDefault();t();if(!I){F[A]=F[A]/((!C&&F[A]>0||C==l.length-1&&F[A]<0)?(Math.abs(F[A])/K+1):1);}g(j,F[A]+L[j],0);g(C,F[A]+L[C],0);g(o,F[A]+L[o],0);var S=F[A]>0?j:o;if(!c&&l[S]){var R=parseInt(l[S].getAttribute("data-index"));k(w.transitionStart&&w.transitionStart(R,l[S]));}c=true;}},end:function(S){var V=+new Date-y.time;var R=Number(V)<250&&Math.abs(F[A])>20||Math.abs(F[A])>K/2;var U=(!C&&F[A]>0),Q=(C==l.length-1&&F[A]<0);var P=I?false:U||Q;var T=F[A]<0;if(!d){if(R&&!P){if(T){h();}else{B();}}else{s(j,-K,J);s(C,0,J);s(o,K,J);if(!I){if(U){k(w.pastStart&&w.pastStart(C,l[C]));}if(Q){k(w.pastEnd&&w.pastEnd(C,l[C]));}}}}q.removeEventListener("touchmove",x,false);q.removeEventListener("touchend",x,false);},transitionEnd:function(Q){r();var P=parseInt(Q.target.getAttribute("data-sindex"),10);if(P==C){if(D){p();}w.transitionEnd&&w.transitionEnd.call(Q,P,l[C]);}}};N();if(D){p();}if(i.addEventListener){if(i.touch){q.addEventListener("touchstart",x,false);}if(i.transitions){q.addEventListener("webkitTransitionEnd",x,false);q.addEventListener("msTransitionEnd",x,false);q.addEventListener("oTransitionEnd",x,false);q.addEventListener("otransitionend",x,false);q.addEventListener("transitionend",x,false);}window.addEventListener("resize",x,false);}else{window.onresize=function(){H();};}return{setup:function(){n();},slide:function(Q,P){b(Q,P);},prev:function(){t();B();},next:function(){t();h();},getPos:function(){return C;},stop:function(){t();},start:function(){p();},getNumSlides:function(){return u;},kill:function(){t();q.style[m]="auto";q.style[G]=0;var Q=l.length;while(Q--){var P=l[Q];P.style[m]="100%";P.style[G]=0;if(i.transitions){g(Q,0,0);}}if(i.addEventListener){q.removeEventListener("touchstart",x,false);q.removeEventListener("webkitTransitionEnd",x,false);q.removeEventListener("msTransitionEnd",x,false);q.removeEventListener("oTransitionEnd",x,false);q.removeEventListener("otransitionend",x,false);q.removeEventListener("transitionend",x,false);window.removeEventListener("resize",x,false);}else{window.onresize=null;}}};}if(window.jQuery||window.Zepto){(function(a){a.fn.Swipe=function(b){return this.each(function(){a(this).data("Swipe",new Swipe(a(this)[0],b));});};})(window.jQuery||window.Zepto);}function swipe(c,o){var n=function(){};var o=o||{},h=parseInt(o.startSlide,10)||0,d=o.speed||0,e=o.transitionStart||n,m=o.callback||n,a=o.nav||null,f=a&&a.children;var g=c.children[0],b=g.children;if(a){if(f.length>0){f[h].className="current";}else{var l="";k(b,function(q,p){l+="<span class="+(q==h?"current":"")+">"+(q+1)+"</span>";});a.innerHTML=l;f=a.children;}}o.callback=function(p,q){if(a){f[h].className="";f[p].className="current";h=p;}m(p,q);j(q);};o.transitionStart=function(q,p){j(p);e(q,p);};var i=new Swipe(c,o);f&&k(f,function(q,p){p.addEventListener("click",function(){i.stop();i.slide(q,d);},false);});function k(q,s){for(var r=0,p=q.length;r<p;r++){s.call(this,r,q[r]);}}function j(p){var q=p.querySelectorAll("img[src2]");if(!q){return;}k(q,function(s,u){var t=u.getAttribute("src2"),r=new Image();r.onload=function(){u.style.cssText="filter:alpha(opacity=30);opacity:0.3;";u.setAttribute("src",t);u.removeAttribute("src2");setTimeout(function(){u.style.cssText="filter:alpha(opacity=100);opacity:1;-webkit-transition:250ms;-moz-transition:250ms;transition:250ms;";},5);};r.src=t;});}return i;}</script>
+    <script type="text/javascript">
+    function $$(id) {
+    return (typeof id == "object") ? id : document.getElementById(id);
+    }
+    slider = swipe($$("JsliderTopWrap"), {
+    speed: 100,
+    continuous: true,
+    callback: function(index, elem) {
+    elem.parentNode.style.height = (elem.clientHeight||elem.offsetHeight) + "px";
+    }
+    });
+    var Jdata = $$("Jdata");
+    //写入当前如期
+    function checkTime(num){
+    if (num < 10) {
+    num = "0" + num;
+    }
+    return num;
+    }
+    $(function(){
+        var d = new Date();
+        var year = d.getFullYear();
+        var month = d.getMonth()+1;
+        var date = d.getDate();
+        var bIsi9300 = navigator.userAgent.toLowerCase().match(/i9300/i) == "i9300";
+        if (!bIsi9300) {
+            $("#Jdata").val(year + '-' + checkTime(month) + '-' + checkTime(date));
+        };
+        $("#Jdata").attr("placeholder",'请输入日期，格式：' + year + '-' + checkTime(month) + '-' + checkTime(date));
+    });
+    function touchEvent(elm, fn) {
+    if ("ontouchstart" in document.documentElement) {
+    elm.addEventListener("touchstart", fn, false);
+    } else {
+    elm.addEventListener("click", fn, false);
+    }
+    }
+    </script>
+    <script type="text/javascript">
+    var JworkOut = $$("JworkOut");
+    var week = new Array(14),
+    month = new Array(12);
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    week[0] = "日";
+    week[1] = "一";
+    week[2] = "二";
+    week[3] = "三";
+    week[4] = "四";
+    week[5] = "五";
+    week[6] = "六";
+    week[7] = "日";
+    week[8] = "一";
+    week[9] = "二";
+    week[10] = "三";
+    week[11] = "四";
+    week[12] = "五";
+    week[13] = "六";
+    var todayTime = new Date(),
+    today = todayTime.getTime(),
+    unit = 1000 * 60 * 60 * 24,
+    startTime = today - (unit * 84),
+    buildTime = today,
+    startWeek,
+    overDays = Math.floor((today - startTime) / unit);
+    var JbuildTime = $$("JbuildTime"),
+    Jtoday = $$("Jtoday"),
+    Jhy = $$("Jhy"),
+    Jweeks = $$("Jweeks"),
+    JdayOut = $$("JdayOut");
+    //	根据毫秒数返回2011-10-21形式的日期
+    function getTime(time) {
+    var t = new Date(),
+    s;
+    t.setTime(time);
+    startWeek = t.getDay();
+    return s = t.getFullYear() + "-" + (Number(t.getMonth()) + 1) + "-" + t.getDate();
+    }
+    var Jdays = document.querySelectorAll(".day");
+    function setTime() {
+    //		写入各日期
+    Jtoday.innerHTML = getTime(today);
+    JbuildTime.innerHTML = getTime(buildTime);
+    Jhy.innerHTML = overDays + "天";
+    JdayOut.innerHTML = 280 - overDays;
+    if (overDays == 0) {
+    Jweeks.innerHTML = "";
+    }else {
+    Jweeks.innerHTML = "(第" + (overDays / 7 < 1 ? "" : (Math.floor(overDays / 7) + "周")) + (overDays / 7 < 1 || overDays % 7 == 0 ? "" : "+") + (overDays % 7 == 0 ? "" : (overDays % 7 + "天")) + ")";
+    };
+    //写入相应的星期
+    for (var i = 0; i < Jdays.length; i++) {
+    var Jdts = Jdays[i].querySelectorAll("dt");
+    for (var j = 0; j < Jdts.length; j++) {
+    var Jdtis = Jdts[j].querySelectorAll("i");
+    var aaa = startWeek;
+    for (var n = 0; n < Jdtis.length; n++) {
+    Jdtis[n].innerHTML = week[aaa];
+    aaa++;
+    };
+    };
+    };
+    //写入相应的时间
+    var ccc = 0;//初始天数
+    for (var i = 0; i < Jdays.length; i++) {
+    var Jdds = Jdays[i].querySelectorAll("dd");
+    for (var j = 0; j < Jdds.length; j++) {
+    var Jddas = Jdds[j].querySelectorAll("a");
+    for (var n = 0; n < Jddas.length; n++) {
+    Jddas[n].className = "";
+    if (ccc < overDays) {
+    Jddas[n].className = "over";
+    };
+    ccc++;
+    Jddas[n].innerHTML = getTime(startTime);
+    startTime = Number(startTime) + unit;
+    };
+    };
+    };
+    }
+    setTime();
+    touchEvent(JworkOut, function() {
+    var y = Jdata.value.split("-")[0],
+    m = Jdata.value.split("-")[1],
+    da = Jdata.value.split("-")[2];
+    if (Jdata.value == "") {
+    showTopTip("请输入完整日期!");
+    hideTopTip();
+    return false;
+    };
+    if (y == "" || m == "" || da == "") {
+    showTopTip("请输入完整日期!");
+    hideTopTip();
+    return false;
+    }
+    var a = Jdata.value,
+    b = a.split("-");
+    var c = month[Number(b[1]) - 1] + " " + b[2] + "," + b[0],
+    time = Date.parse(c);
+    // if (today - time >= unit) {
+    //重置各时间参数
+    startTime = time;
+    buildTime = time + (unit * 84);
+    overDays = Math.floor((today - time) / unit);
+    if (overDays < 0) {
+    showTopTip("不能选择未到来的日期!");
+    hideTopTip();
+    return false;
+    };
+    setTime();
+    window.slider.slide(Math.floor(overDays / 28), 300);
+    $$("Jresult").style.display = "block";
+    // $$("Jslide").style.display = "block";
+    // }
+    });
+    function showTopTip(msg) {
+    var tipEle = document.getElementById("JtopTipMsg");
+    if (!tipEle) {
+    tipEle = document.createElement("div");
+    tipEle.id = "JtopTipMsg";
+    tipEle.style.cssText = "display:none;width:120px;padding:10px;line-height:20px;font-size:12px;background-color:rgba(000,000,000,0.9);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;color:#fff;text-align:center;-webkit-transition:all 0.3s ease-in;transition:all 0.3s ease-in;position:fixed;top:50%;left:50%;margin-left:-70px;margin-top:-20px;opacity:1;z-index:999;";
+    document.body.appendChild(tipEle);
+    }
+    tipEle.innerHTML = msg;
+    tipEle.style.display = "block";
+    setTimeout(function() {
+    tipEle.style.opacity = "1";
+    }, 0);
+    }
+    function hideTopTip() {
+    var tipEle = document.getElementById("JtopTipMsg");
+    if (tipEle) {
+    setTimeout(function() {
+    tipEle.style.opacity = "0";
+    setTimeout(function() {
+    tipEle.style.display = "none";
+    }, 300);
+    }, 1500);
+    }
+    }
+</script>
+</block>
+

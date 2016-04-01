@@ -1,0 +1,91 @@
+<extend name="Home@gfw/Base/commonUcent" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+
+<block name="body">
+
+    <div class="user-wraper-right">
+        <div class="user-right-chapter">
+            <h3>管理产品</h3>
+            <div class="product-list">
+                <div class="product-list-tit"><span class="name">产品信息</span><span>状态</span><span>操作</span></div>
+                <div class="product-list-main">
+                    <ul>
+                    <empty name="list">
+                        <li>
+                            您目前还没有产品，点击<a href="/Product/create">添加</a>一个产品吧!
+                        </li>
+                        <else/>
+                        <foreach name="list" item="val">
+                            <php>
+                                $link = 'javascript:void(0);';
+                                $target = '';
+                                if ('已审核（正常）' == $val['status'])
+                                {
+                                $link = staticUrl('Detail',$val['id'],'Down');
+                                $target = 'target="_blank"';
+                                }
+                            </php>
+                        <li class="yes">
+                            <div class="info-list">
+                                <a href="{$link}" {$target}>
+                                    <php> $photo_id = array_shift(array_filter(array_unique(explode(',', $val['previewimg'])))); </php>
+                                    <img src="{:get_cover($photo_id, 'path');}" title="{$val.title}">
+                                </a>
+
+                                <div class="info">
+                                    <a href="{$link}" {$target}>{$val.title}</a>
+                                    <span>分类：{$cate[$val['category_id']]['title']}</span>
+                                    <span>时间：{$val['update_time']}</span>
+                                </div>
+                            </div>
+                            <div class="pass"><a href="javascript:void(0);">{$val['status']}</a></div>
+                            <div class="edit-dele">
+                                <a href="/Product/create/pid/{$val.id}" class="edit">编辑</a>
+                                <php>if ('已审核（正常）' == $val['status']):</php>
+                                <php>else:</php>
+                                <a href="javascript:void(0);" class="dele delete" id="{$val.id}">删除</a></div>
+                                <php>endif;</php>
+                        </li>
+                        </foreach>
+                    </empty>
+                    </ul>
+                    <div id="fenye">{$page}</div>
+                    <!--div class="get-more">展开更多信息 ↓</div-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/user_center.js"></script>
+    <script type="text/javascript">
+        $('.delete').on('click', function(){
+            var pid = $(this).attr('id');
+            var t = $(this);
+
+            if (window.confirm('确定删除此产品'))
+            {
+                if ('' == pid)
+                {
+                    alert('未知错误！');
+                    return false;
+                }
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/Product/delete',
+                    data: 'pid='+pid,
+                    success: function(msg){
+                        (1 == msg.status_code) ? $(t).parent().parent().remove() : alert(msg.message);
+                    }
+                });
+            }
+        });
+    </script>
+</block>

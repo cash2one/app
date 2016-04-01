@@ -1,0 +1,119 @@
+<extend name="Public/base"/>
+<block name="body">
+    <!-- 标题 -->
+    <div class="main-title">
+        <h2>数据对比</h2>
+        <!-- 数据表格 -->
+        <div class="box"
+             style="position:absolute; border:1px solid; padding:5px; height:35px; width:180px; z-index: 99;background-color: #e0e8ff; margin: 300px 300px;">
+            <div>
+                <form action="{:U('AfsUpdate/redirectOp')}" method="post">
+                    <select name="select_category_id" id="myselect">
+                        <option value="0">请选择分类</option>
+                        <volist name="game_category" id="vo">
+                            <option value="{$vo.id}">{$vo.title}</option>
+                        </volist>
+                    </select>
+                    <input type="hidden" name="new_id" id="new_id" value=""/>
+
+                    <input type="button" value="提交" id="btn_click">
+                </form>
+            </div>
+        </div>
+        <div class="data-table">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>包名</th>
+                    <th>ICON</th>
+                    <th>创建人</th>
+                    <th>分类</th>
+                    <th>基本信息</th>
+                    <th>是否存在</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <!-- 列表 -->
+                <tbody>
+                <volist name="list_items" id="vo">
+                    <tr class="new">
+                        <td><input class="ids_new" type="checkbox" value="{$vo.id}" name="new_id[]"></td>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.name}</td>
+                        <td>{$vo.packageName}</td>
+                        <td><img src="{$vo.iconUrl}" val="{$vo.iconUrl}"></td>
+                        <td></td>
+                        <td></td>
+                        <td>{$vo.minVersion}-{$vo.versionName}</td>
+                        <td></td>
+                        <td>
+                            <a class="btn new_btn_insert">入库</a>
+                        </td>
+                    </tr>
+                    <volist name="vo['similars']" id="vo">
+                        <tr class="old" style="background-color: #CDCDCD; border: 1px solid;">
+                            <td></td>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.title}</td>
+                            <td>{$vo.bag}</td>
+                            <td><img src="{:get_cover($vo['smallimg'],'path')}"
+                                     val="{:get_cover($vo['smallimg'],'path')}"></td>
+                            <td val="{$vo.edit_id}">{$vo.edit_id|edit_id2name=###}</td>
+                            <td>{$vo.category_id|categoryId2Name=###,'1'}-{$vo.category_id|categoryId2Name=###}</td>
+                            <td>
+                                <if condition="$vo.system eq 1">Android
+                                    <else/>
+                                    Ios
+                                </if>
+                                -{$vo.version}
+                            </td>
+                            <td></td>
+                            <td>
+                                <a class="btn btn_update">更新</a>
+                                <a class="btn btn_view">查看</a>
+                            </td>
+                        </tr>
+                    </volist>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+        //新数据进入入库
+        $('.new_btn_insert').click(function () {
+            var new_id = checked_new_id();
+            if (!new_id > 0) {
+                new_id = $(this).parent().siblings().eq(1).text();
+            }
+
+            $('#new_id').val(new_id);
+        });
+
+        //更新操作
+        $('.btn_update').click(function () {
+            var old_id = $(this).parent().siblings().eq(1).text();
+            var new_id = checked_new_id();
+            if(!old_id > 0){
+                alert('不存在的id');
+                return ;
+            }else if(!new_id > 0 ){
+                alert('请勾选插入选项复选框');
+                return ;
+            }
+            window.open("admin.php?s=/AfsUpdate/gameUpdate/new_id/"+new_id+"/old_id/"+old_id);
+        });
+
+        //调用但钱选择的new_id
+        function checked_new_id() {
+            return $('.ids_new:checked').val();
+        }
+
+    </script>
+</block>

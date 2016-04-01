@@ -1,0 +1,25 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/pic.css"/>
+</block>
+<block name="breadcrumbnav"><a href="{:C('MOBILE_STATIC_URL')}">首页</a><notempty name="info['cate']"><a href="{:staticUrlMobile('lists',$info['category_id'],'Gallery')}"> > {$info['cate']}</a></notempty> > 正文</block>
+<block name="body">
+<!--图库详情-->
+<div class="picauto-box" id="picall">
+    <div class="swiper-container5">
+        <php>$count = count($info['imgpack']);</php>
+        <div class="swiper-wrapper">
+            <volist name="info.imgpack" id="image">
+                <div class="swiper-slide">
+                    <img src="{$image.image}" alt="{$image.title}"/>
+                </div>
+            </volist>
+        </div>
+    </div>
+    <div class="pic-text">
+        <p class="pic-text-nub"><span class="now-nub">1</span>/<span class="all-nub">{$count}</span></p>
+        <div class="auto-text-wrap"><h3></h3></div>
+    </div>
+</div>
+<input type="hidden" id="tj-user" name="tj-user" value="{$info['uid']}"/>
+</block>

@@ -1,0 +1,36 @@
+<if condition="in_array($type,array('detail_hot','detail_new'))">
+	<!-- 网站详情页 -->
+	<ul class="related-main">
+	<volist name="webSiteList" id="website" key="i">
+		<li>
+			<a href="{:staticUrl('detail',$website['id'],'Package')}" target="_blank" title="{:$website['title']}" class='<if condition="$website[position]&1">orange</if>'>{$website['title']|msubstr=0,10,'utf-8',false}</a>
+			<if condition="$i elt 3">
+				<if condition="$type eq 'detail_new'">
+					<span class="gif-news"></span>
+				</if>
+			</if>
+		</li>
+	</volist>
+	</ul>
+<else/>
+<div class="newsp gf-border">
+	<div class="release-title">
+		<h2 class="cfl">最新收录网站</h2><i class="release-icon cfl"></i>
+	</div>
+	<ul class="newsp-main">
+		<volist name="webSiteList" id="website" key="i">
+		<li>
+			<a href="{:staticUrl('detail',$website['id'],'Package')}" target="_blank" title="{:$website['title']}" class='<if condition="$website[position]&1">orange</if>'>
+				{$website['title']|msubstr=0,10,'utf-8',false}
+				<if condition="$i elt 3">
+					<span class="gif-news"></span>
+				<else />
+					<if condition="$website[position]&1"><span class="gif-news1"></span></if>
+				</if>
+			</a>
+		</li>
+		</volist>
+	</ul>
+</div>
+</if>
+

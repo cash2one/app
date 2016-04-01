@@ -1,0 +1,28 @@
+<extend name="Home@gfwmobile/Base/commonBaike" />
+<block name="body">
+    <script type="text/javascript">a()</script>
+    <section class="baike-list">
+        <div class="Introd">
+            <div class="title"><span>{$info.title}</span></div>
+               <div class="baike-list-banner">
+              <a href="{:staticUrlMobile('detail', $info['id'],'Document')}"><img height="100%" width="100%" src="{:get_cover($info['smallimg'],'path')}" alt="{$info.title}"></a>
+            </div>
+            <div class="baike-info">
+            {$info.description}
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">b()</script>
+      {~W('Document/Gfwmobile/handleContent',array($info['content']))}
+      <script type="text/javascript">c()</script>
+      <div class="Introd">
+            <div class="title"><h2>热门百科</h2></div>
+            <ul class="art-list">
+            <Think:article basename="Document" name="article"  limit="5" where="category_rootid=80 AND position&1" order="update_time desc">
+                <li><a href="{:staticUrlMobile('detail', $article['id'],'Document')}">{$article.title}</a></li>
+            </Think:article> 
+            </ul>
+        </div>
+    </section>
+    <script type="text/javascript">d()</script>
+</block>

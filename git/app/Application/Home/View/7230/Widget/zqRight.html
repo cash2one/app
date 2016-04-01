@@ -1,0 +1,31 @@
+<div id="zx-right">
+    <div class="recom" id="recomtab">
+        <p class="title">今日推荐<a href="{:C('STATIC_URL')}/yx" target="_blank" class="more"></a></p>
+            <span>
+                <p class="recom-top">
+                    <a href="{:staticUrl('detail',$today['id'],'Down')}" target="_blank" class="pic3"><img src="{:get_cover($today['smallimg'],'path')}"></a>
+                    <b>
+                        <a href="{:staticUrl('detail',$today['id'],'Down')}" target="_blank" class="title">{$today.title}</a>
+                        <i><s>评分：{$today.score}分</s><s>{$today.tags}</s></i>
+                        <i class="info">{$today.description}</i>
+                    </b>
+                </p>
+                <p class="down"><a href="{:staticUrl('detail',$today['id'],'Down')}" target="_blank" class="mfxz">免费下载</a><a href="{$today['batch']?$today['batch']:staticUrl('detail',$today['id'],'Down')}" target="_blank" class="glzq">攻略专区</a></p>
+            </span>
+    </div>
+    <!---今日推荐(recommended) END---->
+
+    <div class="paih" id="paihtab">
+        <p class="title"><i class="cur">排行榜</i><i>最新</i></p>
+        <ul class="cur ulTab">
+            <volist name="rankGame" id="val">
+                <li><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val.title}</a><b>{$val.tags}</b><u class="demo2"><em></em><input class="knob" value="{$val.score}"></u></span></li>
+            </volist>
+        </ul>
+        <ul class="ulTab">
+            <volist name="newGame" id="val">
+            <li><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val.title}</a><b>{$val.tags}</b><u class="demo2"><em></em><input class="knob" value="{$val.score}"></u></span></li>
+            </volist>
+        </ul>
+    </div>
+</div>

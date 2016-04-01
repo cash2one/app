@@ -1,0 +1,12 @@
+<notempty name="lists">
+<div class="cnxh cnxh2 gameQtbb">
+                <div class="downWrap">
+                    <div class="downTit"><p>猜你喜欢</p></div>
+                    <ul id="thelist3">
+                         <volist name="lists" id="vo" offset="0" length="8">
+                            <li><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}"><img src="{:get_cover($vo['smallimg'],'path','1','66','66')}"><span>{$vo['title']}</span></a><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">下载</a></li>
+                          </volist>
+                    </ul>
+                </div>
+            </div>
+</notempty>

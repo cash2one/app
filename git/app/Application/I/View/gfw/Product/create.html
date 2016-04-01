@@ -1,0 +1,173 @@
+<extend name="Home@gfw/Base/commonUcent" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+
+<block name="body">
+
+    <div class="user-wraper-right" id="product">
+        <div class="user-right-chapter">
+            <h3>发布产品</h3>
+            <div class="product-nav">
+                <ul>
+                    <li class="yes"><span>1</span>填写网站标题与分类</li>
+                    <li><span>2</span>产品详细介绍</li>
+                    <li><span>3</span>提交成功</li>
+                </ul>
+            </div>
+            <div class="product-tip">发布产品前一定要先发布公司或商铺的网站，只有发布了网站才能发布网站下的产品！</div>
+            <div class="product-input">
+                <form class="product-form" action="{:U('I/Product/save')}" method="post" onsubmit="return check_field()">
+                    <input type="hidden" id="pid" name="pid" value="{:isset($data['id']) ? $data['id'] : '';}"/>
+                     <input type="hidden" name="type" value="{$type}"/>
+                    <input type="hidden" name="save_step" value="base"/>
+                    <input type="hidden" name="token" value="{$token}"/>
+                    <div class="info-input text">
+                        <em>产品名称：</em>
+                        <input type="text" name="title" value="{:isset($data['title']) ? $data['title'] : '';}" id="title">
+                        <span class="title_pop">*</span>
+                    </div>
+                    <div class="info-input text arr toggle1">
+                        <em>所属网站：</em>
+                        <select name="package_id" id="package_id">
+                            <option value="0">请选择</option>
+                            <foreach name="website_data" item="wd" key="wdk">
+                                <php>
+                                    $selected = (isset($data['package_id']) && $wdk == $data['package_id']) ? 'selected' : '';
+                                </php>
+                                <option value="{$wdk}" {$selected}>{$wd}</option>
+                            </foreach>
+                        </select>
+                        <span class="package_id_pop">*</span>
+                    </div>
+                    <div class="info-input text arr cpfl">
+                        <em>选择分类：</em>
+                        <empty name="cate_data[0]['title']">
+                            <select name="category_id[]" size="6" onclick="change_category(this)" class="category_id_1">
+                                <foreach name="cate_data[0]" item="cd" key="cdk">
+                                    <option value="{$cd['id']}">{$cd['title']}</option>
+                                </foreach>
+                            </select>
+                        <else/>
+                            <foreach name="cate_data" item="cd" key="cdk">
+                                <select name="category_id[]" size="6" onclick="change_category(this)" class="category_id_{$cdk}">
+                                    <foreach name="cd['data']" item="v" key="k">
+                                        <php>$selected = ($v['id'] == $cd['id']) ? 'selected' : '';</php>
+                                        <option value="{$k}" {$selected}>{$v['title']}</option>
+                                    </foreach>
+                                </select>
+                            </foreach>
+                        </empty>
+                        <!--select name="category_id" id="category_id">
+                            <option value="0">请选择</option>
+                            <foreach name="cate_data" item="cd" key="cdk">
+                                <php>
+                                    $selected = (isset($data['category_id']) && $cdk == $data['category_id']) ? 'selected' : '';
+                                </php>
+                                <option value="{$cdk}" {$selected}>{:str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $cd['floor'])}{$cd['title']}</option>
+                            </foreach>
+                        </select-->
+                        <span class="category_id_pop">*</span>
+                    </div>
+                    <div class="info-input text arr toggle1">
+                        <em>产品类型：</em>
+                        <input name="step" id="pcate" type="hidden" value="" />
+                  <!--      <select name="step" id="step">
+                            <option value="0">请选择</option>
+                            <foreach name="product_type" item="pt" key="ptk">
+                            <php>$selected = (isset($data['model_id']) && $data['model_id'] == $pt['model_id']) ? 'selected' : '';</php>
+                            <option value="{$ptk}" {$selected}>{$pt['name']}</option>
+                            </foreach>
+                        </select>-->
+                        <span class="cate_tip" style="font-weight:bold;font-size:14px;margin-right:30px;">未选择</span>
+                          <span class="step_pop">*</span>
+                    </div>
+                    <div class="info-input btn"><input type="submit" value="下一步" name=""></div>
+                </form>
+            </div>
+            <!--说明 start-->
+            <div style="clear:both"></div>
+            <div class="product-info">
+                <p class="product-info-tit">说明</p>
+                <div class="product-info-main">
+                    <p>1.产品名称：建议采用的标题结构：品牌+型号+具体参数+卖点特征+修饰用语+商品名称。(例如: 供应原装进口FAG16021深沟球高速轴承)。</p>
+                    <p>2.所属网站：发布产品前需要发布您的网站，如没有发布网站将不能发布您的产品。</p>
+                    <p>3.必须选择产品所属的分类与类型，如分类不正确，将不能通过审核。</p>
+                </div>
+            </div>
+            <!--说明 end-->
+        </div>
+    </div>
+
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/user_center.js"></script>
+    <script type="text/javascript">
+	   $(document).ready(function(e) {
+		   
+		    if($("#pid").val()==''){
+				  $(".category_id_1").change(function(){
+			           if($(this).val()=='14001'){
+				       $("#pcate").val("detail_network");
+					   $(".cate_tip").text("网络产品");
+				       }else{
+					    $("#pcate").val("detail_entity");
+						$(".cate_tip").text("实体产品");
+			         }
+			     });
+			}else{
+				 $(".category_id_0").change(function(){
+			          if($(this).val()=='14001'){
+				      $("#pcate").val("detail_network");
+					  $(".cate_tip").text("网络产品");
+				      }else{
+					    $("#pcate").val("detail_entity");
+						$(".cate_tip").text("实体产品");
+			          }
+			});
+				
+				
+		  }
+		   
+         
+      });
+        function check_field()
+        {
+            var title = $.trim($('#title').val());
+            var package_id = $('#package_id').val();
+            var category_id = $('#category_id').val();
+            var step = $('#step').val();
+
+            if ('' == title)
+            {
+                $('.title_pop').text('产品名称为空');
+                return false;
+            }
+
+            if (0 == package_id || '' == package_id)
+            {
+                $('.package_id_pop').text('请选择所属网站');
+                return false;
+            }
+
+            if (0 == category_id || '' == category_id)
+            {
+                $('.category_id_pop').text('请选择所属分类');
+                return false;
+            }
+
+            if ($("#pcate").val()=="")
+            {
+                $('.step_pop').text('请选择产品类型');
+                return false;
+            }
+
+            return true;
+        }
+        //勿删，调用URL
+        var url = '/Product/get_category';
+    </script>
+</block>

@@ -1,0 +1,59 @@
+<extend name="Home@7230/Base/common"/>
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/zixun.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/ycpd.css"/>
+</block>
+<!-----head-END----->
+<block name="body">
+<div id="zixun-main">
+    <p class="page-nav">当前位置：<a href="">首页</a>->媒体库</p>
+    <div class="ycpd-top mtk">
+        <p class="title">游戏资讯</p>
+       <Think:article basename="Document" name="article" limit="5"  where="cover_id!=0&&category_rootid=80" order="create_time desc">
+
+<eq name="key" value="0">
+   <p class="ycpd-tl"><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i><img src="__PUBLIC__/Home/7230/images/video.png"></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a><p>
+        <ul>
+<else/>
+    <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i><img src="__PUBLIC__/Home/7230/images/video-small.png"></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a></li>
+</eq>
+   </Think:article>
+        </ul>
+    </div>
+    <div class="ycpd-top mtk">
+        <p class="title">游戏试玩</p>
+         <Think:article basename="Document" name="article" limit="5"  where="cover_id!=0&&category_rootid=81" order="create_time desc">
+
+<eq name="key" value="0">
+   <p class="ycpd-tl"><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i><img src="__PUBLIC__/Home/7230/images/video.png"></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a><p>
+        <ul>
+<else/>
+    <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i><img src="__PUBLIC__/Home/7230/images/video-small.png"></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a></li>
+</eq>
+   </Think:article>
+        </ul>
+    </div>
+    <div class="ycpd-top mtk">
+        <p class="title">游戏攻略</p>
+  <Think:article basename="Document" name="article" limit="5"  where="cover_id!=0&&category_rootid=85" order="create_time desc">
+
+<eq name="key" value="0">
+   <p class="ycpd-tl"><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i><img src="__PUBLIC__/Home/7230/images/video.png"></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a><p>
+        <ul>
+<else/>
+    <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i><img src="__PUBLIC__/Home/7230/images/video-small.png"></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a></li>
+</eq>
+   </Think:article>
+        </ul>
+    </div>
+    <div class="ycpd-top mntp">
+        <p class="title">图片壁纸</p>
+        
+     <Think:article basename="Down" name="dmain" cate="4" limit="5"  where="cover_id!=0" order="create_time desc">
+           <p class="tpbz01"><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title}<s></s></a></p>
+    </Think:article>
+    </div>
+    <!----left -END-->
+</div>
+</block>
+<div style="clear:both"></div>

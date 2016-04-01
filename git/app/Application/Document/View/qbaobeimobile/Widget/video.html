@@ -1,0 +1,76 @@
+<extend name="Home@qbaobeimobile/Base/common2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/index.css"/>
+</block>
+<block name="breadcrumbnav"><a href="{:C('MOBILE_STATIC_URL')}">首页</a> > 视频</block>
+<block name="body">
+<!--导航-->
+<nav class="channel-nav">
+    <a class="active" href="/video/">热播</a>
+    <a href="/list/1307/index_video.html">片库</a>
+</nav>
+<!--轮播-->
+<div class="picauto-box pic-adaptive-wrap">
+    <div class="swiper-container3 pic-adaptive">
+      <div class="swiper-wrapper">
+          {~W('Document/Qbaobeimobile/shipinSlider')}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+</div>
+<section class="ship-cata dis-bot video-list video-list-top">
+    <ul class="ship-cata-ul pic-adaptive-wrap2">
+        {~W('Document/Qbaobeimobile/shipinCommended')}
+    </ul>
+</section>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists','1342','Document')}" class="more">更多</a><h3>食谱</h3></div>
+    <ul class="ship-cata-ul pic-adaptive-wrap2">
+        {~W('Document/Qbaobeimobile/videoBlock',array('1342','2'))}
+     </ul>
+</section>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists','1409','Document')}" class="more">更多</a><h3>儿童乐园</h3></div>
+          {~W('Document/Qbaobeimobile/videoBlock',array('1409','3',1))}
+</section>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists','1308','Document')}" class="more">更多</a><h3>备孕</h3></div>
+    <ul class="ship-cata-ul pic-adaptive-wrap2">
+        {~W('Document/Qbaobeimobile/videoBlock',array('1308','2'))}
+    </ul>
+</section>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists','1315','Document')}" class="more">更多</a><h3>孕期</h3></div>
+         {~W('Document/Qbaobeimobile/videoBlock',array('1315','3',1))}
+</section>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists','1318','Document')}" class="more">更多</a><h3>分娩</h3></div>
+    <ul class="ship-cata-ul pic-adaptive-wrap2">
+       {~W('Document/Qbaobeimobile/videoBlock',array('1318','2'))}
+    </ul>
+</section>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists','1322','Document')}" class="more">更多</a><h3>产后</h3></div>
+          {~W('Document/Qbaobeimobile/videoBlock',array('1322','3',1))}
+</section>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists','1326','Document')}" class="more">更多</a><h3>新生儿</h3></div>
+      <ul class="ship-cata-ul pic-adaptive-wrap2">
+          {~W('Document/Qbaobeimobile/videoBlock',array('1326','2'))}
+          </ul>
+</section>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists','1330','Document')}" class="more">更多</a><h3>0-1岁</h3></div>
+          {~W('Document/Qbaobeimobile/videoBlock',array('1330','3',1))}
+</section>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists','1334','Document')}" class="more">更多</a><h3>1-3岁</h3></div>
+      <ul class="ship-cata-ul pic-adaptive-wrap2">
+          {~W('Document/Qbaobeimobile/videoBlock',array('1334','2'))}
+          </ul>
+</section>
+<section class="ship-cata dis-bot video-list">
+    <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists','1338','Document')}" class="more">更多</a><h3>3-6岁</h3></div>
+          {~W('Document/Qbaobeimobile/videoBlock',array('1338','3',1))}
+</section>
+</block>

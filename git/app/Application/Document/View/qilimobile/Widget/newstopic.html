@@ -1,0 +1,17 @@
+<volist name="theme" id="params">
+	
+	<dt class="mui-pull-left">[{$params.poly_name|msubstr=0,2,'utf-8',false}]</dt>
+	<dd class="mui-clearfix">
+		<volist name="params.theme" id="theme" offset="0" length="3">
+			<a href="{$theme.url}">{$theme.title}</a>&nbsp;
+		</volist>
+
+		<div class="hideShow"><span class="angle-trigger"></span></div>
+
+		<div class="mui-clearfix">
+			<volist name="params.theme" id="theme" offset="4" length="16">
+				<a href="{$theme.url}">{$theme.title|msubstr=0,3,'utf-8',false}</a>
+			</volist>
+		</div>
+	</dd>
+</volist>

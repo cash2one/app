@@ -1,0 +1,13 @@
+<block name="body">
+	<volist name="data" id="document">
+	<li class="mui-table-view-cell mui-media call" href="{$document.url}">
+		<a href="{$document.url}">
+			<img class="mui-media-object mui-pull-left" src="{$document[atlas_a]}">
+			<div class="mui-media-body">
+				<p class="title">{$document.title}</p>
+				<p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document.view}次浏览</span></p>
+			</div>
+		</a>
+	</li>
+	</volist>
+</block>

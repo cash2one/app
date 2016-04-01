@@ -1,0 +1,29 @@
+<extend name="Package@pc6/Base/common"/>
+
+<block name="style">
+<link href="__PUBLIC__/Package/pc6/css/css.css" rel="stylesheet" type="text/css">
+</block>
+
+<block name="body">
+    <dl class="con">
+    	<dd class="banner">
+			<p id="picshow">
+                 <include file="Package@pc6/Widget/bigPic"/>   
+            </p>
+			<p class="newNum">
+		        {:W('Package/Pc6/package',array(6))}
+		    </p>
+		</dd>
+		<dd id="hotGame">
+			{:W('Package/Pc6/productTags',array(10))}
+		</dd>
+		<dd class="listMain">
+			<span class="hotrec">标签列表</span>
+			<ul class="list-ul">
+      			<volist name="list" id="p">
+      				<li><a href="/tag/{$p['name']}/" target="_blank" title="{:$p['title']}">{:$p['title']}</a></li>
+        		</volist>
+			</ul>
+		</dd>
+</dl>
+</block>

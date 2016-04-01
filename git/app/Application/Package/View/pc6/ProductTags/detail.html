@@ -1,0 +1,47 @@
+<extend name="Package@pc6/Base/common"/>
+
+<block name="style">
+<link href="__PUBLIC__/Package/pc6/css/css.css" rel="stylesheet" type="text/css">
+</block>
+
+<block name="body">
+<dl class="con">
+	<dd class="banner">
+			<p id="picshow">
+                 <include file="Package@pc6/Widget/bigPic"/>   
+            </p>
+			<p class="newNum">
+		        {:W('Package/Pc6/package',array(6))}
+		    </p>
+		</dd>
+    <dt style="margin-top:15px;">
+        <div class="Gameico">
+            <a href="/tag/{$info['name']}/" class="ico"><img src="{:get_cover($info['icon'],'path')}" alt="{:$info['title']}" height="80" width="80" /></a>
+            <p><a href="/tag/{$info['name']}/">{:$info['title']}</a></p>
+            <p class="libao">共<em>{:$listCount}</em>款礼包</p>
+        </div> 
+        <div class="Gamelinks">
+            <!-- <a href="" target="_blank">官网</a>
+            <a href="">下载</a> -->
+        </div> 
+    </dt>
+    <dd class="tigsUl">
+        <div class="tigsUl-main">
+        	<volist name="list" id="p">
+            <p>
+            	<span>
+            		<a href="{:staticUrl('Detail',$p['id'],'Package')}" target="_blank" class="tit">{:$p['title']}</a>
+            		<a href="{:staticUrl('Detail',$p['id'],'Package')}" class="card-button btn lq" data-id="{:$p['id']}" data-endtime="{:$p['end_time']}" class="btn lq">立即领取</a>
+            	</span>
+            	<span style="display:none;">
+            		<strong class="card_all" card-id="{:$p['id']}"></strong>
+            		<strong class="card_surplus" card-id="{:$p['id']}"></strong>
+            	</span>
+            	<span class="info">{:clean_str($p['content'])}</span>
+            </p>
+            </volist>
+		</div>
+    </dd>
+    <dd class="page">{:$page}</dd>
+</dl>
+</block>

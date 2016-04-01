@@ -1,0 +1,30 @@
+<extend name="Package@pc6/Base/common"/>
+
+<block name="style">
+    <link href="Public/Package/pc6/css/qhfy.css" rel="stylesheet" type="text/css">
+</block>
+
+<block name="body">
+    <dl class="con">
+        <dd class="left">
+            <p id="picshow">
+                <include file="Package@pc6/Widget/bigPic"/>
+            </p>
+            <p class="list">
+                <b>当前位置：<a href="{:staticUrl('index', '', $static_url_params)}">首页</a> → <font color="red">{$keyword}</font> 搜索结果</b>
+     
+                <empty name="lists">
+               没有搜索到相应数据！
+                <else />
+                 <volist  name="lists" id="article">
+                   <span><a href="{:staticUrl('detail', $article['id'], $static_url_params)}"><img src="{:get_cover($article['cover_id'],'path')}"><font></font><em> {$article['title']}</em></a><u>有效时间： {$article.start_time|time_format="Y-m-d"} 至 {$article.end_time|time_format="Y-m-d"}</u><br/>总量：<h class="card_all" card-id="{$article.id}"></h> / 剩余：<h class="card_surplus" card-id="{$article.id}"></h><br/>平台：{$article.platform} 　卡类：{:showText($article['card_type'],'card_type')} 状态：{$article.status|showFormat="status"}<s><a href="{:staticUrl('detail', $article['id'], $static_url_params)}">立即领取</a></s></span>
+                    </volist>
+                </empty> 
+        </p>
+        <div class="pag">{$page}</div>
+    </dd>
+    <dt class="right"> 
+        <include file="Package@pc6/Public/sideR"/>
+    </dt>
+</dl>
+</block>

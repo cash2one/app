@@ -1,0 +1,20 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/kfkc.css"/>
+</block>
+<block name="body">
+    <div class="main1200">
+        <div class="goback">当前位置：<a href="{:C('STATIC_URL')}">首页</a> > 厂商合集</div>
+        <div class="container">
+            <div class="video-list wrap">
+                <div class="zqzt-tab"><a href="{:getWidgetPath(76,ture)}" class="active">专题合集</a><a href="{:getWidgetPath(77,ture)}" class="active">专区合集</a><h3>厂商合集</h3></div>
+                <ul class="video-ul zq-list">
+                    <volist name="lists" id="val">
+                        <li><a href="{$val['url']}" target="_blank" class="gozq">进入厂商 ></a><a href="{$val['url']}" target="_blank" title="{$val['name']}"><img src="{:get_cover($val['img'],'path')}" alt="{$val['name']}"><span class="tit">{$val['name']}</span><b class="bg"></b></a><div class="info">{$val['description']}</div></li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="page">{$page}</div>
+        </div>
+    </div>
+</block>

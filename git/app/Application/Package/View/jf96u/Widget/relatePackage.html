@@ -1,0 +1,13 @@
+<notempty name="lists">
+<div class="gift-detail-lb">
+  <div class="gift-tit">
+    <h3>相关礼包</h3>
+  </div>
+  <ul class="about-gift">
+  <volist name="lists" id="vo" offset="0" length="17">
+    <li><a href="{:staticUrl('detail',$vo['id'],'Package')}" target="_blank" title="{$vo['title']}"><img src="{:get_cover($vo['cover_id'],'path')}" alt="{$vo['title']}"><span class="tit">{$vo['title']}</span></a><a href="{:staticUrl('detail',$vo['id'],'Package')}" target="_blank" class="lq">领取</a></li>
+   </volist>
+  </ul>
+</div>
+</notempty>
+

@@ -1,0 +1,43 @@
+<extend name="Home@gfw/Base/commonWebsite" />
+
+<block name="style">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/baike.css"/>
+</block>
+
+<block name="body">
+	<div class="page-nav">
+		<div class="page-left">
+			<!-- 当前位置 -->
+			{:W('Gfw/categoryPosition',array($info['id']))}
+		</div>
+		<span class="sum">共计{:$count}个相关网站</span>
+	</div>
+        <div id="banner-1" class="gf1000"><!-- 广告位：网站大全首页 --><center><!-- 广告位：网站大全-列表页 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123291");</script></center></div>
+	<div class="m-novel m30">
+		<!-- 分类 -->
+	    {:W('Gfw/categoryTree',array($info))}
+	    <div class="pright">
+	        <div class="novel-con">
+	        	<if condition="!empty($lists)">
+	        	<volist name="lists" id="website" key="i">
+		            <div class="novel-list">
+		                <p class="title"><a href="{:staticUrl('detail',$website['id'],'Package')}">{:$website['title']}</a></p>
+		                <p class="intro">
+		                	{:msubstr(strip_tags($website['content']),0,100,'utf-8',true)}
+		                	<span><a href="{:staticUrl('detail',$website['id'],'Package')}">[查看详情]</a></span>
+		                </p>
+		            </div>
+		            <if condition='$i lt count($lists)'>
+		            	<div class="line"></div>
+		            </if>
+	            </volist>
+	            <else />
+	            	<div class="novel-list">暂无记录</div>
+	            </if>
+	            <!----novel-list   -end----->
+	        </div>
+	        <p id="fenye">{:$page}</p>
+	    </div>
+	</div>
+</block>

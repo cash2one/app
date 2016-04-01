@@ -1,0 +1,40 @@
+<extend name="Home@7230/Base/common"/>
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/news.css"/>
+</block>
+<!-----head-END----->
+<block name="body">
+<!-----head-END----->
+<div id="news-main">
+<p class="page-nav">当前位置：<a href="{:staticUrl('index')}">首页</a>->{$categoryName}</p>
+<div id="nm-left">
+
+<div class="nm-left-bottom">
+<p class="title">{$categoryName}</p>
+<ul>
+<volist  name="lists" id="article">
+
+<li>
+<php>
+if(strstr(get_cover($article['cover_id'],'path'),"default")==false){
+$img=get_cover($article['cover_id'],'path');
+$url=staticUrl('detail', $article['id'],'Document');
+echo "<a href=\"".$url."\" target=\"_blank\" class=\"pic\"><img src=\"".$img."\"></a>";
+}
+</php>
+
+<span><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank"><h4>{$article.title}</h4></a><b class="info">{:clean_str($article['description'])}</b>
+<b class="jj"><i>编辑：<s>{$article.author}</s></i><i>时间：<s>{$article.start_time|time_format="m-d"}</s></i><i>标签：<s>{:implode(',',array_column(get_tags($article['id'],'Document'),'title'))}
+</s></i><i>来源：<s>{$article.source_url}</s></i><i style="display:none;">赞<s>{$article.abet}</s></i><i style="display:none;">分享+</i></b></span></li>
+</volist>
+<div class="page">{$page}</div>
+</ul>
+<div style=" clear:both"></div>
+</div>
+</div>
+<div id="nm-right">
+    <!--#include virtual="{:getWidgetPath('6')}"-->
+</div>
+</div>
+</block>
+<div style="clear:both"></div>

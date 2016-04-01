@@ -1,0 +1,12 @@
+<volist name="down" id="article">
+<eq name="key" value="0">
+    <li class="cur">
+        <else/>
+    
+    <li>
+</eq>
+<em>{$key+1}</em><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title}</a><span class="num">{$article['hits_today']}次下载</span>
+<p><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['smallimg'],'path',1,60,60)}"><b>{$article.title}</b></a><br>
+    {$article['hits_today']}次下载<a href="{:staticUrl('detail', $article['id'],'Down')}" class="down">下载</a></p>
+</li>
+</volist>

@@ -1,0 +1,82 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>{:isset($info['id'])?'编辑':'新增'}{$name}</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);">基 础</a></li>
+			
+		</ul>
+		<div class="tab-content">
+			<form action="{:U()}" method="post" class="form-horizontal">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item">
+						<label class="item-label">
+							{$name}名称<span class="check-tips">（名称不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="title" class="text input-large" value="{$info.title|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							{$name}标识<span class="check-tips">（英文字母）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="name" class="text input-large" value="{$info.name|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							{$name}路径<span class="check-tips">（前台模板的路径）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="path" class="text input-large" value="{$info.path|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							手机版{$name}路径<span class="check-tips">（手机版前台模板的路径）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="mobile_path" class="text input-large" value="{$info.mobile_path|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">类型<span class="check-tips">（可配置）</span></label>
+						<div class="controls">
+							<select name="type">
+								<volist name="Think.config.TEMPLATE_TYPE" id="type">
+									<option value="{$key}">{$type}</option>
+								</volist>
+							</select>
+						</div>
+					</div>
+
+				</div>
+
+
+				<div class="form-item">
+					<input type="hidden" name="id" value="{$info.id|default=''}">
+					<input type="hidden" name="status" value="1">
+					<button type="submit" id="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+		<present name="info.id">
+		Think.setValue("type", "{$info.type|default=0}");
+		</present>
+		//导航高亮
+		highlight_subnav('{:U('Template/index')}');
+	</script>
+</block>

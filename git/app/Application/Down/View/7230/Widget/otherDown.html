@@ -1,0 +1,9 @@
+<!--其他平台-->
+<p class="yxcp-title"><em>其他平台版本</em></p>
+<div class="other-vise">
+    <ul class="other-vise-li">
+        <volist name="lists" id="val">
+        <li class="channel{$val['channel']}"><a class="ca" href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['title']}</a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="down">立即下载</a></li>
+        </volist>
+    </ul>
+</div>

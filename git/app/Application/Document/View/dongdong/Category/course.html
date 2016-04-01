@@ -1,0 +1,41 @@
+<extend name="Home@dongdong/Widget/common/common" />
+
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/dongdong/gw/css/news.css"/>
+</block>
+
+<block name="body">
+<div id="main">
+    {:W('Dongdong/courseCate',array($info['id']))}
+    <div class="newsMain" id="dcf">
+        <div class="search"></div>
+        <ul class="newsMain-ul">
+            <volist name="lists" id="val">
+            <li><div class="title"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a><span>发表时间：{:date('Y-m-d',$val['update_time'])}</span></div><div class="info">{$val['description']}<a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">更多></a></div></li>
+            </volist>
+        </ul>
+        <div class="page">{$page}</div>
+    </div>
+</div>
+</block>
+<block name="script">
+    <script>
+    var wh = $(window).height();
+    var fh = $(".footer").offset().top;
+    var h  = (wh - fh -151);
+    if(h>0){
+    $("#main").css('height',wh-242);
+    }
+
+    $(".newsMain-ul").find('.info').each(function(){
+        if($(this).text().length > 99){
+            var txt     = $(this).html();
+            var awz     = txt.indexOf('<a');
+            var aTag    = txt.substr(awz);
+            var txt     = txt.substr(0,102);
+            $(this).html(txt+"……"+aTag);
+        }
+    });
+    </script>
+</block>

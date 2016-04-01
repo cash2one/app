@@ -1,0 +1,128 @@
+<extend name="Home@gfw/Base/commonWebsite" />
+
+<block name="style">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/website.css"/>
+</block>
+
+<block name="body">
+<div class="page-nav">
+	<div class="page-left">
+		<span class="location">当前位置：</span>
+		<a href="/">首页</a><span class="grey">&gt;</span>
+		地方网站大全<span class="grey">&gt;</span>{$provinceInfo['name']}
+		<volist name="positionCate" id="cate" key="i">
+			<if condition='$i elt count($positionCate)'>
+				<span class="grey">&gt;</span>
+			</if>
+			<?php $url=str_replace('{pinyin}',$provinceInfo['pinyin'],$path_cate_url);$url=str_replace('{category_id}',$cate['id'],$url);?>
+			<a href="/{:$url}">{:$cate[title]}</a>
+		</volist>
+	</div>
+	<span class="sum"></span>
+</div>
+<div class="place">
+    <div class="place-left">
+    <div class="novel-cate">
+        <div class="hd">
+            <h3>网站分类</h3>
+        </div>
+        <volist name="cateTree" id="cate" key="i">
+        <div class="cate-item">
+            <div class="hd">
+                <h4>
+                	<i></i>
+                	<?php $url=str_replace('{pinyin}',$provinceInfo['pinyin'],$path_cate_url);$url=str_replace('{category_id}',$cate['id'],$url);?>
+                	<a href="/{:$url}" class="<if condition='$select_category_id eq $cate[id]'>colour</if>">{:$cate['title']}</a>
+                </h4>
+            </div>
+            <if condition="$cate['_']">
+            <ul style="<if condition='in_array($cate[id],$selectIds)'>display:block;</if>">
+            	<volist name="cate['_']" id="child" key="j">
+                	<li class="<if condition='$j eq count($cate[_])'>nob</if>">
+                		<?php $url=str_replace('{pinyin}',$provinceInfo['pinyin'],$path_cate_url);$url=str_replace('{category_id}',$child['id'],$url);?>
+	                	<a href="/{:$url}" class="<if condition='$select_category_id eq $child[id]'>colour</if>">
+	                		<i></i>{:$child['title']}
+	                	</a>
+                	</li>
+                </volist>
+            </ul>
+            </if>
+        </div>
+        </volist>
+        <!-----cate-item   -end----->
+    </div>
+    <!-----novel-cate   -end----->
+    <div class="pool">
+        <div class="hd">
+            <h3>所有省份网站大全</h3>
+        </div>
+        <ul class="pool-main">
+        	<volist name="provinceList" id="province">
+        		<?php $url=str_replace('{pinyin}',$province[pinyin],$path_province_url);$url=str_replace('{category_id}',$select_category_id,$url);?>
+	            <li><a href="/{:$url}" class="<if condition='$select_province_id eq $province[id]'>orange</if>">{:$province['name']}网站大全</a></li>
+            </volist>
+        </ul>
+    </div>
+    <!-----pool   -end----->
+    </div>
+    <!-----place-left   -end----->
+    <div class="pright">
+    	<if condition="$webSiteList">
+        <div class="place-main gf-border">
+        	<volist name="webSiteList" id="website" key="i">
+            <div class="place-list">
+                <div class="firm">
+                    <h2><a href="{:staticUrl('detail',$website['id'],'Package')}" target="_blank">{:$website['title']}</a></h2>
+                    <p class="p-about"><a href="{:staticUrl('detail',$website['id'],'Package')}" target="_blank">{:msubstr(strip_tags($website['content']),0,100,'utf-8',true)}</a></p>
+                    <p class="adess"><a href="{:$website['url']}" target="_blank" rel="nofollow">公司官网：<span>{:$website['url']}</span></a></p>
+                </div>
+                <div class="touch">
+                	<if condition="$info['contacts']">
+                    	<p><span>联系人：</span><span class="grey">{:$info['contacts']}</span></p>
+                    </if>
+                    <if condition="$info['phone'] or $info['telphone']">
+	                    <p>
+	                    	<span>电话：</span>
+	                    	<span class="grey">
+	                    		<if condition="$info['phone'] && $info['telphone']">
+	                    			{:$info['phone']},{:$info['telphone']}
+	                    		<elseif condition="$info['phone']">
+	                    			{:$info['phone']}
+	                    		<elseif condition="$info['telphone']">
+	                    			{:$info['telphone']}
+	                    		</if>
+	                    	</span>
+	                    </p>
+                    </if>
+                    
+                    {~$province = getProvince($website['province_id'])}
+		            {~$city = getCity($website['city_id'])}
+		            {~$area = getArea($website['area_id'])}
+                    <if condition="$country or $province or $city or $area or $address">
+	                    <p><span>地址：</span>
+		                    <span class="grey">
+		                    	{:$country}{:$province['name']}{:$city['name']}{:$area['name']}{:$address}
+		                    </span>
+	                    </p>
+                    </if>
+                </div>
+            </div>
+            <if condition='$i lt count($webSiteList)'>
+            	<div class="line"></div>
+            </if>
+            </volist>
+            <!----place-list   -end----->
+        </div>
+        <p id="fenye">{:$page}</p>
+       	<else />
+       		<div class="place-main gf-border">
+       			<div class="place-list">
+                	暂无记录
+                </div>
+       		</div>
+        </if>
+    </div>
+</div>
+<!-----m-novel   -end----->
+<div class="clear1"></div>
+</block>

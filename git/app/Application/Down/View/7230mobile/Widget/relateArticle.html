@@ -1,0 +1,10 @@
+<section>
+    <div class="top_tit"><span>相关攻略资讯</span></div>
+    <div class="ul_lists">
+        <ul>
+            <volist name="data" id="val">
+            <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+</section>

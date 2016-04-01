@@ -1,0 +1,27 @@
+<div id="playBox">
+	<div class="pre"></div>
+	<div class="next"></div>
+	<div class="smalltitle">
+		<ul>
+			<volist name="productList" id="product" key="i">
+			<li class='<if condition="$i eq 1">thistitle</if>'></li>
+			</volist>
+		</ul>
+	</div>
+	<ul class="oUlplay">
+		<volist name="productList" id="product" key="j">
+		<?php 
+			$imgId = 0;
+			if(!empty($product['previewimg'])){
+				$imgArr = explode(',', $product['previewimg']);
+				$imgId = $imgArr[0];
+			}
+	?>
+		<li>
+			<a href="{:staticUrl('detail',$product['id'],'Down')}" target="_blank">
+				<img src="{:get_cover($imgId,'path')}" title="{:$product['title']}"/>
+			</a>
+		</li>
+		</volist>
+	</ul>
+</div>

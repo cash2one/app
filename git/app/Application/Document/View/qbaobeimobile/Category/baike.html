@@ -1,0 +1,17 @@
+<extend name="Home@qbaobeimobile/Base/common2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/channel.css"/>
+</block><block name="breadcrumbnav"><a href="{:C('MOBILE_STATIC_URL')}">首页</a>  > {$categoryName}</block>
+<block name="body">
+<!--百科列表-->
+<section class="baike-list dis-bot">
+    <script> c();</script>
+    <ul class="baike-list-ul">
+    <volist name="lists" id="vo" offset="0" length="10">
+        <li><a href="{:staticUrlMobile('detail', $vo['id'],'Document')}" title="{$vo['title']}"><div class="text"><p class="title">{$vo['title']}</p><p class="info">{:empty($vo['description']) ? $vo['intro']: $vo['description']}</p></div></a></li>
+       </volist>
+     </ul>
+    <div class="loading" id="loadnews" data-id="{$cid}">拼命加载中...</div>
+</section>
+</block>
+<block name="script"><script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.js"></script></block>

@@ -1,0 +1,78 @@
+<extend name="Public/base" />
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <!-- 标题栏 -->
+    <div class="tab-wrap">
+        <ul class="tab-nav nav">
+            <li ><a href="{:U('updatenickname')}">修改昵称</a></li>
+            <li ><a href="{:U('updateusername')}">修改姓名</a></li>
+            <li ><a href="{:U('updatepassword')}">修改密码</a></li>
+            <li class="current"><a href="{:U('updateHeadPic')}">修改头像</a></li>
+        </ul>
+        <div class="tab-content">
+            <!-- 修改密码表单 -->
+            <form action="{:U('User/submitHeadPic')}" method="post" class="form-horizontal" autocomplete="off">
+                <div class="form-item">
+                    <label class="item-label">密码：<span class="check-tips">（请输入密码）</span></label>
+                    <div class="controls">
+                        <input type="password" name="password" class="text "  autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">上传头像</label>
+                    <div class="controls">
+                        <input type="file" id="upload_picture">
+                        <input type="hidden" name="icon" id="icon" value="{$icon|default=''}"/>
+                        <div class="upload-img-box">
+                            <notempty name="icon">
+                                <div class="upload-pre-item"><img src="{$icon|get_cover='path'}"/></div>
+                            </notempty>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    //上传图片
+                    /* 初始化上传插件 */
+                    $("#upload_picture").uploadify({
+                        "height"          : 30,
+                        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+                        "fileObjName"     : "download",
+                        "buttonText"      : "上传图片",
+                        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+                        "width"           : 120,
+                        'removeTimeout'	  : 1,
+                        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+                        "onUploadSuccess" : uploadPicture,
+                        'onFallback' : function() {
+                            alert('未检测到兼容版本的Flash.');
+                        }
+                    });
+                    function uploadPicture(file, data){
+                        var data = $.parseJSON(data);
+                        var src = '';
+                        if(data.status){
+                            $("#icon").val(data.id);
+                            src = data.url || '__ROOT__' + data.path;
+                            $("#icon").parent().find('.upload-img-box').html(
+                                    '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                            );
+                        } else {
+                            updateAlert(data.info);
+                            setTimeout(function(){
+                                $('#top-alert').find('button').click();
+                                $(that).removeClass('disabled').prop('disabled',false);
+                            },1500);
+                        }
+                    }
+                </script>
+                <div class="form-item">
+                    <button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 认</button>
+                    <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+</block>

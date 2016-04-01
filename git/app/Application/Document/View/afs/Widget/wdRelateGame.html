@@ -1,0 +1,8 @@
+<div class="xgyx">
+  <h3><i>相关游戏</i></h3>
+  <ul>
+    <volist name="p" id="f" offset="0" length='10' >
+      <li><a href="{:staticUrl('detail', $f['id'],'Down')}" target="_blank"><img src="{:get_cover($f['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $f['id'],'Down')}" class="tit">{$f['title']}</a></li>
+    </volist>
+  </ul>
+</div>

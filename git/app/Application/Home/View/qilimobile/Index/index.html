@@ -1,0 +1,214 @@
+<extend name="Home@qilimobile/Base/common" />
+
+<block name="body">
+<include file="Home@qilimobile/Base/nav" />
+
+<div class="mui-content">
+	<div id="slider" class="mui-slider">
+		<div class="mui-slider-group mui-slider-loop">
+			<document model="2" flag="mobile_recom,1" limit="5"><php>$slide[] = $document;</php></document>
+			<if condition="count($slide) eq 1"> 
+				<php>$pop = $end = current($slide);</php>
+			<elseif condition="$slide"/>
+				<php>
+					$pop = current($slide);
+					$end = end($slide);
+				</php>
+			</if>
+
+			<if condition="$pop"> 
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="{$pop.url}">
+						<img src="{:get_thumb($pop[atlas_b], $pop[atlas], '320x185')}">
+					</a>
+					<p class="mui-slider-title">
+						{$pop.title|msubstr=0,20}
+					</p>
+				</div>
+			</if>
+
+			<document model="2" flag="mobile_recom,1" limit="5">
+				<div class="mui-slider-item">
+					<a href="{$document.url}">
+						<img src="{:get_thumb($document[atlas_b], $document[atlas], '320x185')}">
+					</a>
+					<p class="mui-slider-title">
+						{$document.title|msubstr=0,20}
+					</p>
+				</div>
+			</document>
+
+			<if condition="$end"> 
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="{$end.url}">
+						<img src="{:get_thumb($end[atlas_b], $end[atlas], '320x185')}">
+					</a>
+					<p class="mui-slider-title">
+						{$end.title|msubstr=0,20}
+					</p>
+				</div>
+			</if>
+		</div>
+
+		<div class="mui-slider-indicator mui-text-right">
+			<document model="2" flag="mobile_recom,1" limit="5">
+				<if condition="$i eq 0"> 
+					<div class="mui-indicator mui-active"></div>
+				<else />
+					<div class="mui-indicator"></div>
+				</if>
+			</document>
+		</div>
+
+		<div class="y7-slider-desc"></div>
+	</div>
+
+	<ul class="mui-table-view mui-grid-view mui-grid-9">
+		<classify model="2" id="2,99,4,1,270,214,5">
+			<li class="mui-table-view-cell mui-media mui-col-xs-3">
+				<a href="{$classify.url}">
+					<span class="y7-grid-icon y7-grid-icon-{$key}"></span>
+					<div class="mui-media-body">{$classify.title}</div>
+				</a>
+			</li>
+		</classify>
+		<li class="mui-table-view-cell mui-media mui-col-xs-3">
+			<a href="/sitemap.html">
+				<span class="y7-grid-icon y7-grid-icon-8"></span>
+				<div class="mui-media-body">全部</div>
+			</a>
+		</li>
+	</ul>
+	
+	<section class="y7-sec">
+		<div class="y7-sec-title mui-clearfix">
+			<h3>编辑精选</h3>
+		</div>
+
+		<div class="y7-sec-body">
+			<ul class="mui-table-view">
+				<document model="2" flag="mobile_recom,8" limit="5" order="edit">
+				<li class="mui-table-view-cell mui-media call" href="{$document.url}">
+                    <a href="{$document.url}">
+                        <img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+                        <div class="mui-media-body">
+                            <p class="title">{$document['description']}</p>
+                            <p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document['view']}次浏览</span></p>
+                        </div>
+                    </a>
+                </li>
+				</document>
+			</ul>
+		</div>
+	</section>
+	
+	<section class="y7-sec">
+		<div class="y7-sec-title mui-clearfix">
+			<h3>本周热门</h3>
+		</div>
+		<div class="y7-sec-body">
+			<ul class="mui-table-view">
+				<document model="2" limit="5"><php>$hot[] = $document;</php></document>
+				
+				<volist name="hot" id="document" offset="0" length="1">
+					<li class="mui-table-view-cell mui-media call" href="{$document.url}">
+						<a href="{$document.url}">
+							<img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+							<div class="mui-media-body">
+								<p class="title">{$document.title}</p>
+								<p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document['view']}次浏览</span></p>
+							</div>
+						</a>
+					</li>
+				</volist>
+				
+				<if condition="count($hot) egt 4"> 
+					<li class="mui-table-view-cell mui-media duotu">
+						<volist name="hot" id="document" offset="1" length="1">
+							<p class="title">{$document.title}</p>
+						</volist>
+
+						<div class="imgbox">
+							<volist name="hot" id="document" offset="1" length="3">
+								<span class="pic call" href="{$document.url}"><img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}"></span>
+							</volist>
+						</div>
+					</li>
+
+					<volist name="hot" id="document" offset="4" length="1">
+						<li class="mui-table-view-cell mui-media call" href="{$document.url}">
+							<a href="{$document.url}" href="{$document.url}">
+								<img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+								<div class="mui-media-body">
+									<p class="title">{$document.title}</p>
+									<p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document['view']}次浏览</span></p>
+								</div>
+							</a>
+						</li>
+					</volist>
+				<else />
+					<volist name="hot" id="document" offset="2" length="4">
+						<li class="mui-table-view-cell mui-media call" href="{$document.url}">
+							<a href="{$document.url}">
+								<img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+								<div class="mui-media-body">
+									<p class="title">{$document.title}</p>
+									<p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document['view']}次浏览</span></p>
+								</div>
+							</a>
+						</li>
+					</volist>
+                </if>
+			</ul>
+		</div>
+	</section>
+	
+	<section class="y7-sec">
+		<div class="y7-sec-title mui-clearfix">
+			<h3>时尚博主</h3>
+		</div>
+		<div class="y7-sec-body">
+			<ul class="mui-table-view">
+				<document model="2" typeid="1371" flag="mobile_recom,4" limit="5">
+				<li class="mui-table-view-cell mui-media call" href="{$document.url}">
+                    <a href="{$document.url}">
+                        <img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+                        <div class="mui-media-body">
+                            <p class="title">{$document.title}</p>
+                            <p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document['view']}次浏览</span></p>
+                        </div>
+                    </a>
+                </li>
+                </document>
+
+				<if condition="$key LT 5">
+					<php>$limit = 5 - $e;</php>
+
+					<document model="2" rootid="1" limit="$limit" key="key">
+					<li class="mui-table-view-cell mui-media call" href="{$document.url}">
+						<a href="{$document.url}">
+							<img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+							<div class="mui-media-body">
+								<p class="title">{$document.title}</p>
+								<p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document['view']}次浏览</span></p>
+							</div>
+						</a>
+					</li>
+					</document>
+				</if>
+			</ul>
+		</div>
+	</section>
+</div>
+</block>
+
+<block name="script">
+<script src="__PUBLIC__/Home/qilimobile/js/index.js"></script>
+<script>
+$(document).ready(function(){
+	$('.y7-sec .call').click(function(){
+		window.location.href=""+$(this).attr('href')+""; 
+	});	
+});
+</script>
+</block>

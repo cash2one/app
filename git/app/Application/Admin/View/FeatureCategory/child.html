@@ -1,0 +1,36 @@
+<ul>
+<?php
+foreach($childs as $v):
+	if($v['pid']>0) $split='────';//└
+	else $split='─';
+	$split='──────';
+	//$temp=$this->tree($v['id']);
+	//$child=$temp?'├':'└';	
+	//$child='├';
+?>
+<li>
+	<b>
+    {$v.id}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{$child}{$split}
+	<php>if($v['is_parent']):</php><i class="fa fa-expand" onclick="<?php echo 'load(\''.$v['id'].'\');$(\'#'.$v['id'].'\').toggle();$(this).toggleClass(\'fa-compress\')' ?>"></i><php>endif;</php>
+	{$v['title']}
+	</b>
+	<span style="float:right;padding-right:55%">
+	<a href="admin.php?s=/FeatureCategory/add/pid/{$v.id}.html" title="添加子标签" class="add-sub-cate">
+		<i class="fa fa-plus-circle"></i>添加
+	</a>
+	<a title="编辑" href="/admin.php?s=/FeatureCategory/edit/id/{$v.id}/pid/{$v.pid}.html">
+		<i class="fa fa-edit"></i>编辑</a>
+
+	<!--a href="/admin.php?s=/FeatureCategory/operate/type/move/from/{$v.id}.html" title="移动"><i class="fa fa-retweet"></i>移动</a-->
+	
+	<a title="删除" href="/admin.php?s=/FeatureCategory/remove/id/{$v.id}.html" class="confirm ajax-get">
+		<i class="fa fa-trash-o"></i>删除</a>
+	</span>
+	<hr width=97% size=1 color=#eee style="FILTER: alpha(opacity=100,finishopacity=0,style=1)"> 
+	
+	<ul style="display:none;padding-left:5%;" id="{$v['id']}">{$temp}</ul>
+</li>
+
+<?php endforeach;?>
+</ul>

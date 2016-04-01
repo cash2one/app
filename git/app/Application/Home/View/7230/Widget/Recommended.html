@@ -1,0 +1,17 @@
+<div class="recom" id="recomtab">
+  <p class="title">今日推荐<a href="{:staticUrl('lists',93, 'Document')}" target="_blank" class="more"></a></p>
+  <span>
+  <Think:article basename="Down" name="dmain"  limit="1" where="position & 1">
+    <p class="recom-top"> <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic3"><img src="{:get_cover($article['smallimg'],'path')}"></a> <b> <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="title">{$article.title}</a> <i><s>评分：{:get_score($article['id'],true)*0.1}分</s><s></s></i> <i class="info">{$article.description}</i> </b> </p>
+
+  <p class="down"><a href="{:staticUrl('detail', $article['id'],'Down')}" class="mfxz">免费下载</a><a href="
+  <PHP>if(getRelationZone($article['id'])==""){
+  echo staticUrl('detail', $article['id'],'Down');
+  }else{
+  echo C('STATIC_URL')."/".getRelationZone($article['id']);
+  }
+  </PHP>
+  
+  " class="glzq">攻略专区</a></p>
+  </Think:article>
+  </span> </div>

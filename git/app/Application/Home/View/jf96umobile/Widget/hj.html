@@ -1,0 +1,15 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css"/>
+</block>
+<block name="title">{$info['title']}</block>
+<block name="body">
+<section class="zq-list picauto-box">
+    <ul class="pic-list">
+        <volist name="lists" id="val">
+        <li class="picauto"><a href="{$val['staticUrl']}" title="{$val['title']}"><img src="{:get_cover($val['icon'],'path')}" alt="{$val['title']}"></a><a href="{$val['staticUrl']}" class="tit">{$val['title']}</a></li>
+        </volist>
+    </ul>
+    <div class="page">{$page}</div>
+</section>
+</block>

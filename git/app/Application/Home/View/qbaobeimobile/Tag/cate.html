@@ -1,0 +1,29 @@
+<extend name="Home@qbaobeimobile/Base/commonCate" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/video.css"/>
+</block>
+<block name="breadcrumbnav">
+    <a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > "{$tagName}"标签分类
+</block>
+<block name="body">
+<!--导航-->
+<nav class="home-nav" id="navcur">
+    <div class="swiper-container2">
+        <div class="swiper-wrapper">
+           {~W('Home/Qbaobeimobile/tagscates')}
+        </div>
+    </div>
+</nav>
+<!--弹出菜单-->
+<div class="pop-navbox">
+<volist name="tagsCate" id="vo">
+    <div class="pop-cata-wrap">
+        <a href="{:C('MOBILE_STATIC_URL')}/tag/{$vo['name']}/" class="pop-cata-tit">{$vo['title']}</a>
+        <ul class="pop-cata-ul">
+          {~W('Home/Qbaobeimobile/tagslist',array($vo['id']))}
+		  </ul>
+    </div>
+</volist>
+</div>
+</block>
+<block name="script"><script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/jquery.cookie.js"></script><script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/cookie.js?t={$alias}"></script></block>

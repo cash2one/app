@@ -1,0 +1,26 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>{$SEO.title}</title>
+<meta name="keywords" content="{$SEO.keywords}"/>
+<meta name="description" content="{$SEO.description}"/>
+<link href="__PUBLIC__/Home/qilimobile/css/mui.min.css" rel="stylesheet" />
+<link href="__PUBLIC__/Home/qilimobile/css/main.css" rel="stylesheet" />
+<script src="__PUBLIC__/Home/qilimobile/lib/gmu/zepto.js"></script>
+<script src="__PUBLIC__/Home/qilimobile/lib/gmu/gmu.js"></script>
+<script src="__PUBLIC__/Home/qilimobile/js/mui.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#y7-search button').click(function(){
+		var value = $('input[name=q]').val();
+		if(value != ''){
+			window.location.href='http://so.7y7.com/cse/search?q=' + value + '&s=5364651094490175667';
+		}
+		return false;
+	});
+
+	//y7-search
+	$('#start-search').click(function(){
+		$('#y7-search').toggle();
+	});
+});
+</script>

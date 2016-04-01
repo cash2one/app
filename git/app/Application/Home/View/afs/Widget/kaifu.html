@@ -1,0 +1,14 @@
+ <div class="kfkc" id="news-kfkc">
+        <div class="title"><b class="cur">开服表</b><b>开测表</b></div>
+        <span><i>时间</i><i>游戏名</i><i>服务器名</i></span>
+        <ul class="current">
+            <Think:article basename="Package" name="particle" cate="4" limit="12">
+             <li><i>{$article.start_time|time_format="m-d H:i"}</i><a href="{~W('Home/Afs/packageUrl',array($article['id']))}" target="_blank">{$article.title}</a><i>{$article.server}</i></li>
+        </Think:article>
+        </ul>
+        <ul>
+         <Think:article basename="Package" name="particle" cate="5" limit="12">
+               <li><i>{$article.start_time|time_format="m-d H:i"}</i><a href="{~W('Home/Afs/packageUrl',array($article['id']))}" target="_blank">{$article.title}</a><i>{$article.server}</i></li>
+        </Think:article>
+        </ul>
+ </div>

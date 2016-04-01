@@ -1,0 +1,45 @@
+<if condition="$type eq '1'">
+	<script>document.write("<script type=\"text/javascript\" src=\"http://www.qbaobei.com/IAA/009000/18.js?t=" + (new Date()).valueOf() + "\"><\/script>")</script>
+	<script>
+		$(".cnt-a-more").find('img').each(function(){ 
+			var src = $(this).attr('src');
+			var new_src = "http://www.qbaobei.com"+src;
+			$(this).attr("src",new_src);
+		});
+	</script>
+	<ul class="cnt-a-m-ul">
+		<li><a title="犰狳是什么？2014巴西世界杯为何选三色犰狳为吉祥物？" href="http://www.qbaobei.com/jiaoyu/jyzx/kxyl/20120918_225963.html">犰狳是什么？2014巴西…</a></li>
+		<li><a title="健康快乐看世界杯" href="http://www.qbaobei.com/jiankang/info/focus/20140614_297592.html">健康快乐看世界杯</a></li>
+		<li><a title="世界杯宵夜推荐：金枪鱼蔬菜沙拉&amp; 苏打饼干" href="http://www.qbaobei.com/mysp/mmsp/yqian/20140614_297593.html">世界杯宵夜推荐：金枪…</a></li>
+		<li><a title="世界杯-埃托奥憾中立柱 墨西哥好球被吹胜喀麦隆" href="http://www.qbaobei.com/jiankang/info/focus/20140614_297597.html">世界杯-埃托奥憾中立…</a></li>
+		<li><a title="世界杯荷兰5:1西班牙 荷兰队主教练:没想到赢这么多" href="http://www.qbaobei.com/jiankang/info/focus/20140615_297599.html">世界杯荷兰5:1西班牙 …</a></li>
+		<li><a title="世界杯荷兰5:1西班牙 荷兰队主教练:没想到赢这么多" href="http://www.qbaobei.com/jiankang/info/focus/20140615_297600.html">世界杯荷兰5:1西班牙 …</a></li>
+	</ul>
+</if>
+<if condition="$type eq '2'">
+	<div class="cnt-a-redian">
+		<div class="cnt-a-title"><span>每日热点</span></div>
+		<div class="cnt-a-txt">
+			<dl class="cnt-a-dl">
+				<dd> <a target="_blank" title="胎儿发育过程图" href="http://www.99.com.cn/taierfayuguochengtu/100.html"> <img alt="胎动是什么感觉" src="http://www.qbaobei.com/UploadFiles/UploadADPic/201401081344135055.jpg" height="160" width="120" />胎儿发育过程图</a> </dd>
+                <dd> <a target="_blank" title="2014年4月12生肖运势" href="http://www.qbaobei.com/jiankang/info/xingzuo/20140326_297296.html"> <img alt="2014年4月12生肖运势" src="http://www.qbaobei.com/UploadFiles/UploadADPic/201404241622480970.jpg" height="160" width="120">2014年4月12生肖运势</a> </dd>
+                <dd> <a target="_blank" title="2014年4月份星座运势" href="http://www.qbaobei.com/jiankang/info/xingzuo/20140316_296076.html"> <img alt="2014年4月份星座运势" src="http://www.qbaobei.com/UploadFiles/UploadADPic/201404241624119913.jpg" height="160" width="120">2014年4月份星座运势</a> </dd>
+			</dl>
+			{:W('Qbaobei/jkmsDetailHot',array($info['category_id'],$info['id'],6))}
+		</div>
+	</div>
+</if>
+<if condition="$type eq '3'">
+	<script>document.write("<script type=\"text/javascript\" src=\"http://www.qbaobei.com/IAA/009000/20.js?t=" + (new Date()).valueOf() + "\"><\/script>")</script>
+	<script>
+		$(".cnt-article-tj").find('img').each(function(){ 
+			var src = $(this).attr('src');
+			var new_src = "http://www.qbaobei.com"+src;
+			$(this).attr("src",new_src);
+		});
+	</script>
+</if>
+<if condition="$type eq '4'">
+	 <!-- 广告位：文章详情第一张图片 -->
+       <script type="text/javascript">BAIDU_CLB_fillSlot("1103247");</script> 
+</if>

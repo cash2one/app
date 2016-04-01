@@ -1,0 +1,15 @@
+{~$cid = !empty($cid)?$cid:0;}
+<if condition="!in_array($cid,array(96,87,90,94,98))">
+	{~$cid = 0;}
+</if>
+<div id="baike-nav">
+	<ul class="nav">
+		<li id="nav_0" class="<if condition='$cid eq 0'>red</if>"><a href="{:C('STATIC_URL')}/baike/">官网百科</a></li>
+		<li id="nav_1" class="<if condition='$cid eq 96'>red</if>"><a href="{:staticUrl('lists',96, 'Document')}">娱乐百科</a></li>
+		<li id="nav_2" class="<if condition='$cid eq 87'>red</if>"><a href="{:staticUrl('lists',87, 'Document')}">生活百科</a></li>
+		<li id="nav_3" class="<if condition='$cid eq 90'>red</if>"><a href="{:staticUrl('lists',90, 'Document')}">文化百科</a></li>
+		<li id="nav_4" class="<if condition='$cid eq 94'>red</if>"><a href="{:staticUrl('lists',94, 'Document')}">IT百科</a></li>
+		<li id="nav_5" class="<if condition='$cid eq 98'>red</if>"><a href="{:staticUrl('lists',98, 'Document')}">行业百科</a></li>
+     </ul>
+</div>
+<!-----baike-nav-end----->

@@ -1,0 +1,57 @@
+<extend name="Home@7230mobile/Base/common2Down"/>
+<block name="style">
+    <link href="__PUBLIC__/Home/7230mobile2/css/downDetail.css" rel="stylesheet" type="text/css">
+</block>
+<block name="body">
+    <!-- 下载部分 -->
+    <section>
+        <div class="page_title"><span><a href="javascript:void(0);" class="back"></a></span><h2>{$info['title']}</h2></div>
+        <div class="down_cont">
+            <div class="art_down">
+                <div class="down_left">
+                    <img src="{:get_cover($info['smallimg'],'path')}">
+                </div>
+                <div class="down_right">
+                    <div class="rgt1">
+                        <h3>{$info['title']}</h3>
+                        <span data_id ="{$info['id']}" data_model="Down" id="zan">{$info['abet']}</span>
+                    </div>
+                    <div class="rgt2">
+                        <span class="size">大小：{:format_size($info['size'])}</span>
+                        <span class="language">语言：{:showText($info['language'],'language')}</span>
+                    </div>
+                    <div class="rgt3">
+                        <span class="cate">{:$info['system']=='0'?'类别：'.$info['cate']:'平台：'.showText($info['system'],'system')}</span>
+                        <span class="system">版本：{$info['version']}</span>
+                    </div>
+                </div>
+            </div>
+            <notempty name="info['tags']">
+                <ul class="down_tags">
+                    <li class="tags_tit">标签:</li>
+                    <volist name="info['tags']" id="val">
+                        <li><a href="{$url}/tag/{$val['name']}">{$val['title']}</a></li>
+                    </volist>
+                </ul>
+            </notempty>
+            <!-- 子下载 -->
+            <div class="pack_bottom">
+                <notempty name="info['down']">
+                <a href="#" onclick="goDown('{$info['down']}','{$info['system']}')" class="pack_down"><span>{$info['title']}下载</span></a>
+                <else />
+                <span class="no_down">不好意思，暂未提供下载</span>
+                </notempty>
+
+                {:W('P7230mobile/childDown',array($info['pid'],$info['id']))}
+            </div>
+        </div>
+    </section>
+    <div class="back_up">
+        <php>$Ptitle = M('Down')->where('id = '.$info['pid'])->getField('title');</php>
+        <a href="{:staticUrlMobile('detail',$info['pid'],'Down')}"><span>返回{$Ptitle}</span></a>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript"> var _webInfo = {};_webInfo={ Username:"{$info['uid']}",Type:"0",DateTime:"{:specialDate($info['update_time'])}",Id:"{$info['id']}" };</script>
+    <script type="text/javascript" src="__PUBLIC__/Home/7230mobile2/js/iscroll.js"></script>
+</block>

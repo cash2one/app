@@ -1,0 +1,13 @@
+<div class="fn-title">
+  <h2>图片点击排行</h2>
+</div>
+<div class="recNews pic-rank">
+  <ul>
+  <volist name="lists" id="vo">
+    <li>
+      <p class="tit"><span>{$key+1}</span><a href="{:staticUrl('detail',$vo['id'],'Gallery')}" target="_blank" class="title">{$vo['title']}</a></p>
+      <div class="info"><a href="{:staticUrl('detail',$vo['id'],'Gallery')}" target="_blank" class="pic"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"></a></div>
+    </li>
+   </volist>
+  </ul>
+</div>

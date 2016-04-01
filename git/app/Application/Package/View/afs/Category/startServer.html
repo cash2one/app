@@ -1,0 +1,160 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/afs/css/kfkc.css"/>
+</block>
+<block name="body">
+<div id="main" class="kaif">
+    <!--今日开服-->
+    <div class="jrkf one" id="jrkc">
+        <span class="today">今日开服</span>
+        <ul>
+            <volist name="todayData" id="val">
+            <li>
+                <b class="sj"><i class="day">{:date('m-d',$val['start_time'])}</i><i class="time">{:date('H:i',$val['start_time'])}</i></b><em class="bj"></em>
+                <div class="wrap">
+                    <s class="arr"></s><a href="{:staticUrl('detail',$val['game'],'Down')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path')}"></a>
+                    <div class="jj"><a href="{:staticUrl('detail',$val['game'],'Down')}" target="_blank">{$val['title']}</a><s>{$val['server']}</s><s> 运营商：{$val['company']?$val['company']:'未知'}</s></div>
+                    <div class="info">{$val['description']}</div>
+                    <span id="game-down">
+                        <php>if($val['iosUrl']){</php>
+                        <b class="app"><a href="{$val['iosUrl']}">苹果下载</a><i></i><em><img src="{$val['iosCode']}"></em></b>
+                        <php>} if($val['androidUrl']){</php>
+                        <b class="adr"><a href="{$val['androidUrl']}">安卓下载</a><i></i><em><img src="{$val['androidCode']}"></em></b>
+                        <php>}</php>
+                    </span>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    <div style=" clear:both"></div>
+    <!--即将开服-->
+    <div class="jrkf two" id="jjkf">
+        <span class="today">即将开服</span>
+        <ul>
+            <volist name="willData" id="val">
+            <li>
+                <b class="sj"><i class="day">{:date('m-d',$val['start_time'])}</i><i class="time">{:date('H:i',$val['start_time'])}</i></b><em class="bj"></em>
+                <div class="wrap">
+                    <s class="arr"></s><a href="{:staticUrl('detail',$val['game'],'Down')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path')}"></a>
+                    <div class="jj"><a href="{:staticUrl('detail',$val['game'],'Down')}" target="_blank">{$val['title']}</a><s>{$val['server']}</s><s> 运营商：{$val['company']?$val['company']:'未知'}</s></div>
+                    <div class="info">{$val['description']}</div>
+                    <span id="game-down">
+                        <php>if($val['iosUrl']){</php>
+                        <b class="app"><a href="{$val['iosUrl']}">苹果下载</a><i></i><em><img src="{$val['iosCode']}"></em></b>
+                        <php>} if($val['androidUrl']){</php>
+                        <b class="adr"><a href="{$val['androidUrl']}">安卓下载</a><i></i><em><img src="{$val['androidCode']}"></em></b>
+                        <php>}</php>
+                    </span>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    <div style=" clear:both"></div>
+    <!--历史开服-->
+    <div class="jrkf three" id="lskf">
+        <span class="today">历史开服</span>
+        <ul>
+            <volist name="historyData" id="val">
+            <li>
+                <b class="sj"><i class="day">{:date('m-d',$val['start_time'])}</i><i class="time">{:date('H:i',$val['start_time'])}</i></b><em class="bj"></em>
+                <div class="wrap">
+                    <s class="arr"></s><a href="{:staticUrl('detail',$val['game'],'Down')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path')}"></a>
+                    <div class="jj"><a href="{:staticUrl('detail',$val['game'],'Down')}" target="_blank">{$val['title']}</a><s>{$val['server']}</s><s> 运营商：{$val['company']?$val['company']:'未知'}</s></div>
+                    <div class="info">{$val['description']}</div>
+                    <span id="game-down">
+                        <php>if($val['iosUrl']){</php>
+                        <b class="app"><a href="{$val['iosUrl']}">苹果下载</a><i></i><em><img src="{$val['iosCode']}"></em></b>
+                        <php>} if($val['androidUrl']){</php>
+                        <b class="adr"><a href="{$val['androidUrl']}">安卓下载</a><i></i><em><img src="{$val['androidCode']}"></em></b>
+                        <php>}</php>
+                    </span>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    <div id="jiazai">正在为你加载更多……</div>
+</div>
+<!--右飘菜单-->
+<div id="right-nav">
+    <p>
+        <b class="cur one" id="jr">今日开测</b>
+        <b class="two" id="jj">即将开测</b>
+        <b class="three" id="ls">历史开测</b>
+    </p>
+    <p id="go_bot"></p>
+</div>
+<!--返回顶部-->
+<div id="go_top"><b></b></div>
+</block>
+<block name="script">
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+    <script>
+        $(function(){
+            //获取开服表的条数
+            var hisul = $('#lskf').find('ul');
+
+            window.s_onoff = true;
+
+            window.onscroll = function(){
+                var documentH = document.documentElement.clientHeight || document.body.scrollTop;//浏览器可视区域
+                //scrollH = document.documentElement.scrollTop || document.body.scrollTop;//网页实际高度
+                var movHeigth = $(window).scrollTop();//鼠标移动的距离
+                var hisli = hisul.find('li');
+                var lheigth = hisli.last().offset().top//获取最后一个li与页面的距离
+
+                if((movHeigth + documentH) >=lheigth+150 && window.s_onoff){
+                    window.s_onoff = false;
+
+                    $.ajax({
+                        dataType:"jsonp",
+                        jsonp:"callback",
+                        url: window.DYNAMIC_SERVER_URL + '/dynamic.php?s=/Afs/ajaxHisTestServerData/cate_id/4/sta/' + hisli.length,
+                        success:function(data){
+                            if(data){
+                                var liThtml ="";
+                                for(i in data){
+                                    liThtml += '<li><b class="sj"><i class="day">'+data[i].month+'</i><i class="time">'+data[i].time+'</i></b><em class="bj"></em><div class="wrap"><s class="arr"></s><a href="'+
+                                    data[i].url +'" target="_blank"><img src="' + data[i].img + '"></a><div class="jj"><a href="'+data[i].url+'" target="_blank">'+data[i].title+'</a><s>' + data[i].server + '</s><s> 运营商：'+data[i].company +
+                                    '</s></div><div class="info">'+data[i].description+'</div><span id="game-down">';
+                                    if(data[i].iosUrl){
+                                        liThtml += '<b class="app"><a href="' + data[i].iosUrl+'">苹果下载</a><i></i><em><img src="'+ data[i].iosCode +'"></em></b>';
+                                    }
+
+                                    if(data[i].androidUrl){
+                                        liThtml += '<b class="adr"><a href="' + data[i].androidUrl + '">安卓下载</a><i></i><em><img src="' + data[i].androidCode + '"></em></b>'
+                                    }
+
+                                    liThtml += '</span></div></li>';
+                                }
+                                hisli.last().after((liThtml));
+                                window.s_onoff = true;
+
+
+                                function o_ewm(){
+                                    $('#game-down i').hover(function(){
+                                        $(this).siblings('em').show();
+                                    },function(){
+                                        $(this).siblings('em').hide();
+                                    });
+                                };
+
+                                o_ewm();
+
+
+                            }else{
+                                $('#jiazai').html('没有更多开服数据了……')
+                                window.s_onoff = false;
+                            }
+                        }
+                    });
+            }
+            }
+        });
+
+
+
+    </script>
+</block>

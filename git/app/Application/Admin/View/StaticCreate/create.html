@@ -1,0 +1,103 @@
+<extend name="Public/base"/>
+
+
+
+<block name="body">
+    <style>.cf{width: 400px;.main-title:400px;}</style>
+  <div class="main-title"> <h2> 全站相关页面生成 </h2> </div>
+  <div class="cf">
+    <div class="fl">
+      <a  class="btn"  href="{:U("home",array("method"=>"index"))}">全站首页</a>
+    </div>
+  </div>
+   </br>
+
+  <div class="main-title"> <h2> {$document_name}生成 </h2> </div>
+  <div class="cf">
+    <div class="fl">
+      <a class="btn"  href="{:U("moduleIndex",array("model"=>"Document","method"=>"createStaticIndex"))}">首 页</a>
+      <a class="btn"  href="{:U("moduleLists",array("model"=>"Document","method"=>"createStaticLists"))}">列 表 页</a>
+      <a class="btn"  href="{:U("moduleDetail",array("model"=>"Document","method"=>"createStaticDetail"))}">内 容 页</a>
+    </div>
+  </div>
+  </br>
+
+  <div class="main-title"> <h2> {$gallery_name}生成 </h2> </div>
+  <div class="cf">
+    <div class="fl">
+      <a class="btn"  href="{:U("moduleIndex",array("model"=>"Gallery","method"=>"createStaticIndex"))}">首 页</a>
+      <a class="btn"  href="{:U("moduleLists",array("model"=>"Gallery","method"=>"createStaticLists"))}">列 表 页</a>
+      <a class="btn"  href="{:U("moduleDetail",array("model"=>"Gallery","method"=>"createStaticDetail"))}">内 容 页</a>
+    </div>
+  </div>
+  </br>
+
+  <div class="main-title"> <h2> {$down_name}生成 </h2> </div>
+  <div class="cf">
+    <div class="fl">
+      <a class="btn"  href="{:U("moduleIndex",array("model"=>"Down","method"=>"createStaticIndex"))}">首 页</a>
+      <a class="btn"  href="{:U("moduleLists",array("model"=>"Down","method"=>"createStaticLists"))}">列 表 页</a>
+      <a class="btn"  href="{:U("moduleDetail",array("model"=>"Down","method"=>"createStaticDetail"))}">内 容 页</a>
+    </div>
+  </div>
+  </br>
+
+  <div class="main-title"> <h2> {$package_name}生成 </h2> </div>
+  <div class="cf">
+    <div class="fl">
+      <a class="btn"  href="{:U("moduleIndex",array("model"=>"Package","method"=>"createStaticIndex"))}">首 页</a>
+      <a class="btn"  href="{:U("moduleLists",array("model"=>"Package","method"=>"createStaticLists"))}">列 表 页</a>
+      <a class="btn"  href="{:U("moduleDetail",array("model"=>"Package","method"=>"createStaticDetail"))}">内 容 页</a>
+    </div>
+  </div>
+  </br>
+    <div class="main-title"> <h2> 标签/产品标签列表生成 </h2> </div>
+    <div class="cf">
+        <div class="fl">
+            <a class="btn"  href="{:U("tagList",array("model"=>"Tags","type"=>"down"))}">标签列表页</a>
+            <a class="btn"  href="{:U("tagList",array("model"=>"ProductTags","type"=>"down"))}">产品标签列表页</a>
+        </div>
+    </div>
+    </br>
+  <div class="main-title"> <h2> 厂商生成 </h2> </div>
+  <div class="cf">
+    <div class="fl">
+      <a class="btn"  href="{:U("companyDetail")}" target="_blank">内 容 页</a>
+    </div>
+  </div>
+  </br>
+
+  <div class="main-title"> <h2>专题专区K页面生成 </h2> </div>
+  <div class="cf">
+    <div class="fl">
+      <a class="btn"  href="?s=Feature/create">所 有 专 题</a>
+      <a class="btn"  href="?s=Batch/create">所 有 专 区</a>
+      <a class="btn"  href="?s=Special/create">所 有 K 页 面</a>
+    </div>
+  </div>
+  </br>
+
+  <div class="main-title"> <h2>百度站点地图生成 </h2> </div>
+  <div class="cf">
+    <div class="fl">
+      <a class="btn"  href="{:U("siteMapNew")}">最新数据生成</a>
+      <a class="btn"  href="{:U("siteMap",array("model"=>"Document"))}">{$document_name}全站站点地图</a><br/><br>
+      <a class="btn"  href="{:U("siteMap",array("model"=>"Down"))}">{$down_name}全站站点地图</a>
+      <a class="btn"  href="{:U("siteMap",array("model"=>"Package"))}">{$package_name}全站站点地图</a><br/><br>
+      <a class="btn"  href="{:U("siteMapToTopic")}">专区、专题、k页面站点地图</a>
+    </div>
+  </div>
+  </br>
+  
+  <div class="main-title"> <h2>神马搜索结构化数据生成 </h2> </div>
+  <div class="cf">
+    <div class="fl">
+      <a class="btn"  href="{:U("shenmaSiteMap",array("model"=>"Document"))}">{$document_name}数据生成</a>
+      <a class="btn"  href="{:U("shenmaSiteMap",array("model"=>"Down"))}">{$down_name}数据生成</a>
+    </div>
+  </div>
+  </br>
+
+  
+</block>
+

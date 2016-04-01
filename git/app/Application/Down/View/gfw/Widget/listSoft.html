@@ -1,0 +1,71 @@
+<div class="introduce gf-border gf980">
+    <a class="pic1" href=""><img src="{:get_cover($catelist['vertical_pic'],'path')}" width="242" height="133"></a>
+    <P class="in-text">
+        <a href="{:staticUrl('lists',$vo['id'],'Down')}" class="text1">{$catelist.title}</a>
+        <span class="text2">主要包括：<volist name="catelist['_']" id="vo" key="k"><neq name="k" value="1">、</neq>{$vo.title}</volist></span>
+    </P>
+</div>
+
+<div id="subject" class="gf1000">
+    <div class="soft gf-border cfr">
+        <volist name="cat_arr" id="list">
+            <div class="title">
+                <h2>{$list.title}</h2>
+                <a href="{:staticUrl('lists',$list['id'],'Down')}">更多></a>
+            </div>
+            <notempty name="list['_']">
+                <ul class="soft-pic flclr">
+                    <volist name="list['_']" id="vo">
+                        <php>$previewimg = explode(',', $vo['previewimg']);</php>
+                        <li>
+                            <a href="{:staticUrl('Detail',$vo['id'],'Down')}" class="pic2"><img src="{:get_cover($previewimg[0],'path')}" width="58" height="57"></a>
+                            <p><a href="{:staticUrl('Detail',$vo['id'],'Down')}">{$vo.title|msubstr=0,6,'utf-8',false}</a></p>
+                        </li>
+                    </volist>
+                </ul>
+            <else />
+
+                <ul class="soft-pic flclr">暂无产品信息！</ul>
+            </notempty>
+        </volist>
+    </div>
+    <!-----soft-end----->
+
+    <div class="subject-right cfl">
+        <div class="choose gf-border">
+            <h3 class="choose-icon">计算机软件推荐</h3>
+            <ul class="phone-list">
+                <Think:article basename="Down" name="dmain" where="position&1&&category_id=14001001" order="create_time desc" limit="6">
+                    <php>$previewimg = explode(',', $article['previewimg']);</php>
+                    <li><a href="{:staticUrl('detail', $article['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" width="48" height="48"></a><p>
+                        <a href="{:staticUrl('detail', $article['id'],'Down')}">{$article.title|msubstr=0,7,'utf-8',false}</a></p></li>
+                </Think:article>
+            </ul>
+        </div>
+
+        <div class="choose gf-border">
+            <h3 class="phone-icon">手机软件推荐</h3>
+            <ul class="phone-list">
+                <Think:article basename="Down" name="dmain" where="position&1&&category_id=14001002" order="create_time desc" limit="6">
+                    <php>$previewimg = explode(',', $article['previewimg']);</php>
+                    <li><a href="{:staticUrl('detail', $article['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" width="48" height="48"></a><p>
+                        <a href="{:staticUrl('detail', $article['id'],'Down')}">{$article.title|msubstr=0,7,'utf-8',false}</a></p></li>
+                </Think:article>
+            </ul>
+        </div>
+
+        <div class="phone gf-border flclr">
+            <h3 class="game-icon">游戏推荐</h3>
+            <ul class="phone-list">
+                <Think:article basename="Down" name="dmain" where="position&1&&category_id=14001003" order="create_time desc" limit="6">
+                    <php>$previewimg = explode(',', $article['previewimg']);</php>
+                    <li><a href="{:staticUrl('detail', $article['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" width="48" height="48"></a><p>
+                        <a href="{:staticUrl('detail', $article['id'],'Down')}">{$article.title|msubstr=0,7,'utf-8',false}</a></p></li>
+                </Think:article>
+            </ul>
+        </div>
+
+    </div>
+    <!-----soft-left-end----->
+
+</div>

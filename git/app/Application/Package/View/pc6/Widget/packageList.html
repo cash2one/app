@@ -1,0 +1,4 @@
+<span><em>最新发号</em></span>
+<volist name="packageList" id="package">
+	<i><s>{$package.update_time|time_format="Y-m-d"}上架</s><a href="{:staticUrl('Detail',$package['id'],'Package')}" target="_blank" title="{:$package['title']}">{:$package['title']}</a></i>
+</volist>

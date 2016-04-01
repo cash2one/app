@@ -1,0 +1,56 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>页面列表</h2>
+    </div>
+    <div>
+        <a href="{:U('add?type='.$type)}" class="btn">增加页面</a>
+    </div>
+
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+        <table>
+            <thead>
+                <tr>
+                    <th >ID</th>
+                    <th>分组</th>
+                    <th>页面名字</th>
+                    <th>模块名</th>
+                    <th>控制层名</th>
+                    <th>方法名</th>
+                    <th>路径</th>
+                    <th>参数</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <notempty name="_list">
+                <volist name="_list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.group}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.module_name}</td>
+                    <td>{$vo.controller_name}</td>
+                    <td>{$vo.method_name}</td>
+                    <td>{$vo.path}</td>
+                    <td>{$vo.params}</td>
+                    <td>
+                        <a href="{:U('edit?id='.$vo['id'].'&type='.$vo['type'])}">编辑</a>
+                        <a title="删除" href="{:U('remove?id='.$vo['id'])}" class="confirm ajax-get">删除</a>
+                    </td>
+                </tr>
+                </volist>
+                <else/>
+                <td colspan="6" class="text-center"> 暂无数据! </td>
+                </notempty>
+            </tbody>
+        </table>
+    </div>
+    <!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+</block>

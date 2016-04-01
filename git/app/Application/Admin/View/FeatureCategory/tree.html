@@ -1,0 +1,37 @@
+<volist name="tree" id="list">
+	<dl class="cate-item">
+		<dt class="cf">
+			<form action="/hehuayuan.php?s=/Tags/edit.html" method="post">
+				<div class="btn-toolbar opt-btn cf">
+					
+					<a title="编辑" href="/hehuayuan.php?s=/Tags/edit/id/{$list['id']}/pid/{$list['pid']}.html">编辑</a>
+					<a title="{$list.status|show_status_op}" href="/hehuayuan.php?s=/Tags/setStatus/ids/{$list['id']}/status/0.html" class="ajax-get">{$list.status|show_status_op}</a>
+					
+					<a title="删除" href="/hehuayuan.php?s=/Tags/remove/id/{$list['id']}.html" class="confirm ajax-get">删除</a>
+					<php>if($_GET['aaa']):</php>
+					<a title="移动" href="{:U('operate?type=move&from='.$list['id'])}">移动</a>
+					<!--<a title="合并" href="{:U('operate?type=merge&from='.$list['id'])}">合并</a>-->
+					<php>endif;</php>
+				</div>
+				<div class="fold"><i></i></div>
+				<div class="order"><input type="text" name="sort" class="text input-mini" value="{$list.sort}"></div>
+				<div class="name">
+					<span class="tab-sign"></span>
+					<input type="hidden" name="id" value="{$list.id}">
+					<input type="text" name="title" class="text" value="{$list.title}">
+					<a class="add-sub-cate" title="添加子标签" href="hehuayuan.php?s=/Tags/add/pid/{$list['id']}.html">
+						<i class="icon-add"></i>
+					</a>
+					<span class="help-inline msg"></span>
+				</div>
+			</form>
+		</dt>
+		<php>if(!$_GET['a2']):</php>
+		<notempty name="list['_']">
+			<dd>
+				{:R('Tags/tree', array($list['_']))}
+			</dd>
+		</notempty>
+		<php>endif;</php>
+	</dl>
+</volist>

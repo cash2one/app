@@ -1,0 +1,26 @@
+<extend name="Package@pc6/Base/common"/>
+
+<block name="style">
+    <link href="__PUBLIC__/Package/pc6/css/qhfy.css" rel="stylesheet" type="text/css">
+</block>
+
+<block name="body">
+    <dl class="con">
+        <dd class="left">
+            <p id="picshow">
+                <include file="Package@pc6/Widget/bigPic"/>
+            </p>
+            <p class="list">
+                <b>当前位置：<a href="">首页</a> →　{$info.title}</b>
+                <volist  name="lists" id="article">
+                    <span><a href="{:staticUrl('detail', $article['id'])}"><img src="{:get_cover($article['cover_id'],'path')}"><font></font><em> {$article.title}</em></a><u>有效时间： {$article.start_time|time_format="Y-m-d"} 至 {$article.end_time|time_format="Y-m-d"}</u><br/>总量：<strong class="card_all" card-id="{$article.id}"></strong> / 剩余：<strong class="card_surplus" card-id="{$article.id}"></strong><br/>平台：{$article.platform} 　卡类：{:showText($article['card_type'],'card_type')}状态：{$article.status|showFormat="status"}<s><a href="{:staticUrl('detail', $article['id'])}" class="card-button" data-id="{:$article['id']}" data-endtime="{:$article['end_time']}">立即领取</a></s></span>
+                   
+                </volist>
+        </p>
+        <div class="pag">{$page}</div>
+    </dd>
+    <dt class="right"> 
+        <include file="Package@pc6/Public/sideR"/>
+    </dt>
+</dl>
+</block>

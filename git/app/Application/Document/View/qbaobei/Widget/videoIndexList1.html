@@ -1,0 +1,29 @@
+<div class="video-list">           
+            <div class="fn-title fn-title-l"><em class="ico {$ico}"></em>{~W('Document/Qbaobei/videoTags',array($cate))}<h2><i>{$title}</i>视频</h2></div>
+            <div class="video-list-main">
+            <volist name="lists" id="vo">
+                       <switch name="key">
+                               <case value="0">
+                                      <div class="video-l">
+                                             <a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="title"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><i class="ico"></i><b class="bg"></b></a>
+                                             <p class="info"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="tit">{$vo['title']}</a><span class="text">{$vo['description']}</span></p>
+                                      </div>
+                               </case>
+                               <case value="1">
+                                        <div class="video-r">
+                                            <ul class="video-ul">
+                                            <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="title"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><i class="ico"></i><b class="bg"></b></a><p class="info"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="tit">{$vo['title']}</a><span class="text">{$vo['description']}</span></p></li>
+                               </case>
+                               
+                               <case value="10">
+                                       <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="title"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><i class="ico"></i><b class="bg"></b></a><p class="info"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="tit">{$vo['title']}</a><span class="text">{$vo['description']}</span></p></li>
+                                      
+                               </case>
+                               
+                               <default /> <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="title"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><i class="ico"></i><b class="bg"></b></a><p class="info"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="tit">{$vo['title']}</a><span class="text">{$vo['description']}</span></p></li>
+                         </switch>
+                       </volist>
+                       </ul> 
+                </div>
+            </div>
+</div>

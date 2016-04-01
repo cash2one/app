@@ -1,0 +1,8 @@
+<notempty name="lists">
+<div class="artLabel"> <span class="artLabel-title">标签：
+ <volist name="lists" id="vo">
+  <a href="{:C('STATIC_URL')}/tag/{$vo['name']}/" target="_blank">{$vo['title']}</a>
+</volist>
+</span> </div>
+</notempty>
+

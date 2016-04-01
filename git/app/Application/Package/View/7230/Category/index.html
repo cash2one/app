@@ -1,0 +1,26 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/7230/css/libao.css"/></block>
+<block name="body">
+
+<div id="libao-main">
+   <!----礼包顶部结束,主体左边开始----->
+    <!--#include virtual="{:getWidgetPath('22')}"-->
+    
+   <!----礼包顶部结束,主体右边开始----->
+    <div class="libao-right">
+    <!--#include virtual="{:getWidgetPath('23')}"-->
+   <!----礼包顶部结束,主体右边开始----->
+    <div class="syxsk">
+        <p class="title"><span></span><b>{$info.title}</b></p>
+        <ul>
+            <volist name="lists" id="val">
+                <li><b class="pictit"><a href="{:staticUrl('detail',$val['id'])}" target="_blank" class="pic"><img src="{:get_cover($val['cover_id'],'path')}"></a><a href="{:staticUrl('detail',$val['id'])}" target="_blank">{$val.title}</a></b><b>{:date('Y-m-d',$val['create_time'])}</b><b>入库</b><b class="azpg"><a class="anzhuo {$val['conditions']==1?'':'az-now'}"></a><a class="apple {$val['conditions']==2?'':'ap-now'}"></a></b><b class="lb">礼</b></li>
+            </volist>
+        </ul>
+    </div>   
+    <div class="page">{$page}</div>
+  </div>
+</div>
+
+</block>

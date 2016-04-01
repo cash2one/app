@@ -1,0 +1,28 @@
+<!-- 网站详情左侧基本信息 -->
+<div class="about gf-border">
+	<h3 class="about-title">{$info['title']|msubstr=0,15,'utf-8',false}</h3>
+	<ul class="contact">
+		<if condition="$info['contacts']">
+			<li><i class="cicon1"></i><span>联系人：</span><span>{:$info['contacts']}</span></li>
+		</if>
+		<if condition="$info['phone']">
+			<li><i class="cicon2"></i><span>电 话：</span><span>{:$info['phone']}</span></li>
+		</if>
+		<if condition="$info['telphone']">
+			<li><i class="cicon3"></i><span>手 机：</span><span>{:$info['telphone']}</span></li>
+		</if>
+		<if condition="$province or $city or $area or $address">
+			<li><i class="cicon4"></i> <span>地 址：</span>
+				<span class="add">
+					{:$province}{:$city}{:$area}{:$address}
+				</span>
+			</li>
+		</if>
+	</ul>
+	<div class="http">
+		<a href="{:$info['url']}" target="_blank" rel="nofollow"><span class="">进入官网</span></a>
+	</div>
+</div>
+
+
+

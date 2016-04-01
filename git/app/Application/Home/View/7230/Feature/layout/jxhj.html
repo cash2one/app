@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>机型合集频道</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/7230/css/jxhj.css"/>
+</head>
+<body>
+
+<include file="Home@7230/Public/header"/>
+
+<div id="down-main">
+    <p class="page-nav">当前位置：<a href="{:C('STATIC_URL')}">首页</a>->机型合集</p>
+
+
+    <!----本期简介---------->
+    <div class="bqjs">
+        <div class="dragable" widget="html">
+        <span>
+            <b>小米手机性价比详解</b>
+            <i class="info">你看了是淡淡的淡淡的淡淡的淡淡的说洛淡的淡淡的淡淡的淡淡的说洛克菲勒开始的记洛克菲勒开始克菲勒开始的记洛克菲勒开始的记洛克菲勒开始克菲勒开始的记洛克菲勒开始的记洛克菲了</i>
+        </span>
+        </div>
+        <p><img src="images/jxtp.png"></p>
+    </div>
+
+
+    <!----最近更新------>
+    <div class="dragable" widget="down__down_category">
+    <p id="djwy" class="zjgx-title">
+        <i class="cur">网游</i>
+        <i>单机</i>
+    </p>
+    </div>
+
+
+    <div class="zjgx">
+        <!----------------------挂载部分------------------------>
+        <php>
+            $category = array_unique(array_column($lists,'title'));
+            $online = array();
+            $alone = array();
+            $count = count($lists) + 1;
+
+            for($i=0;$i<$count;$i++){
+                foreach($category as $k=>$v){
+                    if($v==$lists[$i]['title']){
+                        if($lists[$i]['network']==1){
+                            $alone[$v]['title']=$v;
+                            $alone[$v]['data'][]=$lists[$i];
+                        }else{
+                            $online[$v]['title']=$v;
+                            $online[$v]['data'][]=$lists[$i];
+                        }
+                    }
+                }
+            }
+        </php>
+
+        <div class="current">
+            <volist name="online" id="val">
+                <em class="biaoti">{$val['title']}游戏下载</em>
+                <volist name="val['data']" id="rel">
+                <p>
+                    <a href="{:staticUrl('detail',$rel['id'],'Down')}" target="_blank" class="pic2"><img src="{:get_cover($rel['smallimg'],'path')}"></a>
+                    <span>
+                        <a href="{:staticUrl('detail',$rel['id'],'Down')}" target="_blank" class="tit">{$rel['name']}</a>
+                        <b class="star{:get_score($rel['id'])}"></b><b>{$rel['hits']}人下载过</b><b class="zan">{$rel['abet']}</b>
+                    </span>
+                    <s class="info">{$rel['description']}</s>
+                </p>
+                </volist>
+            </volist>
+        </div>
+
+        <div>
+            <volist name="alone" id="val">
+                <em class="biaoti">{$val['title']}游戏下载</em>
+                <volist name="val['data']" id="rel">
+                    <p>
+                        <a href="{:staticUrl('detail',$rel['id'],'Down')}" target="_blank" class="pic2"><img src="{:get_cover($rel['smallimg'],'path')}"></a>
+                    <span>
+                        <a href="{:staticUrl('detail',$rel['id'],'Down')}" target="_blank" class="tit">{$rel['name']}</a>
+                        <b class="star{:get_score($rel['id'])}"></b><b>{$rel['hits']}人下载过</b><b class="zan">{$rel['abet']}</b>
+                    </span>
+                        <s class="info">{$rel['description']}</s>
+                    </p>
+                </volist>
+            </volist>
+        </div>
+
+    </div>
+</div>
+
+<include file="Home@7230/Public/footer"/>
+
+</body>
+</html>

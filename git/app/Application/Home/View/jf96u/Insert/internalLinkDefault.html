@@ -1,0 +1,11 @@
+    <div id="xq_crf">
+       <span class="xzbt">{$info.title}</span>
+       <ul>
+            <volist name="content" id="c">
+                <li>
+                  <notempty name="c.2"><a href="{$c[1]}" target="_blank"><img src="{$c[2]}"></a></notempty>
+                  <a href="{$c[1]}" target="_blank" class="tit">{$c[0]}</a>
+                </li>
+            </volist>
+       </ul>
+    </div>

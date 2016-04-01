@@ -1,0 +1,20 @@
+<extend name="Home@7230mobile/Base/common"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/7230mobile/css/libao.css"/>
+</block>
+<block name="body">
+    <!----导航---->
+    {~W('Home/p7230mobile/navi')}
+<!-- 最新专区 -->
+<section class="atten_wrap">
+    <h3><i>最新专区</i></h3>
+    <div class="atten">
+        <ul class="clear">
+            <volist name="lists" id="val">
+                <li><a href='zqmb.html'><img src="{:get_cover($val['icon'],'path')}" alt="{$val['title']}"><p>{$val['title']}</p></a></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="page">{$page}</div>
+</section>
+</block>

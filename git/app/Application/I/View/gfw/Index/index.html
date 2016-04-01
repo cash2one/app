@@ -1,0 +1,190 @@
+<extend name="Home@gfw/Base/commonUcent" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+<block name="body">
+<div class="user-wraper-right">
+    <div class="user-right-center">
+        <div class="user-head"> <a href="" class="re-photo">修改头像</a> <span class="prev"><img src="__PUBLIC__/Home/gfw/images/id_wrap.png" alt="相框"></span> <span class="behind"><img src="{:getAvatar($uid)}" alt="默认头像"></span> </div>
+        <div class="user-info">
+            <div class="user-name"><span>{$username},您好！</span></div>
+        </div>
+    </div>
+    <!--弹出框 start-->
+    <div class="pop-nav">
+        <div class="pop-nav-tit"><span>修改头像</span><span class="close">关闭</span></div>
+        <div class="pop-nav-old">
+            <div class="pop-old-img">
+                <div class="user-head"> <a href="" class="re-photo" id="uploadAvatar">修改头像</a> <span class="prev"><img src="__PUBLIC__/Home/gfw/images/id_wrap.png" alt="相框"></span> <span class="behind"><img src="{:getAvatar($uid)}" alt="默认头像"></span> </div>
+                <p class="tips">（支持大小不超过5M的jpg，png等图片）</p>
+            </div>
+            <div class="pop-old-info">
+                <div class="pop-old-title">当前我的头像</div>
+                <p>如果您还没有设置您自己的头像，系统会显示默认头像，您需要自己上传一张新照片来作为自己的个人头像。</p>
+            </div>
+        </div>
+        <form action="{:U('I/Api/cropAvatar')}" method="post">
+            <div class="pop-nav-new">
+                <div class="imageBox"> <img id="viewAvatar" src="__PUBLIC__/Home/gfw/images/head.jpg"  alt="默认头像"> </div>
+                <p class="yltx">预览头像</p>
+                <div class="cropped"><img id="preview" src="__PUBLIC__/Home/gfw/images/head.jpg" alt="默认头像"> </div>
+                <input type="hidden" id="x" name="x" />
+                <input type="hidden" id="y" name="y" />
+                <input type="hidden" id="w" name="w" />
+                <input type="hidden" id="h" name="h" />
+                <input type="hidden" id="path" name="path" />
+            </div>
+            <div class="pop-btn">
+                <input name="提交" type="submit" class="save" value="保存">
+                <input type="button" class="cancel" value="取消">
+            </div>
+        </form>
+    </div>
+    <!--弹出框 end-->
+    <div class="user-right-chapter">
+        <h3>网站管理</h3>
+        <div class="user-web-list">
+            <div class="user-web-title"><span>网站名称</span><span>网站分类</span><span>审核状态</span></div>
+            <ul>
+                <empty name="website_data">
+                    <li>暂无发布网站</li>
+                    <else />
+                    <foreach name="website_data" item="wd">
+                        <li>
+                            <php>
+                                $link = 'javascript:void(0);';
+                                $target = '';
+                                if ('已审核（正常）' == $wd['status'])
+                                {
+                                    $link = staticUrl('Detail',$wd['id'],'Package');
+                                    $target = 'target="_blank"';
+                                }
+                            </php>
+                            <span>
+                                <a href="{$link}" {$target}>{$wd['title']}</a>
+                            </span>
+                            <span>{:empty($website_category[$wd['category_id']]['title']) ? '未知' : $website_category[$wd['category_id']]['title']}</span>
+                            <span class="yes">
+                                <a href="javascript:void(0);">{$wd['status']}</a>
+                            </span>
+                        </li>
+                    </foreach>
+                </empty>
+            </ul>
+            <div class="get-more"><a href="/Website/index">展开更多信息 ↓</a></div>
+        </div>
+    </div>
+    <div class="user-right-chapter">
+        <h3>产品管理</h3>
+        <div class="user-web-list">
+            <div class="user-web-title"><span>网站名称</span><span>网站分类</span><span>审核状态</span></div>
+            <ul>
+                <empty name="product_data">
+                    <li>暂无发布产品</li>
+                    <else/>
+                    <foreach name="product_data" item="pd">
+                    <li>
+                        <php>
+                            $link = 'javascript:void(0);';
+                            $target = '';
+                            if ('已审核（正常）' == $pd['status'])
+                            {
+                                $link = staticUrl('Detail',$pd['id'],'Package');
+                                $target = 'target="_blank"';
+                            }
+                        </php>
+                        <span>
+                            <a href="{$link}" {$target}>{$pd['title']}</a>
+                        </span>
+                        <span>{:empty($product_category[$pd['category_id']]['title']) ? '未知' : $product_category[$pd['category_id']]['title']}</span>
+                        <span class="yes">
+                            <a href="javascript:void(0);">{$pd['status']}</a>
+                        </span>
+                    </li>
+                    </foreach>
+                </empty>
+            </ul>
+            <div class="get-more"><a href="/Product/index">展开更多信息 ↓</a></div>
+        </div>
+    </div>
+</div>
+</div>
+</block>
+<block name="script">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/jcrop/jquery.Jcrop.min.css"/>
+    <script type="text/javascript" src="__PUBLIC__/static/jcrop/jquery.Jcrop.min.js"></script> 
+    <script type="text/javascript" src="__PUBLIC__/static/uploadify/jquery.uploadify.min.js"></script> 
+    <script type="text/javascript">
+        $(document).ready(function(e) {
+          $('#uploadAvatar').uploadify({
+				'swf'      : '__PUBLIC__/static/uploadify/uploadify.swf',
+				'uploader' : "{:U('Api/uploadAvatar')}",
+				'buttonText'      : '选择图片',
+				'onUploadSuccess' : function(file, data, response) {
+					$('#viewAvatar').attr('src',data);
+					$('#preview').attr('src',data);
+					$('#path').val("."+data);
+			  },
+		  });
+		  
+		 var boundx, boundy; 
+		  
+		$('.imageBox').Jcrop({
+			bgColor:'#333',   //选区背景色
+			bgFade:true,      //选区背景渐显
+			fadeTime:1000,    //背景渐显时间
+			allowSelect:false, //是否可以选区，
+			allowResize:true, //是否可以调整选区大小
+			aspectRatio: 1,     //约束比例
+			minSize : [100,100],//可选最小大小
+			boxWidth : 350,		//画布宽度
+			boxHeight : 240,	//画布高度
+			onChange: showPreview,//改变时重置预览图
+			onSelect: showPreview,//选择时重置预览图
+			setSelect:[0, 0, 100, 100],//初始化时位置
+			onSelect: function (c){	//选择时动态赋值，该值是最终传给程序的参数！
+				$('#x').val(c.x);//需裁剪的左上角X轴坐标
+				$('#y').val(c.y);//需裁剪的左上角Y轴坐标
+				$('#w').val(c.w);//需裁剪的宽度
+				$('#h').val(c.h);//需裁剪的高度
+		  } 
+		},function(){
+			 var bounds = this.getBounds();
+			 boundx = bounds[0];
+			 boundy = bounds[1]; 
+		 }
+		  
+		
+		
+		
+		);
+
+		  //预览图
+		function showPreview(coords){
+			var img_width = $('#viewAvatar').width();
+			var img_height = $('#viewAvatar').height();
+		
+			  //根据包裹的容器宽高,设置被除数
+			  var rx = 100 / coords.w;
+			  var ry = 100 / coords.h; 
+			
+			  $('#preview').css({
+			    width: Math.round(rx * img_width) + 'px',
+			    height: Math.round(ry * img_height) + 'px',
+			    marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+			    marginTop: '-' + Math.round(ry * coords.y) + 'px'
+			  });
+	
+		}
+
+		  
+		  
+		  
+		  
+      });
+     </script> 
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script> 
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script> 
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/user_center.js"></script> 
+</block>

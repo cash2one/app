@@ -1,0 +1,179 @@
+<script type="text/javascript">
+$('#submit').click(function(){
+    $("#form").data("submited", true);
+    $('#form').submit();
+});
+
+$(function(){
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+
+    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+
+    showTab();
+
+    <if condition="C('OPEN_DRAFTBOX') and (ACTION_NAME eq 'add' or $data['status'] eq 3)">
+    //保存草稿
+    var interval;
+    $('#autoSave').click(function(){
+        var target_form = $(this).attr('target-form');
+        var target = $(this).attr('url')
+        var form = $('.'+target_form);
+        var query = form.serialize();
+        var that = this;
+
+        $(that).addClass('disabled').attr('autocomplete','off').prop('disabled',true);
+        $.post(target,query).success(function(data){
+            if (data.status==1) {
+                updateAlert(data.info ,'alert-success');
+                $('input[name=id]').val(data.data.id);
+            }else{
+                updateAlert(data.info);
+            }
+            setTimeout(function(){
+                $('#top-alert').find('button').click();
+                $(that).removeClass('disabled').prop('disabled',false);
+            },1500);
+        })
+
+        //重新开始定时器
+        clearInterval(interval);
+        autoSaveDraft();
+        return false;
+    });
+
+    //Ctrl+S保存草稿
+    $('body').keydown(function(e){
+        if(e.ctrlKey && e.which == 83){
+            $('#autoSave').click();
+            return false;
+        }
+    });
+
+    //每隔一段时间保存草稿
+    function autoSaveDraft(){
+        interval = setInterval(function(){
+            //只有基础信息填写了，才会触发
+            var title = $('input[name=title]').val();
+            var name = $('input[name=name]').val();
+            var des = $('textarea[name=description]').val();
+            if(title != '' || name != '' || des != ''){
+                $('#autoSave').click();
+            }
+        }, 1000*parseInt({:C('DRAFT_AOTOSAVE_INTERVAL')}));
+    }
+    //autoSaveDraft();
+
+    </if>
+
+    //预配置的字符串配套JS
+    $('.stringForConfig').each(function() {
+        var p = $(this);
+        p.find('a').click(function() {
+            p.find('input:text').val($(this).html());
+        });
+    });
+
+     //多图多文件上传加载删除事件
+     window.multiclose ={
+        close : function(){
+            $('.upload-pre-item .close').each(function(){
+               $(this).click(function() {
+                   var parentobj = $(this).parents('.controls')[0];
+                   var h = $(parentobj).find('input:hidden').val();
+                   h = h.split(',');
+                   if(h.length<=1){
+                       h = '';
+                   }else{
+                       var i = $(parentobj).find('.upload-pre-item .close').index(this);
+                       h.splice(i, 1); 
+                       h = h.join(','); 
+                   }
+                   $(parentobj).find('input:hidden').val(h);
+                   $(this).parent().remove();
+               });
+            });
+        }
+    }
+    window.multiclose.close();
+
+    window.editormulticlose ={
+        close : function(){
+            $('.upload-pre-item .close').each(function(){
+                $(this).click(function() {
+                    var parentobj = $(this).parents('.controls')[0];
+                    var h = $(parentobj).find('input:hidden').val();
+                    h = h.split(',');
+                    if(h.length<=1){
+                        h = '';
+                    }else{
+                        var i = $(parentobj).find('.upload-pre-item .close').index(this);
+                        h.splice(i, 1);
+                        h = h.join(',');
+                    }
+                    $(parentobj).find('input:hidden').val(h);
+                    $(this).parent().remove();
+                });
+            });
+        }
+    }
+    window.multiclose.close();
+    window.editormulticlose ={
+        close : function(){
+            $('.multi-img-box .close').each(function(){
+                $(this).click(function() {
+                    $(this).parent().remove();
+                });
+            });
+        }
+    }
+    window.editormulticlose.close();
+//单个文件上传加载删除事件
+window.fileclose ={
+    close : function(){
+        $('.upload-pre-file .close').each(function(){
+            $(this).click(function() {
+                var parentobj = $(this).parents('.controls')[0];
+                var h = $(parentobj).find('input:hidden').val();
+                h = h.split(',');
+                if(h.length<=1){
+                    h = '';
+                }else{
+                    var i = $(parentobj).find('.upload-pre-file .close').index(this);
+                    h.splice(i, 1);
+                    h = h.join(',');
+                }
+                $(parentobj).find('input:hidden').val(h);
+                $(this).parent().html('<span class="upload_icon_all"></span>');
+            });
+        });
+    }
+}
+window.fileclose.close();
+
+//离开编辑页面前确认 sunjianhua 2015.12.22
+/*
+var initial_content = $('textarea[name="content"]').val();
+KindEditor.ready(function(K) {
+    $(window).bind('beforeunload', function() {
+        if (editor_content.html() != initial_content) {
+            return "编辑内容尚未保存，确认离开将不会保存当前数据。";
+        }
+    });
+});*/
+$(window).bind('beforeunload', function() {
+    if ($("#form").data("submited") !== true) {
+        return "编辑内容尚未保存，确认离开将不会保存当前数据。";
+    }
+});
+});
+</script>

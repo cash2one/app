@@ -1,0 +1,13 @@
+<!--相关推荐-->
+<section class="about-rec">
+    <if condition="$new gt 0 ">
+        <div class="about-box">
+            <div class="title"><h3>相关推荐</h3></div>
+            <ul class="about-news">
+                <volist name="new_list" id="newlist">
+                    <li><a href="{:staticUrlMobile('detail',$newlist['id'],'Document')}">{$newlist.title}</a></li>
+                </volist>
+            </ul>
+        </div>
+    </if>
+</section>

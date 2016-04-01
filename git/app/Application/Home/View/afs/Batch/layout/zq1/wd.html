@@ -1,0 +1,23 @@
+<include file="Home@afs/Public/zq/swheader"/>
+<!--main-->
+<div id="main" class="yxzq">
+    <!--页面左边-->
+    <div class="yxzq-left" id="bg-w">
+        <p class="nav-zone" style="color:#999"><a href="{$home['url_token']}" target="_blank">{$home['title']}</a>>&nbsp;{$batch['title']}</p>
+        <!--banner-->
+        <div class="dragable" widget="question">
+        <ul>
+            <volist name="question" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="pic"><img src="{:get_cover($val['cover_id'],'path')}" alt="{$val['title']}"></a><span><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a><b><i class="time">{:date('Y-m-d',$val['create_time'])}</i><i class="uesr">作者：{$val['author']}</i></b>
+                <em>{$val['description']}</em></span></li>
+            </volist>
+        </ul>
+        </div>
+        <p id="fenye">{$page}</p>
+    </div>
+    <!--页面右边-->
+    <include file="Home@afs/Public/zq/swright"/>
+</div>
+<include file="Home@afs/Public/foot"/>
+</body>
+</html>

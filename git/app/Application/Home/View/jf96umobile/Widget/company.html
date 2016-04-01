@@ -1,0 +1,15 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css"/>
+</block>
+<block name="title">厂商合集</block>
+<block name="body">
+<section class="zq-list picauto-box">
+    <ul class="pic-list">
+        <volist name="lists" id="val">
+        <li class="picauto"><a href="{$val['url']}" title="{$val['name']}"><img src="{:get_cover($val['img'],'path')}" alt="{$val['name']}"></a><a href="{$val['url']}" class="tit">{$val['name']}</a></li>
+        </volist>
+    </ul>
+    <div class="page">{$page}</div>
+</section>
+</block>

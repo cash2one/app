@@ -1,0 +1,129 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/tools.css">
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > <a href="/tools/">工具</a> > 儿童身高预测</block>
+<block name="body">
+<!--工具详情-->
+<section class="tool-detail dis-bot">
+<h1>儿童身高预测</h1>
+<div class="m-section">宝宝性别</div>
+<form id="JbgSel">
+<div class="item">
+<label for="boy" onclick=""><input type="radio" name="sex" id="boy" checked="checked" /><span>男宝宝</span></label>
+<label for="girl" onclick=""><input type="radio" name="sex" id="girl"/><span>女宝宝</span></label>
+</div>
+</form>
+<div class="m-section">爸爸身高<span>厘米(cm)</span></div>
+<div class="m-input"><input type="text" id="JheightFather" placeholder="请输入爸爸身高"/></div>
+<div class="m-section">妈妈身高<span>厘米(cm)</span></div>
+<div class="m-input"><input type="text" id="JheightMother" placeholder="请输入妈妈身高"/></div>
+<div class="m-work"><input type="submit" id="JworkOut" value="点击计算" /></div>
+<div class="m-result" id="Jresult">
+<div class="m-result-tit">查询结果</div>
+<p style="font-size:16px;">您的宝贝身高可能为：<em id="Jresult1">~</em></p>
+</div>
+<script type="text/javascript">
+function $$(id) {
+return (typeof id == "object") ? id : document.getElementById(id);
+}
+var JworkOut = $$("JworkOut"),
+JheightFather = $$("JheightFather"),
+JheightMother = $$("JheightMother"),
+Jresult1 = $$("Jresult1"),
+JresultA = $$("JresultA"),
+JresultB = $$("JresultB"),
+JbgSel = $$("JbgSel");
+//本工具采用针对我国进行校正的“哈弗利采克公式”：
+//儿子身高=(56.699+0.419×父身高+0.265×母身高)±3cm
+//女儿身高=(40.089+0.306×父身高+0.431×母身高)±3cm
+function touchEvent(elm,fn) {
+if ("ontouchstart" in document.documentElement) {
+elm.addEventListener("touchstart",fn,false);
+}else {
+elm.addEventListener("click",fn,false);
+}
+}
+function touchEvent(elm,fn) {
+if ("ontouchstart" in document.documentElement) {
+elm.addEventListener("touchstart",fn,false);
+}else {
+elm.addEventListener("click",fn,false);
+}
+};
+touchEvent(JworkOut,function () {
+if (checkInput() == false) return; //检查输入
+var fh = JheightFather.value;
+var mh = JheightMother.value;
+var boycsa, boycsb, girlcs, rA, rB;
+if (JbgSel.sex[0].checked == true) {
+boycsa = 56.699, boycsb = 0.419, girlcs = 0.265;
+} else {
+boycsa = 40.089, boycsb = 0.306, girlcs = 0.431;
+}
+rA = Math.round(boycsa + (boycsb * fh) + (girlcs * mh) - 3);
+rB = Math.round(boycsa + (boycsb * fh) + (girlcs * mh) + 3);
+Jresult1.innerHTML = rA + "cm~" + rB + "cm";
+$$("Jresult").style.display = "block";
+});
+//输入检测
+function checkInput() {
+if (JheightFather.value == "") {
+showTopTip("请输入爸爸身高");
+hideTopTip();
+return false;
+}
+if (isNaN(JheightFather.value)) {
+showTopTip("对不起，爸爸身高必须是数字！");
+hideTopTip();
+return false;
+}
+if (JheightFather.value < 55 || JheightFather.value > 255) {
+showTopTip("爸爸身高请填写55-255之间的数字。");
+hideTopTip();
+return false;
+}
+if (JheightMother.value == "") {
+showTopTip("请输入妈妈身高");
+hideTopTip();
+return false;
+}
+if (isNaN(JheightMother.value)) {
+showTopTip("对不起，妈妈身高必须是数字！");
+hideTopTip();
+return false;
+}
+if (JheightMother.value < 55 || JheightMother.value > 255) {
+showTopTip("妈妈身高请填写55-255之间的数字。");
+hideTopTip();
+return false;
+}
+}
+function showTopTip(msg) {
+var tipEle = document.getElementById("JtopTipMsg");
+if (!tipEle) {
+tipEle = document.createElement("div");
+tipEle.id = "JtopTipMsg";
+tipEle.style.cssText = "display:none;width:120px;padding:10px;line-height:20px;font-size:12px;background-color:rgba(000,000,000,0.9);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;color:#fff;text-align:center;-webkit-transition:all 0.3s ease-in;transition:all 0.3s ease-in;position:fixed;top:50%;left:50%;margin-left:-70px;margin-top:-20px;opacity:1;z-index:999;";
+document.body.appendChild(tipEle);
+}
+tipEle.innerHTML = msg;
+tipEle.style.display = "block";
+setTimeout(function() {
+tipEle.style.opacity = "1";
+}, 0);
+}
+function hideTopTip() {
+var tipEle = document.getElementById("JtopTipMsg");
+if (tipEle) {
+setTimeout(function() {
+tipEle.style.opacity = "0";
+setTimeout(function() {
+tipEle.style.display = "none";
+}, 300);
+}, 1500);
+}
+}
+</script>
+</section>
+</block>

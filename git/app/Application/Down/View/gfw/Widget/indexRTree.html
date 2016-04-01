@@ -1,0 +1,17 @@
+<div class="novel-sort cfr">
+    <volist name="tree" id="list" key="o">
+        <h3 class="t-life"><span>{$o}F</span>{$list.title}</h3>
+        <volist name="list['_']" id="two">
+            <dl class="gflist">
+                <dt><a href="{:staticUrl('lists',$two['id'],'Down')}">[{$two.title}]</a></dt>
+                <dd>
+                    <volist name="two['_']" id="three" key="k" offset="0" length='8'>
+                        <a href="{:staticUrl('lists',$three['id'],'Down')}" <eq name="k" value="1">class="blue"</eq>>{$three.title}</a>
+                    </volist>
+                    <if condition="$k gt 7 "><a href="{:staticUrl('lists',$two['id'],'Down')}" class="orange">更多></a></if>
+                </dd>
+            </dl>
+        </volist>
+        <!-----{$o}F{$list.title}  -end----->
+    </volist>
+</div>

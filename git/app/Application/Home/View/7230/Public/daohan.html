@@ -1,0 +1,17 @@
+<div class="nav_zq">
+    <div>
+        <div class="dragable" widget="menus">
+            <span class="left">
+                <a href="../" target="_blank" class="cur">首页</a>
+                <volist name="menus" id="v">
+                    |<a href="{$v.url_token}" target="_blank">{$v['title']}</a>
+                </volist>
+            </span>
+        </div>
+        <form action="" method="get" id="Search_form" name="Search_form" target="_blank" class="">
+            <input type="text" name="keyword" id="searchBox" autocomplete="off" class="" value="输入你想搜索的游戏..." >
+            <button type="submit" id="searchBtn" class="btn-submit"></button>
+        </form>
+        <span class="share">分享</span>
+    </div>
+</div>

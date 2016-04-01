@@ -1,0 +1,175 @@
+<extend name="Public/base" />
+
+<!-- style -->
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/zTree_v3/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/zTree_v3/zTreeStyle/demo.css">
+    <script type="text/javascript" src="__STATIC__/zTree_v3/jquery.ztree.core-3.5.js"></script>
+    <script type="text/javascript" src="__STATIC__/zTree_v3/jquery.ztree.excheck-3.5.js"></script>
+</block>
+
+<!-- 子导航 -->
+<block name="sidebar">
+    <include file="BaseDocument/sidemenu" />
+</block>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title cf">
+		<h2>
+			编辑{$data.model_id|get_document_model='title'} [
+			<volist name="rightNav" id="nav">
+             <a href="{:U('index','cate_id='.$nav['id'])}">{$nav.title}</a>
+             <if condition="count($rightNav) gt $i"><i class="ca"></i></if>
+         </volist>
+         <present name="article">：<a href="{:U('index','cate_id='.$data['category_id'].'&pid='.$article['id'])}">{$article.title}</a></present>
+         ]
+     </h2>
+ </div>
+ <!-- 标签页导航 -->
+ <div class="tab-wrap">
+   <ul class="tab-nav nav">
+      <volist name=":parse_config_attr($model['field_group'])" id="group">
+         <li data-tab="tab{$key}" <eq name="key" value="1">class="current"</eq>><a href="javascript:void(0);">{$group}</a></li>
+     </volist>
+ </ul>
+ <div class="tab-content">
+   <!-- 表单 -->
+   <form id="form" action="{:U('update')}" method="post" class="form-horizontal">
+      <!-- 基础文档模型 -->
+      <volist name=":parse_config_attr($model['field_group'])" id="group">
+        <div id="tab{$key}" class="tab-pane <eq name="key" value="1">in</eq> tab{$key}">
+          <!-- 标签 -->
+          <include file="BaseDocument/tags"/>
+          <!-- 字段解析处理 -->          
+          <include file="BaseDocument/fieldGallery"/>
+</div>
+</volist>
+
+<div class="form-item cf">
+ <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+ <a class="btn btn-return" href="{$Think.cookie.__forward__}">返 回</a>
+ <if condition="C('OPEN_DRAFTBOX') and (ACTION_NAME eq 'add' or $data['status'] eq 3)">
+     <button class="btn save-btn" url="{:U('autoSave')}" target-form="form-horizontal" id="autoSave">
+        存草稿
+    </button>
+</if>
+<input type="hidden" name="id" value="{$data.id|default=''}"/>
+<input type="hidden" name="pid" value="{$data.pid|default=''}"/>
+<input type="hidden" name="model_id" value="{$data.model_id|default=''}"/>
+<input type="hidden" name="category_id" value="{$data.category_id|default=''}">
+</div>
+</form>
+</div>
+</div>
+</block>
+
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <!-- js -->          
+    <include file="BaseDocument/editscript"/>
+
+	<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="__CSS__/fancybox.css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="__JS__/fancybox.js"></script>
+	<script type="text/javascript" src="__STATIC__/jquery.dragsort-0.5.1.min.js"></script>
+    <script type="text/javascript">
+		// 图层删除
+		function DelImage(div){
+			$(div).parent().parent().fadeOut(500, function(){
+				$(this).remove();
+			});
+		}
+
+        Think.setValue("type", 2);
+
+		$(document).ready(function() {
+			$('.fancybox').fancybox();
+
+			$(".needdragsort").dragsort({
+				 dragSelector:'li',
+				 placeHolderTemplate: '<li>&nbsp;</li>',
+				 dragBetween:false,	//允许拖动到任意地方
+				 dragEnd:function(){
+					 return;
+					 var self = $(this);
+					 self.find('input').attr('name', 'field_sort[' + self.closest('ul').data('group') + '][]');
+				 }
+			 });
+			
+			$("#uploadField").uploadify({
+				"swf"             : "__STATIC__/uploadify/uploadify.swf",
+				"fileObjName"     : "download",
+				"buttonText"      : "",
+				"uploader"        : "{:U('File/uploadGallery',array('session_id'=>session_id()))}",
+				'fileTypeExts'   : '*.jpg; *.png; *.gif;',
+				"onUploadSuccess" : gallery,
+				'onFallback' : function() {
+					alert('未检测到兼容版本的Flash.');
+				}
+			});
+
+			function gallery(file, data){
+				var data = $.parseJSON(data);
+				src = data.url || '__ROOT__' + data.path;
+
+				if(data.status){
+					//添加图片区
+					src = data.url || '__ROOT__' + data.path;
+
+					var html = '<li>' +
+									'<div class="thumb">' +
+										'<a class="fancybox" href="' + src + '"><img src="'+ data.thumb +'"></a>' +
+										'<span class="spancss"></span>' +
+										'<div class="imgClose" onclick="DelImage(this)"></div>' +
+									'</div>';
+
+					if($('#mapArea li').length <= '0'){
+						html +=		'<div class="remark">' +
+											'<textarea name="imgpack[mark][]" class="mark" placeholder="描述"></textarea>' +
+										'</div>' +
+
+										'<div class="title">' +
+											'<input name="imgpack[title][]" type="text" class="name" placeholder="标题">' +
+										'</div>';
+					}else{
+						html +=		'<div class="remark">' +
+											'<textarea name="imgpack[mark][]" class="mark"></textarea>' +
+										'</div>' +
+
+										'<div class="title">' +
+											'<input name="imgpack[title][]" type="text" class="name">' +
+										'</div>';
+					}
+						html +=			'<input name="imgpack[image][]" type="hidden" value="'+ src +'">' +
+										'<input name="imgpack[thumb][]" type="hidden" value="'+ data.thumb +'">' +
+									'</li>';
+					
+					$('#mapArea').append(html);
+
+					//加载删除事件
+					window.multiclose.close();
+				} else {
+					updateAlert(data.info);
+
+					setTimeout(function(){
+						$('#top-alert').find('button').click();
+						$(that).removeClass('disabled').prop('disabled',false);
+					}, 1500);
+				}
+			}
+
+			$('.upfile .uploadify-button').removeClass('uploadify-button');
+		});
+    </script>
+           
+    <include file="BaseDocument/editscript"/>
+</block>

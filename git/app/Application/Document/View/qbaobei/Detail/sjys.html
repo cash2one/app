@@ -1,0 +1,131 @@
+<extend name="Home@qbaobei/Base/commonJkms"/>
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/healthdetail.css">
+<script src="__PUBLIC__/Home/qbaobei/js/common.js"></script>
+<script src="__PUBLIC__/Home/qbaobei/js/information-details.js"></script>
+<script src="__PUBLIC__/Home/qbaobei/js/jquery.peex.js"></script>
+<div class="body-w"> 
+	<!--导航栏-->
+	<div class="crumbnav" id="crumbnav"> 您现在的位置： 
+		<a href="/">首页</a> > 
+		{:W('Qbaobei/jkmsCurrentCate',array($info['category_id']))}
+		 > <strong>{:$info['title']}</strong>
+	</div>
+	<!--详细内容-->
+	<div class="cnt">
+	<div class="cnt-right">{:W('Qbaobei/jkmsDetailRight')}</div>
+	<!--左侧-->
+	<div class="cnt-left">
+		<div class="cnt-article-top"> </div>
+		<!--文章详情-->
+		<div class="cnt-article">
+			<div class="clear"> </div>
+			<!-- google_ad_section_start -->
+        	<div class="cnt-a-title">
+				<h1>{:$info['title']}</h1>
+			</div>
+			<div class="cnt-a-author">
+				<div class="cnt-a-author-l">
+            		<div class="cnt-a-look"> </div>
+					<span class="cnt-a-time">{:date('Y年m月d日 H:i',$info['update_time'])}</span>
+					编辑：<span class="cnt-a-r">{:$info['author']}</span>
+					来源：<span class="cnt-a-r">{:$info['source']}</span>
+					阅读次数：<span id="read_times" data-id="{$info['id']}" class="cnt-a-r"> </span>
+					<span class="cnt-share"> 
+					<script type="text/javascript" charset="utf-8">
+					(function() {
+						var _w = 86, _h = 16;
+				        var param = {
+				            url: location.href,
+				            type: '6',
+				            count: '',
+				            appkey: '2499758022',
+				            title: '',
+				            pic: '',
+				            ralateUid: '',
+				            language: 'zh_cn',
+				            rnd: new Date().valueOf()
+						}
+				        var temp = [];
+				        for (var p in param) {
+				            temp.push(p + '=' + encodeURIComponent(param[p] || ''))
+				        }
+				        document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + _w + '" height="' + _h + '"></iframe>')
+					})();
+					</script> 
+					</span>
+				</div>
+			</div>
+			<div class="cnt-a-dd"> <b>导读：</b><span> {$info['description']} </span></br>
+				<span class="cnt-a-mrg-b" id="lab_keywords">标签：
+					<volist name="tags" id="tag">
+						<a target="_blank" href="{:C('STATIC_URL')}/tag/{$tag['name']}">{$tag['title']}</a>
+					</volist>
+				</span></br>
+				<div class="clear"> </div>
+			</div>
+			<div class="cnt-a-detail"> 
+				<!-- 广告左-->
+				<div class="cnt-a-content-left-ads"> 
+		            {:W('Qbaobei/jkmsData',array(4))}
+				</div>
+				<!-- 广告左--> 
+				<span class="cnt-a-content">{:str_replace("[NextPage]","",$info['content'])}</span>
+				<div class="page-detail"><span id="pe100_page_contentpage" class="pagecss"></span></div>
+				<!--友荐插件定位--> 
+				<span id="ujian-slide-pos"></span> 
+				<!--底部广告-->
+				<div class="cnt-detail-adv"> 
+					<!-- 广告位：文章详情底部广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1103260");</script>
+				</div>
+			</div>
+			<!-- google_ad_section_end --> 
+			<!--更多关键词-->
+			<div class="cnt-a-more"> 
+				<span id="lab_nonekeyword">
+					更多关于
+					<volist name="tags" id="tag">
+						<a target="_blank" href="{:C('STATIC_URL')}/tag/{$tag['name']}">{:$tag['title']}</a>
+					</volist>
+					的内容
+				</span>
+				<div class="clear"> </div>
+				{:W('Qbaobei/jkmsData',array(1))}
+			</div>
+			<!--每日热点-->
+			{:W('Qbaobei/jkmsData',array(2))}
+			<div class="cnt-a-page-content"> 
+	        	<span>
+	        		<span>上一篇：</span>
+	        		<if condition="!empty($priv)">
+	        			<a title="{:$priv['title']}" href="{:staticUrl('detail',$priv['id'],'Document')}" target="_self">{:msubstr($priv['title'],0,10,'utf-8',false)}</a>
+	        		<else />
+	        			没有了
+	        		</if> 
+	        	</span>
+	        	<span>
+	        		<span>下一篇：</span>
+	        		<if condition="!empty($next)">
+	        			<a title="{:$next['title']}" href="{:staticUrl('detail',$next['id'],'Document')}" target="_self">{:msubstr($next['title'],0,10,'utf-8',false)}</a>
+	        		<else />
+	        			没有了
+	        		</if>
+	        	</span> 
+			</div>
+		</div>
+		<div class="cnt-article-bottom"> </div>
+		<!--推荐欣赏--> 
+		{:W('Qbaobei/jkmsData',array(3))}	
+	</div>
+	</div>
+</div>
+
+<div class="foot_cnzz"> 
+	<script type="text/javascript">
+		var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F76ae9b5fd1599aa2272781718746bfe7' type='text/javascript'%3E%3C/script%3E"));
+	</script> 
+</div>
+<div class="clear"></div>
+</block>

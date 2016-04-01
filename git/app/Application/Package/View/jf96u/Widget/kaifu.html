@@ -1,0 +1,16 @@
+<div class="tab-wrap wrap cata-tab dis-bot">
+  <div class="tab-hd"><span class="active">开服表</span><span>开测表</span></div>
+  <div class="tab-title"><span>时间</span><span>游戏名</span><span>服务器/状态</span></div>
+  <div class="tab-bd">
+    <ul class="tab-cont current">
+      <Think:article basename="Package" name="particle" limit="9" where="category_id = 4" order="create_time DESC">
+        <li><span>{:date('Y-m-d H:i:s',$article['start_time'])}</span><span>{$article.title}</span><span>{$article['server']}</span></li>
+      </Think:article>
+    </ul>
+    <ul class="tab-cont">
+      <Think:article basename="Package" name="particle" limit="9" where="category_id = 5" order="create_time DESC">
+        <li><span>{:date('Y-m-d H:i:s',$article['start_time'])}</span><span>{$article.title}</span><span>{$article['server']}</span></li>
+      </Think:article>
+    </ul>
+  </div>
+</div>

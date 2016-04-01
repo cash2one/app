@@ -1,0 +1,17 @@
+<extend name="Home@gfw/Base/commonProductIndex" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/product.css"/>
+</block>
+<block name="body">
+<div class="page-nav">
+    {:W('Down/Gfw/navDetail')}
+    <span class="sum"></span>
+</div>
+    {:W('Down/Gfw/productDetail')}
+<!-----product-end----->
+<div class="flclr"></div>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.f-min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/product.js"></script>
+</block>

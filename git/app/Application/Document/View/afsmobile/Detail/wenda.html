@@ -1,0 +1,40 @@
+<extend name="Home@afsmobile/Base/commonNew"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afsmobile/css/ask.css"/>
+</block>
+<block name="body">
+   <section class="news_xq">
+   <!--问答部分-->
+   <div class="wzxq-iask">
+       <div class="ask">
+           <h1>{$info['title']}</h1>
+           <div class="answer_lit">
+               {~W('Document/Afsmobile/answerDescription',array($info['content'],$info['wd_content']))} 
+           </div>
+           <div class="time-user">
+           <span class="user"><img src="__PUBLIC__/Home/afsmobile/images/avatar1.png"></span><span class="name">{:empty($info['answer_user'])?'安粉丝网友':$info['answer_user']}</span><time>{:date('Y-m-d',$info['create_time'])}</time>
+           </div>
+       </div>
+              {~W('Document/Afsmobile/contentHandle',array($info['content']))} 
+   </div>
+   
+   <!--pinglun-->
+   <div class="gameQtbb"  id="smData" data-model="Document">
+    <input name="author" id="tj-user" type="hidden" value="{$info['uid']}" />
+       <div class="downWrap">
+                      <div id="SOHUCS"></div>
+<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" 
+	src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=cysbq8tSM&conf=prod_c8a5d4fa2096d62172fa06c823267fd5">
+</script>
+       </div>
+   </div>
+   <!--相关文章-->
+   <div class="xgwz gameQtbb">
+     {~W('Document/afsmobile/relateArticle',array($info['id']))}
+    </div>
+   <div class="sm-article" id="shenmaStyle"></div>
+   </section>
+</block>
+<block name="script"> 
+  <script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/common.js"></script> 
+</block>

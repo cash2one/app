@@ -1,0 +1,25 @@
+<if condition="!empty($pdata)">
+	<section class="down-detail-mid2 dis-bot">
+		<div class="mid-title"><h2>礼包</h2></div>
+		<ul class="mid2-list">
+
+			<volist name="pdata"  id="v">
+				<li>
+					<a href="{:str_replace('index.html','',staticUrlMobile('detail',$v['id'],'Down'))}" class="title" title="{$v.title}">{$v.title}</a>
+					<a href="{:str_replace('index.html','',staticUrlMobile('detail',$v['id'],'Down'))}" class="lq">领取</a></li>
+			</volist>
+		</ul>
+	</section>
+</if>
+
+<if condition="!empty($ddata)">
+<section class="down-detail-mid3 dis-bot">
+	<div class="mid-title"><h2>相关下载</h2></div>
+	<ul class="mid2-list mid3-list">
+		<volist name="ddata"  id="v">
+		<li><a href="{:str_replace('index.html','',staticUrlMobile('detail',$v['id'],'Down'))}" class="title" title="{$v.title}">{$v.title}</a>
+			<a href="{:str_replace('index.html','',staticUrlMobile('detail',$v['id'],'Down'))}" class="lq">下载</a></li>
+        </volist>
+	</ul>
+</section>
+</if>

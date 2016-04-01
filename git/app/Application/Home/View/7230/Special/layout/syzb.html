@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<include file="Home@7230/Public/head"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/ycpd.css"/>
+</head>
+<body>
+
+<div id="syzb-banner">
+    <div class="dragable" widget="image"><img src="__PUBLIC__/Zq/7230/images/syzb_01.jpg" alt="手游周报"></div>
+</div>
+
+<div id="navigation"><div class="dragable" widget="html"><span>编辑：小肥羊</span><a href="{:C('STATIC_URL')}" target="_blank">7230手游网</a>->手游周报</div></div>
+
+<div name="syzb-main" id="syzb-main">
+<!--热门推荐---->
+    <p class="nav"><img src="__PUBLIC__/Zq/7230/images/syzb_04.jpg"></p>
+
+    <div class="dragable" widget="down__down_category">
+        <ul>
+            <volist name="lists" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic2"><img src="{:get_cover($val['smallimg'],'path')}"></a><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val['name']}</a><b class="star{:get_score($val['id'])}"></b><b>{$val['hits']}人下载过</b><b class="zan">{$val['abet']}</b></span>
+                    <s class="info">{$val['description']}</s></li>
+            </volist>
+        </ul>
+    </div>
+
+    <volist name="lists" id="val" offset="0" length="8" mod="2">
+        <eq name="mod" value="0">
+        <div id="{$val['id']}" class="blzz">
+            <p class="left">
+                <b><img src="{:get_cover($val['cover_id'],'path')}"></b>
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <a href="{$val['url']}" target="_blank" class="down">{$val['system']==2?'苹果':'安卓'}版下载</a>
+            </p>
+            <p class="right">
+                <a href="" class="tit" target="_blank">{$val.name}</a>
+                <b>
+                    <i>联网：<s>{:showText($val['network'],'network',false,'Down')}</s></i>
+                    <i>分类：<s>{$val.title}</s></i>
+                    <i>标签：<s>{:implode(',',array_column(get_tags($val['id'],'Down'),'title'))}</s></i>
+                </b>
+                <b>
+                    <i>版本：<s>{$val.version}</s></i>
+                    <i>大小：<s>{$val.size}</s></i>
+                    <i>更新：<s>{:date('Y-m-d',$val['update_time'])}</s></i>
+                    <i>厂商：<s>{$val.company}</s></i>
+                </b>
+                <b class="info">游戏简介：<s>{$val.description}</s></b>
+            </p>
+        </div>
+        </eq>
+
+        <eq name="mod" value="1">
+        <div id="{$val['id']}" class="blzz ypbf">
+            <p class="left">
+                <b><img src="{:get_cover($val['cover_id'],'path')}"></b>
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <a href="{$val['url']}" target="_blank" class="down">{$val['system']==2?'苹果':'安卓'}版下载</a>
+            </p>
+            <p class="right">
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" class="tit" target="_blank">{$val.name}</a>
+                <b>
+                    <i>联网：<s>{:showText($val['network'],'network',false,'Down')}</s></i>
+                    <i>分类：<s>{$val.title}</s></i>
+                    <i>标签：<s>{:implode(',',array_column(get_tags($val['id'],'Down'),'title'))}</s></i>
+                </b>
+                <b>
+                    <i>版本：<s>{$val.version}</s></i>
+                    <i>大小：<s>{$val.size}</s></i>
+                    <i>更新：<s>{:date('Y-m-d',$val['update_time'])}</s></i>
+                    <i>厂商：<s>{$val.company}</s></i>
+                </b>
+                <b class="info">游戏简介：<s>{$val.description}</s></b>
+            </p>
+        </div>
+        </eq>
+    </volist>
+
+
+
+</div>
+
+
+
+<div id="syzb-right">
+    <div>
+        <a id="topstar" href="#syzb-main">热门推荐</a>
+    </div>
+    <volist name="lists" id="val" offset="0" length="8">
+    <a href="#{$val['id']}" >{$val['name']}</a>
+</volist>
+    <b>TOP</b>
+</div>
+
+<div class="dragable" widget="base"></div>
+<include file="Home@7230/Public/footer"/>
+
+</body>
+</html>

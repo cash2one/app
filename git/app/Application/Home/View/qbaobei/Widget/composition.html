@@ -1,0 +1,111 @@
+<extend name="Home@qbaobei/Base/commonComposition"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/channel.css">
+</block>
+<block name="body">
+    <input type="hidden" value="index" id="c_nav">
+    <div class="adboxB">
+        <div class="boxB1">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 728x90, ������ 10-9-16 -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-4791298099657199"
+                 data-ad-slot="5837412937"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <div class="boxB2">
+
+            <!-- qbaobei_oyako_column_right_220x90 -->
+            <div id='div-gpt-ad-1335334265617-0' style='width:220px; height:90px;'>
+                <a href="http://www.qbaobei.com/plans/baobaozuopiezi/" target="_blank">
+                <img border="0" src="http://www.qbaobei.com/Template/Qbaobei/Ads/images/bbzs-220-90.jpg"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="c-left">
+            <div class="title">作文大全</div>
+            <div class="listbox">
+                <table width="670" border="0" cellspacing="0" cellpadding="0">
+                    <volist name="cate" id="val">
+                        <tr>
+                            <td class="tdleft"><a href="{:staticUrl('lists',$val['id'],'Document')}" target="_blank">{$val['title']}</a>
+                            </td>
+                            <td class="tdright">
+                                <volist name="val['child']" id="vo">
+                                    <php>if($i!=1){echo '|';}</php>
+                                    <a target="_blank"
+                                       href="{:staticUrl('lists',$vo['id'],'Document')}">{$vo['title']}</a>
+                                </volist>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+        <div class="c-right">
+            <div class="rightbox">
+                <div class="r-title"><span class="text">最新作文</span></div>
+                <ul class="list">
+                    <volist name="composition" id="val">
+                        <li><a target="_blank" title="{$val['title']}" href="{:staticUrl('detail',$val['id'],'Document')}">{:msubstr($val['title'],0,20)}</a></li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="rightbox margintop">
+                <div class="r-title"><span class="text">幼儿教育</span> <span class="more"><a
+                        href="http://www.qbaobei.com/jiaoyu/" target="_blank">更多>></a></span></div>
+                <ul class="list">
+                    <volist name="education" id="val">
+                    <li><a target="_blank" title="{$val['title']}" href="{:staticUrl('detail',$val['id'],'Document')}">{$val['title']}</a></li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="rightbox margintop">
+                <div class="r-title"><span class="text">精彩专题</span> <span class="more"><a
+                        href="http://www.qbaobei.com/plans/" target="_blank">更多>></a></span></div>
+                <ul class="imglist">
+                    <li class="ga-img">
+                        <a href="http://www.qbaobei.com/plans/yunwnaqi/" title="孕晚期的那些事儿" target="_blank">
+                        <img src="http://www.qbaobei.com/UploadFiles/2014/3/201403171804169030.jpg">
+                        </a>
+                        <span><a href="http://www.qbaobei.com/plans/yunwnaqi/" title="孕晚期的那些事儿" target="_blank">孕晚期的那些事儿</a></span>
+                    </li>
+                    <li class="ga-img">
+                        <a href="http://www.qbaobei.com/plans/kaixuexiuliance/" title="开学修炼册" target="_blank">
+                            <img src="http://www.qbaobei.com/UploadFiles/2014/8/201408281338242605.jpg">
+                        </a>
+                        <span><a href="http://www.qbaobei.com/plans/kaixuexiuliance/" title="开学修炼册" target="_blank">开学修炼册</a></span>
+                    </li>
+                    <li class="ga-img">
+                        <a href="http://www.qbaobei.com/plans/zhongkao2014/" title="2014，直击中考" target="_blank">
+                        <img src="http://www.qbaobei.com/UploadFiles/2014/6/201406271702368267.jpg"></a>
+                        <span><a href="http://www.qbaobei.com/plans/zhongkao2014/" title="2014，直击中考" target="_blank">2014，直击中考</a></span>
+                    </li>
+                    <li class="ga-img">
+                        <a href="http://www.qbaobei.com/plans/fenmianfangshi/" title="分娩方式大起底" target="_blank">
+                            <img src="http://www.qbaobei.com/UploadFiles/2014/6/201406271457025341.jpg">
+                        </a>
+                        <span><a href="http://www.qbaobei.com/plans/fenmianfangshi/" title="分娩方式大起底" target="_blank">分娩方式大起底</a></span>
+                    </li>
+                    <li class="ga-img">
+                        <a href="http://www.qbaobei.com/plans/yunwanqi/" title="孕晚期注意事项" target="_blank">
+                            <img src="http://www.qbaobei.com/UploadFiles/2014/6/201406231716233180.jpg">
+                        </a>
+                        <span><a href="http://www.qbaobei.com/plans/yunwanqi/" title="孕晚期注意事项" target="_blank">孕晚期注意事项</a></span>
+                    </li>
+                    <li class="ga-img">
+                        <a href="http://www.qbaobei.com/plans/gaokaohougonglue/" title="为自己选择一个更美好的未来" target="_blank">
+                            <img src="http://www.qbaobei.com/UploadFiles/2014/6/201406121714171484.jpg">
+                        </a>
+                        <span> <a href="http://www.qbaobei.com/plans/gaokaohougonglue/" title="为自己选择一个更美好的未来" target="_blank">为自己选择一个更…</a></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</block>

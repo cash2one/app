@@ -1,0 +1,27 @@
+<extend name="Home@gfwmobile/Base/commonIndex" />
+<block name="body">
+	<include file="Home@gfwmobile/Public/search" />
+	<nav>
+    	{:W('Home/GfwMobile/getWebSiteParentCateById')}
+    </nav>
+    <section class="news">
+		<div class="art">
+			<div class="title">
+				<h2>热门网站</h2>
+			</div>
+			{:W('Package/Gfwmobile/websiteHot',array(5))}
+		</div>
+        <div class="product" id="product-info">
+			<div class="title">
+				<h2>热门网站分类</h2>
+			</div>
+			<ul class="product-list">
+				<Think:article basename="PackageCategory" limit="15" where="position & 1" order="sort ASC">
+					<li>
+						<a href="{:staticUrlMobile('lists',$article['id'],'Package')}" title="{:$article['title']}">{:$article['title']}</a>
+					</li>
+				</Think:article>
+			</ul>
+		</div>
+    </section>
+</block>

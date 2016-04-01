@@ -1,0 +1,151 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/detail.css"/></block>
+
+<block name="header">
+	<include file="Home@qili/Public/header" />
+</block>
+
+<block name="body">
+<div class="tupage-nav">
+    <div class="qnx1200">
+        <div class="tupage-left">
+			<classify model="4" id="$info[category_id]">
+				<h3>{$classify.title}</h3>
+			</classify>
+
+            <classify model="4" typeid="0" limit="7">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key != 7"> 
+					<em>|</em>
+				</if>
+            </classify>
+        </div>
+
+        <div class="tupage-right">
+            <document model="4" limit="1" typeid="$info[category_id]" flag="channel_recom,32" order="desc">
+				<span>热点：</span>    
+				<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title|msubstr=0,8}</a>
+			</document>
+        </div>
+    </div>
+</div>
+
+<div class="qnx1200 pic-detail">
+    <div class="location">
+		<position return="position" />
+
+		<volist name="position" id="name">
+			<a href="{$key}">{$name}</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+
+			<if condition="$name == '首页'">
+				<a href="/pic/">图库</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+			</if>
+		</volist>
+
+		正文
+	</div>
+    
+	<div class="pic-title">
+        <h1>{$info.title}</h1>
+        <div class="share">
+            <div class="bot-r">
+                <div>分享：</div>
+
+                <div class="bdsharebuttonbox bdshare-button-style2-24" data-bd-bind="1444991245986">
+					<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+					<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+					<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+					<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pic-auto">
+        <div class="pic-bigger">
+            <div class="pic-main">
+                <div class="pic-mainBox">
+                    <ul class="pic-ul">
+                        <volist name="info.imgpack" id="details">
+							<li><a href="javascript:void(0)" target="_blank" class="pic"><img src="{$details.image}" alt="{$details.mark}"></a></li>
+						</volist>
+                    </ul>
+                </div>
+                <div class="bigBtn left"><span></span></div>
+                <div class="bigBtn right"><span></span></div>
+            </div>
+
+            <div class="pic-info">&nbsp;</div>
+            <div class="pic-nub">
+                <div class="nub-l"><span class="now-nub"><em class="now">1</em>/<em class="all">0</em></span><span class="vis">{$info.view_sc}</span></div>
+                <div class="nub-r">
+					<document model="4" id="$info[id]" callback="classify" order="desc">
+						<if condition="$document[classify]">
+						<span>标签：</span>
+						</if>
+						<volist name="document.classify" id="project" offset="0" length='3'>
+							<a href="{$project.url}" target="_blank">{$project.title}</a>　
+						</volist>
+					</document>
+				</div>
+            </div>
+
+            <div class="pic-small">
+				<pre return="pre" />
+				<if condition="$pre">
+					<document model="4" id="$pre[id]">
+						<div class="small-btn small-l">
+							<a href="{$document.url}"><img src="{:get_thumb($document[atlas_a], $document[atlas], '100x80')}"><span>上一图集</span></a>
+						</div>
+					</document>
+				<else />
+					<div class="small-btn small-l">
+						<a href="{$document.url}"><span>没有了</span></a>
+					</div>
+				</if>
+
+                <div class="small-main">
+                    <span class="btn prev">向左</span>
+                    <div class="small-mainBox">
+                        <ul class="small-ul"></ul>
+                    </div>
+                    <span class="btn next">向右</span>
+                </div>
+
+                <div class="small-btn small-r">
+					<next return="next" />
+					<if condition="$next">
+						<document model="4" id="$next[id]">
+							<div class="small-btn small-l">
+								<a href="{$document.url}"><img src="{:get_thumb($document[atlas_a], $document[atlas], '100x80')}"><span>下一图集</span></a>
+							</div>
+						</document>
+					<else />
+						<div class="small-btn small-l">
+							<a href="{$document.url}"><span>没有了</span></a>
+						</div>
+					</if>
+				</div>
+            </div>
+        </div> 
+    </div>
+    
+</div>
+
+<div class="qnx1200 pic4">
+    <div class="tit">
+        <div class="det-title"><h3>猜你喜欢</h3></div>
+    </div>
+    <div class="autopic">
+      <span class="btn prev">prev</span>
+      <span class="btn next">next</span>
+      <div class="img-list">
+        <ul class="clearfix">
+            <document model="4" typeid="$info[category_id]" limit="9" notin="$info[id]">
+				<li><a href="{$document.url}"><img src="{:get_thumb($document[atlas_e], $document[atlas], '364x218')}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a></li>
+			</document>
+        </ul>
+      </div>
+    </div>  
+</div>
+</block>

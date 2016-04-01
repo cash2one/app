@@ -1,0 +1,80 @@
+<!--网站顶部开始-->
+<style>
+    /*mainguide*/
+    .mainguide{height:46px;width:100%;background:url(http://www.qbaobei.com/Template/Qbaobei/Skin/images/jiankang/mainguide-bg.png) repeat-x;}
+    .guidecontant{width:960px;margin:0 auto;height:44px; position:relative;}
+    .g-c-left{float:left; }
+    .g-c-left a{color:#666;margin-right:13px;}
+    .g-c-left li{}
+    .g-c-right{float:right;padding-right:30px;height:44px;width:300px;}
+    .guidecontant ul{float:left;}
+    .guidecontant li{float:left; font-size:12px; margin-right:10px;height:44px; line-height:44px; }
+    .g-c-right li a{display:block;padding:0px 3px;}
+
+
+    .guidelist{width:530px;border:2px solid #ffa13c; background:#fff; position:absolute;padding:15px; }
+    .guidelist dl{font-size:12px;}
+    .guidelist dl dt{display:inline-block;font-size:12px;font-weight:bold;width:80px;height:30px;line-height:30px;}
+    .guidelist dl dt a{color: #ffa13c;}
+    .guidelist dl dd{width:430px;border-bottom:1px dotted #ccc; display:inline-block;line-height:30px;}
+    .guidelist dl dd a{padding:0px 2px;}
+    .g-c-right span{ display:block;vertical-align:middle;float:right;}
+    .g-c-right .touxiang{width:35px;height:35px;padding:1px;border:1px solid #ccc;margin-top:3px;overflow:hidden;}
+    .g-c-right .touxiang img{width:35px;height:35px;}
+    .g-c-right .name{line-height:45px;padding:0px 10px;}
+    .g-c-right .exit{font-size:12px;color:#666;display:block;float:right;line-height:44px;margin-left:40px;}
+</style>
+<div class="mainguide">
+    <div class="guidecontant">
+        <div class="g-c-left">
+            <ul>
+                <li><a class="mouseon" href="/" target="_blank">首页</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/yq/" target="_blank">备孕</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/yunqi/" target="_blank">孕期</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/fm/" target="_blank">分娩</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/ye/" target="_blank">0-1岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/youer/" target="_blank">1-3岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/xlq/" target="_blank">3-6岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/jiankang/" target="_blank">健康</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/jiaoyu/" target="_blank">教育</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/baobaoleyuan/" target="_blank">儿歌</a></li>
+                <li><a href="http://home.qbaobei.com/" target="_blank">小家</a></li>
+                <li><a class="mouseon" href="http://bbs.qbaobei.com/" target="_blank">论坛</a></li>
+            </ul>
+        </div>
+        <div class="g-c-right">
+            <script src="http://home.qbaobei.com/common/status.aspx?type=4&url=http://www.qbaobei.com/jiankang/" type="text/javascript"></script>
+
+            <!--<a class="exit" href="">退出</a> <a href="/"><span class="name">美丽仙子</span></a> <span class="touxiang"><a href="/">
+
+                          <img src="/Template/Qbaobei/Skin/images/jiankang/eximg.jpg" /></a></span>-->
+
+            <!--<span class="toprighht"><a class="name" href="/">登录</a><a class="name" href="/">注册</a></span>-->
+
+        </div>
+    </div>
+</div>
+<div class="ly-nav">
+    <div class="child-up">
+        <div class="child-logo"> <a class="child-logo-img" href="http://www.qbaobei.com/"></a><span class="ly-logo-line"></span><span class="child-logo-text"> <a  href="http://www.qbaobei.com/zuowen/" >作文大全</a></span> </div>
+        <div class="child-search">
+            <span class="child-search-btn" onclick="search()">搜索</span>
+            <input class="child-search-key" id="keyValue" value="请输入关键字" onclick="CheckValue(this,1)"
+                   onblur="CheckValue(this,2)" />
+        </div>
+        <div class="ly-bg-img"> </div>
+    </div>
+    <div id="nav" class="child-cls ly-cls">
+        <dl>
+            <dt><a data_id="index" href="http://www.qbaobei.com/zuowen/"><b>作文大全首页</b></a></dt>
+        </dl>
+        <volist name="cate" id="val">
+        <dl>
+            <dt><span></span></dt>
+        </dl>
+        <dl>
+            <dt><a data_id="{$val['id']}" href="{:staticUrl('lists',$val['id'],'Document')}"><b>{$val['title']}</b></a></dt>
+        </dl>
+        </volist>
+    </div>
+</div>

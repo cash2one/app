@@ -1,0 +1,15 @@
+<volist name="theme" id="vo">
+<php>$count = count($vo['son'])</php>
+<li>
+	<div class="tit">{$vo.root.title}</div>
+	<p>
+		<volist name="vo['son']" id="vs" key="k">
+			<if condition="$count eq $k">
+				<a href="{$vs.url}">{$vs.title}</a>
+			<else />
+				<a href="{$vs.url}">{$vs.title}</a><em>/</em>
+			</if>
+		</volist>
+	</p>
+</li>
+</volist>

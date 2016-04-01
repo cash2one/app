@@ -1,0 +1,45 @@
+<extend name="Home@7230mobile/Base/common2"/>
+<block name="style">
+    <link href="__PUBLIC__/Home/7230mobile2/css/article.css" rel="stylesheet" type="text/css">
+</block>
+<block name="body">
+<php>
+    $isF       = false;
+    if($info['pid'] != '0'){
+        $isF   = true;
+        $cates = M('Category')->field('id,title')->where('status = 1 AND pid = '.$info['pid'])->order('sort ASC')->select();
+        $pcate = M('category')->field('id,title')->where('status = 1 AND id = '.$info['pid'])->find();
+    }
+</php>
+<div class="page_title {$isF?'':'gray'}"><span><a href="javascript:void(0);" class="back"></a></span><h2>{$pcate['title']?$pcate['title']:$info['title']}</h2></div>
+
+<section>
+    <php>if($isF){</php>
+    <div class="head_tit">
+        <volist name="cates" id="val">
+            <php>if($val['id'] == $info['id']){</php>
+            <h3>{$val['title']}</h3>
+            <php>}else{</php>
+            <a href="{:staticUrlMobile('lists',$val['id'],'Document')}">{$val['title']}</a>
+            <php>}</php>
+        </volist>
+    </div>
+    <php>}</php>
+    <ul class="art_lists">
+        <volist name="lists" id="val">
+        <li>
+            <a href="{:staticUrlMobile('detail',$val['id'],'Document')}">
+                <div class="art_img">
+                    <div class="img"><img src="{:get_cover($val['cover_id'],'path')}"></div>
+                </div>
+                <div class="art_cont">
+                    <span class="art_tit">{$val['title']}</span>
+                    <span class="art_txt">{$val['description']}</span>
+                </div>
+            </a>
+        </li>
+        </volist>
+    </ul>
+    <div class="page">{$page}</div>
+</section>
+</block>

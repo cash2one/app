@@ -1,0 +1,164 @@
+<if condition="$type eq 'position' and !empty($list)">
+	<volist name="list" id="cate">
+		<neq name="i" value="1">&gt;</neq><a href="{:staticUrl('lists',$cate['id'],'Document')}" target="_self">{:$cate['title']}</a>
+	</volist>
+</if>
+<if condition="$type eq 'tags' and !empty($list)">
+	<div class="clearfix">
+	<div class="artLabel">
+		<span class="artLabel-title">标签：<volist name="list" id="tag"><a href="{:C('STATIC_URL')}/tag/{$tag['name']}/" target="_blank">{:$tag['title']}</a></volist></span>
+	</div>
+	</div>
+</if>
+<if condition="$type eq 'tagsList' and !empty($list)">
+	<span class="tit">标签：</span><span class="tipsm"><volist name="list" id="tag"><a href="{:C('STATIC_URL')}/tag/{$tag['name']}/" target="_blank">{:$tag['title']}</a></volist></span>
+</if>
+<if condition="$type eq 'newDocument' and !empty($list)">
+	<ul class="meishi-pic">
+	<volist name="list" id="value">
+		<li>
+			<a href="{:staticUrl('detail', $value['id'],'Document')}" target="_blank">
+				<img src="{:getContentFirstImg($value['smallimg'],$value['content'])}" alt="{:$value['title']}">
+				<span class="info-m">{:$value['title']}</span>
+			</a>
+		</li>	
+	</volist>
+	</ul>
+</if>
+<if condition="$type eq 'hotFollow' and !empty($list)">
+	<ul class="xgtj-list">
+	<volist name="list" id="cate">
+		<li>
+			<span class="tit"><em>{:str_replace('百科','',$cate['title'])}</em></span>
+			<volist name="cate['document']" id="d">
+			<neq name="i" value="1">|</neq><a href="{:staticUrl('detail', $d['id'],'Document')}" target="_blank">{:$d['title']}</a>
+			</volist>
+		</li>
+	</volist>
+	</ul>
+</if>
+<if condition="$type eq 'hotVideo' and !empty($list)">
+	<div class="right baike-dataBox">
+		<div class="fn-title"><a href="{:staticUrl('lists', $video_cId,'Document')}" target="_blank" class="more">更多</a><h2>{:$video_cTitle}视频</h2></div>
+		<div class="fn-ul-list">
+			<ul class="fn-pic-list fn-video">
+			<volist name="list" id="d">
+				<li>
+					<a href="{:staticUrl('detail', $d['id'],'Document')}" title="{:$d['title']}" target="_blank">
+						<img src="{:get_cover($d['smallimg'],'path')}">
+						<span>{:$d['title']}</span><em></em><b></b>
+					</a>
+				</li>
+			</volist>
+			</ul>
+    	</div>
+	</div>
+</if>
+<if condition="$type eq 'tagsDocument' and !empty($list) and $total gt 0">
+	<div class="right baike-dataBox detail-dataBox" id="meishi-dis">
+		<div class="fn-title">
+			<h2>
+				<volist name="list" id="tag" key="i">
+					<if condition="!empty($tag['document'])">
+						<span <if condition="$i eq 1">class="active"</if>>{:$tag['title']}</span>
+					</if>
+				</volist>
+			</h2>
+		</div>
+		<div class="fn-ul-list">
+			<volist name="list" id="tag" key="i">
+				<if condition="!empty($tag['document'])">
+					<ul class="fn-news-list <if condition='$i eq 1'>current</if>">
+						<volist name="tag['document']" id="document">
+							<li><a href="{:staticUrl('detail', $document['id'],'Document')}" target="_blank">{:$document['title']}</a></li>
+						</volist>
+					</ul>
+				</if>
+			</volist>
+		</div>
+	</div>
+</if>
+<if condition="$type eq 'hotDocument' and !empty($list)">
+	<div class="right baike-dataBox detail-tab">
+		<div class="fn-title"><a href="{:staticUrl('lists', $pid,'Document')}" target="_blank" class="more">更多</a><h2>热门推荐</h2></div>
+		<ul class="hot-recNav">
+			<volist name="list" id="cate" key="i">
+				<if condition="$cate['list']">
+					<li <if condition='$i eq 1'>class="active"</if>>{:msubstr($cate['title'],0,5,'utf-8',false)}</li>
+				</if>
+			</volist>
+		</ul>
+		<div class="fn-ul-list">
+			<volist name="list" id="cate" key="i">
+				<if condition="!empty($cate['list'])">
+				<ul class="meishi-news <if condition='$i eq 1'>current</if>">
+					<volist name="cate['list']" id="d" key="i">
+					<li>
+						<a href="{:staticUrl('detail', $d['id'],'Document')}" target="_blank">{:$d['title']}</a>
+						<p class="info">{:$d['description']}</p>
+					</li>
+					</volist>
+				</ul>
+				</if>
+			</volist>
+		</div>
+	</div>
+</if>
+<if condition="$type eq 'listVideo' and !empty($list)">
+	<div class="right">
+		<div class="fn-title"><a href="{:staticUrl('lists', $video_cId,'Document')}" target="_blank" class="more">更多</a><h2>{:$video_cTitle}视频</h2></div>
+		<div class="fn-ul-list">
+			<ul class="fn-pic-list fn-video">
+			<volist name="list" id="d">
+				<li>
+					<a href="{:staticUrl('detail', $d['id'],'Document')}" title="{:$d['title']}" target="_blank">
+						<img src="{:get_cover($d['smallimg'],'path')}">
+						<span>{:$d['title']}</span><em></em><b></b>
+					</a>
+				</li>
+			</volist>
+			</ul>
+		</div>
+	</div>
+</if>
+<if condition="$type eq 'mamaTalk'">
+	<div class="right">
+		<div class="fn-title"><a href="http://bbs.qbaobei.com" target="_blank" class="more">更多</a><h2>妈妈交流</h2></div>
+		<div class="recNews-wraper">
+			<div class="recNews">
+				<div class="disBox-top">
+					<a href="http://bbs.qbaobei.com/thread-246177-1-1.html" target="_blank" class="name">6个纠正孩子暴脾气的小方法 专治熊孩子任性发飙 </a>
+					<p>孩子脾气暴躁，父母应当及早进行纠正。但是，父母在纠正孩子暴脾气的时候……</p>
+				</div>
+				<div class="disBox-top">
+					<a href="http://bbs.qbaobei.com/thread-242063-1-4.html" target="_blank" class="name">孕晚期要吃一些什么东西。</a>
+					<p>孕妈妈们在怀孕的晚期，为了给宝宝更多的营养，妈妈们需要补充更多的东西……</p>
+				</div>
+				<div class="disBox-top">
+					<a href="http://bbs.qbaobei.com/thread-241282-1-4.html" target="_blank" class="name">产后肚腩还是很大，怎么办</a>
+					<p>我没怀孕时96斤，怀孕长了32斤的样子，宝宝生出来是6.6斤，月子里就瘦到……</p></div>
+				<div class="disBox-top">
+					<a href="http://bbs.qbaobei.com/thread-246219-1-1.html" target="_blank" class="name">你是不是也认为羊水给宝宝供氧？别闹了羊水的作用才不是这样！</a>
+					<p>不知道姐妹们在临产时，有没有听到一种说法，就是一旦羊水破了，胎宝宝就……</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</if>
+<if condition="$type eq 'hotPlans'">
+	<div class="right">
+		<div class="fn-title"><a href="http://www.qbaobei.com/plans/" target="_blank" class="more">更多</a><h2>热门专题</h2></div>
+		<div class="fn-ul-list">
+			<ul class="fn-pic-list">
+				<li><a href="http://www.qbaobei.com/plans/xinshengerhuli/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2012/10/201210291623107353.jpg"><span>新生儿该如何护理</span></a></li>
+				<li><a href="http://www.qbaobei.com/plans/tonghua/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/9/201309171514317292.jpg"><span>童话故事大全</span></a></li>
+				<li><a href="http://www.qbaobei.com/plans/buruqiganmao/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/plans/2012/12/201212121152341426.jpg"><span>哺乳期感冒吃什么药</span></a></li>
+				<li><a href="http://www.qbaobei.com/plans/boluo/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/4/201404181800418215.jpg"><span>菠萝的营养价值</span></a></li>
+				<li><a href="http://www.qbaobei.com/plans/baobaotunai/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/6/201406041714249040.jpg"><span>宝宝吐奶怎么办</span></a></li>
+				<li><a href="http://www.qbaobei.com/plans/yunchuqiys/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/3/201403281428483141.jpg"><span>怀孕初期吃什么好</span></a></li>
+				<li><a href="http://www.qbaobei.com/plans/chanfushipu/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/1/201401231401131570.jpg"><span>产妇食谱大全</span></a></li>
+				<li><a href="http://www.qbaobei.com/plans/shejian2/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/4/201404281518212791.jpg"><span>舌尖上的中国第二季</span></a></li>
+			</ul>
+		</div>
+	</div>
+</if>

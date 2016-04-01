@@ -1,0 +1,119 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/tools.css">
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > <a href="/tools/">工具</a> > 入院待产包清单</block>
+<block name="body">
+<!--工具详情-->
+<section class="tool-detail dis-bot">
+<h1>入院待产包清单</h1>
+<style>
+.m-pictxt{overflow:hidden;line-height:25px;color:#333;}
+.m-pictxt-pic{float:left;width:120px;margin:0 10px 0px 0;border:1px solid #d7d7d7;border-radius:3px;background:#fff;}
+.m-pictxt-pic img{display:block;width:120px;height:70px;}
+.m-pictxt-pic span{display:block;line-height:23px;height:23px;overflow:hidden;text-align:center;}
+.dcb-btn{display:block;height:35px;line-height:35px;width:160px;margin:10px auto; color:#ff4444;text-align:center;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;border:1px solid #ff4444;outline:none;font-size:15px;font-size:1.5rem;}
+.dcb-btn:hover{color:#ff4444;}
+.dcb-btn:visited{color:#ff4444;}
+</style>
+<div class="m-section">请输入您的预产期</div>
+<div class="m-input"><input type="date" name="" id="Jdata"/></div>
+<div class="m-work"><input type="submit" id="JworkOut" value="确认输入" /></div>
+<div class="m-result" id="Jresult">
+<p class="">随着肚子越来越大，除了更好地保证营养和安全，你可能还需要为迎接宝宝出生做些必要的准备工作。如果你不希望到临产时仓促准备，最好提前开始准备<a href="http://m.qbaobei.com/a/224491.html" style="color:#f60">入院待产包</a>，以免因出现突发状况临时入院时，弄得手忙脚乱。其中，待产包又分为<a href="http://m.qbaobei.com/a/224491.html" style="color:#f60">孕妇待产包</a>（或者又叫产妇待产包）和<a href="http://m.qbaobei.com/a/223264.html" style="color:#f60">新生儿待产包</a>。为了在生产的时候能得心应手，加上每个季节生宝宝都有相应需要使用到的产品，因此孕妇入院待产包可以按照季节有针对性的准备。此外，你也可以选择下载最新待产包清单对照着收拾待产包。</p>
+</div>
+</section>
+</block>
+<block name="script">
+<script type="text/javascript">
+function $$(id) {
+return (typeof id == "object") ? id : document.getElementById(id);
+}
+var Jdata = $$("Jdata");
+//写入当前如期
+function checkTime(num){
+if (num < 10) {
+num = "0" + num;
+}
+return num;
+}
+$(function(){
+    var d = new Date();
+	var year = d.getFullYear();
+	var month = d.getMonth()+1;
+	var date = d.getDate();
+	var bIsi9300 = navigator.userAgent.toLowerCase().match(/i9300/i) == "i9300";
+	if (!bIsi9300) {
+		$("#Jdata").val(year + '-' + checkTime(month) + '-' + checkTime(date));
+	};
+	$("#Jdata").attr("placeholder",'请输入日期，格式：' + year + '-' + checkTime(month) + '-' + checkTime(date));
+});
+function touchEvent(elm, fn) {
+if ("ontouchstart" in document.documentElement) {
+elm.addEventListener("touchstart", fn, false);
+} else {
+elm.addEventListener("click", fn, false);
+}
+}
+touchEvent(JworkOut, function() {
+var y = Jdata.value.split("-")[0],
+m = Jdata.value.split("-")[1],
+da = Jdata.value.split("-")[2];
+if (Jdata.value == "") {
+showTopTip("请输入完整日期!");
+hideTopTip();
+return false;
+};
+if (y == "" || m == "" || da == "") {
+showTopTip("请输入完整日期!");
+hideTopTip();
+return false;
+}
+var imgSrc,jiJie,jiJieTxt;
+if (m == 2 || m == 3 || m == 4) {
+imgSrc = "__PUBLIC__/Home/qbaobeimobile2/images/chun.png";
+jiJie = "春季待产包";
+jiJieTxt = "春天的天气变化最为反复无常，使人出现种种不适症状，孕妇在生完小孩之后要防止病毒感染以及皮肤过敏等，在春季待产包中要多放些针对春季多发病类的药物，以保证孕妇和宝宝的健康。春天里，湿疹最容易找上免疫力不强的新生儿。妈妈可以为宝宝准备好婴儿专用的润肤霜和小棉签。若属于轻程度的湿疹，可以使用低致敏性的润肤霜帮助皮肤恢复滋润，形成保护膜避免湿疹继续恶化。春季天气仍然干燥，每次喂奶的间隔时间应喂些温开水，以达到清洁口腔，补充水分的作用，鼻腔有分泌物时，应及时用棉签蘸点苏打水清洗干净。更加详细的春季待产包准备攻略，可以点击下面图标了解。";
+}else if (m == 5 || m == 6 || m == 7) {
+imgSrc = "__PUBLIC__/Home/qbaobeimobile2/images/xia.png";
+jiJie = "夏季待产包";
+jiJieTxt = "夏季气温高，天气炎热，待产包里需要为宝宝特别准备空调清洗剂和浴盆。很多人没有注意到，空调经过将近一年的搁置，滤网上积聚了不少灰尘和尘螨，容易造成宝宝过敏和呼吸道疾病，应该定期用专用的清洗剂清洗空调滤网。新生儿出生之后要勤于洗澡，避免汗液积聚在皮肤皱褶而出痱子。因此，准备待产包时除了常规的物品之外，要记得为宝宝准备一个专用的浴盆，避免交叉使用滋生细菌。更加详细的夏季待产包准备攻略，可以点击下面图标了解。";
+}else if (m == 8 || m == 9 || m == 10) {
+imgSrc = "__PUBLIC__/Home/qbaobeimobile2/images/qiu.png";
+jiJie = "秋季待产包";
+jiJieTxt = "秋天干燥，衣物和身上容易起静电，待产包需要为宝宝准备防静电婴儿洗衣液或者空气加湿器。如果身上有静电接触到宝宝，会让宝宝感到刺痛。除此之外，静电还会吸附各种灰尘和细菌，使宝宝皮肤出现红肿瘙痒，发炎等肌肤症状，抵抗力弱的孩子甚至有可能引发气管炎，哮喘等。因此，孕妈在准备待产包时可以加入防静电婴儿洗衣液和加湿器，避免因为天气干燥引起的静电。更加详细的秋季待产包准备攻略，可以点击下面图标了解。";
+}else if (m == 11 || m == 12 || m == 1) {
+imgSrc = "__PUBLIC__/Home/qbaobeimobile2/images/dong.png";
+jiJie = "冬季待产包";
+jiJieTxt = "冬季寒冷风大，除了常规的待产包物品，产妇需要为自己准备一顶月子帽，给宝宝准备一个水温计。新手爸妈在给新生儿洗澡的时候要特别注意水温，成年人觉得合适的水温对于新生儿来说可能过高了。冬天用手去测水温，手部感觉到的水温会比实际水温要低。给新生儿洗澡，水温控制在37℃至45℃为宜。水温过低，宝宝容易感冒；水温过高，宝宝容易被烫伤。因此，冬季待产包里除了常规用品之外，还可以准备一个水温计，它能帮助新手父母为宝宝调试合适的水温。更加详细的冬季待产包准备攻略，可以点击下面图标了解。";
+};
+$$("Jresult").style.display = "block";
+$$("Jresult").innerHTML = '<div class="m-result-tit">查询结果</div><p class="" style="font-weight:bold;font-size:16px;color:#333;line-height:35px;">根据您的预产期，我们推荐：</p><div class="m-pictxt"><div class="m-pictxt-pic"><img src="'+ imgSrc +'" alt="" /><span>'+jiJie+'</span></div>'+ jiJieTxt +'</div>';
+});
+function showTopTip(msg) {
+var tipEle = document.getElementById("JtopTipMsg");
+if (!tipEle) {
+tipEle = document.createElement("div");
+tipEle.id = "JtopTipMsg";
+tipEle.style.cssText = "display:none;width:120px;padding:10px;line-height:20px;font-size:12px;background-color:rgba(000,000,000,0.9);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;color:#fff;text-align:center;-webkit-transition:all 0.3s ease-in;transition:all 0.3s ease-in;position:fixed;top:50%;left:50%;margin-left:-70px;margin-top:-20px;opacity:1;z-index:999;";
+document.body.appendChild(tipEle);
+}
+tipEle.innerHTML = msg;
+tipEle.style.display = "block";
+setTimeout(function() {
+tipEle.style.opacity = "1";
+}, 0);
+}
+function hideTopTip() {
+var tipEle = document.getElementById("JtopTipMsg");
+if (tipEle) {
+setTimeout(function() {
+tipEle.style.opacity = "0";
+setTimeout(function() {
+tipEle.style.display = "none";
+}, 300);
+}, 1500);
+}
+}
+</script>
+</block>

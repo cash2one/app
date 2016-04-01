@@ -1,0 +1,47 @@
+<extend name="Home@7230/Base/common"/>
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/news.css"/>
+</block>
+<!-----head-END----->
+<block name="body">
+<!-----head-END----->
+<div id="news-main">
+<p class="page-nav">当前位置：<a href="">首页</a>->{$keyword}</p>
+<div id="nm-left">
+<div class="nm-left-bottom" id="docList" {:empty($docList)?'style="display:none"':''}>
+<p class="title">文章列表</p>
+<ul>
+<volist name="docList" id="vo">
+<li><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank" class="pic"><img src="{:get_cover($vo['cover_id'],'path')}"></a><span><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank">{$vo['title']}</a><b class="info">{$vo['description']}</b>
+<b class="jj"><i style="display:none;">编辑：<s>{$vo.author}</s></i><i>时间：<s>{$vo.start_time|time_format="m-d"}</s></i><i style="display:none;">标签：<s>{:getDownTag($vo['id'])}</s></i><i style="display:none;">来源：<s>{$vo.source_url}</s></i><i>赞:<s>{$vo.abet}</s></i><i style="display:none;">分享+</i></b></span></li>
+</volist>
+</ul>
+</div>
+<div class="nm-left-bottom" {:empty($downList)?'style="display:none"':''}>
+<p class="title">下载列表</p>
+<ul>
+<volist name="downList" id="do">
+<li><a href="{:staticUrl('detail', $do['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($do['cover_id'],'path')}"></a><span><a href="{:staticUrl('detail', $do['id'],'Down')}" target="_blank">{$do['title']}</a><b class="info">{$do['description']}</b>
+<b class="jj"><i style="display:none;">编辑：<s>{$do.author}</s></i><i>时间：<s>{$do.start_time|time_format="m-d"}</s></i><i style="display:none;">标签：<s>{:getDownTag($do['id'])}</s></i><i style="display:none;">来源：<s>{$do.source_url}</s></i><i>赞:<s>{$do.abet}</s></i><i style="display:none;">分享+</i></b></span></li>
+</volist>
+</ul>
+</div>
+<div class="nm-left-bottom" {:empty($batchList)?'style="display:none"':''}>
+<p class="title">专区列表</p>
+<ul>
+<volist name="batchList" id="zo">
+<li><a href="{:staticUrl('detail', $zo['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($zo['cover_id'],'path')}"></a><span><a href="{:staticUrl('detail', $zo['id'],'Down')}" target="_blank">{$zo['title']}</a><b class="info">{$zo['description']}</b>
+<b class="jj"><i style="display:none;">编辑：<s>{$zo.author}</s></i><i>时间：<s>{$zo.start_time|time_format="m-d"}</s></i><i style="display:none;">标签：<s>{:getDownTag($zo['id'])}</s></i><i style="display:none;">来源：<s>{$zo.source_url}</s></i><i>赞:<s>{$zo.abet}</s></i><i style="display:none;">分享+</i></b></span></li>
+</volist>
+
+</ul>
+</div>
+
+</div>
+<div id="nm-right">
+<include file="/widget/gonglveSider" />
+    <!--#include virtual="{:getWidgetPath('6')}"-->
+</div>
+</div>
+</block>
+<div style="clear:both"></div>

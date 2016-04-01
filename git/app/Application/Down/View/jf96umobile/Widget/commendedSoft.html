@@ -1,0 +1,9 @@
+<volist name="lists" id="article" offset="0" length="10">
+        <li><a href="{:str_replace('index.html','',staticUrlMobile('detail',$article['id'],'Down'))}" title="{$article.title}" class="pic"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a>
+            <div class="text">
+                <a href="{:str_replace('index.html','',staticUrlMobile('detail',$article['id'],'Down'))}" title="{$article.title}">{$article.title}</a>
+                <p>{:format_size($article['size'])}/{:get_game_typedown($article['category_id'])}</p>
+            </div>
+            <a href="{:str_replace('index.html','',staticUrlMobile('detail',$article['id'],'Down'))}" class="down">下载</a>
+        </li>
+</volist>

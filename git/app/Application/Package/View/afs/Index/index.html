@@ -1,0 +1,74 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/afs/css/yxlb.css"/>
+</block>
+<block name="body">
+<!--main-->
+<div id="main">
+<p id="main-title"><a href="{:C('STATIC_URL')}">首页</a>><a href="">礼包</a></p>
+<div class="news-xq">
+    <!--banner-->
+    <div id="banner">
+        <div class="left">
+            <ul>
+                <Think:article basename="package" limit="9" where="category_id = 1 AND brecom_id !=0 AND position & 8" order="id DESC">
+                <li><a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank"><img src="{:get_cover($article['brecom_id'],'path')}" alt="{$article['title']}"></a></li>
+                </Think:article>
+            </ul>
+            <span></span>
+            <p></p>
+            <b></b>
+        </div>
+    </div>
+    <!--热门礼包-->
+    <div class="rmlb">
+        <div id="title-nav"><a href="{:C('PACKAGE_SLD')}/li/" target="_blank">更多&gt;&gt;</a><b></b><h2>热门礼包</h2></div>
+        <ul>
+            <Think:article basename="package" name="pmain" limit="9" where="category_id = 1" order="abet DESC">
+                <li>
+                    <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank"><img src="{:get_cover($article['cover_id'],'path')}"></a>
+                        <span>
+                            <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank">{$article['title']}</a>
+                            <b>{:showText($article['card_type'],'card_type',false,'PACKAGE')}</b>
+                            <b>
+                                <php>if(2&$article['conditions']){</php>
+                                <i class="app"></i>
+                                <php>} if(1&$article['conditions']){</php>
+                                <i class="adr"></i>
+                                <php>}</php>
+                            </b>
+                        </span>
+                    <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" class="lq">领取</a>
+                </li>
+            </Think:article>
+        </ul>
+    </div>
+    <!--最新礼包-->
+    <div class="rmlb">
+        <div id="title-nav"><a href="{:C('PACKAGE_SLD')}/li/" target="_blank">更多&gt;&gt;</a><b></b><h2>最新礼包</h2></div>
+        <ul>
+            <Think:article basename="package" name="pmain" limit="9" where="category_id = 1" order="create_time DESC">
+                <li>
+                    <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank"><img src="{:get_cover($article['cover_id'],'path')}"></a>
+                        <span>
+                            <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank">{$article['title']}</a>
+                            <b>{:showText($article['card_type'],'card_type',false,'PACKAGE')}</b>
+                            <b>
+                                <php>if(2&$article['conditions']){</php>
+                                <i class="app"></i>
+                                <php>} if(1&$article['conditions']){</php>
+                                <i class="adr"></i>
+                                <php>}</php>
+                            </b>
+                        </span>
+                    <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" class="lq">领取</a>
+                </li>
+            </Think:article>
+        </ul>
+    </div>
+</div>
+<div class="news-right">
+    <!--#include virtual="{:getWidgetPath('49')}"-->
+</div>
+</div>
+</block>

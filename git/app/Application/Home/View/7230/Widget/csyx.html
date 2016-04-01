@@ -1,0 +1,48 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/7230/css/down.css"/></block>
+<block name="body">
+<div id="down-main">
+    <p class="page-nav">当前位置：<a href="{:C('STATIC_URL')}">首页</a>-><a href="{:getWidgetPath('13', true)}">厂商列表</a>->厂商下载</a></p>
+    <!--厂商-->
+    <p class="jx-title">游戏厂商简介</p>
+    <div class="xzcs">
+        <div class="xzcs-left">
+            <a href="javascript:void(0)" class="pic"><img src="{:get_cover($info['img'],'path')}"></a>
+        <span>
+        <i class="name"><b>公司名：</b><a href="javascript:void(0)">{$info.name}</a></i>
+        <i><b>英文名：</b>{$info.name_e}</i>
+        <i><b>更新时间：</b>{:date('Y-m-d',$info['create_time'])}</i>
+        <i><b>关键词：</b>{$info.keywords}</i>
+        </span>
+        </div>
+        <div class="xzcs-right">
+            <b>厂商简介：</b>
+            <i>{$info.description}</i>
+        </div>
+    </div>
+    <!--精品推荐-->
+    <p class="jx-title">提供的下载</p>
+    <div class="zjgx">
+        <div class="current">
+            <volist name="lists" id="val" empty="$empty">
+            <p><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic2"><img src="{:get_cover($val['smallimg'],'path')}"></a><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val.title}</a><b class="star{:get_score($val['id'])}"></b><b>{$val.hits}人下载过</b><b class="zan">{$val.abet}</b></span>
+                <s class="info">{$val.description}</s>
+            </p>
+            </volist>
+        </div>
+        <div style=" clear:both"></div>
+        <!---分页--->
+        <div class="page">{$page}</div>
+        <!---分页END--->
+    </div>
+
+</div>
+
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Down/7230/js/jquery.knob.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Down/7230/js/excanvas.js"></script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+</block>

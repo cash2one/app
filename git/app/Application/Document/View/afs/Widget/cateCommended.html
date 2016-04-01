@@ -1,0 +1,9 @@
+<eq name="cateNews" value="">
+<else/>
+<div id="about" class="wrap-r">
+  <h2><i>相关阅读</i></h2>
+  <volist name="cateNews" id="vo" offset="0" length='2'>
+    <span><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"></a><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank" class="tit">{$vo['title']}</a></span>
+    </volist>
+ </div>
+</eq>

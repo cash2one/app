@@ -1,0 +1,16 @@
+<div class="cnxh similar gameQtbb">
+  <div class="downWrap">
+    <div class="downTit">
+      <p>{$company['name']}</p>
+    </div>
+    <div id="wrapper2">
+      <div id="scroller2">
+        <ul id="thelist2">
+        <volist name="lists" id="vo">
+          <li><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}"><img src="{:get_cover($vo['smallimg'],'path','1','66','66')}"><span>{$vo['title']}</span></a><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">下载</a></li>
+        </volist>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

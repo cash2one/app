@@ -1,0 +1,5 @@
+<ul class="newest-ul {$curr}">
+  <volist name="lists" id="article">
+    <li><span>{$article['create_time']|time_format="Y-m-d"}</span><em>[{$category}]</em><a href="{:staticUrl('detail', $article['id'],'Document')}" title="{$article['title']}" target="_blank">{$article.title|msubstr=###,0,18,'utf-8',false}</a></li>
+  </volist>
+</ul>

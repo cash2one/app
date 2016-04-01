@@ -1,0 +1,38 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/afs/css/yxlb.css"/>
+</block>
+<block name="body">
+<!--main-->
+<div id="main" class="yxlb">
+<p id="main-title"><a href="">首页</a>><a href="">游戏资讯</a>><a href="">新闻</a></p>
+<div class="news-xq">
+    <!--删选-->
+    <div id="lbsx">
+        {$filter}
+    </div>
+    <!--热门礼包-->
+    <div class="rmlb">
+        <div id="title-nav"><b></b><h2>游戏礼包</h2></div>
+        <ul>
+            <volist name="lists" id="val">
+            <li>
+                <a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path')}"></a>
+                    <span>
+                        <a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank">{$val['title']}</a>
+                        <b>{:showText($val['card_type'],'card_type',false,'PACKAGE')}</b>
+                        <b><i class="app"></i><i class="adr"></i></b>
+                    </span>
+                <a href="{:staticUrl('detail',$val['id'],'Package')}" class="lq">领取</a>
+            </li>
+            </volist>
+        </ul>
+        <p id="fenye">{$page}</p>
+
+    </div>
+</div>
+<div class="news-right">
+    <!--#include virtual="{:getWidgetPath('49')}"-->
+</div>
+</div>
+</block>

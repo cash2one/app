@@ -1,0 +1,10 @@
+<notempty name="res">
+    <volist name="res" key="k" id="val">
+     <if condition="$k eq 1">
+         <a class="cur" >{$val.title}</a>
+         <else/>
+         <a >{$val.title}</a>
+     </if>
+    </volist>
+</notempty>
+

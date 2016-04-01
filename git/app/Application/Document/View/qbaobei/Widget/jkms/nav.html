@@ -1,0 +1,45 @@
+<div class="new-nav">
+  <div class="nav-up">
+    <div class="child-logo"> <a class="child-logo-img" href="/" ></a><span class="jk-logo-line"></span> <span class="child-logo-text"> <a  href="/jkms/" >美食</a></span> </div>
+    <div class="child-search"> <span class="child-search-btn" onclick="search()">搜索</span>
+      <input class="child-search-key" id="keyValue" value="请输入关键字" onclick="CheckValue(this,1)" onblur="CheckValue(this,2)" />
+    </div>
+    <div class="jk-bg-img"> </div>
+  </div>
+  <div class="clear"> </div>
+  <!-- 导航栏 -->
+  <div class="nav-class">
+
+<div class="nav-class-main if-class-main"><a href="{:getWidgetPath('88')}" title="亲亲宝贝首页" target="_blank">首页</a></div>
+<volist name="cateTree" id="cate">
+	<if condition="count($cate['_child']) elt 2">
+		<div class="nav-class-detail nav-class-nobg">
+			<div class="nav-class-block if-class-block">
+				<a href="{:staticUrl('lists',$cate['id'],'Document')}" title="{:$cate['title']}" target="_blank">{:$cate['title']}</a>
+			</div>
+			<div class="nav-class-child">
+				<ul>
+					<volist name="cate['_child']" id="child">
+						<li><a href="{:staticUrl('lists',$child['id'],'Document')}" title="{:$child['title']}" target="_blank">{:$child['title']}</a></li>
+					</volist>
+				</ul>
+			</div>
+		</div>
+    <else />
+		<div class="nav-class-alone">
+			<div class="nav-class-block if-class-block">
+				<a href="{:staticUrl('lists',$cate['id'],'Document')}" title="{:$cate['title']}" target="_blank">{:$cate['title']}</a>
+			</div>
+			<div class="nav-class-child">
+				<ul>
+					<volist name="cate['_child']" id="child">
+						<li class="nav-class-child-width45"><a href="{:staticUrl('lists',$child['id'],'Document')}" title="{:$child['title']}" target="_blank">{:$child['title']}</a></li>
+					</volist>
+				</ul>
+			</div>
+		</div>
+	</if>
+</volist>
+
+</div>
+</div>

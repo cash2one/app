@@ -1,0 +1,32 @@
+<extend name="Home@afsmobile/Base/commonDown" />
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+<div id="wrapper4">
+  <div id="scroller4">
+    <ul id="thelist4">
+        <Think:article basename="Down" name="paihang"  cate="20" limit="100" order="create_time desc">
+          <switch name="key">
+             <case value="0|11|21|31|41|51|61|71|81|91"><li></case>
+             <case value="10|21|31|41|51|61|71|81|91"></li></case>
+             <default /><a href="{~W('Home/Afsmobile/rankUrl',array($article['path_detail']))}">{$article.title}</a>
+           </switch>
+        </Think:article>
+    </ul>
+  </div>
+  <div class="pagenum"></div>
+</div>
+<!--game_rec-->
+<div class="padding_box2">
+  <div class="cont paihang_border">
+    <ul class="n_gameul">
+      {~W('Down/Afsmobile/rankConList',array($info['id']))}
+    </ul>
+  </div>
+  <a href="javascript:void(0)"  id="get_more" data-id="{$info['id']}" style="display:none;">点击加载更多</a> </div>
+</block>
+<block name="script"> 
+  <script type="text/javascript" src="__PUBLIC__/Down/afsmobile/js/iscrollc.js"></script> 
+    <script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/ajax_load.js"></script> 
+</block>

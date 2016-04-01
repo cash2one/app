@@ -1,0 +1,17 @@
+<notempty name="lists">
+<dl class="answer">
+  <dt class="downTit">
+    <p>好评回答</p>
+  </dt>
+  <volist name="lists" id="vo">
+  <dd>
+    <div class="answer_lit">
+      {$vo['content']}
+    </div>
+    <div class="time-user"> <span class="user"><img src="__PUBLIC__/Home/afsmobile/images/avatar{$vo['avatar']}.png"></span><span class="name">{$vo['author']}</span>
+      <time>{$vo['time']}</time>
+    </div>
+  </dd>
+  </volist>
+</dl>
+</notempty>

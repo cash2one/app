@@ -1,0 +1,58 @@
+<volist name="cateRs" id="cate">
+<div class="fond-line">
+	<div class="food-left-box">
+		<div class="food-left-box-tit">
+			<img src="__PUBLIC__/Home/qbaobei/images/food-left-tit-icon.gif" width="29" height="31" />
+			<a target="_blank" href="{:staticUrl('lists',$cate['id'],'Document')}" title="{:$cate['title']}">{:$cate['title']}</a>
+		</div>
+		<div class="food-left-box-nr">
+			<if condition="!empty($cate['_child'])">
+			<ul>
+				<volist name="cate['_child']" id="child">
+				<li class="f-borderright">
+					<p class="f-fontweight"> <a href="{:staticUrl('lists',$child['id'],'Document')}" target="_blank" title="{:$child['title']}">{:msubstr($child['title'],0,10,'utf-8',false)}</a> </p>
+					<if condition="!empty($child['_list'])">
+						<volist name="child['_list']" id="document" key="n">
+						<if condition="$n eq 1">
+							<a target="_blank" href="{:staticUrl('detail',$document['id'],'Document')}" title="{:$document['title']}">
+								<img src="{:get_cover(0,'path')}" onerror="this.src='{:get_cover(0,'path')}';" original="{:getContentFirstImg($document['smallimg'],$document['content'])}" alt="{:$document['title']}" width="140" height="105" />
+							</a>
+							<p><a class="f-fontredcolor" target="_blank" href="{:staticUrl('detail',$document['id'],'Document')}" title="{:$document['title']}">{:msubstr($document['title'],0,10,'utf-8',false)}</a></p>
+							<p class="food-left-box-nr-list">
+						<else />
+							<a target="_blank" href="{:staticUrl('detail',$document['id'],'Document')}" title="{:$document['title']}">{:msubstr($document['title'],0,10,'utf-8',false)}</a>
+						</if>
+						<if condition="$n eq count($child['_list'])">
+							</p>
+						</if>
+						</volist>
+					</if>
+				</li>
+				</volist>
+			</ul>
+			</if>
+		</div>
+	</div>
+	<div class="food-right-box">
+		<div class="food-right-box-tit">{:$cate['title']}热点排行</div>
+		<if condition="!empty($cate['_hotList'])">
+		<div class="food-right-box-nr">
+			<ul class="food-right-box-nr-list">
+				<volist name="cate['_hotList']" id="hot" key="hi">
+					<if condition="$hi eq 1">
+						<span class="f-first">
+							<a target="_blank" href="{:staticUrl('detail',$hot['id'],'Document')}" title="{:$hot['title']}">
+								<img src="{:get_cover(0,'path')}" onerror="this.src='{:get_cover(0,'path')}';" original="{:getContentFirstImg($hot['smallimg'],$hot['content'])}" alt="{:$hot['title']}" />
+							</a>
+							<a class="f-green" target="_blank" href="{:staticUrl('detail',$hot['id'],'Document')}" title="{:$hot['title']}">{:msubstr($hot['title'],0,8,'utf-8',false)}</a>{:msubstr($hot['description'],0,15,'utf-8',false)}
+						</span>
+					<else />
+						<li><a target="_blank" href="{:staticUrl('detail',$hot['id'],'Document')}" title="{:$hot['title']}">{:msubstr($hot['title'],0,14,'utf-8',false)}</a></li>
+					</if>
+				</volist>
+			</ul>
+		</div>
+		</if>
+	</div>
+</div>
+</volist>

@@ -1,0 +1,200 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/tools.css">
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > <a href="/tools/">工具</a> > 宝宝免费起名软件</block>
+<block name="body">
+<!--工具详情-->
+<section class="tool-detail dis-bot">
+<h1>宝宝免费起名软件</h1>
+<style>
+table th, table td{border:1px solid #DEF5F2;}
+</style>
+<div class="m-section">宝宝性别</div>
+<form id="JbgSel">
+<div class="item">
+<label for="boy" onclick=""><input type="radio" name="sex" id="boy" checked="checked" value="1" /><span>男宝宝</span></label>
+<label for="girl" onclick=""><input type="radio" name="sex" id="girl" value="0" /><span>女宝宝</span></label>
+</div>
+</form>
+<div class="m-section">宝宝的姓氏</div>
+<div class="m-input"><input type="text" id="JfirstName" placeholder="姓氏不超过两个字"/></div>
+<div class="m-section">取名要求</div>
+<form id="Jrequest">
+<div class="item">
+<label for="single" onclick=""><input type="radio" name="workscount" id="single" checked="checked" value="1" /><span>单名</span></label>
+<label for="double" onclick=""><input type="radio" name="workscount" id="double" value="2" /><span>双名</span></label>
+</div>
+</form>
+<div class="m-section">出生日期</div>
+<div class="m-input"><input type="date" name="" id="Jdata" /></div>
+<div class="m-work"><input type="submit" id="JworkOut" value="立即取名" /></div>
+<div class="m-result" id="Jresult">
+<div class="m-result-tit">查询结果</div>
+<div class="m-result-tit" id="JresultTit">适合你宝宝的名字</div>
+<div id="Jresult1" style="padding:10px 0;"></div>
+</div>
+</section>
+</block>
+<block name="script">
+<script type="text/javascript">
+var getScript = function(url, callback) {
+var scr = document.createElement('script');
+scr.onload = scr.onreadystatechange = function() {
+var st = scr.readyState;
+if (st && st !== 'loaded' && st !== 'complete') return;
+scr.onload = scr.onreadystatechange = null;
+callback && callback();
+};
+scr.src = url;
+document.getElementsByTagName('head')[0].appendChild(scr);
+}
+function $$(id) {
+return (typeof id == "object") ? id : document.getElementById(id);
+}
+//写入当前日期
+function checkTime(num) {
+if (num < 10) {
+num = "0" + num;
+}
+return num;
+}
+$(function(){
+    var d = new Date();
+	var year = d.getFullYear();
+	var month = d.getMonth()+1;
+	var date = d.getDate();
+	var bIsi9300 = navigator.userAgent.toLowerCase().match(/i9300/i) == "i9300";
+	if (!bIsi9300) {
+		$("#Jdata").val(year + '-' + checkTime(month) + '-' + checkTime(date));
+	};
+	$("#Jdata").attr("placeholder",'请输入日期，格式：' + year + '-' + checkTime(month) + '-' + checkTime(date));
+});
+function isChinese(str) {
+var badChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+badChar += "abcdefghijklmnopqrstuvwxyz";
+badChar += "0123456789";
+badChar += " " + "　"; //半角与全角空格
+badChar += "`~!@#$%^&()-_=+]\\|:;\"\\'<,>?/"; //不包含*或.的英文符号
+if ("" == str) {
+return false;
+}
+for (var i = 0, l = str.length; i < l; i++) {
+var c = str.charAt(i); //字符串str中的字符
+if (badChar.indexOf(c) > -1) {
+return false;
+}
+}
+return true;
+}
+function chk() {
+if (JfirstName.value.length < 1) {
+showTopTip("你什么都不输入，让我们很为难的…");
+hideTopTip();
+return false;
+} else if (!isChinese(JfirstName.value)) {
+showTopTip("抱歉，目前只可以取中文名哦！");
+hideTopTip();
+return false;
+} else if (JfirstName.value.length > 2) {
+showTopTip("客官，姓氏不支持那么长滴！");
+hideTopTip();
+return false;
+} else {
+return true;
+}
+}
+var JitemA = $$("JitemA");
+var JfirstName = $$("JfirstName"),
+JbgSel = $$("JbgSel"),
+Jrequest = $$("Jrequest"),
+JworkOut = $$("JworkOut"),
+Jresult1 = $$("Jresult1");
+function touchEvent(elm, fn) {
+if ("ontouchstart" in document.documentElement) {
+elm.addEventListener("touchstart", fn, false);
+} else {
+elm.addEventListener("click", fn, false);
+}
+}
+touchEvent(JworkOut, function() {
+if (chk()) {
+var sexs = JbgSel.sex;
+var sexsValue;
+for (var i = 0; i < sexs.length; i++) {
+if (sexs[i].checked) {
+var sexsValue = sexs[i].value;
+};
+};
+var workscounts = Jrequest.workscount;
+var workscountsValue;
+for (var i = 0; i < workscounts.length; i++) {
+if (workscounts[i].checked) {
+var workscountsValue = workscounts[i].value;
+};
+};
+$$("Jresult").style.display = "block";
+$$("JresultTit").innerHTML = "适合"+JfirstName.value+"姓"+((sexsValue==1)?"男":"女")+"宝宝的10个"+((workscountsValue==1)?"单":"双")+"名字";
+getScript('http://my.pcbaby.com.cn/intf/forCMS/intitleJsonForWap.jsp?callback=fillName&wordsCount=' + workscountsValue + '&sex=' + sexsValue + '&xing=' + JfirstName.value);
+};
+});
+function fillName(data) {
+var html = '<table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff">';
+var n = data.names;
+var t = '';
+for (var i = 0, l = n.length; i < l; i++) {
+if (i % 5 == 0) {
+if (i % 10 == 0) {
+t = '</tr><tr class="h">';
+} else {
+t = '</tr><tr>';
+}
+} else {
+t = '';
+}
+html += t + '<td align="center"><em style="font-size:14px;">' + n[i].name + '</em></td>';
+}
+if (l % 5 == 0) {
+html += '</table>';
+} else {
+html += '</tr></table>'
+}
+Jresult1.innerHTML = html;
+if (JbgSel.sex.value == 0) {
+var sexs = '男'
+} else {
+var sexs = '女'
+};
+if (Jrequest.workscount.value == 0) {
+var w = '单'
+} else {
+var w = '双'
+};
+}
+function showTopTip(msg) {
+var tipEle = document.getElementById("JtopTipMsg");
+if (!tipEle) {
+tipEle = document.createElement("div");
+tipEle.id = "JtopTipMsg";
+tipEle.style.cssText = "display:none;width:120px;padding:10px;line-height:20px;font-size:12px;background-color:rgba(000,000,000,0.9);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;color:#fff;text-align:center;-webkit-transition:all 0.3s ease-in;transition:all 0.3s ease-in;position:fixed;top:50%;left:50%;margin-left:-70px;margin-top:-20px;opacity:1;z-index:999;";
+document.body.appendChild(tipEle);
+}
+tipEle.innerHTML = msg;
+tipEle.style.display = "block";
+setTimeout(function() {
+tipEle.style.opacity = "1";
+}, 0);
+}
+function hideTopTip() {
+var tipEle = document.getElementById("JtopTipMsg");
+if (tipEle) {
+setTimeout(function() {
+tipEle.style.opacity = "0";
+setTimeout(function() {
+tipEle.style.display = "none";
+}, 300);
+}, 1500);
+}
+}
+</script>
+</block>

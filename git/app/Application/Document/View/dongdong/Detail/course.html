@@ -1,0 +1,31 @@
+<extend name="Home@dongdong/Widget/common/common" />
+
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/dongdong/gw/css/news.css"/>
+</block>
+
+<block name="body">
+<div id="main">
+    <div class="goback"><span>你的位置：</span><a href="{:C('STATIC_URL')}">首页</a> &gt; <a href="{:staticUrl('lists',$info['category_id'],'Document')}"><php>$cate = M('Category')->where('id = '.$info['category_id'])->getField('title');echo $cate;</php></a> &gt; <span>{$info['title']}</span></div>
+    <div class="textMain" id="dcf">
+        <div class="textMain-top">
+            <h1>{$info['title']}</h1>
+            <div class="textMain-tips"><span>时间：{:date('Y-m-d',$info['update_time'])}</span><span>来源：{$info['source']}</span><span>作者：{$info['author']}</span></div>
+        </div>
+        <div class="textMain-info">
+            {$info['content']}
+        </div>
+    </div>
+</div>
+</block>
+<block name="script">
+    <script>
+        var wh = $(window).height();
+        var fh = $(".footer").offset().top;
+        var h  = (wh - fh -151);
+        if(h>0){
+            $("#main").css('height',wh-242);
+        }
+    </script>
+</block>

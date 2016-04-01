@@ -1,0 +1,15 @@
+<volist name="data" id="val">
+<li>
+    <a href="{:staticUrlMobile('detail',$val['id'],'Down')}">
+        <div class="yx_left"><img src="{:get_cover($val['smallimg'],'path')}"></div>
+        <div class="yx_right">
+            <div class="rgt_l">
+                <div class="right1"><span class="title">{$val['title']}</span><span class="yx_cate">{$val['cate']}</span></div>
+                <div class="right2"><span class="num">{$val['view']}人已下载</span><span class="size">{:format_size($val['size'])}</span></div>
+            </div>
+            <div class="rgt_r"><span class="down">下载</span></div>
+        </div>
+        <div class="yx_txt">{$val['description']}</div>
+    </a>
+</li>
+</volist>

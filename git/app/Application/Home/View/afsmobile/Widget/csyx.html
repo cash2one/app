@@ -1,0 +1,38 @@
+<extend name="Home@afsmobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+<!--标签页-->
+<section class="tags-page">
+    <div class="kc">
+        <div class="ktop"><h1>{$info['name']}</h1><img src="{:get_cover($info['img'],'path')}"></div>
+        <div class="kjs">{$info['description']}</div>
+        <p class="kmore"><span class="zk">展开内容</span></p>
+    </div>
+    <div class="tag-main game" id="rank">
+        <div class="tag-tit"><span class="tit-left">{$info['name']}手游</span><span class="tit-right">共<b>{$count}</b>条数据</span></div>
+        <ul class="tag-ul">
+            <volist name="lists" id="val">
+            <li>
+                <a href="{:staticUrlMobile('detail',$val['id'],'Down')}" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                <div class="main">
+                    <div><a href="{:staticUrlMobile('detail',$val['id'],'Down')}">{$val['title']}</a></div>
+                    <div><i>{$val['size']}</i>&nbsp;<i>{$val['version']}</i></div>
+                    <div><i>{:date('Y-m-d',$val['update_time'])}</i>&nbsp;<i>{$val['cate']}</i></div>
+                </div>
+                <a href="{:staticUrlMobile('detail',$val['id'],'Down')}" class="down"><span class="bg"></span>高速下载</a>
+            </li>
+            </volist>
+        </ul>
+        <div class="page">{$page}</div>
+    </div>
+    <div class="mkl tag-main">
+        <div class="tag-tit">更多合集</div>
+        <ul>
+            {:w('afsmobile/randCs',array($info['id']))}
+        </ul>
+    </div>
+</section>
+<div style=" clear:both"></div>
+</block>

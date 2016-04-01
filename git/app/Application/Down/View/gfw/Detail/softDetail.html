@@ -1,0 +1,176 @@
+<extend name="Home@gfw/Base/commonProductIndex" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/subject.css"/>
+</block>
+
+<block name="body">
+<div class="page-nav">
+    {:W('Down/Gfw/navDetail')}
+    <span class="sum"></span>
+</div>
+
+<div id="subject" class="gf1000">
+    <div class="etp cfr">
+        <div class="etpup gf-border">
+            <h1>{$info.title}</h1>
+                <div class="etpmain">   
+                    <dl class="etpl">
+                        <dt><img src="{:get_cover($info['previewimg'][0],'path')}" width="150" height="150"></dt>
+                        <dd data-id="{$info['id']}" data-model="down">
+
+                            <p class="score" id="abet">
+                                <a href="javascript:void(0)" class="btn" id="tj_abet"></a><!--推荐-->
+                                <span class="counto-con"><span class="counto"></span></span>
+                                <i></i><span>票</span>
+                            </p>
+
+                            <p class="score" id="argue">
+                                <a href="javascript:void(0)" class="btn1" id="tj_argue"></a><!--不推荐-->
+                                <span class="counto-con"><span class="counto"></span></span>
+                                <i></i><span>票</span>
+                            </p>
+
+                        <!--<p>已有<em class="orange">122个</em>网友点评 </p>
+                        <p><a href="" class="blue">我要点评></a>-->
+                    </dd>
+                </dl>
+                <ul class="etpc">
+                    <li class="btns">
+                        <a href="" class="win7" title="Windows 7兼容"></a>
+                        <i class="free" title="无插件,可放心下载"></i>
+                        <i class="king"></i>
+                        <i>金山检测</i>
+                        <i class="rui"></i>
+                        <i>瑞星检测</i>
+                    </li>
+                    <li>
+                        <span>软件大小：</span><span>{:format_size($info['size'])}</span>
+                    </li>
+                    <li>
+                        <span>更新时间：</span><span>{$info.update_time|date="Y年m月d日",###}</span>
+                    </li>
+                    <li>
+                        <span>软件语言：</span>
+                        <span>{:showText($info['language'],'language')}</span>
+                    </li> 
+                    <li>
+                        <span>提供商：</span><span class="black">{$info.supplier}</span>
+                    </li>  
+                    <li>
+                        <span>软件授权：</span><span class="red">{:showText($info['licence'],'licence')}</span>
+                    </li> 
+                    <li>
+                        <span>软件评级：</span><span title="推荐度:{$info.rank}颗星" class="dered"><i class="xingxing" style="width:{$info['rank']*20}%"></i></span>
+                    </li> 
+                    <li class="nob">
+                        <span>应用平台：</span><span>{:showText($info['system'],'system')}</span>
+                    </li>          
+                </ul>
+                <ul class="etpr">
+                    <volist name="info.downAll" id="vo" key="k">
+                        <li><a href="{$vo.url}" class="down-btn" target="_blank">{$vo.title}{$k}</a></li>
+                    </volist>
+                    <php>$where="category_id=".$info['category_id']</php>
+                    <Think:article basename="Down" name="dmain" where="$where" order="create_time desc" limit="1,1">
+                        <php>$previewimg = explode(',', $article['previewimg']);</php>
+                    <li><a href="{:staticUrl('detail', $article['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" width="133" height="97"></a></li>
+                    <li><span>推荐：</span><a href="{:staticUrl('detail', $article['id'],'Down')}"><span class="red">{$article.title|msubstr=0,12,'utf-8',false}</span></a></li>
+                    </Think:article>
+                </ul>
+            </div>
+      </div>
+      <div class="etpdown gf-border">
+          <h2 class="ettitle">相关介绍</h2>
+          <div class="text1">{$info.content}</div>
+      </div>
+      <div class="related-p gf-border">
+          <h3 class="related-picon">相关产品推荐<span class="batch" style="cursor: pointer;" onclick="forbatch('{$info.category_id}')"><em>换一批</em><i class="b-icon"></i></span></h3>
+          <ul class="hotcp">
+              <php>$where="category_id=".$info['category_id']</php>
+              <Think:article basename="Down" name="dmain" where="$where" order="create_time desc" limit="2,5">
+                  <php>$previewimg = explode(',', $article['previewimg']);</php>
+             <li><a href="{:staticUrl('detail', $article['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" width="135" height="100"></a>
+                 <p><a href="{:staticUrl('detail', $article['id'],'Down')}">{$article.title|msubstr=0,10,'utf-8',false}</a></p></li>
+              </Think:article>
+          </ul>
+       </div>
+       
+       <div class="related-p gf-border">
+       <!-- 广告位：产品大全-网络产品详情底部原生广告 -->
+          <script type="text/javascript">BAIDU_CLB_fillSlot("1123349");</script>
+       </div>
+       
+       
+   </div>
+   <!-----soft-end----->
+  
+   <div class="subject-right cfl">
+       <div class="soft_rank gf-border">
+         <div>
+             <h3 class="hot-icon">热门{$cateName}</h3>
+             <ul>
+                 <php>$where="(position&8)&&category_id=".$info['category_id']</php>
+                 <Think:article basename="Down" name="dmain" where="$where" order="create_time desc" limit="10">
+                     <php>
+                         $previewimg = explode(',', $article['previewimg']);
+                         $info = D('Down')->downAll($article['id']);
+                     </php>
+                 <li <PHP>if($i==1){echo 'class="cur"';}</PHP>><b></b><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title|msubstr=0,8,'utf-8',false}</a><span>
+                     <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($previewimg[0],'path')}"></a>
+                     <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="rankt">{$article.title|msubstr=0,8,'utf-8',false}</a><a href="{$info['downAll'][0]['url']}" class="down"></a></span></li>
+                 </Think:article>
+             </ul>
+           </div>
+       </div>
+       <script type="text/javascript">BAIDU_CLB_fillSlot("1083676");</script>
+        <!-----热门计算机软件-end----->
+       <div class="choose gf-border top10">
+           <h3 class="choose-icon">{$cateName}推荐</h3>
+           <ul class="choose-list">
+               <php>$where="category_id=".$info['category_id']</php>
+               <Think:article basename="Down" name="dmain" where="$where" order="create_time desc" limit="10">
+                   <php>$previewimg = explode(',', $article['previewimg']);</php>
+               <li><a href="{:staticUrl('detail', $article['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" width="20" height="20"></a>
+                   <a href="{:staticUrl('detail', $article['id'],'Down')}">{$article.title|msubstr=0,8,'utf-8',false}</a></li>
+               </Think:article>
+          </ul>  
+      </div>
+      
+     
+    </div>
+    <!-----计算机软件推荐-end----->
+</div>
+<!-----soft-end----->
+<script type="text/javascript">
+
+    //換一批
+    var p = 2;
+    function forbatch(cid){
+        p = p+1;
+        var cid = cid;
+        $.ajax({
+            dataType:"jsonp",
+            jsonp:"callback",
+            jsonpCallback:"API_GetProbatch",
+            url: DYNAMIC_SERVER_URL + '/dynamic.php?s=/Gfw/API_GetProbatch',
+            data: {cid:cid,p:p},
+            success: function(data){
+                if(data){
+                    var html ='';
+                    for(i in data){
+                        html += '<li><a href="'+data[i].url+'"><img src="'+data[i].img+'" width="135" height="100"></a>';
+                        html += '<a href="'+data[i].url+'">'+data[i].title+'</a></li>';
+                    }
+                    $('.hotcp').html(html);
+                }else{
+                    alert('没有了');
+                    return false;
+                }
+            }
+        });
+    }
+
+</script>
+</block>
+

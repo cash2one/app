@@ -1,0 +1,33 @@
+{~$currCatePid = 0;}
+<span class="location">当前位置：</span>
+<a href="/">首页</a><span class="grey">&gt;</span>
+<volist name="currentCategory" id="cate" key="i">
+	<?php 
+		$widgetId = 0;
+		if($cate['id'] == 1)$widgetId = 60;
+		elseif($cate['id'] == 2)$widgetId = 61;
+		elseif($cate['id'] == 3)$widgetId = 62;
+		elseif($cate['id'] == 4)$widgetId = 63;
+		elseif($cate['id'] == 5)$widgetId = 64;
+		if($i == 1) $currCatePid = $cate['id'];//当前顶级分类ID
+	?>
+	<if condition="$cate['pid'] gt 0">
+		<a href="{:staticUrl('lists',$cate['id'],'Package')}">{:$cate['title']}</a>
+	<else />
+		<if condition="$widgetId gt 0">
+			<a href="{:getWidgetPath($widgetId)}">{:$cate['title']}</a>
+		<else />
+			{:$cate['title']}
+		</if>
+	</if>
+	
+	<if condition='$i lt count($currentCategory)'>
+		<span class="grey">&gt;</span>
+	</if>
+</volist>
+<script>
+	//网站模块导航栏选中状态
+	var cid = '{:$currCatePid}';
+	jQuery('#header-menu ul li a').removeClass('yellow');
+	jQuery('#header-menu #nav_'+cid).attr('class','yellow');
+</script>

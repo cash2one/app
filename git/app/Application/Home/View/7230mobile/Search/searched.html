@@ -1,0 +1,50 @@
+<extend name="Home@7230mobile/Base/commonDown" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/7230mobile/css/libao.css"/>
+</block>
+
+<block name="body">
+    <header class="wytop">
+   <span class="back"></span>
+   <b class="sear">
+    <form method="get" action="{:C('MOBILE_STATIC_URL')}/search.html"  class="search" id="sepage">
+        <input type="text" name="keyword" class="sipt" id="sipt" placeholder="搜游戏" value="">
+        <input type="hidden" name="type" value="down">
+    </form>
+    </b>
+   <a href="javascript:void();" class="search" id="searchSub"></a>
+ </header>       
+ <section class="sea_result">
+  <p>搜索 <span>{$keyword}</span> 有<span id="total_num">{$count}</span>个结果</p>
+</section>
+
+<!-- 搜索结果 -->
+<section class="search_game">
+  <ul>
+    <volist name="lists" id="article">
+    <li>
+        <eq name="type" value="Down">
+        <div class="game_box"><a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a><a href="{:getFileUrl($article['id'])}" class="down_btn">下载</a><h6><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></h6><p>评分：<span>{:get_score($article['id'],true)}分</span></p><p>{:get_category_title($article['category_id'],'DownCategory')}<i> | </i>{:showText($article['licence'],'licence',false,'Down')}<i> | </i>{:format_size($article['size'])}MB</p></div>
+        <div class="game_intro">{:mb_substr(clean_str($article['conductor']),0,45)}...</div>
+        <!--<div class="game_info"><a href="" class="bbs"><i></i>专区</a><a href="" class="gift on"><i></i>礼包</a><a href="" class="strategy on"><i></i>攻略</a></div>-->
+        </eq>
+
+        <eq name="type" value="Document">
+        <div class="game_box"><a href="{:staticUrlMobile('detail', $article['id'],'Document')}"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"></a><a href="{:staticUrlMobile('detail', $article['id'],'Document')}" class="down_btn">查看</a><h6><a href="{:staticUrlMobile('detail', $article['id'],'Document')}">{$article.title}</a></h6><p>{:get_category_title($article['category_id'],'Category')}</p></div>
+        <div class="game_intro">{:mb_substr(clean_str($article['description']),0,45)}...</div>
+        </eq>
+
+        <eq name="type" value="Package">
+        <div class="game_box"><a href="{:staticUrlMobile('detail', $article['id'],'Package')}"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"></a><a href="{:staticUrlMobile('detail', $article['id'],'Package')}" class="down_btn">查看</a><h6><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></h6><p>{:get_category_title($article['category_id'],'PackageCategory')}</p></div>
+        <div class="game_intro">{:mb_substr(clean_str($article['description']),0,45)}...</div>
+        </eq>
+    </li>
+    </volist>
+</ul>
+<p class="page">{$page}</p>
+</section>
+
+{~W('Home/P7230mobile/tools')}
+</block>
+

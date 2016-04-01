@@ -1,0 +1,19 @@
+<section class="scroll" data-sudaclick="main_focus">
+	<ul class="slide" id="slide">
+		<volist name="productList" id="product" key="j">
+		<?php 
+			$imgId = 0;
+			if(!empty($product['previewimg'])){
+				$imgArr = explode(',', $product['previewimg']);
+				$imgId = $imgArr[0];
+			}
+		?>
+		<li>
+			<a href="{:staticUrlMobile('detail',$product['id'],'Down')}" target="_blank">
+				<img src="{:get_cover($imgId,'path')}" alt="{:$product['title']}" title="{:$product['title']}" />
+			</a>
+		</li>
+		</volist>
+	</ul>
+	<div class="slide_dot" id="slide_dot"></div>
+</section>

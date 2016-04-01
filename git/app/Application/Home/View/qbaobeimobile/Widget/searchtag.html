@@ -1,0 +1,20 @@
+<if condition="$count gt 0">
+<div class="pop-search-box">
+    <div class="swiper-container1">
+        <div class="swiper-wrapper">
+            <volist name="list" id="vo">
+            <if condition="fmod($key,9) eq '0'">
+            <div class="swiper-slide">
+                <ul class="search-tit">
+            </if>
+                    <li><span><a href="{$Think.config.MOBILE_STATIC_URL}/tag/{$vo.name}/">{$vo.title}</a></span></li>
+            <if condition="fmod($key,9) eq '8' OR ($key eq $maxkey)">
+                </ul>
+            </div>
+            </if>
+            </volist>
+        </div>
+        <div class="pop-pagination"></div>
+    </div>
+</div>
+</if>

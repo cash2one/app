@@ -1,0 +1,15 @@
+<style>
+.select{margin:20px}
+#checkbox{margin:20px;}
+#checkbox input{margin-right:10px;vertical-align:middle}
+</style>
+<div class="select">
+<select name="down" id="down" onchange="choice(this)">
+	<option value="1">游戏下载</option>
+	<option value="2">软件下载</option>
+</select>
+</div>
+<div id="checkbox">
+游戏下载<input type="checkbox" name="box[]" onclick="check(this)" value='1'/>
+软件下载<input type="checkbox" name="box[]" onclick="cehck(this)" value='2'/>
+</div>

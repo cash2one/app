@@ -1,0 +1,130 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>{:isset($info['id'])?'编辑':'新增'}{$name}</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);">基 础</a></li>
+			
+		</ul>
+		<div class="tab-content">
+			<form action="{:U()}" method="post" class="form-horizontal">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item">
+						<label class="item-label">
+							{$name}标题<span class="check-tips">（标题不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="title" class="text input-large" value="{$info.title|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							{$name}模板<span class="check-tips">（内链类型的模板数据）</span>
+						</label>
+						<div class="controls">
+							<select name="template_id" id="data-type">
+								<volist name="template" id="vo">
+								<option value="{$vo.id}">{$vo.title}</option>
+								</volist>
+							</select>
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							{$name}内容<span class="check-tips">（格式为 标题|地址|图片，一行一条）</span>
+						</label>
+						<div class="controls">
+							<label class="textarea">
+								<textarea  name="content">{$info.content|default=''}</textarea>
+							</label>
+						</div>
+					</div>
+					<div class="controls">
+						<label class="item-label">预览图片</label>
+						<input type="file" id="upload_picture">
+						<input type="hidden" name="icon" id="icon" value="{$info['icon']|default=''}"/>
+						<div class="upload-img-box">
+							<notempty name="info['icon']">
+								<div class="upload-pre-item"><img src="{$info.icon|get_cover='path'}"/></div>
+							</notempty>
+						</div>
+					</div>
+					<script type="text/javascript">
+						//上传图片
+						/* 初始化上传插件 */
+						$("#upload_picture").uploadify({
+							"height"          : 30,
+							"swf"             : "__STATIC__/uploadify/uploadify.swf",
+							"fileObjName"     : "download",
+							"buttonText"      : "上传图片",
+							"uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+							"width"           : 120,
+							'removeTimeout'	  : 1,
+							'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+							"onUploadSuccess" : uploadPicture,
+							'onFallback' : function() {
+								alert('未检测到兼容版本的Flash.');
+							}
+						});
+						function uploadPicture(file, data){
+							var data = $.parseJSON(data);
+							var src = '';
+							if(data.status){
+								$("#icon").val(data.id);
+								src = data.url || '__ROOT__' + data.path;
+								$("#icon").parent().find('.upload-img-box').html(
+									'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+									);
+							} else {
+								updateAlert(data.info);
+								setTimeout(function(){
+									$('#top-alert').find('button').click();
+									$(that).removeClass('disabled').prop('disabled',false);
+								},1500);
+							}
+						}
+						</script>
+
+					<div class="form-item">
+						<label class="item-label">
+							{$name}描述
+						</label>
+						<div class="controls">
+							<label class="textarea input-large">
+								<textarea  name="description">{$info.description|default=''}</textarea>
+							</label>
+						</div>
+					</div>	
+
+					</div>
+
+
+					<div class="form-item">
+						<input type="hidden" name="id" value="{$info.id|default=''}">
+						<input type="hidden" name="status" value="1">
+						<button type="submit" id="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+						<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</block>
+
+	<block name="script">
+		<script type="text/javascript">
+		<present name="info.id">
+		Think.setValue("template_id", "{$info.template_id|default=0}");
+		</present>
+		
+		$(function(){
+			showTab();
+		});
+		//导航高亮
+		highlight_subnav('{:U('InternalLink/index')}');
+		</script>
+	</block>

@@ -1,0 +1,8 @@
+<volist name="lists" id="vo">
+<eq name="key" value="0">
+<div class="video-head-pic"><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}" title="{$vo.title}"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo.title}"><p class="tit">{$vo.title}</p></a></div>
+   <ul class="ship-cata-ul pic-adaptive-wrap2">
+<else/>
+ <li><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}" class="pic-adaptive2" title="{$vo.title}"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo.title}"><p class="text"><span class="time">{:date('m-d',$vo['update_time'])}</span><span class="length">{:date('h:i',$vo['update_time'])}</span></p></a><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}" class="title">{$vo.title}</a></li>
+</eq>
+</volist></ul>

@@ -1,0 +1,8 @@
+ <div class="hot" id="hottab">
+        <p class="title">大家喜欢看<a href="{:staticUrl('lists',91, 'Document')}" target="_blank" class="more"></a></p>
+        <ul class="ulTab">
+         <Think:article basename="Document" name="article" limit="5" cate="91" order="create_time desc" >    
+            <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title} </a><b>{:getDownTag($article['id'])}</b></li>
+</Think:article>
+        </ul>
+    </div>

@@ -1,0 +1,468 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/tools.css">
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > <a href="/tools/">工具</a> > 宝宝发育指标</block>
+<block name="body">
+<!--工具详情-->
+<section class="tool-detail dis-bot">
+<h1>宝宝发育指标</h1>
+<style>
+/* 焦点图 */
+.slider-top{width:100%;margin:0 auto;overflow:hidden;position:relative;}
+.slider-top .prev{width:30px;height:30px;position:absolute;top:7px;left:0px;color:#777;line-height:30px;text-align:center;}
+.slider-top .next{width:30px;height:30px;position:absolute;top:7px;right:0px;color:#777;line-height:30px;text-align:center;}
+.slider-top-wrap{overflow:hidden;position:relative;}
+.slider-top-pic{position:relative;overflow:hidden;}
+.slider-top-pic li{position:relative;float:left;width:100%;overflow:hidden;}
+.slider-top-pic li:not(:first-child){display:none;}
+.slider-top-pic li p{font-weight:bold;color:#333;line-height:35px;text-align:center;font-size:15px;padding:5px 0;}
+.slider-top-pic li img{float:left;width:120px;margin-right:10px;}
+.slider-top-pic li span{overflow:hidden;display:block;color:#333;font-size:13px;line-height:20px;}
+.table{margin:10px 0;}
+.table .boy td{background:#DFF5FF;color:#509BBC;}
+.table .girl td{background:#FFECEF;color:#FF6985;}
+.table td{text-align:center;padding:2px;line-height:20px;background-color:#fff; border:1px solid #ccc;}
+.table tr:nth-child(2n-1){color:#333;}
+</style>
+<div class="m-section">宝宝出生日期</div>
+<div class="m-input"><input type="date" name="" id="Jdata"/></div>
+<div class="m-work"><input type="submit" id="JworkOut" value="点击计算" /></div>
+<div class="m-result" style="display:block">
+<div class="m-result-tit">查询结果</div>
+<div class="slider-top">
+<div class="slider-top-wrap" id="JsliderTopWrap">
+<ul class="slider-top-pic">
+    <li>
+    <p class="">新生宝宝发育指标</p>
+        <span class="des">刚出生的宝宝，皮肤红红的、凉凉的，头发湿湿地贴着头皮，小手握得很紧，哭声响亮，头部相对较大。在喂养方面，吃完奶后，常常会出现吐奶的情况。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>48.2-52.8cm</td><td>2.9-3.8kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>32.00cm</td><td>32.08cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>48.2-52.8cm</td><td>2.9-3.8kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>32.00cm</td><td>32.08cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">1个月宝宝发育指标</p>
+        <span class="des">宝宝开始有规律地吃奶，因此生长速度非常快，随着宝宝进入第四周，宝宝的运动能力有了很大的发展。宝宝现在非常可爱，圆鼓鼓的小脸，粉嫩的皮肤。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>52.1-57.0cm</td><td>3.6-5.0kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>39.4cm</td><td>39.5cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>51.2-55.8cm</td><td>3.4-4.5kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>38.4cm</td><td>38.2cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">2个月宝宝发育指标</p>
+        <span class="des">两个月的宝宝日常生活开始规律化，也形成了固定的吃奶时间。做为家长的你，要定时给宝宝按摩，经常抱宝宝到户外活动。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>55.5-60.7cm</td><td>4.3-6.0kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>39.84cm</td><td>40.10cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>54.4-59.2cm</td><td>4.0-5.4kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>38.67cm</td><td>38.78cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">3个月宝宝发育指标</p>
+        <span class="des">3个月的宝宝已经基本适应了周围的环境，身体的各种机能开始发育，他会控制手脚去拍打在他周围或前面运动的物件。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>58.5-63.7cm</td><td>5.0-6.9kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>41.25cm</td><td>41.75cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>57.1-59.5cm</td><td>4.7-6.2kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>39.90cm</td><td>40.05cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">4个月宝宝发育指标</p>
+        <span class="des">4个月宝宝，头围和胸围大致相等，比出生时长高10cm以上，体重为出生时的2倍左右。俯卧时宝宝上身完全抬起，与床垂直；腿能抬高踢去衣被及踢吊起的玩具。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>61.0-66.4cm</td><td>5.7-7.6kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>42.30cm</td><td>42.68cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>59.4-64.5cm</td><td>5.3-6.9kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>41.20cm</td><td>41.60cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">5个月宝宝发育指标</p>
+        <span class="des">5个月的宝宝，在饮食方面，开始为断奶做准备了；在亲子互动方面，能够认识妈妈以及亲近的人并与他们应答。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>62.3-68.6cm</td><td>6.3-8.2kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>43.10cm</td><td>43.40cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>61.5-66.7cm</td><td>5.8-7.5kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>41.90cm</td><td>42.05cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">6个月宝宝发育指标</p>
+        <span class="des">6个月宝宝，体格进一步发育，神经系统日趋成熟。在喂养方面，宝宝差不多已经开始长乳牙了，可以添加肉泥、猪肝泥等辅食。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>65.1-70.5cm</td><td>6.9-8.8kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>44.32cm</td><td>44.06cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>63.3-68.6cm</td><td>6.3-8.1kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>43.20cm</td><td>42.86cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">7个月宝宝发育指标</p>
+        <span class="des">宝宝头部的生长速度减慢，腿部和躯干生长速度加快，行动姿势也会发生很大变化。随着肌肉张力改善，孩子的姿势变得更加直立。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>66.7-72.1cm</td><td>7.4-9.3kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>45cm</td><td>44.6cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>64.8-70.2cm</td><td>6.8-8.6kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>43.7cm</td><td>43.5cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">8个月宝宝发育指标</p>
+        <span class="des">婴儿在8个月后逐渐向儿童期过渡，此时的营养非常重要，否则会跟不上就会影响成年身高，在运动方面，8个月的宝宝一般都能爬行了。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>68.3-73.6cm</td><td>7.8-9.8kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>45.74cm</td><td>45.13cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>66.4-71.8cm</td><td>7.2-9.1kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>45.20cm</td><td>45.46cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">9个月宝宝发育指标</p>
+        <span class="des">9个月宝宝头部的生长速度减慢，腿部和躯干生长速度加快，行动姿势也会发生很大变化。随着肌肉张力的改善，将形成更高、更瘦、更强壮的外表。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>69.7-75.0cm</td><td>8.2-10.2kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>46cm</td><td>45.6cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>67.7-73.2cm</td><td>7.6-9.5kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>45.2cm</td><td>46.5cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">10个月宝宝发育指标</p>
+        <span class="des">不要强迫宝宝吃不喜欢的食物，逐渐将辅食变为主食。此时，婴儿的身体动作变得越来越敏捷，能很快地将身体转向有声音的地方，并可以爬着走。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>71.0-76.3cm</td><td>8.6-10.6kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>46.09cm</td><td>45.99cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>69.0-74.5cm</td><td>7.9-9.9kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>44.89cm</td><td>44.89cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">11个月宝宝发育指标</p>
+        <span class="des">此阶段宝宝的辅食开始变成主食，应该保证宝宝摄入足够的动物蛋白，辅食要少放盐、糖。还要开始锻炼宝宝克服怕生现象。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>72.2-77.6cm</td><td>8.9-11.0kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>46.3cm</td><td>46.37cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>70.3-75.8cm</td><td>8.2-10.3kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>45.3cm</td><td>45.3cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">1岁宝宝发育指标</p>
+        <span class="des">1岁宝宝刚刚断奶或者没有完全断奶,孩子度过了婴儿期，进入了幼儿期。 幼儿无论在体格和神经发育上还是在心理和智能发育上，都出现了新的发展。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>73.4-78.8cm</td><td>9.1-11.3kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>46.5cm</td><td>46.8cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>71.5-77.1cm</td><td>8.5-10.6kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>45.4cm</td><td>45.8cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">2岁宝宝发育指标</p>
+        <span class="des">两岁宝宝的头部生长速度减慢，腿部和躯干生长速度加快，行动姿势也会发生很大变化。随着肌肉张力的改善，孩子的姿势变得更加直立。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>84.3-91.0cm</td><td>11.2-14.0kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>48.2cm</td><td>49.4cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>83.3-89.8cm</td><td>10.6-13.2kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>47.1cm</td><td>48.2cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">3岁宝宝发育指标</p>
+        <span class="des">到3岁时，婴儿脑重已接近成人脑重的范围，以后发育速度就变慢了。而身体已经非常结实了,对疾病的抵抗能力也有了很大程度的提高。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>91.1-98.7cm</td><td>13.0-16.4kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>49.58cm</td><td>50.4cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>90.2-98.1cm</td><td>12.6-16.1kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>48.33cm</td><td>49.2cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">4岁宝宝发育指标</p>
+        <span class="des">在本阶段，孩子的脂肪会进一步下降，肌肉组织将进一步增加，使孩子具有更加强健和成熟的外观，他的上下肢更加苗条，上身狭窄成锥形。每天都精力非常充沛。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>98.7-107.2cm</td><td>14.8-18.7kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>49.93cm</td><td>51.2cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>97.6-105.7cm</td><td>14.3-18.3kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>48.33cm</td><td>50.1cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">5岁宝宝发育指标</p>
+        <span class="des">5岁孩子的身高、体重的增长速度仍处于稳速增长阶段，其增长速度与3—4岁时相近，仍然是身高的增长速度稍快而体重的增长则相对较慢。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>105.3-114.5cm</td><td>16.6-21.1kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>50.98cm</td><td>54.45cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>104.0-112.8cm</td><td>15.7-20.4kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>50.02cm</td><td>53.24cm</td></tr>
+        </table>
+    </li>
+    <li>
+        <p class="">6岁宝宝发育指标</p>
+        <span class="des">孩子处于很活跃的阶段，是一个循序渐进的过程。但生长较缓慢，速度平稳。体重每年增加不足2千克，身高的增长也比较稳定，每年大约5—7、5厘米。</span>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="boy"><td colspan="2">男孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>111.2-121.0cm</td><td>18.4-23.6kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>51.07cm</td><td>56.78cm</td></tr>
+        </table>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#fff" class="table">
+            <tr class="girl"><td colspan="2">女孩</td></tr>
+            <tr><td>身高</td><td>体重</td></tr>
+            <tr><td>109.7-119.6cm</td><td>17.3-22.9kg</td></tr>
+            <tr><td>头围</td><td>胸围</td></tr>
+            <tr><td>50.98cm</td><td>55.89cm</td></tr>
+        </table>
+    </li>
+</ul>
+</div>
+<div class="prev" onclick="slider.prev()"><</div>
+<div class="next" onclick="slider.next()">></div>
+</div>
+</div>
+</section>
+</block>
+<block name="script">
+<script type="text/javascript">function Swipe(E,w){var O=function(){};var k=function(P){setTimeout(P||O,0);};var i={addEventListener:!!window.addEventListener,touch:("ontouchstart" in window)||window.DocumentTouch&&document instanceof DocumentTouch,transitions:(function(P){var R=["transformProperty","WebkitTransform","MozTransform","OTransform","msTransform"];for(var Q in R){if(P.style[R[Q]]!==undefined){return true;}}return false;})(document.createElement("swipe"))};if(!E){return;}var q=E.children[0],l=q.children,u=l.length;var C=parseInt(w.startSlide,10)||0,J=w.speed||300,I=w.continuous,v=w.vertical||false;if(I){var z=q.innerHTML;if(u==2){q.innerHTML=z+z;}else{if(u==1){q.innerHTML=z+z+z;}}}var j=C-1,o=C+1,c,L,K,a,e;var m=v?"height":"width",G=v?"top":"left",A=v?"y":"x";function H(){L=new Array(l.length);E.style.overflow="hidden";K=E.getBoundingClientRect()[m]||(v?E.offsetHeight:E.offsetWidth);q.style[m]=(l.length*K)+"px";var R=l.length;while(R--){var P=l[R];P.style[m]=K+"px";P.style.display="inline";P.style.cssFloat="left";P.style.position="relative";P.style[G]=(R*-K)+"px";P.setAttribute("data-sindex",R);if(u>2){P.setAttribute("data-index",R);}else{if(u==2){P.setAttribute("data-index",R%2);}else{if(u==1){P.setAttribute("data-index",0);}}}if(i.transitions){var Q=C>R?-K:(C<R)?K:0;if(I){if(C==l.length-1&&R==0){Q=K;o=0;}if(!C&&R==l.length-1){Q=-K;j=R;}}if(R!=C){s(R,Q,0);}else{L[C]=0;}}}if(!i.transitions){q.style[G]=(C*-K)+"px";}}function n(){q=E.children[0],l=q.children,u=l.length;H();}function N(){H();var P=parseInt(l[C].getAttribute("data-index"));k(w.callback&&w.callback(P,l[C]));E.style.visibility="visible";}function r(){var Q=l.length;while(Q--){if(i.transitions){var P=C>Q?-K:(C<Q)?K:0;if(I){if(C==l.length-1&&Q==0){P=K;o=0;}if(!C&&Q==l.length-1){P=-K;j=Q;}}s(Q,P,0);}}}function B(){if(C){b(j,J,-1);}else{if(I){b(j,J,-1);}}}function h(){if(C<l.length-1){b(o,J,1);}else{if(I){b(o,J,1);}}}function b(S,P,Q){if(C==S||S<0||S>l.length-1){return;}if(!c){var R=parseInt(l[S].getAttribute("data-index"));k(w.transitionStart&&w.transitionStart(R,l[S]));}if(i.transitions){if(!Q){Q=-Math.abs(C-S)/(C-S);}if(Q>0){s(j,-K,0);s(C,L[C]-K,J);s(o,L[o]-K,J);C=o;}else{s(o,+K,0);s(C,L[C]+K,J);s(j,L[j]+K,J);C=j;}}else{M(C*-K,S*-K,P||J);}j=S-1;C=S;o=S+1;var R=parseInt(l[C].getAttribute("data-index"));k(w.callback&&w.callback(R,l[C]));}function s(P,R,Q){g(P,R,Q);L[P]=R;}function g(S,V,U){var Q=l[S];var T=Q&&Q.style;if(!T){return;}var R=v?0:V,P=v?V:0;T.webkitTransitionDuration=T.MozTransitionDuration=T.msTransitionDuration=T.OTransitionDuration=T.transitionDuration=U+"ms";T.webkitTransform="translate("+R+"px,"+P+"px)translateZ(0)";T.msTransform=T.MozTransform=T.OTransform=v?"translateY("+V+"px)":"translateX("+V+"px)";}function M(T,S,P){if(!P){q.style[G]=S+"px";return;}var R=+new Date;var Q=setInterval(function(){var U=+new Date-R;if(U>P){q.style[G]=S+"px";if(D){p();}var V=parseInt(l[C].getAttribute("data-index"));w.transitionEnd&&w.transitionEnd.call(event,V,l[C]);clearInterval(Q);return;}q.style[G]=(((S-T)*(Math.floor((U/P)*100)/100))+T)+"px";},4);}var D=w.auto||0;var f;function p(){f=setTimeout(h,D);}function t(){clearTimeout(f);}var y={};var F={};var d;var x={handleEvent:function(P){switch(P.type){case"touchstart":this.start(P);break;case"touchmove":this.move(P);break;case"touchend":k(this.end(P));break;case"webkitTransitionEnd":case"msTransitionEnd":case"oTransitionEnd":case"otransitionend":case"transitionend":k(this.transitionEnd(P));break;case"resize":k(H.call());break;}if(w.stopPropagation){P.stopPropagation();}},start:function(P){r();var Q=P.touches[0];y={x:Q.pageX,y:Q.pageY,time:+new Date};d=undefined;F={};c=false;q.addEventListener("touchmove",this,false);q.addEventListener("touchend",this,false);},move:function(P){if(l[C].getAttribute("disableSlide")!=null){return;}if(P.touches.length>1||P.scale&&P.scale!==1){return;}if(w.disableScroll){P.preventDefault();}var Q=P.touches[0];F={x:Q.pageX-y.x,y:Q.pageY-y.y};if(typeof d=="undefined"){d=!!(d||Math.abs(F[v?"y":"x"])<Math.abs(F[v?"x":"y"])*1.2);}if(!d){P.preventDefault();t();if(!I){F[A]=F[A]/((!C&&F[A]>0||C==l.length-1&&F[A]<0)?(Math.abs(F[A])/K+1):1);}g(j,F[A]+L[j],0);g(C,F[A]+L[C],0);g(o,F[A]+L[o],0);var S=F[A]>0?j:o;if(!c&&l[S]){var R=parseInt(l[S].getAttribute("data-index"));k(w.transitionStart&&w.transitionStart(R,l[S]));}c=true;}},end:function(S){var V=+new Date-y.time;var R=Number(V)<250&&Math.abs(F[A])>20||Math.abs(F[A])>K/2;var U=(!C&&F[A]>0),Q=(C==l.length-1&&F[A]<0);var P=I?false:U||Q;var T=F[A]<0;if(!d){if(R&&!P){if(T){h();}else{B();}}else{s(j,-K,J);s(C,0,J);s(o,K,J);if(!I){if(U){k(w.pastStart&&w.pastStart(C,l[C]));}if(Q){k(w.pastEnd&&w.pastEnd(C,l[C]));}}}}q.removeEventListener("touchmove",x,false);q.removeEventListener("touchend",x,false);},transitionEnd:function(Q){r();var P=parseInt(Q.target.getAttribute("data-sindex"),10);if(P==C){if(D){p();}w.transitionEnd&&w.transitionEnd.call(Q,P,l[C]);}}};N();if(D){p();}if(i.addEventListener){if(i.touch){q.addEventListener("touchstart",x,false);}if(i.transitions){q.addEventListener("webkitTransitionEnd",x,false);q.addEventListener("msTransitionEnd",x,false);q.addEventListener("oTransitionEnd",x,false);q.addEventListener("otransitionend",x,false);q.addEventListener("transitionend",x,false);}window.addEventListener("resize",x,false);}else{window.onresize=function(){H();};}return{setup:function(){n();},slide:function(Q,P){b(Q,P);},prev:function(){t();B();},next:function(){t();h();},getPos:function(){return C;},stop:function(){t();},start:function(){p();},getNumSlides:function(){return u;},kill:function(){t();q.style[m]="auto";q.style[G]=0;var Q=l.length;while(Q--){var P=l[Q];P.style[m]="100%";P.style[G]=0;if(i.transitions){g(Q,0,0);}}if(i.addEventListener){q.removeEventListener("touchstart",x,false);q.removeEventListener("webkitTransitionEnd",x,false);q.removeEventListener("msTransitionEnd",x,false);q.removeEventListener("oTransitionEnd",x,false);q.removeEventListener("otransitionend",x,false);q.removeEventListener("transitionend",x,false);window.removeEventListener("resize",x,false);}else{window.onresize=null;}}};}if(window.jQuery||window.Zepto){(function(a){a.fn.Swipe=function(b){return this.each(function(){a(this).data("Swipe",new Swipe(a(this)[0],b));});};})(window.jQuery||window.Zepto);}function swipe(c,o){var n=function(){};var o=o||{},h=parseInt(o.startSlide,10)||0,d=o.speed||0,e=o.transitionStart||n,m=o.callback||n,a=o.nav||null,f=a&&a.children;var g=c.children[0],b=g.children;if(a){if(f.length>0){f[h].className="current";}else{var l="";k(b,function(q,p){l+="<span class="+(q==h?"current":"")+">"+(q+1)+"</span>";});a.innerHTML=l;f=a.children;}}o.callback=function(p,q){if(a){f[h].className="";f[p].className="current";h=p;}m(p,q);j(q);};o.transitionStart=function(q,p){j(p);e(q,p);};var i=new Swipe(c,o);f&&k(f,function(q,p){p.addEventListener("click",function(){i.stop();i.slide(q,d);},false);});function k(q,s){for(var r=0,p=q.length;r<p;r++){s.call(this,r,q[r]);}}function j(p){var q=p.querySelectorAll("img[src2]");if(!q){return;}k(q,function(s,u){var t=u.getAttribute("src2"),r=new Image();r.onload=function(){u.style.cssText="filter:alpha(opacity=30);opacity:0.3;";u.setAttribute("src",t);u.removeAttribute("src2");setTimeout(function(){u.style.cssText="filter:alpha(opacity=100);opacity:1;-webkit-transition:250ms;-moz-transition:250ms;transition:250ms;";},5);};r.src=t;});}return i;}</script>
+
+<script type="text/javascript">
+function $$(id) {
+return (typeof id == "object") ? id : document.getElementById(id);
+}
+slider = swipe($$("JsliderTopWrap"),{
+speed: 100,
+continuous: true
+});
+var Jdata = $$("Jdata");
+//写入当前如期
+function checkTime(num){
+if (num < 10) {
+num = "0" + num;
+}
+return num;
+}
+$(function(){
+    var d = new Date();
+	var year = d.getFullYear();
+	var month = d.getMonth()+1;
+	var date = d.getDate();
+	var bIsi9300 = navigator.userAgent.toLowerCase().match(/i9300/i) == "i9300";
+	if (!bIsi9300) {
+		$("#Jdata").val(year + '-' + checkTime(month) + '-' + checkTime(date));
+	};
+	$("#Jdata").attr("placeholder",'请输入日期，格式：' + year + '-' + checkTime(month) + '-' + checkTime(date));
+});
+function touchEvent(elm, fn) {
+if ("ontouchstart" in document.documentElement) {
+elm.addEventListener("touchstart", fn, false);
+} else {
+elm.addEventListener("click", fn, false);
+}
+}
+touchEvent(JworkOut, function() {
+var y = Jdata.value.split("-")[0],
+m = Jdata.value.split("-")[1],
+da = Jdata.value.split("-")[2];
+if (Jdata.value == "") {
+showTopTip("请输入完整日期!");
+hideTopTip();
+return false;
+};
+if (y == "" || m == "" || da == "") {
+showTopTip("请输入完整日期!");
+hideTopTip();
+return false;
+}
+var today = new Date();//今天
+var birthTime = new Date(y + "-" + m + "-" + da).getTime();//宝宝出生日期的毫秒数
+var hasBirth = (today - birthTime)/1000;//已经出生的秒数
+var month = parseInt(hasBirth / 3600 / 24 / 30);//计算周数
+if (12 <= month && month < 24) {
+window.slider.slide(12, 300);
+}else if (24 <= month && month < 35) {
+window.slider.slide(13, 300);
+}else if (36 <= month && month < 47) {
+window.slider.slide(14, 300);
+}else if (48 <= month && month < 59) {
+window.slider.slide(15, 300);
+}else if (60 <= month && month < 71) {
+window.slider.slide(16, 300);
+}else if (72 <= month && month < 83) {
+window.slider.slide(17, 300);
+}else if (84 <= month) {
+showTopTip("您的孩子的年龄已经不适用本工具了");
+hideTopTip();
+}else {
+window.slider.slide(month, 300);
+};
+});
+function showTopTip(msg) {
+var tipEle = document.getElementById("JtopTipMsg");
+if (!tipEle) {
+tipEle = document.createElement("div");
+tipEle.id = "JtopTipMsg";
+tipEle.style.cssText = "display:none;width:120px;padding:10px;line-height:20px;font-size:12px;background-color:rgba(000,000,000,0.9);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;color:#fff;text-align:center;-webkit-transition:all 0.3s ease-in;transition:all 0.3s ease-in;position:fixed;top:50%;left:50%;margin-left:-70px;margin-top:-20px;opacity:1;z-index:999;";
+document.body.appendChild(tipEle);
+}
+tipEle.innerHTML = msg;
+tipEle.style.display = "block";
+setTimeout(function() {
+tipEle.style.opacity = "1";
+}, 0);
+}
+function hideTopTip() {
+var tipEle = document.getElementById("JtopTipMsg");
+if (tipEle) {
+setTimeout(function() {
+tipEle.style.opacity = "0";
+setTimeout(function() {
+tipEle.style.display = "none";
+}, 300);
+}, 1500);
+}
+}
+</script>
+</block>

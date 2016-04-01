@@ -1,0 +1,27 @@
+<volist name="taglist" id="document">
+<li>
+	<a href="{$document.url}" target="_blank"><img src="{:get_thumb($document[atlas_a], $document[atlas], '285x271')}" alt="{$document.title}"></a>
+
+	<div class="info">
+		<div class="top"><a href="{$document.url}" target="_blank" class="title">{$document.title}</a><span class="vis">{$document.view}</span></div>
+		<p class="jj">{$document.description}</p>
+
+		<div class="bot">
+			<div class="bot-l">
+				<volist name="document.classify" id="project" offset="0" length='3'>
+					<a href="{$project.url}" target="_blank">{$project.title}</a>
+				</volist>
+			</div>
+
+			<div class="bot-r">
+				<div class="bdsharebuttonbox">
+					<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+					<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+					<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+					<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</li>
+</volist>

@@ -1,0 +1,51 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/gift.css"/>
+</block>
+<block name="title">{$info.title}</block>
+<block name="body">
+<div class="list-nav">
+   <eq name="cid" value="1"><a href="{:staticUrlMobile('lists','1','Package')}" class="active">礼包</a><else/><a href="{:staticUrlMobile('lists','1','Package')}">礼包</a></eq>
+   <eq name="cid" value="7"><a href="{:staticUrlMobile('lists','7','Package')}"  class="active">激活码</a><else/><a href="{:staticUrlMobile('lists','7','Package')}">激活码</a></eq>
+   <eq name="cid" value="8"><a href="{:staticUrlMobile('lists','8','Package')}"  class="active">新手卡</a><else/><a href="{:staticUrlMobile('lists','8','Package')}">新手卡</a></eq>
+    
+</div>
+<section class="gift-list">
+    <ul class="gift-game-ul">
+    <volist name="lists" id="val">
+        <li><a href="{:staticUrlMobile('detail',$val['id'],'Package')}" title="{$val.title}" class="pic"><img src="{:get_cover($val['cover_id'],'path')}" alt="{$val.title}"></a>
+            <div class="text">
+                <a href="{:staticUrlMobile('detail',$val['id'],'Package')}" title="{$val.title}">{$val.title}</a>
+                <p class="vis"><span class="adr"></span><span class="iph"></span></p>
+            </div>
+            <div class="lqbox" card_id="{$val['id']}"><p></p><a href="{:staticUrlMobile('detail',$val['id'],'Package')}" class="lq">领取</a></div>
+        </li>
+        </volist>
+    </ul>
+    <p class="mid-more bottom-more"><a data-id="{$cid}" id="loadcate" href="javascript:void(0)"><span>点击查看更多</span><em class="arr"></em></a></p>
+</section>
+
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/jf96umobile/js/ajax_package.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var card_ids = {};
+    $('.lqbox').each(function(){ card_ids[$(this).attr('card_id')]= 0});
+    $.ajax({
+        dataType:"jsonp",
+        jsonp:"callback",
+        url: DYNAMIC_SERVER_URL + '/dynamic.php?s=/Card/API_surplus',
+        data: {surplus_ids : card_ids},
+        success: function(data){
+            if(data){
+                $('.lqbox').each(function(){
+                    var i = $(this).attr('card_id');
+                    $(this).find('p').text('余：'+data[i]+'个');
+                });
+            }
+        }
+    });
+});
+</script>
+</block>

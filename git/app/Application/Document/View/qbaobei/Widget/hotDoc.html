@@ -1,0 +1,5 @@
+<ul class="list1">
+  <volist name="lists" id="vo">
+  <li> <a target="_blank" title="{$vo.title}" href="{:staticUrl('detail', $vo['id'],'Document')}">{$vo.title|msubstr=###,0,18,'utf-8',false}</a> </li>
+  </volist>
+</ul>

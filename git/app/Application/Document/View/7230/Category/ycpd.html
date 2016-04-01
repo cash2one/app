@@ -1,0 +1,60 @@
+<extend name="Home@7230/Base/common"/>
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/zixun.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/ycpd.css"/>
+</block>
+<!-----head-END----->
+<block name="body">
+<div id="zixun-main">
+    <p class="page-nav">当前位置：<a href="{:staticUrl('index')}">首页</a>->{$categoryName}</p>
+    <div class="ycpd-top">
+        <p class="title">逗你玩<a href="{:staticUrl('lists',93, 'Document')}" target="_blank">更多+</a></p>
+        <p class="ycpd-tl">
+        
+         <Think:article basename="Document" name="article" limit="1" cate="93" order="create_time desc" >  
+        <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank"><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a>
+          </Think:article>
+        </p>
+        <ul>
+                   <Think:article basename="Document" name="article" limit="4" cate="93" order="create_time desc" >  
+                    <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank"><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a></li>  
+            </Think:article> 
+        </ul>
+    </div>
+    <div id="ycpd-left">
+      <div>
+            <p class="title">软件测评<a href="{:staticUrl('lists',88, 'Document')}" target="_blank">更多+</a></p>
+             <Think:article basename="Document" name="article" limit="3" cate="88" order="create_time desc" > 
+             <p class="ycwz"><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i class="rank18"></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a>
+            <i class="info">{:clean_str($article['description'])}</i></p> 
+            </Think:article>     
+        </div>
+        <div>
+            <p class="title">手游测评<a href="" target="_blank">更多+</a></p>
+                 <Think:article basename="Document" name="article" limit="3" cate="91" order="create_time desc" > 
+             <p class="ycwz"><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i class="rank18"></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a>
+            <i class="info">{:clean_str($article['description'])}</i></p> 
+            </Think:article> 
+        </div>
+        <div>
+            <p class="title">手游周报<a href="{:getWidgetPath('20', true)}" target="_blank">更多+</a></p>
+            <Think:article basename="batch" limit="3" where="category_id = 11 AND pid = 0" order="id desc" >
+            <p class="ycwz"><a href="{$article.url_token}" target="_blank" class="pic"><i class="rank18"></i><img src="{:get_cover($article['icon'],'path')}"></a><a href="{$article.url_token}" target="_blank" class="tit">{$article.title}</a>
+            <i class="info">{:clean_str($article['description'])}</i></p>
+            </Think:article>
+        </div>
+        <div>
+            <p class="title">手游月报<a href="{:getWidgetPath('19', true)}" target="_blank">更多+</a></p>
+            <Think:article basename="batch" limit="3" where="category_id = 10 AND pid = 0" order="id desc" >
+                <p class="ycwz"><a href="{$article.url_token}" target="_blank" class="pic"><i class="rank18"></i><img src="{:get_cover($article['icon'],'path')}"></a><a href="{$article.url_token}" target="_blank" class="tit">{$article.title}</a>
+                    <i class="info">{:clean_str($article['description'])}</i></p>
+            </Think:article>
+        </div>
+    </div>
+    <!----left -END-->
+    <div id="zx-right">
+      <!--#include virtual="{:getWidgetPath('8')}"-->
+    </div>
+</div>
+</block>
+<div style="clear:both"></div>

@@ -1,0 +1,411 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/kfkc.css">
+</block>
+
+<block name="body">
+
+	<div class="kckf-body">
+		<div class="main1200">
+			<div class="goback">当前位置： <position /> > 网游开测表</div>
+			<div class="container">
+				<div class="kfkc-nav"><a href="{:C('STATIC_URL')}{:getWidgetPath(73)}"  >网游开测表</a>
+					<a href="{:C('STATIC_URL')}{:getWidgetPath(74)}"  class="active">网游开服表</a>
+				</div>
+				<div class="today-kfkc">
+					<div class="kfkc-tit"><span class="active">今日开服</span><span><php>echo date("m月d日",strtotime("+1 day"))</php></span><span><php>echo date("m月d日",strtotime("+2 day"))</php></span>
+					</div>
+					<ul class="today-kc current">
+
+						<volist name="nkaice"  id="vo" >
+							<php>
+								$ntid=M('tags_map')->where("did=$vo[id]")->getField('tid',true);
+								foreach($ntid as $k=>$va){
+								$nid[$i].="'". $va."'," ;
+								}
+
+								$ntid[$i]= substr($nid[$i], 0, -1);
+
+								if(!empty($ntid[$i])){
+								$jpid[$i]=M('tags_map')->alias('a')->join('__PACKAGE__ b')
+								->where("a.tid in ($ntid[$i]) and a.type='package' and a.did=b.id  and b.category_id=1")
+								->getField('b.id');
+								$jztid[$i]=M('tags_map')->alias('a')
+								->join('__BATCH__ b')
+								->where("a.tid in ($ntid[$i]) and a.did=b.id and b.pid=0")->getField('url_token');
+								$jxid[$i]=M('tags_map')->alias('a')->join('__DOWN__ b')
+								->where("a.tid in ($ntid[$i]) and a.type='down' and a.did=b.id  and b.status=1")
+								->getField('b.id');
+								}
+							</php>
+							<li>
+								<a  title="{$vo.title}">
+									<img src="{:get_cover($vo['cover_id'],'path')}" alt="{$vo.title}">
+								</a>
+								<div class="text">
+									<p><a href="{:staticUrl('detail',$vo['id'],'down')}" target="_blank" title="{$vo.title}" class="name"> {$vo.title}</a>  <span class="lx"> {:showText($vo['game_type'],'game_type',ture,'Package')}</span>
+									</p>     <php>$h=date('G',$vo['start_time']);</php>
+									<p class="data">今日 <php>if ($h<11) echo '早上';
+										else if ($h<13) echo '中午';
+										else if ($h<17) echo '下午';
+										else echo '晚上';</php>
+										<em class="orange">{:date('H:i',$vo['start_time'])}</em>
+										{$vo.server}</p>
+								</div>
+								<div class="kfkc-btn">
+									<if condition="$jztid[$i]  NEQ null ">
+										<a href="/{:C(FEATURE_ZQ_DIR)}/{$jztid[$i]}" target="" class="zq">进入专区</a>
+										<else />
+										<a href="#" onclick='alert("暂时没有专区")' class="zq">进入专区</a>
+									</if>
+									<if condition="$jpid[$i]  NEQ null ">
+										<a href="{:staticUrl('detail',$jpid[$i],'package')}" target="" class="lq">领取礼包</a>
+										<else />
+										<a href="#" onclick='alert("暂时没有礼包可以领取")' target="" class="lq">领取礼包</a>
+									</if>
+									<if condition="$jxid[$i]  NEQ null ">
+										<a href="{:staticUrl('detail',$jxid[$i],'down')}" target="_blank" class="xz">点击下载</a>
+										<else />
+										<a href="#" onclick='alert("暂时没有游戏下载")' class="xz">点击下载</a>
+									</if>
+
+
+
+									<script type="text/javascript">
+
+										var __qqClockShare = {
+											content: "您关注的游戏 {$vo.title}的马上就要开始{$vo.server}了 赶快来96u 看看吧  ",
+											time: "{:date('Y-m-d  H:i',$vo['start_time'])}",
+											advance: 0,
+											url: "{:staticUrl('detail',$vo['id'],'down')}",
+											icon: "3_1"
+										};
+										document.write('<a href="http://qzs.qq.com/snsapp/app/bee/widget/open.htm#content='
+												+ encodeURIComponent(__qqClockShare.content) +'&time='
+												+ encodeURIComponent(__qqClockShare.time) +'&advance='
+												+ __qqClockShare.advance +'&url=' + encodeURIComponent(__qqClockShare.url)
+												+ '" target="_blank" class="qq" style="margin:10px 56px 0 0;" >qq提醒</a>');
+
+									</script>
+								</div>
+							</li>
+						</volist>
+
+					</ul>
+					<ul class="today-kc">
+						<volist name="mkaice"  id="v" >
+							<php>
+								$tid=M('tags_map')->where("did=$v[id]")->getField('tid',true);
+
+								foreach($tid as $k=>$vc){
+								$tcid[$i].="'". $vc."'," ;
+								}
+								$taid[$i]= substr($tcid[$i], 0, -1);
+								if(!empty($taid[$i])){
+								$jpid[$i]=M('tags_map')->alias('a')->join('__PACKAGE__ b')
+								->where("a.tid in ($taid[$i]) and a.type='package' and a.did=b.id  and b.category_id=1")
+								->getField('b.id');
+								$jztid[$i]=M('tags_map')->alias('a')
+								->join('__BATCH__ b')
+								->where("a.tid in ($taid[$i]) and a.did=b.id and b.pid=0")->getField('url_token');
+								$jxid[$i]=M('tags_map')->alias('a')->join('__DOWN__ b')
+								->where("a.tid in ($taid[$i]) and a.type='down' and a.did=b.id  and b.status=1")
+								->getField('b.id');
+								}
+
+							</php>
+							<li>
+								<a  title="{$v.title}">
+									<img src="{:get_cover($v['cover_id'],'path')}" alt="{$v.title}">
+								</a>
+								<div class="text">
+									<p>
+										<a href="{:staticUrl('detail',$v['id'],'down')}" target="_blank" title="{$v.title}" class="name"> {$v.title}</a>
+										<span class="lx"> {:showText($v['game_type'],'game_type',ture,'Package')}</span>
+									</p>     <php>$h=date('G',$v['start_time']);</php>
+									<p class="data">明日 <php>if ($h<11) echo '早上';
+										else if ($h<13) echo '中午';
+										else if ($h<17) echo '下午';
+										else echo '晚上';</php>
+										<em class="orange">{:date('H:i',$v['start_time'])}</em>
+										{$v.server}</p>
+								</div>
+								<div class="kfkc-btn">
+									<if condition="$jztid[$i]  NEQ null ">
+										<a href="/{:C(FEATURE_ZQ_DIR)}/{$jztid[$i]}" target="" class="zq">进入专区</a>
+										<else />
+										<a href="#" onclick='alert("暂时没有专区")' class="zq">进入专区</a>
+									</if>
+									<if condition="$jpid[$i]  NEQ null ">
+										<a href="{:staticUrl('detail',$jpid[$i],'package')}" target="" class="lq">领取礼包</a>
+										<else />
+										<a href="#" onclick='alert("暂时没有礼包可以领取")' target="" class="lq">领取礼包</a>
+									</if>
+									<if condition="$jxid[$i]  NEQ null ">
+										<a href="{:staticUrl('detail',$jxid[$i],'down')}" target="_blank" class="xz">点击下载</a>
+										<else />
+										<a href="#" onclick='alert("暂时没有游戏下载")' class="xz">点击下载</a>
+									</if>
+
+
+
+									<script type="text/javascript">
+
+										var __qqClockShare = {
+											content: "您关注的游戏 {$vo.title}的马上就要开始{$vo.server}了 赶快来96u 看看吧  ",
+											time: "{:date('Y-m-d  H:i',$vo['start_time'])}",
+											advance: 0,
+											url: "{:staticUrl('detail',$vo['id'],'down')}",
+											icon: "3_1"
+										};
+										document.write('<a href="http://qzs.qq.com/snsapp/app/bee/widget/open.htm#content='
+												+ encodeURIComponent(__qqClockShare.content) +'&time='
+												+ encodeURIComponent(__qqClockShare.time) +'&advance='
+												+ __qqClockShare.advance +'&url=' + encodeURIComponent(__qqClockShare.url)
+												+ '" target="_blank" class="qq" style="margin:10px 56px 0 0;" >qq提醒</a>');
+
+									</script>
+								</div>
+							</li>
+						</volist>
+					</ul>
+					<ul class="today-kc">
+						<volist name="hkaice"  id="v" >
+							<php>
+								$tid=M('tags_map')->where("did=$v[id]")->getField('tid',true);
+
+								foreach($tid as $k=>$vc){
+								$tcid[$i].="'". $vc."'," ;
+								}
+								$taid[$i]= substr($tcid[$i], 0, -1);
+								if(!empty($taid[$i])){
+								$jpid[$i]=M('tags_map')->alias('a')->join('__PACKAGE__ b')
+								->where("a.tid in ($taid[$i]) and a.type='package' and a.did=b.id  and b.category_id=1")
+								->getField('b.id');
+								$jztid[$i]=M('tags_map')->alias('a')
+								->join('__BATCH__ b')
+								->where("a.tid in ($taid[$i]) and a.did=b.id and b.pid=0")->getField('url_token');
+								$jxid[$i]=M('tags_map')->alias('a')->join('__DOWN__ b')
+								->where("a.tid in ($taid[$i]) and a.type='down' and a.did=b.id  and b.status=1")
+								->getField('b.id');
+								}
+
+							</php>
+							<li>
+								<a  title="{$v.title}">
+									<img src="{:get_cover($v['cover_id'],'path')}" alt="{$v.title}">
+								</a>
+								<div class="text">
+									<p><a href="{:staticUrl('detail',$v['id'],'down')}" target="_blank" title="{$v.title}" class="name"> {$v.title}</a>  <span class="lx"> {:showText($v['game_type'],'game_type',ture,'Package')}</span>
+									</p>     <php>$h=date('G',$v['start_time']);</php>
+									<p class="data">后天 <php>if ($h<11) echo '早上';
+										else if ($h<13) echo '中午';
+										else if ($h<17) echo '下午';
+										else echo '晚上';</php>
+										<em class="orange">{:date('H:i',$v['start_time'])}</em>
+										{$v.server}</p>
+								</div>
+								<div class="kfkc-btn">
+									<if condition="$jztid[$i]  NEQ null ">
+										<a href="/{:C(FEATURE_ZQ_DIR)}/{$jztid[$i]}" target="" class="zq">进入专区</a>
+										<else />
+										<a href="#" onclick='alert("暂时没有专区")' class="zq">进入专区</a>
+									</if>
+									<if condition="$jpid[$i]  NEQ null ">
+										<a href="{:staticUrl('detail',$jpid[$i],'package')}" target="" class="lq">领取礼包</a>
+										<else />
+										<a href="#" onclick='alert("暂时没有礼包可以领取")' target="" class="lq">领取礼包</a>
+									</if>
+									<if condition="$jxid[$i]  NEQ null ">
+										<a href="{:staticUrl('detail',$jxid[$i],'down')}" target="_blank" class="xz">点击下载</a>
+										<else />
+										<a href="#" onclick='alert("暂时没有游戏下载")' class="xz">点击下载</a>
+									</if>
+
+
+
+									<script type="text/javascript">
+
+										var __qqClockShare = {
+											content: "您关注的游戏 {$vo.title}的马上就要开始{$vo.server}了 赶快来96u 看看吧  ",
+											time: "{:date('Y-m-d  H:i',$vo['start_time'])}",
+											advance: 0,
+											url: "{:staticUrl('detail',$vo['id'],'down')}",
+											icon: "3_1"
+										};
+										document.write('<a href="http://qzs.qq.com/snsapp/app/bee/widget/open.htm#content='
+												+ encodeURIComponent(__qqClockShare.content) +'&time='
+												+ encodeURIComponent(__qqClockShare.time) +'&advance='
+												+ __qqClockShare.advance +'&url=' + encodeURIComponent(__qqClockShare.url)
+												+ '" target="_blank" class="qq" style="margin:10px 56px 0 0;" >qq提醒</a>');
+
+									</script>
+								</div>
+							</li>
+						</volist>
+					</ul>
+				</div>
+				<div class="today-kfkc">
+					<div class="mid-tit">
+						<h3>即将开服 </h3>
+					</div>
+					<div class="will-nav"><span class="name">游戏名称</span><span>类型</span><span>开服时间</span><span>服务器</span><span>游戏下载</span><span>礼包领取</span><span>游戏专区</span><span>添加提醒</span>
+					</div>
+					<ul class="will-kc">
+						<volist  name="jkaice"  id="vo">
+							<php>
+								$jtid=M('tags_map')->where("did=$vo[id]")->getField('tid',true);
+								foreach($jtid as $k=>$v){
+								$jid[$i].="'". $v."'," ;
+								}
+								$jidc[$i]= substr($jid[$i], 0, -1);
+
+								if(!empty($jidc[$i])){
+								$jpid[$i]=M('tags_map')->alias('a')->join('__PACKAGE__ b')
+								->where("a.tid in ($jidc[$i]) and a.type='package' and a.did=b.id  and b.category_id=1")
+								->getField('b.id');
+								$jztid[$i]=M('tags_map')->alias('a')
+								->join('__BATCH__ b')
+								->where("a.tid in ($jidc[$i]) and a.did=b.id and b.pid=0")->getField('url_token');
+								$jxid[$i]=M('tags_map')->alias('a')->join('__DOWN__ b')
+								->where("a.tid in ($jidc[$i]) and a.type='down' and a.did=b.id  and b.status=1")
+								->getField('b.id');
+								}
+							</php>
+							<li>
+								<a  class="title">{$vo.title}</a>
+						<span>
+							{:showText($vo['game_type'],'game_type',ture,'Package')}
+						</span><span>{:date('Y-m-d',$vo['start_time'])}</span>
+								<span>{$vo.server}</span>
+							<span>
+								    <if condition="$jztid[$i]  NEQ null ">
+									    <a href="/{:C(FEATURE_ZQ_DIR)}/{$jztid[$i]}" target="" class="zq">进入专区</a>
+									    <else />
+									    <a href="#" onclick='alert("暂时没有专区")' class="zq">进入专区</a>
+								    </if>
+
+
+							</span>
+								<if condition="$jpid[$i]  NEQ null ">
+									<span><a href="{:staticUrl('detail',$jpid[$i],'package')}" target="" class="lq">领取礼包</a></span>
+									<else />
+									<span><a href="#" onclick='alert("暂时没有礼包可以领取")' target="" class="lq">领取礼包</a></span>
+
+								</if>
+							<span>
+								 <if condition="$jxid[$i]  NEQ null ">
+									 <a href="{:staticUrl('detail',$jxid[$i],'down')}" target="_blank" class="xz">点击下载</a>
+									 <else />
+									 <a href="#" onclick='alert("暂时没有游戏下载")' class="xz">点击下载</a>
+
+								 </if>
+
+							</span>
+						<span><script type="text/javascript">
+
+							var __qqClockShare = {
+								content: "您关注的游戏 {$vo.title}的马上就要开始{$vo.server}了 赶快来96u 看看吧  ",
+								time: "{:date('Y-m-d  H:i',$vo['start_time'])}",
+								advance: 0,
+								url: "{:staticUrl('detail',$vo['id'],'down')}",
+								icon: "3_1"
+							};
+							document.write('<a href="http://qzs.qq.com/snsapp/app/bee/widget/open.htm#content='
+									+ encodeURIComponent(__qqClockShare.content) +'&time='
+									+ encodeURIComponent(__qqClockShare.time) +'&advance='
+									+ __qqClockShare.advance +'&url=' + encodeURIComponent(__qqClockShare.url)
+									+ '" target="_blank" class="qq" >qq提醒</a>');
+
+						</script></span>
+							</li>
+						</volist>
+					</ul>
+				</div>
+				<div class="today-kfkc">
+					<div class="mid-tit">
+						<h3>已经开服</h3>
+					</div>
+					<div class="will-nav"><span class="name">游戏名称</span><span>类型</span><span>开服时间</span><span>服务器</span><span>游戏专区</span><span>礼包领取</span><span>游戏下载</span><span>添加提醒</span>
+					</div>
+					<ul class="will-kc">
+						<volist  name="ykaice"  id="vo">
+							<!--开服开测的礼包-->
+
+							<php>
+								$tid=M('tags_map')->where("did=$vo[id]")->getField('tid',true);
+								foreach($tid as $k=>$v){
+								$id[$i].="'". $v."'," ;
+								}
+								$idc[$i]= substr($id[$i], 0, -1);
+								if(!empty($idc[$i])){
+								$pid[$i]=M('tags_map')->alias('a')->join('__PACKAGE__ b')
+								->where("a.tid in ($idc[$i]) and a.type='package' and a.did=b.id  and b.category_id=1")
+								->getField('b.id');
+								$ztid[$i]=M('tags_map')->alias('a')
+								->join('__BATCH__ b')
+								->where("a.tid in ($idc[$i]) and a.did=b.id and b.pid=0")->getField('url_token');
+								$xid[$i]=M('tags_map')->alias('a')->join('__DOWN__ b')
+								->where("a.tid in ($idc[$i]) and a.type='down' and a.did=b.id  and b.status=1")
+								->getField('b.id');
+								}
+
+
+							</php>
+							<li>
+								<a  class="title">{$vo.title}</a>
+						<span>
+							{:showText($vo['game_type'],'game_type',ture,'Package')}
+						</span>
+								<span>{:date('Y-m-d',$vo['start_time'])}</span>
+								<span>{$vo.server}</span>
+							<span>
+								    <if condition="$ztid[$i]  NEQ null ">
+									    <a href="/{:C(FEATURE_ZQ_DIR)}/{$ztid[$i]}" target="" class="zq">进入专区</a>
+									    <else />
+									    <a href="#" onclick='alert("暂时没有专区")' class="zq">进入专区</a>
+
+								    </if>
+
+
+							</span>
+								<if condition="$pid[$i]  NEQ null ">
+									<span><a href="{:staticUrl('detail',$pid[$i],'package')}" target="" class="lq">领取礼包</a></span>
+									<else />
+									<span><a href="#" onclick='alert("暂时没有礼包可以领取")' target="" class="lq">领取礼包</a></span>
+
+								</if>
+							<span>
+								 <if condition="$xid[$i]  NEQ null ">
+									 <a href="{:staticUrl('detail',$xid[$i],'down')}" target="_blank" class="xz">点击下载</a>
+									 <else />
+									 <a href="#" onclick='alert("暂时没有游戏下载")' class="xz">点击下载</a>
+
+								 </if>
+
+							</span>
+						<span>
+							<script type="text/javascript">
+
+								var __qqClockShare = {
+									content: "您关注的游戏 {$vo.title}的马上就要开始{$vo.server}了 赶快来96u 看看吧  ",
+									time: "{:date('Y-m-d  H:i',$vo['start_time'])}",
+									advance: 0,
+									url: "{:staticUrl('detail',$vo['id'],'down')}",
+									icon: "3_1"
+								};
+								document.write('<a href="http://qzs.qq.com/snsapp/app/bee/widget/open.htm#content='
+										+ encodeURIComponent(__qqClockShare.content) +'&time='
+										+ encodeURIComponent(__qqClockShare.time) +'&advance='
+										+ __qqClockShare.advance +'&url=' + encodeURIComponent(__qqClockShare.url)
+										+ '" target="_blank" class="qq" >qq提醒</a>');
+
+							</script></span>
+							</li>
+						</volist>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>

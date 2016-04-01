@@ -1,0 +1,44 @@
+<extend name="Document@jf96u/Base/wdsjcommon"/>
+<block name="body">
+<div class="goback">您的位置： <position /></div>
+<div class="wraper-left">
+<div class="cata-l">
+<div class="news-detail">
+        <div class="art-tit">
+            <h1>{$info.title}</h1>
+            <div class="art-info"><span>发表时间：{:date('Y-m-d H:i:s',$info['create_time'])}</span><span>来源：<if condition="$info.source eq ''">96u手游网<else/>{$info.source}</if></span><span>作者：<if condition="$info.author eq ''">96u<else/>{$info.author}</if></span></div>
+        </div>
+
+    <div class="art-body">
+            <if condition="$info.content eq ''">
+                {$info.description}
+                <else/>
+                {$info.content}
+            </if>
+    </div>
+</div>
+<div class="about-news dis-top">
+    <div class="mid-tit"><h3>相关阅读</h3><a href="{:staticUrl('lists',1822,'Document',null,false,false)}" target="_blank" class="more">更多</a></div>
+    <ul class="about-ul">
+        <related model="2" order="click" limit="10">
+            <li><a href="{$related.typeurl}" target="_blank" class="cata">[{:str_replace('我的世界','',$related['typename'])}]</a><a class="tit" href="{$related.url}" target="_blank" title="{$related.title}">{$related.title}</a></li>
+        </related>
+    </ul>
+</div>
+<!--评论-->
+<div class="comment">
+    <div class="mid-tit"><h3>独家评论</h3></div>
+    <form action="" method="" name="" id="pl" data-id="{$info['id']}" data-model="document">
+        <input name="author" id="tj-user" type="hidden" value="{$info['uid']}">
+        <p><input type="text" placeholder="请输入用户名" id="user"></p>
+        <p><textarea placeholder="这里输入您想和大家说的，也可以是对我们的建议……"></textarea></p>
+        <p class="bot"><span>本站为防止低俗内容出现，用户发表的评论需经过审核，谢谢 ！</span><input type="button" value="发表评论" id="btn"></p>
+    </form>
+    <ul class="comment-list" data-id="{$info['id']}" data-model="document">
+        <p id="no-comment" style="text-align:center;">暂无评论</p>
+    </ul>
+    <div class="gdmore">查看更多 ↓</div>
+</div>
+</div>
+</div>
+</block>

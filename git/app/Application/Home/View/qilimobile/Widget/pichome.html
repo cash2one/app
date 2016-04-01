@@ -1,0 +1,130 @@
+<extend name="Home@qilimobile/Base/common" />
+
+<block name="body">
+<include file="Home@qilimobile/Base/nav" />
+
+<div class="mui-content">
+	<classify model="4" typeid="0"><php> $ids[] = $classify['id'];</php></classify>
+	<php>$cid = implode($ids, ',')</php>
+
+	<div id="slider" class="mui-slider">
+		<div class="mui-slider-group mui-slider-loop">
+			<document model="4" typeid="$cid" flag="mobile_recom,2" limit="5"><php>$slide[] = $document;</php></document>
+			<if condition="count($slide) eq 1"> 
+				<php>$pop = $end = current($slide);</php>
+			<elseif condition="$slide"/>
+				<php>
+					$pop = current($slide);
+					$end = end($slide);
+				</php>
+			</if>
+
+			<if condition="$pop"> 
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="{$pop.url}">
+						<img src="{:get_thumb($pop[atlas_b], $pop[atlas], '320x185')}">
+					</a>
+					<p class="mui-slider-title">
+						{$pop.title|msubstr=0,20}
+					</p>
+				</div>
+			</if>
+
+			<document model="4" typeid="$cid" flag="mobile_recom,2" limit="5">
+				<div class="mui-slider-item">
+					<a href="{$document.url}">
+						<img src="{:get_thumb($document[atlas_b], $document[atlas], '320x185')}">
+					</a>
+					<p class="mui-slider-title">
+						{$document.title|msubstr=0,20}
+					</p>
+				</div>
+			</document>
+
+			<if condition="$end"> 
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="{$end.url}">
+						<img src="{:get_thumb($end[atlas_b], $end[atlas], '320x185')}">
+					</a>
+					<p class="mui-slider-title">
+						{$end.title|msubstr=0,20}
+					</p>
+				</div>
+			</if>
+		</div>
+
+		<div class="mui-slider-indicator mui-text-right">
+			<document model="4" typeid="$cid" flag="mobile_recom,2" limit="5">
+				<if condition="$i eq 0"> 
+					<div class="mui-indicator mui-active"></div>
+				<else />
+					<div class="mui-indicator"></div>
+				</if>
+			</document>
+		</div>
+	</div>
+
+	<div class="y7-sec-body">
+        <ul class="mui-table-view">
+			<document model="4" typeid="$cid">
+            <li class="mui-table-view-cell mui-media call" href="{$document.url}">
+                <a href="{$document.url}">
+                    <img class="mui-media-object mui-pull-left" src="{:get_thumb($document[atlas_a], $document[atlas], '88x82')}">
+                    <div class="mui-media-body">
+                        <p class="title">{$document.title}</p>
+                        <p class="mui-text-mute"><time>{$document['create_time']|date="Y/m/d H:i:s",###}</time><span class="vis">{$document.view}次浏览</span></p>
+                    </div>
+                </a>
+            </li>
+			</document>
+        </ul>
+    </div>
+</block>
+
+<block name="script">
+<script src="__PUBLIC__/Home/qilimobile/js/index.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$('.mui-table-view li').click(function(){
+		var href = $(this).attr('href');
+		if(href != null){
+			window.location.href=""+$(this).attr('href')+""; 
+		}
+	});	
+
+	var lock = false;
+	
+	var page = 1;
+
+	$(window).scroll(function () {
+		if (($(window).height() + $(window).scrollTop()) >= $("body").height() && lock == false) {
+			lock = true;
+
+			$.ajax({  
+				type:'get',
+				url:'/dynamic.php?s=Qilimobile/picchannel/typeid/{$cid}/page/'+page++,
+				dataType:'json',
+				success:function(params){
+					if(params.status == '1'){
+						var html = '';
+						$.each(params.data, function(i, val){
+							html += '<li class="mui-table-view-cell mui-media call" onclick="window.location.href=\''+val.url+'\'">';
+							html += '<img class="mui-media-object mui-pull-left" src="'+ val.atlas_a +'">';
+							html += '<div class="mui-media-body">';
+							html += '<p class="title">'+ val.title +'</p>';
+							html += '<p class="mui-text-mute"><time>' + val.create_time + '</time><span class="vis">' + val.view + '次浏览</span></p>';
+							html += '</div></li>';
+						});
+						
+						$('.mui-table-view').append(html);
+						lock = false;
+					}else{
+						$('.get_more span').text('没有了').show();
+					}
+				}  
+			 });
+		}
+	});
+});
+</script>
+</block>

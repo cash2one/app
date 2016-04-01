@@ -1,0 +1,77 @@
+<extend name="Home@afs/Base/common"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afs/css/kfkc.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afs/css/index1.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afs/css/azk.css"/>
+</block>
+<block name="body">
+    <div id="main" class="kpage">
+        <p id="main-title"><a href="{:C('STATIC_URL')}">首页</a>>
+            <if condition="$type eq 'game'"><a href="{:C('STATIC_URL')}/game/">游戏大全</a>>{$tag['title']}<else/> <a href="{:C('STATIC_URL')}/soft/">软件大全</a>>{$tag['title']}</if>
+        </p>
+        <dl class="con">
+            <dt><img src="{:get_cover($tag['icon'],'path')}">
+            <div class="content">
+                <h1>{$SEO['sub_title']}</h1>
+                <p>{$SEO['description']}</p>
+                <i><em><font>{$total}</font>个应用</em></i>
+
+                <div id="bdshare"><p class="sinaGFoot-share bdsharebuttonbox" data-tag="share_1"><a data-cmd="qzone"
+                                                                                                    class="a1"
+                                                                                                    href="javascript:void 0"
+                                                                                                    title="分享至QQ空间"
+                                                                                                    rel="nofollow"></a><a
+                        data-cmd="tsina" class="a2" href="javascript:void 0" title="分享到新浪微博" rel="nofollow"></a><a
+                        data-cmd="renren" class="a4" href="javascript:void 0" title="分享到校内人人网" rel="nofollow"></a><a
+                        data-cmd="tieba" class="a6" href="javascript:void 0" rel="nofollow"></a><a data-cmd="sqq"
+                                                                                                   class="a7"
+                                                                                                   href="javascript:void 0"
+                                                                                                   rel="nofollow"></a><a
+                        href="#" onclick="return false;" class="popup_weixin a5" data-cmd="weixin" rel="nofollow">微信</a>
+                </p>
+                    <script>
+                        with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+                    </script>
+                </div>
+            </div>
+            </dt>
+
+            <dd class="list clearfix">
+                <h2>合集列表</h2>
+                <ul class="clearfix mainCont">
+                    <volist name="lists" id="val">
+                        <li><p><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img
+                                src="{:get_cover($val['smallimg'],'path')}"><img class="ewm"
+                                                                                 src="{:get_cover($val['smallimg'],'path')}"><strong>{$val['title']}</strong></a>{$val['create_time']|date='Y-m-d',###}
+                            / {$val['size']}M<if condition="$val.soft_socre gt 0"><span class="star{$val['soft_socre'|ceil=###]}"></span><else/><span class=""></span></if><s><a
+                                    href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">下载</a></s><em><font>推荐理由:</font><strong>{$val['description']}</strong></em>
+                        </p></li>
+                    </volist>
+                </ul>
+                <div class="page">
+                    {$page_list}
+                </div>
+            </dd>
+            <!-- relation art -->
+            {~W('Home/Afs/relationArt',array('tags'=>$ids))}
+            <!-- relation art -->
+            <dd class="box">
+                <h2>合集推荐</h2>
+                <div class="banner2 ">
+                    <span class="prev"><em class="ico">prev</em></span><span class="next"><em class="ico">next</em></span>
+                    <div class="img-list">
+                        <ul class="piclist mainlist">
+                            <volist name="union_list" id="val">
+                                <li><a href="{:C('STATIC_URL')}/tag/{$val['name']}/"><img src="{:get_cover($val['img'],'path')}"><span>{$val.title}</span><b></b></a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </dd>
+
+        </dl>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/afs/js/k.js"></script>
+</block>

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Cache-Control" content="max-age=31536000" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="{$SEO['keywords']}" name="Keywords" />
+    <meta content="{$SEO['description']}" name="Description" />
+    <meta name="author" content="亲亲宝贝网" />
+    <meta name="copyright" content="亲亲宝贝网享有版权" />
+    <title>{$SEO['title']}</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/common.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/myjk.css">
+    <script src="__PUBLIC__/Home/qbaobei/js/jquery-1.10.2.min.js"></script>
+    <script src="__PUBLIC__/Home/qbaobei/js/lazyload.js"></script>
+    <script src="__PUBLIC__/Home/qbaobei/js/slide1.js"></script>
+    <script src="__PUBLIC__/Home/qbaobei/js/subscription.js"></script>
+    <script src="__PUBLIC__/Home/qbaobei/js/jiankangindex.js"></script>
+    <script src="__PUBLIC__/Home/qbaobei/js/jquery.peex.js"></script>
+    <script src="__PUBLIC__/Home/qbaobei/js/jkImg.js"></script>
+	<!-- 请置于所有广告位代码之前 -->
+    <script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+</head>
+<body>
+<div class="mainguide">
+    <div class="guidecontant">
+        <div class="g-c-left">
+            <ul>
+                <li><a class="mouseon" href="/" target="_blank">首页</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/yq/" target="_blank">备孕</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/yunqi/" target="_blank">孕期</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/fm/" target="_blank">分娩</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/ye/" target="_blank">0-1岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/youer/" target="_blank">1-3岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/xlq/" target="_blank">3-6岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/jiankang/" target="_blank">健康</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/jiaoyu/" target="_blank">教育</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/baobaoleyuan/" target="_blank">儿歌</a></li>
+                <li><a href="http://home.qbaobei.com/" target="_blank">小家</a></li>
+                <li><a class="mouseon" href="http://bbs.qbaobei.com/" target="_blank">论坛</a></li>
+            </ul>
+        </div>
+        <div class="g-c-right"></div>
+    </div>
+</div>
+<div class="header">
+    <div class="cont">
+        <h1> <a href="/" target="_blank" title="亲亲宝贝网" class="logo">亲亲宝贝网</a></h1>
+        <p class="theme"> 母婴健康</p>
+        <p class="linkarae"> <a href="http://www.qbaobei.com/qinbi/" target="_blank">亲币</a>|<a target="_blank"
+                                                                                               href="http://www.qbaobei.com/huodong/index.aspx">活动</a></p>
+        <div class="searchbar" onmouseover="this.className='searchbar-hover'" onmouseout="this.className='searchbar'">
+            <input type="text" class="searchText" />
+            <a class="searchBtn">搜索</a></div>
+    </div>
+    <div class="mainnav">
+        <ul>
+            <li class="current" list-id="1"><a href="http://www.qbaobei.com/jiankang/" target="_blank"> 健康首页</a></li>
+            <li list-id="2"><a href="{:staticUrl('lists',19,'Document')}" target="_blank">孕前</a></li>
+            <li list-id="3"><a href="{:staticUrl('lists',21,'Document')}" target="_blank">孕中</a></li>
+            <li list-id="4"><a href="{:staticUrl('lists',192,'Document')}" target="_blank">分娩</a></li>
+            <li list-id="5"><a href="{:staticUrl('lists',22,'Document')}" target="_blank">产后</a></li>
+            <li list-id="6"><span class="zeroto1week"></span><a href="{:staticUrl('lists',934,'Document')}" target="_blank">新生儿</a></li>
+            <li list-id="7"><span class="baby"></span><a href="{:staticUrl('lists',129,'Document')}" target="_blank">婴儿</a></li>
+            <li list-id="8"><span class="infant"></span><a href="{:staticUrl('lists',130,'Document')}" target="_blank">幼儿</a></li>
+            <li list-id="9"><span class="child"></span><a href="{:staticUrl('lists',131,'Document')}" target="_blank">学龄前</a></li>
+            <li class="nopop"><a href="http://www.qbaobei.com/jieti/28537.html" target="_blank"> 成长阶梯</a></li>
+            <li list-id="10"><a href="{:staticUrl('lists',80,'Document')}" target="_blank">生活</a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    //导航 =====================================
+
+    $(".mainnav li ").hover(function () {
+        var listContentID = $(this).attr("list-id");
+        if (listContentID == undefined || listContentID == null)
+            return;
+        listContentID = "#tab-" + listContentID;
+        $(".secondnav").hide();
+        $(listContentID).show();
+        $(".mainnav li").removeClass("current");
+        $(this).addClass("current");
+    }, function () {
+
+    });
+
+</script>
+<div class="secondnav" id="tab-1" style="display: block;">
+    {:W('Qbaobei/healthNav',array(4))}
+</div>
+<div class="secondnav" id="tab-2">
+    {:W('Qbaobei/healthNav',array(19))}
+</div>
+<div class="secondnav" id="tab-3">
+    {:W('Qbaobei/healthNav',array(21))}
+</div>
+<div class="secondnav" id="tab-4">
+    {:W('Qbaobei/healthNav',array(192))}
+</div>
+<div class="secondnav" id="tab-5">
+    {:W('Qbaobei/healthNav',array(22))}
+</div>
+<div class="secondnav" id="tab-6">
+    {:W('Qbaobei/healthNav',array(934))}
+</div>
+<div class="secondnav" id="tab-7">
+    {:W('Qbaobei/healthNav',array(129))}
+</div>
+<div class="secondnav" id="tab-8">
+    {:W('Qbaobei/healthNav',array(130))}
+</div>
+<div class="secondnav" id="tab-9">
+    {:W('Qbaobei/healthNav',array(131))}
+</div>
+<div class="secondnav" id="tab-10">
+    {:W('Qbaobei/healthNav',array(80))}
+</div>
+<div class="pregnantime">
+    <a class="getready" href="http://www.qbaobei.com/hybk/yq/" title="准备怀孕" target="_blank"> 准备怀孕</a>
+    <a class="preon" href="http://www.qbaobei.com/hybk/yunqi/hyssz/" title="怀孕" target="_blank">怀孕</a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/28657.html" title="怀孕第1周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/28786.html" title="怀孕第2周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/28787.html" title="怀孕第3周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/28788.html" title="怀孕第4周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/28790.html" title="怀孕第5周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/28792.html" title="怀孕第6周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/28794.html" title="怀孕第7周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/28795.html" title="怀孕第8周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/28998.html" title="怀孕第9周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29000.html" title="怀孕第10周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29104.html" title="怀孕第11周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29106.html" title="怀孕第12周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29107.html" title="怀孕第13周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29108.html" title="怀孕第14周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29110.html" title="怀孕第15周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29111.html" title="怀孕第16周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29113.html" title="怀孕第17周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29114.html" title="怀孕第18周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29115.html" title="怀孕第19周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29116.html" title="怀孕第20周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29119.html" title="怀孕第21周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29120.html" title="怀孕第22周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29122.html" title="怀孕第23周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29123.html" title="怀孕第24周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29124.html" title="怀孕第25周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29125.html" title="怀孕第26周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29127.html" title="怀孕第27周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29128.html" title="怀孕第28周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29129.html" title="怀孕第29周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29130.html" title="怀孕第30周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29133.html" title="怀孕第31周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29134.html" title="怀孕第32周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29135.html" title="怀孕第33周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29137.html"  title="怀孕第34周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29138.html" title="怀孕第35周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29139.html" title="怀孕第36周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29141.html" title="怀孕第37周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29142.html" title="怀孕第38周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29143.html" title="怀孕第39周" target="_blank"></a>
+    <a class="preweek" href="http://www.qbaobei.com/jieti/29144.html" title="怀孕第40周" target="_blank"></a>
+    <a class="getready" href="http://www.qbaobei.com/chengzhang/fenmian/" title="分娩" target="_blank">分娩</a>
+    <a class="getready" href="http://www.qbaobei.com/chengzhang/0-1/" title="宝宝0-1岁" target="_blank">宝宝0-1岁</a>
+    <a class="getready" href="http://www.qbaobei.com/chengzhang/1-3/" title="宝宝1-3岁" target="_blank">宝宝1-3岁</a>
+    <a class="getready" href="http://www.qbaobei.com/chengzhang/3-6/" title="宝宝3-6岁" target="_blank">宝宝3-6岁</a>
+</div>
+<div class="clear"> </div>
+ 
+<div class="commonbox box1">
+    <!--  box_left  -->
+    <div class="boxleft">
+
+        <div class="slide">
+            <div style="position: relative; width: 420px; overflow: hidden; height:550px;" id="jFlowSlide1">
+                <input type="hidden" value="1" id="hidAd">
+                <div id="slides1">
+                    <div class="slide_wrap">
+                        <div class="jFlowSlideContainer">
+                            <div class="pic-box"><a target="_blank" href="http://www.qbaobei.com/plans/chuhan/" alt="晚上睡觉出汗是怎么回事"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/3/201403141611030989.jpg" alt="晚上睡觉出汗是怎么回事"></a></div>
+                        </div>
+                    </div>
+                    <div class="slide_wrap">
+                        <div class="jFlowSlideContainer">
+                            <div class="pic-box"><a target="_blank" href="http://www.qbaobei.com/plans/yunchuqiys/" alt="怀孕初期吃什么好"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/3/201403281429573619.jpg" alt="怀孕初期吃什么好"></a></div>
+                        </div>
+                    </div>
+                    <div class="slide_wrap">
+                        <div class="jFlowSlideContainer">
+                            <div class="pic-box"><a target="_blank" href="http://www.qbaobei.com/plans/yqjc/" alt="孕前检查项目"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/11/201311131715119602.jpg" alt="孕前检查项目"></a></div>
+                        </div>
+                    </div>
+                    <div class="slide_wrap">
+                        <div class="jFlowSlideContainer">
+                            <div class="pic-box"><a target="_blank" href="http://www.qbaobei.com/plans/yesuan/" alt="叶酸的作用"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401151457593927.jpg" alt="叶酸的作用"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="myController1"><span class="jPrev" style="display: none; background: none repeat scroll 0% 0% transparent; -moz-background-inline-policy: continuous;">&lt;</span>
+                <div class="jFlowControl1 jFlowSelected1"><a target="_blank" href="http://www.qbaobei.com/plans/chuhan/" alt="晚上睡觉出汗是怎么回事" title="晚上睡觉出汗是怎么回事">1 </a></div>
+                <div class="jFlowControl1"><a target="_blank" href="http://www.qbaobei.com/plans/yunchuqiys/" alt="怀孕初期吃什么好" title="怀孕初期吃什么好">2 </a></div>
+                <div class="jFlowControl1"><a target="_blank" href="http://www.qbaobei.com/plans/yqjc/" alt="孕前检查项目" title="孕前检查项目">3 </a></div>
+                <div class="jFlowControl1" style="margin-right: 0pt;"><a target="_blank" href="http://www.qbaobei.com/plans/yesuan/" alt="叶酸的作用" title="叶酸的作用">4 </a></div>
+                <span class="jNext" style="display: none; background: none repeat scroll 0% 0% transparent; -moz-background-inline-policy: continuous;">&gt;</span>
+            </div>
+        </div>
+
+        <div class="myjk-zhou">
+            <div class="myjk-tit"><span>宝宝护理</span></div>
+            <div class="myjk-main">
+                <a href="{:staticUrl('detail',$hl[0]['id'],'Document')}" target="_blank"><img src="{:get_cover($hl[0]['smallimg'],'path')}"></a>
+                <div class="myjk-m-right">
+                    <volist name="hl" id="val" offset="1" length="4">
+                    <a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="{$key==1?'tit':''}">{$val['title']}</a>
+                    </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="boxmiddle">
+        <div class="topnews" id="topnew">
+            <volist name="headline" id="val">
+                <h2><a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val['title']}</a></h2>
+                <p><span class="topnewstr">{$val['description']}</span>... <a class="gray-a" target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}"> [详细]</a></p>
+            </volist>
+            <div class="sec-part">
+                <div class="s-pleft"><a target="_blank" href="{:staticUrl('detail',$hotImg['id'],'Document')}" title="{$hotImg['title']}"><img src="{:get_cover($hotImg['smallimg'],'path')}" alt="{$hotImg['title']}"></a><br>
+                    <a target="_blank" href="{:staticUrl('detail',$hotImg['id'],'Document')}" title="{$hotImg['title']}">{:substr($hotImg['title'],0,36)}</a></div>
+                <div class="s-pright">
+                    <ul>
+                        <volist name="hot" id="val">
+                            <li><a class="classify" target="_blank" href="{:staticUrl('lists',$val['cate_id'],'Document')}" title="{$val['cate']}"> [{$val['cate']}]</a><a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}" class="hotli">{$val['title']}</a></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"> </div>
+        </div>
+        <div class="keyword"> <a target="_blank" href="http://www.qbaobei.com/jiankang/myyp/" title="母婴用品">母婴用品</a>| <a target="_blank" href="http://www.qbaobei.com/plans/buyunbuyuzt/" title="不孕不育">不孕不育</a>| <a target="_blank" href="http://www.qbaobei.com/plans/fenmianzt/" title="分娩方式">分娩方式</a>| <a target="_blank" href="http://www.qbaobei.com/plans/shengnanhai" title="生男孩科学方法">生男孩科学方法</a> </div>
+        <ul class="imgfcous">
+            <li><a target="_blank" href="http://www.qbaobei.com/plans/yunmeiren/" title="“孕美人”诞生记"><img alt="“孕美人”诞生记" src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071718586580.jpg"></a><a target="_blank" href="http://www.qbaobei.com/plans/yunmeiren/" title="“孕美人”诞生记">“孕美人”诞生记</a></li>
+            <li><a target="_blank" href="http://www.qbaobei.com/plans/tangshai" title="唐筛什么时候做"><img alt="唐筛什么时候做" src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071720106027.jpg"></a><a target="_blank" href="http://www.qbaobei.com/plans/tangshai" title="唐筛什么时候做">唐筛什么时候做</a></li>
+            <li><a target="_blank" href="http://www.qbaobei.com/plans/baobaoladuzi" title="宝宝拉肚子怎么办"><img alt="宝宝拉肚子怎么办" src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071720110570.jpg"></a><a target="_blank" href="http://www.qbaobei.com/plans/baobaoladuzi" title="宝宝拉肚子怎么办">宝宝拉肚子怎么办</a></li>
+        </ul>
+    </div>
+    <script>
+        topnew = $("#topnew");
+        strlen(topnew.find(".topnewstr"),47);
+        strlen(topnew.find(".hotli"),10);
+
+        function strlen(obj,len){
+            obj.each(function(){
+                $(this).text($(this).text().substr(0,len));
+            });
+        }
+
+    </script>
+    {:W('Qbaobei/healthBoxRight')}
+    <div class="clear"> </div>
+    <div class="l-ad">
+       <!-- 广告位：母婴健康Banner1 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1100786");</script>
+    </div>
+</div>
+ 
+<div class="commonbox box1">
+    <div class="classtify-tt yunyu">
+        <ul>
+            <li><span>孕育期</span></li>
+        </ul>
+        <div class="y-alink"> <a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/zhunbei/" title="怀孕准备">怀孕准备</a><a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/yinshi/" title="孕前饮食">孕前饮食</a><a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/shengnanshengnv/" title="生男生女">生男生女</a><a target="_blank" href="http://www.qbaobei.com/jiankang/huaiyun/yinshi/" title="孕妇饮食">孕妇饮食</a><a target="_blank" href="http://www.qbaobei.com/jiankang/fenmian/zhunbei/" title="产前准备">产前准备</a><a target="_blank" href="http://www.qbaobei.com/jiankang/chanhou/huifu/" title="产后恢复">产后恢复</a> </div>
+    </div>
+    <div class="boxleft">
+        <div class="slide"> <a target="_blank" href="http://www.qbaobei.com/plans/yunfujianfei/" title="孕妇减肥"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/9/201309291435474871.jpg" alt="孕妇减肥"></a> </div>
+        <div class="parg-contact">
+            <div class="commontitle"> <b>孕妇交流</b> </div>
+            <div class="contactimg"> <a target="_blank" href="http://www.qbaobei.com/plans/chxsh/" title="产后性生活"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071735192637.jpg" alt="产后性生活"></a></div>
+            <ul>
+                {:W('Qbaobei/healthLi',array('category_id = 121',6))}
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="boxmiddle">
+        <div class="agestep">
+            <div class="as-left"><a class="sort" target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/" title="{$yunyu[0]['title']}">{$yunyu[0]['title']}</a>
+                <div class="newsimg"><a target="_blank" href="http://www.qbaobei.com/plans/huaiyunzt/" title="怀孕多久能测出来"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071739105273.jpg" alt="怀孕多久能测出来"></a><span>怀孕多久能测出来</span></div>
+            </div>
+            <div class="as-right">
+                <h3><a target="_blank" href="{:staticUrl('detail',$yunyu[0]['article']['id'],'Document')}" title="{$yunyu[0]['article']['title']}">{$yunyu[0]['article']['title']}</a></h3>
+                <volist name="yunyu[0]['child']" id="val">
+                    <dl>
+                        <dt> <span class="node_name"> <a href="{:staticUrl('lists',$val['id'],'Document')}" target="_self"> [{$val['title']}] </a> </span> </dt>
+                        <dd> <a target="_blank" href="{:staticUrl('detail',$val['article']['id'],'Document')}" title="{$val['article']['title']}">{$val['article']['title']}</a> </dd>
+                    </dl>
+                </volist>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="keyword"> <a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/zhunbei/" title="孕前准备">孕前准备</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/buyunbuyu/" title="不孕不育">不孕不育</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/yichuan/" title="遗传优生">遗传优生</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/liangxing/" title="两性知识">两性知识</a> </div>
+        <div class="agestep">
+            <div class="as-left"><a class="sort" target="_blank" href="http://www.qbaobei.com/jiankang/huaiyun/" title="{$yunyu[1]['title']}">{$yunyu[1]['title']}</a>
+                <div class="newsimg"><a target="_blank" href="http://www.qbaobei.com/plans/gongwaiyun" title="宫外孕有哪些症状"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071739317762.jpg" alt="宫外孕有哪些症状"></a><span>宫外孕有哪些症状</span></div>
+            </div>
+            <div class="as-right">
+                <h3><a target="_blank" href="{:staticUrl('detail',$yunyu[1]['article']['id'],'Document')}" title="{$yunyu[1]['article']['title']}">{$yunyu[1]['article']['title']}</a></h3>
+                <volist name="yunyu[1]['child']" id="val">
+                    <dl>
+                        <dt> <span class="node_name"> <a href="{:staticUrl('lists',$val['id'],'Document')}" target="_self"> [{$val['title']}] </a> </span> </dt>
+                        <dd> <a target="_blank" href="{:staticUrl('detail',$val['article']['id'],'Document')}" title="{$val['article']['title']}">{$val['article']['title']}</a> </dd>
+                    </dl>
+                </volist>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="keyword"> <a target="_blank" href="http://www.qbaobei.com/jiankang/huaiyun/jibing/" title="孕妇疾病">孕妇疾病</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/huaiyun/baojian/" title="孕妇保健">孕妇保健</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/huaiyun/tefy/" title="胎儿发育">胎儿发育</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/huaiyun/liuchan/" title="流产胎停">流产胎停</a> </div>
+        <div class="agestep">
+            <div class="as-left"><a class="sort" target="_blank" href="http://www.qbaobei.com/jiankang/fenmian/" title="{$yunyu[2]['title']}">{$yunyu[2]['title']}</a>
+                <div class="newsimg"><a target="_blank" href="http://www.qbaobei.com/jiankang/fenmian/fangshi/20130328_257756.html" title="有助于顺产的技巧"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071739575897.jpg" alt="有助于顺产的技巧"></a><span>有助于顺产的技巧</span></div>
+            </div>
+            <div class="as-right">
+                <h3><a target="_blank" href="{:staticUrl('detail',$yunyu[2]['article']['id'],'Document')}" title="{$yunyu[2]['article']['title']}">{$yunyu[2]['article']['title']}</a></h3>
+                <volist name="yunyu[2]['child']" id="val">
+                    <dl>
+                        <dt> <span class="node_name"> <a href="{:staticUrl('lists',$val['id'],'Document')}" target="_self"> [{$val['title']}] </a> </span> </dt>
+                        <dd> <a target="_blank" href="{:staticUrl('detail',$val['article']['id'],'Document')}" title="{$val['article']['title']}">{$val['article']['title']}</a> </dd>
+                    </dl>
+                </volist>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="keyword"> <a target="_blank" href="http://www.qbaobei.com/jiankang/fenmian/zhunbei/" title="产前心理">产前心理</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/fenmian/fangshi/" title="分娩方式">分娩方式</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/fenmian/zcnc/" title="早产难产">早产难产</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/fenmian/zhunbei/" title="待产知识">待产知识</a> </div>
+        <div class="agestep">
+            <div class="as-left"><a class="sort" target="_blank" href="http://www.qbaobei.com/jiankang/chanhou/" title="{$yunyu[3]['title']}">{$yunyu[3]['title']}</a>
+                <div class="newsimg"><a target="_blank" href="http://www.qbaobei.com/plans/poufuchan/" title="剖腹产后注意事项"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071740110851.jpg" alt="剖腹产后注意事项"></a><span>剖腹产后注意事项</span></div>
+            </div>
+            <div class="as-right">
+                <h3><a target="_blank" href="{:staticUrl('detail',$yunyu[3]['article']['id'],'Document')}" title="{$yunyu[3]['article']['title']}">{$yunyu[3]['article']['title']}</a></h3>
+                <volist name="yunyu[3]['child']" id="val">
+                    <dl>
+                        <dt> <span class="node_name"> <a href="{:staticUrl('lists',$val['id'],'Document')}" target="_self"> [{$val['title']}] </a> </span> </dt>
+                        <dd> <a target="_blank" href="{:staticUrl('detail',$val['article']['id'],'Document')}" title="{$val['article']['title']}">{$val['article']['title']}</a> </dd>
+                    </dl>
+                </volist>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="keyword"> <a target="_blank" href="http://www.qbaobei.com/jiankang/chanhou/jibing/" title="产后疾病">产后疾病</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/chanhou/yingyang/" title="产后饮食">产后饮食</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/chanhou/buru/" title="产后哺乳">产后哺乳</a>| <a target="_blank" href="http://www.qbaobei.com/jiankang/chanhou/chby/" title="产后避孕">产后避孕</a> </div>
+    </div>
+
+    <div class="boxright">
+        <div class="zhuanti">
+            <div class="commontitle"> <b>精彩专题</b> </div>
+            <dl>
+                <dt><a target="_blank" href="http://www.qbaobei.com/plans/yunqitongfang" title="怀孕期间可以同房吗"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071731482185.jpg" alt="怀孕期间可以同房吗"></a></dt>
+                <dd>
+                    <h4><a target="_blank" href="http://www.qbaobei.com/plans/yunqitongfang" title="怀孕期间可以同房吗">怀孕期间可以同房吗</a></h4>
+                    怀孕期间可以同房吗？健康而适度的性生活能大大增进夫妻间的感情，并且不必担心避孕问题，夫妻更能体验到房<br>
+                    <a class="enter" target="_blank" href="http://www.qbaobei.com/plans/yunqitongfang"> 进入专题&gt;&gt; </a></dd>
+            </dl>
+            <ul>
+                <li><a href="" title="" target="&#xD;&#xA;                      _blank&#xD;&#xA;                  "></a></li>
+                <li><a href="http://www.qbaobei.com/plans/fenmianfangshi/" title="分娩方式大起底" target="&#xD;&#xA;                      _blank&#xD;&#xA;                  ">分娩方式大起底</a></li>
+                <li><a href="http://www.qbaobei.com/plans/yunwanqi/" title="孕晚期注意事项" target="&#xD;&#xA;                      _blank&#xD;&#xA;                  ">孕晚期注意事项</a></li>
+                <li><a href="http://www.qbaobei.com/plans/yurenjie/" title="健康妈咪不贫血" target="&#xD;&#xA;                      _blank&#xD;&#xA;                  ">健康妈咪不贫血</a></li>
+                <li><a href="" title="孕早期指南" target="&#xD;&#xA;                      _blank&#xD;&#xA;                  ">孕早期指南</a></li>
+            </ul>
+        </div>
+        <div class="recommend">
+            <div class="commontitle"> <b>编辑推荐</b> </div>
+            <volist name="author" id="val">
+            <dl>
+                <dt><a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" alt="{$val['title']}" title="{$val['title']}"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a></dt>
+                <dd><a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" alt="{$val['title']}" title="{$val['title']}">{$val['title']}</a></dd>
+            </dl>
+            </volist>
+            <div class="clear"> </div>
+        </div>
+    </div>
+    <div class="clear"> </div>
+    <div class="l-ad">
+        <div class="boxB1">
+            <!-- qbaobei_jiankang_tonglan2 -->
+            <div id='div-gpt-ad-1351223277233-0' style='width:728px; height:90px;'>
+            <!-- 广告位：母婴健康Banner2 -->
+              <script type="text/javascript">BAIDU_CLB_fillSlot("1100788");</script>
+            </div>
+        </div>
+        <div class="boxB2"> <a href="/plans/chanhoujianfei/" target="_blank" > <img border="0" src="/Template/Qbaobei/Skin/images/220-90.jpg?00"/></a> </div>
+        <div class="clear"></div>
+    </div>
+</div>
+ 
+<div class="commonbox box1">
+<div class="classtify-tt buyu">
+    <ul>
+        <li><span>哺育期</span></li>
+    </ul>
+    <div class="y-alink"> <a target="_blank" href="http://www.qbaobei.com/jiankang/chanhou/buru/" title="产后哺乳">产后哺乳</a><a target="_blank" href="http://www.qbaobei.com/jiankang/chanhou/huifu/" title="产后恢复">产后恢复</a><a target="_blank" href="http://www.qbaobei.com/jiankang/fenmian/zcnc/" title="早产难产">早产难产</a><a target="_blank" href="http://www.qbaobei.com/chengzhang/xse/zcehl/" title="早产儿护理">早产儿护理</a><a target="_blank" href="http://www.qbaobei.com/jiankang/chanhou/baojian/" title="产后保健">产后保健</a><a target="_blank" href="http://www.qbaobei.com/chengzhang/xse/xsehl/" title="新生儿护理">新生儿护理</a> </div>
+</div>
+<div class="boxleft">
+    <div class="slide"> <a target="_blank" href="http://www.qbaobei.com/plans/xinaiqi/" title="吸奶器什么牌子好"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071541124876.jpg" alt="吸奶器什么牌子好"></a> </div>
+    <div class="parg-contact">
+        <div class="commontitle"> <b>宝宝成长日历</b> </div>
+        <div class="calendar"> <a class="on" title="一月" href="http://www.qbaobei.com/jieti/28537.html" target="_blank"> 1</a><a title="二月" href="http://www.qbaobei.com/jieti/28538.html" target="_blank">2</a>
+            <a title="三月" href="http://www.qbaobei.com/jieti/28539.html" target="_blank">3</a>
+            <a title="四月" href="http://www.qbaobei.com/jieti/28541.html" target="_blank">4</a>
+            <a title="五月" href="http://www.qbaobei.com/jieti/28542.html" target="_blank">5</a>
+            <a title="六月" href="http://www.qbaobei.com/jieti/28543.html" target="_blank">6</a>
+            <a title="七月" href="http://www.qbaobei.com/jieti/28545.html" target="_blank">7</a>
+            <a title="八月" href="http://www.qbaobei.com/jieti/28546.html" target="_blank">8</a>
+            <a title="九月" href="http://www.qbaobei.com/jieti/28547.html" target="_blank">9</a>
+            <a title="十月" href="http://www.qbaobei.com/jieti/28548.html" target="_blank">10</a>
+            <a title="十一月" href="http://www.qbaobei.com/jieti/28549.html" target="_blank">11</a>
+            <a title="一岁" href="http://www.qbaobei.com/jieti/28550.html" target="_blank">12</a>
+            <a title="一岁零一个月" href="http://www.qbaobei.com/jieti/28559.html" target="_blank">13</a>
+            <a title="一岁零二个月" href="http://www.qbaobei.com/jieti/28561.html" target="_blank">14</a>
+            <a title="一岁零三个月" href="http://www.qbaobei.com/jieti/28562.html" target="_blank">15</a>
+            <a title="一岁零四个月" href="http://www.qbaobei.com/jieti/28564.html" target="_blank">16</a>
+            <a title="一岁零五个月" href="http://www.qbaobei.com/jieti/28566.html" target="_blank">17</a>
+            <a title="一岁零六个月" href="http://www.qbaobei.com/jieti/28568.html" target="_blank">18</a>
+            <a title="一岁零七个月" href="http://www.qbaobei.com/jieti/28569.html" target="_blank">19</a>
+            <a title="一岁零八个月" href="http://www.qbaobei.com/jieti/28570.html" target="_blank">20</a>
+            <a title="一岁零九个月" href="http://www.qbaobei.com/jieti/28572.html" target="_blank">21</a>
+            <a title="一岁零十个月" href="http://www.qbaobei.com/jieti/28574.html" target="_blank">22</a>
+            <a title="一岁零十一个月" href="http://www.qbaobei.com/jieti/28575.html" target="_blank">23</a>
+            <a title="两岁" href="http://www.qbaobei.com/jieti/28577.html" target="_blank">24</a>
+            <a title="两岁零一个月" href="http://www.qbaobei.com/jieti/28614.html" target="_blank">25</a>
+            <a title="两岁零二个月" href="http://www.qbaobei.com/jieti/28617.html" target="_blank">26</a>
+            <a title="两岁零三个月" href="http://www.qbaobei.com/jieti/28619.html" target="_blank">27</a>
+            <a title="两岁零四个月" href="http://www.qbaobei.com/jieti/28620.html" target="_blank">28</a>
+            <a title="两岁零五个月" href="http://www.qbaobei.com/jieti/28622.html" target="_blank">29</a>
+            <a title="两岁零六个月" href="http://www.qbaobei.com/jieti/28623.html" target="_blank">30</a>
+            <a title="两岁零七个月" href="http://www.qbaobei.com/jieti/28624.html" target="_blank">31</a>
+            <a title="两岁零八个月" href="http://www.qbaobei.com/jieti/28625.html" target="_blank">32</a>
+            <a title="两岁零九个月" href="http://www.qbaobei.com/jieti/28626.html" target="_blank">33</a>
+            <a title="两岁零十个月" href="http://www.qbaobei.com/jieti/28628.html" target="_blank">34</a>
+            <a title="两岁零十一个月" href="http://www.qbaobei.com/jieti/28629.html" target="_blank">35</a>
+            <a title="三岁" href="http://www.qbaobei.com/jieti/28635.html" class="la" target="_blank"> 3岁</a>
+            <a title="四岁" href="http://www.qbaobei.com/jieti/30061.html" class="la" target="_blank">4岁</a>
+            <a title="五岁" href="http://www.qbaobei.com/jieti/30062.html" class="la" target="_blank">5岁</a>
+            <a title="六岁" href="http://www.qbaobei.com/jieti/30063.html" class="la" target="_blank">6岁</a>
+        </div>
+        <div class="contactimg"> <a target="_blank" href="http://www.qbaobei.com/plans/bbzhiniaoku/" title="如何给宝宝挑选纸尿裤"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071733293138.jpg" alt="如何给宝宝挑选纸尿裤"></a></div>
+    </div>
+</div>
+
+
+<div class="boxmiddle">
+    <div class="agestep">
+        <div class="as-left"><a class="sort" target="_blank" href="http://www.qbaobei.com/chengzhang/xse/" title="{$buyuqi[0]['title']}">{$buyuqi[0]['title']}</a>
+            <div class="newsimg"><a target="_blank" href="http://www.qbaobei.com/jiankang/bbjb/chushengjibing/20130924_281979.html" title="新生儿溢奶不是病"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071740435821.jpg" alt="新生儿溢奶不是病"></a><span>新生儿溢奶不是病</span></div>
+        </div>
+        <div class="as-right">
+            <h3><a target="_blank" href="{:staticUrl('detail',$buyuqi[0]['article']['id'],'Document')}" title="{$buyuqi[0]['article']['title']}">{$buyuqi[0]['article']['title']}</a></h3>
+            <volist name="buyuqi[0]['child']" id="val">
+                <dl>
+                    <dt> <span class="node_name"> <a href="{:staticUrl('lists',$val['id'],'Document')}" target="_self"> [{$val['title']}] </a> </span> </dt>
+                    <dd> <a target="_blank" href="{:staticUrl('detail',$val['article']['id'],'Document')}" title="{$val['article']['title']}">{$val['article']['title']}</a> </dd>
+                </dl>
+            </volist>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="keyword">
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/xse/xsehl/20121022_231061.html" title="新生儿洗澡">新生儿洗澡</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/xse/zcehl/20121017_230171.html" title="早产儿贫血">早产儿贫血</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/xse/xsehl/20121017_230163.html" title="宝宝鹅口疮">宝宝鹅口疮</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/xse/xsehl/20121009_228624.html" title="新生儿腹泻">新生儿腹泻</a>
+    </div>
+    <div class="agestep">
+        <div class="as-left"><a class="sort" target="_blank" href="http://www.qbaobei.com/chengzhang/0-1/" title="0-1岁">0-1岁</a>
+            <div class="newsimg"><a target="_blank" href="http://www.qbaobei.com/plans/baobaoshizhen/" title="婴儿湿疹怎么办"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071741025722.jpg" alt="婴儿湿疹怎么办"></a><span>婴儿湿疹怎么办</span></div>
+        </div>
+        <div class="as-right">
+            <h3><a target="_blank" href="{:staticUrl('detail',$buyuqi[1]['article']['id'],'Document')}" title="{$buyuqi[1]['article']['title']}">{$buyuqi[1]['article']['title']}</a></h3>
+            <volist name="buyuqi[1]['child']" id="val">
+                <dl>
+                    <dt> <span class="node_name"> <a href="{:staticUrl('lists',$val['id'],'Document')}" target="_self"> [{$val['title']}] </a> </span> </dt>
+                    <dd> <a target="_blank" href="{:staticUrl('detail',$val['article']['id'],'Document')}" title="{$val['article']['title']}">{$val['article']['title']}</a> </dd>
+                </dl>
+            </volist>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="keyword">
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/0-1/yejk/20121015_229778.html" title="宝宝睡眠">宝宝睡眠</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/0-1/yejk/20121017_230328.html" title="婴儿补铁">婴儿补铁</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/0-1/yeyy/20121022_230985.html" title="补钙食谱">补钙食谱</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/0-1/yejy/20120924_226899.html" title="宝宝智力">宝宝智力</a>
+    </div>
+    <div class="agestep">
+        <div class="as-left"><a class="sort" target="_blank" href="http://www.qbaobei.com/chengzhang/1-3/" title="1-3岁">1-3岁</a>
+            <div class="newsimg"><a target="_blank" href="http://www.qbaobei.com/plans/xiaohaikesou/" title="小孩咳嗽怎么办"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071741234435.jpg" alt="小孩咳嗽怎么办"></a><span>小孩咳嗽怎么办</span></div>
+        </div>
+        <div class="as-right">
+            <h3><a target="_blank" href="{:staticUrl('detail',$buyuqi[2]['article']['id'],'Document')}" title="{$buyuqi[2]['article']['title']}">{$buyuqi[2]['article']['title']}</a></h3>
+            <volist name="buyuqi[2]['child']" id="val">
+                <dl>
+                    <dt> <span class="node_name"> <a href="{:staticUrl('lists',$val['id'],'Document')}" target="_self"> [{$val['title']}] </a> </span> </dt>
+                    <dd> <a target="_blank" href="{:staticUrl('detail',$val['article']['id'],'Document')}" title="{$val['article']['title']}">{$val['article']['title']}</a> </dd>
+                </dl>
+            </volist>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="keyword">
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/1-3/youerjk/20121015_229775.html" title="安抚奶嘴">安抚奶嘴</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/1-3/youeryy/20120919_226309.html" title="垃圾食品">垃圾食品</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/1-3/youerjb/20121012_229344.html" title="宝宝抽动症">宝宝抽动症</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/1-3/youerjy/20121015_229544.html" title="幼儿手部训练">幼儿手部训练</a>
+    </div>
+    <div class="agestep">
+        <div class="as-left"><a class="sort" target="_blank" href="http://www.qbaobei.com/chengzhang/3-6/" title="3-6岁">3-6岁</a>
+            <div class="newsimg"><a target="_blank" href="http://www.qbaobei.com/plans/liusuibbshipu/" title="6岁宝宝食谱大全"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2014/1/201401071741410242.jpg" alt="6岁宝宝食谱大全"></a><span>6岁宝宝食谱大全</span></div>
+        </div>
+        <div class="as-right">
+            <h3><a target="_blank" href="{:staticUrl('detail',$buyuqi[3]['article']['id'],'Document')}" title="{$buyuqi[3]['article']['title']}">{$buyuqi[3]['article']['title']}</a></h3>
+            <volist name="buyuqi[3]['child']" id="val">
+                <dl>
+                    <dt> <span class="node_name"> <a href="{:staticUrl('lists',$val['id'],'Document')}" target="_self"> [{$val['title']}] </a> </span> </dt>
+                    <dd> <a target="_blank" href="{:staticUrl('detail',$val['article']['id'],'Document')}" title="{$val['article']['title']}">{$val['article']['title']}</a> </dd>
+                </dl>
+            </volist>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="keyword">
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/3-6/xlqjy/20120917_225814.html" title="防范陌生人">防范陌生人</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/3-6/xlqjb/20120922_226775.html" title="婴儿脑瘫">婴儿脑瘫</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/3-6/xlqjy/20120926_227524.html" title="奶声奶气">奶声奶气</a>|
+        <a target="_blank" href="http://www.qbaobei.com/chengzhang/3-6/xlqjb/20121010_228708.html" title="孩子上火">孩子上火</a>
+    </div>
+</div>
+
+
+<div class="boxright">
+    <div class="zhuanti">
+        <div class="commontitle"> <b>精彩专题</b> </div>
+        <dl>
+            <dt><a target="_blank" href="http://www.qbaobei.com/plans/yunfubianmi/" title="孕妇便秘怎么办"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/10/201310141151553168_S.jpg" alt="孕妇便秘怎么办"></a></dt>
+            <dd>
+                <h4><a target="_blank" href="http://www.qbaobei.com/plans/yunfubianmi/" title="孕妇便秘怎么办">孕妇便秘怎么办</a></h4>
+                便秘，对孕妇来说，是一种难以启齿的困扰，便秘一般可分为弛缓性、痉挛性、直肠性三种，孕期中多为弛缓性便<br>
+                <a class="enter" target="_blank" href="http://www.qbaobei.com/plans/yunfubianmi/"> 进入专题&gt;&gt; </a></dd>
+        </dl>
+        <ul>
+            {:W('Qbaobei/healthLi',array(rand_where('document',5,'category_id IN(136,137,138,139)'),5,'id ASC'))}
+        </ul>
+    </div>
+    <div class="takecare">
+        <div class="commontitle"> <b>育儿心得</b> </div>
+        <div class="tc-img"> <a target="_blank" href="http://www.qbaobei.com/plans/baobaoxueyingyu/" title="宝宝学英语"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/10/201310141151257549.jpg" alt="宝宝学英语"></a> </div>
+        <ul>
+            {:W('Qbaobei/healthLi',array(rand_where('document',8,'category_id IN(140,141,142,143)'),8,'id ASC'))}
+        </ul>
+        <div class="clear"> </div>
+    </div>
+</div>
+<div class="clear"> </div>
+<div class="l-ad">
+    <div class="boxB1">
+   <!-- 广告位：母婴健康Banner3 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1100790");</script>
+    </div>
+    <div class="boxB2"> <a href="/plans/chanhoujianfei/" target="_blank" > <img border="0" src="/Template/Qbaobei/Skin/images/234.jpg?000" style="width:234px"></a> </div>
+    <div class="clear"></div>
+</div>
+</div>
+ 
+<div class="commonbox box1">
+    <div class="classtify-tt live">
+        <ul>
+            <li><span>生&nbsp;&nbsp;活</span></li>
+        </ul>
+        <div class="y-alink"> <a target="_blank" href="http://www.qbaobei.com/jiankang/info/baike/" title="百科知识">百科知识</a><a target="_blank" href="http://www.qbaobei.com/jiankang/info/focus/" title="焦点关注">焦点关注</a><a target="_blank" href="http://www.qbaobei.com/jiankang/info/yule/" title="娱乐明星">娱乐明星</a><a target="_blank" href="http://www.qbaobei.com/jiankang/info/xingzuo/" title="星座奇缘">星座奇缘</a><a target="_blank" href="http://www.qbaobei.com/jiankang/myyp/" title="母婴用品">母婴用品</a> </div>
+    </div>
+    <div class="boxleft">
+        <div class="slide"> <a target="_blank" href="http://www.qbaobei.com/plans/fangfushe/" title="防辐射服有用吗"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/12/201312021651444443.jpg" alt="防辐射服有用吗"></a> </div>
+        <div class="parg-contact">
+            <div class="commontitle"> <b>焦点关注</b> </div>
+            <ul>
+                {:W('Qbaobei/healthLi',array('category_id =115'))}
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="boxmiddle">
+        <volist name="life" id="rel">
+            <php>if($i!=1){</php>
+            <div class="line"> </div>
+            <php>}</php>
+            <div class="agestep">
+                <div class="as-left"><a class="sort" target="_blank" href="{:staticUrl('lists',$rel['id'],'Document')}" title="{$rel['title']}">{$rel['title']}</a>
+                    <div class="newsimg"><a target="_blank" href="{:staticUrl('detail',$rel['article'][0]['id'],'Document')}" title="{$rel['article'][0]['title']}"><img src="{:get_cover($rel['article'][0]['smallimg'],'path')}" alt="{$rel['article'][0]['title']}"></a><a target="_blank" href="{:staticUrl('detail',$rel['article'][0]['id'],'Document')}" title="{$rel['article'][0]['title']}"><span>{$rel['article'][0]['title']}</span></a></div>
+                </div>
+                <div class="as-right">
+                    <h3><a target="_blank" href="{:staticUrl('detail',$rel['article'][1]['id'],'Document')}" title="{$rel['article'][1]['title']}">{$rel['article'][1]['title']}</a></h3>
+                    <ul class="livemidlle">
+                        <volist name="rel['article']" id="val" offset="2" length="4">
+                            <li> <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val['title']}</a> </li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </volist>
+    </div>
+
+
+    <div class="boxright">
+        <div class="zhuanti">
+            <div class="commontitle"> <b>精彩专题</b> </div>
+            <dl>
+                <dt><a target="_blank" href="http://www.qbaobei.com/plans/yjtuichi" title="月经推迟的原因"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/10/201310141121491186_S.jpg" alt="月经推迟的原因"></a></dt>
+                <dd>
+                    <h4><a target="_blank" href="http://www.qbaobei.com/plans/yjtuichi" title="月经推迟的原因">月经推迟的原因</a></h4>
+                    女性月经周期一般为28～30天。提前或延后7天左右仍属正常范围，周期长短因 人而异。但是如果超出7天后还没<br>
+                    <a class="enter" target="_blank" href="http://www.qbaobei.com/plans/yjtuichi"> 进入专题&gt;&gt; </a></dd>
+            </dl>
+            <ul>
+                <li><a href="http://www.qbaobei.com/plans/zhongkao2014/" title="2014，直击中考" target="&#xD;&#xA;                      _blank&#xD;&#xA;                  ">2014，直击中考</a></li>
+                <li><a href="http://www.qbaobei.com/plans/gaokaohougonglue/" title="为自己选择一个更美好的未来" target="&#xD;&#xA;                      _blank&#xD;&#xA;                  ">为自己选择一个更美好的未</a></li>
+                <li><a href="http://www.qbaobei.com/plans/xiajishuiguo/" title="夏季吃什么水果好" target="&#xD;&#xA;                      _blank&#xD;&#xA;                  ">夏季吃什么水果好</a></li>
+                <li><a href="http://www.qbaobei.com/plans/mothersgift/" title="母亲节送什么礼物" target="&#xD;&#xA;                      _blank&#xD;&#xA;                  ">母亲节送什么礼物</a></li>
+                <li><a href="http://www.qbaobei.com/plans/shejian2/" title="舌尖上的中国第二季" target="&#xD;&#xA;                      _blank&#xD;&#xA;                  ">舌尖上的中国第二季</a></li>
+            </ul>
+        </div>
+        <div class="takecare">
+            <div class="commontitle"> <b>趣味生活</b> </div>
+            <ul>
+                <li><a target="_blank" href="http://bbs.qbaobei.com/thread-215241-1-1.html" title="新妈妈如何再次入职场">新妈妈如何再次入职场</a></li>
+                <li><a target="_blank" href="http://bbs.qbaobei.com/thread-215061-1-1.html" title="宝宝马上就要满三岁了，公公婆婆确坚持给孩子过农历生日">宝宝马上就要满三岁了，公公婆婆确坚持给孩子过农历生日</a></li>
+                <li><a target="_blank" href="http://bbs.qbaobei.com/thread-215242-1-1.html" title="宁做二奶也不嫁80后">宁做二奶也不嫁80后</a></li>
+                <li><a target="_blank" href="http://bbs.qbaobei.com/thread-190725-1-1.html" title="想找育儿书籍，来这里220本经典育儿书籍吐血推荐">想找育儿书籍，来这里220本经典育儿书籍吐血推荐</a></li>
+                <li><a target="_blank" href="http://bbs.qbaobei.com/thread-218380-1-1.html" title="十二星座好色男女外遇几率终极排行榜  ">十二星座好色男女外遇几率终极排行榜 </a></li>
+                <li><a target="_blank" href="http://bbs.qbaobei.com/thread-200939-1-1.html" title="挑逗or撒娇 哄好老公的10个手段">挑逗or撒娇 哄好老公的10个手段</a></li>
+            </ul>
+            <div class="clear"> </div>
+        </div>
+    </div>
+    <div class="clear"> </div>
+</div>
+
+
+<div class="commonbox box1">
+    <div class="pic">
+        <div class="pictitle"> <span>精彩贴图</span> </div>
+        <div class="pic-content">
+            <div class="showbox">
+                <ul>
+                    <li><a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/shengnanshengnv/20131104_287299.html" alt="2014生男生女预测表"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2012/10/201210291622447512.jpg" alt="2014生男生女预测表"></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/shengnanshengnv/20131104_287299.html" title="2014生男生女预测表" alt="2014生男生女预测表">2014生男生女预测表</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/jiankang/info/xingzuo/20140223_294122.html" title="2014年3月份星座运势"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/7/201307301125069631.jpg" alt=""></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/jiankang/info/xingzuo/20140223_294122.html" title="2014年3月份星座运势" alt="2014生男生女预测表">2014年3月份星座运势</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/plans/xinshengerhuli/" title="新生儿该如何护理"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2012/10/201210291623107353.jpg" alt=""></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/plans/xinshengerhuli/" title="新生儿该如何护理" alt="/UploadFiles/jiankang/2012/10/201210291623107353.jpg">新生儿该如何护理</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/liangxing/20120927_227708.html" title="女人应学习的7个性爱技巧"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2012/10/201210291622579066.jpg" alt=""></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/jiankang/beiyun/liangxing/20120927_227708.html" title="女人应学习的7个性爱技巧" alt="">女人应学习的7个性爱技巧</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/plans/biyunyao" alt="避孕药的副作用"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2012/12/201212290957112941.jpg" alt="避孕药的副作用"></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/plans/biyunyao" title="避孕药的副作用" alt="避孕药的副作用">避孕药的副作用</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/plans/yisuibbshipu/" title="一岁宝宝食谱大全"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/5/201305300951109549.jpg" alt=""></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/plans/yisuibbshipu/" title="一岁宝宝食谱大全" alt="避孕药的副作用">一岁宝宝食谱大全</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/plans/baobaoladuzi/" title="宝宝拉肚子怎么办"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2012/10/201210291624164667.jpg" alt=""></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/plans/baobaoladuzi/" title="宝宝拉肚子怎么办" alt="/UploadFiles/jiankang/2012/10/201210291624164667.jpg">宝宝拉肚子怎么办</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/plans/xiaohaikesou/" title="小孩咳嗽吃什么好的快"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/5/201305300952007593.jpg" alt=""></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/plans/xiaohaikesou/" title="小孩咳嗽吃什么好的快" alt="">小孩咳嗽吃什么好的快</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/plans/fenmianzt/" alt="顺产好还是剖腹产好"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/5/201305300955209714.jpg" alt="顺产好还是剖腹产好"></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/plans/fenmianzt/" title="顺产好还是剖腹产好" alt="顺产好还是剖腹产好">顺产好还是剖腹产好</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/jiankang/info/xingzuo/20131220_291248.html" title="唐立淇2014星座运势"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2013/7/201307301126157139.jpg" alt=""></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/jiankang/info/xingzuo/20131220_291248.html" title="唐立淇2014星座运势" alt="顺产好还是剖腹产好">唐立淇2014星座运势</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/plans/huaiyunchuqi/" title="怀孕初期肚子疼"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2012/12/201212290955269340.jpg" alt=""></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/plans/huaiyunchuqi/" title="怀孕初期肚子疼" alt="/UploadFiles/jiankang/2012/12/201212290955269340.jpg">怀孕初期肚子疼</a></li>
+                    <li><a target="_blank" href="http://www.qbaobei.com/plans/xingaijiqiao/" title="你不得不知的性爱技巧"><img src="http://www.qbaobei.com/UploadFiles/jiankang/2012/10/201210291624546822.jpg" alt=""></a><br>
+                        <a target="_blank" href="http://www.qbaobei.com/plans/xingaijiqiao/" title="你不得不知的性爱技巧" alt="">你不得不知的性爱技巧</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"> </div>
+    </div>
+</div>
+
+
+<div class="commonbox userbar">
+    <script src="http://home.qbaobei.com/common/status.aspx?type=2&url=http://www.qbaobei.com/jiankang/"
+            type="text/javascript"> </script>
+</div>
+<div class="q-footer jk_mar_t">
+    <div class="cont">
+        <div class="aboutus"> ﻿ <a rel="nofollow" href="http://www.qbaobei.com/webroot/aboutus.html?id=1" target="_blank"> 关于我们</a> | <a rel="nofollow" href="http://www.qbaobei.com/webroot/aboutus.html?id=3" target="_blank"> 广告服务</a> | <a rel="nofollow" href="http://www.qbaobei.com/webroot/aboutus.html?id=4"
+                                                                                                                                                                                                                                               target="_blank">投稿指南</a> | <a rel="nofollow" href="http://www.qbaobei.com/webroot/aboutus.html?id=5"
+                                                                                                                                                                                                                                                                             target="_blank">网站合作</a> | <a rel="nofollow" href="http://www.qbaobei.com/webroot/aboutus.html?id=6"
+                                                                                                                                                                                                                                                                                                           target="_blank">免责声明</a> | <a rel="nofollow" href="http://www.qbaobei.com/webroot/aboutus.html?id=7"
+                                                                                                                                                                                                                                                                                                                                         target="_blank">联系我们</a><br />
+            &copy; 2011 <a rel="nofollow" href="http://www.qbaobei.com" target="_blank" title="亲亲宝贝网"> 亲亲宝贝网</a> 版权所有 <a href="http://www.miibeian.gov.cn" target="_blank"
+                                                                                                                         rel="nofollow">粤ICP备13041365号-2</a> <a href="http://www.qbaobei.com/images/20110810/wangluoshiting.jpg"
+                                                                                                                                                                target="_blank" title="信息网络传播视听节目许可证" rel="nofollow">网络视听许可证1911597号</a> <a href="http://www.qbaobei.com/images/xukezheng.jpg"
+                                                                                                                                                                                                                                            target="_blank" title="增值电信业务经营许可证:粤B2-20070459" rel="nofollow">增值电信业务经营许可证:粤B2-20070459</a>
+            <div style="display: none">
+                <script src="http://www.qbaobei.com/Templates/oldweb/scripts/g.js" language="JavaScript" charset="gb2312"></script>
+            </div>
+            <br />
+            <a rel="nofollow" href="http://www.sznet110.gov.cn" target="_blank" title="公安亭"> <img src="http://www.qbaobei.com/templates/oldweb/images/qbaobei/sznet110gangting.gif" /></a> <a rel="nofollow" href="http://www.sznet110.gov.cn/webrecord/innernet/Welcome.jsp?bano=44030000201311"
+                                                                                                                                                                                              target="_blank" title="网安"> <img src="http://www.qbaobei.com/templates/oldweb/images/qbaobei/sznet110anwang.gif" /></a> <a rel="nofollow" class="cservice" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=630186001&site=亲亲宝贝网&menu=yes"> <img border="0" src="http://www.qbaobei.com/templates/oldweb/images/qbaobei/qq-news.png"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    alt="新闻投稿" title="新闻投稿"></a> <a rel="nofollow" class="cservice" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1281864170&site=亲亲宝贝网&menu=yes"> <img border="0" src="http://www.qbaobei.com/templates/oldweb/images/qbaobei/qq_cs.png"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                alt="亲亲在线" title="亲亲在线"></a> <a rel="nofollow" class="cservice" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=627502351&site=亲亲宝贝网&menu=yes"> <img border="0" src="http://www.qbaobei.com/templates/oldweb/images/qbaobei/qq_market.gif"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           alt="业务合作" title="业务合作"></a>
+            <script type="text/javascript">
+                (function() {
+                    var baidu = document.createElement('script'); baidu.type = 'text/javascript'; baidu.async = true;
+                    baidu.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'hm.baidu.com/h.js?924d0463dac9e0c1d9e2258dfc2a6b6b';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(baidu, s);
+                })();
+            </script>
+            <!--到顶部 begin-->
+            <style>
+                a.gotop {background-color: #FAFAFA;border: 1px solid #E0E0E0;color: #D4D4D4;cursor: pointer;display: block;height: 54px;outline: medium none;position: fixed;right: 0;top: 560px;width: 54px;text-decoration: none;}
+                a.gotop i {display: block;font-size: 30px;font-style: normal;height: 24px;line-height: 50px;overflow: hidden;text-align: center;}
+                a.gotop b {display: block;font-size: 20px;font-style: normal;height: 16px;line-height: 2px;overflow: hidden;text-align: center;}
+            </style>
+            <a class="gotop" title="返回顶部" href="#"> <i>◆</i> <b>■</b> </a>
+            <!--到顶部 end-->
+            ﻿<!-- qbaobei_jiankang_tonglan2 -->
+            <div id='div-gpt-ad-1351223277233-0' style='width:728px; height:90px;'>
+                <!-- Baidu Button BEGIN -->
+                <script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=2&amp;pos=right&amp;uid=679504" ></script>
+                <script type="text/javascript" id="bdshell_js"></script>
+                <script type="text/javascript">
+                    var bds_config={"bdTop":100};
+                    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+                </script>
+                <!-- Baidu Button END -->
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<notempty name="lists">
+<div class="right baike-dataBox">
+   <div class="fn-title"><h2>热门图片推荐</h2></div>
+      <div class="fn-ul-list">
+                    <ul class="fn-pic-list">
+                            <volist name="lists" id="vo">
+                                  <li><a href="{:staticUrl('detail',$vo['id'],'Gallery')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}"><span>{$vo['title']}</span></a></li>
+                           </volist>
+                    </ul>
+      </div>
+</div>
+</notempty>

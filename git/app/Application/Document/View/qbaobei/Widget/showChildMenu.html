@@ -1,0 +1,6 @@
+<em class="arr"></em>
+<div class="hidebox"> 
+<volist name="lists" id="vo">
+<a href="{:staticUrl('lists',$vo['id'],'Document')}" target="_blank"><s class="ico"><img src="{:get_cover($vo['icon'],'path')}"></s>{$vo['title']}</a>
+</volist>
+</div>

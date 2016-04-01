@@ -1,0 +1,9 @@
+<ul class="yesp-ul">
+  <volist name="lists" id="article">
+    <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article['title']}"></a>
+      <div class="info"><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article['title']}</a>
+        <p>{$article['description']}</p>
+      </div>
+    </li>
+  </volist>
+</ul>

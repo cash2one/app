@@ -1,0 +1,92 @@
+<extend name="Home@afsmobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afsmobile/css/index.css"/>
+</block>
+<block name="body">
+    <!--banner-->
+	<section class="scroll" data-sudaclick="main_focus">
+		<ul class="slide" id="slide">
+         <Think:article basename="Document" name="article" limit="4" where="category_rootid=80&&home_position & 1" order="create_time desc">
+         <li><a href="{:staticUrlMobile('detail', $article['id'],'Document')}"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"><p>{$article.title}</p></a></li>
+          </Think:article>
+		</ul>
+		<div class="slide_dot" id="slide_dot"></div>
+	</section>
+   <!--四个圆盘-->
+   <section id="four_circle">
+       <span class="game">
+           <a href="{:C('MOBILE_STATIC_URL')}/danji/" class="pic" ></a>
+           <a href="{:C('MOBILE_STATIC_URL')}/danji/">单机</a>
+       </span>
+       <span class="web">
+            <a href="{:C('MOBILE_STATIC_URL')}/shouyou/" class="pic" ></a>
+           <a href="{:C('MOBILE_STATIC_URL')}/shouyou/">网游</a>
+       </span>
+       <span class="adr">
+          <a href="{:C('MOBILE_STATIC_URL')}{:getWidgetPath('47')}" class="pic" ></a>
+           <a href="{:C('MOBILE_STATIC_URL')}{:getWidgetPath('47')}">专区</a>
+       </span>
+       <span class="app">
+           <a href="{:C('MOBILE_STATIC_URL')}/ka/" class="pic" ></a>
+           <a href="{:C('MOBILE_STATIC_URL')}/ka/">礼包</a>
+       </span>
+   </section>
+   <!--news-->
+   <section id="wraper" class="news">
+       <p class="title"><a href="{:C('MOBILE_STATIC_URL')}/zixun/">更多+</a><span>最新资讯 <b>NEWS</b></span></p>
+           <ul>
+            <Think:article basename="Document" name="article" limit="10" where="category_rootid=80" order="create_time desc">
+    <li><a href="{:staticUrlMobile('detail', $article['id'],'Document')}"><b>[手游攻略]</b>{$article.title}</a></li>
+           </Think:article>
+           </ul>
+   </section>
+
+   <!--news-->
+   <section id="wraper" class="game">
+       <p class="title"><a href="{:C('MOBILE_STATIC_URL')}/shouyou/">更多+</a><span>推荐游戏 <b>HOT</b></span></p>
+           <ul>
+            <Think:article basename="Down" name="dmain"  where="smallimg!=0&&position & 1"  order="update_time desc" limit="10">
+              <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></div>
+                       <div><i>{:getCateName($article['id'],'Down')}</i><i>{$article['size']}</i><i>{:getLanguage($article['id'])}</i></div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+        </Think:article>
+           </ul>
+   </section>
+
+
+   <section id="wraper" class="game libao">
+       <p class="title"><a href="{:C('MOBILE_STATIC_URL')}/li/">更多+</a><span>精品礼包 <b>GIFT</b></span></p>
+           <ul>
+             <Think:article basename="Package" name="pmain" limit="5"  order="create_time desc">
+             <li>
+                   <a href="{:staticUrlMobile('detail',$article['id'],'Package')}" class="pic"><img src="{:get_cover($article['cover_id'],'path')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail',$article['id'],'Package')}">{$article.title}</a></div>
+                       <div><i>{:mb_substr(clean_str($article['content']),0,45)}...</i></div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail',$article['id'],'Package')}" class="down">领取</a>
+               </li>
+             </Think:article>
+           </ul>
+   </section>
+
+ 
+   <!--tags-->
+       {~W('Home/afsmobile/tags')}
+
+   <!--LINKs-->
+   <section id="wraper" class="links">
+       <p class="title"><span>友情链接 <b>LINK</b></span></p>
+       <div> 
+     <IndexTag:friendlink name="n" group="3" count="100">
+    <a href="{$n['url_token']}" target="_blank">{$n['title']}</a>
+    </IndexTag:friendlink>                                          
+       </div>
+   </section>
+</block>
+   

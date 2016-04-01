@@ -1,0 +1,32 @@
+   <!--猜你喜欢-->
+           <eq name="d" value="">
+<else/>
+            <div class="cnxh similar">
+                <p class="title">猜你喜欢</p>
+                <div id="wrapper2">
+                    <div id="scroller2">
+                        <ul id="thelist2">
+                          <volist name="d" id="vo" offset="0" length="5">
+                              <li><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}"><img src="{:get_cover($vo['smallimg'],'path','1','66','66')}"></a><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">{$vo['title']}</a></li>
+                          </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </eq>
+        <!--相关教程-->
+        
+        <eq name="a" value="">
+<else/>
+     <div class="xgwz" style="margin-top:10px;border-top:1px solid #dbdbdb">
+            <p class="title">相关文章</p>
+             <ul>
+            <volist name="a" id="vo" offset="0" length="5">
+             <li><a href="{:staticUrlMobile('detail', $vo['id'],'Document')}">{$vo['title']}</a></li>
+            </volist>
+            
+            </ul>
+         </div>
+</eq>
+    

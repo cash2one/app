@@ -1,0 +1,82 @@
+<extend name="Home@gfw/Base/commonWebsite" />
+
+<block name="style">
+    <link href="__PUBLIC__/Home/gfw/css/website.css" rel="stylesheet" type="text/css" />
+</block>
+
+
+<block name="body">
+    <div class="page-nav">
+        <div class="page-left">
+            <span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">&gt;</span>
+            <volist name="here" id="vo" key="k">
+                <if condition="$k lt count($here) ">
+                    <a href="{:staticUrl('lists',$vo['id'],'Down')}">{$vo.title}</a>
+                    <span class="grey">&gt;</span>
+                    <else />
+                    {$vo.title}
+                </if>
+            </volist>
+        </div>
+        <span class="sum"></span></div>
+    <div class="p-novel">
+        <div class="sitesl">
+            <notempty name="info['title']">
+            <div class="about gf-border">
+                <h3 class="about-title" title="{$info.title}">{$info.title}</h3>
+                <ul class="contact">
+                    <notempty name="info['contacks']"><li><i class="cicon1"></i><span>联系人：</span><span>{$info.contacks}</span></li></notempty>
+                        <notempty name="info['phone']"><li><i class="cicon2"></i><span>电  话：</span><span>{$info.phone}</span></li></notempty>
+                            <notempty name="info['telphone']"><li><i class="cicon3"></i><span>手  机：</span><span>{$info.telphone}</span></li></notempty>
+                                <notempty name="info['address']"><li><i class="cicon4"></i><span>地  址：</span><span class="add">{$info.address}</span></li></notempty>
+                </ul>
+                <div class="http"><a href="{:staticUrl('Detail',$info['id'],'Package')}" target="_blank"><span>进入官网</span></a></div>
+            </div>
+            </notempty>
+            <script type="text/javascript">BAIDU_CLB_fillSlot("1083676");</script>
+            <!-----about  -end----->
+            <div class="related  gf-border">
+                <div class="title">
+                    <h2>公司简介</h2>
+                </div>
+                <p class="related-text">
+                    {$info.content|msubstr=0,180,'utf-8',true}
+                </p>
+            </div>
+            <!-----related  -end----->
+            <div class="related  gf-border">
+                <div class="title">
+                    <h2>最新网站</h2>
+                </div>
+                <ul class="related-main">
+                    <Think:article basename="Package"  limit="5" where="position&2">
+                        <li><a href="{:staticUrl('detail',$article['id'],'Package')}">{$article.title|msubstr=0,12,'utf-8',false}</a><if condition="$k elt 4"><span class="gif-news"></span></if></li>
+                    </Think:article>
+                </ul>
+            </div>
+            <!-----related  -end----->
+        </div>
+        <!-----sitesl  -end----->
+        <div class="sitesr">
+            <div class="introduce1">
+                <div class="referral1">
+                    <ul class="model1">
+                        <volist name="prodata" id="vo">
+                            <php>$previewimg = explode(',', $vo['previewimg']);</php>
+                            <li>
+                                <a href="{:staticUrl('Detail',$vo['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" width="150" height="150"></a>
+                                <p class="m-title"><a href="{:staticUrl('Detail',$vo['id'],'Down')}">{$vo.title|msubstr=0,10,'utf-8',false}</a></p>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+
+            </div>
+            <!-----introduce  -end----->
+            <p id="fenye">{$show}</p>
+        </div>
+        <!-----sitesr  -end----->
+
+    </div>
+    <!-----p-novel   -end----->
+</block>

@@ -1,0 +1,22 @@
+{~$category_id = !empty($category_id)?$category_id:0;}
+<if condition="!in_array($category_id,array(1,2,3,4,5))">
+	{~$category_id = 0;}
+</if>
+<div id="header-menu">
+    <div id="menu">
+	    <div class="items cfl chunk-d">
+	        <h3 class="faint"><a href="javascript:;">所有网站分类<i class="bicon"></i></a></h3>
+	        {:W('Home/Gfw/tree',array(0,0,'PackageCategory'))}
+	        <!-----chunk01-end----->
+	    </div>
+	    <!-----下拉菜单-end----->
+	    <ul class="menu-main2">
+			<li><a id="nav_0" class="<if condition='$category_id eq 0'>yellow</if>" href="{:C('STATIC_URL')}/website/">网站大全</a></li>
+			<li><a id="nav_1" class="<if condition='$category_id eq 1'>yellow</if>" href="{:getWidgetPath('60')}">娱乐休闲</a></li>
+			<li><a id="nav_2" class="<if condition='$category_id eq 2'>yellow</if>" href="{:getWidgetPath('61')}">生活服务</a></li>
+			<li><a id="nav_3" class="<if condition='$category_id eq 3'>yellow</if>" href="{:getWidgetPath('62')}">文化教育</a></li>
+			<li><a id="nav_4" class="<if condition='$category_id eq 4'>yellow</if>" href="{:getWidgetPath('63')}">电脑网络</a></li>
+			<li><a id="nav_5" class="<if condition='$category_id eq 5'>yellow</if>" href="{:getWidgetPath('64')}">行业网站</a></li>
+		</ul>
+    </div>
+</div>

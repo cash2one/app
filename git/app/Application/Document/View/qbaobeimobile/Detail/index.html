@@ -1,0 +1,65 @@
+<extend name="Home@qbaobeimobile/Base/common2d"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/channel.css"/>
+</block>
+<block name="breadcrumbnav">{:W('Qbaobeimobile/ty_xq_mbx',array($info['category_id']))}</block>
+<block name="body">
+    <section class="baike-detail beiy-detail dis-bot">
+        <div class="detail-art-main">
+            <div class="art-title">
+                <h1>{$info['title']}</h1>
+                <span class="glass">大字</span>
+            </div>
+            <!--标签-->
+            <div class="add-tags">
+                <div class="ico"></div>
+                <div class="ico-tags-main">
+                    <div class="swiper-container6">
+                        <div class="swiper-wrapper">
+                            <volist name="tags" id="val"><a href="{:C('MOBILE_STATIC_URL')}/tag/{$val['name']}/" class="swiper-slide">{$val['title']}</a></volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--标签-->
+            <div class="by-art-intro"><span class="arr arr-top"></span><div class="art-intro-main">{$info['description']}</div><span class="arr arr-bot"></span></div>
+            <script>a();</script>
+            {:W('Qbaobeimobile/mp3',array($info['mediaurl']))}
+            <if condition="$info['step_read'] eq '1' AND !empty($info['stepList'])">
+                <article class="art-body">
+                    <volist name="info['stepList']" id="val">
+                        <div class="item">
+                            <div class="item-nub"><em class="nub">{$val['number']}</em><em class="bg"></em></div>
+                            <p class="introTit">{$val['title']}</p>
+                            {$val['content']}
+                        </div>
+                    </volist>
+                </article>
+                <else/>
+                <article class="art-body">
+                    <p class="introTit">{$info['title']}</p>
+                    {$info['content']}
+                </article>
+            </if>
+        </div>
+        <div class="share">
+            <div id="nativeShare"><span class="nativeShare-tit">分享：</span></div>
+            <div class="bdsharebuttonbox">
+                <a href="#" class="sina bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                <a href="#" class="qq bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+            </div>
+        </div>
+    </section>
+    <section id="weixin-code">
+    </section>
+    <script>c();</script>
+    {:W('Qbaobeimobile/by_related2',array($info,$tags))}
+    <input type="hidden" id="tj-user" name="tj-user" value="{$info['uid']}"/>
+    <input type="hidden" id="doc-id" name="doc-id" value="{$info['id']}"/>
+    <input type="hidden" id="doc-cid" name="doc-cid" value="{$info['category_id']}"/>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.relate.js"></script>
+</block>

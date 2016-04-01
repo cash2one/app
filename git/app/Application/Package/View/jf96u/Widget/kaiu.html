@@ -1,0 +1,16 @@
+ <div class="tab-wrap wrap cata-tab dis-bot">
+                <div class="tab-hd"><span class="active">开服表</span><span>开测表</span></div>
+                <div class="tab-title"><span>开服时间</span><span>游戏名</span><span>服务器名</span></div>
+                <div class="tab-bd">
+                    <ul class="tab-cont current">
+                     <Think:article basename="package" name="pmain" limit="9" where="category_id = 4" order="abet DESC">
+                        <li><span>03-31 11:00</span><a href="" target="_blank" title="{$article.title}">{$article.title}</a><span>玉观音</span></li>
+                      </Think:article>
+                    </ul>
+                    <ul class="tab-cont">
+                        <Think:article basename="package" name="pmain" limit="9" where="category_id = 5" order="abet DESC">
+                        <li><span>03-31 11:00</span><a href="" target="_blank" title="{$article.title}">{$article.title}</a><span>玉观音</span></li>
+                      </Think:article>
+                    </ul>
+                </div>
+            </div>

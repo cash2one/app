@@ -1,0 +1,21 @@
+<div class="boxmiddle">
+    <volist name="lists" id="list" key="j">
+        <div class="agestep">
+            <div class="as-left"><a class="sort" target="_blank" href="{$list.url}" title="{$list.title}">{$list.title}</a>
+                <div class="newsimg"><a target="_blank" href="{:staticUrl('detail',$list['pic_doc']['id'], 'Document')}" title="{$list['pic_doc']['title']}"><img src="{$list['pic_doc']['smallimg']|get_cover='path'}" alt="{$list['pic_doc']['title']}"></a><a target="_blank" href="{:staticUrl('detail',$list['pic_doc']['id'], 'Document')}" title="{$list['pic_doc']['title']}"><span>{$list['pic_doc']['title']}</span></a></div>
+            </div>
+            <div class="as-right">
+                <h3><a target="_blank" href="{:staticUrl('detail',$list['h2_doc']['id'], 'Document')}" title="{$list['h2_doc']['title']}">{$list['h2_doc']['title']}</a></h3>
+                <ul class="livemidlle">
+                    <volist name="list.doc" id="doc">
+                        <li> <a target="_blank" href="{:staticUrl('detail',$doc['id'], 'Document')}" title="{$doc.title}">{$doc.title}</a> </li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <if condition="$j lt 4 ">
+            <div class="line"> </div>
+        </if>
+    </volist>
+</div>

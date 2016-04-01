@@ -1,0 +1,71 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/gift.css"/>
+</block>
+<block name="body">
+<div class="main1200">
+    <div class="goback">当前位置：<a href="{:C('STATIC_URL')}">首页</a> > 礼包</div>
+    <div class="container">
+        <div class="cata-l">
+            <!--banner-->
+            <div class="focus-wrap">
+                <ul class="focus">
+                    <Think:article basename="package" name="pmain" limit="4" where="category_id = 1 AND home_position&1" order="update_time DESC">
+                             <li><a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" title="{$article.title}"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"></a></li>
+                    </Think:article>
+                </ul>
+                <div class="focus-ibtn"></div>
+                <div class="focus-tit"><a href="#" target="_blank"></a><span class="bg"></span></div>
+            </div>
+            <!--hotGift-->
+            <div class="gift-hot dis-top wrap">
+                <div class="mid-tit"><h3>热门游戏礼包</h3><a href="/fahao/" target="_blank" class="more">更多礼包</a></div>
+                <ul class="gift-ul1">
+                  <Think:article basename="package" name="pmain" limit="12" where="category_id = 1 AND home_position&2" order="update_time DESC">
+                    <li><a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" title="{$article.title}" class="title">{$article.title}</a><a href="{:staticUrl('detail',$article['id'],'Package')}" class="lq">领取</a></li>
+                   </Think:article>
+                </ul>
+                <ul class="gift-ul2">
+                    <Think:article basename="package" name="pmain" limit="16" where="category_id = 1" order="update_time DESC">
+                    <li><a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" title="{$article.title}"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"><span class="tit">{$article.title}</span></a></li>
+                    </Think:article>
+                </ul>
+            </div>
+            <!--最新礼包-->
+            <div class="gift-new dis-top wrap">
+                <div class="mid-tit"><h3>热门游戏礼包</h3><a href="/fahao/" target="_blank" class="more">更多礼包</a></div>
+                <ul class="gift-ul">
+                <Think:article basename="package" name="pmain" limit="10" where="category_id = 1" order="abet DESC">
+                <li><a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" title=""><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"></a>
+                        <div class="text">
+                            <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" title="{$article.title}">{$article.title}</a>
+                            <p class="info">{:strip_tags($article['content'])}</p>
+                        </div>
+                        <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" class="lq">领取</a>
+                    </li>
+                  </Think:article>
+                </ul>
+            </div>
+        </div>
+        <div class="cata-r">
+            {~W('Package/Jf96u/kaifu')}
+            <div class="game-hot dis-bot wrap">
+                <div class="mid-tit"><h3>热门手游排行榜</h3></div>
+                <ul class="tab-cont current">
+                   <Think:article basename="Down" name="dmain"  cate="1666" order="view desc" limit="10">
+                    <li><em>{$key+1}</em><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" title="{$article['title']}">{$article['title']}</a><span class="down-nub">{$article['view']}</span></li>
+                    </Think:article>
+                </ul>
+            </div>
+            <div class="cata-news wrap">
+                <div class="mid-tit"><h3>最新资讯</h3><a href="/news/" target="_blank" class="more">更多资讯</a></div>
+                <ul class="tab-cont current">
+                  <Think:article basename="Document" name="article"  order="view" limit="8">
+                    <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" title="{$article.title}">{$article.title}</a></li>
+                 </Think:article>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</block>

@@ -1,0 +1,40 @@
+<extend name="Home@gfwmobile/Base/commonIndex" />
+
+<block name="body">
+<include file="Home@gfwmobile/Public/search" />
+<nav id="nav-pic">
+    <div class="nav-left">
+        <a href="{:C('MOBILE_STATIC_URL')}{:getWidgetPath('78')}" class="hywz top p1"><p><span><img src="__PUBLIC__/Home/gfwmobile/images/home.png"></span>专题合集</p></a>
+        <div class="hywz">
+            <a href="{:staticUrlMobile('lists',$nav[2]['id'],'Feature')}" class="ylxx p1"><p><span><img src="{:get_cover($nav[2]['icon'],'path')}"></span>{$nav[2]['title']}</p></a>
+            <a href="{:staticUrlMobile('lists',$nav[3]['id'],'Feature')}" class="shfw p2"><p><span><img src="{:get_cover($nav[3]['icon'],'path')}"></span>{$nav[3]['title']}</p></a>
+        </div>
+    </div>
+    <div class="nav-main">
+        <a href="{:staticUrlMobile('lists',$nav[0]['id'],'Feature')}" class="whjy p2"><p><span><img src="{:get_cover($nav[0]['icon'],'path')}"></span>{$nav[0]['title']}</p></a>
+        <a href="{:staticUrlMobile('lists',$nav[4]['id'],'Feature')}" class="zthj p2"><p><span><img src="{:get_cover($nav[4]['icon'],'path')}"></span>{$nav[4]['title']}</p></a>
+    </div>
+    <a href="{:staticUrlMobile('lists',$nav[1]['id'],'Feature')}" class="nav-right"><p><span><img src="{:get_cover($nav[1]['icon'],'path')}"></span>{$nav[1]['title']}</p></a>
+</nav>
+<section class="news">
+    <div class="art">
+        <div class="title"><h2>热门专题</h2></div>
+        <ul class="art-list company">
+            <volist name="rm" id="val" offset="0" length="3">
+            <li><a href="{:C('MOBILE_STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$val['url_token']}">{$val['title']}</a><span></span></li>
+            </volist>
+            <volist name="rm" id="val" offset="3" length="2">
+            <li><a href="{:C('MOBILE_STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$val['url_token']}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="product" id="product-info">
+        <div class="title"><h2>专题分类</h2></div>
+        <ul class="product-list">
+            <volist name="lists" id="val">
+                <li><a href="{:staticUrlMobile('lists',$val['id'],'Feature')}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+</section>
+</block>

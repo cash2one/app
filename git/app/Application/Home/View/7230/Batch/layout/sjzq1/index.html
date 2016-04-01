@@ -1,0 +1,90 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Home@7230mobile/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230mobile/css/libao.css"/>
+</head>
+
+<body>
+
+<include file="Home@7230mobile/Public/header"/>
+<nav>
+    <div id="show" class="topnav">
+        <a href="">{:empty($home['title'])?$game['title']:$home['title']}</a><span class="spl">|</span><i class="last more">更多<span></span></i>
+    </div>
+    <div id="hidden">
+        <div class="dragable" widget="menus">
+        <volist name="menus" id="val">
+            <php>if(!empty($val)){</php>
+            <a id="zqHidden" href="{:'/'.C(FEATURE_ZQ_DIR)}/{$val['url_token']}">{$home['title']}游戏文章</a>
+            <php>}</php>
+        </volist>
+        </div>
+    </div>
+</nav>
+<!--头图-->
+<section class="pic">
+    <img src="{$batch['icon']?get_cover($batch['icon'],'path'):get_cover($game['cover_id'],'path')}">
+</section>
+<!--游戏指导-->
+<section class="fresh_wrap">
+    <h3>
+        <i>游戏指导</i>
+        <span class="djlb">
+            <div class="dragable" widget="mobilePackage">
+            <a href="{:staticUrlMobile('detail',$mobilePackage['id'],'Package')}">独家礼包</a>
+            </div>
+        </span>
+    </h3>
+    <div class="fresh">
+        <div class="dragable" widget="novice">
+        <p>
+            <span>新手指南：</span>
+            <volist name="novice" id="val" offset="0" length="10">
+                <a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val.sub_title} |</a>
+            </volist>
+        </p>
+        </div>
+        <div class="dragable" widget="master">
+        <p>
+            <span>高手进阶：</span>
+            <volist name="master" id="val" offset="0" length="10">
+                <a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val.sub_title} |</a>
+            </volist>
+        </p>
+        </div>
+    </div>
+</section>
+<!-- 游戏攻略 -->
+<section class="str_wrap">
+    <h3><i>游戏攻略</i></h3>
+    <div class="news_box">
+        <div class="dragable" widget="indexGuide">
+        <ul>
+            <volist name="indexGuide" id="val" offset="0" length="10">
+            <li><span>{:date('Y-m-d',$val['create_time'])}</span><a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val.title}</a></li>
+            </volist>
+        </ul>
+        </div>
+    </div>
+    <a class="recom_more" href="{:'/'.C(FEATURE_ZQ_DIR)}/{$more['document']}">点击查看更多<span></span></a>
+</section>
+<!-- 游戏攻略 -->
+<section class="str_wrap">
+    <h3><i>游戏新闻</i></h3>
+    <div class="news_box">
+        <div class="dragable" widget="indexNews">
+        <ul>
+            <volist name="indexNews" id="val" offset="0" length="10">
+            <li><span>{:date('Y-m-d',$val['create_time'])}</span><a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+        </div>
+    </div>
+    <a class="recom_more" href="{:'/'.C(FEATURE_ZQ_DIR)}/{$more['document']}">点击查看更多<span></span></a>
+</section>
+
+<include file="Home@7230mobile/Public/footer"/>
+</body>
+</html>

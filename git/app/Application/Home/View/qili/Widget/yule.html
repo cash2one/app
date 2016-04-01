@@ -1,0 +1,152 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/channel.css"/></block>
+
+<block name="header">
+    <include file="Home@qili/Public/header" />
+</block>
+
+<block name="body">
+<classify model="2" typeid="1511" index="film"></classify>
+<classify model="2" typeid="293" index="star"></classify>
+<classify model="2" typeid="1514" index="gossip"></classify>
+<classify model="2" typeid="1516" index="variety"></classify>
+<php>$recreationid = $film.','.$star.','.$gossip.','.$variety;</php>
+
+<div class="qnx1200 banner">
+    <div class="focus6">
+        <ul class="focus6-ul">
+			<document  model="2" typeid="$recreationid" limit="5" flag="rec_recom,1" order="update_time DESC,level DESC">
+				<li><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '790x470')}" alt="{$document.title|msubstr=0,18}"/></a></li>
+			</document>
+        </ul>
+
+        <div class="focus-info"><a href="javascript:;" target="_blank"></a><div class="circle"></div><div class="bg"></div></div>
+    </div>
+
+    <div class="right tab-nub">
+        <p class="tab-tit"><span>TOP LINE</span><span class="active">今日头条<em></em></span></p>
+
+        <ul class="right-ul current">
+			<document model="2" typeid="$recreationid" limit="12" flag="rec_recom,2">
+				<li><a href="{$document.url}" title="{$document.title}">{$document.title}</a></li>
+			</document>
+        </ul>
+
+        <div class="fresh"><span><i></i>换一组</span></div>
+    </div>
+</div>
+<!--时装-->
+<div class="qnx1200 channel hufu star">
+    <div class="title">
+        <h3><a href="/xingwen/" target="_blank">星闻</a></h3>
+        <div class="rec-links">
+            <classify model="2" id="700,1150,734,1198,741,1149,1148,1105,708,750">
+                <a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 8">
+					<em>|</em>
+				</if>
+            </classify>
+        </div>
+    </div>
+
+    <div class="channel-l">
+        <div class="left-one">
+			<document model="2" rootid="293" limit="1" flag="rec_recom,8" order="edit">
+				<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_d], $document[atlas], '437x372')}" alt="{$document.title}"><span class="tit">{$document.title}</span></a>
+			</document>
+
+            <ul class="about-list">
+				<document model="2" rootid="293" limit="1,4" flag="rec_recom,8">
+					<li><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a></li>
+				</document>
+            </ul>
+        </div>
+
+        <div class="left-two">
+			<document model="2" rootid="293" limit="2" flag="rec_recom,4" order="edit">
+				<div class="hjzb"><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_e], $document[atlas], '335x250')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a></div>
+			</document>
+        </div>
+    </div>
+
+    <div class="channel-r">
+        <ul class="channel-tab">
+			<document model="2" rootid="293" limit="4" flag="rec_recom,16" order="edit">
+				<li <if condition="$key eq 1"> conclass="active" </if>><a href="{$document.url}" target="_blank" title="{$document.title}"><span class="tit">{$document.title}</span><img src="{:get_thumb($document[atlas_e], $document[atlas], '360x280')}" alt="{$document.title}"></a></li>
+			</document>
+        </ul>
+    </div>
+</div>
+
+<div class="qnx1200 channel bagua">
+    <div class="title">
+        <h3><a href="/bagua/" target="_blank">八卦</a></h3>
+        <div class="rec-links">
+            <classify model="2" id="295,296,739,297">
+                <a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 4">
+					<em>|</em>
+				</if>
+            </classify>
+       </div>
+    </div>
+
+    <ul class="bagua-ul">
+		<document model="2" rootid="1514" limit="3" flag="rec_recom,4" order="edit">
+			<li><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '380x230')}" alt="{$document.title}"><span class="tit">{$document.title}</span></a></li>
+		</document>
+   </ul>
+</div>
+
+<div class="qnx1200 channel zongyi">
+    <div class="title">
+        <h3><a href="/zongyi/" target="_blank">综艺</a></h3>
+        <div class="rec-links">
+            <classify model="2" id="1200,1147,1537,1538,1539,1136,968,1100">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 6">
+					<em>|</em>
+				</if>
+            </classify>
+        </div>
+    </div>
+    <ul class="zongyi-ul">
+		<document model="2" rootid="1516" limit="8" flag="rec_recom,4" order="edit">
+			<li><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '280x170')}" alt="{$document.title}"></a><span class="all-tit"><em class="left-arr"></em><a href="{$document.url}" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></span></li>
+		</document>
+    </ul>
+</div>
+
+<div class="qnx1200 channel tuku">
+    <div class="title">
+        <h3><a href="{:C('STATIC_URL')}/pic/" target="_blank">图库</a></h3>
+        <div class="rec-links">
+            <classify model="4" typeid="0">
+                <a href="{$classify.url}" target="_blank">{$classify.title}</a><em>|</em>
+            </classify>
+        </div>
+    </div>
+
+    <ul class="tuku-ul">
+		<document model="4" limit="1" flag="rec_recom,2" order="edit">
+			<li class="one">
+				<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '383x490')}" alt="{$document.title}"><span><em class="tit">{$document.title}</em><b class="bg"></b></span></a>
+			</li>
+		</document>
+		
+		<document model="4" limit="4" flag="rec_recom,1" order="edit">
+			<li>
+				<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '389x236')}" alt="{$document.title}"><span><em class="tit">{$document.title}</em><b class="bg"></b></span></a>
+			</li>
+		</document>
+    </ul>
+</div>
+</block>
+
+<block name="script">
+<script>
+$(document).ready(function(){
+	$('.rec-links em').eq(-1).empty();
+});
+</script>
+</block>

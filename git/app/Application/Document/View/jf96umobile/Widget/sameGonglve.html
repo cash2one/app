@@ -1,0 +1,10 @@
+<notempty name="lists">
+<section class="mid3 dis-bot">
+    <div class="mid-title"><h2>手游攻略</h2><a href="/news/"><span>更多</span><em class="arr"></em></a></div>
+    <ul class="news-list">
+   <volist name="lists" id="vo" offset="0" length="5">
+        <li><span>[资讯]</span><a href="{:staticUrlMobile('detail', $vo['id'],'Document')}" title="{$vo['title']}">{$vo['title']}</a></li>
+    </volist>
+    </ul>
+</section>
+</notempty>

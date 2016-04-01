@@ -1,0 +1,19 @@
+<extend name="Home@gfw/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+<block name="body">
+<!--注册成功-->
+<div class="main" id="reg-yes-wraper">
+    <div class="reg-yes-top">
+        <p class="go-user">恭喜，已注册成功！<a href="{:U('Ucenter/index')}" target="_blank">去会员中心</a></p>
+        <p class="go-data">为了方便您更方便的享受官方网的服务，建议您<a href="{:U('Ucenter/updateInfo')}" target="_blank">完善资料！</a></p>
+    </div>
+   
+</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+</block>

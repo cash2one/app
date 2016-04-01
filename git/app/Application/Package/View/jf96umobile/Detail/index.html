@@ -1,0 +1,111 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/gift.css"/>
+</block>
+<block name="title">{:getCateName($info['id'],'package')}</block>
+<block name="body">
+<div class="about-game gift-detail-game dis-bot">
+    <div class="gift-detail-top">
+       <img src="{:get_cover($info['cover_id'],'path')}" alt="{$info['title']}">
+        <div class="text">
+            <p>{$info['title']}</p>
+            <p id="surplus">库存量 <span>0%</span></p>
+             <strong class="card_all" card-id="{$info['id']}" style="display:none;"></strong> 
+             <strong class="card_surplus" card-id="{$info['id']}" style="display:none;"></strong>
+            <p>适用平台：{$info['conditions']|showCheckbox="conditions",2}</p>
+        </div>
+    </div>
+    <a href="javascript:void(0)" class="gameLq">免费领取</a>
+    <p class="time">有效时间：<em>{:date('Y-m-d H:i:s',$info['start_time'])}</em>至<em>{:date('Y-m-d H:i:s',$info['end_time'])}</em></p>
+</div>
+<section class="gift-detail">
+    <div class=" dis-bot">
+        <div class="mid-title"><h2>礼包内容</h2></div>
+        <div class="gift-artbody">{$info['content']}</div>
+    </div> 
+    <div class=" dis-bot">
+        <div class="mid-title"><h2>使用方法</h2></div>
+        <div class="gift-artbody">
+             {$info['activation']}
+        </div>
+    </div> 
+</section>
+  {~W('Package/Jf96umobile/relatePackage',array($info['id']))}
+</block>
+<block name="script">
+<script type="text/javascript" src="__STATIC__/artdialog/jquery.artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="__STATIC__/artdialog/iframeTools.source.js"></script>
+<script language="javascript"> 
+    $(function(){ 
+	   if(("#surplus").length>0){
+		    //ajax获取总数和剩余数
+			var all_ids = {};
+			$('.card_all').each(function(){
+				all_ids[$(this).attr('card-id')] = 0;
+			});
+			var surplus_ids = {};
+			$('.card_surplus').each(function(){
+				surplus_ids[$(this).attr('card-id')] = 0;
+			});
+		    $.ajax({
+            type : "post",
+            dataType:"jsonp",
+            jsonp:"callback",
+            jsonpCallback:"batchAjax",
+            url: DYNAMIC_SERVER_URL + '/Card/batchAjax',
+            data: {surplus_ids : surplus_ids, all_ids : all_ids},
+            success: function(data){
+                if(data){
+                    data = eval(data);
+                    //读取所有卡数
+					
+                    all_ids = data.all_ids;
+                    $('.card_all').each(function(){
+                        var card_id = $(this).attr('card-id');
+                        $(this).html(all_ids[card_id]);
+                    });     
+                    //读取剩余卡数
+                    surplus_ids = data.surplus_ids;
+					
+                    $('.card_surplus').each(function(){
+                        var card_id = $(this).attr('card-id');
+                        $(this).html(surplus_ids[card_id]);
+                    });
+				 //计算百分比
+				 $('.card_surplus').each(function(i){
+					 var card_id = $(this).attr('card-id');
+					 var w =  Math.round(surplus_ids[card_id] / all_ids[card_id] * 10000) / 100.00;
+			
+					 if(isNaN(w)) w=0;
+					 $('#surplus span').eq(i).html(w +"%");
+				 });
+                }
+            }
+         });
+		 
+	   }
+	   
+        //领取
+        $('.gameLq').click(function() {
+            $.ajax({
+                type : "get",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonpCallback:"drawCard",
+                url: DYNAMIC_SERVER_URL + '/Card/drawCard/id/{$info.id}.html',
+                //data: {id : draw_id},
+                success: function(data){
+                    if(data){
+                        data = eval(data);
+                        if(data.error){
+                            art.dialog.alert(data.error,"温馨提示",'warning');
+                        }else{
+                            art.dialog.alert('请记住卡号： <span class=\'card_decorate\'>'+ data.row +'<span>',"温馨提示",'succeed');
+                        }
+                    }
+                }
+            });
+        });       
+    }); 
+    </script>
+</block>

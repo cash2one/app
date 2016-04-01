@@ -1,0 +1,73 @@
+<extend name="Home@qbaobei/Base/commonJkms"/>
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/healthdetail.css">
+<script src="__PUBLIC__/Home/qbaobei/js/common.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("img").lazyload({ effect: "fadeIn" });
+    });
+</script>
+<div class="food-box">
+	<div class="crumbnav"> 当前位置：
+		<a href="http://www.qbaobei.com/">首页</a> > 
+		{:W('Qbaobei/jkmsCurrentCate',array($cid))}
+  </div>
+  <div class="food-ad">
+    <div class="boxB1"> 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+      <!-- 728x90, ? 10-9-16 --> 
+      <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-4791298099657199" data-ad-slot="5837412937"></ins> 
+      <script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+	</script> 
+    </div>
+    <div class="boxB2">{:W('Qbaobei/jkmsBanner',array(3))}</div>
+  </div>
+ <div class="food-details-box">
+    <div class="food-details-box-tit"> <a class="food-colore23100" href="{:staticUrl('lists',$info['category_id'],'Document')}">{:$info['title']}文章列表 </a> </div>
+	<div class="food-details-box-list">
+		<ul>
+	      	<volist name="lists" id="document">
+	        <li>
+	        	<a target="_blank" href="{:staticUrl('detail',$document['id'],'Document')}" title="{:$document['title']}">
+	        		<img src="{:get_cover(0,'path')}" onerror="this.src='{:get_cover(0,'path')}';" original="{:getContentFirstImg($document['smallimg'],$document['content'])}" alt="{:$document['title']}" />
+	        	</a>
+				<p class="food-fsize14"><a target="_blank" href="{:staticUrl('detail',$document['id'],'Document')}" title="{:$document['title']}">{:$document['title']}</a></p>
+				<p>
+				关键词：
+				{:W('Qbaobei/jkmsTags',array($document['id']))}
+				</p>
+				<p>导  读：{:msubstr(strip_tags($document['description']),0,500,'utf-8',false)}</p>
+			</li>
+	        </volist>
+		</ul>
+		<div class="clear"></div>
+		<div class="class_page"> <span id="pe100_page_内容信息列表_美食列表页" class="pagecss"><!--{pe.begin.pagination}-->
+			<script type="text/javascript" language="javascript">
+				function listPage_Jumpto内容信息列表_美食列表页(e,ele){
+					e=e||event;
+					if(13==e.keyCode){
+						var i=Number(ele.value);
+						if(i<1||i>10){alert("你输入的页码超出范围。");}
+						switch(i){
+							case 1: break; case 2: location='/yswh/zxcly/List_9.html';break; case 3: location='/yswh/zxcly/List_8.html';break; case 4: location='/yswh/zxcly/List_7.html';break; case 5: location='/yswh/zxcly/List_6.html';break; case 6: location='/yswh/zxcly/List_5.html';break; case 7: location='/yswh/zxcly/List_4.html';break; case 8: location='/yswh/zxcly/List_3.html';break; case 9: location='/yswh/zxcly/List_2.html';break; case 10: location='/yswh/zxcly/List_1.html';break; 
+						default: break;
+						}
+					}
+				}
+			</script>
+			<div class="pager">{:$page}</div>
+	        <!--{pe.end.pagination}--></span> 
+		</div>
+		<div class="cnt-detail-adv"> 
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+			<!-- 468*15_qbaobei_l --> 
+	        <ins class="adsbygoogle" style="display:inline-block;width:468px;height:15px" data-ad-client="ca-pub-4791298099657199" data-ad-slot="5376387759"></ins> 
+			<script>(adsbygoogle = window.adsbygoogle || []).push({});</script> 
+		</div>
+	</div>
+ </div>
+  <div class="boxAR">{:W('Qbaobei/jkmsDetailRight')}</div>
+  <div class="clear"></div>
+</div>
+</block>

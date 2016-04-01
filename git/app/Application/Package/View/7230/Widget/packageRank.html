@@ -1,0 +1,26 @@
+<div id="lbxq-right">
+    <!--排行榜-->
+    <p class="lbjh"><i>礼包排行</i><b></b></p>
+    <div class="paih" id="paihtab">
+        <p class="title"><i class="cur">安卓</i><i>IOS</i></p>
+        <ul class="cur ulTab">
+            <Think:article basename="package" name="pmain" where="category_id = 1 AND conditions & 1" order="create_time desc" limit="10">
+                <li><span><a href="{:staticUrl('detail',$article['id'])}" target="_blank" class="pic4"><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail',$article['id'])}" target="_blank" class="title">{$article.title}</a><s>礼</s></span></li>
+            </Think:article>
+        </ul>
+        <ul class="ulTab ulTab">
+            <Think:article basename="package" name="pmain" where="category_id = 1 AND conditions & 2" order="create_time desc" limit="10">
+                <li><span><a href="{:staticUrl('detail',$article['id'])}" target="_blank" class="pic4"><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail',$article['id'])}" target="_blank" class="title">{$article.title}{$article.id}</a><s>礼</s></span></li>
+            </Think:article>
+        </ul>
+    </div>
+    <div class="lkxz">
+        <b>领卡须知：</b>
+        <ol>
+            <li>7230手游礼包中心是7230手游网最新推出的一个用户自主领号系统，提供各种最新热门手游的礼包、激活码、新手卡，欢迎玩家领取</li>
+            <li>7230手游礼包中心无需注册即可领取</li>
+            <li>每种礼包每人只能领取一次</li>
+            <li>建议领到号的玩家立即进入游戏中激活，以免系统回收后被他人使用。</li>
+        </ol>
+    </div>
+</div>

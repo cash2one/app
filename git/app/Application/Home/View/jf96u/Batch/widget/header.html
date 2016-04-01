@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$SEO['title']}</title>
+    <meta name="keywords" content="{$SEO['keywords']}"/>
+    <meta name="description" content="{$SEO['description']}"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/base.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/yxzq.css">
+    <script language="javascript"> window.DYNAMIC_SERVER_URL = '{$Think.config.DYNAMIC_SERVER_URL}';</script>
+</head>
+
+<body>
+<div class="topbar">
+    <div class="main1200 topbar-main">
+        <div class="fl">96U手游网—最好玩的手机游戏网站！</div>
+        <div class="fr">
+            <div class="schome"><span class="sethome">设为首页</span> | <span class="setup">加入收藏</span></div>
+            <a href="{:C('MOBILE_STATIC_URL')}" target="_blank" class="mobile">手机版</a>
+        </div>
+    </div>
+</div>
+<div id="banner"><img src="{:get_cover($base['themeimg'],'path')}"></div>
+<div class="nav">
+    <div class="main1200">
+        <ul class="nav-ul">
+            <li {:empty($nav_index)?'':'class="active"'}><a href="{$baseUrl}">首页</a></li>
+            <volist name="nav" id="val">
+                <li {$val['active']?'class="active"':''}><a href="{$val['url']}" {:empty($val['id'])?'target="_blank"':''}>{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+</div>

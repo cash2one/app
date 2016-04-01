@@ -1,0 +1,133 @@
+<extend name="Public/base" />
+
+<!-- style -->
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/jquery-easyui-1.4/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/jquery-easyui-1.4/themes/icon.css">
+    <script type="text/javascript" src="__STATIC__/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/zTree_v3/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/zTree_v3/zTreeStyle/demo.css">
+    <script type="text/javascript" src="__STATIC__/zTree_v3/jquery.ztree.core-3.5.js"></script>
+    <script type="text/javascript" src="__STATIC__/zTree_v3/jquery.ztree.excheck-3.5.js"></script>
+</block>
+
+<!-- 子导航 -->
+<block name="sidebar">
+    <include file="BaseDocument/sidemenu" />
+</block>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title cf">
+		<h2>
+			新增{$info.model_id|get_document_model='title'} [
+			<volist name="rightNav" id="nav">
+             <a href="{:U('index','cate_id='.$nav['id'])}">{$nav.title}</a>
+             <if condition="count($rightNav) gt $i"><i class="ca"></i></if>
+         </volist>
+         <present name="article">：<a href="{:U('index','cate_id='.$info['category_id'].'&pid='.$article['id'])}">{$article.title}</a></present>
+         ]
+     </h2>
+ </div>
+ <!-- 标签页导航 -->
+ <div class="tab-wrap">
+   <ul class="tab-nav nav">
+      <volist name=":parse_config_attr($model['field_group'])" id="group">
+         <li data-tab="tab{$key}" <eq name="key" value="1">class="current"</eq>><a href="javascript:void(0);">{$group}</a></li>
+     </volist>
+     <eq name="model.name" value="pmain">
+         <!--卡号管理-->
+         <li data-tab="tabCard"><a href="javascript:void(0);">数据获取</a></li>
+     </eq>
+ </ul>
+ <div class="tab-content">
+   <!-- 表单 -->
+   <form id="form" action="{:U('update')}" method="post" class="form-horizontal">
+      <!-- 基础文档模型 -->
+      <volist name=":parse_config_attr($model['field_group'])" id="group">
+        <div id="tab{$key}" class="tab-pane <eq name="key" value="1">in</eq> tab{$key}">
+            <!-- 标签 -->
+            <include file="BaseDocument/tags"/>
+            <!-- 字段解析处理 -->
+            <include file="BaseDocument/field"/>
+
+</div>
+</volist>
+<eq name="model.name" value="pmain">
+    <!-- 卡号管理 -->
+    <include file="card"/>
+</eq>
+<div class="form-item cf">
+ <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+ <if condition="session('SESSION_SITEID') neq ''">
+    <button class="btn submit-btn" id="submit_upload"  target-form="form-horizontal">提交并上传数据中心</button>
+ </if>
+ <a class="btn btn-return" href="{:U('index?cate_id='.$cate_id)}">返 回</a>
+ <if condition="C('OPEN_DRAFTBOX') and (ACTION_NAME eq 'add' or $info['status'] eq 3)">
+     <button class="btn save-btn" url="{:U('autoSave')}" target-form="form-horizontal" id="autoSave">
+        存草稿
+    </button>
+</if>
+<input type="hidden" name="id" value="{$info.id|default=''}"/>
+<input type="hidden" name="pid" value="{$info.pid|default=''}"/>
+<input type="hidden" name="model_id" value="{$info.model_id|default=''}"/>
+<input type="hidden" name="model_id" id="model_id" value="{$info.model_id|default=''}"/>
+<input type="hidden" name="category_id" id="category_id" value="{$info.category_id|default=''}">
+<input type="hidden" name="siteid" id="siteid" value="{:session('SESSION_SITEID')}"/>
+<input type="hidden" name="collector_url" id="collector_url" value="{:session('SESSION_REDIRECTURL')}"/>
+<input type="hidden" name="collector_true_url" id="collector_true_url" value="{:session('SESSION_REDIRECTURL')}"/>
+<input type="hidden" name="data_center" id="data_center" value=""/>
+</div>
+</form>
+</div>
+<php>
+    session('SESSION_REDIRECTURL',null);  //采集站点url session值设置为空
+</php>
+<div class="pop-nav"></div>
+</div>
+</block>
+
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <if condition="session('SESSION_SITEID') neq ''">
+        <!--script type="text/javascript" src="__STATIC__/base64.js"></script-->
+        <script type="application/javascript" src="http://dc.20hn.cn/External/js/pop-nav.js"></script>
+        <link type="text/css" href="http://dc.20hn.cn/External/css/pop-nav.css" rel="stylesheet">
+    </if>
+    <script type="text/javascript">
+        $("#submit_upload").click(function(){
+           // $(".form-horizontal").attr('action',"{:U('updateData')}");
+            $("#data_center").val(1);
+            $("#collector_true_url").val(utf8to16(base64decode($("#collector_true_url").val().toString())));
+            $("#submit").click();
+        });
+        Think.setValue("type", 2);
+		
+	 //标题重复检测 Author:Jeffrey Lau
+	 $(window).load(function(){
+		 $("input[name='title']").after("<span class=\"judgetitle\"></span>");
+	 });
+	 $("input[name='title']").blur(function(){
+		 var val = $(this).val();
+		 var judge_module ="<PHP>echo CONTROLLER_NAME;</PHP>";
+		 if(val.length<2){return;}
+		 $(".judgetitle").html("标题重复检测中...");
+		 $.getJSON("/admin.php?c=Api&a=checkTitle&title="+val+'&module='+ judge_module, function(data){
+			 data = eval(data);
+			  if(data.result =="0"){
+				  $(".judgetitle").html("<font color=\"red\">网站后台中已经存在相同标题的文档</font>");
+			  }else{
+				   $(".judgetitle").html("<font color=\"green\">恭喜,不存在相同标题的数据</font>");
+			  }
+		 });
+	 });
+	  
+	//标题重复检测结束 Author:Jeffrey Lau 
+    </script>
+     <!-- js -->
+     <include file="BaseDocument/editscript"/>
+</block>

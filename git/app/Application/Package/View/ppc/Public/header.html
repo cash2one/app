@@ -1,0 +1,35 @@
+<!-- 导航条
+    ================================================== -->
+    <dl id="header">
+        <dd class="aztop IE6FIXED">
+            <ul class="menu">
+                <li><a href="http://www.paopaoche.net" target="_blank" title="首页">首页</a></li>
+                <li><a href="http://www.paopaoche.net/phone/" target="_blank" title="手游下载">手游下载</a></li>
+                <li><a href="http://iphone.paopaoche.net/" target="_blank" title="苹果下载">苹果下载</a></li>
+                <li><a href="http://www.paopaoche.net/danji/" target="_blank" title="单机游戏">单机游戏</a></li>
+                <li><a href="http://www.paopaoche.net/z/" target="_blank" title="游戏合集">游戏合集</a></li>
+            </ul>
+        </dd>
+        <dd class="ls"><a href="#" class="logo"><img src="__PUBLIC__/Package/ppc/images/logo.png" ></a><div class="search">
+          <form action="{:C('DYNAMIC_SERVER_URL')}/dynamic.php?" method="get"  id="searchForm" name="Search_form">
+            <fieldset>
+               <legend>请输入您要查找的内容...</legend><input type="text" name="keyword" id="searchBox" class="input-bg grey9" value="请输入您要查找的内容..." onfocus="this.value=''" onblur="if(this.value==''){this.value='请输入您要查找的内容...'}" >                
+               <button type="submit" id="searchBtn" class="btn-submit">搜索</button>
+                <input name="c" type="hidden" value="Search" />
+               <input name="a" type="hidden" value="package" />
+               <input name="searchType" type="hidden" value="card">
+               <input name="theme" type="hidden" value="ppc">
+            </fieldset>
+          </form>
+     </div><!--end search--> 
+   </dd>
+   <dt class="nav"><p>
+   <a href="{:staticUrl('index', '', $static_url_params)}" <php>if(CONTROLLER_NAME=='Index'){echo "class='cur'";}</php>>发号首页</a>
+   <a href="{:staticUrl('lists', 2, $static_url_params)}" <php>if(CONTROLLER_NAME=='Category'&&$cid=='2'){echo "class='cur'";}</php>>新手卡</a>
+   <a href="{:staticUrl('lists', 1, $static_url_params)}" <php>if(CONTROLLER_NAME=='Category'&&$cid=='1'){echo "class='cur'";}</php>>大礼包</a>
+   <a href="{:staticUrl('lists', 4, $static_url_params)}" <php>if(CONTROLLER_NAME=='Category'&&$cid=='4'){echo "class='cur'";}</php>>开测表</a>
+   </p>
+   
+   
+   </dt>
+</dl>

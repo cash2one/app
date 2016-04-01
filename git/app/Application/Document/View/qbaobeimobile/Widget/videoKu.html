@@ -1,0 +1,63 @@
+<extend name="Home@qbaobeimobile/Base/common2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/index.css"/>
+</block>
+<block name="breadcrumbnav">
+<a href="{:C('MOBILE_STATIC_URL')}">首页</a> > {$cateName}
+</block>
+<block name="body">
+<!--导航-->
+<nav class="channel-nav">
+    <a href="/video/">热播</a>
+    <a class="active" href="/list/1307/">片库</a>
+</nav>
+<!--视频库菜单-->
+<section class="videok-nav">
+    <div class="spk-nav-list">
+        <div class="swiper-container2">
+            <div class="swiper-wrapper"> 
+               <eq name="cate" value="1307"><a class="swiper-slide active" href="/{~W('Document/Qbaobeimobile/orderUrlDir')}list/1307/{~W('Document/Qbaobeimobile/orderUrl')}">全部</a><else /><a class="swiper-slide" href="/{~W('Document/Qbaobeimobile/orderUrlDir')}list/1307/{~W('Document/Qbaobeimobile/orderUrl')}">全部</a></eq>  
+              <volist name="pcate" id="vo">    
+               <eq name="pid" value="$vo['id']"><a class="swiper-slide active" href="/{~W('Document/Qbaobeimobile/orderUrlDir')}list/{$vo['id']}/{~W('Document/Qbaobeimobile/orderUrl')}">{$vo['title']}</a><else/> <a class="swiper-slide" href="/{~W('Document/Qbaobeimobile/orderUrlDir')}list/{$vo['id']}/{~W('Document/Qbaobeimobile/orderUrl')}">{$vo['title']}</a></eq>                   
+              </volist>
+            </div>
+        </div>
+    </div>
+    <notempty name="childcate">
+   <div class="spk-nav-list">
+        <div class="swiper-container2">                         
+            <div class="swiper-wrapper">
+                  <notempty name="isSecond"><a class="swiper-slide active" href="/{~W('Document/Qbaobeimobile/orderUrlDir')}list/{$pid}/{~W('Document/Qbaobeimobile/orderUrl')}">全部</a><else /><a class="swiper-slide" href="/{~W('Document/Qbaobeimobile/orderUrlDir')}list/{$pid}/{~W('Document/Qbaobeimobile/orderUrl')}">全部</a></notempty>
+                  <volist name="childcate" id="vo">                       
+                          <eq name="cate" value="$vo['id']">
+                           <a class="swiper-slide active" href="/{~W('Document/Qbaobeimobile/orderUrlDir')}list/{$vo['id']}/{~W('Document/Qbaobeimobile/orderUrl')}">{$vo['title']}</a>
+                           <else/> 
+                           <a class="swiper-slide" href="/{~W('Document/Qbaobeimobile/orderUrlDir')}list/{$vo['id']}/{~W('Document/Qbaobeimobile/orderUrl')}">{$vo['title']}</a>
+                         </eq>     
+                 </volist> 
+            </div>
+        </div>
+    </div>
+   </notempty>
+ 
+    <div class="spk-nav-list">
+        <div class="swiper-container2">
+            <div class="swiper-wrapper">
+                <eq name="order" value="0"><a class="swiper-slide active" href="/video/list/{$pid}/0/">热播榜</a><a class="swiper-slide" href="/list/{$pid}/1/">新上线</a>
+                <else/>
+                  <a class="swiper-slide" href="/video/list/{$pid}/0/">热播榜</a><a class="swiper-slide active" href="/list/{$pid}/1/">新上线</a>
+                </eq>     
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ship-cata dis-bot video-list video-list-top">
+    <ul class="ship-cata-ul pic-adaptive-wrap2">
+         <volist name="lists" id="vo">
+           <li><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}" class="pic-adaptive2" title="{$vo['title']}"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><p class="text"><span class="length">{:date('h:i',$vo['update_time'])}</span></p></a><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}" class="title">{$vo['title']}</a></li>
+         </volist>
+    </ul>
+     <div class="loading" id="loadVideo" data-id="{$cate}" data-order="{$order}">拼命加载中...</div>
+</section>
+</block>
+<block name="script"><script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.js"></script></block>

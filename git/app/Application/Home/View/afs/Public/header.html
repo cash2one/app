@@ -1,0 +1,40 @@
+<script language="javascript"> window. DYNAMIC_SERVER_URL = '{:C("DYNAMIC_SERVER_URL")}';</script>
+<div id="top">
+    <div class="top-main">
+        <p class="left"><a href="http://m.anfensi.com">手机版</a></p>
+        <ul>
+            <li><a href="http://www.anfensi.com/top/">手游排行榜</a></li>
+            <li><a href="http://www.anfensi.com/top/2014/">手游排行榜2016</a></li>
+            <li><a href="http://www.anfensi.com/top/danji/">手机单机游戏排行榜</a></li>
+            <li><a href="http://www.anfensi.com/top/android/">安卓游戏排行榜</a></li>
+            <li><a href="http://www.anfensi.com/top/japan/">日本游戏排行榜</a></li>
+            <li><a href="http://www.anfensi.com/top/kapai/">卡牌手游排行榜</a></li>
+            <li><a href="{:C('PACKAGE_SLD')}">游戏礼包</a></li>
+            <li><a href="http://www.anfensi.com/zuixin/">最近更新</a></li>
+        </ul>
+    </div>
+</div>
+<!--head-->
+<div id="head"><a href="{:C('STATIC_URL')}"><img src="__PUBLIC__/Home/afs/images/logo.jpg"></a>
+
+    <form action="http://s.anfensi.com/cse/search" method="get" id="Search_form" name="Search_form" target="_blank"
+          class="">
+        <input type="hidden" name="s" value="10366954480845088817">
+        <input type="text" name="q" id="searchBox" autocomplete="off" class="" value="输入你想搜索的游戏...">
+        <button type="submit" id="searchBtn" class="btn-submit"></button>
+    </form>
+</div>
+<!--nav-->
+<div id="nav">
+    <a href="{:C('STATIC_URL')}" target="_blank" class="cur">首页</a>
+    <a class="hot" href="{:C('STATIC_URL')}/top/" target="_blank">手游榜单<img src="__PUBLIC__/Home/afs/images/hot.gif"
+                                                                           alt="手游榜单"></a>
+    <a href="{:C('STATIC_URL')}{:getWidgetPath('1')}" target="_blank">单机游戏</a>
+    <a href="{:C('STATIC_URL')}{:getWidgetPath('5')}" target="_blank">网络游戏</a>
+    <a href="{:C('STATIC_URL')}/game/" target="_blank">游戏大全</a>
+    <a href="{:C('STATIC_URL')}/soft/" target="_blank">软件大全</a>
+    <a href="{:C('STATIC_URL')}/zixun/" target="_blank">游戏资讯</a>
+    <a href="{:C('STATIC_URL')}{:getWidgetPath('33')}" target="_blank">游戏专区</a>
+    <a href="{:C('STATIC_URL')}{:getWidgetPath('3')}" target="_blank">开服表</a>
+    <a href="{:C('STATIC_URL')}{:getWidgetPath('2')}" target="_blank">开测表</a>
+</div>

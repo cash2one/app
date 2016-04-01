@@ -1,0 +1,61 @@
+<extend name="Home@gfw/Base/commonWebsite" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/website.css"/>
+</block>
+
+<block name="body">
+<div class="page-nav">
+	<div class="page-left">
+		{:W('Gfw/categoryPosition',array($info['category_id']))}
+		<span class="grey">&gt;</span>
+		{:$info['title']}
+	</div>
+	<span class="sum"></span>
+</div>
+<div class="p-novel">
+    <div class="sitesl">
+        {:W('Gfw/websiteBasicInfo',array($info))}
+        <!-----about  -end----->
+        <div class="related  gf-border">
+            <div class="title">
+                <h2>相关网站</h2>
+            </div>
+            {:W('Gfw/websiteRecommended',array(7,'detail_hot',$info['category_id'],$info['id']))}
+        </div>
+       <div class="gf-border">
+         <!-- 广告位：网站大全-详情&#60;左侧原生广告&#62; -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123292");</script>
+        </div>
+        <!-----related  -end-----> 
+        <div class="related  gf-border">
+            <div class="title">
+                <h2>最新网站</h2>
+            </div>
+            {:W('Gfw/websiteRecommended',array(7,'detail_new',$info['category_id'],$info['id']))}
+        </div>
+        <!-----related  -end----->
+    </div> 
+    <!-----sitesl  -end----->
+    <div class="sitesr">
+      <div class="introduce">
+            <h1>{:$info['title']}</h1>
+            <h5>公司简介:</h5>
+            <div class="referral">
+                <p>{:$info['content']}</p>
+            </div>
+            <h5>网站产品:</h5>
+            {:W('Gfw/websiteProduct',array($info,8))}
+            <!-- 广告位：网站大全-详情&#60;右侧底部原生广告&#62; -->
+            <script type="text/javascript">BAIDU_CLB_fillSlot("1123294");</script>
+      </div>
+        <!-----introduce  -end----->
+    </div>
+    <!-----sitesr  -end----->
+   
+    <div id="banner-1" class="gf1000 p10"><script type="text/javascript">BAIDU_CLB_fillSlot("1083680");</script></div>
+<!-----banner-1-end-----> 
+</div>
+<!-----p-novel   -end----->
+</block>

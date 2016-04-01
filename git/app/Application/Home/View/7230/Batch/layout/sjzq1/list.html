@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Home@7230mobile/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230mobile/css/news.css" />
+</head>
+
+<body>
+<include file="Home@7230mobile/Public/header"/>
+
+<!-- 首页搜索 和 新闻-->
+<section class="news_wrap">
+    <div id="listTitle">
+        <div class="dragable" widget="menus">
+        <h3>{$home['title']}</h3>
+        <a href="{:'/'.C(FEATURE_ZQ_DIR)}/{$home['url_token']}">回到主页</a>
+        </div>
+    </div>
+    <div class="dragable" widget="mobileArticle">
+        <ul class="batch_list">
+            <volist name="mobileArticle" id="val">
+            <li>
+                <h4><a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a></h4>
+                <span class="jianjie">{$val['description']}</span>
+                <p>
+                    <span class="sdate">{:date('Y年m月d日',$val['create_time'])}</span>
+                    <span class="cmt">{$val['view']}</span>
+                    <span class="bubble"></span>
+                </p>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    <div class="mpage">{$page}</div>
+</section>
+
+<!-- 热门工具 -->
+<section class="tool_wrap">
+    <h3><i>热门工具</i></h3>
+    <div class="tool_box" data-sudaclick="main_hottool">
+        <ul>
+            <Think:article basename="Down" name="dmain"  where="category_rootid=2&&cover_id!=0" order="hits_today" limit="2">
+                <li>
+                    <a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img alt="{$article.title}" src="{:get_cover($article['smallimg'],'path')}"></a>
+                    <h6><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></h6>
+                    <p>{:mb_substr(clean_str($article['conductor']),0,45)}...</p>
+                    <a class="tool_btn" href="{:getFileUrl($article['id'])}"></a>
+                </li>
+            </Think:article>
+        </ul>
+    </div>
+</section>
+
+<include file="Home@7230mobile/Public/footer"/>
+</body>
+</html>

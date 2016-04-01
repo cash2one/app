@@ -1,0 +1,32 @@
+<extend name="Public/base"/>
+
+<block name="header">
+    <li class="active"><a href="javascript:;">安装协议</a></li>
+    <li class="active"><a href="javascript:;">环境检测</a></li>
+    <li class="active"><a href="javascript:;">创建数据库</a></li>
+    <li class="active"><a href="javascript:;"><eq name="Think.session.update" value="1">升级<else/>安装</eq></a></li>
+    <li class="active"><a href="javascript:;">完成</a></li>
+</block>
+
+<block name="body">
+    <h1>完成</h1>
+    <p><eq name="Think.session.update" value="1">升级<else/>安装</eq>完成！</p>
+    <ul>
+        <li><h3>静态生成地址为本机的时候时，请修改HOST将静态生成地址指向本机</h3></li>
+        <li>
+            <h3>
+                请在linux系统下做软连接，链接下载文件夹和资源文件夹，例：</br>
+                ln -s ../Public Public</br>
+                ln -s ../Uploads Uploads
+            </h3>
+        </li>
+    </ul>
+
+</block>
+
+
+<block name="footer">
+    <a class="btn btn-primary btn-large" href="admin.php">登录后台</a>
+    <a class="btn btn-success btn-large" href="index.php">访问首页</a>
+	<script type="text/javascript" src="http://tajs.qq.com/stats?sId=30545910" charset="UTF-8"></script>
+</block>

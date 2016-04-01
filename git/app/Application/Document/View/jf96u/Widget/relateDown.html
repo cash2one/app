@@ -1,0 +1,28 @@
+<notempty name="down">
+<div class="ngzGame"> <a href="{:str_replace('index.html','',staticUrl('detail', $down['id'],'Down'))}" title="{$down['title']}" class="pic"><img src="{:get_cover($down['smallimg'],'path')}" alt="{$down['title']}"></a>
+  <div class="nzgamex">
+    <p class="namep"> <a href="{:str_replace('index.html','',staticUrl('detail', $down['id'],'Down'))}" class="name" title="{$down['title']}">{$down['title']}</a> <span class="nub">{$packageCount}</span>个礼包
+    <notempty name="package">
+    <a href="{:staticUrl('detail', $package[0]['id'],'Package')}" class="getBtn" target="_blank" title="查看{$down['title']}礼包">查看</a>
+</notempty
+
+    ></p>
+    <ul class="nzgamey">
+      <li>类型：{:getCateName($down['id'],'Down')}</li>
+      <li>平台：{:getSystem($down['id'])}</li>
+      <li>状态：公测</li>
+      <li>大小：{:empty($down['size']) ? "未知" : $down['size']}</li>
+    </ul>
+     {~W('Document/Jf96u/getRelateLink',array($down['id']))}
+  </div>
+  <div class="ngzGame2"> 
+  <eq name="down['system']" value="1">
+          <a href="{:str_replace('index.html','',staticUrl('detail', $down['id'],'Down'))}" title="{$down['title']}安卓版下载" class="az"><em></em>安卓版下载</a>
+  </eq>
+  <eq name="down['system']" value="2">
+          <a href="{:str_replace('index.html','',staticUrl('detail', $down['id'],'Down'))}" title="{$down['title']}苹果版下载" class="pg"><em></em>苹果版下载</a>
+  </eq>    
+  </div>
+</div>
+</notempty>
+

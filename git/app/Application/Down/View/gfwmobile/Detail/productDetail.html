@@ -1,0 +1,40 @@
+<extend name="Home@gfwmobile/Base/commonProduct" />
+<block name="body">
+<script type="text/javascript">a()</script>
+<section class="baike-list">
+    <div class="Introd">
+        <div class="title"><span>{$info.title}</span></div>
+        <div class="introd-list">
+            <php>
+                $table = $info.model_id == 13 ? 'down_dmain' : 'down_product';
+                $detail = D($table)->where(array('id' => $info['id']))->find();
+
+                //获取产品对应公司详情
+                if(!empty($info['package_id'])){
+                    //$packinfo = D('Package')->detail($info['package_id']);
+                    $province = getProvince($packinfo['province_id']);//赋值省份
+                    $city = getCity($packinfo['city_id']);//获取城市
+                    $area = getArea($packinfo['province_id']);//获取区
+                }
+            </php>
+            <ul class="art-list" id="cpdq">
+                <li><em>供应商：</em>{$info.supplier}</li>
+                <li class="address"><span><em>所在地：</em>{$province['name']}&nbsp;&nbsp;{$city['name']}&nbsp;&nbsp;{$area['name']}&nbsp;&nbsp;{$packinfo.address}</span><!--<a href="" class="qq">qq交流</a>--></li>
+                <li class="contact"><span><em>联系人：</em>{$packinfo.contacts}</span><!--<s><a href="" class="call"></a><i>您采购，我付钱</i></s>--></li>
+                <li class="price"><em>价　格：</em>{:sprintf("%01.2f", $info['price'])}元/件</li>
+                <li class="number"><em>最小采购量：</em>{$info.limit}件</li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">b()</script>
+    <div class="Introd">
+        <div class="title" id="comany-name"><span>产品简介</span></div>
+        <div class="baike-info">
+            {$detail.content}
+        </div>
+    </div>
+    <script type="text/javascript">c()</script>
+    <div class="enter"><a href="{:staticUrlMobile('detail', $info['package_id'],'Package')}" target="_blank">进入官网</a></div>
+    <script type="text/javascript">d()</script>
+</section>
+</block>

@@ -1,0 +1,38 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/afs/css/kfkc.css"/>
+</block>
+<block name="body">
+<!-----head-END----->
+<div id="main" class="kpage">
+    <p id="main-title"><a href="{:C('STATIC_URL')}">首页</a>><a href="{:C('STATIC_URL')}{:getWidgetPath('51')}">厂商合集</a>>{$info['name']}</p>
+    <div class="cshj-cs">
+        <h3>游戏厂商简介</h3>
+        <div class="cshj-csjj">
+            <a class="pic"><img src="{:get_cover($info['img'],'path')}" alt="{$info['name']}"></a>
+            <div class="cshj-csjj-right">
+                <div class="csjj-right-info">
+                    <ul>
+                        <li><b>公司名：</b>{$info['name']}</li>
+                        <li><b>英文名：</b>{$info['name_e']?$info['name_e']:'无'}</li>
+                        <li><b>更新时间：</b>{:date('Y-m-d',$info['update_time'])}</li>
+                    </ul>
+                </div>
+                <div class="csjj-right-jj">
+                    <b>厂商简介：</b>
+                    <div class="csjj">{$info['description']}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="klb">
+        <volist name="lists" id="val">
+        <li>
+            <p><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['title']}</a><i>{:format_size($val['size'])}</i><i>{$val['cate']}</i><a href="{:staticUrl('detail',$val['id'],'Down')}" class="down" target="_blank">下载</a></span></p>
+            <b>{$val['description']}</b>
+        </li>
+        </volist>
+    </ul>
+    <div id="fenye">{$page}</div>
+</div>
+</block>

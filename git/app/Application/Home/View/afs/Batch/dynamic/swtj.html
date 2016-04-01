@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<include file="Home@afsmobile/Public/head"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/afsmobile/css/yxzq.css" />
+</head>
+
+<body>
+<header id="inpage_head">
+    <span class="back"></span>
+    <b>{$home['title']}</b>
+    <em id="head-nav"></em>
+</header>
+<!--弹出菜单-->
+<div id="case-main">
+    <include file="Home@afsmobile/Public/popup" />
+</div>
+<!--zq-->
+<section class="zqsy tj_list">
+    <div class="search">
+        <form method="get" action="" class="sear-box" onsubmit="return handBook();">
+            <input type="text" class="text" id="handTitle" placeholder="请输入您想搜索的关键字" value="">
+            <input type="submit" class="btn" id="btn" value="">
+        </form>
+    </div>
+   <!--图鉴-->
+   <div class="wrap yxzl">
+       <div class="xfl zlxfl">
+           <div class="xfl_tit">
+               <ul class="news-nav">
+                   <li class="cur"><a>全部</a></li>
+                   <volist name="nav" id="val">
+                   <li><a>{$val['title']}</a></li>
+                   </volist>
+                </ul>
+           </div>
+           <ul class="zl-list current">
+               <volist name="data" id="val">
+               <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}"><img src="{:get_cover($val['smallimg']>0?$val['smallimg']:$val['cover_id'],'path')}"><em>{$val['sub_title']}</em></a></li>
+               </volist>
+           </ul>
+           <volist name="nav" id="val">
+               <ul class="zl-list">
+                   <volist name="val['data']" id="rel">
+                   <li><a href="{:staticUrlMobile('detail',$rel['id'],'Document')}"><img src="{:get_cover($rel['smallimg']>0?$rel['smallimg']:$rel['cover_id'],'path')}"><em>{$rel['sub_title']}</em></a></li>
+                   </volist>
+               </ul>
+           </volist>
+           <ul class="zl-list" id="bookData">
+           </ul>
+       </div>
+    </div>
+</section>
+<!--footer-->
+<include file="Home@afsmobile/Public/zq/foot"/>
+<script>
+    function handBook(){
+        var name = $("#handTitle").val();
+        var ul = $("#bookData");
+        name = name.replace(/( )/g,"");
+        if(name == ""){
+            alert('不允许输入空值哦');
+            return false;
+        }
+
+        $.ajax({
+            url: window.DYNAMIC_SERVER_URL+"/dynamic.php?s=/Afs/ajaxhandBook/params/{$home['id']}/",
+            data:'name='+name,
+            dataType: 'jsonp',
+            success: function(data){
+                if(!data){
+                    alert('没有找到"'+name+'"，换个词试试吧！');
+                }else{
+                    html='';
+                    for(val in data){
+                       html +='<li><a href="'+data[val].url+'"><img src="'+data[val].imgUrl+'"><em>'+ data[val].sub_title +'</em></a></li>';
+                    }
+                    ul.html(html);
+                    ul.addClass('current').siblings().removeClass('current');
+                }}});
+        return false;
+    }
+</script>
+</body>
+</html>

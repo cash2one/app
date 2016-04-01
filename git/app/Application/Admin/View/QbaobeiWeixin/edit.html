@@ -1,0 +1,238 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{:isset($data['id'])?'编辑':'新增'}微信二维码模块</h2>
+    </div>
+    <div class="tab-wrap">
+        <ul class="tab-nav nav">
+            <li data-tab="tab1" class="current"><a href="javascript:void(0);">基 础</a></li>
+        </ul>
+        <div class="tab-content">
+            <form action="{$url}" method="post" class="form-horizontal">
+                <!-- 基础 -->
+                <div id="tab1" class="tab-pane in tab1">
+                    <div class="form-item">
+                        <label class="item-label">标题<span class="check-tips"></span></label>
+                        <div class="controls">
+                            <input type="text" class="text input-mid" name="title" value="{$data.title}" />
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <label class="item-label">内容<span class="check-tips"></span></label>
+                        <div class="controls">
+                            <div class="textarea-div" style="width: 1920px;"> <textarea name="content">{$data['content']}</textarea></div>
+                            {:hook('adminArticleEdit', array('name'=>'content','value'=>$data['content']))}
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="item-label">
+                            关联类型<span class="check-tips"></span>
+                        </label>
+                        <div class="controls">
+                            <div class="data-table table-striped">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th >一级栏目</th>
+                                        <th >二级栏目</th>
+                                        <th >三级栏目</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td rowspan="4">怀孕</td>
+                                                <td><input type="checkbox" value="19" name="category_id[]" <if condition="in_array('19',$data['category_id'])">checked="checked"</if>>孕前</td>
+                                                <td>
+                                                    <input type="checkbox" value="81" name="category_id[]" <if condition="in_array('81',$data['category_id'])">checked="checked"</if>>孕前检查<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="83" name="category_id[]" <if condition="in_array('83',$data['category_id'])">checked="checked"</if>>孕前饮食<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="84" name="category_id[]" <if condition="in_array('84',$data['category_id'])">checked="checked"</if>>遗传优生<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="85" name="category_id[]" <if condition="in_array('85',$data['category_id'])">checked="checked"</if>>生男生女<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="87" name="category_id[]" <if condition="in_array('87',$data['category_id'])">checked="checked"</if>>不孕不育<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="189" name="category_id[]" <if condition="in_array('189',$data['category_id'])">checked="checked"</if>>两性知识<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" value="21" name="category_id[]" <if condition="in_array('21',$data['category_id'])">checked="checked"</if>>孕中</td>
+                                                <td>
+                                                    <input type="checkbox" value="187" name="category_id[]" <if condition="in_array('187',$data['category_id'])">checked="checked"</if>>流产胎停<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="190" name="category_id[]" <if condition="in_array('190',$data['category_id'])">checked="checked"</if>>胎儿发育<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="191" name="category_id[]" <if condition="in_array('191',$data['category_id'])">checked="checked"</if>>孕妇疾病<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="94" name="category_id[]" <if condition="in_array('94',$data['category_id'])">checked="checked"</if>>孕妇饮食<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="95" name="category_id[]" <if condition="in_array('95',$data['category_id'])">checked="checked"</if>>孕妇保健<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="96" name="category_id[]" <if condition="in_array('96',$data['category_id'])">checked="checked"</if>>胎教常识<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" value="192" name="category_id[]" <if condition="in_array('192',$data['category_id'])">checked="checked"</if>>分娩</td>
+                                                <td>
+                                                    <input type="checkbox" value="193" name="category_id[]" <if condition="in_array('193',$data['category_id'])">checked="checked"</if>>产前准备<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="194" name="category_id[]" <if condition="in_array('194',$data['category_id'])">checked="checked"</if>>分娩方式<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="195" name="category_id[]" <if condition="in_array('195',$data['category_id'])">checked="checked"</if>>早产难产<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr style="border-bottom: solid 1px #d84f4b">
+                                                <td><input type="checkbox" value="22" name="category_id[]" <if condition="in_array('22',$data['category_id'])">checked="checked"</if>>产后</td>
+                                                <td>
+                                                    <input type="checkbox" value="188" name="category_id[]" <if condition="in_array('188',$data['category_id'])">checked="checked"</if>>产后避孕<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="98" name="category_id[]" <if condition="in_array('98',$data['category_id'])">checked="checked"</if>>产后哺乳<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="99" name="category_id[]" <if condition="in_array('99',$data['category_id'])">checked="checked"</if>>产后饮食<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="100" name="category_id[]" <if condition="in_array('100',$data['category_id'])">checked="checked"</if>>产后保健<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="101" name="category_id[]" <if condition="in_array('101',$data['category_id'])">checked="checked"</if>>产后恢复<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="103" name="category_id[]" <if condition="in_array('103',$data['category_id'])">checked="checked"</if>>产后疾病<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td rowspan="4">育儿</td>
+                                                <td><input type="checkbox" value="934" name="category_id[]" <if condition="in_array('934',$data['category_id'])">checked="checked"</if>>新生儿</td>
+                                                <td>
+                                                    <input type="checkbox" value="935" name="category_id[]" <if condition="in_array('935',$data['category_id'])">checked="checked"</if>>新生儿护理<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="936" name="category_id[]" <if condition="in_array('936',$data['category_id'])">checked="checked"</if>>新生儿疾病<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="937" name="category_id[]" <if condition="in_array('937',$data['category_id'])">checked="checked"</if>>早产儿护理<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" value="129" name="category_id[]" <if condition="in_array('129',$data['category_id'])">checked="checked"</if>>0-1岁</td>
+                                                <td>
+                                                    <input type="checkbox" value="132" name="category_id[]" <if condition="in_array('132',$data['category_id'])">checked="checked"</if>>婴儿健康<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="133" name="category_id[]" <if condition="in_array('133',$data['category_id'])">checked="checked"</if>>婴儿营养<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="134" name="category_id[]" <if condition="in_array('134',$data['category_id'])">checked="checked"</if>>婴儿教育<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="135" name="category_id[]" <if condition="in_array('135',$data['category_id'])">checked="checked"</if>>婴儿疾病<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" value="130" name="category_id[]" <if condition="in_array('130',$data['category_id'])">checked="checked"</if>>1-3岁</td>
+                                                <td>
+                                                    <input type="checkbox" value="136" name="category_id[]" <if condition="in_array('136',$data['category_id'])">checked="checked"</if>>幼儿健康<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="137" name="category_id[]" <if condition="in_array('137',$data['category_id'])">checked="checked"</if>>幼儿营养<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="138" name="category_id[]" <if condition="in_array('138',$data['category_id'])">checked="checked"</if>>幼儿教育<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="139" name="category_id[]" <if condition="in_array('139',$data['category_id'])">checked="checked"</if>>幼儿疾病<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr style="border-bottom: solid 1px #d84f4b">
+                                                <td><input type="checkbox" value="145" name="category_id[]" <if condition="in_array('145',$data['category_id'])">checked="checked"</if>>3-6岁</td>
+                                                <td>
+                                                    <input type="checkbox" value="140" name="category_id[]" <if condition="in_array('140',$data['category_id'])">checked="checked"</if>>学龄前健康<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="141" name="category_id[]" <if condition="in_array('141',$data['category_id'])">checked="checked"</if>>学龄前营养<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="142" name="category_id[]" <if condition="in_array('142',$data['category_id'])">checked="checked"</if>>学龄前教育<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="143" name="category_id[]" <if condition="in_array('143',$data['category_id'])">checked="checked"</if>>学龄前疾病<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td rowspan="4">早教</td>
+                                                <td><input type="checkbox" value="198" name="category_id[]" <if condition="in_array('198',$data['category_id'])">checked="checked"</if>>教育资讯</td>
+                                                <td>
+                                                    <input type="checkbox" value="203" name="category_id[]" <if condition="in_array('203',$data['category_id'])">checked="checked"</if>>教育热点<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="204" name="category_id[]" <if condition="in_array('204',$data['category_id'])">checked="checked"</if>>开心娱乐<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="305" name="category_id[]" <if condition="in_array('305',$data['category_id'])">checked="checked"</if>>节日大全<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="1115" name="category_id[]" <if condition="in_array('1115',$data['category_id'])">checked="checked"</if>>亲子活动<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" value="205" name="category_id[]" <if condition="in_array('205',$data['category_id'])">checked="checked"</if>>宝宝早教</td>
+                                                <td>
+                                                    <input type="checkbox" value="206" name="category_id[]" <if condition="in_array('206',$data['category_id'])">checked="checked"</if>>胎教音乐<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="207" name="category_id[]" <if condition="in_array('207',$data['category_id'])">checked="checked"</if>>胎教故事<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="208" name="category_id[]" <if condition="in_array('208',$data['category_id'])">checked="checked"</if>>胎教常识<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" value="197" name="category_id[]" <if condition="in_array('197',$data['category_id'])">checked="checked"</if>>特色教育</td>
+                                                <td>
+                                                    <input type="checkbox" value="24" name="category_id[]" <if condition="in_array('24',$data['category_id'])">checked="checked"</if>>艺术特色<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="14" name="category_id[]" <if condition="in_array('14',$data['category_id'])">checked="checked"</if>>智力开发<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="16" name="category_id[]" <if condition="in_array('16',$data['category_id'])">checked="checked"</if>>行为习惯<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="17" name="category_id[]" <if condition="in_array('17',$data['category_id'])">checked="checked"</if>>家庭教育<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="18" name="category_id[]" <if condition="in_array('18',$data['category_id'])">checked="checked"</if>>性格心理<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr style="border-bottom: solid 1px #d84f4b">
+                                                <td><input type="checkbox" value="741" name="category_id[]" <if condition="in_array('741',$data['category_id'])">checked="checked"</if>>幼儿故事</td>
+                                                <td>
+                                                    <input type="checkbox" value="742" name="category_id[]" <if condition="in_array('742',$data['category_id'])">checked="checked"</if>>童话故事<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="743" name="category_id[]" <if condition="in_array('743',$data['category_id'])">checked="checked"</if>>寓言故事<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="744" name="category_id[]" <if condition="in_array('744',$data['category_id'])">checked="checked"</if>>睡前故事<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="745" name="category_id[]" <if condition="in_array('745',$data['category_id'])">checked="checked"</if>>成语故事<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6">营养</td>
+                                                <td><input type="checkbox" value="688" name="category_id[]" <if condition="in_array('688',$data['category_id'])">checked="checked"</if>>美食资讯</td>
+                                                <td>
+                                                    <input type="checkbox" value="730" name="category_id[]" <if condition="in_array('730',$data['category_id'])">checked="checked"</if>>饮食快报<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="731" name="category_id[]" <if condition="in_array('731',$data['category_id'])">checked="checked"</if>>食品安全	<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="739" name="category_id[]" <if condition="in_array('739',$data['category_id'])">checked="checked"</if>>各地小吃<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="740" name="category_id[]" <if condition="in_array('740',$data['category_id'])">checked="checked"</if>>食品行业资讯<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" value="690" name="category_id[]" <if condition="in_array('690',$data['category_id'])">checked="checked"</if>>妈妈食谱</td>
+                                                <td>
+                                                    <input type="checkbox" value="694" name="category_id[]" <if condition="in_array('694',$data['category_id'])">checked="checked"</if>>备孕食谱<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="695" name="category_id[]" <if condition="in_array('695',$data['category_id'])">checked="checked"</if>>孕期食谱<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="696" name="category_id[]" <if condition="in_array('696',$data['category_id'])">checked="checked"</if>>产后食谱<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="697" name="category_id[]" <if condition="in_array('697',$data['category_id'])">checked="checked"</if>>哺乳期<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" value="691" name="category_id[]" <if condition="in_array('691',$data['category_id'])">checked="checked"</if>>宝宝食谱</td>
+                                                <td>
+                                                    <input type="checkbox" value="701" name="category_id[]" <if condition="in_array('701',$data['category_id'])">checked="checked"</if>>儿童<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="698" name="category_id[]" <if condition="in_array('698',$data['category_id'])">checked="checked"</if>>婴儿<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="699" name="category_id[]" <if condition="in_array('699',$data['category_id'])">checked="checked"</if>>幼儿<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="700" name="category_id[]" <if condition="in_array('700',$data['category_id'])">checked="checked"</if>>学龄前<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr >
+                                                <td><input type="checkbox" value="209" name="category_id[]" <if condition="in_array('209',$data['category_id'])">checked="checked"</if>>奶粉</td>
+                                                <td>
+                                                    <input type="checkbox" value="210" name="category_id[]" <if condition="in_array('210',$data['category_id'])">checked="checked"</if>>奶粉品牌<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="213" name="category_id[]" <if condition="in_array('213',$data['category_id'])">checked="checked"</if>>奶粉排行榜<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="214" name="category_id[]" <if condition="in_array('214',$data['category_id'])">checked="checked"</if>>奶粉最新事件<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="218" name="category_id[]" <if condition="in_array('218',$data['category_id'])">checked="checked"</if>>奶粉知识<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr >
+                                                <td><input type="checkbox" value="1213" name="category_id[]" <if condition="in_array('1213',$data['category_id'])">checked="checked"</if>>烘焙</td>
+                                                <td>
+                                                    <input type="checkbox" value="1214" name="category_id[]" <if condition="in_array('1214',$data['category_id'])">checked="checked"</if>>蛋糕的做法大全<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="1215" name="category_id[]" <if condition="in_array('1215',$data['category_id'])">checked="checked"</if>>饼干的做法大全<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="1216" name="category_id[]" <if condition="in_array('1216',$data['category_id'])">checked="checked"</if>>面包的做法大全<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="1217" name="category_id[]" <if condition="in_array('1217',$data['category_id'])">checked="checked"</if>>甜品的做法大全<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr >
+                                                <td><input type="checkbox" value="686" name="category_id[]" <if condition="in_array('686',$data['category_id'])">checked="checked"</if>>美食养生</td>
+                                                <td>
+                                                    <input type="checkbox" value="710" name="category_id[]" <if condition="in_array('710',$data['category_id'])">checked="checked"</if>>春季养生<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="711" name="category_id[]" <if condition="in_array('711',$data['category_id'])">checked="checked"</if>>夏季养生<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="712" name="category_id[]" <if condition="in_array('712',$data['category_id'])">checked="checked"</if>>秋季养生<span style="margin-right: 10px;"></span>
+                                                    <input type="checkbox" value="713" name="category_id[]" <if condition="in_array('713',$data['category_id'])">checked="checked"</if>>冬季养生<span style="margin-right: 10px;"></span>
+                                                </td>
+                                            </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <input type="hidden" name="type" value="{$type|default='0'}">
+                    <input type="hidden" name="id" value="{$data.id|default=''}">
+                    <button type="submit" id="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+                    <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+    </script>
+</block>

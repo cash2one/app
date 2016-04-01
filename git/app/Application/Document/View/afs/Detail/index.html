@@ -1,0 +1,81 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/afs/css/news.css"/>
+</block>
+<block name="body">
+<!--main-->
+<div id="main">
+  <p id="main-title">{~W('Home/Afs/wbreadCrumb',array($info['id'],'Document','detail'))}</p>
+  <div class="news-xq">
+    <div class="list-top">
+      <h1>{$info['title']}</h1>
+      <span><b><i>来源：{$info['source']}</i><i>时间：{$info['create_time']|time_format="Y-m-d H:i:s"}</i><i>作者：{$info['author']}</i></b><a href="#pinglun" >我要点评</a></span> </div>
+    {~W('Afs/relateDown',array($info['id']))}
+    <div class="main-xq"> {~W('Home/P7230/contentProcess',array($info['content']))} </div>
+    
+    <!--游戏攻略--> 
+    <div class="yxgl">
+<!-- 广告位：文章详情百度原生广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1146787");</script>
+<!-- 广告位：文章详情对联广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1146786");</script>
+    </div>
+    {~W('Afs/relateArticle',array($info['id']))} 
+    
+    <!--评论-->
+    <div id="pinglun" name="pinglun">
+      <h3>评论</h3>
+      <form action="" method="" name="" id="pl"  data-id="{$info['id']}" data-model="document">
+        <input name="author" id="tj-user" type="hidden" value="{$info['uid']}" />
+        <p>
+          <input type="text" placeholder="请输入用户名" id="user">
+        </p>
+        <p>
+          <textarea></textarea>
+        </p>
+        <p class="bot"><b>本站为防止低俗内容出现，用户发表的评论需经过审核，谢谢 ！</b>
+          <input type="button" value="发表评论" id="btn">
+        </p>
+      </form>
+      <h2><i>热门评论</i></h2>
+      <ul class="comment_lists" data-id="{$info['id']}" data-model="document">
+        <p style="text-align:center;display:block;padding:10px 0;">暂无评论</p>
+      </ul>
+    </div>
+  </div>
+  <div class="news-right">
+    <div class="wrap-r"> 
+<!-- 广告位：安粉丝PC文章右侧300_250 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1146788");</script>
+    </div>
+    {~W('Afs/relatePackage',array($info['id']))} 
+    <!--本月评分-->
+    <div class="game_rank wrap-r" id="pfph">
+      <h2><i>最新游戏</i></h2>
+      <div class="current">
+        <ul>
+          <!--{~W('Down/Afs/rankCon',array('105641','2'))}-->
+            {~W('Down/Afs/newGame')}
+        </ul>
+      </div>
+    </div>
+    <!--最新软件-->
+    <!--{~W('Afs/sameStyle',array($info['id']))} -->
+      {~W('Afs/newSoft')}
+    <!--热门评测-->
+    <div class="wrap-r" id="rmpc">
+      <h2><i>热门评测</i></h2>
+      <ul>
+        <Think:article basename="Document" name="article" cate="184" order="view" limit="10">
+          <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" title="{$article.title}">{$article.title}</a></li>
+        </Think:article>
+      </ul>
+    </div>
+    <div class="wrap-r"> 
+     <!-- 广告位：安粉丝PC版下载页300_250云标签 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1146789");</script>
+    </div>
+    {~W('Home/Afs/zhuanqu')} </div>
+</div>
+<div style=" clear:both"></div>
+</block>

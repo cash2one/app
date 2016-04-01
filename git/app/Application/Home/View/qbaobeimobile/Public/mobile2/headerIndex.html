@@ -1,0 +1,35 @@
+<header class="home-header">
+    <div id="fixd-top">
+        <div class="home-logo"><a href="{:C('MOBILE_STATIC_URL')}" title="亲亲宝贝网"><img src="__PUBLIC__/Home/qbaobeimobile2/images/logo.png" alt="亲亲宝贝网"></a></div>
+        <div class="home-searbox">高龄备孕二胎</div>
+        <div class="home-popnav-btn popbtn"><a href="{:C('MOBILE_STATIC_URL')}/cate/"></a></div>
+        <div class="pop-searbox">
+            <form id="bdcs-search-form" class=""  method="get" action="http://s.qbaobei.com/cse/search">
+                <input type="hidden" value="9283565739734765726" name="s">
+                <input type="text" autocomplete="off" placeholder="高龄备孕二胎" id="bdcs-search-form-input" class="text" name="q" required><a href="javascript:;" class="clear">╳</a>
+                <input type="submit" value="取消" id="bdcs-search-form-cancel" class="btn">
+                <input type="submit" value="搜索" id="bdcs-search-form-submit" class="btn">
+            </form>
+        </div>
+    </div>
+</header>
+<!-- 搜索标签推荐-->
+{~W('Home/Qbaobeimobile/getSearchTag')}
+<!--导航-->
+<nav class="home-nav">
+    <div class="swiper-container2">
+        <div class="swiper-wrapper">
+            <a class="swiper-slide active" href="{$Think.config.MOBILE_STATIC_URL}">首页</a>
+            <a class="swiper-slide" href="{$Think.config.MOBILE_STATIC_URL}/list/19/">备孕</a>
+            <a class="swiper-slide" href="{$Think.config.MOBILE_STATIC_URL}/list/21/">怀孕</a>
+            <a class="swiper-slide" href="{$Think.config.MOBILE_STATIC_URL}/list/192/">分娩</a>
+            <a class="swiper-slide" href="{$Think.config.MOBILE_STATIC_URL}/list/22/">产后</a>
+            <a class="swiper-slide" href="{$Think.config.MOBILE_STATIC_URL}/list/934/">新生儿</a>
+            <a class="swiper-slide" href="{$Think.config.MOBILE_STATIC_URL}/list/129/">0-1岁</a>
+            <a class="swiper-slide" href="{$Think.config.MOBILE_STATIC_URL}/list/130/">1-3岁</a>
+            <a class="swiper-slide" href="{$Think.config.MOBILE_STATIC_URL}/list/131/">3-6岁</a>
+        </div>
+    </div>
+</nav>
+<!--首页轮播图-->
+{~W('Home/Qbaobeimobile/getPicPostion')}

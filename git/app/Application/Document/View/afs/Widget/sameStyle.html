@@ -1,0 +1,10 @@
+<notempty name="result">
+<div class="wrap-r" id="hot">
+  <h2><i>相同风格</i></h2>
+  <ul>
+  <volist name="result" id="vo" offset="0" length='9'>
+    <li><a href="{:staticUrl('detail', $vo['id'],'Down')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $vo['id'],'Down')}" target="_blank" class="tit">{$vo['title']}</a></li>
+    </volist>
+  </ul>
+</div>
+</notempty>

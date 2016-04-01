@@ -1,0 +1,66 @@
+<extend name="Home@afsmobile/Base/commonNew" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+    <!--标签页-->
+    <section class="tags-page">
+        <div class="kc">
+            <div class="ktop"><h1>{$info['title']}</h1><img src="{:get_cover($info['img'],'path')}"></div>
+            <div class="go-home"><a href="{:C('MOBILE_STATIC_URL')}">首页</a><a href="{:C('MOBILE_STATIC_URL')}{:getWidgetPath('14')}">排行</a><a href="http://m.anfensi.com/soft/">分类</a></div>
+            <div class="kjs">{$info['description']}</div>
+            <p class="kmore"><span class="zk">展开内容</span></p>
+        </div>
+        <div class="tag-main game" id="rank">
+            <div class="tag-tit"><span class="tit-left">{$info['sub_title']}</span><span class="tit-right">共<b>{$count}</b>条数据</span></div>
+            <ul class="tag-ul">
+                <volist name="lists" id="val">
+                    <li>
+                        <a href="{:staticUrlMobile('detail',$val['id'],'Down')}" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                        <div class="main">
+                            <div><a href="{:staticUrlMobile('detail',$val['id'],'Down')}">{$val['title']}</a></div>
+                            <div><i>{$val['size']}</i>&nbsp;|&nbsp;<i>{$val['version']}</i></div>
+                            <div><i>{:date('Y-m-d',$val['update_time'])}</i>&nbsp;|&nbsp;<i>{$val['cate']}</i></div>
+                        </div>
+                        <a href="{:staticUrlMobile('detail',$val['id'],'Down')}" class="down"><span class="bg"></span>高速下载</a>
+                    </li>
+                </volist>
+            </ul>
+            <div id="get_more" onclick="tag_more($(this))">点击加载更多</div>
+        </div>
+        <div class="mkl tag-main">
+            <div class="tag-tit">更多合集</div>
+            <ul>
+                {:W('Home/Afsmobile/randTag',array($info['id'],$info['category']))}
+            </ul>
+        </div>
+    </section>
+    <div style=" clear:both"></div>
+</block>
+<block name="script">
+    <script>
+        function tag_more(more){
+            var t_li = $('.tag-ul').find('li');
+            $.ajax({
+                dataType:"jsonp",
+                jsonp:"callback",
+                url: window.DYNAMIC_SERVER_URL + '/dynamic.php?s=/Afsmobile/API_softTags/key/'+"{$info['id']}"+'/num/' + t_li.length,
+                success:function(data){
+                    if(data){
+                        var li_html = '';
+                        for(i in data){
+                            li_html += '<li><a href="'+data[i].url+'" class="pic"><img src="'+data[i].img+'"></a><div class="main"><div><a href="';
+                            li_html += data[i].url+'">'+data[i].title+'</a></div><div><i>'+data[i].size+'</i>&nbsp;|&nbsp;<i>'+data[i].version+'</i></div>';
+                            li_html += '<div><i>'+data[i].update_time+'</i>&nbsp;|&nbsp;<i>'+data[i].cate+'</i></div>';
+                            li_html += '</div><a href="'+data[i].url+'" class="down"><span class="bg"></span>高速下载</a></li>';
+                        }
+                        t_li.last().after(li_html);
+                    }else{
+                        more.html("没有更多数据了");
+                        more.removeAttr('onclick');
+                    }
+                }
+            });
+        }
+    </script>
+</block>

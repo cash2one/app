@@ -1,0 +1,17 @@
+ <ul class="nav">
+          <volist name="lists" id="vo" offset="0" length="6">
+            <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>>{$vo.title}</li>
+         </volist>
+          <li>最近更新</li>
+        </ul>
+<volist name="lists" id="vo" offset="0" length="6">
+ <div class="glrec <PHP>if($key=='0'){echo "current";}</PHP>">
+ {~W('Afs/indexZq',array($vo['id']))}
+</volist>
+<div class="glrec ">
+<ul>
+       <Think:article basename="Document" name="article" limit="7"  where="category_id=192 OR category_id=181 OR category_id=191" order="update_time desc">
+            <li><b>{$article.create_time|time_format="m-d"}</b><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" title="{$article['title']}">{$article['title']}</a> </li>
+         </Think:article>
+  </ul>
+</div>

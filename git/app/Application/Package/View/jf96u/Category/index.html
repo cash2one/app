@@ -1,0 +1,59 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/gift.css"/>
+</block>
+<block name="body">
+<div class="main1200">
+    <div class="goback">当前位置：<a href="{:C('STATIC_URL')}">首页</a> > 礼包</div>
+    <div class="container">
+        <div class="cata-l">
+            <!--gift-nav-->
+            <div class="gift-nav wrap">
+                <div class="wcata cata">
+                    <span class="tit">类型：</span>
+                    <eq name="cate" value="0"><a href="{~W('Package/Jf96u/packageUrl',array($le,'0'))}" class="active">全部</a><else/><a href="{~W('Package/Jf96u/packageUrl',array($le,'0'))}">全部</a></eq>
+                    <eq name="cate" value="6"><a href="{~W('Package/Jf96u/packageUrl',array($le,'6'))}" class="active">礼包</a><else/><a href="{~W('Package/Jf96u/packageUrl',array($le,'6'))}">礼包</a></eq>
+                    <eq name="cate" value="7"><a href="{~W('Package/Jf96u/packageUrl',array($le,'7'))}" class="active">激活码</a><else/><a href="{~W('Package/Jf96u/packageUrl',array($le,'7'))}">激活码</a></eq>
+                    <eq name="cate" value="8"><a href="{~W('Package/Jf96u/packageUrl',array($le,'8'))}" class="active">新手卡</a><else/><a href="{~W('Package/Jf96u/packageUrl',array($le,'8'))}">新手卡</a></eq>
+                 </div>
+                <div class="wcata words">
+                    <span class="tit">拼音：</span>
+                    <empty name="le"><a href="{~W('Package/Jf96u/packageUrl',array("0",$cate))}" class="active">全部</a><else/><a href="{~W('Package/Jf96u/packageUrl',array("0",$cate))}">全部</a></empty> 
+                    <volist name="letters" id="vo">
+                      <eq name="le" value="$vo"><a href="{~W('Package/Jf96u/packageUrl',array($vo,$cate))}" class="active">{$vo}</a><else/><a href="{~W('Package/Jf96u/packageUrl',array($vo,$cate))}">{$vo}</a></eq>
+                    </volist>
+                </div>
+            </div>
+            <!--最新礼包-->
+            <div class="gift-new dis-top wrap">
+                <div class="mid-tit"><h3>最新礼包</h3></div>
+                <ul class="gift-ul">
+                <volist name="lists" id="vo">
+                    <li><a href="{:staticUrl('detail',$vo['id'],'Package')}" target="_blank" title="{$vo['title']}"><img src="{:get_cover($vo['cover_id'],'path')}" alt="{$vo['title']}"></a>
+                        <div class="text">
+                            <a href="{:staticUrl('detail',$vo['id'],'Package')}" target="_blank" title="{$vo['title']}">{$vo['title']}</a>
+                            <p class="info">{:strip_tags($vo['content'])}</p>
+                        </div>
+                        <a href="{:staticUrl('detail',$vo['id'],'Package')}" target="_blank" class="lq">领取</a>
+                    </li>
+                </volist>
+                </ul>
+            </div>
+            <div class="page">
+                {$page}
+            </div>
+        </div>
+        <div class="cata-r">
+            {~W('Package/Jf96u/kaifu')}
+            <div class="game-hot dis-top wrap">
+                <div class="mid-tit"><h3>热门手游排行榜</h3></div>
+                <ul class="tab-cont current">
+                   <document model="21" limit="0,10" order="view desc" key="k">
+                    <li><em>{$k}</em><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a><span class="down-nub">{$document.view}</span></li>
+                   </document>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</block>

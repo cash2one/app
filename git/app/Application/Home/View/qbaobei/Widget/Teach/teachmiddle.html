@@ -1,0 +1,48 @@
+<div class="boxmiddle">
+    <div class="topnews">
+        <h2><a target="_blank" href="{:staticUrl('detail',$first['id'],'Document')}" title="{$first.title}">{$first.title}</a></h2>
+        <p>{$first.description}... <a class="gray-a" target="_blank" href="{:staticUrl('detail',$first['id'],'Document')}"> [详细] </a></p>
+        <h2><a target="_blank" href="{:staticUrl('detail',$second['id'],'Document')}" title="{$second.title}">{$second.title}</a></h2>
+        <div class="p-news">
+            <volist name="list" id="l">
+             <a class="hot" target="_blank" href="{:staticUrl('detail',$l['id'],'Document')}" title="{$l.title}">{$l.title}</a>
+            </volist>
+        </div>
+        <div class="clear"> </div>
+        <div class="sec-part">
+            <volist name="focus_list" id="list">
+                <dl>
+                    <dt><a class="classify" target="_blank" href="{:staticUrl('lists',$list['cateid'],'Document')}"> [{$list.catetitle}] </a></dt>
+                    <volist name="list.doc" id="doc">
+                    <dd><a target="_blank" href="{:staticUrl('detail',$doc['id'], 'Document')}" title="{$doc.title}">{$doc.title}</a></dd>
+                    </volist>
+                </dl>
+            </volist>
+        </div>
+        <div class="clear"> </div>
+    </div>
+    <div class="keyword">
+        <volist name="cate_list" id="list">
+        <a target="_blank" href="{:staticUrl('lists',$list['id'],'Document')}" title="{$list.title}">{$list.title}</a><if condition="$i lt 5 ">|</if>
+        </volist>
+    </div>
+    <ul class="imgfcous">
+        <li><a target="_blank" href="http://www.qbaobei.com/plans/shuiqiangushi/" title="睡前小故事"><img src="http://www.qbaobei.com/UploadFiles/jiaoyu/2013/9/201309171415296786.jpg" alt="睡前小故事"><br>
+            睡前小故事</a></li>
+        <li><a target="_blank" href="http://www.qbaobei.com/plans/shougong/" title="废物利用手工制作"><img src="http://www.qbaobei.com/UploadFiles/jiaoyu/2013/9/201309171415354983.jpg" alt="废物利用手工制作"><br>
+            废物利用手工制作</a></li>
+        <li><a target="_blank" href="http://www.qbaobei.com/tools/qinziyouxicx/" title="亲子游戏查询工具"><img src="http://www.qbaobei.com/UploadFiles/jiaoyu/2013/9/201309171409259571.jpg" alt="亲子游戏查询工具"><br>
+            亲子游戏查询工具</a></li>
+    </ul>
+</div>
+<div class="boxright">
+    <div class="tech-title"><span>焦点关注</span></div>
+    <ul class="tech-rec">
+        <volist name="hot_list" id="list">
+            <li><a href="{:staticUrl('detail',$list['id'],'Document')}" target="_blank">{$list.title}</a></li>
+        </volist>
+    </ul>
+    <div class="tech_pic">
+        <a href="{:staticUrl('detail',$hot_pic['id'],'Document')}" target="_blank"><img src="{$hot_pic.smallimg|get_cover='path'}" alt="{$hot_pic.title}"><span>{$hot_pic.title}</span></a><b></b>
+    </div>
+</div>

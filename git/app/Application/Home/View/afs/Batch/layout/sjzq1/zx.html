@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Home@afsmobile/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/afsmobile/css/yxzq.css" />
+</head>
+
+<body>
+<header id="inpage_head">
+    <span class="back"></span>
+    <b>{$batch['title']}</b>
+    <em id="head-nav"></em>
+</header>
+<!--弹出菜单-->
+<div id="case-main">
+    <include file="Home@afsmobile/Public/popup" />
+</div>
+<!--zq-->
+<section class="zqsy">
+    <div class="wrap zqgl">
+        <ul class="new_list">
+            <div class="dragable" widget="newsMobile" style=" width: 100%; height: 30px; border: 1px solid #ff0000;">
+            <volist name="newsMobile" id="val">
+            <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a><em>{:date('m-d',$val['create_time'])}</em></li>
+            </volist>
+            </div>
+        </ul>
+    </div>
+    <div class="page">{$page}</div>
+</section>
+<!--footer-->
+<include file="Home@afsmobile/Public/zq/foot"/>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<php>if($cates){</php>
+<li><a href="{:staticUrl('lists',$id,'Document')}" target="_blank">{$title}</a><em class="arr"></em>
+    <div class="hidebox">
+        <volist name="cates" id="val">
+        <a href="{:staticUrl('lists',$val['id'],'Document')}" target="_blank"><s class="ico"><img src="{:get_cover($val['icon'],'path')}"></s>{$val['title']}</a>
+        </volist>
+    </div>
+</li>
+<php>}else{</php>
+<li><a href="{:staticUrl('lists',$id,'Document')}" target="_blank">{$title}</a></li>
+<php>}</php>

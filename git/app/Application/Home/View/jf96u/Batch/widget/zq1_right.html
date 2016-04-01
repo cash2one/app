@@ -1,0 +1,13 @@
+<div class="wraper-right">
+    {:W('Home/Jf96ubatch/zq1_right1',array($tag))}
+    <div class="game-hot cata-tab dlList">
+        <div class="mid-tit"><h3>热门手游排行榜</h3></div>
+        <ul class="tab-cont current">
+            <volist name="lists" id="val">
+            <li><em>1</em><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" title="{$val['title']}">{$val['title']}</a><span class="down-nub">{$val['view']}</span></li>
+            </volist>
+        </ul>
+    </div>
+    <!-- 游戏热门攻略 -->
+    {:W('Home/Jf96ubatch/zq1_hot_gl',array($tag,$more))}
+</div>

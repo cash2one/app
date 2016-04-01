@@ -1,0 +1,28 @@
+<extend name="Home@gfw/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+<block name="body">
+<!--main-->
+
+<!--注册-->
+<div class="main" id="reg-wraper">
+    <div class="reg-top">
+        <div class="reg-top-title">你还未绑定登陆,请先绑定</div>
+        <div class="reg-top-login"><em>没有官方网账户？</em><a href="{:U('Index/register')}" target="_blank">立即注册</a></div>
+    </div>
+    <div class="reg-body">
+        <form class="reg-form" id="bindForm" method="post" action="{:U('Api/bindLogin')}">
+            <div class="info_list text"><em>用户名：</em><input type="text"  placeholder="请填写您的邮箱地址" id="username" name="username" class="username"></div>
+            <div class="info_list text"><em>密码：</em><input type="password" name="password" id="password" class="password"></div>
+            <div class="info_list btn"><input name="type" type="hidden" value="{$type}" /><input name="token" type="hidden" value="{$token}" /><input id="regBtn" type="submit" class="submit" value="确认绑定"></div>
+        </form>
+    </div>
+</div>
+
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+</block>

@@ -1,0 +1,12 @@
+<div class="game_xq_rec">
+    <div class="gamerec gameRj"><span>软件</span>
+        <volist name="soft" id="val">
+            <php>if($key>0){echo '|';}</php><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['title']}</a>
+        </volist>
+    </div>
+    <div class="gamerec gameYx"><span>集合</span>
+        <volist name="jh" id="val">
+            <php>if($key>0){echo '|';}</php><a href="{:C('STATIC_URL')}/tag/{$val['name']}/" target="_blank">{$val['title']}</a>
+        </volist>
+    </div>
+</div>

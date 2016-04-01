@@ -1,0 +1,13 @@
+<div style=" clear:both"></div>
+<!--友情链接-->
+<php>if($link){</php>
+<div class="links">
+    <h2>友情链接</h2>
+    <div class="link-m">
+        <volist name="link" id="val">
+            <php>if($i!=1){echo '|';}</php>
+            <a href="{$val['url_token']}" target="_blank">{$val['title']}</a>
+        </volist>
+    </div>
+</div>
+<php>}</php>

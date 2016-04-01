@@ -1,0 +1,50 @@
+
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/index.css"/>
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > 食谱</block>
+<block name="body">
+    <!--导航-->
+    <nav class="channel-nav">
+        <a class="active" href="{:C('MOBILE_STATIC_URL')}{:getWidgetPath(84)}">今日推荐</a>
+        <a href="{:staticUrlMobile('lists',694,'Document')}">食谱库</a>
+    </nav>
+    <!--轮播-->
+    <div class="picauto-box pic-adaptive-wrap">
+        <div class="swiper-container3 pic-adaptive">
+            <div class="swiper-wrapper">
+                <volist name="slide" id="val">
+                <div class="swiper-slide"><a href="{:staticUrlMobile('detail',$val['id'],'Document')}"><img src="{:get_cover($val['smallimg'],'path')}"></a><div class="autoTitle"><p class="title">{$val['title']}</p></div></div>
+                </volist>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <section class="news-list dis-bot beiyun-news">
+        <div class="news-list-ul">
+            <volist name="bjtj" id="val">
+            <if condition="$val['count_img'] lt 3">
+            <div class="has-action li"><a href="{:staticUrlMobile('detail',$val['id'],'Document')}"><div class="pic"><img src="{:get_cover($val['smallimg'],'path',1,240,200)}"></div><div class="text"><p class="tit">{$val['title']}</p><p class="info">{$val['description']}</p></div></a></div>
+            <else/>
+            <div class="middle_mode li"><a href="{:staticUrlMobile('detail',$val['id'],'Document')}"><div class="mid-text"><p class="mid-tit">{$val['title']}</p><p class="mid-info">{$val['description']}</p></div><div class="mid-pic"><ul class="mid-ul pic-adaptive-wrap2"><volist name="val['imgs']" id="vo" offset="0" length="3"><li class="pic-adaptive2"><img src="{:get_cover($vo,'path',1,240,200)}"></li></volist></ul></div></a></div>
+            </if>
+            </volist>
+        </div>
+    </section>
+
+    <volist name="lists" id="val">
+    <section class="ship-cata dis-bot">
+        <div class="ship-cata-tit"><a href="{:staticUrlMobile('lists',$val['id'],'Document')}" class="more">更多</a><h3>{$val['title']}</h3></div>
+        <ul class="ship-cata-ul pic-adaptive-wrap2">
+            <volist name="val['data']" id="vo">
+            <li><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}" class="pic-adaptive2" title="{$vo['title']}"><img src="{:get_cover($vo['smallimg'],'path',1,240,200)}" alt="{$vo['title']}"></a><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}" class="title">{$vo['title']}</a></li>
+            </volist>
+        </ul>
+    </section>
+    </volist>
+
+</block>
+<block name="script">
+    <script src="__PUBLIC__/Home/qbaobeimobile2/js/swiper.js"></script>
+</block>

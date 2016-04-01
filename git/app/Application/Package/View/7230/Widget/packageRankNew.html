@@ -1,0 +1,30 @@
+<php>if($data){</php>
+<div id="lbxq-right">
+    <!--排行榜-->
+    <p class="lbjh"><i>相关下载</i><b></b></p>
+    <div class="paih" id="paihtab">
+        <p class="title"><i class="cur">安卓</i><i>IOS</i></p>
+        <ul class="cur ulTab">
+            <volist name="data['adr']" id="val">
+                <li><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val.title}</a><s>下载</s></span></li>
+            </volist>
+        </ul>
+        <ul class="ulTab ulTab">
+            <volist name="data['ios']" id="val">
+                <li><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val.title}</a><s>下载</s></span></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="lkxz">
+        <b>领卡须知：</b>
+        <ol>
+            <li>7230手游礼包中心是7230手游网最新推出的一个用户自主领号系统，提供各种最新热门手游的礼包、激活码、新手卡，欢迎玩家领取</li>
+            <li>7230手游礼包中心无需注册即可领取</li>
+            <li>每种礼包每人只能领取一次</li>
+            <li>建议领到号的玩家立即进入游戏中激活，以免系统回收后被他人使用。</li>
+        </ol>
+    </div>
+</div>
+<php>}else{</php>
+<!--#include virtual="{:getWidgetPath('28')}"-->
+<php>}</php>

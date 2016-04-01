@@ -1,0 +1,4 @@
+<volist name="provinceList" id="province" key="i">
+	<?php $path_url = str_replace('{pinyin}',$province[pinyin],$path_province);?>
+	<a href="{:C('STATIC_URL')}/{:$path_url}" target="_blank">{:$province['name']}</a>
+</volist>

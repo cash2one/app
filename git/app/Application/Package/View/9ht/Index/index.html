@@ -1,0 +1,75 @@
+<extend name="Package@9ht/Base/common"/>
+
+<block name="style">
+<link href="__PUBLIC__/Package/9ht/css/css.css" rel="stylesheet" type="text/css">
+</block>
+
+<block name="body">
+    <dl class="con">
+        <dd class="left">
+            <p id="picshow">
+                 <include file="Package@9ht/Widget/bigPic"/>   
+            </p>
+            <p class="list">
+                <b><u class="cur">全部</u><u>安卓</u><u>Iphone</u><u>Ipad</u><u>PC</u></b>
+                <i class="on">
+                    <Think:article basename="Package" name="pmain" limit="5">
+                        <span><a href="{:staticUrl('Detail',$article['id'])}"><img src="{:get_cover($article['cover_id'],'path')}"><font></font><em>{$article.title|msubstr=###,0,24,'utf-8',false}</em></a><u>有效时间：{$article.start_time|time_format="Y-m-d"} 至 {$article.end_time|time_format="Y-m-d"}</u><br/>总量：<strong class="card_all" card-id="{$article.id}"></strong> / 剩余：<strong class="card_surplus" card-id="{$article.id}"></strong><br/>平台：{$article.platform} 　卡类：{:showText($article['card_type'],'card_type')} 　状态：{$article.status|showFormat="status"}<s><a href="{:staticUrl('Detail',$article['id'])}">立即领取</a></s></span>
+                    </Think:article>
+            </i>
+            <i>
+                    <Think:article basename="Package" name="pmain" limit="5" where="conditions & 1">
+                        <span><a href="{:staticUrl('Detail',$article['id'])}"><img src="{:get_cover($article['cover_id'],'path')}"><font></font><em>{$article.title|msubstr=###,0,24,'utf-8',false}</em></a><u>有效时间：{$article.start_time|time_format="Y-m-d"} 至 {$article.end_time|time_format="Y-m-d"}</u><br/>总量：<strong class="card_all" card-id="{$article.id}"></strong> / 剩余：<strong class="card_surplus" card-id="{$article.id}"></strong><br/>平台：{$article.platform} 　卡类：{$article.card_type|showFormat="card_type"}  　状态：{$article.status|showFormat="status"}<s><a href="{:staticUrl('Detail',$article['id'])}">立即领取</a></s></span>
+                    </Think:article>
+            </i>
+            <i>
+                    <Think:article basename="Package" name="pmain" limit="5" where="conditions & 2">
+                        <span><a href="{:staticUrl('detail', $article['id'])}"><img src="{:get_cover($article['cover_id'],'path')}"><font></font><em>{$article.title|msubstr=###,0,24,'utf-8',false}</em></a><u>有效时间：{$article.start_time|time_format="Y-m-d"} 至 {$article.end_time|time_format="Y-m-d"}</u><br/>总量：<strong class="card_all" card-id="{$article.id}"></strong> / 剩余：<strong class="card_surplus" card-id="{$article.id}"></strong><br/>平台：{$article.platform} 　卡类：{$article.card_type|showFormat="card_type"}  　状态：{$article.status|showFormat="status"}<s><a href="{:staticUrl('Detail',$article['id'])}">立即领取</a></s></span>
+                    </Think:article>
+            </i>
+            <i>
+                    <Think:article basename="Package" name="pmain" limit="5" where="conditions & 4">
+                        <span><a href="{:staticUrl('detail', $article['id'])}"><img src="{:get_cover($article['cover_id'],'path')}"><font></font><em>{$article.title|msubstr=###,0,24,'utf-8',false}</em></a><u>有效时间：{$article.start_time|time_format="Y-m-d"} 至 {$article.end_time|time_format="Y-m-d"}</u><br/>总量：<strong class="card_all" card-id="{$article.id}"></strong> / 剩余：<strong class="card_surplus" card-id="{$article.id}"></strong><br/>平台：{$article.platform} 　卡类：{$article.card_type|showFormat="card_type"}  　状态：{$article.status|showFormat="status"}<s><a href="{:staticUrl('detail', $article['id'])}">立即领取</a></s></span>
+                    </Think:article>
+            </i>
+            <i>
+                    <Think:article basename="Package" name="pmain" limit="5" where="conditions & 8">
+                        <span><a href="{:staticUrl('detail', $article['id'])}"><img src="{:get_cover($article['cover_id'],'path')}"><font></font><em>{$article.title|msubstr=###,0,24,'utf-8',false}</em></a><u>有效时间：{$article.start_time|time_format="Y-m-d"} 至 {$article.end_time|time_format="Y-m-d"}</u><br/>总量：<strong class="card_all" card-id="{$article.id}"></strong> / 剩余：<strong class="card_surplus" card-id="{$article.id}"></strong><br/>平台：{$article.platform} 　卡类：{$article.card_type|showFormat="card_type"}  　状态：{$article.status|showFormat="status"}<s><a href="{:staticUrl('detail', $article['id'])}">立即领取</a></s></span>
+                    </Think:article>
+            </i>
+        </p>
+          <div id="index_list">
+            <div class="list_con">
+             <div class="hd"><h3>大礼包</h3><a href="{:staticUrl('lists', 1)}" title="更多">更多...</a></div>
+            <ul>
+            <Think:article basename="Package" name="pmain" cate="1" limit="10">
+            <li><i class="<PHP>if($key+1<=3){echo "top";}else{echo "normal";}</PHP>">{$key+1}</i><a href="{:staticUrl('detail', $article['id'])}">{$article.title|msubstr=###,0,5,'utf-8',false}</a><a class="get" href="{:staticUrl('detail', $article['id'])}">领取</a><span>{$article.card_type|showFormat="card_type"}</span></li>
+            </Think:article>
+            </ul>
+            </div>
+            
+           <div class="list_con">
+             <div class="hd"><h3>新手卡</h3><a href="{:staticUrl('lists', 3)}" title="更多">更多...</a></div>
+            <ul>
+             <Think:article basename="Package"  cate="3" limit="10">
+          <li><i class="<PHP>if($key+1<=3){echo "top";}else{echo "normal";}</PHP>">{$key+1}</i><a href="{:staticUrl('detail', $article['id'])}">{$article.title|msubstr=###,0,5,'utf-8',false}</a><a class="get" href="{:staticUrl('detail', $article['id'])}">领取</a><span>{$article.card_type|showFormat="card_type"}</span></li>
+            </Think:article>
+            </ul>
+            </div>
+          <div class="list_con">
+             <div class="hd"><h3>激活码</h3><a href="{:staticUrl('lists', 4)}" title="更多">更多...</a></div>
+            <ul>
+            <Think:article basename="Package" name="pmain" cate="4" limit="10">
+          <li><i class="<PHP>if($key+1<=3){echo "top";}else{echo "normal";}</PHP>">{$key+1}</i><a href="{:staticUrl('detail', $article['id'])}">{$article.title|msubstr=###,0,5,'utf-8',false}</a><a class="get" href="{:staticUrl('detail', $article['id'])}">领取</a><span>{$article.card_type|showFormat="card_type"}</span></li>
+            </Think:article>
+            </ul>
+            </div>
+            
+   </div>
+          
+</dd>
+<dt class="right"> 
+    <include file="Package@9ht/Public/sideR"/>
+</dt>
+</dl>
+</block>

@@ -1,0 +1,41 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/home.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/kfkc.css"/>
+</block>
+<block name="body">
+<div class="main1200">
+    <div class="goback">当前位置：<a href="{:C('STATIC_URL')}" target="_blank">首页</a> > 排行榜</div>
+    <div class="container">
+        <div class="rank-nav wrap fl">
+             <Think:article basename="Down" name="paihang"  cate="1856" order="level desc" limit="100"> 
+             <a href="{:str_replace("index.html","",staticUrl('detail', $article['id'],'Down'))}" >{$article.title}</a> 
+             </Think:article>
+        </div>
+        <div class="rank-cont fr">
+              {~W('Down/Jf96u/rankCon',array('266472','1','手游排行榜2016','./2014top10/'))}
+              {~W('Down/Jf96u/rankCon',array('266463','1','手机网游排行榜','./ol/'))}
+              {~W('Down/Jf96u/rankCon',array('266464','1','单机手游排行榜','./danji/'))}
+              {~W('Down/Jf96u/rankCon',array('266466','1','安卓手游排行榜','./android/'))}
+              {~W('Down/Jf96u/rankCon',array('266467','1','IOS手游排行榜','./ios/'))}
+              {~W('Down/Jf96u/rankCon',array('266477','1','安卓动作手游榜','./dongzuo/'))}
+              
+        </div>
+    </div>
+    <!--links-->
+    <div class="links  dis-top">
+        <div class="fl">友情链接</div>
+        <div class="fr">
+            <ul class="links-cont">
+                <IndexTag:friendlink name="n" group="4" count="100">
+                    <li><a href="{$n['url_token']}" target="_blank">{$n['title']}</a></li>
+                </IndexTag:friendlink>
+            </ul>
+        </div>
+        <div class="btn">
+            <span class="btn-t"></span>
+            <span class="btn-b"></span>
+        </div>
+    </div>
+</div>
+</block>

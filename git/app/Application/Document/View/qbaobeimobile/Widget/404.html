@@ -1,0 +1,24 @@
+<extend name="Home@qbaobeimobile/Base/common2" />
+<block name="style">
+<style>
+    .main{ padding:30px 10px 20px 10px; margin-bottom:10px; background-color:#fff;}
+    .main404{height:500px; background:url(/Public/Home/qbaobeimobile2/images/page.png) center top no-repeat; background-size:300px 500px}
+    .main404 .btn{ padding-top:230px; margin:0 auto; width:300px;}
+    .main404 .btn a{ display:inline-block; width:110px; height:30px; margin-left:10px; text-indent:-9999px;}
+    .main404 a:first-child{ background:url(/Public/Home/qbaobeimobile2/images/back.png) 0 0 no-repeat; background-size:110px auto}
+    .main404 a:last-child{ background:url(/Public/Home/qbaobeimobile2/images/back.png) 0 -30px no-repeat; background-size:110px auto}
+</style>
+</block>
+<block name="body">
+<!--404 main-->
+    <section class="main">
+        <div class="main404">
+            <div class="btn"><a href="http://m.qbaobei.com">返回首页</a><a href="javascript:history.go(-1)">返回上一页</a></div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1257155389'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1257155389' type='text/javascript'%3E%3C/script%3E"));
+        document.getElementById('cnzz_stat_icon_1257155389').style.display="none";
+    </script>
+</block>

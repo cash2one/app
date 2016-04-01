@@ -1,0 +1,15 @@
+<div class="kpage-hj">
+    <div class="mid-tit"><h3>推荐合辑</h3><a href="{:getWidgetPath(86,ture)}" target="_blank" class="more">更多</a></div>
+    <div class="autopic">
+        <span class="btn prev">prev</span>
+        <span class="btn next">next</span>
+        <div class="img-list">
+            <ul class="clearfix">
+                <!--li至少为6个-->
+                <volist name="lists" id="val">
+                <li><a href="{$val['url']}" target="_blank"><img src="{:get_cover($val['img'],'path')}"><span class="all-tit">{$val['name']}</span><b class="bg"></b></a></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</div>

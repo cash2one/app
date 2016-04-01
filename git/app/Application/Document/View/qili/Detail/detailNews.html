@@ -1,0 +1,165 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/detail.css"/></block>
+<block name="header">
+    <include file="Home@qili/Public/header" />
+</block>
+<block name="body">        
+<div class="tupage-nav">
+    <div class="qnx1200">
+        <div class="tupage-left">
+			<classify model="2" id="$info[category_id]"><php>$typeid = $classify['rootid'];</php></classify>
+			
+			<if condition="$typeid"> 
+				<classify model="2" id="$typeid">
+					<h3>{$classify.title}</h3>
+				</classify>
+				
+				<classify model="2" typeid="$typeid" limit="6">
+					<a href="{$classify.url}">{$classify.title}</a><em>|</em>
+				</classify>
+			</if>
+        </div>
+
+        <div class="tupage-right">
+            <document model="2" typeid="$info[category_id]" flag="detail_recom,32" limit="1">
+				<span>热点：</span>  
+                <a href="{$document.url}" title="{$document.title}">{$document.title}</a>
+			</document>
+        </div>
+    </div>
+</div>
+
+<div class="qnx1200 detail">
+    <div class="detail-left">
+        <div class="location"> <position />&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;正文</div>
+        <div class="artcont">
+            <div class="artitle"><h1>{$info['title']}</h1></div>
+            <div class="art-auther">
+                <span>{$info['create_time']|time_format="Y-m-d H:i:s"}</span><span>来源：<if condition="$info[source]">{$info['source']}<else />七丽女性网</if></span><span class="vis">{$info['view']+1}</span>
+                <div class="art-share">
+                    <div class="share-tit">分享：</div>
+                    <div class="bdsharebuttonbox">
+						<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+						<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+					</div>
+                </div>
+            </div>
+
+            <div class="art-guidecont">
+				<span class="btn arr-left"></span>
+				<p class="jjxq">{$info['description']}</p>
+				<span class="btn arr-right"></span>
+			</div>
+
+            <div class="art-body">
+              {$info['content']}
+            </div> 
+        </div>
+
+        <div class="art-tags">
+            <div class="tags-left">
+				<document model="2" id="$info[id]" callback="classify" order="desc">
+					<if condition="$document[classify]">
+					标签：
+					</if>
+
+					<volist name="document.classify" id="project" offset="0" length='4'>
+						<a href="{$project.url}">{$project.title}</a>　
+					</volist>
+				</document>
+            </div>
+
+            <div class="art-share">
+                <div class="share-tit">分享：</div>
+                <div class="bdsharebuttonbox">
+					<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+					<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+					<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+					<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-right">
+		{~W('Qili/graphicBlack',array($info['category_id'], $info['id']))}
+
+        {~W('Qili/detailTagRank',array($info['id']))}
+
+       <div class="djdzk">
+           <div class="det-title"><h3>大家都在看</h3></div>
+           <ul class="djdzk-ul">
+            <document model="2" typeid="$info[category_id]" limit="4" notin="$info[id]">
+                <li><a class="pic" href="{$document.url}" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '386x208')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a>
+               <div class="info"><a href="{$document.url}">{$document.title}</a><p>{$document.title}</p></div></li>        
+			 </document>
+           </ul>
+       </div>
+  
+       <div class="adv"><img src="__PUBLIC__/Home/qili/images/adv.jpg"></div>
+	   
+        {~W('Qili/detailSearch',array($info['category_id']))} 
+    </div>
+</div>
+
+<div class="qnx1200 detail-foot">
+    {~W('Qili/relateContent',array($info['id']))}
+</div>
+
+<div class="qnx1200 pic4">
+    <div class="tit">
+        <div class="det-title"><h3>猜你喜欢</h3></div>
+        <div class="rec-links">
+             {~W('Qili/guessuLike',array($info['category_rootid']))} 
+        </div>
+    </div>
+
+    <div class="autopic">
+		<span class="btn prev">prev</span>
+		<span class="btn next">next</span>
+
+		<div class="img-list">
+			<ul class="clearfix">
+				<php>$key = 0; $ids = '';</php>
+				<document model="2" typeid="$info[category_id]" limit="5" order="view desc" notin="$info[id]" index="ids">
+					<li><a href="{$document.url}"><img src="{:get_thumb($document[atlas_e], $document[atlas], '364x218')}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a></li>
+				</document>
+
+				<if condition="$key elt 4">
+					<if condition="$ids"> 
+						<php>$ids .= ','.$info[id];</php>
+					<else />
+						<php>$ids = $info[id];</php>
+					</if>
+
+					<document model="2" rootid="$info[category_rootid]" limit="5" order="view desc" notin="$ids">
+						<li><a href="{$document.url}"><img src="{:get_thumb($document[atlas_e], $document[atlas], '364x218')}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a></li>
+					</document>
+				</if>
+			</ul>
+		</div>
+    </div>
+</div>
+
+<div class="qnx1200 rechots">
+	{~W('Qili/commendedNews',array($info['category_id']))} 
+</div>
+</block>
+<block name="script">
+<script>
+$(document).ready(function(){
+	$('.rec-links em').eq(-1).empty();
+	
+	$('.tupage-left em').eq(-1).empty();
+
+	$.ajax({
+		type:'get',
+		dataType:'json',
+		url: "/dynamic.php?s=Base/getClickAmount/modelid/{$info[model_id]}/id/{$info[id]}",
+		success:function(params){
+
+		}
+	});
+});
+</script>
+</block>

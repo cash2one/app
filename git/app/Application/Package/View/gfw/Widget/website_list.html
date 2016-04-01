@@ -1,0 +1,56 @@
+<?php if($position == '2'){?>
+	<volist name="cateTree" id="cate" key="i">
+		<div class="title">
+			<h2>
+				<img width="19" height="16" src="{:get_cover($cate['icon'],'path')}" />{$cate['title']}
+			</h2>
+		</div>
+		<div class="mtext1">
+			<volist name="cate['_']" id="child" key="i">
+				<a href="{:staticUrl('lists',$child['id'],'Package')}" target="_blank">{:$child['title']}</a>
+			</volist>
+		</div>
+	</volist>
+<?php }elseif($position == '3'){?>
+	<volist name="cateTree" id="cate" key="i">
+	<div class="title">
+		<h2><img width="19" height="16" src="{:get_cover($cate['icon'],'path')}" />{$cate['title']}</h2>
+	</div>
+	<div class="mtext">
+		<volist name="cate['_']" id="child" key="i">
+			<a href="{:staticUrl('lists',$child['id'],'Package')}" target="_blank">{:$child['title']}</a>
+		</volist>
+	</div>
+	</volist>
+<?php }else{ ?>
+	<volist name="cateTree" id="cate" key="i">
+	<div class="website">
+	    <div class="trade">
+	       <div class="trade-title">
+	           <h2><span><img src="{:get_cover($cate['icon'],'path')}" width="19" height="16"></span><span>{$cate['title']}</span></h2>
+	      </div>
+	       <div class="webtext">
+	       	<volist name="cate['_']" id="child" key="i">
+	           <a href="{:staticUrl('lists',$child['id'],'Package')}" target="_blank">{:$child['title']}</a>
+	        </volist>
+	       </div>
+	    </div>
+	    <!-----trade-end-----> 
+	    <div class="company">
+	        <ul class="company-main">
+	            <volist name="webSiteList" id="webSite" key="k">
+	            	<li>
+	            		<a href="{:staticUrl('detail',$webSite['id'],'Package')}" target="_blank" class='<if condition="$webSite[position]&1">orange</if>'>
+	            			{$webSite['title']|msubstr=0,10,'utf-8',false}
+	            		</a>
+	            		<if condition="$webSite[position]&1">
+	            			<span class="gif-news1"></span>
+	            		</if>
+	            	</li>
+	            </volist>
+	        </ul>
+	    </div>
+	    <!-----company-end-----> 
+	</div>
+	</volist>
+<?php }?>

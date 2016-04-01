@@ -1,0 +1,9 @@
+<volist name="lists" id="vo">
+<div class="item">
+<empty name="vo['title']">
+<else /> 
+ <h2>{$vo['title']}</h2>
+</empty> 
+ {$vo['content']}
+</div>
+</volist>

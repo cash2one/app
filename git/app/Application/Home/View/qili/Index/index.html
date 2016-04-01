@@ -1,0 +1,608 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/index.css"/></block>
+<block name="body">
+<div class="topbar">
+    <div class="topbar-main">
+        <div class="left">
+            <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a></div>
+            <iframe src="http://open.qzone.qq.com/like?url=http%3A%2F%2Fuser.qzone.qq.com%2F19881012&type=button_num&width=400&height=30&style=2" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:400px;height:30px;border:none;overflow:hidden;"></iframe>
+        </div>
+
+        <div class="right"></div>
+    </div>
+</div>
+
+<div class="logo">
+	<a href="/"><img src="__PUBLIC__/Home/qili/images/logo.jpg" alt="七丽女性网"></a>
+</div>
+
+<div class="nav">
+    <div class="nav-main">
+        <ul class="nav-ul">
+            <li class="shis">
+				<a href="/shishang.html" class="one">时尚</a>
+				<a href="/shizhuang/">时装</a>
+				<a href="/mingxing/">明星</a>
+				<a href="/dapei/">搭配</a>
+				<a href="/jiepai/">街拍</a>
+				<a href="/bozhu/">博主</a>
+				<a href="/youpin/">优品</a>
+				<a href="/xiuchang/">秀场</a>
+				<a href="/dapian/">大片</a> 
+			</li>
+
+            <li class="meir">
+				<a href="/meirong.html" class="one">美容</a>
+				<a href="/hufu/">护肤</a> 
+				<a href="/caizhuang/">彩妆</a> 
+				<a href="/meifa/">美发</a> 
+				<a href="/meijia/">美甲</a> 
+				<a href="/yimei/">医美</a> 
+			</li>
+
+            <li class="sheh">
+				<a href="/shenghuo.html" class="one">生活</a>
+				<a href="/yimei/">健康</a> 
+				<a href="/qinzi/">亲子</a> 
+				<a href="/jianfei/">减肥</a> 
+				<a href="/qinggan/">情感</a> 
+				<a href="/xingzuo/">星座</a> 
+				<a href="/shuma/">数码</a> 
+			</li>
+
+            <li class="yule">
+				<a href="/yule.html" class="one">娱乐</a>
+				<a href="/zongyi/">综艺</a> 
+				<a href="/yingshi/">影视</a> 
+				<a href="/xingwen/">星闻</a> 
+				<a href="/bagua/">八卦</a> 
+			</li>
+        </ul>
+
+        <div class="sy-search">
+            <span class="icon_search"></span>
+            <div class="content">
+				<form onsubmit="return goSearch()">
+					<input name="q" type="text" id="t_keywords" class="i-input" placeholder="请输入想搜索的关键字">
+					<input type="button" value="搜 索" onclick="goSearch()" class="i-button">
+				</form>
+				<div class="close"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pic-focus">
+    <ul>
+		<document model="2" limit="4" flag="home_recom,1" order="update_time DESC,level DESC">
+		<li><a href="{$document.url}" target="_blank"><img src="<pic name="$document.atlas_h" />" alt="{$document.title}" oalt="{$document.description}"></a></li>
+		</document>
+    </ul>
+
+    <div class="focus-info"><a href="" target="_blank"></a><p></p><div class="circle"></div><div class="bg"></div></div>
+</div>
+
+<div class="qnx1200 recbox">
+    <div class="left">
+        <h3>推荐</h3>
+		<document model="2" limit="2" flag="home_recom,4" order="edit">
+			<a class="recpic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_a], $document[atlas], '378x378')}" alt="{$document.title|msubstr=0,18}"><span>{$document.title}</span></a>
+		</document>
+    </div>
+
+    <div class="right tab-nub">
+        <p class="tab-tit"><i>TOP LINE</i><span class="active">今日头条<em></em></span></p>
+        <ul class="right-ul current">
+			<document model="2" limit="12" flag="home_recom,2" order="edit">
+				<li><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a></li>
+            </document>
+        </ul>
+
+        <div class="fresh"><span><i></i>换一组</span></div>
+    </div>
+</div>
+
+<div class="qnx1200 pic2">
+    <ul class="pic2-ul">
+        <document model="2" limit="2,3" flag="home_recom,4" order="edit">
+			<li><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '380x230')}" alt="{$document.title}"><span>{$document.title}</span></a></li>
+        </document>
+    </ul>
+</div>
+
+<div class="fashion qnxauto">
+    <div class="box-tit">
+		<h2>fashion 时尚</h2>
+		<em class="line"></em>
+	</div>
+
+    <div class="qnx1200">
+        <div class="title3">
+            <h3>
+				<a href="/shizhuang/" target="_blank">时装</a>
+			</h3>
+			
+			<classify model="2" typeid="1" index="match"></classify>
+			<classify model="2" typeid="214" index="street"></classify>
+			<php>$match .= ','.$fashionid;</php>
+
+            <div class="rec-tags">
+				<document model="2" typeid="$match" limit="1" flag="home_recom,256" order="edit">
+				<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+				</document>
+			</div>
+
+            <div class="rec-links">
+				<classify model="2" id="356,319,992,410,351,820,1208">
+					<if condition="$key eq 7"> 
+						<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+					<else />
+						<a href="{$classify.url}" target="_blank">{$classify.title}</a><em>|</em>
+					</if>
+				</classify>
+			</div>
+        </div>
+
+        <div class="left">
+            <div class="btn prev"><em>向左</em></div>
+            <ul class="focus">
+				<php>$mat .= ','.$fashionid.','.$street;</php>
+
+				<document model="2" limit="5" typeid="$mat" flag="home_recom,8" order="edit">
+					<li><a href="{$document.url}" target="_blank"><img src="{:get_thumb($document[atlas_f], $document[atlas], '380x615')}" alt="{$document.title}" oalt="{$document.description}"></a></li>
+                </document>
+            </ul>
+
+            <div class="btn next"><em>向右</em></div>
+            <div class="pic-info"><em class="left-arr"></em><a href="javascript:;" class="text"  target="_blank"><span class="title"></span><span class="info"></span></a><em class="right-arr"></em><b class="bg"></b></div>
+            <div class="zhez"></div>
+            <div class="circle0"></div>
+        </div>
+
+        <div class="right tab-nub div-tab">
+            <p class="tab-tit"><span class="active">今日热门<em></em></span><span>阅读排行<em></em></span></p>
+			
+            <ul class="right-ul current">   
+				{~W('Home/qili/hot', array($match, 1))}
+            </ul>
+
+            <ul class="right-ul">
+                {~W('Home/qili/hot', array($match, 7))}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="qnx1200 pic3">
+    <ul class="pic3-ul">
+        <li>
+			<div class="tit">
+				<h3><a href="/mingxing/" target="_blank">明星</a></h3>
+				<a href="/mingxing/" target="_blank" class="more"><em>更多</em></a>
+			</div>
+
+            <div class="pic-text">
+				<document model="2" rootid="1510" limit="1" flag="home_recom,16" order="edit">
+					<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '282x372')}" alt="{$document.title}"></a>
+					<p class="all-tit">
+						<em class="left-arr"></em>
+						<a href="{$document.url}" class="text" target="_blank">{$document.title}</a>
+						<em class="right-arr"></em>
+						<b class="bg"></b>
+					</p>
+				</document>
+            </div>
+			
+            <div class="list-text">
+                <document model="2" rootid="1510" limit="2,2" flag="home_recom,16" order="edit">
+					<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+				</document>
+            </div>
+        </li>
+
+        <li>
+			<div class="tit">
+				<h3><a href="/dapei/" target="_blank">搭配</a></h3>
+				<a href="/dapei/" target="_blank" class="more"><em>更多</em></a>
+			</div>
+
+            <div class="pic-text">
+				<document model="2" rootid="1" limit="1" flag="home_recom,16" order="edit">
+					<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '282x372')}" alt="{$document.title}"></a>
+					<p class="all-tit">
+						<em class="left-arr"></em>
+						<a href="{$document.url}" class="text">{$document.title}</a>
+						<em class="right-arr"></em>
+						<b class="bg"></b>
+					</p>
+				</document>
+            </div>
+			
+            <div class="list-text">
+                <document model="2" rootid="1" limit="2,2" flag="home_recom,16" order="edit">
+					<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+				</document>
+            </div>
+        </li>
+
+        <li>
+			<div class="tit">
+				<h3><a href="/jiepai/" target="_blank">街拍</a></h3>
+				<a href="/jiepai/" target="_blank" class="more"><em>更多</em></a>
+			</div>
+
+            <div class="pic-text">
+				<document model="2" rootid="214" limit="1" flag="home_recom,16" order="edit">
+					<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '282x372')}" alt="{$document.title}"></a>
+					<p class="all-tit">
+						<em class="left-arr"></em>
+						<a href="{$document.url}" class="text">{$document.title}</a>
+						<em class="right-arr"></em>
+						<b class="bg"></b>
+					</p>
+				</document>
+            </div>
+			
+			<if condition="!empty($jp)"> 
+            <div class="list-text">
+                <document model="2" rootid="214" limit="2,2" flag="home_recom,16" order="edit">
+					<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+				</document>
+            </div>
+			</if>
+        </li>
+
+        <li>
+			<div class="tit">
+				<h3><a href="/xiuchang/" target="_blank">秀场</a></h3>
+				<a href="/xiuchang/" target="_blank" class="more"><em>更多</em></a>
+			</div>
+
+            <div class="pic-text">
+				<document model="2" rootid="1509" limit="1" flag="home_recom,16" order="edit">
+					<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '282x372')}" alt="{$document.title}"></a>
+					<p class="all-tit">
+						<em class="left-arr"></em>
+						<a href="{$document.url}" class="text">{$document.title}</a>
+						<em class="right-arr"></em>
+						<b class="bg"></b>
+					</p>
+				</document>
+            </div>
+			
+			<if condition="!empty($xc)"> 
+            <div class="list-text">
+                <document model="2" rootid="1509" limit="2,2" flag="home_recom,16" order="edit">
+					<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+				</document>
+            </div>
+			</if>
+        </li>
+    </ul>
+</div>
+
+<div class="qnx1200 pic4">
+    <div class="tit">
+        <h3>
+			<a href="/youpin/" target="_blank">优品</a>
+		</h3>
+
+        <div class="rec-links">
+			<classify model="2" id="272,273,271,817,1138,1144,1142">
+				<if condition="$key eq 7"> 
+					<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<else />
+					<a href="{$classify.url}" target="_blank">{$classify.title}</a><em>|</em>
+				</if>
+			</classify>
+        </div>
+    </div>
+
+    <div class="autopic">
+      <span class="btn prev">prev</span>
+      <span class="btn next">next</span>
+      <div class="img-list">
+        <ul class="clearfix">
+			<document model="2" rootid="1501" limit="6" flag="home_recom,32" order="edit">
+				<li><a href="{$document.url}" target="_blank"><img src="{:get_thumb($document[atlas_b], $document[atlas], '366x220')}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a></li>
+            </document>
+        </ul>
+      </div>
+    </div>  
+</div>
+
+<div class="qnx1200 pic5">
+    <div class="dapan">
+        <h3>
+			<a href="/dapian/" target="_blank">大片</a>
+		</h3>
+
+        <div class="focus5">
+            <ul class="focus5-ul">
+				<document model="2" rootid="1508" limit="6" flag="home_recom,32" order="edit">
+				<li>
+					<a href="{$document.url}" target="_blank" title="{$document.title}">
+						<img src="{:get_thumb($document[atlas_a], $document[atlas], '390x380')}"><span class="tit">{$document.title}</span><em class="info">{$document.description}</em>
+					</a>
+				</li>
+				</document>
+            </ul>
+
+            <div class="circle"></div>
+        </div>
+    </div>
+
+    <div class="hunji">
+		<document model="2" limit=":2" flag="home_recom,64" order="edit">
+			<php>$typeid[] = $document['category_id'];</php>
+		</document>
+
+        <h3>
+			<if condition="$typeid[0]"> 
+				<classify model="2" id="$typeid[0]" limit="1">
+					<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				</classify>
+			</if>
+		</h3>
+
+        <div class="hjzb">
+			<document model="2" typeid="$typeid[0]" limit="1" flag="home_recom,64" order="edit">
+				<a href="{$document.url}" target="_blank" title="{$document.title}">
+					<img src="{:get_thumb($document[atlas_b], $document[atlas], '366x220')}" alt="{$document.title}">
+					<span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span>
+				</a>
+			</document>
+		</div>
+		
+		<if condition="$typeid[1]"> 
+			<h3>
+				<classify model="2" id="$typeid[1]" limit="1">
+					<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				</classify>
+			</h3>
+
+			<div class="hjzb">
+			   <document model="2" typeid="$typeid[1]" limit="1" flag="home_recom,64" order="edit">
+					<a href="{$document.url}" target="_blank" title="{$document.title}">
+						<img src="{:get_thumb($document[atlas_b], $document[atlas], '366x220')}" alt="{$document.title}">
+						<span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span>
+					</a>
+				</document>
+			</div>
+		</if>
+    </div>
+
+    <div class="bozhu">
+        <h3><a href="/bozhu/" target="_blank">时尚博主</a></h3>
+        <div class="shbz-main">
+            <div class="shbz-box">
+                <ul class="bzul">
+					<classify model="2" typeid="1500" limit="6" flag="position,16">
+                    <li>
+						<a href="{$classify.url}" target="_blank" title="{$classify.title}" class="img"><img src="<pic name="$classify.icon" />"></a>
+						<span class="list">
+							<a href="{$classify.url}" target="_blank" class="tit">{$classify.title}</a>
+							<a href="{$classify.url}" target="_blank">{$classify.describe}</a>
+						</span>
+					</li>
+					</classify>
+                </ul>
+            </div>
+            <div class="scbar"><div class="line"></div><div class="line-auto"><span class="auto"></span></div></div>
+        </div>
+    </div>
+</div>
+
+<div class="beauty qnxauto">
+    <div class="box-tit"><h2>beauty 美容</h2><em class="line"></em></div>
+    <div class="qnx1200">
+        <div class="title3">
+            <h3><a href="/hufu/" target="_blank">护肤</a></h3>
+			
+			<classify model="2" typeid="99" index="cosmetics"></classify>
+			<classify model="2" typeid="2" index="skin"></classify>
+			<classify model="2" typeid="4" index="salon"></classify>
+			<classify model="2" typeid="1517" index="nail"></classify>
+			<php>$beauty = $cosmetics.','.$skin.','.$salon.','.$nail;</php>
+            <div class="rec-tags">
+				<document model="2" typeid="$beauty" limit="1" flag="home_recom,256" order="edit">
+					<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+				</document>	
+			</div>
+			
+            <div class="rec-links">
+				<classify model="2" id="517,513,984,465,490,1047,486,1293,470">
+					<if condition="$key eq 9"> 
+						<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+					<else />
+						<a href="{$classify.url}" target="_blank">{$classify.title}</a><em>|</em>
+					</if>
+				</classify>
+			</div>
+        </div>
+
+        <div class="focus6">
+            <ul class="focus6-ul">
+				<document model="2" typeid="$beauty" limit="5" flag="home_recom,8" order="edit">
+					<li><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_g], $document[atlas], '780x370')}" alt="{$document.title}"></a></li>
+                </document>
+            </ul>
+            <div class="focus-info"><em class="left-arr"></em><em class="right-arr"></em><a href="javascript:;" target="_blank"></a><div class="circle"></div><div class="bg"></div></div>
+        </div>
+
+        <div class="right showhide">
+			<document model="2" typeid="$beauty" limit="2" flag="home_recom,512" order="edit">
+				<div class="list">
+					<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '386x208')}" alt="{$document.title}"></a>
+					<p><a href="{$document.url}" target="_blank" class="tit">{$document.title}</a><span class="info">{$document.description}</span></p>
+				</div>
+			</document>
+        </div>
+    </div>
+
+    <div class="qnx1200">
+        <div class="mjcz">
+            <div class="caizhu pic3-ul">
+                <div class="tit"><h3><a href="/caizhuang/" target="_blank">彩妆</a></h3><a href="/caizhuang/" target="_blank" class="more"><em>更多</em></a></div>
+				
+				<div class="caizhu-box">
+					<document model="2" rootid="99" limit="1" flag="home_recom,32" order="edit">
+					<div class="pic-text">
+						<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '282x372')}" alt="{$document.title}"></a>
+						<p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p>
+					</div>
+					</document>
+
+					<div class="list-text">
+						<document model="2" rootid="99" limit="2" order="hot1">
+							<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+						</document>
+					</div>
+				</div>
+
+				<div class="caizhu-box">
+					<document model="2" rootid="99" limit="1,1" flag="home_recom,32" order="edit">
+					<div class="pic-text">
+						<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '282x372')}" alt="{$document.title}"></a>
+						<p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p>
+					</div>
+					</document>
+
+					<div class="list-text">
+						<document model="2" rootid="99" limit="2,2" order="hot1">
+							<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+						</document>
+					</div>
+				</div>
+            </div>
+
+            <div class="caizhu pic3-ul">
+                <div class="tit"><h3><a href="/meijia/" target="_blank">美甲</a></h3><a href="/meijia/" target="_blank" class="more"><em>更多</em></a></div>
+				
+				<div class="caizhu-box">
+					<document model="2" rootid="1517" limit="1" flag="home_recom,32" order="edit">
+					<div class="pic-text">
+						<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '282x372')}" alt="{$document.title}"></a>
+						<p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p>
+					</div>
+					</document>
+
+					<div class="list-text">
+						<document model="2" rootid="1517" limit="2" order="hot1">
+							<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+						</document>
+					</div>
+				</div>
+
+				<div class="caizhu-box">
+					<document model="2" rootid="1517" limit="1,1" flag="home_recom,32" order="edit">
+					<div class="pic-text">
+						<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '282x372')}" alt="{$document.title}"></a>
+						<p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p>
+					</div>
+					</document>
+
+					<div class="list-text">
+						<document model="2" rootid="1517" limit="2,2" order="hot1">
+							<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+						</document>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="qnx1200 pic5">
+        <div class="meifa">
+            <div class="title3">
+                <h3><a href="/meifa/" target="_blank">美发</a></h3>
+                <div class="rec-links">
+					<classify model="2" id="679,247,1366,1193,1209,623,662,674">
+						<if condition="$key eq 8"> 
+							<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+						<else />
+							<a href="{$classify.url}" target="_blank">{$classify.title}</a><em>|</em>
+						</if>
+					</classify>
+				</div>
+            </div>
+
+            <div class="meifa-list">
+				<document model="2" rootid="4" limit="2" flag="home_recom,32" order="edit">
+					<div class="pic-text">
+						<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '380x500')}" alt="{$document.title}"></a>
+						<p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" target="_blank" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p>
+					</div>
+                </document>
+            </div>
+        </div>
+
+        <div class="bozhu">
+            <h3><a href="/yimei/" target="_blank">医学美容</a></h3>
+            <div class="shbz-main">
+                <div class="shbz-box">
+                    <ul class="bzul">
+						<classify model="2" typeid="1503" limit="8" flag="position,16">
+							<li><a href="{$classify.url}" target="_blank" title="{$classify.title}" class="img"><img src="<pic name="$classify.icon" />"></a><span class="list"><a href="{$classify.url}" target="_blank" class="tit">{$classify.title}</a><a href="{$classify.url}" target="_blank">{$classify.description}</a></span></li>
+                        </classify>
+                    </ul>
+                </div>
+                <div class="scbar"><div class="line"></div><div class="line-auto"><span class="auto"></span></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="life qnxauto">
+    <div class="box-tit"><h2>life 生活</h2><em class="line"></em></div>
+    <div class="qnx1200">
+
+        <ul class="life-pic">
+			{~W('Home/qili/liferecom', array())}
+        </ul>
+    </div>
+</div>
+
+<div class="keyword qnxauto">
+    <div class="box-tit"><h2>keywords 热门</h2><em class="line"></em></div>
+    <div class="qnx1200">
+        <ul class="key-ul">
+            <li>
+				<h4><a href="/shishang.html" target="_blank">时尚</a></h4>
+				<p>
+					<classify model="2" limit="18" flag="position,1">
+						<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+					</classify>
+				</p>
+			</li>
+
+            <li>
+				<h4><a href="/meirong.html" target="_blank">美容</a></h4>
+				<p>
+					<classify model="2" limit="18" flag="position,2">
+						<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+					</classify>
+				</p>
+			</li>
+
+            <li>
+				<h4><a href="/shenghuo.html" target="_blank">生活</a></h4>
+				<p>
+					<classify model="2" limit="18" flag="position,4">
+						<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+					</classify>
+				</p>
+			</li>
+
+            <li>
+				<h4><a href="/yule.html" target="_blank">娱乐</a></h4>
+				<p>
+					<classify model="2" limit="18" flag="position,8">
+						<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+					</classify>
+				</p>
+			</li>
+        </ul>
+    </div>
+</div>
+</block>

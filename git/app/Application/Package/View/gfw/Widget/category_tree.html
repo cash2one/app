@@ -1,0 +1,27 @@
+<!-- 网址子频道左侧分类树 -->
+<div class="novel-cate cfl">
+    <div class="hd">
+        <h3>{:$rootCate['title']}</h3>
+    </div>
+
+    <volist name="cateList" id="val">
+    <div class="cate-item">
+        <div class="hd">
+            <h4>
+            	<i class="<?php if(!empty($val['_'])){echo 'hd-cur';}else{echo 'hd-cur1';}?>"></i>
+            	<a href="{:staticUrl('lists',$val['id'],'Package')}"  class='<if condition="$category_id eq $val[id]">colour</if>' title="{:$val['title']}">{:$val['title']}</a>
+            </h4>
+        </div>
+        <ul style="{:in_array($val['id'],$cate)?'display:block;':''}">
+            <volist name="val['_']" id="rel">
+            <li class="{:($i == count($val['_']))?'nob':''}">
+            	<a href="{:staticUrl('lists',$rel['id'],'Package')}" class="{:in_array($rel['id'],$cate)?'colour':''}" title="{:$rel['title']}">
+            		<i class="hd-cur1"></i>{:$rel['title']}
+            	</a>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    </volist>
+    <!-----cate-item   -end----->
+</div>

@@ -1,0 +1,349 @@
+<extend name="Home@7230mobile/Base/common"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230mobile/css/k.css"/>
+</block>
+<block name="body">
+    <div class="g">
+        <header style=" background-color:#fff; height:46px; border-bottom:1px solid #e7e7e7;"> <span style="background-color:#fff;color:#333;height:46px;line-height:46px;text-align:center;">{$info.name}游戏合集</span> <a href="javascript:history.go(-1)" class="back" style="background: url(/Public/Home/7230mobile/images/sprite2.png) -5px 0px no-repeat;"></a> </header>
+        <section id="ztc" class="cfix" style="padding-bottom:0px;">
+            <div class="company">
+                <dl id="cintro">
+                    <dt><img title="{$info.name}" src="{:get_cover($info['img'],'path')}" />
+                        <notempty name="info['name']">
+                            <p><span>公司名称: </span>{$info.name}</p>
+                        </notempty>
+                        <notempty name="info['name_e']">
+                            <p><span>英文名称: </span>{$info.name_e}</p>
+                        </notempty>
+                        <notempty name="info['homepage']">
+                            <p><span>公司网址: </span>{$info.homepage}</p>
+                        </notempty>
+                    </dt>
+                    <notempty name="info['description']">
+                        <dd id="sintro">{$info.description}</dd>
+                        <dd id="expand"><span>+ 详细介绍</span></dd>
+                    </notempty>
+                </dl>
+                <neq name="game_exist" value="0">
+                    <dl class="downBox">
+                        <dt><if condition="($game_exist eq 1) OR ($game_exist eq 2)"><span class="cur" id="game_android">安卓游戏<i></i></span></if><if condition="($game_exist eq 1) OR ($game_exist eq 3)"><span id="game_ios" <eq name="game_exist" value="3"> class="cur" </eq>>IOS游戏<i></i></span></if></dt>
+                        <if condition="($game_exist eq 1) OR ($game_exist eq 2)">
+                            <div class="anios showcurrent" id="game_android_div">
+                                <volist name="game_list_info_android" id="vo">
+                                    <dd><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="img"><img src="{:get_cover($vo['smallimg'],'path')}" /></a>
+                                        <p><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">{$vo.title}</a><span><i>{:getCateName($vo['id'],'Down')}</i><i>{:getLanguage($vo['id'])}</i></span><span>{$vo['size']/1024|number_format=1}M</span></p>
+                                        <a class='bxz' href="{:staticUrlMobile('detail', $vo['id'],'Down')}" target='_blank'>下载</a></dd>
+                                </volist>
+                            </div>
+                        </if>
+                        <if condition="($game_exist eq 1) OR ($game_exist eq 3)">
+                            <div id="game_ios_div" class="anios" <eq name="game_exist" value="3"> class="anios showcurrent" </eq>>
+                            <volist name="game_list_info_ios" id="vo">
+                                <dd><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="img"><img src="{:get_cover($vo['smallimg'],'path')}" /></a>
+                                    <p><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">{$vo.title}</a><span><i>{:getCateName($vo['id'],'Down')}</i><i>{:getLanguage($vo['id'])}</i></span><span>{$vo['size']/1024|number_format=1}M</span></p>
+                                    <a class='bxz' href="{:staticUrlMobile('detail', $vo['id'],'Down')}" target='_blank'>下载</a></dd>
+                            </volist>
+            </div>
+            </if>
+            </dl>
+            <eq name="is_more_android_game" value="1">
+            <p class="get_more game_android_more" <eq name="game_exist" value="3"> style="display: none;" </eq>><a href="javascript:void(0);">查看更多 →</a></p>
+            </eq>
+            <eq name="is_more_ios_game" value="1">
+            <p class="get_more game_ios_more"  <neq name="game_exist" value="3"> style="display: none;" </neq>><a href="javascript:void(0);">查看更多 →</a></p>
+            </eq>
+            <eq name="is_exist_game" value="1">
+                <dl class="artBox" id="game_list_course">
+                    <dt>相关攻略<i></i></dt>
+                    <volist name="game_list_course" id="vo">
+                        <dd><a href="{:staticUrlMobile('detail', $vo['id'],'Document')}">{$vo.title}</a></dd>
+                    </volist>
+
+                </dl>
+                <eq name="is_more_game" value="1">
+                    <p class="get_more game_course_more"><a href="javascript:void(0);">查看更多 →</a></p>
+                </eq>
+            </eq>
+            </neq>
+            <neq name="soft_exist" value="0">
+                <dl class="downBox">
+                    <dt><if condition="($soft_exist eq 1) OR ($soft_exist eq 2)"><span id="soft_android" class="cur">安卓软件<i></i></span></if><if condition="($soft_exist eq 1) OR ($soft_exist eq 3)"><span id="soft_ios" <eq name="soft_exist" value="3"> class="cur" </eq>>IOS软件<i></i></span></if></dt>
+                    <if condition="($soft_exist eq 1) OR ($soft_exist eq 2)">
+                        <div class="anios showcurrent" id="soft_android_div">
+                            <volist name="soft_list_info_android" id="vo">
+                                <dd><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="img"><img src="{:get_cover($vo['smallimg'],'path')}" /></a>
+                                    <p><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">{$vo.title}</a><span><i>{:getCateName($vo['id'],'Down')}</i><i>{:getLanguage($vo['id'])}</i></span><span>{$vo['size']/1024|number_format=1}M</span></p>
+                                    <a class='bxz' href="{:staticUrlMobile('detail', $vo['id'],'Down')}" target='_blank'>下载</a></dd>
+                            </volist>
+                        </div>
+                    </if>
+                    <if condition="($soft_exist eq 1) OR ($soft_exist eq 3)">
+                        <div  id="soft_ios_div" class="anios" <eq name="soft_exist" value="3"> class="anios showcurrent" </eq>>
+                        <volist name="soft_list_info_ios" id="vo">
+                            <dd><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="img"><img src="{:get_cover($vo['smallimg'],'path')}" /></a>
+                                <p><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">{$vo.title}</a><span><i>{:getCateName($vo['id'],'Down')}</i><i>{:getLanguage($vo['id'])}</i></span><span>{$vo['size']/1024|number_format=1}M</span></p>
+                                <a class='bxz' href="{:staticUrlMobile('detail', $vo['id'],'Down')}" target='_blank'>下载</a></dd>
+                        </volist>
+    </div>
+    </if>
+    </dl>
+    <eq name="is_more_android_soft" value="1">
+    <p class="get_more soft_android_more" <eq name="soft_exist" value="3"> style="display: none;" </eq> ><a href="javascript:void(0);">查看更多 →</a></p>
+    </eq>
+    <eq name="is_more_ios_soft" value="1">
+    <p class="get_more soft_ios_more" <neq name="soft_exist" value="3">style="display: none;" </neq>><a href="javascript:void(0);">查看更多 →</a></p>
+    </eq>
+    <eq name="is_exist_soft" value="1">
+        <dl class="artBox" id="soft_list_course">
+            <dt>相关教程<i></i></dt>
+            <volist name="soft_list_course" id="vo">
+                <dd><a href="{:staticUrlMobile('detail', $vo['id'],'Document')}">{$vo.title}</a></dd>
+            </volist>
+
+        </dl>
+        <eq name="is_more_soft" value="1">
+            <p class="get_more soft_course_more"><a href="javascript:void(0);">查看更多 →</a></p>
+        </eq>
+    </eq>
+    </neq>
+    <dl class="comBox">
+        <dt>更多合集<i></i></dt>
+        <dd>
+            <volist name="company_list" id="vo">
+                <a href="{$vo.url}"><img src="{:get_cover($vo['img'],'path')}" /><b>{$vo.name}</b></a>
+            </volist>
+        </dd>
+    </dl>
+    </div>
+    </section>
+    </div>
+</block>
+<block name="Commonscript">
+    <script type="text/javascript">
+        $(document).ready(function(e) {
+            var g_page= 1,s_page=1;
+            var g_android = 1,g_ios = 1, s_android = 1,s_ios = 1;
+            var id = {$info.id};
+        $("#game_android").click(function(){
+            $(".game_android_more").show();
+            $(".game_ios_more").hide();
+        });
+        $("#game_ios").click(function(){
+            $(".game_android_more").hide();
+            $(".game_ios_more").show();
+        });
+        $("#soft_ios").click(function(){
+            $(".soft_android_more").hide();
+            $(".soft_ios_more").show();
+        });
+        $("#soft_android").click(function(){
+            $(".soft_android_more").show();
+            $(".soft_ios_more").hide();
+        });
+        $(".soft_android_more").click(function(){
+            var type = 1;
+            var ios = 1;
+            $.ajax({
+                type:"GET",
+                async:false,
+                url:DYNAMIC_SERVER_URL +"/dynamic.php?s=P7230mobile/ajaxCsSoft",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonCallback:"callback",
+                data:{page:s_android,type:type,id:id,system:ios},
+                success: function(json){
+                    if(json){
+                        var html=new Array();
+                        $.each(json,function(index,data){
+                            html.push( "<dd><a href=\""+data.url+"\" class=\"img\"><img src=\""+data.path+"\" /></a><p><a href=\""+data.url+"\">"+data.title+"</a><span><i>"+data.cate+"</i><i>"+data.lang+"</i></span><span>"+data.size+"M</span></p><a class='bxz' href=\""+data.url+"\" target='_blank'>下载</a></dd>");
+                        });
+                        s_android++;
+                        $("#soft_android_div").append(html.join(''));
+                    }else{
+                        alert("没有数据了!");
+                        return false;
+                    }
+
+                }
+
+            });
+        });
+        $(".soft_ios_more").click(function(){
+            var type = 1;
+            var ios = 2;
+            $.ajax({
+                type:"GET",
+                async:false,
+                url:DYNAMIC_SERVER_URL +"/dynamic.php?s=P7230mobile/ajaxCsSoft",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonCallback:"callback",
+                data:{page:s_ios,type:type,id:id,system:ios},
+                success: function(json){
+                    if(json){
+                        var html=new Array();
+                        $.each(json,function(index,data){
+                            html.push( "<dd><a href=\""+data.url+"\" class=\"img\"><img src=\""+data.path+"\" /></a><p><a href=\""+data.url+"\">"+data.title+"</a><span><i>"+data.cate+"</i><i>"+data.lang+"</i></span><span>"+data.size+"M</span></p><a class='bxz' href=\""+data.url+"\" target='_blank'>下载</a></dd>");
+                        });
+                        s_ios++;
+                        $("#soft_ios_div").append(html.join(''));
+                    }else{
+                        alert("没有数据了!");
+                        return false;
+                    }
+
+                }
+
+            });
+        });
+        $(".game_android_more").click(function(){
+            var type = 2;
+            var ios = 1;
+            $.ajax({
+                type:"GET",
+                async:false,
+                url:DYNAMIC_SERVER_URL +"/dynamic.php?s=P7230mobile/ajaxCsSoft",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonCallback:"callback",
+                data:{page:g_android,type:type,id:id,system:ios},
+                success: function(json){
+                    if(json){
+                        var html=new Array();
+                        $.each(json,function(index,data){
+                            html.push( "<dd><a href=\""+data.url+"\" class=\"img\"><img src=\""+data.path+"\" /></a><p><a href=\""+data.url+"\">"+data.title+"</a><span><i>"+data.cate+"</i><i>"+data.lang+"</i></span><span>"+data.size+"M</span></p><a class='bxz' href=\""+data.url+"\" target='_blank'>下载</a></dd>");
+                        });
+                        g_android++;
+                        $("#game_android_div").append(html.join(''));
+                    }else{
+                        alert("没有数据了!");
+                        return false;
+                    }
+
+                }
+
+            });
+        });
+        $(".game_ios_more").click(function(){
+            var type = 2;
+            var ios = 2;
+            $.ajax({
+                type:"GET",
+                async:false,
+                url:DYNAMIC_SERVER_URL +"/dynamic.php?s=P7230mobile/ajaxCsSoft",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonCallback:"callback",
+                data:{page:g_ios,type:type,id:id,system:ios},
+                success: function(json){
+                    if(json){
+                        var html=new Array();
+                        $.each(json,function(index,data){
+                            html.push( "<dd><a href=\""+data.url+"\" class=\"img\"><img src=\""+data.path+"\" /></a><p><a href=\""+data.url+"\">"+data.title+"</a><span><i>"+data.cate+"</i><i>"+data.lang+"</i></span><span>"+data.size+"M</span></p><a class='bxz' href=\""+data.url+"\" target='_blank'>下载</a></dd>");
+                        });
+                        g_ios++;
+                        $("#game_ios_div").append(html.join(''));
+                    }else{
+                        alert("没有数据了!");
+                        return false;
+                    }
+
+                }
+
+            });
+        });
+        $(".game_course_more").click(function(){
+            var type = 2;
+            $.ajax({
+                type:"GET",
+                async:false,
+                url:DYNAMIC_SERVER_URL +"/dynamic.php?s=P7230mobile/ajaxCourse",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonCallback:"callback",
+                data:{page:g_page,type:type,id:id},
+                success: function(json){
+                    if(json){
+                        var html=new Array();
+                        $.each(json,function(index,data){
+                            html.push( "<dd><a href="+data.url+">"+data.title+"</a></dd>");
+                        });
+                        g_page++;
+                        $("#game_list_course").append(html.join(''));
+                    }else{
+                        alert("没有数据了!");
+                        return false;
+                    }
+
+                }
+
+            });
+        });
+        $(".soft_course_more").click(function(){
+            var type = 1;
+            $.ajax({
+                type:"GET",
+                async:false,
+                url:DYNAMIC_SERVER_URL +"/dynamic.php?s=P7230mobile/ajaxCourse",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonCallback:"callback",
+                data:{page:s_page,type:type,id:id},
+                success: function(json){
+                    if(json){
+                        var html=new Array();
+                        $.each(json,function(index,data){
+                            html.push( "<dd><a href="+data.url+">"+data.title+"</a></dd>");
+                        });
+                        s_page++;
+                        $("#soft_list_course").append(html.join(''));
+                    }else{
+                        alert("没有数据了!");
+                        return false;
+                    }
+
+                }
+
+            });
+        });
+        });
+        //厂商合集
+        function company(){
+            var omain=$('#sintro');
+            oHtml=omain.html();
+            oLength=oHtml.length;
+            obtn=$();
+            maxLengt=76;//显示最大文本
+            okg=true;
+            obtn=$('#expand span');
+            onow = oHtml.slice(0, maxLengt) + '...';
+            if (oLength > maxLengt) {
+                omain.html(onow)
+            };
+
+            obtn.click(function() {
+                if (okg) {
+                    obtn.html('-收起介绍');
+                    omain.html(oHtml);
+                } else {
+                    obtn.html('+详细介绍');
+                    omain.html(onow);
+                };
+                okg = !okg;
+            });
+        };
+        company();
+        //厂商合集tab
+        function tabAuto(oclass,cur, current) {
+            var obj=$(oclass);
+            obj.each(function(){
+                $(this).find(cur).click(function() {
+                    var oIndex = $(this).index();
+                    $(this).addClass('cur').siblings().removeClass('cur');
+                    $(this).parents(oclass).find(current).eq(oIndex).addClass('showcurrent').siblings().removeClass('showcurrent');
+                });
+            });
+        };
+        tabAuto('.downBox','dt span', '.anios');
+    </script>
+</block>

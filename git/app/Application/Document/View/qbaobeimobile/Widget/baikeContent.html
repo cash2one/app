@@ -1,0 +1,8 @@
+<volist name="lists" id="vo">
+<eq name="key" value="1">
+ {$vo['content']} 
+<else/>
+  <p class="introTit"><em class="nub">{$key-1}</em>{$vo['title']}</p>
+ {$vo['content']} 
+</eq>
+</volist>

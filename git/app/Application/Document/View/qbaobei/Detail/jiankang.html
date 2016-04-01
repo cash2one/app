@@ -1,0 +1,141 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/content.css" /></block>
+<block name="body">
+{:W('Qbaobei/header',array($info['category_id'],false,false))}
+<!--内容主体部分 start-->
+<div class="channel-main detailBox">
+    <div class="wrap channel-wraper">
+    <div class="cont-goback"><span>您的位置：</span><a href="{:C('STATIC_URL')}">首页</a>&gt;{:W('Qbaobei/currentPosition',array($info['category_id']))}&gt;<span>{:$info['title']}</span></div>
+    <div class="baike-main">
+        <div class="detail-main-l">
+            <!--详情List-->
+            <div class="detail-list">
+                <div class="news-title">
+                    <h1>{:$info['title']}</h1>
+                    <div class="news-writer"><span>{:date('Y年m月d日 H:i',$info['update_time'])}</span><span>出处：<if condition="!empty($info['source'])">{:$info['source']}<else />亲亲宝贝网</if></span><span>作者：<if condition="!empty($info['author'])">{:$info['author']}<else />亲亲宝贝网</if></span><span>阅读次数：<em id="hits" data-id="{$info['id']}" data-model="document">{$info['view']}</em></span></div>
+                    <input name="author" id="tj-user" type="hidden" value="{:$info['uid']}" />
+                    <input type="hidden" id="doc-id" name="doc-id" value="{$info['id']}"/>
+                    <input type="hidden" id="doc-cid" name="doc-cid" value="{$info['category_id']}"/>
+                </div>
+                {:W('Qbaobei/tags',array($info['id']))}
+                <if condition="$info['step_read'] eq 1 && !empty($info['stepList'])">
+	                <div class="wgt-thumbs">
+	                    <ul class="wgt-thumbs-list"></ul>
+	                    <div class="readMore"><a href="javascript:;">分步阅读 ></a></div>
+	                </div>
+				</if>
+				<div class="news-jj">
+					<div class="news-jj-main">{:$info['description']}</div>
+					<span class="newsKh qute-l"></span>
+					<span class="newsKh qute-r"></span>
+				</div>
+            </div>
+            <!--广告-->
+            <div class="adv927_103">
+            <center>
+			<!-- 广告位：文章详情二级标题上广告原ID1135447 -->
+<script>
+(function() {
+    var s = "_" + Math.random().toString(36).slice(2);
+    document.write('<div id="' + s + '"></div>');
+    (window.slotbydup=window.slotbydup || []).push({
+        id: '2448810',
+        container: s,
+        size: '927,100',
+        display: 'inlay-fix'
+    });
+})();
+</script>
+<script src="http://dup.baidustatic.com/js/os.js"></script>
+			</center>
+            </div>
+            <!--内容板块-->
+            <if condition="$info['step_read'] eq 1 && !empty($info['stepList'])">
+	            <div class="detail-area">
+	                <volist name="info.stepList" id="step">
+	                <div class="detail-list item">
+	                    <div class="detail-textNub"><span class="textNub">{:$step['number']}</span></div>
+	                    <div class="detail-box">
+	                        <h2>{:strip_tags($step['title'])}</h2>
+	                        <php>$step['content'] = preg_replace('/\[NextPage]/', '', $step['content']);</php>
+	                        {:$step['content']}
+	                    </div>
+	                </div>
+	                </volist>
+	            </div>
+            <else />
+            	<div class="detail-area baike-detail">
+                <div class="detail-box">
+                	<php>$info['content'] = preg_replace('/\[NextPage]/', '', $info['content']);</php>
+                	{:$info['content']}
+                </div>
+            	</div>
+            </if>
+            <!-- 二维码-->
+            <div id="weixin-code">
+            </div>
+            <!--广告-->
+            <div class="adv927_103"> <!-- 广告位：资讯详情Bannber -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1135933");</script></div>
+            <!--相关文章推荐-->       
+            <div class="detail-xgtj">
+                <div class="fn-title fn-title-l"><a href="{:staticUrl('lists', $info['category_id'],'Document')}" target="_blank" class="more">更多</a><h2>相关文章</h2></div>
+                {:W('Qbaobei/newDocument',array($info['id'],$info['category_id'],4))}
+            </div>
+            <!--热门关注-->       
+            <div class="detail-xgwz detail-xgtj">
+                <div class="fn-title fn-title-l"><a href="{:C('STATIC_URL')}/baike/" target="_blank" class="more">更多</a><h2>热门关注</h2></div>
+                {:W('Qbaobei/hotFollow',array(8))}
+            </div>
+        </div>
+        <div class="baike-main-r">
+            <!--广告-->
+            <div class="adv259_193"><!-- 广告位：资讯详情右侧广告1 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1135928");</script></div><strong></strong>
+            {:W('Qbaobei/hotVideo',array($info['category_id'],6))}
+            <!--广告-->
+            <div class="adv259_193"><!-- 广告位：资讯详情右侧广告2 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1135929");</script></div>
+            {:W('Qbaobei/tagsDocument',array($info['id'],8))}
+            <!--广告-->
+            <div class="adv259_193"><!-- 广告位：资讯详情右侧广告3 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1135930");</script></div>
+            {:W('Qbaobei/hotDocument',array($info['id'],$info['category_id'],5))}
+        </div>
+    </div>
+ </div>
+</div>
+<!--内容主体部分 end-->
+<if condition="$info['step_read'] eq 1 && !empty($info['stepList'])">
+	<!--分步阅读 start-->
+	<div id="popBox">
+	    <div class="popBox-top">
+	        <div class="btn"><a href="javascript:void(0);">分步阅读</a></div>
+	        <div class="wrap popBox-top-main"><h1></h1></div>
+	    </div>
+	    <div class="wrap popBox-main">
+	        <div class="popBox-inner">  
+	        </div>
+	    </div>
+	    <div class="popBox-bot">
+	        <div class="popBox-bot-main">
+	            <div class="popBox-bot-con">
+	                <ul class="small-list"></ul>
+	            </div>
+	            <span class="small-btn small-btn-l"></span>
+	            <span class="small-btn small-btn-r"></span>
+	        </div>
+	    </div>
+	    <!--按钮-->
+	    <span class="popBtn btn-l"></span>
+	    <span class="popBtn btn-r"></span>
+	    <!--遮罩-->
+	    <div class="hideBox zz-left"></div>
+	    <div class="hideBox zz-right"></div>
+	</div>
+	<!--分步阅读 end-->
+</if>
+<script>
+    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"2","bdPos":"right","bdTop":"218.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+</block>

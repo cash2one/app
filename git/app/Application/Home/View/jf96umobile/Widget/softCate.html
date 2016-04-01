@@ -1,0 +1,18 @@
+<div class="down-list pop-down-list down-tab">
+    <div class="pop-wrap">
+        <h3><a href="{:staticUrlMobile('lists',$android_id,'Down')}"><span class="ico"><img src="__PUBLIC__/Home/jf96umobile/images/ico5.png"/></span>{$android_name}</a></h3>
+        <ul class="pop-box">
+            <volist name="android_cate" id="list">
+                <li><a href="{:staticUrlMobile('lists',$list['id'],'Down')}">{$list.title}</a></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="pop-wrap">
+        <h3><a href="{:staticUrlMobile('lists',$ios_id,'Down')}"><span class="ico"><img src="__PUBLIC__/Home/jf96umobile/images/ico2.png"/></span>{$ios_name}</a></h3>
+        <ul class="pop-box">
+            <volist name="ios_cate" id="list">
+                <li><a href="{:staticUrlMobile('lists',$list['id'],'Down')}">{$list.title}</a></li>
+            </volist>
+        </ul>
+    </div>
+</div>

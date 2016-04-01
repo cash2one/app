@@ -1,0 +1,168 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/channel.css" /></block>
+<block name="body">
+<!--head部分-->
+<div class="wrap channel-head">
+    <div class="wrap adv1200_103"><center><script type="text/javascript">BAIDU_CLB_fillSlot("1135455");</script></center></div>
+    <div class="head-main">
+        <div class="left">
+            <a href="{:C('STATIC_URL')}" class="logo">亲亲宝贝网</a>
+            <h1>百科</h1>
+        </div>
+        <div class="middle"><p class="goback"><span>您的位置：</span><a href="{:C('STATIC_URL')}">亲亲宝贝网</a>><span>百科</span></p></div>
+         <include file="Home@qbaobei/Public/PC2/search" />
+    </div>
+</div>
+<div class="channel-nav  show-channel-nav">
+    <div class="wrap nav-main">
+        <ul class="nav-ul">                                                         
+            <li><a href="{:getWidgetPath('67',true)}">百科首页</a></li>
+            <li><a href="{:staticUrl('lists',746,'Document')}">怀孕</a>
+                {~W('Document/Qbaobei/showChildMenu',array('746'))}
+            </li>
+            <li><a href="{:staticUrl('lists',747,'Document')}">育儿</a>
+                {~W('Document/Qbaobei/showChildMenu',array('747'))}
+            </li>
+            <li><a href="{:staticUrl('lists',749,'Document')}">营养美食</a>
+              {~W('Document/Qbaobei/showChildMenu',array('749'))}
+            </li>
+            <li><a href="{:staticUrl('lists',750,'Document')}">保健养生</a>
+              {~W('Document/Qbaobei/showChildMenu',array('750'))}
+            </li>
+            <li><a href="{:staticUrl('lists',751,'Document')}">生活用品</a>
+              {~W('Document/Qbaobei/showChildMenu',array('751'))}
+            </li>
+        </ul>
+            {~W('Document/Qbaobei/showMenuTag')}
+    </div>
+</div>
+<!--频道主体部分 start-->
+<div class="channel-main">
+    <div class="wrap channel-wraper">
+    <!--chanbox-->
+    <div class="fn-area chanbox1">
+        <div class="left">
+               {~W('Document/Qbaobei/baikeIndexHeadline')}
+        </div>
+               {~W('Document/Qbaobei/baikeChannelTags')}
+    </div>
+    <div class="baike-main">
+        <div class="baike-main-l">
+            <!--广告-->
+            <div class="adv927_103"><!-- 广告位：频道页横幅广告 -->
+<center><script type="text/javascript">BAIDU_CLB_fillSlot("1135455");</script></center></div>
+            <!--百科list-->
+             {~W('Document/Qbaobei/getBaikeCates',array('746','怀孕百科'))}
+            <!--百科list-->
+             {~W('Document/Qbaobei/getBaikeCates',array('747','育儿百科'))}
+            <!--百科list-->
+             {~W('Document/Qbaobei/getBaikeCates',array('748','早教百科'))}
+            <!--百科list-->
+             {~W('Document/Qbaobei/getBaikeCates',array('749','营养百科'))}
+            <!--百科list-->
+             {~W('Document/Qbaobei/getBaikeCates',array('750','保健百科'))}
+            <!--百科list-->
+            {~W('Document/Qbaobei/getBaikeCates',array('751','生活百科'))}
+        </div>
+        <div class="baike-main-r">
+            <div class="baike-dataBox">
+                <div class="fn-title"><h2>妈妈怀孕日历</h2></div>
+                         <div class="dataBox-main">
+                    <span class="prev btn"><em></em></span>
+                    <div class="dataBox-main-m">
+                        <div class="dataBox-mbox">
+                        <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120903_223264.html" target="_blank">第1周</a>        <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120903_223265.html" target="_blank">第2周</a>          <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120903_223266.html" target="_blank">第3周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120903_223267.html" target="_blank">第4周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120903_223268.html" target="_blank">第5周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120903_223269.html" target="_blank">第6周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120903_223270.html" target="_blank">第7周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120903_223271.html" target="_blank">第8周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120903_223272.html" target="_blank">第9周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120903_223273.html" target="_blank">第10周</a> 
+                        </div>
+                        <div class="dataBox-mbox">
+                             <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120827_222142.html" target="_blank">第11周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120828_222421.html" target="_blank">第12周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120908_224487.html" target="_blank">第13周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120908_224489.html" target="_blank">第14周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120908_224490.html" target="_blank">第15周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120908_224491.html" target="_blank">第16周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120908_224492.html" target="_blank">第17周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120908_224494.html" target="_blank">第18周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120908_224496.html" target="_blank">第19周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120908_224498.html" target="_blank">第20周</a> 
+                        </div>
+                        <div class="dataBox-mbox">
+                            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224614.html" target="_blank">第21周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224616.html" target="_blank">第22周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224618.html" target="_blank">第23周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224630.html" target="_blank">第24周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224634.html" target="_blank">第25周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224638.html" target="_blank">第26周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224640.html" target="_blank">第27周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224641.html" target="_blank">第28周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224646.html" target="_blank">第29周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224650.html" target="_blank">第30周</a>           
+                        </div>
+                        <div class="dataBox-mbox">
+                            <a  href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120828_222355.html" target="_blank">第31周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120907_224368.html" target="_blank">第32周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120910_224719.html" target="_blank">第33周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120911_224957.html" target="_blank">第34周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120911_224964.html" target="_blank">第35周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120912_225192.html" target="_blank">第36周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120912_225194.html" target="_blank">第37周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120913_225377.html" target="_blank">第38周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120913_225380.html" target="_blank">第39周</a>            <a href="http://www.qbaobei.com/hybk/yunqi/hyssz/20120914_225533.html" target="_blank">第40周</a>    
+                        </div>
+                    </div>
+                    <span class="next btn"><em></em></span>
+                </div>
+            </div>
+            <div class="baike-dataBox">
+                <div class="fn-title"><h2>宝宝成长日历</h2></div>
+                     <div class="dataBox-main">
+                    <span class="prev btn"><em></em></span>
+                    <div class="dataBox-main-m">
+                        <div class="dataBox-mbox">
+    <a href="http://www.qbaobei.com/jieti/28537.html" title="1个月">1个月</a>
+   <a href="http://www.qbaobei.com/jieti/28538.html" title="2个月">2个月</a>
+   <a href="http://www.qbaobei.com/jieti/28539.html" title="3个月">3个月</a>
+   <a href="http://www.qbaobei.com/jieti/28541.html" title="4个月">4个月</a>
+   <a href="http://www.qbaobei.com/jieti/28542.html" title="5个月">5个月</a>
+   <a href="http://www.qbaobei.com/jieti/28543.html" title="6个月">6个月</a> 
+   <a href="http://www.qbaobei.com/jieti/28545.html" title="7个月">7个月</a>
+   <a href="http://www.qbaobei.com/jieti/28546.html" title="8个月">8个月</a>
+   <a href="http://www.qbaobei.com/jieti/28547.html" title="9个月">9个月</a>
+   <a href="http://www.qbaobei.com/jieti/28548.html" title="10个月">10个月</a>
+                        </div>
+                        <div class="dataBox-mbox">
+   <a href="http://www.qbaobei.com/jieti/28549.html" title="11个月">11个月</a>
+   <a href="http://www.qbaobei.com/jieti/28550.html" title="12个月">12个月</a> 
+   <a href="http://www.qbaobei.com/jieti/28559.html" title="13个月">13个月</a>
+   <a href="http://www.qbaobei.com/jieti/28561.html" title="14个月">14个月</a>
+   <a href="http://www.qbaobei.com/jieti/28562.html" title="15个月">15个月</a>
+   <a href="http://www.qbaobei.com/jieti/28564.html" title="16个月">16个月</a>
+   <a href="http://www.qbaobei.com/jieti/28566.html" title="17个月">17个月</a>
+   <a href="http://www.qbaobei.com/jieti/28568.html" title="18个月">18个月</a>
+   <a href="http://www.qbaobei.com/jieti/28569.html" title="19个月">19个月</a>
+   <a href="http://www.qbaobei.com/jieti/28570.html" title="20个月">20个月</a> 
+                        </div>
+                        <div class="dataBox-mbox">
+   <a href="http://www.qbaobei.com/jieti/28572.html" title="21个月">21个月</a>
+   <a href="http://www.qbaobei.com/jieti/28574.html" title="22个月">22个月</a>
+   <a href="http://www.qbaobei.com/jieti/28575.html" title="23个月">23个月</a>
+   <a href="http://www.qbaobei.com/jieti/28577.html" title="24个月">24个月</a> 
+   <a href="http://www.qbaobei.com/jieti/28614.html" title="2岁1个月">25个月</a> 
+   <a href="http://www.qbaobei.com/jieti/28617.html" title="2岁2个月">26个月</a>
+   <a href="http://www.qbaobei.com/jieti/28619.html" title="2岁3个月">27个月</a>
+   <a href="http://www.qbaobei.com/jieti/28620.html" title="2岁4个月">28个月</a>
+   <a href="http://www.qbaobei.com/jieti/28622.html" title="2岁5个月">29个月</a>
+   <a href="http://www.qbaobei.com/jieti/28623.html" title="2岁6个月">30个月</a> 
+                        </div>
+                           <div class="dataBox-mbox">
+                             <a href="http://www.qbaobei.com/jieti/28624.html" title="2岁7个月">31个月</a>
+   <a href="http://www.qbaobei.com/jieti/28625.html" title="2岁8个月">32个月</a>
+   <a href="http://www.qbaobei.com/jieti/28626.html" title="2岁9个月">33个月</a>
+   <a href="http://www.qbaobei.com/jieti/28628.html" title="2岁10个月">34个月</a>
+   <a href="http://www.qbaobei.com/jieti/28629.html" title="2岁11个月">35个月</a> 
+   <a href="http://www.qbaobei.com/jieti/28635.html" title="3岁">3岁</a>
+   <a href="http://www.qbaobei.com/jieti/30061.html" title="4岁">4岁</a>
+   <a href="http://www.qbaobei.com/jieti/30062.html" title="5岁">5岁</a>
+   <a href="http://www.qbaobei.com/jieti/30063.html" title="6岁">6岁</a> 
+                        </div>
+                    </div>
+                    <span class="next btn"><em></em></span>
+                </div>
+            </div>
+            <!--广告-->
+            <div class="adv259_193"><!-- 广告位：频道页横幅广告 --><center><script type="text/javascript">BAIDU_CLB_fillSlot("1135455");</script></center>
+            </div>
+            <div class="right baike-dataBox">
+                <div class="fn-title"><a href="http://www.qbaobei.com/plans/" target="_blank" class="more">更多</a><h2>育儿专题</h2></div>
+                <div class="fn-ul-list">
+                    <ul class="fn-pic-list">
+                        <li><a href="http://www.qbaobei.com/plans/mabbqiming/" target="_blank"><img src="http://www.qbaobei.com/plans/mabbqiming/images/1-1.jpg"><span>马宝宝起名字大全</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/zhongkao2014/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/6/201406271702368267.jpg"><span>2014，直击中考</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/xiajishuiguo/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/5/201405231704573893.jpg"><span>夏季吃什么水果好</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/fenmianfangshi/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/6/201406271457025341.jpg"><span>分娩方式大起底</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/yunchuqiys/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/3/201403281428483141.jpg"><span>怀孕初期吃什么好</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/yurenjie/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/5/201405091613480459.jpg"><span>健康妈咪不贫血</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/boluo/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/4/201404181800418215.jpg"><span>菠萝的营养价值</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/bbzhanggao/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/plans/2014/4/201404111259183954.jpg"><span>长高的科学方法</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+</div>
+<!--频道主体部分 end-->
+</block>

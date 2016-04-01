@@ -1,0 +1,17 @@
+<notempty name="lists">
+<div class="right baike-dataBox detail-tab">
+  <div class="fn-title">
+    <h2>热门文章推荐</h2>
+  </div>
+  <div class="fn-ul-list">
+    <ul class="meishi-news current">
+      <volist name="lists" id="vo">
+        <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a>
+          <p class="info">{:empty($vo['description']) ? $vo['intro']:$vo['description']}</p>
+        </li>
+      </volist>
+    </ul>
+  </div>
+</div>
+</notempty>
+

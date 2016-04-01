@@ -1,0 +1,41 @@
+<div class="layoutBox {$curr}">
+ <div class="layoutBox-left">
+      <volist name="slider" id="vo">
+           <switch name="key" >
+                       <case value="0">
+                          <div class="bigPic-pic">
+                            <div class="bigPic-wrap"><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}"><span>{$vo['title']}</span><b></b></a></div>
+                       </case>
+                       <case value="1">
+                               <div class="bigPic-wrap"><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}"><span>{$vo['title']}</span><b></b></a></div>
+                           </div>
+                       </case>
+                       <case value="2">
+                             <div class="bigPic-text">
+                             <div class="title"><a href="http://www.qbaobei.com/jiankang/" target="_blank" class="tip">育儿宝典</a><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank" class="tit">{$vo['title']}</a></div>
+                                      <div class="text">
+                                               {$vo['description']}           
+                                      </div>
+                            </div>
+                       </case>  
+                <default/>
+          </switch>
+      </volist>   
+ </div>
+  <div class="layoutBox-right">
+    <div class="news-con1">
+     <volist name="headlineList" id="article">
+      <div class="yuer-con1-wrap">
+        <div class="yuer-con1-top"> <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="title">{$article['title']}</a>
+          <p class="info">{$article['description']}</p>
+        </div>
+        </volist>
+        <ul class="news-con1-ul yuerFgx">
+          <volist name="hotList" id="article">
+            <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article['title']}</a></li>
+          </volist>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

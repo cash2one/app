@@ -1,0 +1,8 @@
+ <volist name="ranks"  id="f" >
+<li><em>1</em><a href="{:str_replace('index.html','',staticUrl('detail',$f['id'],'Down'))}" target="" title="{$f['title']}"><img src="{:get_cover($f['smallimg'],'path')}" alt="{$f['title']}"></a>
+  <div class="text"> <a href="{:str_replace('index.html','',staticUrl('detail',$f['id'],'Down'))}" target="_blank" title="{$f['title']}" class="title">{$f['title']}</a>
+    <p class="yxjj"><span><b>{$f['size']}</b></span><span><s>平台：</s><i class="adr"></i><i class="iph"></i></span><span>类型：<b>{:getCateName($f['id'],'Down')}</b></span><span>更新时间：<b>{$f.update_time|time_format="Y-m-d"}</b></span></p>
+    <p class="info">{$f['description']}</p>
+  </div>
+  <a href="{:str_replace('index.html','',staticUrl('detail',$f['id'],'Down'))}" target="_blank" class="down">点击下载</a> </li>
+</volist>

@@ -1,0 +1,126 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>分类管理</h2>
+	</div>
+
+	<!-- 表格列表 -->
+	<div class="tb-unit posr">
+		<div class="tb-unit-bar">
+			<a class="btn" href="{:U('add')}">新 增</a>
+			<div class="fr">
+			<form method="post" action="{:U('search')}" class="search-form" id="category_search">
+				<input type="text" name="kw" value="" class="search-input" placeholder="请输入搜索关键词" />
+				<input type="submit" class="btn" value="搜索">
+			</form>
+			</div>
+		</div>
+		<div class="category">
+			<div class="hd cf">
+				<div class="fold">折叠</div>
+				<div class="order">排序</div>
+				<div class="order">发布</div>
+				<div class="name">名称</div>
+			</div>
+			{:R($cate_name.'/tree', array($tree))}
+		</div>
+		<div class="page" style="float: right;">
+			{$_page}
+		</div>
+	</div>
+	<!-- /表格列表 -->
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+
+		(function($){
+			/* 分类展开收起 */
+			$(".category dd").prev().find(".fold i").addClass("icon-unfold")
+				.click(function(){
+					var self = $(this);
+					if(self.hasClass("icon-unfold")){
+						self.closest("dt").next().slideUp("fast", function(){
+							self.removeClass("icon-unfold").addClass("icon-fold");
+						});
+					} else {
+						self.closest("dt").next().slideDown("fast", function(){
+							self.removeClass("icon-fold").addClass("icon-unfold");
+						});
+					}
+				});
+
+			/* 三级分类删除新增按钮 */
+			$(".category dd dd .add-sub").remove();
+
+			function setCookie(cname, cvalue, seconds) {
+                var d = new Date();
+                d.setTime(d.getTime() + (seconds*1000));
+                var expires = "expires="+d.toUTCString();
+                document.cookie = cname + "=" + cvalue + "; " + expires;
+            }
+
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1);
+                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                }
+                return "";
+            }
+
+			//设置cookie 搜索关键词
+			$("#category_search").submit(function(){
+                setCookie('admin_search_keyword', $.trim($("#category_search .search-input").val()), 20);
+            });
+
+            //搜素结果高亮显示
+            (function(){
+                var okeys=decodeURIComponent(getCookie('admin_search_keyword'));
+                if (okeys) {
+                	//console.log(okeys);
+                    $('dl input,dt input').each(function(){
+                        if($(this).val().indexOf(okeys) > -1){
+                            $(this).parents('dt').css('background','#eaf3b6');
+                        };
+                    });
+                }
+            })();
+
+			/* 实时更新分类信息 */
+			$(".category")
+				.on("submit", "form", function(){
+					var self = $(this);
+					$.post(
+						self.attr("action"),
+						self.serialize(),
+						function(data){
+							/* 提示信息 */
+							var name = data.status ? "success" : "error", msg;
+							msg = self.find(".msg").addClass(name).text(data.info)
+									  .css("display", "inline-block");
+							setTimeout(function(){
+								msg.fadeOut(function(){
+									msg.text("").removeClass(name);
+								});
+							}, 1000);
+						},
+						"json"
+					);
+					return false;
+				})
+                .on("focus","input",function(){
+                    $(this).data('param',$(this).closest("form").serialize());
+
+                })
+                .on("blur", "input", function(){
+                    if($(this).data('param')!=$(this).closest("form").serialize()){
+                        $(this).closest("form").submit();
+                    }
+                });
+		})(jQuery);
+	</script>
+</block>

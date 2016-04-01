@@ -1,0 +1,101 @@
+<extend name="Home@dongdong/Widget/common/commonIndex" />
+
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/dongdong/gw/css/ddgw.css"/>
+</block>
+
+
+
+
+
+<block name="body">
+
+    <div id="main">
+        <div id="s1" class="pager">
+            <div class="main">
+                <p class="pic"><img src="__PUBLIC__/Home/dongdong/gw/images/pic1_1.jpg"></p>
+                <div class="wzjj">
+                    <p class="big">东东助手</p>
+                    <p class="small">让手游无处不在</p>
+                    <p class="down"><a href="//{$pgi['download_address']}">立即下载</a></p>
+                    <p class="bb">版本: {$pgi['version']}　　　　大小: {$pgi['size']}　　　是否免费: {$pgi['is_free']}<br>
+                        系统要求: {$pgi['system_requirements']}</p>
+                    <p class="bottom"><img src="__PUBLIC__/Home/dongdong/gw/images/arr.jpg"></p>
+                </div>
+            </div>
+        </div>
+        <div id="s2" class="pager">
+            <div class="main">
+                <p class="pic"><img src="__PUBLIC__/Home/dongdong/gw/images/pic_2.jpg"></p>
+                <div class="wzjj">
+                    <p class="big">完美操作体验</p>
+                    <p class="small">操作简单方便，完美将手游移植到电脑，<br>尽情体验在电脑上玩手游的乐趣，体验PC端不一样的感受</p>
+                    <p class="down"><a href="//{$pgi['download_address']}">立即下载</a></p>
+                    <p class="bb">版本: {$pgi['version']}　　　　大小: {$pgi['size']}　　　是否免费: {$pgi['is_free']}<br>
+                        系统要求: {$pgi['system_requirements']}</p>
+                    <p class="bottom"><img src="__PUBLIC__/Home/dongdong/gw/images/arr.jpg"></p>
+                </div>
+            </div>
+        </div>
+        <div id="s3" class="pager">
+            <div class="main">
+                <p class="pic"><img src="__PUBLIC__/Home/dongdong/gw/images/pic_3.jpg"></p>
+                <div class="wzjj">
+                    <p class="big">自动检测并修复</p>
+                    <p class="small">软件实现智能的系统环境检测和修复功能，为你电脑顺利玩手游保驾护航</p>
+                    <p class="down"><a href="//{$pgi['download_address']}">立即下载</a></p>
+                    <p class="bb">版本: {$pgi['version']}　　　　大小: {$pgi['size']}　　　是否免费: {$pgi['is_free']}<br>
+                        系统要求: {$pgi['system_requirements']}</p>
+                    <p class="bottom"><img src="__PUBLIC__/Home/dongdong/gw/images/arr.jpg"></p>
+                </div>
+            </div>
+        </div>
+        <div id="s4" class="pager">
+            <div class="main">
+                <p class="pic"><img src="__PUBLIC__/Home/dongdong/gw/images/pic_4.jpg"></p>
+                <div class="wzjj">
+                    <p class="big">海量游戏应用下载</p>
+                    <p class="small">海量安卓手游应用，种类丰富，想下就下，想玩就玩</p>
+                    <p class="down"><a href="//{$pgi['download_address']}">立即下载</a></p>
+                    <p class="bb">版本: {$pgi['version']}　　　　大小: {$pgi['size']}　　　是否免费: {$pgi['is_free']}<br>
+                        系统要求: {$pgi['system_requirements']}</p>
+                    <p class="bottom"><img src="__PUBLIC__/Home/dongdong/gw/images/arr.jpg"></p>
+                </div>
+            </div>
+        </div>
+        <div id="s5" class="pager">
+            <div class="main">
+                <div class="pic" id="pic5">
+                    <p class="circ"><span class="aaa" title="通过360杀毒、百度杀毒、金山毒霸等主流软件检测，安全无毒，放心使用！">安全认证</span></p>
+                    <p class="circ"><span class="bbb" title="再也不用担心流量不够，尽情畅玩！">无限流量</span></p>
+                    <p class="circ"><span class="ccc" title="移动 PC无障碍切换，24小时随时等待召唤！">永远在线</span></p>
+                    <p class="circ"><span class="ddd" title="随意控制屏幕大小，体验大屏玩3D手游带来的快感！">超大屏幕</span></p>
+                </div>
+                <div class="wzjj">
+                    <p class="big">了解更多特性</p>
+                    <p class="small">您可以用鼠标指向这些特点进一步了解东东手游更多独特之处</p>
+                    <p class="down"><a href="//{$pgi['download_address']}">立即下载</a></p>
+                    <p class="bb">版本: {$pgi['version']}　　　　大小: {$pgi['size']}　　　是否免费: {$pgi['is_free']}<br>
+                        系统要求: {$pgi['system_requirements']}</p>
+                    <p class="bh">备案编号：湘ICP备16000834号-1 <a href="{:getWidgetPath(4, true)}" target="_blank">联系我们</a></p>
+                </div>
+            </div>
+        </div>
+        <!--right_nav-->
+        <div id="right_nav">
+            <b class="cur"><em>1</em></b>
+            <b><em>2</em></b>
+            <b><em>3</em></b>
+            <b><em>4</em></b>
+            <b><em>5</em></b>
+        </div>
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/dongdong/gw/js/ddgw.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/dongdong/gw/js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/dongdong/gw/js/nicescroll.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/dongdong/js/ddsy.js"></script>
+</block>

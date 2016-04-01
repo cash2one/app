@@ -1,0 +1,41 @@
+<extend name="Home@afsmobile/Base/commonDown"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/afsmobile/css/libao.css"/>
+</block>
+<block name="body">
+    <!--banner-->
+	<section class="scroll" data-sudaclick="main_focus">
+		<ul class="slide" id="slide">
+         <Think:article basename="Package" name="pmain" limit="4" where="category_rootid=1&&position & 2" order="create_time desc">
+         <li><a href="{:staticUrlMobile('detail', $article['id'],'Package')}"><img src="{:get_cover($article['srecom_id'],'path')}" alt="{$article.title}"><p>{$article.title}</p></a></li>
+          </Think:article>
+		</ul>
+		<div class="slide_dot" id="slide_dot"></div>
+	</section>
+   <!--libao-->
+   <section class="libao">
+       <div class="rmhj" id="wraper">
+           <p class="title"><a href="{:getWidgetPath('42')}">更多+</a><span>热门礼包 <b>	HOT</b></span></p>
+           <ul>
+            <Think:article basename="Package" name="pmain" limit="6" where="category_rootid=1&&position & 4" order="create_time desc"> 
+               <li><a href="{:staticUrlMobile('detail', $article['id'],'Package')}"><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrlMobile('detail', $article['id'],'Package')}" class="tit">{$article.title}</a></li>
+          </Think:article>
+           </ul>
+       </div>
+       <div class="jplb" id="wraper">
+           <p class="title"><a href="{:getWidgetPath('42')}">更多+</a><span>精品礼包 <b>	GIFT</b></span></p>
+           <ul>
+            <Think:article basename="Package" name="pmain" limit="10" where="category_rootid=1" order="create_time desc">
+               <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Package')}" class="pic"><img src="{:get_cover($article['cover_id'],'path')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $article['id'],'Package')}">{$article.title}</a></div>
+                       <div><i>{$article['seo_description']}</i></div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Package')}" class="down">领取</a>
+               </li>
+          </Think:article>
+           </ul>
+       </div>
+   </section>
+</block>

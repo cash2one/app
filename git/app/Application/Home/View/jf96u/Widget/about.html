@@ -1,0 +1,24 @@
+<extend name="Home@jf96u/Base/about" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/about.css">
+</block>
+<block name="body">
+    <div class="main1200">
+        <div class="container about-box">
+            <div class="about-nav">
+                <a href="/about/about.html" <if condition="$id eq 66">class="active"</if>>关于我们</a>
+                <a href="/about/contact.html" <if condition="$id eq 67">class="active"</if>>联系我们</a>
+                <a href="/about/duty.html" <if condition="$id eq 68">class="active"</if>>免责声明</a>
+                <a href="/about/ggfw.html" <if condition="$id eq 69">class="active"</if>>广告合作</a>
+                <a href="/about/links.html" <if condition="$id eq 70">class="active"</if>>网站合作</a>
+                <a href="/about/sitemap.html" <if condition="$id eq 71">class="active"</if>>网站地图</a>
+            </div>
+            <div class="about-main">
+                <h2>{$name}</h2>
+                <div class="art-body">
+                    {$content}
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

@@ -1,0 +1,31 @@
+<extend name="Package@pc6/Base/common"/>
+<block name="style">
+  <link href="__PUBLIC__/Package/pc6/css/qhfy.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="__PUBLIC__/Package/pc6/js/kai.js"></script>
+</block>
+<block name="body">
+  <dl class="con">
+    <dd class="left">
+     <p id="picshow">
+      <include file="Package@pc6/Widget/bigPic"/>
+    </p>
+    <p class="kaifu"> 
+      <b><font id="divT"></font>最新手机游戏开服表</b>
+      <span><em>开服时间</em><em>游戏名称</em><em>服务器</em><em>类型</em><em>当前情况</em></span>
+      <volist  name="lists" id="article">
+        <i>
+          <em>{$article.start_time|time_format="Y-m-d"}</em>
+          <em><a href="{$article.link}" target="_blank" title="{$article.title}">{$article.title}</a></em>
+          <em>{$article.server}</em>
+          <em>{$article.game_type|showCheckbox="card_type",2}</em>
+          <em>{$article.server_type|showFormat="server_type"}</em>
+        </i>
+      </volist>
+  
+  <div class="pag">{$page}</div>
+</dd>
+<dt class="right">
+  <include file="Package@pc6/Public/sideR"/>
+</dt>
+</dl>
+</block>

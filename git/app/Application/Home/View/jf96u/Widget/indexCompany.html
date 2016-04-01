@@ -1,0 +1,13 @@
+<ul class="ul1">
+  <volist name="lists" id="document" offset="0" length="10">
+    <li><a href="/{$document['path']}/" target="_blank" title="{$document.name}"><img src="{:get_cover($document['img'],'path')}" alt="{$document.name}"><span class="tit">{$document.name}</span></a></li>
+  </volist>
+</ul>
+<div class="cont-text">
+  <div class="line"><span class="line-tit"></span></div>
+  <div class="cont-main"> 
+         <volist name="lists" id="document" offset="10" length="10">
+          <a href="/{$document['path']}/" target="_blank" title="{$document.name}">{$document.name}</a><em>|</em> 
+         </volist>
+   </div>
+</div>

@@ -1,0 +1,79 @@
+<extend name="Home@afsmobile/Base/commonDown" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+    <!--game_rec-->
+    <section id="game_rec" class="game">
+        <p id="title-nav"><i>分类</i><i class="cur">最新</i><i>推荐</i></p>
+        <div class="xfl">
+            <volist name="cate" id="val">
+            <p><a href="{:staticUrlMobile('lists',$val['id'],'Down')}" style="background: none; padding: 15px 0px 0px 0px; height: 90px; text-align: center;">
+                <img style="display: block; margin: 0px auto; float: none;" src="{:get_cover($val['icon'],'path')}" width="60" height="60">{$val['title']}
+            </a></p>
+            </volist>
+        </div>
+        <div class="xfl current" id="newGameList">
+            <ul>
+                <volist name="new" id="vo">
+                    <li>
+                        <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="pic"><img src="{:get_cover($vo['smallimg'],'path','1','66','66')}"></a>
+                        <div class="main">
+                            <div><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">{$vo.title}</a></div>
+                            <div><i>{$vo['cate']}</i><i>{$vo['size']}</i><i>{:showText($vo['language'],'language',false,'down')}</i></div>
+                        </div>
+                        <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="down">下载</a>
+                    </li>
+                </volist>
+            </ul>
+            <a href="javascript:void(0)" onclick="api_soft(newGameList,2,$(this))" data-type="danji" id="get_more">点击加载更多</a>
+        </div>
+        <div class="xfl" id="commendedGameList">
+            <ul>
+                <volist name="position" id="vo">
+                    <li>
+                        <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="pic"><img src="{:get_cover($vo['smallimg'],'path','1','66','66')}"></a>
+                        <div class="main">
+                            <div><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">{$vo.title}</a></div>
+                            <div><i>{$vo['cate']}</i><i>{$vo['size']}</i><i>{:showText($vo['language'],'language',false,'down')}</i></div>
+                        </div>
+                        <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="down">下载</a>
+                    </li>
+
+                </volist>
+            </ul>
+            <a href="javascript:void(0)" onclick="api_soft(commendedGameList,1,$(this))" data-type="danji" id="get_more">点击加载更多</a>
+        </div>
+    </section>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/common.js"></script>
+    <script>
+        function api_soft(fa,po,o){
+            var ul  = $(fa).find('ul');
+            var li  = ul.find('li');
+            var num = li.length;
+
+            $.ajax({
+                dataType:'jsonp',
+                jsonp:"callback",
+                url: DYNAMIC_SERVER_URL+'/dynamic.php?s=/Afsmobile/API_soft/',
+                data:"num="+num+"&&key="+po,
+                success:function(data){
+                    if(data){
+                        var html = '';
+                        for(i in data){
+                            html += '<li><a href="'+data[i].url+'" class="pic"><img src="'+data[i].img+'"></a><div class="main"><div><a href="'
+                            +data[i].url+'">'+data[i].title+'</a></div><div><i>'+data[i].cate+'</i><i>'+data[i].size+'</i><i>'+data[i].language+'</i></div></div><a href="'
+                            +data[i].url+'" class="down">下载</a></li>';
+                        }
+                        li.last().after(html);
+                    }else{
+                        o.text('没有更多数据了');
+                        o.removeAttr('onclick');
+                    }
+                }
+            });
+        }
+    </script>
+</block>

@@ -1,0 +1,22 @@
+<div class="f-title">
+	<h2>{:$number}F {:$cateInfo['title']}</h2>
+</div>
+<a href="{:staticUrl('lists',$cateInfo['id'],'Down')}" class="cfl"><img src="__PUBLIC__/Home/gfw/images/product_cate_{:$cateInfo['id']}.jpg" width="201" height="375" title="{:$cateInfo['title']}" /></a>
+{~$count = 8;//显示记录条数}
+<div class="f-main gf-border">
+	<volist name="cateTree['_']" id="cate" key="i" offset="0" length="8">
+		<dl class="gflist">
+			<dt>
+				<a href="{:staticUrl('lists',$cate['id'],'Down')}" title="{:$cate['title']}">[{:$cate['title']}]</a>
+			</dt>
+			<dd>
+				<volist name="cate['_']" id="child" key="j">
+					<if condition="$j elt $count">
+						<a href="{:staticUrl('lists',$child['id'],'Down')}" title="{:$child['title']}" class="<if condition='$j eq 1'>blue</if>">{:$child['title']}</a>
+					</if>
+				</volist>
+				<a href="{:staticUrl('lists',$cate['id'],'Down')}" class="orange" title="更多">更多></a>
+			</dd>
+		</dl>
+	</volist>
+</div>

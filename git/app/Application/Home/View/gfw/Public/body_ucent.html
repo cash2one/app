@@ -1,0 +1,40 @@
+<div class="main" id="user-wraper">
+    <div class="user-wraper-left">
+        <div class="user-wraper-nav">
+            <dl>
+                <dt class="zh">管理账户</dt>
+                <dd>
+                    <ul>
+                        <li {:check_cur(array('ucenter/index'));}><a href="{:U('I/Ucenter/index')}">中心首页</a></li>
+                        <li {:check_cur(array('ucenter/updateInfo'));}><a href="{:U('I/Ucenter/updateInfo')}">修改资料</a></li>
+                        <li {:check_cur(array('ucenter/editpwd'));}><a href="{:U('I/Ucenter/editPwd')}">修改密码</a></li>
+                       
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="wz">我的网站</dt>
+                <dd>
+                    <ul>
+                        <li {:check_cur(array('website/create', 'website/save'));}><a href="{:U('I/Website/create')}">发布网站</a></li>
+                        <li {:check_cur(array('website/index'));}><a href="{:U('I/Website/index')}">管理网站</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="cp">我的产品</dt>
+                <dd>
+                    <ul>
+                        <li {:check_cur(array('product/create', 'product/save'));}><a href="{:U('I/Product/create')}">发布产品</a></li>
+                        <li {:check_cur(array('product/index'));}><a href="{:U('I/Product/index')}">管理产品</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+
+    <block name="body"></block>
+
+
+</div>

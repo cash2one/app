@@ -1,0 +1,169 @@
+<meta charset="utf-8">
+	<title>{$SEO.title}</title>
+	<meta name="keywords" content="{$SEO.keywords}"/>
+	<meta name="description" content="{$SEO.description}"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/layout.css">
+	<block name="style"></block>
+<classify model="2" typeid="1500" index="blogger"></classify>
+<php>
+// [ 时尚 ]
+$fashion = array(
+	'shizhuang'	=>	array(
+		'name'	=>  '时装',
+		'typeid'=>	'1507',
+		'id'	=>  '1529,1530,1531,1532',
+	),
+	'mingxing'	=>	array(
+		'name'	=>  '明星',
+		'typeid'=>	'1510',
+		'id'	=>	'202,213',
+	),
+	'dapian'	=>	array(
+		'name'	=>  '大片',
+		'typeid'=>	'1508',
+		'id'	=>  '727,1528',
+	),
+	'youpin'	=>	array(
+		'name'	=>	'优品',
+		'typeid'=>	'1501',
+		'id'	=>	'1524,1525,1526,1527',
+	),
+	'xiuchang'	=>	array(
+		'name'	=>	'秀场',
+		'typeid'=>	'1509',
+		'id'	=>	'1522,1523',
+	),
+	'jiepai'	=>	array(
+		'name'	=>	'街拍',
+		'typeid'=>	'214',
+		'id'	=>	'613,1533,604,618,1534',
+	),
+	'bozhu'		=>	array(
+		'name'	=>	'博主',
+		'typeid'=>	'1500',
+		'id'	=>	$blogger,
+	),
+	'dapei'		=>	array(
+		'name'	=>	'搭配',
+		'typeid'=>	'1',
+		'id'	=>	'1535,1536,354,1201,356,992,991',
+	)
+);
+$fashionid = implode(array_column($fashion, 'id'), ',');
+// [ 美容 ]
+$beauty = array(
+	'hufu'	=>	array(
+		'name'	=> '护肤',
+		'typeid'=>	'2',
+		'id'	=> '1023,239,509,1307,517,486,514,489,490',
+	),
+	'caizhuang'	=>	array(
+		'name'	=> '彩妆',
+		'typeid'=>	'99',
+		'id'	=> '509,513,945,1024,470,1293,1177',
+	),
+	'meifa'	=>	array(
+		'name'	=> '美发',
+		'typeid'=>	'4',
+		'id'	=> '247,623,679,668,652,1209,662,674,947,1193,251',
+	),
+	'meijia'	=>	array(
+		'name'	=>	'美甲',
+		'typeid'=>	'1517',
+		'id'	=>	'463,1264,1268,1275,1315,1328',
+	),
+	'yimei'	=>	array(
+		'name'	=>	'医美',
+		'typeid'=>	'1503',
+		'id'	=>	'1359,1320,1319,1338',
+	)
+);
+$beautyid = implode(array_column($beauty, 'id'), ',');
+// [ 生活 ]
+$life = array(
+	'jiankang'	=>	array(
+		'name'	=> '健康',
+		'typeid'=>	'918',
+		'id'	=> '1176,929,1067,1290,928,1000,1259,1361,1339,930,1226',
+	),
+	'qinzi'	=>	array(
+		'name'	=> '亲子',
+		'typeid'=>	'917',
+		'id'	=> '1183,1058,921,995,926,979,1065,982,1059',
+	),
+	'jianfei'	=>	array(
+		'name'	=> '减肥',
+		'typeid'=>	'5',
+		'id'	=> '580,57,577,940,1140,52,53,998,567,1130,1190',
+	),
+    'jiaju'	=>	array(
+		'name'	=> '家居',
+		'typeid'=> '281',
+		'id'	=> '281'
+    ),
+	'qinggan'	=>	array(
+		'name'	=> '情感',
+		'typeid'=> '951',
+		'id'	=> '960,1249,954,1039,1125,1041,1181,1122,1055,1119',
+	),
+	'xingzuo'	=>	array(
+		'name'	=> '星座',
+		'typeid'=> '303',
+		'id'	=> '915,899,898,1131,916,909,1092,304,910,908,890',
+	),
+	'shuma'		=>	array(
+		'name'	=>	'数码',
+		'typeid'=>  '277',
+		'id'	=>	'1153,877,278,938,875',
+	)
+);
+$lifeid = implode(array_column($life, 'id'), ',');
+// [ 娱乐 ]
+$recreation = array(
+	'zongyi'	=>	array(
+		'name'	=> '综艺',
+		'typeid'=>  '1516',
+		'id'	=> '1200,1537,1147,1538,1539',
+	),
+	'yingshi'	=>	array(
+		'name'	=> '影视',
+		'typeid'=>  '1511',
+		'id'	=> '726,716',
+	),
+	'xingwen'	=>	array(
+		'name'	=> '星闻',
+		'typeid'=>  '293',
+		'id'	=> '302,301,300,299',
+	),
+	'bagua'	=>	array(
+		'name'	=> '八卦',
+		'typeid'=>  '1514',
+		'id'	=> '295,301,739,297',
+	),
+);
+$recreationid = implode(array_column($recreation, 'id'), ',');
+if(!empty($board)){
+	if(isset($fashion[$board])){
+		$site = 1;
+		$params = $fashion[$board];
+	}elseif(isset($beauty[$board])){
+		$site = 2;
+		$params = $beauty[$board];
+	}elseif(isset($life[$board])){
+		$site = 3;
+		$params = $life[$board];
+	}elseif(isset($recreation[$board])){
+		$site = 4;
+		$params = $recreation[$board];
+	}
+}else{
+	if(CONTROLLER_NAME == 'Widget'){
+		$link = array_flip(array('', 'channelFashion', 'channelBeauty', 'shenghuo', 'yule'));
+
+		if(isset($link[$_GET['method']])){
+			$site = $link[$_GET['method']];
+		}
+	}
+}
+</php>

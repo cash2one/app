@@ -1,0 +1,30 @@
+<extend name="Home@gfw/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+<block name="body">
+<!--注册-->
+<div class="main" id="pass-wraper">
+    <div class="pass-login">已有官方网账户了？<a href="" target="_blank">立即登录</a></div>
+    <div class="pass-inwraper">
+        <div class="pass-inwraper-title">找回密码<span></span></div>
+        <div class="pass-inwraper-main">
+            <ul class="pass-ul-title">
+                <li class="yes"><span>1</span>填写用户名</li>
+                <li class="yes"><span>2</span>验证身份</li>
+                <li class="yes"><span>3</span>重置密码</li>
+                <li class="yes"><span>4</span>成功找回</li>
+            </ul>
+            <div class="pass-inwraper-input" id="pass-success">
+                <p class="message1">恭喜，您的新登录密码已设置成功，请您记住它哦！</p>
+                <p class="login1"><a href="{:U('Index/login')}" class="ck-email">点击此处</a>，立即登录</p>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+</block>

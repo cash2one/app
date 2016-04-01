@@ -1,0 +1,105 @@
+<extend name="Home@afsmobile/Base/commonNew" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+    <!--游戏信息-->
+   <section class="yxxq">
+       <div class="yxxq-info">
+           <a href="{:staticUrlMobile('detail', $info['id'],'Down')}" class="pic"><img src="{:get_cover($info['smallimg'],'path','1','66','66')}"></a>
+           <span><b class="tit">{$info.title}</b><b>{:getCateName($info['id'],'down')} | {$info.size}</b><b>更新时间：{$info['update_time']|time_format="Y-m-d H:i:s"}</b></span>
+       </div>
+       <div class="xq-down">
+             <php>
+            $info['downAll'] = M('downAddress')->alias('a')->field('a.url,a.site_id,b.site_name title')->join('__PRESET_SITE__ b ON a.site_id = b.id','left')->where('did = '.$info['id'])->order('b.level DESC')->select();
+            foreach($info['downAll'] as $k=>&$v){
+            $v['url'] = formatAddress($v['url'],$v['site_id']);
+            }
+            unset($v);
+        </php>
+          <volist name="info['downAll']" id="val">
+            <if condition="$val.url eq '' "> <a href="#" onclick="readyDown()">正在上传</a>
+              <else/>
+                <if condition="$val.title eq '本地下载' ">
+                  <a href="#" onclick="goDown('{$val['url']}')">{$val['title']}</a> 
+                 <else/>
+               <a href="{$val['url']}">{$val['title']}</a> 
+                </if>
+           </if>
+        </volist>
+       </div>
+   </section>
+   <!--其他版本-->
+   <section class="gameQtbb">
+       <div class="downWrap">
+          {~W('Down/Afsmobile/relateVersion',array($info['id']))}
+       </div>
+       <div class="downWrap tags"> <notempty name="info['tags']">
+            <volist name="info['tags']" id="vo">
+                <a href="{:C('MOBILE_STATIC_URL')}/tag/{$vo['name']}/">{$vo.title}</a>
+            </volist>
+    </notempty></div>
+   </section>
+   
+   <!--游戏详情主体-->
+    <section id="yxjj" class="gameQtbb">
+        <div class="downWrap">
+            <div class="downTit"><p>游戏简介</p></div>
+            <div class="yxjs">
+                {~W('Afsmobile/specialText',array($info['keytext']))}
+                 <div class="main">
+                     {~W('Home/P7230/contentProcess',array($info['content']))}
+                 </div>
+                 <p class="zkxq">展开内容</p>
+            </div>
+        </div>
+
+        <!--游戏截图-->
+        <div class="yxjj-xbtj gameQtbb">
+           <div class="downWrap">
+               <div class="downTit"><p>游戏截图</p></div>
+               <div class="cont xyc">
+                   <div id="wrapper">
+                       <div id="scroller">
+                           <ul id="thelist">
+                              <volist name="info['previewimg']" id="val">
+                                       <li><img alt="{$info.title}" src="{:get_cover($val,'path',1,200,200,'jpg','0','70')}"></li>
+                                </volist>
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+           </div>
+            <!--厂商-->
+              {~W('Down/Afsmobile/downFactory',array($info['company_id']))}
+           
+            <!--猜你喜欢-->
+             {~W('Down/Afsmobile/guessLike',array($info['productTags']['id'],$info['tags'],$info['id'],$info['category_id']))}
+        </div>
+        <!--相关教程-->
+         {~W('Down/Afsmobile/relateArticle',array($info['id']))}
+       <!--pinglun-->
+       <div class="gameQtbb">
+           <div class="downWrap">
+               <div class="downTit"><p>网友评论</p></div>
+               <div class="wrap" id="pingl">
+                     <form action="" method="" name="" id="pl"  data-id="{$info['id']}" data-model="Down">
+                         <input name="author" id="tj-user" type="hidden" value="{$info['uid']}" />
+                         <p><input type="text"  placeholder="游客" id="user" class="commentUserForm"></p>
+                         <p><textarea class="commentForm" ></textarea></p>
+                         <p><input type="button" value="发表评论" class="comment_submit" id="btn"></p>
+                    </form>
+                    <p class="newset_list">最新评论<span></span></p>
+                    <ul class="commentInfo" data-id="{$info['id']}" data-model="down">
+                     <p class="no-comment"> 暂无评论 </p>
+                    </ul>
+               </div>
+           </div>
+       </div>
+    </section>
+    <div style=" clear:both"></div>
+</block>
+<block name="script"> 
+    <script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/common.js"></script> 
+    <script type="text/javascript" src="__PUBLIC__/Down/afsmobile/js/iscrollc.js"></script> 
+</block>

@@ -1,0 +1,26 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/pic.css"/>
+</block>
+<block name="breadcrumbnav"><a href="{:C('MOBILE_STATIC_URL')}">首页</a>  > {$categoryName}</block>
+<block name="body">
+<!--图库列表-->
+<section class="news-list dis-bot beiyun-news">
+    <div class="news-list-ul pic-page-ul">
+        <volist name="lists" id="val">
+            <div class="has-action"><a href="{:str_replace(C('STATIC_URL'),C('MOBILE_STATIC_URL'),staticUrlMobile('detail',$val['id'],'Gallery'))}">
+                <div class="pic"><img src="{:get_cover($val['smallimg'],'path',1,160,120)}"></div>
+                <div class="text">
+                    <p class="tit">{$val['title']}</p>
+                    <p class="mui-text-mute">
+                        <span class="time-left"><i>{$categoryName}</i><time>{:date('m-d',$val['update_time'])}</time></span>
+                        <span class="vis">{$val['view']}</span>
+                    </p>
+                </div>
+            </a></div>
+        </volist>
+    </div>
+    {~W('Gallery/Qbaobeimobile/categoryPage',array($info['list_row'],$count,$cid,$p))}
+    <input type="hidden" id="cate-id" value="{$info.id}">
+</section>
+</block>

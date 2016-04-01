@@ -1,0 +1,85 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/content.css" /></block>
+<block name="body">
+<!--head部分-->
+<div class="wrap channel-head">
+    <div class="wrap adv1200_103"><center><!-- 广告位：首页横幅广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1135447");</script></center></div>
+    <div class="head-main">
+        <div class="left">
+            <a href="{:C('STATIC_URL')}" class="logo">亲亲宝贝网</a>
+            <h1>图库</h1>
+        </div>
+       <include file="Home@qbaobei/Public/PC2/search" />
+    </div>
+</div>
+<!--内容主体部分 start-->
+<div class="channel-main detailBox">
+    <div class="wrap channel-wraper">
+    <div class="cont-goback"><span>您的位置：</span><a href="{:C('STATIC_URL')}">首页</a>> {~W('Gallery/Qbaobei/breadCrumb',array($info['category_id'],$info['category_rootid']))}<span>{$info['title']}</span></div>
+    <div class="baike-main">
+        <div class="detail-main-l">
+            <div class="pic-detail">
+                <div class="news-title">
+                    <h1>{$info['title']}</h1>
+                </div>
+                <div class="clearfix">
+                    {~W('Gallery/Qbaobei/relateTags',array($info['id']))}
+                    <div class="artShare"><span>日期：{$info['create_time']|time_format="Y-m-d H:i:s"} </span><span>浏览：<em id="hits" data-id="{$info['id']}" data-model="gallery">{$info['view']}</em>次</span></div>
+                </div>
+                <div class="pic-bigger">
+                    <div class="pic-main">
+                        <div class="pic-mainBox">
+                            <ul class="pic-ul">
+                               <volist name="info.imgpack" id="image">
+                                <li><a href="javascript:void(0)" target="_blank" class="pic"><img src="{$image.image}" alt="{$image.title}"></a></li>
+                              </volist>
+                            </ul>
+                        </div>
+                        <div class="bigBtn left"><span></span></div>
+                        <div class="bigBtn right"><span></span></div>
+                    </div>
+                    <div class="pic-info">{$info.content}</div>
+                    <div class="pic-small">
+                        <div class="small-btn small-l"><a href="{:staticUrl('detail',$priv['id'],'Gallery')}"><img src="{:get_cover($priv['smallimg'],'path')}"><span>《 上一图集</span></a></div>
+                        <div class="small-main">
+                            <span class="btn prev">向左</span>
+                            <div class="small-mainBox">
+                                <ul class="small-ul"></ul>
+                            </div>
+                            <span class="btn next">向右</span>
+                        </div>
+                        <div class="small-btn small-r"><a href="{:staticUrl('detail',$next['id'],'Gallery')}"><img src="{:get_cover($next['smallimg'],'path')}"><span>下一图集 》</span></a></div>
+                    </div>    
+                </div>
+                  <input name="author" id="tj-user" type="hidden" value="{$info['uid']}" />
+            </div>
+            <!--广告-->
+            <div class="adv927_103">
+                <center><!-- 广告位：图库详情中长横幅 --><script type="text/javascript">BAIDU_CLB_fillSlot("1135608");</script></center>
+            </div>
+            <!--相关图片-->       
+              {~W('Gallery/Qbaobei/relatePic',array($info['id']))}
+        </div>
+        <div class="baike-main-r">
+            <!--广告-->
+            <div class="adv259_193">
+            <!-- 广告位：图库详情右侧广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1135609");</script>
+            </div>
+            <!--热门词条-->
+            <div class="right baike-dataBox">
+                {~W('Gallery/Qbaobei/hotTags')}
+            </div>
+            <!--热门文章-->
+            <div class="right baike-dataBox detail-tab">
+                 {~W('Gallery/Qbaobei/picRank')}
+            </div>
+               {~W('Gallery/Qbaobei/picCommended')}
+          
+        </div>
+    </div>
+ </div>
+</div>
+<!--内容主体部分 end-->
+</block>

@@ -1,0 +1,9 @@
+<div class="paih" id="paihtab">
+    <p class="title">热门游戏下载</p>
+    <b class="nav"><i>排名</i><i class="yx">游戏</i><i class="df">得分</i></b>
+    <ul class="cur ulTab">
+        <volist name="lists" id="list">
+        <li><span><a href="{:staticUrl('detail',$list['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($list['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$list['id'],'Down')}" target="_blank" class="title">{$list.title}</a><b>{$list.tags}</b><u class="demo2"><em></em><input class="knob" value="{$list.score}"></u></span></li>
+        </volist>
+    </ul>
+</div>

@@ -1,0 +1,17 @@
+<if condition="$data  GT 0 ">
+<section class="mid3 dis-bot">
+
+	<div class="mid-title">
+		<h2>手游攻略</h2>
+		<a href="{:staticUrlMobile('lists',1588,'document')}"><span>更多</span><em class="arr"></em></a>
+	</div>
+	<ul class="news-list">
+
+
+     <volist name="data" id="v">
+		<li><span>[攻略]</span><a href="{:staticUrlMobile('detail',$v['id'],'document')}" title="{$v.title}">{$v.title}</a></li>
+     </volist>
+
+	</ul>
+</section>
+</if>

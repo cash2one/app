@@ -1,0 +1,25 @@
+<notempty name="tag[0]">
+<div class="news-wrap">
+  <div class="title2">
+    <h3>{$tag[0]['title']}</h3>
+    <em class="arr"></em></div>
+  <ul class="news-li">
+    <document model="2" id="$list1">
+		<li <eq name="key" value="0">class="current"</eq>><a href="{$document['url']}" target="_blank" title="{$document['title']}"><img src="__PUBLIC__/Home/qili/images/pic3.jpg" alt=""><span><em>{$document['title']}</em></span></a></li>
+    </document>
+  </ul>
+</div>
+</notempty>
+
+<notempty name="tag[1]">
+<div class="news-wrap">
+  <div class="title2">
+    <h3>{$tag[1]['title']}</h3>
+    <em class="arr"></em></div>
+  <ul class="news-li">
+    <document model="2" id="$list2">
+     <li <eq name="key" value="0">class="current"</eq>><a href="{$document['url']}" target="_blank" title="{$document['title']}"><img src="__PUBLIC__/Home/qili/images/pic3.jpg" alt=""><span><em>{$document['title']}</em></span></a></li>
+    </document>
+  </ul>
+</div>
+</notempty>

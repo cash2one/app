@@ -1,0 +1,12 @@
+<notempty name="relation_art">
+<dd class="cms"><h2>相关文章</h2>
+    <ul class="clearfix">
+     <volist name="relation_art" id="val">
+        <li><a href="{:staticUrl('detail',$val['did'],'Document')}" target="_blank">{$val.title}</a></li>
+     </volist>
+    </ul>
+    <s><a class="moreTab" href="javascript:;">全部↓</a></s>
+</dd>
+
+</notempty>
+

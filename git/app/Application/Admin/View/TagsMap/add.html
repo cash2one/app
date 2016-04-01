@@ -1,0 +1,68 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>新增标签关联数据 [{$info.title}][{:getTagsMapType($type)}]</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);">基 础</a></li>
+		</ul>
+		<div class="tab-content">
+			<form action="{:U()}" method="post" class="form-horizontal">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item">
+						<label class="item-label">
+							标签名称<span class="check-tips"></span>
+						</label>
+						<div class="controls">
+							<input type="text" name="title" class="text input-mid" disabled="disabled" value="{$info.title|default=''}" />
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							关联类型<span class="check-tips"></span>
+						</label>
+						<div class="controls">
+							<select name="mType" disabled="disabled">
+								<option value="-1">--请选择--</option> 
+								<volist name="mapTypes" id="mType">
+									<option value="{$mType}" <if condition="$key eq $type">selected</if>>{$mType}</option>
+								</volist>
+							</select>
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							关联ID<span class="check-tips">（不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="did" class="text input-mid" value="{$info.did|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							排序<span class="check-tips"></span>
+						</label>
+						<div class="controls">
+							<input type="text" name="sort" class="text input-mid" value="{$info.sort|default='0'}">
+						</div>
+					</div>
+				</div>
+				<div class="form-item">
+					<input type="hidden" name="tid" value="{$info['id']|default='0'}" />
+					<input type="hidden" name="type" value="{$type|default=''}" />
+					<button type="submit" id="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+	</script>
+</block>

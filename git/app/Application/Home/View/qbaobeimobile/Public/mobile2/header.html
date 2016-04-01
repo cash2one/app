@@ -1,0 +1,18 @@
+<header class="home-header cata-header">
+    <div id="fixd-top">
+        <div class="gohome"><span class="title"><block name="breadcrumbnav"></block></span></div>
+        <div class="home-popnav-btn popbtn"><a href="{:C('MOBILE_STATIC_URL')}/cate/"></a></div>
+        <div class="home-popnav-btn cata-popbtn"></div>
+        <div class="pop-searbox">
+            <form id="bdcs-search-form" class=""  method="get" action="http://s.qbaobei.com/cse/search">
+                <input type="hidden" value="9283565739734765726" name="s">
+                <input type="text" autocomplete="off" placeholder="高龄备孕二胎" id="bdcs-search-form-input" class="text" name="q" required><a href="javascript:;" class="clear">╳</a>
+                <input type="submit" value="取消" id="bdcs-search-form-cancel" class="btn">
+                <input type="submit" value="搜索" id="bdcs-search-form-submit" class="btn">
+            </form>
+        </div>
+    </div>
+</header>
+{~W('Home/Qbaobeimobile/getSearchTag')}
+<block name="nav"></block>
+<block name="pic"></block>

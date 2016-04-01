@@ -1,0 +1,12 @@
+<php>if($lists){</php>
+<div class="hot gf-border">
+    <h3 class="hot-icon2">相关专题</h3>
+    <ul>
+        <volist name="lists" id="rel">
+            <li>
+                <a href="{:C('STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$rel['url_token']}" target="_blank" class="hot-img"><img src="{:get_cover($rel['icon'],'path')}" width="177" height="99"><span class="hot-title"><em>{$rel['title']}</em></span></a>
+            </li>
+        </volist>
+    </ul>
+</div>
+<php>}</php>

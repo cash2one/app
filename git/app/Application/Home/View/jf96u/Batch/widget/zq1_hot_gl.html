@@ -1,0 +1,8 @@
+<div class="dlList mid-news rmgl">
+    <div class="tit"><a href="{$more}" target="_blank">更多</a><span>热门攻略</span></div>
+    <ul class="wenda-ul">
+        <volist name="gl" id="val">
+        <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" title="{$val['title']}">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>

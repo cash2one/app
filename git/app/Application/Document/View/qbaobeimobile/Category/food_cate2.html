@@ -1,0 +1,45 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/index.css"/>
+</block>
+<block name="breadcrumbnav"><a href="{:C('MOBILE_STATIC_URL')}">首页</a> > {$top_cate['title']}</block>
+<block name="body">
+<!--导航-->
+<nav class="channel-nav">
+    <a href="{:C('MOBILE_STATIC_URL')}{:getWidgetPath(84)}">今日推荐</a>
+    <a class="active" href="{:staticUrlMobile('lists',694,'Document')}">食谱库</a>
+</nav>
+<!--食谱库菜单-->
+<notempty name="cate">
+<section class="spk-nav">
+    <div class="spk-nav-cata">
+        <ul class="spk-nav-ul">
+            <volist name="cate" id="val">
+            <li<?php if($info['id'] == $val['id']){echo ' class="active"';} ?>><a href="{:staticUrlMobile('lists',$val['id'],'Document')}" title="{$val['title']}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+    <notempty name="tags">
+    <div class="spk-nav-list">
+        <div class="swiper-container2">
+            <div class="swiper-wrapper">
+                <volist name="tags" id="val">
+                <a class="swiper-slide" href="{:C('MOBILE_STATIC_URL')}/tag/{$val['name']}/">{$val['title']}</a>
+                </volist>
+            </div>
+        </div>
+    </div>
+    </notempty>
+</section>
+</notempty>
+<section class="ship-cata dis-bot">
+    <ul id="food" data-id="{$info['id']}" class="ship-cata-ul pic-adaptive-wrap2">
+    <script> c();</script>
+        <volist name="lists" id="val">
+        <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" class="pic-adaptive2" title="{$val['title']}"><img src="{:get_cover($val['smallimg'],'path',1,240,200)}" alt="{$val['title']}"></a><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" class="title">{$val['title']}</a></li>
+        </volist>
+    </ul>
+    <div class="loading">拼命加载中...</div>
+</section>
+</block>
+<block name="script"><script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/by.js"></script></block>

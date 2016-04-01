@@ -1,0 +1,188 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/detail.css"/></block>
+
+<block name="header">
+	<include file="Home@qili/Public/header" />
+</block>
+
+<block name="body">
+<div class="tupage-nav">
+    <div class="qnx1200">
+       
+    </div>
+</div>
+
+<div class="qnx1200 rec-list" style="margin-top:-60px">
+    <div class="location">
+		<position return="position" />
+		
+		<php>
+			$e = 1;
+			$count = count($position);
+		</php>
+		<volist name="position" id="name">
+			<if condition="$e eq 1">
+				<a href="{$key}">{$name}</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+			<elseif condition="$count eq $e" />
+				<a href="{$key}">{$name}</a>
+			</if>
+
+			<php>$e++;</php>
+		</volist>
+	</div>
+
+	{~W('Home/qili/listTop', array($cid))}
+</div>
+
+<div class="qnx1200 detail news-list">
+    <div class="detail-left">
+        <ul class="news-ul">
+			<?php
+				$map  = M('CategoryMap');
+				$count = $map->where(array('type'=>'document', 'cid' => $cid))->count();
+				if(strrpos($_SERVER['REQUEST_URI'], '.html')){
+					$url = dirname($_SERVER['REQUEST_URI']).'/';
+				}else{
+					$url = $_SERVER['REQUEST_URI'];
+				}
+				$page  = new \Think\Page($count,7,array(),false, $url.'index_{page}.html');
+				$page->setConfig('prev',"上一页");
+				$page->setConfig('next','下一页');
+				$page->setConfig('theme','%UP_PAGE% %LINK_PAGE% %DOWN_PAGE%');
+				$pages = $page->show();
+				$limit = $page->firstRow.',7';
+				$maps = $map->where(array('type'=>'document', 'cid' => $cid))->order('id DESC')->limit($limit)->select();
+				if($maps){
+					$ids		= implode(',', array_column($maps, 'did'));
+					$document	= M('Document')->where("status = 1 AND id IN($ids)")->select();
+					$ids		= implode(',', array_column($document, 'category_id'));
+					$category	= M('Category');
+					$menu = $category->field('id,title,template_index,path_index,template_lists,path_lists,path_detail,path_lists_index,rootid')->where('id IN('.$ids.')')->select();
+					$details = array();
+					foreach($menu as $value){
+						$details[$value['id']] = $value;
+					}
+					foreach($document as $k => $v){
+						$v['module'] = array('Category', 'Document', 'DocumentArticle');
+						$v['path_detail']		 = $details[$v['category_id']]['path_detail'];
+						$v['rootid']			 = $details[$v['category_id']]['rootid'];
+						$document[$k]['url']     = parseModuleUrl($v);
+						$document[$k]['atlas']= get_thumb($v['atlas_a'], $v['atlas'], '285x271');
+						$node = $map->where(array('type' => 'document', 'did' => $v['id']))->select();
+						if($node){
+							$ids = implode(',', array_column($node, 'cid'));
+							$document[$k]['classify'] = $category->field('id,title,name')->limit(2)->select($ids);
+							if($document[$k]['classify']){
+								foreach($document[$k]['classify'] as $i => $val){
+									$document[$k]['classify'][$i]['url'] = '/'.$val['name'].'/';
+								}
+							}
+						}else{
+							$document[$k]['classify'] = array();
+						}
+					}
+					$taglist = $document;
+				}
+			?>
+
+			<volist name="taglist" id="document">
+			<li>
+				<a href="{$document.url}" target="_blank"><img src="{:get_thumb($document[atlas_a], $document[atlas], '285x271')}" alt="{$document.title}"></a>
+
+				<div class="info">
+					<div class="top"><a href="{$document.url}" target="_blank" class="title">{$document.title}</a><span class="vis">{$document.view}</span></div>
+					<p class="jj">{$document.description}</p>
+
+					<div class="bot">
+						<div class="bot-l">
+							<volist name="document.classify" id="project" offset="0" length='3'>
+								<a href="{$project.url}">{$project.title}</a>
+							</volist>
+						</div>
+
+						<div class="bot-r">
+							<div class="bdsharebuttonbox">
+								<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+								<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+								<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+								<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			</volist>
+        </ul>
+
+        <div class="page-box">
+			{$pages}
+		</div>   
+    </div>
+
+    <div class="detail-right">
+        <div class="right tab-nub news-tab div-tab">
+            <p class="tab-tit"><span class="active">今日热门<em></em></span><span>阅读排行<em></em></span></p>
+            <ul class="right-ul current">  
+                {~W('Home/qili/hot', array($cid, 1))}
+            </ul>
+
+            <ul class="right-ul">   
+				{~W('Home/qili/hot', array($cid, 7))}
+            </ul>
+       </div>
+
+       <div class="djdzk">
+           <div class="det-title"><h3>大家都在看</h3></div>
+           <ul class="djdzk-ul">
+				<document model="2" typeid="$cid" limit="4" order="rand">
+                <li>
+					<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}">
+						<img src="{:get_thumb($document[atlas_b], $document[atlas], '138x190')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span>
+					</a>
+
+					<div class="info"><a href="{$document.url}" target="_blank">{$document.title}</a><p>{$document.description|msubstr=0,45}</p></div>
+			    </li>
+				</document>
+           </ul>
+       </div>
+
+		<div class="adv"><img src="__PUBLIC__/Home/qili/images/adv.jpg"></div>    
+		
+		{~W('Home/qili/tagsSearch', array($cid))}    
+    </div>
+</div>
+
+<div class="qnx1200 pic4">
+    <div class="tit">
+        <div class="det-title"><h3>猜你喜欢</h3></div>
+        <div class="rec-links">
+			<classify model="2" id="$cid">
+				<php>$typeid = $classify['rootid'];</php>
+			</classify>
+
+			<classify model="2" typeid="$typeid" limit="9" index="id">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a><em>|</em>
+			</classify>
+        </div>
+    </div>
+
+    <div class="autopic">
+      <span class="btn prev">prev</span>
+      <span class="btn next">next</span>
+      <div class="img-list">
+        <ul class="clearfix">
+			<if condition="$id"> 
+				{~W('Home/qili/guess', array($id, 7))}
+			</if>
+        </ul>
+      </div>
+    </div>  
+</div>
+</block>
+<block name="script">
+<script>
+$(document).ready(function(){
+	$('.rec-links em').eq(-1).empty();
+});
+</script>
+</block>

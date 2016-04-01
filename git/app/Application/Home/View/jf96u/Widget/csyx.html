@@ -1,0 +1,34 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/kfkc.css"/>
+</block>
+<block name="body">
+<div class="main1200">
+    <div class="goback">当前位置：<a href="{:C('STATIC_URL')}">首页</a> > <a href="{:getWidgetPath(86,ture)}">厂商合集</a> > {$info['name']}</div>
+    <div class="container">
+        <div class="kpage-top">
+            <img src="{:get_cover($info['img'],'path')}" alt="{$info['name']}">
+            <div class="kpage-des">
+                <h1>{$info['name']}</h1>
+                <p class="info">{$info['description']}</p>
+            </div>
+        </div>
+        <div class="kpage-main">
+            <ul class="kpage-ul">
+                <volist name="lists" id="val">
+                <li><a href="{:str_replace('index.html','',staticUrl('detail',$val['id'],'Down'))}" target="_blank" title="{$val['title']}"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a>
+                    <div class="text"><a href="{:str_replace('index.html','',staticUrl('detail',$val['id'],'Down'))}" target="_blank">{$val['title']}</a><p>{$val['cate']}</p><p>{:date('m-d',$val['update_time'])} | {:$val['size']?format_size($val['size']):'未知'}</p><p>版本：{$val['version']?$val['version']:'未知'}</p></div>
+                    <div class="info">{$val['description']}</div>
+                </li>
+                </volist>
+            </ul>
+        </div>
+        <div class="page">{$page}</div>
+        <!--合辑-->
+        {:W('Jf96u/cs',array($info['id']))}
+        <!--合辑相关-->
+        </div>
+    </div>
+</div>
+</block>
+

@@ -1,0 +1,53 @@
+<extend name="Home@dongdong/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/dongdong/css/yxlist.css"/>
+</block>
+
+<block name="body">
+<input type="hidden" id="nav_cur" value="{$topCate}">
+<div class="page_main">
+    <!--推荐-->
+    <div id="game_rec">
+        <p class="rec"><b>推荐</b>
+            <volist name="recommend" id="val">
+                <php>if($key != 0){echo '|';}</php>
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['title']}</a>
+            </volist>
+        </p>
+        <p class="hot"><b>热门</b>
+            <volist name="hot" id="val">
+                <php>if($key != 0){echo '|';}</php>
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['title']}</a>
+            </volist>
+        </p>
+        <p class="new"><b>最新</b>
+            <volist name="new" id="val">
+                <php>if($key != 0){echo '|';}</php>
+                <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['title']}</a>
+            </volist>
+        </p>
+    </div>
+
+    <!--banner-->
+        <!--widget-->
+    <php>if(!in_array($topCate,array(12))){</php>
+    {:W('Down/Dongdong/todaySlide',array($topCate,$cates))}
+    <php>}</php>
+    <!--游戏分类-->
+    <div class="wraper yxfl">
+        <div class="wraper_l">
+            <volist name="cate" id="val">
+                <dl>
+                    <dt><span class="dt_l">{$val['title']}</span><span class="dt_r"><a href="{:staticUrl('lists',$val['id'],'Down')}" target="_blank">+更多</a></span></dt>
+                    <dd>
+                        <ul>
+                            <volist name="val['data']" id="rel">
+                                <li><a href="{:staticUrl('detail',$rel['id'],'Down')}" target="_blank"><img src="{:get_cover($rel['smallimg'],'path',1,80,80)}" alt="{$rel['title']}"><span>{$rel['title']}</span></a></li>
+                            </volist>
+                        </ul>
+                    </dd>
+                </dl>
+            </volist>
+        </div>
+    </div>
+</block>

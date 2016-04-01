@@ -1,0 +1,91 @@
+<extend name="Home@gfw/Base/commonIndex" />
+
+<block name="style">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/index.css"/>
+</block>
+
+<block name="body">
+<div id="main" class=" gf1000 flclr">
+    <div class="main-left cfl">
+        
+    </div>
+    <!-----nav-list-end-----> 
+    <div class="main-center cfl">
+    	{:W('Home/Gfw/productAd',array(1,6))}
+    </div>
+    <!-----main-center-end-----> 
+    <div class="main-right top10 cfr">{:W('Home/Gfw/rightUser',array('all'))}</div>
+    <!-----main-right-end-----> 
+</div>
+<!-----main-end-----> 
+<div id="place" class=" gf1000 gf-border">{:W('Package/Gfw/websiteProvince')}</div>
+<!-----place-end-----> 
+<div id="classify" class="gf1000">
+    <div class="classify-left gf-border cfl">
+       {:W('Package/Gfw/websiteList',array(5,2,0,2))}
+    </div>   
+    <!-----classify-left-end-----> 
+    
+    <div class="classify-right gf-border cfr">
+        <div class="classify-up">
+            <div class="recreation01 c-width">
+                {:W('Package/Gfw/websiteList',array(1,2,0,3))}
+            </div>
+        
+            <div class="life02 c-width">
+                {:W('Package/Gfw/websiteList',array(2,2,0,3))}
+           </div>
+       </div>
+       <div class="classify-down">
+           <div class="education03 c-width">
+                {:W('Package/Gfw/websiteList',array(3,2,0,3))}
+           </div>
+       
+           <div class="internet04 c-width">
+                {:W('Package/Gfw/websiteList',array(4,2,0,3))}
+            </div>
+        </div>
+    </div>   
+       <!-----classify-right-end-----> 
+    
+</div>
+<!-----classify-end-----> 
+
+<div id="banner-1" class="gf1000"><center><!-- 广告位：全站首页&#60;1&#62; -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123275");</script></center></div>
+<!-----banner-1-end-----> 
+
+<div id="f1life" class="gf1000 f-content">
+	{:W('Home/Gfw/productCategory',array(1,14))}
+</div>
+<!-----生活消费-end-----> 
+<div id="f2life" class="gf1000 f-content1">
+	{:W('Home/Gfw/productCategory',array(2,15))}
+</div>
+<div id="banner-1" class="gf1000"><center><!-- 广告位：全站首页&#60;2&#62; -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123276");</script></center></div>
+<!-----机械设备-end-----> 
+<div id="f3life" class="gf1000 f-content">
+  {:W('Home/Gfw/productCategory',array(3,16))}
+</div>
+<!-----物料耗材-end-----> 
+<div id="f1life" class="gf1000 f-content">
+  {:W('Home/Gfw/productCategory',array(4,17))}
+</div>
+<div id="banner-1" class="gf1000"><center><!-- 广告位：全站首页&#60;3&#62; -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123277");</script></center></div>
+<!-----服务行业-end-----> 
+
+<div id="pc-hot">
+  <div class="hot-icon"></div>
+  {:W('Home/Gfw/product',array(8,5))}
+</div>
+<!-----热门产品-end-----> 
+<include file="Home@gfw/Public/link" />
+<!-----友情链接-end-----> 
+</block>
+
+<block name="script">
+	<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/lrtk.js"></script>
+</block>
+

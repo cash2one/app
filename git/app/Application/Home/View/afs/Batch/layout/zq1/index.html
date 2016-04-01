@@ -1,0 +1,117 @@
+<include file="Home@afs/Public/zq/swheader"/>
+<!--main-->
+<div id="main" class="yxzq">
+<!--页面左边-->
+<div class="yxzq-left">
+    <!--banner-->
+    <div id="banner">
+        <!--专区幻灯-->
+        <div class="left">
+            <ul>
+                <div class="dragable" widget="indexRecom">
+                <volist name="indexRecom" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path')}" alt="{$val['title']}"></a></li>
+                </volist>
+                </div>
+            </ul>
+            <span></span>
+            <p></p>
+            <b></b>
+        </div>
+        <!--专区头条新闻-->
+        <div class="news-rec">
+            <!--专区头条-->
+            <div>
+                <h3><a href="{:staticUrl('detail',$headline['id'],'Document')}" target="_blank" class="title">{$headline['title']}</a></h3><p><span>{$headline['description']}</span><a href="{:staticUrl('detail',$headline['id'],'Document')}" target="_blank">详情>></a></p>
+            </div>
+            <!--专区新闻-->
+            <ul>
+                <div class="dragable" widget="indexNews">
+                <volist name="indexNews" id="val" offset="1" length="9">
+                <li><b>{:date('Y-m-d',$val['create_time'])}</b><i>[资讯]</i><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a></li>
+                </volist>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <!--游戏特色部分-->
+    <php>if($feaList){</php>
+    <div class="gsje">
+        <volist name="feaList" id="fea">
+        <p><b>{$fea['title']}</b>
+            <volist name="fea['data']" id="tes" key="t">
+            <php>if($t != 1){</php><i>|</i><php>}</php>
+            <a href="{:staticUrl('detail',$tes['id'],'Document')}" target="_blank">{$tes['sub_title']}</a>
+            </volist>
+        </p>
+        </volist>
+    </div>
+    <php>}</php>
+
+    <!--游戏文章部分-->
+    <php>if($artList){</php>
+        <volist name="artList" id="art">
+            <php>if($art["style"]=="1"){</php>
+            <div style=" clear:both"></div>
+            <php>}</php>
+            <php>$class ="news"; if($art["style"]=="2"){ $class="news small"; }</php>
+        <div class="{$class}">
+            <h3><i>{$art['title']}</i></h3>
+            <ul>
+                <volist name="art['data']" id="arl">
+                <li><b>{:date('m-d',$arl['create_time'])}</b><a href="{:staticUrl('detail',$arl['id'],'Document')}" target="_blank">{$arl['title']}</a></li>
+                </volist>
+            </ul>
+        </div>
+        </volist>
+
+    <php>}</php>
+
+
+    <div style=" clear:both"></div>
+
+    <!---游戏图鉴部分--->
+    <volist name="handBook" id="tu">
+    <div class="yxtj">
+        <div class="title"><h3>{$tu['title']}</h3>
+
+        <php>if($tu['child']){</php>
+        <span>
+        <volist name="tu['child']" id="jian" key="k">
+            <php>if($k==1){</php>
+            <b class="cur">{$jian['title']}</b>
+            <php>}else{</php>
+            <b>{$jian['title']}</b>
+            <php>}</php>
+        </volist>
+        </span>
+        <php>}</php>
+        </div>
+
+        <php>if($tu['child']){</php>
+        <volist name="tu['child']" id="jians" key="ks">
+            <php>if($ks==1){ $cur = 'class="current"'; }else{ $cur = ''; }</php>
+        <ul {$cur}>
+            <volist name="jians['data']" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg']?$val['smallimg']:$val['cover_id'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="tit">{$val['sub_title']}</a></li>
+            </volist>
+        </ul>
+        </volist>
+        <php>}else{</php>
+        <ul class="current">
+        <volist name="tu['data']" id="rel">
+        <li><a href="{:staticUrl('detail',$rel['id'],'Document')}" target="_blank"><img src="{:get_cover($rel['smallimg']?$rel['smallimg']:$rel['cover_id'],'path')}"></a><a href="{:staticUrl('detail',$rel['id'],'Document')}" target="_blank" class="tit">{$rel['sub_title']}</a></li>
+        </volist>
+        </ul>
+        <php>}</php>
+    </div>
+    </volist>
+</div>
+<!--页面右边-->
+<include file="Home@afs/Public/zq/swright"/>
+
+<include file="Home@afs/Public/zq/link"/>
+</div>
+<include file="Home@afs/Public/foot"/>
+</body>
+</html>

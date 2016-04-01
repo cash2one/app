@@ -1,0 +1,44 @@
+<volist name="tree" id="list">
+	<dl class="cate-item">
+		<dt class="cf">
+			<form action="{:U('edit')}" method="post">
+				<div class="btn-toolbar opt-btn cf">
+					<a style="cursor:pointer;" data-trigger="hover"
+						data-container="body" data-toggle="popover" data-placement="left" 
+						data-content="" href="{:U('TagsMap/index?tid='.$list['id'])}">数据列表</a>
+					<!--begin 统计显示数据处理 add liujun 2015-07-21 -->
+					<div class="totalTitle" style="display:none;"><font color="red">{$list.title}</font>关联统计</div>
+					<div class="totalContent" style="display:none;">
+						<volist name="list['count']" id="mCount">
+							<p>{$mCount.title}：{$mCount.total}个</p>
+						</volist>
+					</div>
+					<!--end 统计显示数据处理 -->
+					<a title="编辑" href="{:U('edit?id='.$list['id'].'&pid='.$list['pid'])}">编辑</a>
+					<a title="{$list.status|show_status_op}" href="{:U('setStatus?ids='.$list['id'].'&status='.abs(1-$list['status']))}" class="ajax-get">{$list.status|show_status_op}</a>
+					<a title="删除" href="{:U('remove?id='.$list['id'])}" class="confirm ajax-get">删除</a>
+					<a title="移动" href="{:U('operate?type=move&from='.$list['id'])}">移动</a>
+					<!--<a title="合并" href="{:U('operate?type=merge&from='.$list['id'])}">合并</a>-->
+				</div>
+				<div style="width:50px;float:left;text-align: center;line-height: 35px;"><input class="ids" type="checkbox" value="{$list.id}" name="ids[]"></div>
+				<div class="fold"><i></i></div>
+				<div class="order"><input type="text" name="sort" class="text input-mini" value="{$list.sort}"></div>
+				<div class="name" style="width:600px;">
+					<span class="tab-sign"></span>
+					<input type="hidden" name="id" value="{$list.id}">
+					<input type="text" name="title" class="text" value="{$list.title}">
+					<a class="add-sub-cate" title="添加子标签" href="{:U('add?category='.$category.'&pid='.$list['id'])}">
+						<i class="icon-add"></i>
+					</a>
+					<span class="help-inline msg"></span>
+				</div>
+				<div class="order">{$list.total}</div>
+			</form>
+		</dt>
+		<notempty name="list['_']">
+			<dd>
+				{:R('Tags/tree', array($list['_']))}
+			</dd>
+		</notempty>
+	</dl>
+</volist>

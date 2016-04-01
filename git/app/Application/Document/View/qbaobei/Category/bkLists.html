@@ -1,0 +1,98 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/channel.css">
+</block>
+<block name="body">
+<!--head部分-->
+<div class="wrap channel-head">
+    <div class="wrap adv1200_103"><center><script type="text/javascript">BAIDU_CLB_fillSlot("1135447");</script></center></div>
+    <div class="head-main">
+        <div class="left">
+            <a href="{:C('STATIC_URL')}" class="logo">亲亲宝贝网</a>
+            <h1>百科</h1>
+        </div>
+        <div class="middle"><p class="goback"><span>您的位置：</span><a href="{:C('STATIC_URL')}">亲亲宝贝网</a>>{$mbx}<span>{$info['title']}</span></p></div>
+        <include file="Home@qbaobei/Public/PC2/search" />
+    </div>
+</div>
+
+<div class="channel-nav">
+    <div class=" wrap nav-main">
+        <ul class="nav-ul" id="yingy">
+            <li><a href="{:getWidgetPath('64',true)}" target="_blank">百科首页</a></li>
+            <volist name="nav" id="val">
+            <li <php>if($val['id'] == $info['id']){echo 'class="active"';}</php>><a href="{:staticUrl('lists',$val['id'],'Document')}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+</div>
+<!--频道主体部分 start-->
+    <div class="channel-main baike-channel">
+        <div class="wrap baike-list-wrap baike-channel">
+            <div class="baike-main">
+                <div class="baike-main-l baike-hover baike-channel">
+<!--广告-->
+<div class="adv927_103"><center><script type="text/javascript">BAIDU_CLB_fillSlot("1135974");</script></center></div>
+
+<!--百科list-->
+<php>if($level < 2){</php>
+<volist name="lists" id="val">
+<div class="baike-list baike-listul">
+    <div class="fn-title fn-title-l"><h2>{$val['title']}</h2></div>
+    <php>if($level == 0){</php>
+    <div class="baike-list-ul">
+        <div class="baike-ul-main">
+            <volist name="val['child']" id="vc">
+            <div class="baike-ulbox">
+                <a href="{:staticUrl('lists',$vc['id'],'Document')}" class="title" title="{$vc['title']}">{$vc['title']}</a>
+                <div class="info">
+                    <div class="info-m">
+                    <volist name="vc['data']" id="vo">
+                        <a href="{:staticUrl('detail',$vo['id'],'title')}" target="_blank" title="{$vo['title']}">{$vo['title']}</a>
+                    </volist>
+                    </div>
+                </div>
+            </div>
+            </volist>
+
+        </div>
+    </div>
+    <php>}else{</php>
+    <div class="baike-list-ul add-baike">
+        <div class="baike-ul-main">
+            <volist name="val['child']" id="vc">
+            <div class="baike-ulbox">
+                <a href="{:staticUrl('lists',$vc['id'],'Document')}" class="title" title="{$vc['title']}">{$vc['title']}</a>
+                <div class="info">
+                    <volist name="vc['data']" id="vo">
+                    <a href="{:staticUrl('detail',$vo['id'],'title')}" target="_blank" title="{$vo['title']}">{$vo['title']}</a>
+                    </volist>
+                </div>
+            </div>
+            </volist>
+        </div>
+    </div>
+    <php>}</php>
+</div>
+</volist>
+<php>}else{</php>
+<div class="baike-list baike-listul">
+    <div class="fn-title fn-title-l"><h2>{$info['title']}</h2></div>
+    <div class="baike-list-ul add-baike">
+        <div class="baike-ul-main">
+            <div class="baike-ulbox">
+                <div class="info">
+                    <volist name="lists" id="vo">
+                    <a href="{:staticUrl('detail',$vo['id'],'title')}" target="_blank" title="{$vo['title']}">{$vo['title']}</a>
+                    </volist>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<php>}</php>
+
+</div>
+</div>
+</div>
+</div>
+</block>

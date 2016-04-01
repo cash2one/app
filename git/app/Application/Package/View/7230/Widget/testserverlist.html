@@ -1,0 +1,11 @@
+<span class="nav"><i class="cur">开测表</i><i>开服表</i></span>
+<ul class="current">
+    <volist name="server" id="val">
+        <li><i class="fenl">礼</i><i class="time">{:date('Y-m-d',$val['start_time'])}</i><a href="{:$val['androidId']?staticUrl('detail',$val['androidId'],'Down'):'javascript:void(0)'}" target="{$val['androidId']?'_blank':'_self'}">{$val['title']}</a><i>{$val['server']}</i></li>
+    </volist>
+</ul>
+<ul>
+    <volist name="test" id="val">
+        <li><i class="fenl">礼</i><i class="time">{:date('Y-m-d',$val['start_time'])}</i><a href="{:$val['androidId']?staticUrl('detail',$val['androidId'],'Down'):'javascript:void(0)'}" target="{$val['androidId']?'_blank':'_self'}">{$val['title']}</a><i>{$val['server']}</i></li>
+    </volist>
+</ul>

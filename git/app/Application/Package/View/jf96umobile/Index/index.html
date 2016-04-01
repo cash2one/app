@@ -1,0 +1,56 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/gift.css"/>
+</block>
+<block name="title">礼包首页</block>
+<block name="body">
+<div class="swiper-container picauto">
+  <div class="swiper-wrapper">
+      <Think:article basename="Package" name="pmain" limit="4" where="category_id IN(6,7,8) AND position & 1" order="create_time desc">
+       <div class="swiper-slide"><a href="{:staticUrlMobile('detail', $article['id'],'Package')}"><img src="{:get_cover($article['vertical_pic'],'path')}"></a></div>
+       </Think:article>
+  </div>
+  <div class="swiper-pagination"></div>
+</div>
+<section class="mid0">
+    <ul class="cata-nav">
+        <li><a href="{:staticUrlMobile('lists','6','Package')}"><span class="bg"></span>礼包</a></li>
+        <li><a href="{:staticUrlMobile('lists','7','Package')}"><span class="bg"></span>激活码</a></li>
+        <li><a href="{:staticUrlMobile('lists','8','Package')}"><span class="bg"></span>新手卡</a></li>
+        <li><a href="/zt/"><span class="bg"></span>专题</a></li>
+    </ul>
+</section>
+<section class="mid1 dis-bot">
+    <div class="mid-title"><h2>热门礼包</h2></div>
+    <ul class="app2-list gift-game-list">
+       <Think:article basename="package" name="pmain" limit="6" where="category_id = 6 AND position & 2" order="update_time DESC">
+        <li><a href="{:staticUrlMobile('detail',$article['id'],'Package')}" title="{$article.title}"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}">
+            <div class="text">
+                <p class="title">{$article.title}</p>
+                <p class="cata">{:strip_tags($article['content'])}</p>
+                <p class="lq">领取</p>
+            </div></a>
+        </li>
+        </Think:article>
+    </ul>
+</section>
+<section class="mid1 dis-bot">
+    <div class="mid-title"><h2>最新礼包</h2></div>
+    <ul class="app2-list gift-game-list" id="latest-gift">
+    
+         <Think:article basename="package" name="pmain" limit="6" where="category_id = 6" order="create_time DESC">
+        <li><a href="{:staticUrlMobile('detail',$article['id'],'Package')}" title="{$article.title}"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}">
+            <div class="text">
+                <p class="title">{$article.title}</p>
+                <p class="cata">{:strip_tags($article['content'])}</p>
+                <p class="lq">领取</p>
+            </div></a>
+        </li>
+        </Think:article>
+    </ul>
+    <p class="mid-more bottom-more"><a id="loadmore" href="javascript:void(0)"><span>点击查看更多</span><em class="arr"></em></a></p>
+</section>
+</block>
+<block name="script">
+ <script type="text/javascript" src="__PUBLIC__/Home/jf96umobile/js/ajax_package.js"></script>
+</block>

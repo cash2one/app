@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>机型合集频道</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/7230/css/jxhj.css"/>
+</head>
+<body>
+<div id="head">
+    <div id="top"><a href="{:C('STATIC_URL')}" class="logo"></a>
+        <form action="{:C('STATIC_URL')}/search.html" method="get" id="Search_form" name="Search_form" class="">
+            <input type="text" name="keyword" id="searchBox" autocomplete="off" class="" value="输入你想搜索的游戏...">
+            <button type="submit" id="searchBtn" class="btn-submit"></button>
+        </form>
+    </div>
+    <div id="nav">
+        <ul>
+            <li><a href="{:C('STATIC_URL')}">首页</a></li>
+            <li><a href="{:staticUrl('lists',90, 'Document')}">资讯</a>
+                 <span>
+                      <a href="{:staticUrl('lists',90, 'Document')}">新游</a>
+                      <a href="{:staticUrl('lists',94, 'Document')}">活动</a>
+                      <a href="{:staticUrl('lists',87, 'Document')}">业界</a>
+                 </span>
+            </li>
+            <li><a href="{:staticUrl('lists',95, 'Document')}">攻略</a>
+                 <span>
+                      <a href="{:staticUrl('lists',95, 'Document')}">网游攻略</a>
+                      <a href="{:staticUrl('lists',92, 'Document')}">单机攻略</a>
+                      <a href="{:staticUrl('lists',89, 'Document')}">软件教程</a>
+                 </span>
+            </li>
+            <li><a href="{:C('STATIC_URL')}/yx/">下载</a>
+                 <span>
+                      <a href="{:C('STATIC_URL')}/yx/">游戏</a>
+                      <a href="{:C('STATIC_URL')}/rj/">软件</a>
+                      <a href="{:C('STATIC_URL')}/tj/">推荐列表</a>
+                 </span>
+            </li>
+            <li><a href="{:staticUrl('lists',81, 'Document')}">原创</a>
+                 <span>
+                      <a href="{:staticUrl('lists',93, 'Document')}">逗你玩</a>
+                      <a href="{:staticUrl('lists',91, 'Document')}">游戏评测</a>
+                      <a href="{:staticUrl('lists',88, 'Document')}">软件评测</a>
+                      <a href="{:getWidgetPath('20', true)}">周报</a>
+                      <a href="{:getWidgetPath('19', true)}">月报</a>
+                 </span>
+            </li>
+
+            <li class="ztright"><a href="{:staticUrl('index', null, 'Package')}">礼包</a>
+              <span>
+                  <a href="{:staticUrl('lists', 1, 'Package')}">大礼包</a>
+                  <a href="{:staticUrl('lists', 2, 'Package')}">激活码</a>
+                  <a href="{:staticUrl('lists', 4, 'Package')}">新手卡</a>
+              </span>
+            </li>
+
+            <li class="ztright"><a href="{:getWidgetPath('30', true)}">测试表</a>
+                 <span>
+                  <a href="{:getWidgetPath('31', true)}">开测表</a>
+                  <a href="{:getWidgetPath('30', true)}">开服表</a>
+                 </span>
+            </li>
+
+            <li class="ztright"><a href="{:getWidgetPath('16',true)}">专题</a>
+                 <span>
+                      <a href="{:getWidgetPath('17', true)}">专区</a>
+                      <a href="{:getWidgetPath('18', true)}">合辑</a>
+                      <a href="{:getWidgetPath('13', true)}">厂商</a>
+                      <a href="{:getWidgetPath('14', true)}">机型</a>
+                 </span>
+            </li>
+            <li class="ztright"><a href="{:C('STATIC_URL')}/top/phpd.html">排行</a>
+                 <span>
+                      <a href="{:getWidgetPath('10')}">媒体库</a>
+                      <a href="{:C('STATIC_URL')}/pic/">图片库</a>
+                 </span>
+            </li>
+        </ul>
+    </div>
+    <p id="nav2"></p>
+</div>
+<!-----head-END----->
+<div style=" clear:both"></div>

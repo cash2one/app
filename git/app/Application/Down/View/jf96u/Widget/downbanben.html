@@ -1,0 +1,65 @@
+<if condition="$otherdowncount  gt 0 ">
+<div class="dx game-vis">
+	<h3><a name="vis">其他平台版本</a></h3>
+	<ul class="plat">
+		<volist  name="otherdown"  id="v">
+			<php>if($v['system']==2){
+				echo "<li class='iph'>";}
+					elseif($v['system']==1){
+					echo "<li class='adr'>";
+					}
+			        elseif($v['system']==3){
+					echo "<li class='pc'>";
+					}</php>
+
+			<a href="{:staticUrl('detail', $v['id'],'down')}" target="_blank" class="title">{$v.title}</a>
+			<a href="{:staticUrl('detail', $v['id'],'down')}" target="_blank" class="down">立即下载</a>
+		</li>
+		</volist>
+	</ul>
+</div>
+</if>
+<if condition="$count  gt 0 ">
+    <!--猜你喜欢-->
+<div class="dx game-cnxh">
+	<div class="cnxh-title"><h3><a name="cnxh">猜你喜欢</a></h3>
+		<div class="cnxh-tags">
+               <php>$flag=0;</php>
+               <volist name="ptag" id="v">
+                <php>$flag++;</php>
+				<span <php>if($flag=='1'){echo "class='active'";}</php>>{$v.title}</span>
+               </volist>
+		</div>
+	</div>
+	<div class="cnxh-top">
+    <php>$flag=0;</php>
+    <volist name="ptag" id="va">
+        <php>$fkey=$va['id'];$flag++;</php>
+        <div <php>if($flag=='1'){echo "class='topWrap current'";}else{echo "class='topWrap'";}</php>>
+        <foreach name="wdata[$fkey]" item="v">
+            <div class="top-text">
+                <a href="{:C('STATIC_URL')}/{:getCPath($v['id'],'feature')}" target="_blank" title="{$v.title}" class="pic"><img src="{:get_cover($v['icon'],'path')}" alt="{$v.title}"></a>
+                <div class="text-info">
+                    <a href="{:C('STATIC_URL')}/{:getCPath($v['id'],'feature')}" target="_blank" title="{$v.title}" class="title">{$v.title}</a>
+                    <p class="info">{$v.description}</p>
+                    <a href="{:C('STATIC_URL')}/{:getCPath($v['id'],'feature')}" target="_blank" class="more">查看更多></a>
+                </div>
+            </div>
+        </foreach>
+        <ul class="cnxh-ul">
+            <foreach name="data[$fkey]" item="vo">
+                <li><a href="{:str_replace('index.html','',staticUrl('detail',$vo['id'],'Down'))}" target="_blank" title="{$vo.title}"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo.title}"></a>
+                    <div class="text">
+                        <a href="{:str_replace('index.html','',staticUrl('detail',$vo['id'],'Down'))}" target="_blank" title="{$vo.title}" class="tit">{$vo.title}</a>
+                        <p><a href="{:staticUrl('lists',$vo['category_id'],'Down')}" target="_blank">{:get_game_typedown($vo['category_id'])}</a></p>
+                        <p>{$vo.create_time|date="m-d",###} | {:format_size($vo['size'])}<if condition="$vo['size'] eq '' ">未知</if></p>
+                        <p>版本：{$vo.version}<if condition="$vo['version'] eq '' ">1.0</if></p>
+                    </div>
+                </li>
+            </foreach>
+        </ul>
+     </div>
+    </volist>
+</div>
+</div>
+</if>

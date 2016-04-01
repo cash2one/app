@@ -1,0 +1,15 @@
+<div class="baike-list">
+  <div class="fn-title fn-title-l">
+    <h2>{$categoryName}</h2>
+  </div>
+  <div class="baike-list-ul">
+    <ul>
+    <volist name="cateList" id="vo">
+      <li>
+        <p class="title"><a href="{:staticUrl('lists',$vo['id'],'Document')}">{$vo['title']}</a></p>
+        {~W('Document/Qbaobei/baikeCon',array($vo['id']))}
+      </li>
+     </volist>
+    </ul>
+  </div>
+</div>

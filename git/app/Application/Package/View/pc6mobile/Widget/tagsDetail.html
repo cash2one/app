@@ -1,0 +1,32 @@
+<extend name="Package@pc6mobile/Base/common" />
+<block name="body">
+  <article class="content">
+    <section class="app-intro">
+      <div class="tab_main" id="yw0">
+        <div class="tag-info">
+                  <h2 class="title">"{$info['title']}" 相关礼包列表</h2>
+        </div>
+        <ul class="mod-app-intro">
+          <volist name="lists" id="vo">
+            <li>
+                        <figure><a href="{:staticUrlMobile('detail',$vo['id'],'Package')}"><img src="{:get_cover($vo['cover_id'],'path')}"/></a>
+                            <figcaption>
+                                <h3 class="tit"><a href="{:staticUrlMobile('detail',$vo['id'],'Package')}">{$vo.title}</a></h3>
+                                <p class="type"> <span class="shiyong" style="float: left;">适用于:</span> <img src="__PUBLIC__/Package/9htmobile/images/and.png" style="width:12px;height:12px;display: inline;" class="and_png"></p>
+                                <div class="syspuls"> 
+                                    <div class="c"> <span><code style="width:76.7%;"></code><i>76.7%</i></span> </div>
+                                     <strong class="card_all" card-id="{$vo['id']}" style="display:none;"></strong> 
+                                     <strong class="card_surplus" card-id="{$vo['id']}" style="display:none;"></strong>
+                                </div>
+                               </figcaption>
+                        </figure>
+                        <a href="{:staticUrlMobile('detail',$vo['id'],'Package')}" class="btn btn-c lqhl">领取</a>
+                    </li>
+          </volist>
+        </ul>
+        <div class="page">{$page}</div>
+      </div>
+    </section>
+    <div class="clear"></div>
+  </article>
+</block>

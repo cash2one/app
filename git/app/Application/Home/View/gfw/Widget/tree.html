@@ -1,0 +1,29 @@
+<volist name="tree" id="cate" key="i">
+<dl class="chunk-c">
+    <dt><a href="{:staticUrl('lists',$cate['id'],$model)}">{:$cate['title']}</a>（{:$cate['listCount']}）</dt>
+    <dd>
+        <volist name="cate['_']" id="child2" key="j">
+			<a href="{:staticUrl('lists',$child2['id'],$model)}" target="_blank">{:$child2['title']}</a>&nbsp;
+		</volist>
+    </dd>
+    <div class="subblock">
+        <dl>
+        	<volist name="cate['_']" id="child2" key="k">
+				<dl>
+					<dt>
+						<a href="{:staticUrl('lists',$child2['id'],$model)}">[{:$child2['title']}]</a>
+					</dt>
+					<dd>
+						<volist name="child2['_']" id="child3" key="m" offset="0" length="6">
+							<neq name="m" value="1">|</neq><a href="{:staticUrl('lists',$child3['id'],$model)}">{:$child3['title']}</a>
+						</volist>
+						<if condition="count($child2['_']) gt 6">
+							|<a href="{:staticUrl('lists',$child2['id'],$model)}" class="orange">更多></a>
+						</if>
+					</dd>
+				</dl>
+			</volist>
+        </dl>
+    </div>
+</dl>
+</volist>

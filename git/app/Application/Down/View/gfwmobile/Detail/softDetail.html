@@ -1,0 +1,33 @@
+<extend name="Home@gfwmobile/Base/commonProduct" />
+<block name="body">
+<script type="text/javascript">a()</script>
+<section class="baike-list">
+    <div class="Introd">
+        <div class="title"><span>{$info.title}</span></div>
+        <div class="introd-list">
+            <ul class="art-list" id="cpdq">
+                <li><em>供应商：</em>{$info.supplier}</li>
+                <li><em>软件大小：</em>{:format_size($info['size'])}</li>
+                <li><em>软件语言：</em>{:showText($info['language'],'language')}</li>
+                <li><em>软件授权：</em>{:showText($info['licence'],'licence')}</li>
+                <!--<li><em>软件评级：</em><i class="xingxing" style="width:{$info['rank']*20}%"></i></li>-->
+                <li><em>应用平台：</em>{:showText($info['system'],'system')}</li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">b()</script>
+    <php>
+        $table = $info.model_id == 13 ? 'down_dmain' : 'down_product';
+        $detail = D($table)->where(array('id' => $info['id']))->find();
+    </php>
+    <div class="Introd">
+        <div class="title" id="comany-name"><span>产品简介</span></div>
+        <div class="baike-info">
+            {$detail.content}
+        </div>
+    </div>
+    <script type="text/javascript">c()</script>
+    <div class="enter"><a href="{:staticUrlMobile('detail', $info['package_id'],'Package')}" target="_blank">进入官网</a></div>
+    <script type="text/javascript">d()</script>
+</section>
+</block>

@@ -1,0 +1,157 @@
+<extend name="Home@dongdong/Widget/common/common" />
+
+<block name="header">
+    <div id="top">
+        <div class="mid">
+            <span>
+                <a href="{:C('STATIC_URL')}" target="_blank">东东手游网</a>
+                <a href="{:getWidgetPath(1, true)}">东东助手官网</a>
+                <a href="{:getWidgetPath(19, true)}" target="_blank">东东助手协议</a>
+            </span>
+            <a class="gethome" href="javascript:jf.set_home(this, '{:C('STATIC_URL')}');" id="#addHomePage">设为首页</a>
+        </div>
+    </div>
+</block>
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/dongdong/gw/css/help.css"/>
+</block>
+
+<block name="body">
+
+    <div id="main" style="height:820px">
+        <div class="head">
+            <img src="__PUBLIC__/Home/dongdong/gw/images/wtfk.jpg">
+            <!--form action="" method="get" id="Search_form0" name="Search_form" target="_blank" class="searchform">
+                <input type="text" name="keyword" id="searchbox" class="searchbox" autocomplete="off" placeholder="在此搜索问题...">
+                <button type="submit" id="searchBtn" class="btn-submit"></button>
+            </form-->
+        </div>
+        <!--当前位置-->
+        <div class="go_home">当前位置：<a href="{:getWidgetPath(1, true)}">首页</a> > 反馈</div>
+        <div class="wraper">
+            <form action="" method="POST" id="cmtForm">
+
+                <input type="hidden" name="issue_type" value="1" id="issue_type"/>
+
+                <div class="title">请选择问题类型
+                    <span>
+                        <em class="switch_tab" content="one" value="1">东东助手</em>
+                        <em class="switch_tab" content="two" value="2">东东手游网</em>
+                    </span>
+                </div>
+                <div class="quers one">
+                    <volist name="hand_aide_tag" id="hat">
+                        <s value="{$hat}" class="issue">{$hat}</s>
+                    </volist>
+                </div>
+                <div class="quers two" style="display:none;">
+                    <volist name="hand_tag" id="ht">
+                    <s value="{$hat}" class="issue">{$ht}</s>
+                    </volist>
+                </div>
+
+                <div class="xyj">
+                    <p>
+                        <textarea name="content" id="content" class="input-bor" autocomplete="off" placeholder="请输入您遇到的问题，也可以对我们提出提出您的建议与意见..."></textarea></p>
+                    <p>
+                    <div class="qq_btn">
+                    <span class="lx_email">留下你的QQ或者邮箱：</span>
+                    <input type="text" name="email" placeholder="请输入QQ或邮箱" id="email"/>
+                    <span><i>QQ1群</i><a target="_blank" href="http://jq.qq.com/?_wv=1027&amp;k=SdODl2"><img src="http://pub.idqqimg.com/wpa/images/group.png" alt="东东助手1群" title="东东助手1群" border="0"></a></span>
+                    <span><i>QQ2群</i><a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=299ec2279785a124e4be78fd26e3ebf1b034baa50482e435a78eca4e278b3132"><img src="http://pub.idqqimg.com/wpa/images/group.png" alt="东东助手2群" title="东东助手2群" border="0"></a></span>
+                    <span><i>QQ3群</i><a target="_blank" href="http://jq.qq.com/?_wv=1027&amp;k=dWD5pY"><img src="http://pub.idqqimg.com/wpa/images/group.png" alt="东东助手3群" title="东东助手3群" border="0"></a></span>
+                    <button type="button" class="btn-submit button btnOrg fr" id="subCmt">提交</button>
+                    </div></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</block>
+
+
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/dongdong/gw/js/help_rz.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/dongdong/gw/js/kf/kf.css">
+    <script type="text/javascript" src="__PUBLIC__/Home/dongdong/gw/js/kf/kf.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $("#lrkfwarp").lrkf({
+                kftop:'140',
+                btntext:'客服在线',
+                qqs:[
+                    {'name':'客服1号','qq':'3309467620'}		//注意逗号是英文的逗号
+                ],
+                tel:[
+                    {'name':'上班时间','tel':'9:00-18:00'},	//注意逗号是英文的逗号
+                    {'name':'非上班时间','tel':'可以去群里提问'}
+                ]
+            });
+        });
+
+
+
+        $(function()
+        {
+            $('.switch_tab').click(function(){
+                $('.quers').hide();
+                $('.'+$(this).attr('content')).show();
+
+                $('#issue_type').attr('value', $(this).attr('value'));
+                $('.issue_hidden').remove();
+
+                var arr=['#f1b80e','#5b8bdb','#f87899','#a8daa5','#c8a2df','#94d5fd','#ffb8ab'];
+                var oIndex2=$(this).index()%arr.length;
+                $('.wraper s').css({'color':arr[oIndex2],'background':'none'});
+            });
+
+            $('.issue').click(function(){
+                var val = $(this).attr('value');
+                var html = '<input type="hidden" name="issue[]" value="'+val+'" class="issue_hidden issue_hidden'+val+'"/>';
+
+                (0 >= $('.issue_hidden'+val).length) ? $('#cmtForm').append(html) : $('.issue_hidden'+val).remove();
+            });
+
+            $('#subCmt').click(function(){
+                var issue_type = $('#issue_type').val();
+                var email = $('#email').val();
+                var content = $('#content').val();
+
+                var issue_hidden = '';
+
+                $('.issue_hidden').each(function(){
+                    issue_hidden += '-'+$(this).val();
+                });
+
+                if ('' == content || 'undefined' == content)
+                {
+                    alert('请填写反馈内容');
+                    return;
+                }
+
+                //var url = DYNAMIC_SERVER_URL+'/dynamic.php?s=/Common/API_commentSub';
+                var param = 'model=comment&id='+issue_type+'&'+'&message='+content+'-'+email+issue_hidden;
+
+
+                $.ajax({
+                    dataType:"jsonp",
+                    jsonp:"callback",
+                    jsonpCallback:"API_comment",
+                    url: DYNAMIC_SERVER_URL + '/dynamic.php?s=/Common/API_commentSub',
+                    //crossDomain:true,
+                    data: param,
+                    success: function(data){
+                        if (data)
+                        {
+                            alert('感谢您的反馈，我们将会认真阅读！');
+                            location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</block>

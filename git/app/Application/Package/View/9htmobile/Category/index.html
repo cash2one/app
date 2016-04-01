@@ -1,0 +1,29 @@
+<extend name="Package@9htmobile/Base/common" />
+<block name="body">
+    <article class="content">
+        <section class="app-intro">
+            <div class="tab_main" id="yw0">
+                <ul class="mod-app-intro">
+                 <volist name="lists" id="vo">
+                    <li data-url="{:staticUrlMobile('detail',$vo['id'],'Package')}">
+                        <figure> <img src="{:get_cover($vo['cover_id'],'path')}"/>
+                            <figcaption>
+                                <h3 class="tit">{$vo.title}</h3>
+                                <p class="type"> <span class="shiyong" style="float: left;">适用于:</span> <img src="__PUBLIC__/Package/9htmobile/images/and.png" style="width:12px;height:12px;display: inline;" class="and_png"></p>
+                                <div class="syspuls"> 剩余：
+                                    <div class="c"> <span><code style="width:76.7%;"></code><i>76.7%</i></span> </div>
+                                     <strong class="card_all" card-id="{$vo['id']}" style="display:none;"></strong> 
+                                     <strong class="card_surplus" card-id="{$vo['id']}" style="display:none;"></strong>
+                                </div>
+                               </figcaption>
+                        </figure>
+                         <span data-url="{:staticUrlMobile('detail',$vo['id'],'Package')}" class="btn btn-c lqhl">领取</span> 
+                    </li>
+                         </volist>
+                </ul>
+                <div class="page">{$page}</div>
+            </div>
+        </section>
+        <div class="clear"></div>
+    </article>
+</block>

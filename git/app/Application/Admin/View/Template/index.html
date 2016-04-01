@@ -1,0 +1,60 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>
+            {$name}列表
+             [ <present name="Think.get.type">
+                     <a href="{:U('index')}">全部</a><else/><strong>全部</strong></present>&nbsp;<foreach name="type_list" item="vo">
+                    <neq name="type" value="$key">
+                     <a href="{:U('index?type='.$key)}">{$vo}</a><else/><strong>{$vo}</strong></neq>&nbsp;     
+                    </foreach> ]
+        </h2>
+    </div>
+    <div>
+        <a href="{:U('add')}" class="btn">增加{$name}</a>
+    </div>
+
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+        <table>
+            <thead>
+                <tr>
+                    <th >ID</th>
+                    <th >类型</th>
+                    <th>名称</th>
+                    <th>标识</th>
+                    <th>路径</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <notempty name="_list">
+                <volist name="_list" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.type_text}</td>
+                    <td>{$vo.title}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.path}</td>
+                    <td>{$vo.status_text}</td>
+                    <td>
+                        <a href="{:U('edit?id='.$vo['id'])}">编辑</a>
+                        <a title="{$vo.status|show_status_op}" href="{:U('setStatus?ids='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="ajax-get">{$vo.status|show_status_op}</a>
+                        <a title="删除" href="{:U('remove?id='.$vo['id'])}" class="confirm ajax-get">删除</a>
+                    </td>
+                </tr>
+                </volist>
+                <else/>
+                <td colspan="6" class="text-center"> 暂无数据! </td>
+                </notempty>
+            </tbody>
+        </table>
+    </div>
+    <!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+</block>

@@ -1,0 +1,51 @@
+<meta http-equiv="Cache-Control" content="max-age=31536000" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="{$SEO['keywords']}" name="Keywords" />
+<meta content="{$SEO['description']}" name="Description" />
+<title>{$SEO['title']}</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/base.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/common1.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/commonlist.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/subscibe.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/search.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/newnav.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/newhead.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei/css/indexhead.css">
+<script src="__PUBLIC__/Home/qbaobei/js/jquery-1.10.2.min.js"></script>
+<script src="__PUBLIC__/Home/qbaobei/js/newnavigation.js"></script>
+<script type="text/javascript">
+    function changeSearchTab(o) {
+        var obj = document.getElementById("searchBar");
+        var lis = obj.getElementsByTagName("li");
+        for (var i = 0; i < lis.length; i++)
+        { lis[i].className = ""; }
+        o.className = "selected";
+    }
+    function setClassTypeValue(v) {
+        tp = document.getElementById("classType");
+        fm = document.getElementById("s_form");
+        tp.value = v;
+        fm.submit();
+    }
+    function reSetTab(k) {
+        var obj = document.getElementById("searchBar");
+        var lis = obj.getElementsByTagName("li");
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].className = "";
+        }
+        lis[k].className = "selected";
+        document.getElementById("classType").value = k;
+    }
+    function dosearch() {
+        var value = document.getElementById("keyword").value;
+        if (value.length < 2) {
+            alert("搜索关键字必须大于或等于2个字");
+            return false;
+        } else {
+            if (value == '请输入关键字并点击搜索') {
+                return false;
+            }
+        }
+        return true;
+    }
+</script>

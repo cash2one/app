@@ -1,0 +1,169 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>{:isset($info['id'])?'编辑':'新增'}页面</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);">基 础</a></li>
+			
+		</ul>
+		<div class="tab-content">
+			<form action="{:U()}" method="post" class="form-horizontal">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item">
+						<label class="item-label">
+							分组<span class="check-tips">（生成页面按照分组显示）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="group" class="text input-large" value="{$info.group|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							页面名字<span class="check-tips">（页面名字不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="name" class="text input-large" value="{$info.name|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							生成访问模块名<span class="check-tips">（生成访问模块名不能为空，注意大小写）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="module_name" class="text input-large" value="{$info.module_name|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							生成访问控制层名<span class="check-tips">（生成访问控制层名不能为空，注意大小写）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="controller_name" class="text input-large" value="{$info.controller_name|default=''}">
+						</div>
+					</div>					
+					<div class="form-item">
+						<label class="item-label">
+							生成访问方法名<span class="check-tips">（生成访问方法名不能为空，注意大小写）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="method_name" class="text input-large" value="{$info.method_name|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							生成路径<span class="check-tips">（默认为html结尾）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="path" class="text input-large" value="{$info.path|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							参数<span class="check-tips">（格式X=X，一行一个；page_id和gettotal为默认参数，请不要使用；直接读模板的时候请使用_代替/）</span>
+						</label>
+						<div class="controls">
+							<label class="textarea">
+								<textarea  name="params">{$info.params|default=''}</textarea>
+							</label>
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							多页参数<span class="check-tips">（不填即为单页）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="multipage" class="text input-large" value="{$info.multipage|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							多页生成第一页名<span class="check-tips">（默认index）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="multipage_index" class="text input-large" value="{$info.multipage_index|default='index'}">
+						</div>
+					</div>
+
+
+					<div class="form-item">
+						<label class="item-label">
+							标题<span class="check-tips">（网页title）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="title" class="text input-large" value="{$info.title|default=''}">
+						</div>
+					</div>
+					<div class="form-item">
+						<label class="item-label">
+							关键词<span class="check-tips">（网页keywords）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="keywords" class="text input-large" value="{$info.keywords|default=''}">
+						</div>
+					</div>
+
+					<div class="form-item">
+						<label class="item-label">
+							描述<span class="check-tips">（网页description）</span>
+						</label>
+						<div class="controls">
+							<label class="textarea">
+								<textarea  name="description">{$info.description|default=''}</textarea>
+							</label>
+						</div>
+					</div>
+
+                    <div class="form-item">
+                        <label class="item-label">
+                            自定义内容<span class="check-tips">（网页description）</span>
+                        </label>
+                        <div class="controls">
+                            <label class="textarea">
+                                <textarea  name="custom_content">{$info.custom_content|default=''}</textarea>
+                                {:hook('adminArticleEdit', array('name'=>$info.custom_content,'value'=>$info.custom_content))}
+                                <script>
+                                    $(function () {
+                                        var editor = KindEditor.create('textarea[name="custom_content"]', {
+                                            uploadJson:'/administrator/attached/upload',
+                                            fileManagerJson:'/administrator/attached/manager',
+                                            resizeType:1,
+                                            allowPreviewEmoticons:false,
+                                            allowFileManager:true,
+                                            allowImageUpload:true,
+                                            items:[
+                                                'source', 'preview', 'fullscreen','|','fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                                                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                                'insertunorderedlist', '|', 'emoticons', 'image', 'link', 'unlink']
+                                        });
+                                    });
+                                </script>
+                            </label>
+                        </div>
+                    </div>
+
+					<div class="form-item">
+						<input type="hidden" name="id" value="{$info.id|default=''}">
+						<input type="hidden" name="type" value="{$type}">
+						<button type="submit" id="submit" class="btn submit-btn" target-form="form-horizontal">确 定</button>
+						<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</block>
+
+	<block name="script">
+		<script type="text/javascript">
+		
+		$(function(){
+			showTab();
+		});
+		//导航高亮
+		highlight_subnav('{:U('staticCreate/index')}');
+		</script>
+	</block>

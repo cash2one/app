@@ -1,0 +1,23 @@
+<PHP>
+if($hasCookie){
+    if($ishot =="1" || $ishot !="2" || empty($ishot) ){
+      echo "<a class=\"swiper-slide\" href=\"/cate/\">常用</a>";
+    }else{
+      echo "<a class=\"swiper-slide active\" href=\"/cate/\">常用</a>";
+    }
+}
+
+</PHP>
+<eq name="ishot" value="1">
+<a class="swiper-slide active" href="/hottag/">热门</a>
+<else /> 
+<a class="swiper-slide" href="/hottag/">热门</a>
+</eq> 
+<volist name="tags" id="vo">
+<eq name="cid" value="$vo['id']">
+<a class="swiper-slide active" href="/cate/{$vo['id']}/">{$vo['title']}</a>
+<else /> 
+<a class="swiper-slide" href="/cate/{$vo['id']}/">{$vo['title']}</a>
+</eq> 
+
+</volist>

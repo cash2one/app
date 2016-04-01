@@ -1,0 +1,33 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afs/css/yxdq.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afs/css/index1.css"/>
+</block>
+<block name="body">
+<!--main-->
+<div id="main">
+    <div class="sxtj">
+        {$filter}
+    </div>
+    <!--游戏删选结果-->
+    <div class="sxjg">
+        <p>
+            <php>if($istag){</php><span><a href="{$new}" class="{$best==1?'cur':''}">最新发布</a><a href="{$hot}" class="{$best==2?'cur':''}">最高评分</a></span><php>}</php>
+            <em>共找到<i>{$count}</i>个</em></p>
+        <ul>
+            <volist name="lists" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"></a><div><p><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['title']}</a>
+                <b><i>{$val['size']}</i>|<i>{$val['cate']}</i>|
+                    <php>if($val['system'] == 2){</php>
+                    <i class="app">apple</i>
+                    <php>} if($val['system'] == 1){</php>
+                    <i class="adr">adrioad</i>
+                    <php>}</php>
+                </b><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="down">立即下载</a></p>
+                <p class="info">{$val['description']}</p></div></li>
+            </volist>
+        </ul>
+        <p id="fenye">{$page}</p>
+    </div>
+</div>
+</block>

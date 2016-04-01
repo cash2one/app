@@ -1,0 +1,102 @@
+<div class="m-novel">
+    <div class="novel-left">
+        <notempty name="packinfo">
+        <div class="about gf-border">
+            <h3 class="about-title" title="{$packinfo.title}">{$packinfo.title}</h3>
+            <ul class="contact">
+                <notempty name="packinfo.contacts"><li><i class="cicon1"></i><span>联系人：</span><span>{$packinfo.contacts}</span></li></notempty>
+                <notempty name="packinfo.phone"><li><i class="cicon2"></i><span>电  话：</span><span>{$packinfo.phone}</span></li></notempty>
+                <notempty name="packinfo.telphone"><li><i class="cicon3"></i><span>手  机：</span><span>{$packinfo.telphone}</span></li></notempty>
+                <notempty name="packinfo.address"><li><i class="cicon4"></i><span>地  址：</span><span class="add">{$packinfo.province_id}{$packinfo['city_id']}{$packinfo.area_id}{$packinfo.address}</span></li></notempty>
+            </ul>
+            <div class="http"><a href="{:staticUrl('Detail',$info['package_id'],'Package')}" target="_blank"><span>进入官网</span></a></div>
+        </div>
+        <!-----about  -end----->
+        </notempty>
+       <div class="about gf-border">
+<!-- 广告位：产品大全-实体产品详情左侧原生广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123354");</script>
+        </div>
+        {:W('Down/Gfw/comPro')}
+        <!-----related  -end----->
+    </div>
+    <!-----novel-left  -end----->
+    <div class="pshow">
+        <h1>{$info.title}</h1>
+        <div class="pshow-pic">
+            <div class="preview">
+                <div id="vertical" class="bigImg">
+                    <volist name="info['previewimg']" id="vo">
+                        <img src="{:get_cover($vo,'path')}" width="266" height="231" alt="{$info.title}" id="midimg" />
+                    </volist>
+                    <div style="display:none;" id="winSelector"></div>
+                </div>
+                <!--bigImg end-->
+
+                <div class="smallImg">
+                    <div class="scrollbutton smallImgUp disabled"></div>
+                    <div id="imageMenu">
+                        <ul>
+                            <volist name="info['previewimg']" id="vo" key="k">
+                                <li <eq name="k" value="1">id="onlickImg"</eq>><img src="{:get_cover($vo,'path')}" width="68" height="68" alt="{$info.title}"/></li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <div class="scrollbutton smallImgDown"></div>
+                </div>
+                <!--smallImg end-->
+                <div id="bigView" style="display:none;"><img width="600" height="521" alt="" src="" /></div>
+
+            </div>
+            <!--preview end-->
+        </div>
+        <!-----pshow-pic-end----->
+        <div class="info">
+            <div class="details">
+                <div class="detailsmain">
+                    <div class="d-title"><span>详细信息</span></div>
+                    <ul class="d-content">
+                        <li><span class="gray">建议零售价</span><span>￥{:sprintf("%01.2f", $info['market_price'])}</span></li>
+                        <li><span class="gray">品牌</span><span>{$info.brand}</span></li>
+                        <li><span class="gray">货号</span><span>{$info.model}</span></li>
+                        <php>
+                            if($info['parameter']){
+                                $parameter = array();
+                                foreach($info['parameter'] as $value){
+                                    $value = str_replace(array(':'), '：', trim($value));
+                                    $parameter[] = explode('：', $value);
+                                }
+                            }
+                        </php>
+                        <volist name="parameter" id="vo">
+                            <li><span class="gray">{$vo[0]}</span><span>{$vo[1]}</span></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="d-mores"><span class="d-more"><i class="pack-up"></i></span></div>
+            </div>
+            <!-----details-end----->
+
+            <div class="connect">
+                <div class="connect-title"><span>联系方式</span></div>
+                <ul class="contact-main">
+                    <li><i class="cicon1"></i><span>供应商：</span><span><a href="">{$info.supplier}</a></span></li>
+                    <li><i class="cicon2"></i><span>所在地：</span><span> {$packinfo['province_id']} {$packinfo['city_id']}</span></li>
+                    <li><i class="cicon3"></i><span>联系人：</span><span>{$packinfo.contacts}</span><!--<a href=""><img src="__PUBLIC__/Home/gfw/images/qq.gif" width="77" height="22"></a>--></li>
+                    <li><i class="cicon4"></i><span>价格：</span><span class="orange">{:sprintf("%01.2f", $info['price'])}元/件</span>
+                        <!--<span><a href=""><img src="__PUBLIC__/Home/gfw/images/tool.gif" width="77" height="21"></a></span><span>您采购，我付钱</span>-->
+                    </li>
+                    <li><i class="cicon5"></i><span>最小采购量：</span><notempty name="info['limit']"><span>{$info.limit}件</span></notempty></li>
+                </ul>
+            </div>
+            <!-----connect-end----->
+        </div>
+        <!-----info-end----->
+        <div class="detail-tab">
+            {$info.content}
+        </div>
+    </div>
+    <!-----pshow-end----->
+    <!-- 广告位：产品大全-实体产品详情底部原生广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123356");</script>
+</div>

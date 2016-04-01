@@ -1,0 +1,16 @@
+<div class="down_div">
+    <a href="{:staticUrlMobile('detail',$info['id'],'Down')}" class="yx_left"><img src="{:get_cover($info['smallimg'],'path')}"></a>
+    <a href="{:staticUrlMobile('detail',$info['id'],'Down')}" class="yx_right">
+        <div class="rgt_l">
+            <div class="right1"><span class="title">{$info['title']}</span><span class="yx_cate">{$info['cate']}</span></div>
+            <div class="right2"><span class="num">{$info['view']}人已下载</span><span class="size">{:format_size($info['size'])}</span></div>
+        </div>
+        <div class="rgt_r"><span>下载</span></div>
+    </a>
+    <div class="yx_txt">
+        <span>标签：</span>
+        <volist name="info['tags']" id="val">
+            <a href="{:C('MOBILE_STATIC_URL')}/tag/{$val['name']}">{$val['title']}</a>
+        </volist>
+    </div>
+</div>

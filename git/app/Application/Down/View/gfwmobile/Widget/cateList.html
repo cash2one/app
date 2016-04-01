@@ -1,0 +1,10 @@
+<div class="product" id="product-info">
+    <ul class="product-list">
+        <volist name="tree['_']" id="one">
+            <li><a href="{:staticUrlMobile('lists', $one['id'],'Down')}">{$one.title}</a></li>
+            <volist name="one['_']" id="two">
+                <li><a href="{:staticUrlMobile('lists', $two['id'],'Down')}">{$two.title}</a></li>
+            </volist>
+        </volist>
+    </ul>
+</div>

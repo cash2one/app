@@ -1,0 +1,40 @@
+<div class="layoutBox {$curr}">
+  <div class="layoutBox-left">
+    <ul>
+      <volist name="slider" id="vo">
+        <li>
+          <div class="show"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"></a><span>{$vo['title']}</span><b></b></div>
+        </li>
+      </volist>
+    </ul>
+  </div>
+  <div class="layoutBox-right">
+    <div class="news-con1">
+      <div class="text-con1-wrap">
+        <div class="news-con1-top">
+          <volist name="today" id="vo">
+          <div class="title"><span class="tips">今日热点</span><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a></div>
+          <p class="info">{$vo['description']}</p>
+           </volist>
+        </div>
+        <ul class="news-con1-ul">
+          <volist name="headlineList" id="vo">
+            <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a></li>
+          </volist>
+        </ul>
+      </div>
+    </div>
+    <div class="news-con2">
+      <div class="news-con2-top"> <span class="tips">热门推荐</span>
+                 <volist name="headlineList" id="vo">
+                 <a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a>
+                 </volist>
+       </div>
+        <volist name="rank" id="vo">
+      <div class="news-con2-bop"> <a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="title">{$vo['title']}</a>
+        <p class="info">{$vo['description']}</p>
+      </div>
+       </volist>
+    </div>
+  </div>
+</div>

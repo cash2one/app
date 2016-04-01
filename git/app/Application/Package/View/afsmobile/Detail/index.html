@@ -1,0 +1,78 @@
+<extend name="Home@afsmobile/Base/commonDown"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/afsmobile/css/libao.css"/>
+</block>
+<block name="body">
+    <!--礼包信息-->
+   <section class="yxlb_lq">
+       <div class="lq_wrap">
+           <div class="lbxq">
+               <a href="{:staticUrlMobile('detail', $info['id'],'Package')}" class="pic"><img src="{:get_cover($info['cover_id'],'path')}"></a>
+               <div class="lbxx">
+                    <h3 class="tit">{$info['title']}</h3>
+                    <div class="syspuls">
+                        <b>剩余：</b>
+                        <div class="c">
+                        <span><code style="width:0%;"></code><i>0%</i></span>
+                         <strong class="card_all" card-id="{$info['id']}" style="display:none;"></strong> 
+                         <strong class="card_surplus" card-id="{$info['id']}" style="display:none;"></strong>
+                        </div>
+                    </div>
+                    <p>截止时间：{:date('Y.m.d',$info['end_time'])}</p>
+               </div>
+           </div>
+           <div class="libao_con"></div>
+           <div class="lbxz">
+               <a id="taoBtn" href="javascript:void(0)">领取好礼</a>
+                {~W('Afsmobile/relateDown',array($info['id']))}
+           </div>
+       </div>
+       <div class="th_wrap">
+           <p class="title"><span>礼包内容</span></p>
+           <p class="info">{$info['content']}</p>
+       </div>
+       <div class="xg_wrap">
+           <p class="title"><span class="cur">领取方式</span><span>相关礼包</span></p>
+           <div class="info current">{$info['activation']}</div>
+           <div class="info">
+               <ul>
+                   {~W('Afsmobile/relatePackage',array($info['id']))}
+               </ul>
+           </div>
+       </div> 
+   </section>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/common.js"></script>
+    <script language="javascript"> 
+    $(function(){ 
+        //领取
+        $('#taoBtn').click(function() {
+            $.ajax({
+                type : "get",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonpCallback:"drawCard",
+                url: DYNAMIC_SERVER_URL + '/Card/drawCard/id/{$info[\'id\']}.html',
+                //data: {id : draw_id},
+                success: function(data){
+                    if(data){
+                        $(".libao_con").css("display",'block');
+	                   // $(".cardCon").slideDown("slow");
+                        data = eval(data);
+                        if(data.error){
+							$('.libao_con').attr('display','block');
+                            $('.libao_con').html('<b>'+data.error+'<b>');
+                        }else{
+							$('.libao_con').attr('display','block');
+                            $('.libao_con').html('你领取的卡号为：'+ data.row);
+                        }
+                        $('.libao_con').slideDown();                        
+                        $('#taoBtn').unbind("click");
+                    }
+                }
+            });
+        });       
+    }); 
+    </script>
+</block>

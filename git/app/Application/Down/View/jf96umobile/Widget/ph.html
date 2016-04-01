@@ -1,0 +1,62 @@
+
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css">
+</block>
+<block name="title">{$SEO.ctitle}</block>
+<block name="body">
+
+ 
+ <section class="rank-more swiper-container5">
+<ul class="swiper-wrapper">
+ 
+        <volist name="gdata"  id="v" key='k'   mod='6'>
+ <eq name="mod" value="0"> 
+        <li class="swiper-slide">
+         </eq>
+            <a href="{:staticUrlMobile('detail',$v['id'],'Down')}">{$a}{$v.title}</a>
+                  
+        <eq name="mod" value="5"> 
+        </li>
+         </eq>
+   </volist>
+ 
+ 
+</ul>
+<div class="swiper-pagination"></div>
+</section>
+ 
+
+
+<section class="down-list dis-bot">
+    <ul class="down-game-ul addNub">
+        <foreach name="data" item="vo">
+
+            <volist name="vo" id="v">
+                <li><span class="nub">1</span>
+                    <a href="{:str_replace('index.html','',staticUrlMobile('detail',$v['id'],'Down'))}" title="{$v.title}" class="pic">
+                        <img src="{:get_cover($v['smallimg'],'path')}" alt="{$v.title}">
+                    </a>
+                    <div class="text">
+                        <a href="{:str_replace('index.html','',staticUrlMobile('detail',$v['id'],'Down'))}" title="{$v.title}">{$v.title}</a>
+                        <p>{:format_size($v['size'])} <if condition="$v['size'] EQ 0 ">未知</if>
+                            /
+                            <php>
+                                $catename=M('down_category')->where("id=$v[category_id]")->getField('title');
+                                echo $catename;
+                            </php>
+                        </p>
+                    </div>
+                    <a href="{:str_replace('index.html','',staticUrlMobile('detail',$v['id'],'Down'))}" class="down">下载</a>
+                </li>
+            </volist>
+
+
+
+        </foreach>
+
+    </ul>
+   <!--// <p class="mid-more bottom-more"><a href=""><span>点击查看更多</span><em class="arr"></em></a></p>-->
+</section>
+ 
+ </block>

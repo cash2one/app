@@ -1,0 +1,8 @@
+  <h3><i>特色合集</i><span></span></h3>
+   <div class="feature"> 
+     <volist name="tags" id="vo">
+     <PHP>$color=array('purple'=>4,'yellow'=>6,'yellow'=>2,'green'=>8,'blue'=>7,'gray'=>3,''=>70);$style=get_rand($color);</PHP>
+     <a href="{:mobileTagUrl($vo['name'])}" class="{$style}">{$vo.title}</a>
+    </volist>
+    </div>
+ 

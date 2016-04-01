@@ -1,0 +1,19 @@
+<!-- <div class="libaolist">
+<ul>
+<volist name="package" id="val" empty="$empty">
+    <li><a href="{:staticUrlMobile('detail',$val['id'],'Package')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path')}"></a><a href="{:staticUrlMobile('detail',$val['id'],'Package')}" class="relate_libao">{$val.title}</a></li>
+</volist>
+</ul>
+</div> -->
+
+ 
+<volist name="package" id="val" empty="$empty">
+ 
+    <a href="{:staticUrlMobile('detail',$val['id'],'Package')}" class="pack_li">
+                    <div class="pack_xg_l">
+                        <span class="li_tit">{$val.title}</span>
+                        <span>{$val.content}</span>
+                    </div>
+                    <div class="pack_right"><span>领号</span></div>
+                </a>
+ </volist>

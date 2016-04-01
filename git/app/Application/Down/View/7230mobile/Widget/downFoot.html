@@ -1,0 +1,40 @@
+<!-- 相关礼包 -->
+<if condition="($info['category_rootid'] NEQ '2')">
+<section>
+    <div class="top_tit"><span>相关礼包</span></div>
+    {:W('P7230mobile/relatePackage',array($info['productTags'][0]['id']))}
+</section>
+</if>
+<notempty name="info['tags']">
+<section>
+    <div class="top_tit"><span>猜你喜欢</span></div>
+    <div id="down_cont">
+        <div id="down_table"><volist name="info['tags']" id="val"><span{$i == 1?' class="cur"':''}>{$val['title']}</span></volist></div>
+        <div id="table_cont">
+            <div id="table_ul" class="ul_li">
+                <volist name="tagDown" id="val">
+                <ul>
+                    <volist name="val" id="vo">
+                    <li><a href="{:staticUrlMobile('detail',$vo['id'],'Down')}"><img src="{:get_cover($vo['smallimg'],'path')}" /><span class="jx_title">{$vo['title']}</span><span class="jx_size">{:format_size($vo['size'])}</span><span class="jx_xz">下载</span></a></li>
+                    </volist>
+                </ul>
+                </volist>
+            </div>
+        </div>
+    </div>
+</section>
+</notempty>
+
+<section>
+    <div class="top_tit"><span>相关下载推荐</span></div>
+    <div class="ul_li">
+        <ul>
+            <volist name="cateDown" id="val">
+            <li><a href="{:staticUrlMobile('detail',$val['id'],'Down')}"><img src="{:get_cover($val['smallimg'],'path')}" /><span class="jx_title">{$val['title']}</span><span class="jx_size">{:format_size($val['size'])}</span><span class="jx_xz">下载</span></a></li>
+            </volist>
+        </ul>
+    </div>
+</section>
+
+<!-- 相关攻略资讯 -->
+{:W('P7230mobile/relateArticle',array($info['productTags'][0]['id']))}

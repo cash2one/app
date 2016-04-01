@@ -1,0 +1,55 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>
+            微信二维码列表
+            [
+            <a href="{:U('index?type=all')}">全部</a>&nbsp;
+            <a href="{:U('index?type=0')}">PC版</a>&nbsp;
+            <a href="{:U('index?type=1')}">手机版</a>&nbsp;
+            ]
+        </h2>
+    </div>
+    <div>
+        <a href="{:U('edit?type=0')}" class="btn">新增PC版</a>&nbsp;
+        <a href="{:U('edit?type=1')}" class="btn">新增手机版</a>&nbsp;
+    </div>
+
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+        <table>
+            <thead>
+            <tr>
+                <th >ID</th>
+                <th >类型</th>
+                <th>名称</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <notempty name="list">
+                <volist name="list" id="vo">
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td><if condition="$vo.type eq '1'">手机版<else/>PC版</if></td>
+                        <td>{$vo.title}</td>
+                        <td>
+                            <a href="{:U('edit?id='.$vo['id'].'&type='.$vo['type'])}">编辑</a>
+                            <a title="生成" href="{:U('createWeixin?id='.$vo['id'])}" class="ajax-get">生成</a>
+                            <a title="删除" href="{:U('deleteWeixin?id='.$vo['id'])}" class="confirm ajax-get">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                <else/>
+                <td colspan="6" class="text-center"> 暂无数据! </td>
+            </notempty>
+            </tbody>
+        </table>
+    </div>
+    <!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+</block>

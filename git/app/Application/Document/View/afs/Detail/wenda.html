@@ -1,0 +1,57 @@
+<extend name="Home@afs/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/afs/css/news.css"/></block>
+<block name="body">
+    <!--main-->
+  <div id="main">
+             <p id="main-title">{~W('Home/Afs/wbreadCrumb',array($info['id'],'Document','detail'))}</p>
+        <div class="news-xq">                       
+            <!--问题-->
+            <div class="ques">
+                <div class="tit"><h1>{$info['title']}</h1><span>时间：{$info['create_time']|time_format="Y-m-d H:i:s"}</span></div>
+                   {~W('Afs/relateDown',array($info['id']))} 
+                   {$info['wd_content']}
+                    {~W('Afs/contentHandle',array($info['content']))} 
+            </div>
+            <!--评论-->
+            <div id="pinglun" name="pinglun">
+ 
+                <h3>我来回答</h3>
+              <form action="" method="" name="" id="pl"  data-id="{$info['id']}" data-model="document">
+                    <p><input type="text" placeholder="请输入用户名" id="user"></p>
+                    <input name="author" id="tj-user" type="hidden" value="{$info['uid']}" />
+                    <p><textarea></textarea></p>
+                    <p class="bot"><b>本站为防止低俗内容出现，用户发表的评论需经过审核，谢谢 ！</b>
+                <input type="button" value="发表评论" id="btn"></p>
+                </form>
+                 <h2><i>热门评论</i></h2>
+                <ul class="comment_lists" data-id="{$info['id']}" data-model="document">
+                <p style="text-align:center;display:block;padding:10px 0;">暂无评论</p>
+                </ul>
+            </div>
+            <!--相关游戏-->
+            {~W('Document/Afs/relateYouxi',array($info['id']))}
+            <!--游戏攻略-->
+            {~W('Document/Afs/relateWenda',array($info['id']))}
+           
+        </div>
+        <div class="news-right">
+        <!--相同风格-->
+         <div class="wduser">
+         <b class="pic"><i></i><img src="__PUBLIC__/Home/afs/images/u-ico.jpg"></b>
+         <span><b>{$info['author']}</b><i>喜欢吹牛逼，喜欢做作，喜欢没事找抽，自称屌丝界泰斗！</i></span>
+         </div>
+         <!--热门评测-->
+        <div class="wrap-r" id="rmpc">
+            <h2><i>热门问答</i></h2>
+            <ul>
+           <Think:article basename="Document" name="article"  limit="10" cate="191"  order="create_time desc">
+            <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" title="{$article.title}">{$article.title}</a></li>
+           </Think:article>
+            </ul>
+        </div> 
+        <!--热门专区-->
+         {~W('Home/Afs/zhuanqu')}· 
+     </div>
+ </div>
+ <div style=" clear:both"></div>
+</block>

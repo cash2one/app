@@ -1,0 +1,56 @@
+<div style="clear:both"></div>
+<div id="footer">
+    <div class="foot-top">
+        <ul>
+            <li class="zx">
+                <i>资讯</i><a href="{:staticUrl('lists',90, 'Document')}" target="_blank">新游</a><a href="{:staticUrl('lists',94, 'Document')}" target="_blank">活动</a><a href="{:staticUrl('lists',87, 'Document')}" target="_blank">业界</a>
+            </li>
+            <li class="lm">
+                <i>栏目</i><a href="{:staticUrl('lists',91, 'Document')}" target="_blank">手游评测</a><a href="{:staticUrl('lists',93, 'Document')}" target="_blank">逗你玩</a><a href="{:staticUrl('lists',95, 'Document')}" target="_blank">网游攻略</a><a href="{:staticUrl('lists',92, 'Document')}" target="_blank">单机攻略</a>
+            </li>
+            <li class="cp">
+                <i>产品</i><a href="{:getWidgetPath('17', true)}" target="_blank">游戏专区</a><a href="{:getWidgetPath('18', true)}" target="_blank">游戏合辑</a><a href="{:getWidgetPath('20', true)}" target="_blank">手游周报</a><a href="{:getWidgetPath('19', true)}" target="_blank">手游月报</a>
+            </li>
+            <li class="hz">
+                <i>合作</i><a href="javascript:void(0)">mail:hqy@952.com</a><a href="javascript:void(0)">QQ：524507871</a><a href="javascript:void(0)">电话：0731-85868798</a>
+            </li>
+            <li class="fx">
+                <a href="" class="logo"></a>
+                <form action="{:C('STATIC_URL')}/search.html" method="get" id="Search_form" name="Search_form" class=""  target="_blank">
+                    <input type="text" name="keyword" id="searchBox" autocomplete="off" class="" value="输入你想搜索的游戏...">
+                    <button type="submit" id="searchBtn" class="btn-submit"></button>
+                </form>
+                <span class="fxan">
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style_32x32">
+                    <a class="jiathis_button_qzone"></a>
+                    <a class="jiathis_button_tsina"></a>
+                    <a class="jiathis_button_tqq"></a>
+                    <a class="jiathis_button_weixin"></a>
+                    <a class="jiathis_button_renren"></a>
+                    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                </div>
+                <!-- JiaThis Button END -->
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="foot-bottom">
+<span>
+<b>友情链接：</b> 
+<volist name="flink" id="flink">
+<a href="{$flink.url_token}" target="_blank" title="{$flink.title}">{$flink.title}</a>
+</volist>
+
+        <p><a href="#" target="_blank" rel="nofollow">关于本站</a>|<a href="#" target="_blank" rel="nofollow">免责声明</a>|<a href="#" target="_blank" rel="nofollow">网站合作</a>|<a href="#" target="_blank" rel="nofollow">友情链接</a> </p>
+        <p>Copyright © 2012 7230手机门户(www.7230.com).All Right severed 备案编号：<a href="http://www.miitbeian.gov.cn" rel="nofollow" target="_blank">湘ICP备14002623号</a></p>
+        </span>
+    </div>
+</div>
+<script type="text/javascript" src="__STATIC__/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/7230/js/global.js"></script>
+<block name="Commonscript"></block>
+<script type="text/javascript" src="__STATIC__/jquery.knob.js"></script>
+<script type="text/javascript" src="__STATIC__/excanvas.js"></script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>

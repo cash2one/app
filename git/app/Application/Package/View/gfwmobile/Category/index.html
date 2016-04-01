@@ -1,0 +1,25 @@
+<extend name="Home@gfwmobile/Base/commonWebsite" />
+
+<block name="body">
+	<nav id="web-nav">
+        {:W('Home/GfwMobile/getWebSiteParentCateById',array(array(5,1,2,3,6,4)))}
+    </nav>
+    <section class="news">
+        <div class="art">
+            <div class="title"><h2>{:W('Package/Gfw/categoryPosition',array($info['id']))}</h2><!-- <a href="">更多></a> --></div>
+            <ul class="website-list">
+            	<if condition="!empty($lists)">
+            	<volist name="lists" id="website" key="i">
+            		<li>
+            			<a href="{:staticUrlMobile('detail',$website['id'],'Package')}">{:$website['title']}</a>
+            			<p>{:msubstr(strip_tags($website['content']),0,500,'utf-8',false)}</p>
+            		</li>
+            	</volist>
+            	<else />
+            		<li><p>暂无记录</p></li>
+            	</if>
+            </ul>
+        </div>
+        {~W('Package/gfwmobile/categoryPage',array('row'=>$info['list_row'],'count'=>$count,'cate'=>$cid))}
+    </section>
+</block>

@@ -1,0 +1,111 @@
+ 
+<extend name="Home@7230mobile/Base/common2"/>
+<block name="style">
+    <link href="__PUBLIC__/Home/7230mobile2/css/package.css" rel="stylesheet" type="text/css">
+</block>
+
+<block name="body">
+<div class="page_title"><span><a href="javascript:void(0);" class="back"></a></span><h2>{:get_category_title($info['category_id'],'PackageCategory')}</h2></div>
+<section>
+    <div class="pack_head">
+        <div class="img"><img src="{:get_cover($info['cover_id'],'path')}"></div>
+        <div class="head_cont">
+            <h3>{$info['title']}</h3>
+            <span>剩余：30个</span>
+        </div>
+        <div class="head_date">有效期：{:date('Y.m.d',$info['start_time'])}-{:date('Y.m.d',$info['end_time'])}</div>
+    </div>
+    <div class="getCard">
+        <div id="card"></div>
+        <span onclick="myCard()">领取好礼</span>
+    </div>
+</section>
+
+<!-- 礼包内容 -->
+<section>
+    <div class="top_tit"><span>礼包内容</span></div>
+    <div class="pack_cont"><div>{$info['content']}</div></div>
+</section>
+
+<!-- 礼包内容 -->
+<section>
+    <div class="top_tit"><span>使用方法</span></div>
+    <div class="pack_cont"><div>{$info['activation']}</div></div>
+</section>
+
+<php>$productID = get_tags($info['id'],'package','product');</php>
+<!-- 相关礼包 -->
+<section>
+    <div class="top_tit"><span>相关礼包推荐</span></div>
+    {:W('Down/P7230mobile/relatePackage',array($productID[0]['id'],'b.id !='.$info['id']))}
+</section>
+
+<!-- 相关下载 -->
+{:W('P7230mobile/relateDown',array($productID[0]['id']))}
+</block>
+<block name="script">
+    <script>
+        $(document).ready(function() {
+            var card_ids = {};
+                card_ids[{$info['id']}] = 0;
+            $.ajax({
+                dataType:"jsonp",
+                jsonp:"callback",
+                url: DYNAMIC_SERVER_URL + '/dynamic.php?s=/Card/API_surplus',
+                data: {surplus_ids : card_ids},
+                success: function(data){
+                    if(data){
+                        $('.head_cont').find('span').text('剩余：'+data[{$info['id']}] + '个');
+                    }
+                }
+            });
+        });
+
+        //获取 已经领取的卡号
+        function myCard(){
+            var val = getCookie('li{$info["id"]}');
+            if(val){
+                $('#card').html('一个IP只能领取一次：<br/>'+val).slideDown('slow');
+                $('.getCard').find('span').removeAttr('onclick');
+                return false;
+            }
+
+            $.ajax({
+                dataType:"jsonp",
+                jsonp:"callback",
+                url: DYNAMIC_SERVER_URL + '/dynamic.php?s=/Card/myCard/id/'+{$info['id']},
+                success: function(data){
+                    if(data['number']){
+                        var text    =   '一个IP只能领取一次：<br/>' + data['number'];
+                        $('#card').html(text).slideDown('slow');
+                        setCookie('li{$info["id"]}',data['number'],3*24*60*60*1000);
+                        $('.getCard').find('span').removeAttr('onclick');
+                    }else{
+                        get_card();
+                    }
+                }
+            });
+        }
+
+        //领取卡号
+        function get_card(){
+            $.ajax({
+                dataType:"jsonp",
+                jsonp:"callback",
+                url: DYNAMIC_SERVER_URL + '/dynamic.php?s=/Card/drawCard/id/'+{$info['id']},
+                success: function(data){
+                    if(data.error){
+                        $('#card').html('你来晚了，卡号已被领完！').slideDown('slow');
+                        $('.getCard').find('span').removeAttr('onclick');
+                    }else if(data.row){
+                        var text    =   '你领取的卡号为：<br/>' + data['row'];
+                        $('#card').html(text).slideDown('slow');
+                        setCookie('li{$info["id"]}',data['row'],3*24*60*60*1000);
+                        $('.getCard').find('span').removeAttr('onclick');
+                    }
+                }
+            });
+        }
+    </script>
+</block>
+ 

@@ -1,0 +1,23 @@
+<div class="right">
+  <div class="fn-title">
+    <h2>热播排行</h2>
+  </div>
+  <div class="video-rec">
+         <volist name="lists" id="vo">
+                 <switch name="key">
+                    <case value="0">
+                             <div class="recNews-v"> <a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" class="tit"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><i class="ico"></i><b></b></a>
+                                   <p class="info"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a><span>{$vo['description']}</span></p>
+                             </div>
+                    </case>
+                    <case value="1">
+                      <ul class="rec-news">
+                          <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a></li>
+                    
+                    </case>
+                    <default /><li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a></li>
+                </switch>
+         </volist>
+    </ul>
+  </div>
+</div>

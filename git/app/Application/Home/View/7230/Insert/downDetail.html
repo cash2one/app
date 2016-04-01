@@ -1,0 +1,9 @@
+    <div class="xq-ltop" id="xq_crn">
+        <span>
+            <b class="pic"><img src="{:get_cover($info['smallimg'],'path')}"><s class="title"><a href="{:staticUrl('detail',$info['id'],'Down')}" target="_blank">{$info.title}</a></s><s>评分：{:get_score($info['id'])}分</s><s class="star{:get_score($info['id'])}"></s></b>
+            <b><u>画面：<i class="star{$info.picture_score}"></i></u><u>特色：<i class="star{$info.feature_score}"></i></u></b>
+            <b><u>音乐：<i class="star{$info.music_score}"></i></u><u>运行：<i class="star{$info.run_score}"></i></u></b>
+            <a href="{$info['down']}" class="down">安全下载</a>
+        </span>
+        <span class="pingyu">评语：{$info.conductor}</span>
+    </div>

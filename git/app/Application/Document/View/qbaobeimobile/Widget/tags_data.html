@@ -1,0 +1,38 @@
+<!--tab切换 start-->
+<section class="tab-scroll">
+    <div class="game-cnxh">
+        <div class="cnxh-nav swiper-hd">
+            <div class="swiper-wrapper pagination1">
+                <volist name="lists" id="val">
+                <div class="{:($i==1)?'active ':''}swiper-slide tab-li">{$val['title']}</div>
+                </volist>
+            </div>
+            <div class="swiper-wrapper pagination2"></div>
+        </div>
+
+        <div class="swiper-tab">
+            <div class="swiper-wrapper">
+                <volist name="lists" id="val">
+                <div class="swiper-slide tab-bd">
+                    <div class="news-list-ul">
+                        <volist name="val['lists_data']" id="vo">
+                        <?php
+
+                        if($vo['previewimg'] && (count($vo['previewimg'] = explode(',',$vo['previewimg'])) >2)){ ?>
+                            <div class="middle_mode"><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}"><div class="mid-text"><p class="mid-tit">{$vo['title']}</p><p class="mid-info">{$vo['description']}</p></div><div class="mid-pic"><ul class="mid-ul pic-adaptive-wrap2">
+                                <volist name="vo['previewimg']" id="vc">
+                                <li class="pic-adaptive2"><img src="{:get_cover($vc,'path',1,200,100)}"></li>
+                                </volist>
+                            </ul></div></a></div>
+                        <?php }else{ ?>
+                            <div class="has-action"><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}"><div class="pic"><img src="{:get_cover($vo['smallimg'],'path',1,200,100)}"></div><div class="text"><p class="tit">{$vo['title']}</p><p class="info">{$vo['description']}</p></div></a></div>
+                        <?php } ?>
+                        </volist>
+                    </div>
+                </div>
+                </volist>
+            </div>
+        </div>
+    </div>
+</section>
+<!--tab切换 end-->

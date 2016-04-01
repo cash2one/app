@@ -1,0 +1,24 @@
+<footer class="bottom">
+    <a id="goTop" href="#">返回顶部</a><p><a href="http://libao.pc6.com">访问电脑版</a>|<a href="/">返回首页</a></p>
+</footer>
+<script src="__PUBLIC__/Package/pc6mobile/js/base.js" type="text/javascript"></script>
+<script src="__PUBLIC__/Package/pc6mobile/js/package.js" type="text/javascript"></script>
+<script>
+    seajs.use('common.js', function(init){
+        init();
+    });
+</script> 
+<script src="__STATIC__/jquery-2.0.3.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/Package/pc6mobile/js/common.js" type="text/javascript"></script>
+<block name="script"></block>
+<script type="text/javascript">
+    tabShow=function(m,c,n,t){;
+        //m为导航统一名称，c为对应内容统一名称，n为对应序号,t为数量（比如这个切换效果有三块内容则为3）
+        for(i=1;i<=t;i++){
+            document.getElementById(m+i).className = "";
+            document.getElementById(c+i).style.display = "none";
+        }
+        document.getElementById(m+n).className = "cur";
+        document.getElementById(c+n).style.display = "";
+    };
+</script>

@@ -1,0 +1,25 @@
+<div class="news-xq">
+    <!--相关礼包-->
+    <div class="rmlb">
+        <div id="title-nav"><a href="{$game}" target="_blank">更多&gt;&gt;</a><b></b><h2>相关礼包</h2></div>
+        <ul>
+            <volist name="packages" id="val" empty="$empty">
+                <li>
+                    <a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path')}"></a>
+                        <span>
+                            <a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank">{$val['title']}</a>
+                            <b>{:showText($val['card_type'],'card_type',false,'PACKAGE')}</b>
+                            <b>
+                                <php>if(1&$val['conditions']){</php>
+                                <i class="app"></i>
+                                <php>} if(2&$val['conditions']){</php>
+                                <i class="adr"></i>
+                                <php>}</php>
+                            </b>
+                        </span>
+                    <a href="{:staticUrl('detail',$val['id'],'Package')}" class="lq">领取</a>
+                </li>
+            </volist>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<extend name="Home@gfwmobile/Base/commonWebsite" />
+
+<block name="body">
+<script type="text/javascript">a()</script>
+    <section class="baike-list">
+        <div class="Introd"><div class="title"><span>{:$info['title']}</span></div>
+        <div class="introd-list">
+            <ul class="art-list" id="company-info">
+            	<if condition="$info['contacts']">
+                	<li><em>联系人：</em>{:$info['contacts']}</li>
+                </if>
+                <if condition="$info['phone']">
+                	<li><em>电　话：</em>{:$info['phone']}</li>
+                </if>
+                <if condition="$info['telphone']">
+                	<li><em>手　机：</em>{:$info['telphone']}</li>
+                </if>
+                <?php 
+                	$province = '';
+					$city = '';
+					$area = '';
+                	if($info['province_id'] > 0){
+						$provinceInfo = getProvince($info['province_id']);
+						$province = !empty($provinceInfo)?$provinceInfo['name']:'';
+					}
+					if($info['province_id'] > 0){
+                		$cityInfo = getCity($info['city_id']);
+						$city = !empty($cityInfo)?$cityInfo['name']:'';
+					}
+					if($info['province_id'] > 0){
+						$areaInfo = getArea($info['area_id']);
+						$area = !empty($areaInfo)?$areaInfo['name']:'';
+					}
+                ?>
+                <if condition="$province or $city or $area or $info['address']">
+                	<li><em>地　址：</em>{:$province}{:$city}{:$area}{:$info['address']}</li>
+                </if>
+            </ul>
+            </div><div class="enter"><a href="{:$info['url']}" target="_blank" rel="nofollow">进入官网</a></div>
+        </div>
+        <script type="text/javascript">b()</script>
+        <div class="Introd">
+            <div class="title" id="comany-name"><span>公司简介</span></div>
+            <if condition="empty($info['content'])">
+            	<div class="website-info">暂无内容</div>
+            <else />
+            	<div class="website-info" id="website_info">{:$info['content']}</div>
+            </if>
+        </div>
+        <script type="text/javascript">c()</script>
+        <div class="art">
+            <div class="title"><h2>相关网站</h2><a href="{:staticUrlMobile('lists',$info['category_id'],'Package')}">更多></a></div>
+            <ul class="art-list">
+                {:W('Gfw/websiteRecommended',array(7,'detail_hot',$info['category_id'],$info['id']))}
+            </ul>
+        </div>
+        <script type="text/javascript">d()</script>
+    </section>
+</block>
+

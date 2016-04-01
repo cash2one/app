@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Home@afsmobile/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/afsmobile/css/yxzq.css" />
+</head>
+
+<body id="game_xq">
+<div class="dragable" widget="base"></div>
+<header id="inpage_head">
+    <span class="back"></span>
+    <b>{$info['title']}</b>
+    <em id="head-nav"></em>
+</header>
+<!--弹出菜单-->
+<div id="case-main">
+    <include file="Home@afsmobile/Public/popup" />
+</div>
+
+<!--game_rec-->
+<section class="zhuan-list">
+    <dl id="hcont">
+        <dt><div class="dragable" widget="image" style="width: 432px; height: 288px; border: 1px solid #ff0000;"><img src="http://pic.9ht.com/up/2014-12/2014129223048.jpg"></div></dt>
+        <dd><div class="dragable" widget="html" style=" width: 100%; height: 52px; border: 1px solid #ff0000;">
+            天天风之旅包含了腾讯正式版的天天风之旅，同时还有各种天天风之旅破解版以及天天风之旅各类修改器，如果您觉得天天风之旅游戏的难度有点让你接受不了，可以尝试使用修改器进行修改，通常天天风之旅破解版会有封号的风险哦！
+        </div>
+        </dd>
+    </dl>
+    <div class="game-xg">
+        <p class="acount">{$info['title']}<b>6</b>款:</p>
+        <div id="game_rec" class="game">
+            <ul>
+                <div class="dragable" widget="down__product_tags" style=" width: 100%; height: 82px; border: 1px solid #ff0000;">
+                <volist name="lists" id="val">
+                <li>
+                    <a href="{:staticUrlMobile('detail',$val['id'],'Down')}" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a>
+                    <p class="main">
+                        <span><a href="{:staticUrlMobile('detail',$val['id'],'Down')}">{$val['name']}</a></span>
+                        <span><i>{$val['title']}</i><i>{$val['size']}</i><i>{:showText($val['language'],'language',false,'down')}</i></span>
+                    </p>
+                    <a href="{:staticUrlMobile('detail',$val['id'],'Down')}" class="down">下载</a>
+                </li>
+                </volist>
+                    <php>unset($lists);</php>
+                </div>
+            </ul>
+        </div>
+        <p class="acount">更多合集:</p>
+        <ul class="zq-list" id="more">
+            <div class="dragable" widget="batch__product_tags" style=" width: 100%; height: 112px; border: 1px solid #ff0000;">
+            <volist name="lists" id="val">
+            <li><a href="{:'/'.C('FEATURE_K_DIR')}/{:$val['url_token']}"><img src="{:get_cover($val['icon'],'path')}"><b>{$val.title}</b></a></li>
+            </volist>
+            </div>
+        </ul>
+    </div>
+</section>
+<!--footer-->
+<include file="Home@afsmobile/Public/foot"/>
+</body>
+</html>

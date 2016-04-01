@@ -1,0 +1,34 @@
+<extend name="Home@gfw/Base/commonZt" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/subject.css"/>
+</block>
+<block name="body">
+<!-----header-end----->
+<input id="navId" type="hidden" value="{$info['id']}">
+<div class="page-nav"><div class="page-left"><span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">&gt;</span><a href="{:getWidgetPath('66', true)}">专题合集</a><span class="grey">&gt;</span>{$info['title']}</div><span class="sum"></span></div>
+<div id="subject" class="gf1000">
+    <div class="subject-left1 cfl">
+        <div class="subject-c gf-border">
+            <ul class="pic">
+                <volist name="lists" id="val">
+                <li>
+                    <a href="{:C('STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$val['url_token']}" class="s-pic"><img src="{:get_cover($val['icon'],'path')}" width="242" height="135"></a>
+                    <p class="s-title"><a href="{:C('STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$val['url_token']}">{$val['title']}</a></p>
+                </li>
+                </volist>
+            </ul>
+           <!-- 广告位：专题合集详情左侧底部原生广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123368");</script>
+        </div>
+        <div id="fenye">{$page}</div>
+    </div>
+    <!-----subject-left-end----->
+    <div class="subject-right cfr">
+        <!--#include virtual="{:getWidgetPath('67')}"-->
+        {:W('Home/Gfw/otherFeature',array($info['id']))}
+        <!--#include virtual="{:getWidgetPath('68')}"-->
+    </div>
+    <!-----subject-right-end----->
+
+</div>
+</block>

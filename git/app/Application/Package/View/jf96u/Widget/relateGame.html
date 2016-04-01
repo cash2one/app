@@ -1,0 +1,16 @@
+<notempty name="game">
+<div class="tab-wrap wrap cata-tab dis-bot">
+  <div class="mid-tit">
+    <h3>游戏信息</h3>
+  </div>
+  <div class="gamegift-info"> <a href="{:str_replace('index.html','',staticUrl('detail', $game['id'],'Down'))}" target="_blank" class="pic" title="{$game['title']}"><img src="{:get_cover($game['smallimg'],'path')}" alt="{$game['title']}"></a>
+    <div class="info">{$game['description']}</div>
+    <div class="game-down"><a href="{:str_replace('index.html','',staticUrl('detail', $game['id'],'Down'))}" target="_blank" class="down">下载游戏</a>
+               <notempty name="batch">
+                       <a href="{:getCPath($batch['id'],'batch')}" target="_blank" class="gozq">进入专区</a>
+              </notempty>
+
+     </div>
+  </div>
+</div>
+</notempty>

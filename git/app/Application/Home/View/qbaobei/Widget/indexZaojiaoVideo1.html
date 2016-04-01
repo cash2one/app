@@ -1,0 +1,7 @@
+<ul class="zaoj_video">
+  <volist name="lists" id="article">
+    <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="picBox"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"><span></span><b></b></a>
+      <p class="info"><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a><span>{$article['description']}</span></p>
+    </li>
+  </volist>
+</ul>

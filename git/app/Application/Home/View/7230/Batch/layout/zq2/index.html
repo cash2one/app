@@ -1,0 +1,98 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Home@7230/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/kpage.css"/>
+</head>
+<body>
+<include file="Home@7230/Public/header"/>
+<div id="kpage">
+    <div class="dragable" widget="pc2" style="display: none;"></div>
+    <p class="page-nav">当前位置：<a href="/">首页</a>-><a href="{:getWidgetPath('17', true)}">专区</a>->{$cid['title']}</p>
+    {:W('Home/P7230batch/pc2head',array($cid,$base))}
+
+    <div class="rjhj-main">
+        <!--轮播部分-->
+        <div class="wraper-pic">
+            <div class="hjlb">
+                <div class="lb-topl">
+                    <span><i class="cur">1</i><volist name="slide" id="val" offset="1" length="10"><i>{$i}</i></volist></span>
+                    <ul class="libaoul">
+                        <volist name="slide" id="val">
+                            <li class="{$i==1?'current':''}"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path')}" alt="{$val['title']}"></a></li>
+                        </volist>
+                    </ul>
+                    <p class="biaoti"><em></em><b></b></p>
+                </div>
+                <!--最新教程-->
+                <div class="new-jc">
+                    <div class="hj-news-rec">
+                        <h2><a href="{:staticUrl('detail',$zx['id'],'Document')}" target="_blank">{$zx['title']}</a></h2>
+                        <p id="str">{$zx['description']}</p>
+                    </div>
+                    <ul>
+                        <volist name="gx" id="val">
+                            <li><em>{:date('m-d',$val['update_time'])}</em><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            <!--软件教程-->
+            <div class="hj-jc">
+                <p class="title"><i></i>攻略<a href="{$more['gl']}" target="_blank" class="more"></a></p>
+                <div class="tptj">
+                    <volist name="glimg" id="val">
+                        <p><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path')}"><span>{$val['title']}</span></a></p>
+                    </volist>
+                </div>
+                <ul>
+                    <volist name="gl" id="val">
+                        <li><i>{:date('m-d',$val['update_time'])}</i><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><b>[xx] </b>{$val['title']}</a></li>
+                    </volist>
+                </ul>
+            </div>
+            <!--软件问答-->
+            <div class="hj-jc">
+                <p class="title"><i></i>问答<a href="{$more['wd']}" target="_blank" class="more"></a></p>
+                <div class="tptj">
+                    <volist name="askimg" id="val">
+                    <p><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['cover_id'],'path')}"><span>{$val['title']}</span></a></p>
+                    </volist>
+                </div>
+                <ul>
+                    <volist name="ask" id="val">
+                        <li><i>{:date('m-d',$val['update_time'])}</i><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><b>[xx] </b>{$val['title']}</a></li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+        {:W('Home/P7230batch/pc2right',array($cid['id']))}
+    </div>
+
+
+    <!----底部轮播---->
+    <div id="lunbo">
+        <p class="title"><i></i>推荐合集<a href="{:getWidgetPath('18', true)}" target="_blank" class="more"></a></p>
+        <div class="lbmain">
+            <span class="prev"></span>
+            <div class="lunbo-m">
+                <ul>
+                    <div class="dragable" widget="special__tags" style="width: 2380px; height: 130px; border: 1px solid #FF0000; float: left;">
+                    <volist name="lists" id="val">
+                    <li><a href="{:C('STATIC_URL')}{$val['url']}" target="_blank"><img src="{:get_cover($val['icon'],'path')}"></a><a href="{:C('STATIC_URL')}{$val['url']}" target="_blank" class="title">{$val['title']}</a></li>
+                    </volist>
+                    </div>
+                </ul>
+            </div>
+            <span class="next"></span>
+        </div>
+    </div>
+</div>
+<include file="Home@7230/Public/footer"/>
+<script>
+    str = $("#str");
+    str.html(str.html().substr(0,56) + "……");
+</script>
+</body>
+</html>

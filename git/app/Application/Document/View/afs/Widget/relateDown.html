@@ -1,0 +1,14 @@
+<eq name="down" value="">
+<else/>
+<div class="yxjj"> <a href="{:staticUrl('detail', $down['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($down['smallimg'],'path')}"></a>
+  <div class="cc">
+    <div>
+      <h3><a href="{:staticUrl('detail',$down['id'],'Down')}" class="title">{$down['title']}</a></h3>
+      <b><i>游戏平台：{:getSystem($down['id'])}</i></b><b>游戏大小：{$down['size']}</b></div>
+      <notempty name="batchUrl"><a href="{$batchUrl}" target="_blank" class="jrzq">进入专区</a></notempty></div>
+      <span id="game-down">
+       <b class="adr"><a href="{:staticUrl('detail',$down['id'],'Down')}">安卓下载</a><i></i><em><img src="{$qrcode}"></em></b>
+ </span> </div>
+</eq>
+
+

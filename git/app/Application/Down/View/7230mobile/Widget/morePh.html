@@ -1,0 +1,10 @@
+<section>
+    <div class="top_tit"><span>更多手游排行榜</span></div>
+    <div class="ph_li">
+        <ul>
+            <volist name="lists" id="val">
+            <li><a href="{:str_replace('index.html','',staticUrlMobile('detail',$val['id'],'Down'))}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+</section>

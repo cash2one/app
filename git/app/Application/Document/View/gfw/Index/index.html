@@ -1,0 +1,146 @@
+<extend name="Home@gfw/Base/commonBaike" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/baike.css"/>
+</block>
+<block name="body">
+<div class="page-nav">
+    <div class="page-left"><span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">&gt;</span>百科</div>
+    <span class="sum"></span></div>
+<div id="baike-main">
+    <div class="baike-top"> 
+        <!-- 幻灯片 -->
+     {~W('Document/Gfw/cateSlider',array('index',1))} 
+        
+        <!-- 热门百科 -->
+        <div class="ranklist gf-border">
+            <h2 class="bkicon1">热门百科</h2>
+            <ul class="ranking">
+                <Think:article basename="Document" name="article" limit="10" order="update_time desc">
+                    <lt name="key" value="3">
+                        <li><em class="orange">{$key+1}</em><a href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a><i class="arrows"></i></li>
+                        <else/>
+                        <li><em class="blue">{$key+1}</em><a href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a><i class="arrows"></i></li>
+                    </lt>
+                </Think:article>
+            </ul>
+        </div>
+        <div class="id flclr">
+            <div class="size"> 
+          <!-- 广告位：百科首页Banner广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123374");</script></div>
+            <ul class="news">
+                <Think:article basename="Document" name="article"  limit="4" where="category_rootid=80" order="update_time desc">
+                    <li><a href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a></li>
+                </Think:article>
+            </ul>
+        </div>
+    </div>
+    <div class="left">
+        <div class="consent mright13">
+            <div class="c-title">
+                <h2 class="bkicon2"><a href="{:staticUrl('lists',96, 'Document')}" class="tex">娱乐</a></h2>
+                <a class="more1" href="{:staticUrl('lists',96, 'Document')}">更多></a> </div>
+            <Think:article basename="Document" name="article" cate="96" limit="6" order="update_time desc">
+                <eq name="key" value="0">
+                    <div class="bd"> <a href="{:staticUrl('detail', $article['id'],'Document')}" class="bdimg"><img src="{:get_cover($article['cover_id'],'path')}" width="150" height="110"></a>
+                        <div class="bdtext"> <span class="theme"><a href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a></span>
+                            <p class="referral">{$article.description|msubstr=0,30} <a href="{:staticUrl('detail', $article['id'],'Document')}"><
+                                <详情>
+                                ></a></p>
+                            {~W('Document/Gfw/relateCi',array($article.id))} </div>
+                    </div>  <div class="aligh">
+                    <else/>
+                    
+                     <div class="baitext"><a href="{:staticUrl('detail', $article['id'],'Document')}" class="name">{$article.title}：</a><span>{$article.description|msubstr=0,10}</span><a href="{:staticUrl('detail', $article['id'],'Document')}" class="specifics">详情</a></div>
+                </eq>
+            </Think:article>
+            </div>
+            <!-----aligh-end-----> 
+        </div>
+        <div class="consent">
+            <div class="c-title">
+                <h2 class="bkicon3"><a href="{:staticUrl('lists',87, 'Document')}" class="tex">生活</a></h2>
+                <a class="more1" href="{:staticUrl('lists',87, 'Document')}">更多></a> </div>
+    <Think:article basename="Document" name="article" cate="87" limit="6" order="update_time desc">
+                <eq name="key" value="0">
+                    <div class="bd"> <a href="{:staticUrl('detail', $article['id'],'Document')}" class="bdimg"><img src="{:get_cover($article['cover_id'],'path')}" width="150" height="110"></a>
+                        <div class="bdtext"> <span class="theme"><a href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a></span>
+                            <p class="referral">{$article.description|msubstr=0,30} <a href="{:staticUrl('detail', $article['id'],'Document')}"><
+                                <详情>
+                                ></a></p>
+                            {~W('Document/Gfw/relateCi',array($article.id))} </div>
+                    </div>  <div class="aligh">
+                    <else/>
+                    
+                     <div class="baitext"><a href="{:staticUrl('detail', $article['id'],'Document')}" class="name">{$article.title}：</a><span>{$article.description|msubstr=0,10}</span><a href="{:staticUrl('detail', $article['id'],'Document')}" class="specifics">详情</a></div>
+                </eq>
+            </Think:article>
+            </div>
+            <!-----aligh-end-----> 
+        </div>
+        <div class="consent mright13">
+            <div class="c-title">
+                <h2 class="bkicon4"><a href="{:staticUrl('lists',90, 'Document')}" class="tex">文化</a></h2>
+                <a class="more1" href="{:staticUrl('lists',90, 'Document')}">更多></a> </div>
+            <Think:article basename="Document" name="article" cate="90" limit="6" order="update_time desc">
+                <eq name="key" value="0">
+                    <div class="bd"> <a href="{:staticUrl('detail', $article['id'],'Document')}" class="bdimg"><img src="{:get_cover($article['cover_id'],'path')}" width="150" height="110"></a>
+                        <div class="bdtext"> <span class="theme"><a href="">{$article.title}</a></span>
+                            <p class="referral">{$article.description|msubstr=0,30} <a href="{:staticUrl('detail', $article['id'],'Document')}"><
+                                <详情>
+                                ></a></p>
+                           {~W('Document/Gfw/relateCi',array($article.id))} </div>
+                    </div>  <div class="aligh">
+                    <else/>
+                    
+                     <div class="baitext"><a href="{:staticUrl('detail', $article['id'],'Document')}" class="name">{$article.title}：</a><span>{$article.description|msubstr=0,10}</span><a href="{:staticUrl('detail', $article['id'],'Document')}" class="specifics">详情</a></div>
+                </eq>
+            </Think:article>
+            </div>
+            <!-----aligh-end-----> 
+        </div>
+        <div class="consent">
+            <div class="c-title">
+                <h2 class="bkicon5"><a href="{:staticUrl('lists',94, 'Document')}" class="tex">IT</a></h2>
+                <a class="more1" href="{:staticUrl('lists',94, 'Document')}">更多></a> </div>
+             <Think:article basename="Document" name="article" cate="94" limit="6" order="update_time desc">
+                <eq name="key" value="0">
+                    <div class="bd"> <a href="{:staticUrl('detail', $article['id'],'Document')}" class="bdimg"><img src="{:get_cover($article['cover_id'],'path')}" width="150" height="110"></a>
+                        <div class="bdtext"> <span class="theme"><a href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a></span>
+                            <p class="referral">{$article.description|msubstr=0,30} <a href="{:staticUrl('detail', $article['id'],'Document')}"><
+                                <详情>
+                                ></a></p>
+                          {~W('Document/Gfw/relateCi',array($article.id))} </div>
+                    </div>  <div class="aligh">
+                    <else/>
+                    
+                     <div class="baitext"><a href="{:staticUrl('detail', $article['id'],'Document')}" class="name">{$article.title}：</a><span>{$article.description|msubstr=0,10}</span><a href="{:staticUrl('detail', $article['id'],'Document')}" class="specifics">详情</a></div>
+                </eq>
+            </Think:article>
+            </div>
+            <!-----aligh-end-----> 
+        </div>
+        <div class="vocation gf-border flclr">
+            <div class="c-title">
+                <h2 class="bkicon6"><a href="{:staticUrl('lists',98, 'Document')}" class="tex">行业</a></h2>
+                <a class="more1" href="{:staticUrl('lists',98, 'Document')}">更多></a> </div>
+            <ul class="trade">
+                <Think:article basename="Document" name="article" cate="98"  limit="6" where="category_rootid=80" order="update_time desc">
+                    <li> <a href="{:staticUrl('detail', $article['id'],'Document')}" class="bkpic"><img src="{:get_cover($article['cover_id'],'path')}" width="112" height="85"></a>
+                        <p class="bktext"><a href="{:staticUrl('detail', $article['id'],'Document')}" class="fitness">{$article.title}</a><a href="{:staticUrl('detail', $article['id'],'Document')}" class="describe">{$article.description|msubstr=0,50}</a></p>
+                    </li>
+                </Think:article>
+            </ul>
+        </div>
+        <!-- 广告位：百科首页底部原生广告 -->
+         <script type="text/javascript">BAIDU_CLB_fillSlot("1123373");</script>
+    </div>
+    <!-----left-end-----> 
+    <div class="right"><!-- 广告位：百科首页右侧原生广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123699");</script></div>
+    <!-----right-end-----> 
+    
+</div>
+<!-----baike-main-end----->
+</block>

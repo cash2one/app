@@ -1,0 +1,30 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$SEO.title}</title>
+    <meta name="keywords" content="{$SEO.keywords}"/>
+    <meta name="description" content="{$SEO.description}"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/7230/css/zqys.css" />
+</head>
+<body>
+<script language="javascript"> window.DYNAMIC_SERVER_URL = '{:C("DYNAMIC_SERVER_URL")}';</script>
+    <div class="top_zq">
+        <p>
+            <a href="{:C('STATIC_URL')}"><img src="__PUBLIC__/Home/7230/images/logozq.jpg"> 7230手游网</a>|<a href="{:staticUrl('lists',90, 'Document')}" target="_blank">资讯</a>|<a href="{:staticUrl('lists',95, 'Document')}" target="_blank">攻略</a>|<a href="{:C('STATIC_URL')}/yx/" target="_blank">下载</a>|<a href="{:staticUrl('lists',81, 'Document')}" target="_blank">原创</a>|<a href="{:staticUrl('index', null, 'Package')}" target="_blank">礼包</a>|<a href="{:getWidgetPath('31', true)}" target="_blank">测试表</a>|<a href="{:getWidgetPath('16',true)}" target="_blank">专题</a>|<a href="{:C('STATIC_URL')}/top/phpd.html" target="_blank">排行</a>|
+        </p>
+    </div>
+    <div class="yxtj_zq">
+        <p>
+            <a href="{:$game['id']?staticUrl('detail',$game['id'],'Down'):'javascript:void(0)'}" target="{$game['id']?'_blank':'_self'}" class="pic"><img src="{:get_cover($game['smallimg'],'path')}"></a>
+            <span class="yxbt"><a href="{:$game['id']?staticUrl('detail',$game['id'],'Down'):'javascript:void(0)'}" target="{:$game['id']?'_blank':'_self'}">{$home['title']}</a>
+                <volist name="home['tags']" id="tag" offset="0" length="4">
+                    <i class="{$key==0?'blue':($key==1?'green':($key==2?'deepb':'yellow'))}">{$tag}</i>
+                </volist>
+            </span>
+            <span class="rankzq"><i class="demo3"><em></em><input class="knob" value="{:get_score_other($home['id'],'batch')}"></i><s class="praise_api" data-id="{$home.id}" data-model="Batch">{$home['abet']}</s></span>
+            <span class="info">{$batch['description']?$batch['description']:$game['description']}</span>
+        </p>
+    </div>

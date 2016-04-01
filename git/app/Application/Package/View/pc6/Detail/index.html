@@ -1,0 +1,277 @@
+<extend name="Package@pc6/Base/common"/>
+
+<block name="style">
+<link href="__PUBLIC__/Package/pc6/css/cardinfo.css" rel="stylesheet" type="text/css">
+</block>
+
+<block name="body">
+    
+    
+    
+    <dl class="con">
+        <dd class="left">
+            <p id="picshow">
+             <include file="Package@pc6/Widget/bigPic"/>
+            </p>
+            <dl class="content">
+                <dt class="gameName"><h1>{$info.title}</h1><a class="productTagName" href="javascript:void(0);" target="_blank">查看全部礼包</a></dt>
+                <dd class="dinfo clearfix"><img src="{:get_cover($info['cover_id'],'path')}">
+                	<p class="xinfo">
+                	<em class="addName">
+                		游戏：{:W('Package/Pc6/packageProductTags',array($info['id']))}
+                		<if condition="!empty($info['game_url'])">
+                			<a href="{:$info['game_url']}" target="_blank">[下载]</a>
+                		</if>
+                		<if condition="!empty($info['link'])">
+                			<a href="{:$info['link']}" target="_blank">[专区]</a>
+                		</if>
+                	</em>
+                	<em>卡号数量：<span class="card_all" card-id="{$info.id}"></span>个</em><em>发布时间：{$info.create_time|time_format="Y-m-d"}</em><em>使用期限：{$info.start_time|time_format="m-d"} 至 {$info.end_time|time_format="m-d"} </em><em>运营平台：{$info.platform|msubstr=###,0,8,'utf-8',false}</em><em>适用设备：{:showText($info['conditions'],'conditions',true)}</em></p>
+                    <div class="barbg"><b>发号情况：</b>
+                        <div class="barbg_xs">
+                            <em card-id="{$info.id}" class="card_per" id="countper"><span></span></em>
+                        </div>
+                        <div id="shengyu">剩余：<span class="card_surplus" card-id="{$info.id}"></span>个</div>
+                    </div>
+                     <div class="test"></div>
+                    <p class="lhtg"> <a id="draw" href="javascript:void(0);" class="qh_bnt card-button" data-id="{:$info['id']}" data-endtime="{:$info['end_time']}">领 号</a>
+                    <span class="buttonMsg">免登陆，点击输入验证码可以直接领取。</span>
+                    </p>
+                    <div id="myCard" class="yjlq" style="display:none;">
+			            <p>您已经领取过该礼包码，请尽快使用。</p>
+			            <p class="lqlb">
+			            	<span>您领取到的礼包码：</span>
+			            	<input type="text" class="text" id="card_number" name="card_number" value="" readonly />
+			            	<input type="button" value="复制" class="btn" id="copyCard" name="copyCard" data-clipboard-target="card_number" />
+			            </p>
+			            <p class="ewmt" id="card_qrCode"></p>
+			        </div>
+                    <p class="lhlc"><i>点击<br/>"领号"按钮</i><i>同一个IP只能领取同一个礼包一次</i><i>有效期内使用{$info.start_time|time_format="m-d"} 至 {$info.end_time|time_format="m-d"}</i><i>扫描二维码，可直接复制礼包码到手机</i></p>
+                </dd>
+                <dd class="title">
+                    <font>礼包详情</font>
+                    <dd class="cardtext">
+                        <p>{$info.content}</p>
+                        </br>
+                        <p>{$info.activation}</p>
+                        </br>
+                    </dd>
+                        <dd class="lqqk"><h3>领取情况</h3>
+                        <div id="rightlink">
+                        <ul>
+                        <li>剩余：<span class="card_surplus" card-id="{$info.id}"></span>个</li>
+                        <li>总量：<span class="card_all" card-id="{$info.id}"></span>个</li>
+                        </ul>
+                        </div>
+                        </dd>
+                        <div id="listinfo">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="zxrk_table_box zxrk_table card_draw_lists" card-id="{$info.id}">
+                                <tr class="zxrk_title"><td class="td11">序号</td><td class="td2t">激活码</td><td class="td33">领取人</td><td class="td44">领取时间</td></tr>
+                            </table>
+                        </div>
+                        <dd class="xglist">
+                            <p style="margin-right: 30px;">
+                                {~W('Pc6/packageNewList')} 
+                            </p>
+                            <p>
+                                {~W('Pc6/packageHotList')} 
+                            </p>
+                        </dd>
+                    </dl>
+                </dd>
+                <dt class="right"> 
+                    <include file="Package@pc6/Public/sideR"/>
+                </dt>
+            </dl>
+    <!-- 验证码 -->        
+	<div class="verifycode" style="display:none;">
+		<input type="text" id="verify" name="verify" placeholder="请填写验证码" autocomplete="off" />
+		<a class="reloadverify" title="换一张" href="javascript:void(0)">换一张？</a>
+		<p class="errorMsg" style="color:red;"></p>
+		<p><img class="verifyimg reloadverify" alt="点击切换" src="" width="250px" height="62px" /></p>
+	</div>
+</block>
+
+<block name="script">
+    <script language="javascript"> 
+    $(function(){ 
+        artDialog.alert = function (content,title,icon, callback) {
+            return artDialog({
+                id: 'Alert',
+                icon: icon,
+        		title:title,
+                fixed: true,
+                lock: true,
+                content: content,
+        		ok: function () {
+                window.location.reload();
+                return false;
+               },
+                close: callback
+        		
+             });
+        };
+        //领取
+        $('#draw').click(function() {
+        	//判断是否过期 add liujun 2015-06-19
+        	var end_time = $(this).data('endtime');
+        	var isDeadline = checkDate(end_time);
+            if(isDeadline){
+            	art.dialog.alert('该礼包活动已结束',"温馨提示",'warning');
+            	return false;
+            }
+			//判断验证码 add liujun 2015-06-30
+        	if(!isValidate){
+        		checkVerify();
+        		return false;
+        	}
+            $.ajax({
+                type : "get",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonpCallback:"drawCard",
+                url: DYNAMIC_SERVER_URL + '?s=/Card/drawCard/id/{$info.id}.html',
+                //data: {id : draw_id},
+                success: function(data){
+                    if(data){
+                        data = eval(data);
+                        if(data.error){
+                            art.dialog.alert(data.error,"温馨提示",'warning');
+                        }else{
+                            //art.dialog.alert('请记住卡号： <span class=\'card_decorate\'>'+ data.row +'<span>',"温馨提示",'succeed');
+                            window.location.reload();//直接刷新页面 add liujun 2015-07-02
+                        }
+                    }
+                }
+            });
+        });
+        
+       getMyCard('{$info.id}');//获取我领取的卡号信息
+       
+       var tagUrl = jQuery('.productTag').data('tagurl');
+       var tagTitle = jQuery('.productTag').html();
+       jQuery('.productTagName').attr('href',tagUrl);
+       jQuery('.productTagName').html("查看《"+ tagTitle +"》全部礼包");
+    });
+    
+    /**
+     * 获取我领取的卡号信息
+     * @param id
+     */
+    function getMyCard(id){
+    	var card_surplus = $('.card_surplus').html();//剩余数量
+        var end_time = $('#draw').data('endtime');//结束日期
+    	var isDeadline = checkDate(end_time);
+        //只判断过期的
+    	if(!isDeadline){
+	    	var url = DYNAMIC_SERVER_URL + '?s=/Card/myCard';
+	    	$.ajax({
+                type : "get",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonpCallback:"myCard",
+                url: url,
+                data: {id:id},
+                success: function(data){
+                	if(data.status == '1'){
+	                	jQuery('#card_number').val(data.number);//设置卡号
+	                	jQuery('#myCard').show();
+	                	jQuery('.lhtg').hide();
+	                	setCopy('card_number','copyCard');//复制
+	                	getQrCode(data.number);//获取二维码
+	                }
+                }
+            });
+    	}//end if
+    }
+    
+    /**
+    *获取二维码
+    */
+    function getQrCode(str){
+    	$.ajax({
+            type : "get",
+            dataType:"jsonp",
+            jsonp:"callback",
+            jsonpCallback:"qrCode",
+            url: DYNAMIC_SERVER_URL + '?s=/Common/qrCode',
+            data: {'str':str},
+            success: function(data){
+            	if(data.status == '1'){
+            		jQuery('#card_qrCode').html('<img src="'+ data.qrCode +'" />');//设置二维码图片
+            	}
+            }
+        });
+    }
+    
+    /**
+    * 验证码验证
+    */
+    var isValidate = false;
+    function checkVerify(){
+		art.dialog({
+			width:300,
+			height:100,
+			id: 'verifycode',
+			title: '验证码',
+			content: $('.verifycode').html(),
+			lock: true,
+			fixed: true,
+			ok: function () {
+				var url = DYNAMIC_SERVER_URL + '?s=/Common/API_checkVerify';
+				var codeObj = $('#verify');
+				if(codeObj.val().length <= 0){
+					codeObj.focus();
+					$('.errorMsg').html('请输入验证码！');
+					return false;
+				}
+				$.ajax({
+	                type : "get",
+	                dataType:"jsonp",
+	                jsonp:"callback",
+	                jsonpCallback:"checkVerify",
+	                url: url,
+	                data: {code:codeObj.val()},
+	                success: function(data){
+	                	if(data.status == '1'){
+	                		isValidate = true;
+	                		art.dialog.close();
+	                		art.dialog.list['verifycode'].close();
+	                		$("#draw").trigger("click");
+		                }else{
+		                	$(".reloadverify").trigger("click");//刷新验证码
+		                	$('.errorMsg').html(data.msg);
+		                }
+	                }
+	            });
+        	}
+        });
+		getVerify();//获取验证码
+    };
+    
+    /**
+     * 获取验证码
+     */
+    function getVerify(){
+   	 	//验证码url
+		var verifyimg = DYNAMIC_SERVER_URL + '?s=/Common/API_verify';
+		//默认验证码
+       $(".verifyimg").attr("src", verifyimg);
+		//刷新验证码
+       $(".reloadverify").click(function(){
+           if( verifyimg.indexOf('?')>0){
+               $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+           }else{
+               $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+           }
+           $('#verify').focus();
+       });
+       $('#verify').focus();
+   };
+    </script>
+
+</block>
+<block name="dialog">
+<script type="text/javascript" src="__STATIC__/artdialog/jquery.artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="__STATIC__/artdialog/iframeTools.source.js"></script>
+</block>

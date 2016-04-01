@@ -1,0 +1,21 @@
+<section class="game_score" >
+    <div class="gs">
+        <a href="{:staticUrlMobile('detail',$down['id'],'Down')}"><img alt="{$down['title']}" src="{:get_cover($down['smallimg'],'path')}"></a>
+        <a class="sizectrl" href="{:getFileUrl($down['id'])}">下载</a>
+           <div class="score_wrap">
+            <a href=""><p>{$down['title']}</p></a>
+            <span>类型：{:getCateName($down['id'],'Down')}</span>			
+            <div class="score">
+                <div class="F">
+                    <span class="ff">{:get_score_other($down['id'],true)}</span><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="score_info">
+        <li class="zone" style="display:none;"><a href="{:staticUrlMobile('detail',getRelationZone($down['id']),'Package')}"><i></i>专区{:getRelationZone($down['id'])}</a></li>
+        <li class="gift"><a class="on" href="{:staticUrlMobile('detail',$package['id'],'Package')}"><i></i>礼包</a></li>
+        <li class="strategy"><a class="on" href="{$doc}"><i></i>攻略</a></li>
+    </ul>
+</section>
+    

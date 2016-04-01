@@ -1,0 +1,18 @@
+<!-----游戏攻略----->
+  <div class="yxcp-title">游戏攻略</div>
+<div class="yxgl">
+    <ul>
+        <volist name="article" id="val">
+            <li><i>{:date('m-d',$val['create_time'])}</i><a href="{:staticUrl('Detail',$val['id'],'document')}" target="_blank">{$val.title}</a></li>
+        </volist>
+    </ul>
+</div>
+<!-----相关应用----->
+   <div class="yxcp-title">相关应用</div>
+<div class="xgyy">
+    <ul>
+        <volist name="apply" id="val">
+            <li><a href="{:staticUrl('Detail',$val['id'])}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('Detail',$val['id'])}" target="_blank" class="tit">{$val.title}</a></li>
+        </volist>
+    </ul>
+</div>

@@ -1,0 +1,129 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/7230/css/down.css"/></block>
+<block name="body">
+    <div id="down-main">
+        <p class="page-nav">当前位置：{:getCrumbs(array('detail',$info['id'],'Down'))}</p>
+        <div class="down-xql">
+            <div class="title"><h1 id="gameTitle" href="">{$info.title}</h1></div>
+            <div class="down-xqlm">
+                <i class="pic"><img src="{:get_cover($info['smallimg'],'path')}"></i>
+
+                <i class="zan praise_api" data-id="{$info.id}" data-model="Down"></i>
+        <span class="jbxx">
+            <i>大小：<s>{:format_size($info['size'])}</s></i>
+            <i>授权：<s>{:showText($info['licence'],'licence')}</s></i>
+            <i>适用：<s>{:showText($info['system'],'system')}&nbsp;{$info.system_version}以上</s></i>
+            {~W('P7230/tags',array($info['id']))}
+            <i>类型：<s>{:get_category_title($info['category_id'],MODULE_NAME.'Category')}</s></i>
+            <i>开发商：<s>{$info['company']?$info['company']:'未知'}</s></i>
+            <i>更新时间：<s>{:date('Y-m-d',$info['update_time'])}</s></i>
+            <i>语言：<s>{:showText($info['language'],'language')}</s></i>
+
+        </span>
+                <a href="{$info['down']}" class="down"></a>
+
+                <b>
+                    <i>手机助手快速安装</i>
+                    <i class="sjaz"><a href="" class="wdj"></a><a href="" class="yyb"></a></i>
+                    <i class="ewm"><img src="{$qrcode}"></i>
+                    <i>二维码扫描下载</i>
+                </b>
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                    <a class="fx">我要分享：</a>
+                    <a class="jiathis_button_qzone"></a>
+                    <a class="jiathis_button_tsina"></a>
+                    <a class="jiathis_button_tqq"></a>
+                    <a class="jiathis_button_weixin"></a>
+                    <a class="jiathis_button_renren"></a>
+                    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                    <a class="jiathis_counter_style"></a>
+                </div>
+                <!-- JiaThis Button END -->
+            </div>
+        </div>
+        <div class="down-xqr">
+            {~W('P7230/lzk',array($info['id']))}
+            <p class="down-title"><i class="cur">全部内容</i><i>游戏截图</i><i>游戏攻略</i><i>评论</i></p>
+            <div class="down-xqrm">
+                <!--全部内容-->
+                <div class="djxq">
+                    <div class="qbnr">
+                        <p>{~W('Home/P7230/contentProcess',array($info['content']))}</p>
+                    </div>
+                    <i class="zkxq">展开详情+</i>
+                </div>
+                <!--游戏测评-->
+                  <div class="yxcp-title"><h2 class="tit">游戏评测</h2></div>
+                <div class="yxcp">
+      <span>
+          <b class="pic"><u class="demo3"><em id="demoem"></em><input class="knob" value="{$info['score']}"></u><s class="title">{$info.title}</s><s>编辑：胡秋阳</s></b>
+          <b><em>画面：<i class="star{$info.picture_score}"></i></em><em>特色：<i class="star{$info.feature_score}"></i></em></b>
+          <b><em>音乐：<i class="star{$info.music_score}"></i></em><em>运行：<i class="star{$info.run_score}"></i></em></b>
+
+          <?php $tid = M('productTagsMap')->where('did = '.$info['id'])->getField('tid',true);
+                $tid = implode(',',$tid);
+                if($tid){
+                $xqpcId = M('document')->alias('a')->join('__PRODUCT_TAGS_MAP__ b ON a.id = b.did')->where('b.tid IN('.$tid.') AND b.type="document" AND a.category_id IN(88,91)')->order('a.create_time desc')->getField('a.id');
+                }
+          ?>
+          <a href="{:$xqpcId?staticUrl('detail',$xqpcId,'Document'):'javascript:void(0)'}" target="{:$xqpcId?'_blank':'_self'}" class="down">详细评测</a>
+      </span>
+                    <span class="pingyu">评语：{$info.keytext}</span>
+                </div>
+
+                <!--游戏图片-->
+                <div class="yxcp-title"><h2 class="tit">游戏截图</h2></div>
+                <div class="sptp">
+                    <div id="waic">
+                        <div class="div1"></div>
+                    </div>
+                    <div class="xxx">
+                        <ul class="gdt">
+                            <!--<li><a href="" target="_blank"><i></i><img src=""></a></li>-->
+                            <volist name="info['previewimg']" id="img">
+                                <li><img src="{:get_cover($img,'path')}"></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+
+                {~W('P7230/ArticleApply',array($info['id'],$info['category_id']))}
+
+                <!--同一开发者
+                <p class="yxcp-title"><em>入选专辑</em></p>
+                <div class="xgyy">
+                    <ul>
+                        <li class="fm"><a href="" target="_blank"><img src="__PUBLIC__/Down/7230/images/pic1.jpg"><u>熟悉计算机考试快</u><s></s></a></li>
+                        <li><a href="" target="_blank" class="pic"><img src="__PUBLIC__/Down/7230/images/pic3.jpg"></a><a href="" target="_blank" class="tit">熟悉计算机考试快</a></li>
+                        <li><a href="" target="_blank" class="pic"><img src="__PUBLIC__/Down/7230/images/pic3.jpg"></a><a href="" target="_blank" class="tit">熟悉计算机考试快</a></li>
+                        <li><a href="" target="_blank" class="pic"><img src="__PUBLIC__/Down/7230/images/pic3.jpg"></a><a href="" target="_blank" class="tit">熟悉计算机考试快</a></li>
+                        <li><a href="" target="_blank" class="pic"><img src="__PUBLIC__/Down/7230/images/pic3.jpg"></a><a href="" target="_blank" class="tit">熟悉计算机考试快</a></li>
+                        <li><a href="" target="_blank" class="pic"><img src="__PUBLIC__/Down/7230/images/pic3.jpg"></a><a href="" target="_blank" class="tit">熟悉计算机考试快</a></li>
+                        <li><a href="" target="_blank" class="pic"><img src="__PUBLIC__/Down/7230/images/pic3.jpg"></a><a href="" target="_blank" class="tit">熟悉计算机考试快</a></li>
+                    </ul>
+                </div>
+-->
+                <!--网友评论-->
+                 <div class="yxcp-title"><h2 class="tit">网友评论</h2></div>
+                <div id="pinglun">
+                    <form action="" method="" name="" id="pl"  data-id="{$info['id']}" data-model="down">
+                        <p><input type="text" value="游客" id="user"><span><i class="qd">值得期待，赞！</i><i class="jy"> 打个酱油！</i><i class="ca">踩一脚！</i></span></p>
+                        <p class="bot"><b></b><textarea></textarea><input type="button" value="发表评论" id="btn"></p>
+                    </form>
+                    <ul class="comment_lists" data-id="{$info['id']}" data-model="down"></ul>
+                    <p class="more"><a href="{:C('STATIC_URL')}/P7230/commentIndex/id/{$info['id']}/model/down" target="_blank">点击查看更多评论</a></p>
+                </div>
+            </div>
+            <!--主体内容 END-->
+        </div>
+    </div>
+
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Down/7230/js/jquery.knob.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Down/7230/js/excanvas.js"></script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+</block>

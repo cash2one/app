@@ -1,0 +1,75 @@
+{:W('Home/Jf96ufeature/head')}
+<div class="dragable" widget="batch_zq1_base"></div>
+<php>$jfzt = $info;</php>
+<include file="Home@jf96umobile/Public/head"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css">
+{:W('Home/Jf96ufeature/body')}
+<include file="Home@jf96umobile/Public/otherheader"/>
+<section class="down-detail-mid1 dis-bot">
+    <div class="mid1-top">
+        <img src="{:get_cover($down['smallimg'],'path')}" alt="{$down['title']}">
+        <div class="text">
+            <h1>{$down['title']}</h1>
+            <p>语言：{$down['language']}</p>
+            <p>{$down['size']}/{$down['cate']}</p>
+        </div>
+    </div>
+    <div class="mid1-bot"><a href="{$nav2['gl']['url']}"><span><em class="ico"></em>攻略</span></a><a href="{$nav2['zx']['url']}"><span><em class="ico"></em>资讯</span></a><a href="{$staticUrl}/libao/d_{$down['id']}.html"><span><em class="ico"></em>礼包</span></a></div>
+</section>
+
+<section class="down-detail-mid3 dis-bot">
+    <div class="mid-title"><h2>相关下载</h2></div>
+    <ul class="mid2-list mid3-list">
+        <volist name="down['sys']" id="val">
+            <li><a href="{:str_replace('index.html','',staticUrlMobile('detail',$val['id'],'Down'))}" class="title" title="{$val['title']}">[{$val[sys]}]&nbsp;&nbsp;{$val['title']}</a><a href="{:str_replace('index.html','',staticUrlMobile('detail',$val['id'],'Down'))}" class="lq">下载</a></li>
+        </volist>
+    </ul>
+</section>
+
+<section class="down-detail-mid4 dis-bot">
+    <div class="mid-title"><h2>游戏介绍</h2></div>
+    <div class="swiper-container1">
+        <div class="swiper-wrapper">
+            <volist name="img" id="val">
+            <div class="swiper-slide"><img src="{:get_cover($val,'path')}"></div>
+            </volist>
+        </div>
+    </div>
+    <div class="game-intro">
+        <div id="details">{$down['description']}</div>
+        <p class="mid-more bottom-more"><a href="javascript:void(0);"><span>点击查看更多</span><em class="arr"></em></a></p>
+    </div>
+</section>
+
+<!--相关攻略-->
+<section class="mid3 dis-bot">
+    <div class="mid-title"><h2>手游攻略</h2><a href="{$nav2['gl']['url']}"><span>更多</span><em class="arr"></em></a></div>
+    <ul class="news-list">
+        <volist name="gl" id="val">
+        <li><span>[攻略]</span><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" title="{$val['title']}">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</section>
+
+<!--相关资讯-->
+<section class="mid3 dis-bot">
+    <div class="mid-title"><h2>手游资讯</h2><a href="{$nav2['zx']['url']}"><span>更多</span><em class="arr"></em></a></div>
+    <ul class="news-list">
+        <volist name="zx" id="val">
+        <li><span>[资讯]</span><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" title="{$val['title']}">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</section>
+
+<!--评论-->
+<section class="comment">
+    <div class="comment-tit"></div>
+    <form action="" method="" name="" id="pl" data-id="{$info['id']}" data-model="batch">
+        <input name="author" id="tj-user" type="hidden" value="{$info['uid']}">
+        <textarea class="commentForm"></textarea>
+        <p class="bot"><input type="button" value="发表评论" class="comment_submit" id="btn"></p>
+    </form>
+    <ul class="commentInfo" data-id="{$info['id']}" data-model="batch"></ul>
+</section>
+<include file="Home@jf96umobile/Public/otherfoot" />
+{:W('Home/Jf96ufeature/foot')}

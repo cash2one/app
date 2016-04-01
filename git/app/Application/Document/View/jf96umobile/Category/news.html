@@ -1,0 +1,27 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="title">{$categoryName}</block>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css"/>
+</block>
+<block name="body">
+    <input type="hidden"  id="hitid"   name="id"  value="{$info.id}">
+    <input type="hidden"  id="hituid"  name="uid"  value="{$info.uid}">
+    <input type="hidden"  id="hittype"  name="type"  value="{:MODULE_NAME}">
+<!--资讯导航-->
+<nav class="news-nav">
+
+    <eq name="cid" value="1622"><a href="{:staticUrlMobile('lists','1622','Document')}" class="active">资讯</a><else/><a href="{:staticUrlMobile('lists','1622','Document')}">资讯</a></eq>
+    <eq name="cid" value="1588"><a href="{:staticUrlMobile('lists','1588','Document')}" class="active">攻略</a><else/><a href="{:staticUrlMobile('lists','1588','Document')}">攻略</a></eq>
+    <eq name="cid" value="1589"><a href="{:staticUrlMobile('lists','1589','Document')}" class="active">评测</a><else/><a href="{:staticUrlMobile('lists','1589','Document')}">评测</a></eq>
+    <eq name="cid" value="1853"><a href="{:staticUrlMobile('lists','1853','Document')}" class="active">教程</a><else/><a href="{:staticUrlMobile('lists','1853','Document')}">教程</a></eq>
+    <eq name="cid" value="1764"><a href="{:staticUrlMobile('lists','1764','Document')}" class="active">问答</a><else/><a href="{:staticUrlMobile('lists','1764','Document')}">问答</a></eq>
+</nav>
+<section class="news-list-wrap">
+    <ul class="news-list-ul">
+        <volist name="lists" id="val">
+             <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a><div class="text"><a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a><p class="info">{$val['description']}</p></div></li>
+        </volist>
+      </ul>
+    <p class="mid-more bottom-more" data-id="{$cid}" id="loadnews"><a href="javascript:void(0)"><span>点击查看更多</span><em class="arr"></em></a></p>
+</section>
+</block>

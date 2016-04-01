@@ -1,0 +1,9 @@
+<div class="lbright-bjjx">
+    <p class="title"><a href="{:getWidgetPath('27', true)}" target="_blank">更多+</a><i>编辑精选</i></p>
+    <ul>
+        <Think:article basename="package" limit="18" where="position & 1">
+            <li><a href="{:staticUrl('detail',$article['id'])}" target="_blank" class="pic"><b>礼</b><i></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail',$article['id'])}" target="_blank">{$article.title}</a></li>
+        </Think:article>
+    </ul>
+    <span class="lbrnav"><b></b></span>
+</div>

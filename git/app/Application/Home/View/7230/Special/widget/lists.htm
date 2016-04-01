@@ -1,0 +1,13 @@
+<div class="dragable" widget="down__product_tags">
+<ul class="klb">
+<volist name="lists" id="v">
+    <li>
+        <p>
+        	<a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($v['cover_id'],'path')}"></a>
+        	<span><a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank">{$v.title}</a><i class="star4 star"></i><i>{:format_size($v['size'])}</i><a href="{$v.url}" class="down">下载</a></span>
+        	</p>
+       <b></b>
+    </li>
+    </volist>
+    </ul>
+</div>

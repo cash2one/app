@@ -1,0 +1,35 @@
+<!--游戏排行-->
+<div class="game_rank">
+    <div>
+        <h2>手机网游排行榜</h2>
+        <ul>
+           <Think:article basename="Down" name="dmain"  cate="5"  where="cover_id!=0" limit="10">
+          <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>><b></b><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title}</a><span><a href="" target="_blank"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic">{$article.title}</a><em><i>大小：200M</i><i>模拟街机</i></em></span></li>
+        </Think:article>
+        </ul>
+    </div>
+    <div>
+        <h2>安卓游戏排行榜</h2>
+        <ul>
+           <Think:article basename="Down" name="dmain"  cate="6"  where="cover_id!=0" limit="10">
+          <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>><b></b><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title}</a><span><a href="" target="_blank"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic">{$article.title}</a><em><i>大小：200M</i><i>模拟街机</i></em></span></li>
+        </Think:article>
+        </ul>
+    </div>
+    <div>
+        <h2>苹果游戏排行榜</h2>
+        <ul>
+            <Think:article basename="Down" name="dmain"  cate="7"  where="cover_id!=0" limit="10">
+          <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>><b></b><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title}</a><span><a href="" target="_blank"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic">{$article.title}</a><em><i>大小：200M</i><i>模拟街机</i></em></span></li>
+        </Think:article>
+        </ul>
+    </div>
+    <div>
+        <h2>手游下载排行榜</h2>
+        <ul>
+            <Think:article basename="Down" name="dmain"  cate="8"  where="cover_id!=0" limit="10">
+          <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>><b></b><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title}</a><span><a href="" target="_blank"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic">{$article.title}</a><em><i>大小：200M</i><i>模拟街机</i></em></span></li>
+        </Think:article>
+        </ul>
+    </div>
+</div>

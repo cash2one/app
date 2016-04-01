@@ -1,0 +1,8 @@
+<div id="about-rec">
+    <notempty name="top['js']">
+    <p class="zbjs"><span>{$bTags['js']['title']}</span><volist name="top['js']" id="val"><php>if($i!=1){echo '|';}</php><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['sub_title']?$val['sub_title']:$val['title']}</a></volist></p>
+    </notempty>
+    <notempty name="top['wf']">
+    <p class="wfpx"><span>{$bTags['wf']['title']}</span><volist name="top['wf']" id="val"><php>if($i!=1){echo '|';}</php><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['sub_title']?$val['sub_title']:$val['title']}</a></volist></p>
+    </notempty>
+</div>

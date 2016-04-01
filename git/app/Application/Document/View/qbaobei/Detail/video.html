@@ -1,0 +1,64 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/content.css" /></block>
+<block name="body">
+<!--head部分-->
+<div class="wrap channel-head">
+    <div class="wrap adv1200_103"><img src="__PUBLIC__/Home/qbaobei2/images/adv1.jpg"></div>
+    <div class="head-main">
+        <div class="left">
+            <a href="{:C('STATIC_URL')}" class="logo">亲亲宝贝网</a>
+            <h1>视频</h1>
+        </div>
+      <include file="Home@qbaobei/Public/PC2/search" />
+    </div>
+</div>
+<!--内容主体部分 start-->
+<div class="channel-main detailBox">
+    <div class="wrap channel-wraper">
+    <div class="cont-goback"><span>您的位置：</span><a href="{:C('STATIC_URL')}">首页</a>>{:W('Qbaobei/currentPosition',array($info['category_id']))}><span>{$info['title']}</span></div>
+    <!--视频播放-->
+    <div class="video-wrap">
+        <h1>{$info['title']}</h1>
+        <div class="video-tips">
+            {~W('Document/Qbaobei/videoRelateTags',array($info['id']))} 
+            <p class="tit-info"><b>详细介绍：</b>{$info['description']}</p>
+        </div>
+        <div class="video-auto"><embed src="{$info['video_url']}" quality="high" width="100%" height="100%" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></div>
+        <div class="video-zan">
+            <span class="bf">播放次数：<em id="hits" data-id="{$info['id']}" data-model="document">{$info['view']}</em></span>
+        </div>
+    </div>
+    <div class="baike-main">
+        <div class="detail-main-l video-detail">
+              {~W('Document/Qbaobei/videoDetailRelate',array($info['id']))} 
+        <div class="pinglun">
+            <div class="fn-title fn-title-l"><h2>妈妈评论</h2></div>
+            <div class="pingl-box">
+                <form action="" method="" name="" id="pl" data-id="{$info['id']}" data-model="document">
+                    <input name="author" id="tj-user" type="hidden" value="{$info['uid']}" />
+                    <p><textarea></textarea></p>
+                    <p class="bot"><b>本站为防止低俗内容出现，用户发表的评论需经过审核，谢谢 ！</b>
+                    <input type="button" value="发表评论" id="btn"></p>
+                </form>
+            </div>
+            <div class="pingl-list">
+                <div class="fn-title fn-title-l"><h2>妈妈评论</h2></div>
+                <ul class="pingl-ul" data-id="{$info['id']}" data-model="document">
+                       <p id="no-comment" style="text-align:center;">暂无评论</p>
+                </ul>
+            </div>
+        </div>
+        </div>
+        <div class="baike-main-r">
+            <!--广告-->
+            <div class="adv259_193">
+            <!-- 广告位：资讯详情右侧广告3 -->
+             <script type="text/javascript">BAIDU_CLB_fillSlot("1135930");</script>
+            </div>
+            {~W('Document/Qbaobei/detailVideoRank')}
+        </div>
+    </div>
+ </div>
+</div>
+<!--内容主体部分 end-->
+</block>

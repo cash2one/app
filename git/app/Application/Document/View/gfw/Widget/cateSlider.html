@@ -1,0 +1,17 @@
+<div class="slide">
+<ul class="slide-img">
+<volist name="lists" id="vo">
+ <li><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['cover_id'],'path')}" ></a></li>
+</volist>
+</ul>
+<ul class="slide-content">
+<volist name="lists" id="vo">
+    <li>
+        <h3>{$vo['title']}</h3>
+        <div>{$vo['description']|msubstr=0,50}</div>
+    </li>
+</volist>
+</ul>
+<ul class="slide-list">
+</ul>
+</div>

@@ -1,0 +1,22 @@
+<extend name="Home@afsmobile/Base/common"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/afsmobile/css/news.css"/>
+</block>
+<block name="body">
+   <!--game_rec-->
+   <section id="game_rec" class="news_list">
+       <p class="title">
+       <a <php>if($cate=='192'){echo "class='cur'";}</php> href="{:getWidgetPath('50')}">资料</a>
+       <a <php>if($cate=='81'){echo "class='cur'";}</php>href="{:getWidgetPath('10')}">预告</a>
+       <a <php>if($cate=='184'){echo "class='cur'";}</php>href="{:getWidgetPath('11')}">评测</a>
+       <a <php>if($cate=='182'){echo "class='cur'";}</php>href="{:getWidgetPath('12')}" >新闻</a>
+       <a <php>if($cate=='191'){echo "class='cur'";}</php>href="{:getWidgetPath('13')}">问答</a>
+       </p>
+       <ul>
+        <volist  name="lists" id="article">
+            <li><a href="{:staticUrlMobile('detail', $article['id'],'Document')}"><img src="{:get_cover($article['cover_id'],'path')}"></a><span><a href="{:staticUrlMobile('detail', $article['id'],'Document')}">{$article.title}</a><i>{$article.description}</i></span></li>
+        </volist>
+       </ul>
+        <div class="page">{$page}</div>
+   </section>
+</block>

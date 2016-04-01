@@ -1,0 +1,32 @@
+<div class="game-hot dis-bot wrap cata-tab">
+  <div class="mid-tit">
+    <h3>热门手游排行榜</h3>
+    <p class="tab-hd"><span class="active">日榜</span><span>周榜</span></p>
+  </div>
+  <ul class="tab-cont current">
+      <document model="13" rootid="1645" order="hot" limit="10"  index="ids">
+                    </document>
+                    <if condition="substr_count($ids, ',') eq '9'">
+                        <document model="13" rootid="1645" order="hot" limit="10"  index="ids">
+                            <li><em>1</em><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a><span class="down-nub">{$document.view}</span></li>
+                        </document>
+                        <else/>
+                        <document model="13" rootid="1645" order="click" limit="10"  index="ids">
+                            <li><em>1</em><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a><span class="down-nub">{$document.view}</span></li>
+                        </document>
+                    </if>
+  </ul>
+  <ul class="tab-cont">
+<document model="13" rootid="1645" order="hot7" limit="10"  index="ids">
+                    </document>
+                    <if condition="substr_count($ids, ',') eq '9'">
+                        <document model="13" rootid="1645" order="hot7" limit="10"  index="ids">
+                            <li><em>1</em><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a><span class="down-nub">{$document.view}</span></li>
+                        </document>
+                        <else/>
+                        <document model="13" rootid="1645" order="click" limit="10"  index="ids">
+                            <li><em>1</em><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a><span class="down-nub">{$document.view}</span></li>
+                        </document>
+                    </if>
+  </ul>
+</div>

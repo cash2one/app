@@ -1,0 +1,310 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/channel.css"/></block>
+<block name="header">
+    <include file="Home@qili/Public/header" />
+</block>
+
+<block name="body">
+<classify model="2" typeid="2" index="fashion"></classify>
+<classify model="2" typeid="99" index="match"></classify>
+<classify model="2" typeid="1517" index="street"></classify>
+<classify model="2" typeid="1503" index="star"></classify>
+<classify model="2" typeid="4" index="blogger"></classify>
+<php>$beautyid = $fashion.','.$match.','.$street.','.$star.','.$blogger;</php>
+
+<div class="qnx1200 banner">
+    <div class="focus6">
+        <ul class="focus6-ul">
+              <document model="2" typeid="$beautyid" flag="beauty_recom,1" limit="5" order="update_time DESC,level DESC">
+                    <li><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '790x470')}" alt="{$document.title}"></a></li>
+             </document>
+        </ul>
+        <div class="focus-info"><a href="javascript:;" target="_blank"></a><div class="circle"></div><div class="bg"></div></div>
+    </div>
+    <div class="right tab-nub">
+        <p class="tab-tit"><span>TOP LINE<em></em></span><span class="active">今日头条<em></em></span></p>
+        <ul class="right-ul current">   
+          <document model="2" typeid="$beautyid" flag="beauty_recom,2" limit="12" order="edit">
+            <li><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a></li>
+          </document>
+        </ul>
+        <div class="fresh"><span><i></i>换一组</span></div>
+    </div>
+</div>
+
+<!--时装-->
+<div class="qnx1200 channel hufu">
+    <div class="title">
+        <h3><a href="/hufu/" target="_blank">护肤</a></h3>
+        <div class="rec-tags">
+			<document model="2" rootid="2" flag="beauty_recom,32" limit="1" order="edit">
+				<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+			</document>
+		</div>
+
+        <div class="rec-links">
+			<classify model="2" id="509,975,1338,1544,1179,483,512,1265,1257">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 7">
+					<em>|</em>
+				</if>
+			</classify>
+		</div>
+    </div>
+
+    <div class="channel-l">
+        <div class="left-one">
+			<document model="2" rootid="2" flag="beauty_recom,8" limit="1" order="edit">
+				<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_d], $document[atlas], '437x372')}" alt="{$document.title|msubstr=0,18}"><span class="tit">{$document.title}</span></a>
+			</document>
+
+            <ul class="about-list">
+                <document model="2" rootid="2" flag="beauty_recom,8" limit="1,4" order="edit">
+					<li><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a></li>
+                </document>
+            </ul>
+        </div>
+
+        <div class="left-two">
+			<document model="2" rootid="2" flag="beauty_recom,4" limit="2" order="edit">
+				<div class="hjzb">
+					<a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_e], $document[atlas], '335x250')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a>
+				</div>
+			</document>
+        </div>
+    </div>
+
+    <div class="channel-r">
+        <ul class="channel-tab">
+			<document model="2" rootid="2" flag="beauty_recom,16" limit="4" order="edit">
+				<li <eq name="key" value="1">class="active"</eq>>
+					<a href="{$document.url}" target="_blank" title="{$document.title}"><span class="tit">{$document.title}</span><img src="{:get_thumb($document[atlas_e], $document[atlas], '360x280')}" alt="{$document.title}"></a>
+				</li>
+            </document>
+        </ul>
+    </div>
+</div>
+
+<div class="qnx1200 channel caizhu">
+    <div class="title">
+        <h3><a href="/caizhuang/" target="_blank">彩妆</a></h3>
+        <div class="rec-links">
+			<classify model="2" id="945,464,1177,467,1325,1212,501,1241">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 8">
+					<em>|</em>
+				</if>
+			</classify>
+        </div>
+    </div>
+
+    <div class="channel-l caizhu-l">
+		<document model="2" rootid="99" flag="beauty_recom,4" limit=":3" order="edit">
+			<php>$typeid[] = $document['category_id'];$docid[] = $document['id'];</php>
+		</document>
+
+        <ul class="left-ul pdpic4">
+         <notempty name="typeid[0]">
+         <li>
+          <document model="2" typeid="$typeid[0]" flag="beauty_recom,4" limit="1">   
+           <b class="pic-tag">
+				<a href="{$document.typeurl}">{$document.typename}</a>
+		   </b>
+                <a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '250x350')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a>
+              </document>
+                <div class="list-text">
+                  <document model="2" typeid="$typeid[0]" notin="$docid[0]" order="desc" limit="2">
+                    <a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+                    </document>
+                </div>
+            </li>
+              <!---->
+            </notempty>
+          <notempty name="typeid[1]">
+          <li>
+          <document model="2" typeid="$typeid[1]" flag="beauty_recom,4" limit="1">   
+           <b class="pic-tag"><a href="{$document.typeurl}">{$document.typename}</a></b>
+                <a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '250x350')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a>
+              </document>
+                <div class="list-text">
+                  <document model="2" typeid="$typeid[1]" notin="$docid[1]" order="desc" limit="2">
+                    <a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+                    </document>
+                </div>
+            </li>
+          </notempty>
+           <notempty name="typeid[2]">
+           <li>
+          <document model="2" typeid="$typeid[2]" flag="beauty_recom,4" limit="1">   
+           <b class="pic-tag"><a href="{$document.typeurl}">{$document.typename}</a></b>
+                <a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '250x350')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a>
+              </document>
+                <div class="list-text">
+                  <document model="2" typeid="$typeid[2]" notin="$docid[2]" order="desc" limit="2">
+                    <a href="{$document.url}" target="_blank" title="{$document.typename}">{$document.title}</a>
+                    </document>
+                </div>
+            </li>
+         </notempty>
+        </ul>
+    </div>
+    <div class="channel-r caizhu-r showhide">
+         <document model="2" rootid="99" flag="beauty_recom,16" limit="2" order="edit">
+        <div class="list">
+            <a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '385x230')}" alt="{$document.title}"></a>
+            <p><a href="{$document.url}" target="_blank" class="tit">{$document.title}</a><span class="info">{$document.title}</span></p>
+        </div>
+        </document>
+    </div>
+</div>
+
+<div class="qnx1200 channel meifa">
+    <div class="title">
+        <h3><a href="/meifa/" target="_blank">美发</a></h3>
+        <div class="rec-links">
+			<classify model="2" id="247,662,623,689,1368,661,251,254">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 8">
+					<em>|</em>
+				</if>
+			</classify>
+        </div>
+    </div>
+    <ul class="meifa-ul pdpic4">
+	   <document model="2" rootid="4" flag="beauty_recom,4" limit="4">
+		<li><b class="pic-tag"><a href="{$document.typeurl}" target="_blank">{$document.typename}</a></b><a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '780x370')}" alt="{$document.title}"></a>
+		<p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" target="_blank" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p></li>
+	   </document>
+    </ul>
+</div>
+
+<div class="qnx1200 channel caizhu">
+    <div class="title">
+        <h3><a href="/meijia/" target="_blank">美甲</a></h3>
+        <div class="rec-links">
+			<classify model="2" typeid="1517" limit="5">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 5">
+					<em>|</em>
+				</if>
+			</classify>
+		</div>
+    </div>
+    <div class="channel-l caizhu-l">
+        <ul class="left-ul pdpic4">
+			<document model="2" rootid="1517" limit=":3" flag="beauty_recom,4" order="edit"><php>$typeids[] = $document['id'];</php></document>
+			<document model="2" rootid="1517" limit="2" flag="beauty_recom,16" order="edit" index="recom"></document>
+
+			<if condition="isset($typeids[0])"> 
+				<li>
+					<document model="2" id="$typeids[0]" index="id">
+						<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}">
+							<img src="{:get_thumb($document[atlas_c], $document[atlas], '252x340')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span>
+						</a>
+						<php>
+							$categoryid = $document['category_id'];
+							$id = $recom ? $recom.','.$id : $id;
+						</php>
+					</document>
+
+					<div class="list-text">
+						<document model="2" typeid="$categoryid" notin="$id" limit="2">
+							<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+						</document>
+					</div>
+				</li>
+			</if>
+
+			<if condition="isset($typeids[1])"> 
+				<li>
+					<document model="2" id="$typeids[1]" index="$id">
+						<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}">
+							<img src="{:get_thumb($document[atlas_c], $document[atlas], '252x340')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span>
+						</a>
+						<php>
+							$categoryid = $document['category_id'];
+							$id = $recom ? $recom.','.$id : $id;
+						</php>
+					</document>
+
+					<div class="list-text">
+						<document model="2" typeid="$categoryid" notin="$id" limit="2">
+							<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+						</document>
+					</div>
+				</li>
+			</if>
+
+			<if condition="isset($typeids[2])"> 
+				<li>
+					<document model="2" id="$typeids[2]" index="id">
+						<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}">
+							<img src="{:get_thumb($document[atlas_c], $document[atlas], '252x340')}" alt="{$document.title}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span>
+						</a>
+						<php>
+							$categoryid = $document['category_id'];
+							$id = $recom ? $recom.','.$id : $id;
+						</php>
+					</document>
+
+					<div class="list-text">
+						<document model="2" typeid="$categoryid" notin="$id" limit="2">
+							<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+						</document>
+					</div>
+				</li>
+			</if>
+        </ul>
+    </div>
+
+    <div class="channel-r caizhu-r showhide">
+		<document model="2" rootid="1517" limit="2" flag="beauty_recom,16" order="edit">
+			<div class="list">
+				<a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '385x230')}" alt="{$document.title}"></a>
+				<p><a href="{$document.url}" target="_blank" class="tit">{$document.title}</a><span class="info">{$document.description}</span></p>
+			</div>
+		</document>
+    </div>
+</div>
+
+<div class="qnx1200 channel yimei">
+    <div class="title">
+        <h3><a href="/yimei/" target="_blank">医美</a></h3>
+        <div class="rec-links">
+			<classify model="2" typeid="1503" limit="5">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key lt 5">
+					<em>|</em>
+				</if>
+			</classify>
+        </div>
+    </div>
+
+    <div class="channel-l">
+        <ul class="yimei-ul">
+           <document model="2" rootid="1503" limit="4" flag="beauty_recom,4" order="edit">
+				<li><b class="pic-tag"><a href="{$document.typeurl}">{$document.typename}</a></b><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '385x230')}" alt="{$document.title}"></a><p class="all-tit"><em class="left-arr"></em><a href="{$document.url}" target="_blank" class="text">{$document.title}</a><em class="right-arr"></em><b class="bg"></b></p></li>
+           </document>
+        </ul>
+    </div>
+
+    <div class="channel-r bozhu">
+        <div class="shbz-main">
+            <div class="shbz-box">
+                <ul class="bzul">
+                <classify model="2" typeid="1503" limit="12" flag="position,64" order="edit">
+					<li>
+						<a href="{$classify.url}" target="_blank" title="{$classify.title}" class="img"><img src="<pic name="$classify.icon" />"></a>
+						<span class="list">
+							<a href="{$classify.url}" target="_blank" class="tit">{$classify.title}</a>
+							<a href="{$classify.url}" target="_blank">{$classify.description}</a>
+						</span>
+					</li>
+                </classify>
+                </ul>
+            </div>
+            <div class="scbar"><div class="line"></div><div class="line-auto"><span class="auto"></span></div></div>
+        </div>
+    </div>
+</div>
+</block>

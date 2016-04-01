@@ -1,0 +1,9 @@
+<div class="fl-nav-r">
+  <ul class="fl-r-ul">
+  <volist name="lists" offset="0" length="4" id="vo">
+    <li><a href="{:C('STATIC_URL')}/tag/{$vo['name']}/" target="_blank">{$vo['title']}</a>
+    <neq name="key" value="3"><em>/</em></neq>
+    </li>
+   </volist>
+  </ul>
+</div>

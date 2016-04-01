@@ -1,0 +1,33 @@
+  {~W('Home/p7230/everydayRecommend')}
+    <!---今日推荐(recommended) END---->
+
+    <div class="hot" id="hottab">
+        <p class="title">热点资讯<a href="{:staticUrl('lists',90, 'Document')}" target="_blank" class="more"></a></p>
+        <ul class="ulTab">
+            <Think:article basename="Document" name="article" cate="90"  limit="8" order="create_time desc" >    
+            <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title} </a></li>
+           </Think:article>
+        </ul>
+    </div>
+    <!---热点资讯(hot) END---->
+
+    <div class="review">
+        <p class="title">最新评测<a href="{:staticUrl('lists',91, 'Document')}" target="_blank" class="more"></a></p>
+        <ul>
+           <Think:article basename="Document" name="article" limit="5" cate="91"  order="create_time desc" >    
+            <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic3"><img src="{:get_cover($article['cover_id'],'path')}"></a>
+            <b><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a><i class="info">{$article.description}</i></b></li>
+           </Think:article>
+        </ul>
+    </div>
+    <!---最新评测(review) END---->
+
+    <div class="newgame">
+        <p class="title">最新入库游戏<a href="{:C('STATIC_URL')}/yx/0_0_0_0_2_1.html" target="_blank" class="more"></a></p>
+        <ul>
+          <Think:article basename="Down" name="dmain" limit="18" where="category_rootid=1" order="create_time desc"  >
+                <li><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic3"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="title">{$article.title}</a></li>
+            </Think:article>
+        </ul>
+    </div>
+    <!---最新入库游戏(new games) END---->

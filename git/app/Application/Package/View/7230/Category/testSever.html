@@ -1,0 +1,78 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/7230/css/wjgzb.css"/></block>
+<block name="body">
+<div id="wjgzb-main">
+    {~W('P7230/testServerRank')}
+    <!------即将开测------->
+    <P class="wjgz jjkc">{$info['title']}<i></i></P>
+    <div class="gzbd">
+        <p class="nav kcnav"><i class="cur">全部</i><i>安卓</i><i>IOS</i></p>
+        <p class="yxxx"><i>测试时间</i><i class="tb">图标</i><i>游戏名</i><i>{$info['id']=='3'?'服务器名':'测试类型'}</i><i>游戏分类</i><i>评分</i><i>下载</i><i>礼包</i><i>厂商</i><i>玩家关注</i></p>
+        <ul class="current">
+            <volist name="list" id="val" empty="$empty">
+            <li><i>{:date('Y-m-d',$val['start_time'])}</i><a href="{:$val['androidId']?staticUrl('detail',$val['androidId'],'Down'):'javascript:void(0)'}" target="{$val['androidId']?'_blank':'_self'}" class="pic"><img src="{:get_cover($val['cover_id'],'path')}"></a><a href="{:$val['androidId']?staticUrl('detail',$val['androidId'],'Down'):'javascript:void(0)'}" target="{$val['androidId']?'_blank':'_self'}" class="tit">{$val['title']}</a><i>{$val['server']}</i><i>{:showText($val['game_type'],'game_type',false,'Package')}</i><i>{$val['score']}分</i><i class="down"><a {:$val['androidId']?('href="'.staticUrl('detail',$val['androidId'],'Down').'" target="_blank"'):''} class="anzhuo {$val['androidId']?'':'az-now'}"></a><a {:$val['IOS']?('href="'.staticUrl('detail',$val['IOS'],'Down').'" target="_blank"'):''} class="apple {$val['IOS']?'':'ap-now'}"></a></i>
+            <a href="{:$val['packageId']?staticUrl('detail',$val['packageId'],'Package'):'javascript:void(0)'}" target="{$val['packageId']?'_blank':'_self'}" class="lb"></a><i>{$val['company']?$val['company']:'未知'}</i><i>3000人关注</i></li>
+            </volist>
+            <li class="loading"><input type="hidden" value="" /><input type="hidden" value="1" />正在为你加载更多……</li>
+        </ul>
+        <ul>
+            <volist name="android" id="val" empty="$empty">
+                <li><i>{:date('Y-m-d',$val['start_time'])}</i><a href="{:$val['androidId']?staticUrl('detail',$val['androidId'],'Down'):'javascript:void(0)'}" target="{$val['androidId']?'_blank':'_self'}" class="pic"><img src="{:get_cover($val['cover_id'],'path')}"></a><a href="{:$val['androidId']?staticUrl('detail',$val['androidId'],'Down'):'javascript:void(0)'}" target="{$val['androidId']?'_blank':'_self'}" class="tit">{$val['title']}</a><i>{$val['server']}</i><i>{:showText($val['game_type'],'game_type',false,'Package')}</i><i>{$val['score']}分</i><i class="down"><a {:$val['androidId']?('href="'.staticUrl('detail',$val['androidId'],'Down').'" target="_blank"'):''} class="anzhuo {$val['androidId']?'':'az-now'}"></a><a {:$val['IOS']?('href="'.staticUrl('detail',$val['IOS'],'Down').'" target="_blank"'):''} class="apple {$val['IOS']?'':'ap-now'}"></a></i>
+                    <a href="{:$val['packageId']?staticUrl('detail',$val['packageId'],'Package'):'javascript:void(0)'}" target="{$val['packageId']?'_blank':'_self'}" class="lb"></a><i>{$val['company']?$val['company']:'未知'}</i><i>3000人关注</i></li>
+            </volist>
+            <li class="loading"><input type="hidden" value="1" /><input type="hidden" value="1" />正在为你加载更多……</li>
+        </ul>
+        <ul>
+            <volist name="IOS" id="val" empty="$empty">
+                <li><i>{:date('Y-m-d',$val['start_time'])}</i><a href="{:$val['androidId']?staticUrl('detail',$val['androidId'],'Down'):'javascript:void(0)'}" target="{$val['androidId']?'_blank':'_self'}" class="pic"><img src="{:get_cover($val['cover_id'],'path')}"></a><a href="{:$val['androidId']?staticUrl('detail',$val['androidId'],'Down'):'javascript:void(0)'}" target="{$val['androidId']?'_blank':'_self'}" class="tit">{$val['title']}</a><i>{$val['server']}</i><i>{:showText($val['game_type'],'game_type',false,'Package')}</i><i>{$val['score']}分</i><i class="down"><a {:$val['androidId']?('href="'.staticUrl('detail',$val['androidId'],'Down').'" target="_blank"'):''} class="anzhuo {$val['androidId']?'':'az-now'}"></a><a {:$val['IOS']?('href="'.staticUrl('detail',$val['IOS'],'Down').'" target="_blank"'):''} class="apple {$val['IOS']?'':'ap-now'}"></a></i>
+                    <a href="{:$val['packageId']?staticUrl('detail',$val['packageId'],'Package'):'javascript:void(0)'}" target="{$val['packageId']?'_blank':'_self'}" class="lb"></a><i>{$val['company']?$val['company']:'未知'}</i><i>3000人关注</i></li>
+            </volist>
+            <li class="loading"><input type="hidden" value="2" /><input type="hidden" value="1" />正在为你加载更多数据……</li>
+        </ul>
+    </div>
+</div>
+</block>
+<block name="Commonscript">
+<script>
+    $(function(){
+        //获取开服表的条数
+        var box =   $('.gzbd');
+        window.onscroll = function(){
+            var bul     =   box.find('ul.current');
+            var more    =   bul.find('.loading');
+            var input   =   more.find('input');
+            var va      =   input.eq(1);
+            var key     =   va.val();
+            var documentH = document.documentElement.clientHeight || document.body.scrollTop;//浏览器可视区域
+            var movHeigth = $(window).scrollTop();//鼠标移动的距离
+            var lheigth = more.offset().top//获取最后一个li与页面的距离
+
+            if((movHeigth + documentH) >=lheigth && key>0){
+                va.val(0);
+                var bli     =   bul.find('li').length-1;
+                var con     =   input.eq(0).val();
+                $.ajax({
+                    dataType:"jsonp",
+                    jsonp:"callback",
+                    url: window.DYNAMIC_SERVER_URL + '/dynamic.php?s=/P7230/AjaxTestServer/cate/{$cate}/start/' + bli+(con?'/con/'+con:''),
+                    success:function(data){
+                        if(data){
+                            var liThtml ="";
+                            for(i in data){
+                                liThtml += '<li><i>'+data[i].start_time+'</i><a href="'+(data[i].game?data[i].game:'javascript:void(0)')+'" target="'+(data[i].game?'_blank':'_self')+'" class="pic"><img src="'+data[i].imgurl +'"></a><a href="'+(data[i].game?data[i].game:'javascript:void(0)')+'" target="'+(data[i].game?'_blank':'_self')+'" class="tit">' + data[i].title+'</a><i>'+data[i].server+'</i><i>'+123+'</i><i>'+(data[i].score?data[i].score:'6')+'分</i><i class="down"><a '+(data[i].androidId?'href="'+data[i].game+'" target="_blank"':'')+' class="anzhuo '+(data[i].game?'':'az-now')+'"></a><a '+(data[i].IOS?'href="'+data[i].IOS+'" target="_blank"':'')+' class="apple '+(data[i].IOS?'':'ap-now')+'"></a></i>'+
+                                        '<a href="'+(data[i].package?data[i].package:'javascript:void(0)') + '" target="'+(data[i].package?'_blank':'_self') + '" class="lb"></a><i>'+(data[i]['company']?data[i]['company']:'未知')+'</i><i>3000人关注</i></li>';
+                            }
+                            more.before(liThtml);
+                            va.val(1);
+                        }else{
+                            more.html('这篇已经没有更多数据了……');
+                            va.val(0);
+                        }
+                    }
+                });
+            }
+        }
+    });
+</script>
+</block>

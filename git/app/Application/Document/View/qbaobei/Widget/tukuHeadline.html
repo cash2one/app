@@ -1,0 +1,48 @@
+<div class="left">
+  <div class="picFocus"> <span class="focus-btn prev"></span> <span class="focus-btn next"></span>
+    <ul>
+        <volist name="slider" id="vo">
+                 <eq name="key" value="0">
+                        <li class="current"><a href="{:staticUrl('detail', $vo['id'],'Gallery')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"></a></li>
+                 <else/>
+                       <li><a href="{:staticUrl('detail', $vo['id'],'Gallery')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"></a></li>
+                 </eq>
+       </volist>
+    </ul>
+    <div class="circle"></div>
+    <p class="focusTitle"><a href="javascript:;" rel="nofollow" target="_blank" class="focusa"></a><b></b></p>
+  </div>
+  <div class="chanbox1-rec">
+              <volist name="headline" id="vo">
+    <div class="chanbox1-info"> <a href="{:staticUrl('detail', $vo['id'],'Gallery')}" target="_blank">{$vo['title']}</a>
+      <p class="info">{:strip_tags($vo['content'])}</p>
+    </div>
+               </volist>
+    <ul class="chanbox1-ul">
+          <volist name="latest" id="vo">
+                 <li><a href="{:staticUrl('detail', $vo['id'],'Gallery')}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+         </volist>
+    </ul>
+  </div>
+</div>
+<div class="right">
+  <div class="fn-title">
+    <h2>大家都爱看</h2>
+  </div>
+  <div class="recNews-pic"> 
+        <volist name="commend" id="vo">
+              <switch name="key">
+                    <case value="0">
+                        <a href="{:staticUrl('detail', $vo['id'],'Gallery')}" target="_blank" class="bigpic"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><span class="tit">{$vo['title']}</span></a>
+                    </case>
+                    <case value="1">
+                       <a href="{:staticUrl('detail', $vo['id'],'Gallery')}" target="_blank" class="smallpic left"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><span class="tit">{$vo['title']}</span></a> 
+                    </case>
+                    <case value="2">
+                       <a href="{:staticUrl('detail', $vo['id'],'Gallery')}" target="_blank" class="smallpic right"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><span class="tit">{$vo['title']}</span></a>
+                    </case>
+              <default />
+              </switch>
+        </volist>
+  </div>
+</div>

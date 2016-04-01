@@ -1,0 +1,9 @@
+<div class="hot" id="hottab">
+    <p class="title">热门机型下载</p>
+    <b class="nav"><i>排名</i><i class="yx">机型</i></b>
+    <ul class="ulTab">
+        <volist name="hotType" id="val">
+        <li><a href="{$val['path']?$val['path']:'javascript:void(0)'}" target="{$val['path']?'_blank':'_self'}">{$val.title}</a></li>
+        </volist>
+    </ul>
+</div>

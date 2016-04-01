@@ -1,0 +1,6 @@
+   <div class="slide" id="slide">
+         <volist name="bannerH" id="val" offset="0" length='4'>
+            <div class="mod"><a href="{:staticUrlMobile('detail',$val['id'],$val['type'])}"><img src="{:get_cover($val['cover_id'],'path')}" width="600px" height="220px"/></a><span></span><a href="{:staticUrlMobile('detail',$val['id'],$val['type'])}" class="name">{$val.title}</a></div>
+        </volist>
+    </div>
+ <p class="dotModule_new"><span id="slide_dot"></span></p>

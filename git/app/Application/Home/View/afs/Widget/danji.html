@@ -1,0 +1,169 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afs/css/yxdq.css"/>
+</block>
+<block name="body">
+    <!--main-->
+    <div id="main" class="dqb">
+    <!--轮播-->
+    <div id="banner">
+        <div class="left">
+            <div class="left-main">
+                <ul>
+                 <Think:article basename="Document" name="article" cate="81"  order="update_time desc" where="position & 64" limit="3">
+                  <li><a href="{:staticUrl('detail', $article['id'],'Document')}"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"></a></li>
+                  </Think:article>
+                </ul>
+                <span></span>
+                <p></p>
+                <b></b>
+            </div>
+            <div class="small-pic"></div>
+        </div>
+        <div class="jptj">
+            <div id="title-nav"><b></b><h2>手机单机游戏</h2></div>
+          <Think:article basename="Down" name="dmain"  where="category_rootid=1&&smallimg!=0&&position & 16" order="update_time desc" limit="2">
+           <p><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($article['smallimg'],'path')}"></a><span><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank">{$article.title}</a><b><i>大小：{$article.size}</i><i>{:getCateName($article['id'],'Down')}</i></b><a href="{:staticUrl('detail', $article['id'],'Down')}" class="down">下载游戏</a></span></p>
+        </Think:article>
+        </div>
+    </div>
+    <!--游戏分类-->
+<div class="yxfl">
+    <a href="/danji/" class="dj">单机游戏</a>
+    <a href="/shouyou/" class="wy">网络游戏</a>
+    <a href="/game/0_4_0_1_1.html" class="yz">益智休闲</a>
+    <a href="/game/0_5_0_1_1.html" class="ty">体育竞技</a>
+    <a href="/game/0_14_0_1_1.html" class="dz">动作冒险</a>
+    <a href="/game/0_6_0_1_1.html" class="js">角色扮演</a>
+    <a href="/game/0_7_0_1_1.html" class="sj">射击飞行</a>
+    <a href="/game/0_8_0_1_1.html" class="zl">战略塔防</a>
+    <a href="/tag/pj/" class="pj">破解游戏</a>
+    <a href="/game/0_11_0_1_1.html" class="kp">卡牌战略</a>
+    <a href="/game/0_9_0_1_1.html" class="qp">棋牌桌游</a>
+    <a href="/game/0_8_0_1_1.html" class="cl">策略游戏</a>
+    <a href="/tag/yl/" class="yy">音乐节奏</a>
+    <a href="/tag/yc/" class="mn">模拟经营</a>
+    <a href="/tag/gd/" class="gd">格斗游戏</a>
+    <a href="/game/0_5_0_1_1.html" class="sc">赛车竞速</a>
+    <a href="/tag/jm/" class="mx">冒险解谜</a>
+    <a href="/game/" class="all">全部游戏</a>
+</div>
+
+    <!--新游下载-->
+    <div class="libao_rec" id="yxdq">
+        <div class="game_top">
+
+<div id="title-nav"><a href="http://www.anfensi.com/game/1_0_0_1_1.html" target="_blank">更多>></a><b></b><h2>最新单机</h2>
+           <span>
+           <a href="/tag/dx/">大型</a><i>|</i>
+           <a href="/tag/zw/">中文</a><i>|</i>
+           <a href="/tag/pk/">跑酷</a><i>|</i>
+           <a href="/tag/jis/">即时</a><i>|</i>
+           <a href="/tag/dm/">动漫</a><i>|</i>
+           <a href="/tag/fz/">辅助</a><i>|</i>
+           <a href="/tag/sg/">三国</a><i>|</i>
+           <a href="/tag/pj/">破解</a><i>|</i>
+           <a href="/tag/sj/">射击</a><i>|</i>
+           <a href="/tag/xc/">消除</a><i>|</i>
+           <a href="/tag/jm/">解谜</a>
+           </span>
+</div>
+           <ul class="yxfl-u">
+              <Think:article basename="Down" name="dmain"  where="category_rootid=1&&smallimg!=0" order="update_time desc" limit="32">
+            <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article.title}</b><i>{:getCateName($article['id'],'Down')}</i></a><a target="_blank" href="{:staticUrl('detail', $article['id'],'Down')}" class="down">立即下载</a></li>
+        </Think:article>
+    
+           </ul>
+       </div>
+   {~W('Home/Afs/kaifu')}
+    </div>  
+   <div style=" clear:both"></div>
+    <!--游戏分类推荐-->
+    <div class="yxfl-rec">
+        <div class="yxxfl">
+        <h3 class="qp">策略塔防</h3>
+           <ul class="yxfl-u">
+            <Think:article basename="Down" name="dmain"  cate="8" where="position & 8&&smallimg!=0" limit="4">
+          <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>>
+          <a href="{:staticUrl('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article.title}</b><i>策略塔防</i></a><a href="{:staticUrl('detail', $article['id'],'Down')}" class="down">立即下载</a></li>
+        </Think:article>
+           </ul>
+        </div>
+        <div class="yxxfl">
+        <h3 class="dz">射击飞行</h3>
+           <ul class="yxfl-u">
+               <Think:article basename="Down" name="dmain"  cate="7"  where="position & 8&&smallimg!=0" limit="4">
+          <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>>
+          <a href="{:staticUrl('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article.title}</b><i>射击飞行</i></a><a href="{:staticUrl('detail', $article['id'],'Down')}" class="down">立即下载</a></li>
+        </Think:article>
+           </ul>
+        </div>
+        <div class="yxxfl">
+        <h3 class="sc">角色扮演</h3>
+           <ul class="yxfl-u">
+             <Think:article basename="Down" name="dmain"  cate="6"  where="position & 8&&smallimg!=0" limit="4">
+          <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>>
+          <a href="{:staticUrl('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article.title}</b><i>角色扮演</i></a><a href="{:staticUrl('detail', $article['id'],'Down')}" class="down">立即下载</a></li>
+        </Think:article>
+           </ul>
+        </div>
+        <div class="yxxfl">
+        <h3 class="gd">竞速游戏</h3>
+           <ul class="yxfl-u">
+                <Think:article basename="Down" name="dmain"  cate="5"  where="position & 8&&smallimg!=0" limit="4">
+          <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>>
+          <a href="{:staticUrl('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article.title}</b><i>竞速游戏</i></a><a href="{:staticUrl('detail', $article['id'],'Down')}" class="down">立即下载</a></li>
+        </Think:article>
+           </ul>
+        </div>
+        <div class="yxxfl">
+        <h3 class="yz">益智休闲</h3>
+           <ul class="yxfl-u">
+                 <Think:article basename="Down" name="dmain"  cate="4"  where="position & 8&&smallimg!=0" limit="4">
+          <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>>
+          <a href="{:staticUrl('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article.title}</b><i>益智休闲</i></a><a href="{:staticUrl('detail', $article['id'],'Down')}" class="down">立即下载</a></li>
+        </Think:article>
+           </ul>
+        </div>
+        <div class="yxxfl">
+        <h3 class="kp">动作游戏</h3>
+           <ul class="yxfl-u">
+                 <Think:article basename="Down" name="dmain"  cate="3"  where="position & 8&&smallimg!=0" limit="4">
+          <li <PHP>if($key=='0'){echo "class='cur'";}</PHP>>
+          <a href="{:staticUrl('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article.title}</b><i>动作游戏</i></a><a href="{:staticUrl('detail', $article['id'],'Down')}" class="down">立即下载</a></li>
+        </Think:article>
+           </ul>
+        </div>
+    </div>
+   <div style=" clear:both"></div>
+   <!--游戏排行-->
+    <div class="game_rank">
+        <div>
+            <h2>网游排行榜</h2>
+            <ul>
+           {~W('Down/Afs/rankCon',array('105638','2'))}
+            </ul>
+        </div>
+        <div>
+            <h2>单机排行榜</h2>
+            <ul>
+       {~W('Down/Afs/rankCon',array('105639','2'))}
+            </ul>
+        </div>
+        <div>
+            <h2>安卓排行榜</h2>
+            <ul>
+            {~W('Down/Afs/rankCon',array('105640','2'))}
+            </ul>
+        </div>
+        <div>
+            <h2>评分排行榜</h2>
+            <ul>
+    {~W('Down/Afs/rankCon',array('105641','2'))}
+            </ul>
+        </div>
+    </div>
+ </div>
+ <!--返回顶部-->
+ <div id="go_top"><b></b></div>
+</block>

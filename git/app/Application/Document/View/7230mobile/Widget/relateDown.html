@@ -1,0 +1,10 @@
+<section>
+    <div class="top_tit"><span>相关下载推荐</span></div>
+    <div class="ul_li">
+        <ul>
+            <volist name="lists" id="val">
+            <li><a href="{:staticUrlMobile('detail',$val['id'],'Down')}"><img src="{:get_cover($val['smallimg'],'path')}" /><span class="jx_title">{$val['title']}</span><span class="jx_size">{:format_size($val['size'])}</span><span class="jx_xz">下载</span></a></li>
+            </volist>
+        </ul>
+    </div>
+</section>

@@ -1,0 +1,90 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title cf">
+        <h2>百度sitemap时时推送地址列表</h2>
+    </div>
+    <div class="cf">
+        <div class="search-form fr cf">
+            <div class="sleft">
+                    <input type="text" id="time_start" name="time_start" class="text input-2x" style="width:140px" value="" placeholder="起始时间" /> -
+                    <input type="text" id="time_end" name="time_end" class="text input-2x" style="width:140px" value="" placeholder="结束时间" />
+            </div>
+            <a class="sch-btn2" href="javascript:;" id="search" url="{:U('sitemapInfo','',false)}"><i class="btn-search"></i></a>
+        </div>
+    </div>
+    <div class="data-table table-striped">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>URL</th>
+                <th>状态</th>
+                <th>更新时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <notempty name="list">
+                <volist name="list" id="v">
+                    <tr>
+                        <td>{$v.id}</td>
+                        <td><a href="{$v['url']}" target="_blank">{$v.url}</a></td>
+                        <td>{$v.status}</td>
+                        <td>{$v.update_time|date="Y-m-d H:i:s",###}</td>
+                    </tr>
+
+                </volist>
+                <else/>
+                <td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
+            </notempty>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        {$pagination}
+    </div>
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        $(function(){
+            //搜索功能
+            $("#search").click(function(){
+                var url = $(this).attr('url');
+                var query  = $('.search-form').find('input').serialize();
+                query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+                query = query.replace(/^&/g,'');
+                if( url.indexOf('?')>0 ){
+                    url += '&' + query;
+                }else{
+                    url += '?' + query;
+                }
+                window.location.href = url;
+            });
+            //回车自动提交
+            $('.search-form').find('input').keyup(function(event){
+                if(event.keyCode===13){
+                    $("#search").click();
+                }
+            });
+
+            $('#time_start').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii:ss',
+                language:"zh-CN",
+                minView:2,
+                autoclose:true
+            });
+
+            $('#time_end').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii:ss',
+                language:"zh-CN",
+                minView:2,
+                autoclose:true
+            });
+        });
+    </script>
+</block>

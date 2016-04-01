@@ -1,0 +1,101 @@
+<extend name="Public/base" />
+<block name="body">
+  <!-- 标题栏 -->
+  
+  <div class="main-title">
+    <h2>{$name}列表</h2>
+  </div>
+  <div class="cf">
+    <div class="fl"> <a href="{:U('add?type='.$type)}" class="btn">增加{$name}</a> </div>
+     <div class="search-form fr cf">
+            <div class="sleft">
+                <input type="text" name="name" class="search-input" value="{:I('name')}" placeholder="请输入内链名称">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('index','',false)}"><i class="btn-search"></i></a>
+            </div>
+        </div>
+  </div>
+  
+  <!-- 数据列表 -->
+  <div class="data-table table-striped">
+    <table>
+      <thead>
+        <tr>
+          <th class="row-selected"> <input class="checkbox check-all" type="checkbox">
+          </th>
+          <th>编号</th>
+          <th>关键词</th>
+          <th>链接地址</th>
+          <th>作用平台</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+          <notempty name="lists">
+        
+        <volist name="lists" id="vo">
+          <tr>
+            <td><input class="ids row-selected" type="checkbox" name="ids[]" id="" value="{$vo['id']}"></td>
+            <td>{$key+1}</td>
+            <td>{$vo.words}</td>
+            <td>{$vo.url}</td>
+            <td><in name="vo.platform" value="1,2">PC端 </in> <in name="vo.platform" value="1,3">手机端</in></td>
+            <td><eq name="vo['status']" value="1">启用<else/>禁用</eq></td>
+            <td><a href="{:U('edit?id='.$vo['id'])}">编辑</a> 
+              <!-- 单个禁用/启用 -->
+              <eq name="vo['status']" value="1"> <a title="禁用" href="{:U('setStatus',array('type'=>0,'id'=>$vo['id']))}" class="confirm ajax-get">禁用</a> </eq>
+              <eq name="vo['status']|default='0'" value="0"> <a title="启用" href="{:U('setStatus',array('type'=>1,'id'=>$vo['id']))}" class="confirm ajax-get">启用</a> </eq>
+              <a title="删除" href="{:U('removeItem?id='.$vo['id'])}" class="confirm ajax-get">删除</a></td>
+          </tr>
+        </volist>
+        <else/>
+      <td colspan="6" class="text-center"> 暂无数据! </td>
+          </notempty>
+          </tbody>
+    </table>
+  </div>
+  <!-- 分页 -->
+  <div class="page"> {$page} </div>
+</block>
+<block name="script">
+  <script type="text/javascript">
+        $(function(){
+			  //搜索功能
+            $("#search").click(function(){
+                var url = $(this).attr('url');
+                var query  = $('.search-form').find('input').serialize();
+                query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+                query = query.replace(/^&/g,'');
+                if( url.indexOf('?')>0 ){
+                    url += '&' + query;
+                }else{
+                    url += '?' + query;
+                }
+                window.location.href = url;
+            });
+            //点击排序
+            $('.list_sort').click(function(){
+                var url = $(this).attr('url');
+                var ids = $('.ids:checked');
+                var param = '';
+                if(ids.length > 0){
+                    var str = new Array();
+                    ids.each(function(){
+                        str.push($(this).val());
+                    });
+                    param = str.join(',');
+                }
+
+                if(url != undefined && url != ''){
+                    window.location.href = url + '/ids/' + param;
+                }
+            });
+            //回车自动提交
+            $('.search-form').find('input').keyup(function(event){
+                if(event.keyCode===13){
+                    $("#search").click();
+                }
+            });
+        });
+    </script>
+</block>

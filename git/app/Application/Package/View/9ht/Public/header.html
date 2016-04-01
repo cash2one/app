@@ -1,0 +1,35 @@
+<!-- 导航条
+    ================================================== -->
+    <dl id="header">
+        <dd class="aztop IE6FIXED">
+            <ul class="menu">
+                <li><a href="http://www.9ht.com" target="_blank" title="首页">首页</a></li>
+                <li><a href="http://www.9ht.com/az/" target="_blank" title="安卓下载">安卓下载</a></li>
+                <li><a href="http://www.9ht.com/iphone/" target="_blank" title="苹果下载">苹果下载</a></li>
+                <li><a href="http://www.9ht.com/dj/" target="_blank" title="单机游戏">单机游戏</a></li>
+                <li><a href="http://www.9ht.com/z/gamek/shouji/" target="_blank" title="手游合集">手游合集</a></li>
+            </ul>
+        </dd>
+        <dd class="ls"><a href="#" class="logo"><img src="__PUBLIC__/Package/9ht/images/logo.png" ></a><div class="search">
+          <form action="{:C('DYNAMIC_SERVER_URL')}/dynamic.php?" method="get"  id="searchForm" name="Search_form">
+            <fieldset>
+               <legend>请输入您要查找的内容...</legend><input type="text" name="keyword" id="searchBox" class="input-bg grey9" value="请输入您要查找的内容..." onfocus="this.value=''" onblur="if(this.value==''){this.value='请输入您要查找的内容...'}" >                
+               <button type="submit" id="searchBtn" class="btn-submit">搜索</button>
+               <input name="c" type="hidden" value="Search" />
+               <input name="a" type="hidden" value="package" />
+               <input name="searchType" type="hidden" value="card">
+               <input name="theme" type="hidden" value="9ht">
+            </fieldset>
+          </form>
+     </div><!--end search--> 
+   </dd>
+   <dt class="nav"><p>
+   <a href="{:staticUrl('index', '', $static_url_params)}" <php>if(CONTROLLER_NAME=='Index'){echo "class='cur'";}</php>>发号首页</a>
+   <a href="{:staticUrl('lists', 1, $static_url_params)}" <php>if(CONTROLLER_NAME=='Category'&&$cid=='1'){echo "class='cur'";}</php>>大礼包</a>
+   <a href="{:staticUrl('lists', 2, $static_url_params)}" <php>if(CONTROLLER_NAME=='Category'&&$cid=='2'){echo "class='cur'";}</php>>开服表</a>
+   <a href="{:staticUrl('lists', 3, $static_url_params)}" <php>if(CONTROLLER_NAME=='Category'&&$cid=='3'){echo "class='cur'";}</php>>新手卡</a>
+   </p>
+   
+   
+   </dt>
+</dl>

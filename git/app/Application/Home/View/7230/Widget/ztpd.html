@@ -1,0 +1,52 @@
+<extend name="Base/common"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/ycpd.css"/>
+</block>
+<block name="body">
+<div id="zixun-main">
+    <p class="page-nav">当前位置：<a href="{:C('STATIC_URL')}">首页</a>->专题</p>
+    <div class="ycpd-top mtk">
+        <p class="title">游戏专区<a href="{:getWidgetPath('17', true)}" target="_blank">更多+</a></p>
+        <volist name="zqList" id="val" offset="0" length="1">
+            <p class="ycpd-tl"><a href="/{:C(FEATURE_ZQ_DIR)}/{$val.url_token}" target="_blank" class="pic"><img src="{:get_cover($val['icon'],'path')}"></a><a href="/{:C(FEATURE_ZQ_DIR)}/{$val.url_token}" target="_blank" class="tit">{$val.title}</a><p>
+        </volist>
+        <ul>
+        <volist name="zqList" id="val" offset="1" length="4">
+            <li><a href="/{:C(FEATURE_ZQ_DIR)}/{$val.url_token}" target="_blank" class="pic"><img src="{:get_cover($val['icon'],'path')}"></a><a href="/{:C(FEATURE_ZQ_DIR)}/{$val.url_token}" target="_blank" class="tit">{$val.title}</a></li>
+        </volist>
+        </ul>
+    </div>
+    <div class="ycpd-top mtk">
+        <p class="title">游戏合集<a href="{:getWidgetPath('18', true)}" target="_blank">更多+</a></p>
+        <volist name="ztList" id="val" offset="0" length="1">
+            <p class="ycpd-tl"><a href="/{:C(FEATURE_ZT_DIR)}/{$val.url_token}" target="_blank" class="pic"><img src="{:get_cover($val['icon'],'path')}"></a><a href="/{:C(FEATURE_ZT_DIR)}/{$val.url_token}" target="_blank" class="tit">{$val.title}</a><p>
+        </volist>        <ul>
+        <volist name="ztList" id="val" offset="1"  length="4">
+            <li><a href="/{:C(FEATURE_ZT_DIR)}/{$val.url_token}" target="_blank" class="pic"><img src="{:get_cover($val['icon'],'path')}"></a><a href="/{:C(FEATURE_ZT_DIR)}/{$val.url_token}" target="_blank" class="tit">{$val.title}</a></li>
+        </volist>
+        </ul>
+    </div>
+    <div class="ycpd-top mtk">
+        <p class="title">游戏厂商<a href="{:getWidgetPath('13', true)}" target="_blank">更多+</a></p>
+        <volist name="companyList" id="val" offset="0" length="1">
+            <p class="ycpd-tl"><a href="{$val['path']}" target="_blank" class="pic"><img src="{:get_cover($val['img'],'path')}"></a><a href="{$val['path']}" target="_blank" class="tit">{$val.name}</a><p>
+        </volist>        <ul>
+            <volist name="companyList" id="val" offset="1" length="4">
+                <li><a href="{$val['path']}" target="_blank" class="pic"><img src="{:get_cover($val['img'],'path')}"></a><a href="{$val['path']}" target="_blank" class="tit">{$val.name}</a></li>
+            </volist>
+        </ul>
+    </div>
+    <p class="ztpd-title">机型合集<a href="{:getWidgetPath('14', true)}" target="_blank">更多+</a></p>
+    <div class="ztpd">
+        <volist name="jx" id="val">
+        <p class="ztpd-p">
+        <b>{$val.title}</b>
+        <volist name="val['game']" id="yx">
+            <a href="/{:C(FEATURE_ZT_DIR)}/{$yx.url_token}" target="_blank">{$yx.title}</a>
+        </volist>
+
+        </p>
+        </volist>
+    </div>
+</div>
+</block>

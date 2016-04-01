@@ -1,0 +1,84 @@
+<extend name="Home@7230mobile/Base/common2"/>
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230mobile2/css/tags.css"/>
+</block>
+
+<block name="body">
+<section class="tags_head">
+    <div class="page_title"><span><a href="javascript:void(0);" class="back"></a></span><h2>{$info['title']}</h2></div>
+    <div class="page_cont">
+        <img src="{:get_cover($info['img'],'path')}">
+        <p>{$info['description']}</p>
+    </div>
+</section>
+
+<notempty name="lists">
+<section>
+    <div class="down_list">
+        <ul>
+            <volist name="lists" id="val">
+            <li>
+                <a href="{:staticUrlMobile('detail',$val['id'],'Down')}">
+                    <div class="yx_left"><img src="{:get_cover($val['smallimg'],'path')}"></div>
+                    <div class="yx_right">
+                        <div class="rgt_l">
+                            <div class="right1"><span class="title">{$val['title']}</span><span class="yx_cate">{$val['cate']}</span></div>
+                            <div class="right2"><span class="num">{$val['view']}人已下载</span><span class="size">{:format_size($val['size'])}</span></div>
+                        </div>
+                        <div class="rgt_r"><span class="down">下载</span></div>
+                    </div>
+                    <div class="yx_txt">{$val['description']}</div>
+                </a>
+            </li>
+            </volist>
+        </ul>
+        <div id="yx_more" onclick="m2more()">点击加载更多>></div>
+    </div>
+</section>
+</notempty>
+
+<notempty name="sameLists">
+<section>
+    <div class="same_tit"><span>同类标签还有</span></div>
+    <div class="tags_cont same">
+        <div class="tags_cate2">{$sameTag}</div>
+        <ul class="tags_cate">
+            <volist name="sameLists" id="val">
+            <li><a href="{$url}/tag/{$val['name']}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="tags_index">
+        <a href="{$url}{:getWidgetPath('60')}">返回标签首页>></a>
+    </div>
+</section>
+</notempty>
+</block>
+<block name="script">
+    <script>
+        function m2more(){
+            var t_li = $('.down_list').find('li');
+            $.ajax({
+                dataType:"jsonp",
+                jsonp:"callback",
+                url: window.DYNAMIC_SERVER_URL + '/dynamic.php?s=/P7230mobile/API_tags/key/'+"{$info['id']}"+'/star/' + t_li.length,
+                success:function(data){
+                    if(data){
+                        var li_html = '';
+                        for(i in data){
+                            li_html +=  '<li><a href="'+data[i].url+'"><div class="yx_left"><img src="'+data[i].smallimg+'"></div><div class="yx_right"><div class="rgt_l">';
+                            li_html +=  '<div class="right1"><span class="title">'+data[i].title+'</span><span class="yx_cate">'+data[i].cate+'</span></div>';
+                            li_html +=  '<div class="right2"><span class="num">'+data[i].view+'人已下载</span><span class="size">'+data[i].size+'</span></div>';
+                            li_html +=  '</div><div class="rgt_r"><span class="down">下载</span></div></div><div class="yx_txt">'+data[i].description +'</div></a></li>';
+                        }
+                        t_li.last().after(li_html);
+                    }else{
+                        $('#yx_more').html("没有更多数据了");
+                        $('#yx_more').removeAttr('onclick');
+                    }
+                }
+            });
+        }
+    </script>
+</block>

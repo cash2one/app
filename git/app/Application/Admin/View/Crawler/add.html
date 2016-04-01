@@ -1,0 +1,165 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>{:isset($c['id'])?'编辑':'新增'}{$name}</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);">基 础</a></li>
+			
+		</ul>
+		<div class="tab-content">
+			<form action="{:U('add_action')}" method="post" class="form-horizontal">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item">
+						<label class="item-label">
+							采集规则名<span class="check-tips">（规则名称不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="name" class="text input-large" value="{$c.name|default=''}">
+						</div>
+					</div>
+	                <div class="form-item">
+						<label class="item-label">
+							标题采集规则:<span class="check-tips">（规则不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="title_rule" class="text input-large" value="{$c.title_str|default=''}">
+						</div>
+					</div>
+                      <div class="form-item">
+						<label class="item-label">
+							描述采集规则:<span class="check-tips">（规则不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="description_rule" class="text input-large" value="{$c.description_str|default=''}">
+						</div>
+					</div>
+                    <div class="form-item">
+						<label class="item-label">
+							内容采集规则:<span class="check-tips">（规则不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="content_rule" class="text input-large" value="{$c.content_str|default=''}">
+						</div>
+					</div>
+                    
+                     <div class="form-item">
+						<label class="item-label">
+							版本采集规则:<span class="check-tips">（规则不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="version_rule" class="text input-large" value="{$c.version_str|default=''}">
+						</div>
+					</div>
+                      <div class="form-item">
+						<label class="item-label">
+							软件大小采集规则:<span class="check-tips">（规则不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="size_rule" class="text input-large" value="{$c.size_str|default=''}">
+						</div>
+					</div>
+                     <div class="form-item">
+						<label class="item-label">
+							下载地址采集规则:<span class="check-tips">（规则不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="file_rule" class="text input-large" value="{$c.fileurl_str|default=''}">
+						</div>
+					</div>
+                    
+                     <div class="form-item">
+						<label class="item-label">
+							ICON图采集规则:<span class="check-tips">（规则不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="icon_img" class="text input-large" value="{$c.icon_str|default=''}">
+						</div>
+					</div>
+                    <div class="form-item">
+						<label class="item-label">
+							预览多图采集规则:<span class="check-tips">（规则不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="multi_img" class="text input-large" value="{$c.images_str|default=''}">
+						</div>
+					</div>
+                    
+                      <div class="form-item">
+						<label class="item-label">
+							SEO标题规则:<span class="check-tips">（变量:{标题}）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="seo_title" class="text input-large" value="{$c.seo_title_str|default=''}">
+						</div>
+					</div>
+                      <div class="form-item">
+						<label class="item-label">
+							SEO关键字规则:<span class="check-tips">（变量:{标题}）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="seo_keywords" class="text input-large" value="{$c.seo_keywords_str|default=''}">
+						</div>
+					</div>
+                      <div class="form-item">
+						<label class="item-label">
+							SEO描述规则:<span class="check-tips">（变量:{标题}） </span>
+						</label>
+						<div class="controls">
+                           <label class="textarea">
+                        	<textarea  name="seo_description">{$c.seo_description_str|default=''}</textarea>
+                            </label>
+						</div>
+					</div>
+                    
+                    
+                    
+                    
+					<div class="form-item">
+						<label class="item-label">
+							规则描述
+						</label>
+						<div class="controls">
+							<label class="textarea">
+								<textarea  name="description">{$c.description|default=''}</textarea>
+							</label>
+						</div>
+					</div>
+			
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+					</div>
+
+
+					<div class="form-item">
+						<input type="hidden" name="id" value="{$c.id}">
+                        <input type="hidden" name="type" value="{$type}">
+						<button type="submit" id="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+						<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</block>
+
+	<block name="script">
+		<script type="text/javascript">
+		
+		$(function(){
+			showTab();
+		});
+		//导航高亮
+		highlight_subnav("{:U('PresetSite/index')}");
+		</script>
+	</block>

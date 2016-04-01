@@ -1,0 +1,57 @@
+<div id="subject" class="gf1000 m-novel">
+
+    <div class="pright">
+        <notempty name="lists">
+            <div class="soft gf-border cfr">
+                <ul class="eproduct">
+                    <volist name="lists" id="vo">
+                        <php>
+                            $previewimg = explode(',', $vo['previewimg']);
+                            $info = D('Down')->downAll($vo['id']);
+                        </php>
+                        <li>
+                            <p class="itleft"><a href="{:staticUrl('Detail',$vo['id'],'Down')}" class="epic"><img src="{:get_cover($previewimg[0],'path')}" width="55" height="55"></a>
+                                <a href="{$info['downAll'][0]['url']}" class="ebutton"></a></p>
+                            <dl class="itright">
+                                <dt class="etitle"><a href="{:staticUrl('Detail',$vo['id'],'Down')}">{$vo.title}</a></dt>
+                                <dd><em>{$vo.version}</em>&nbsp;&nbsp;<em>{$vo.create_time|date="Y-m-d",###}</em>&nbsp;&nbsp;<em>{:format_size($vo['size'])}</em>&nbsp;&nbsp;<em>{:showText($vo['language'],'language')}</em></dd>
+                                <dd><a href="{:staticUrl('Detail',$vo['id'],'Down')}"><span class="orange-e">推荐理由:</span>{$vo.description|msubstr=0,46,'utf-8'}</a></dd>
+                            </dl>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+            <p id="fenye">{$page}</p>
+        <else />
+            <div class="soft gf-border cfr" style="line-height: 32px;">
+                暂无产品信息!
+            </div>
+        </notempty>
+    </div>
+    <!-----soft-end----->
+
+
+    <div class="subject-right cfl">
+        {:W('Down/Gfw/listLTree')}
+        <!-----novel-cate   -end----->
+        <div class="soft_rank gf-border">
+            <div>
+                <h3 class="hot-icon">热门{$categoryName}</h3>
+                <ul>
+                    <php>$where="(position&8)&&category_id=".$cid</php>
+                    <Think:article basename="Down" name="dmain" where="$where" order="create_time desc" limit="10">
+                        <php>
+                            $previewimg = explode(',', $article['previewimg']);
+                            $info = D('Down')->downAll($article['id']);
+                        </php>
+                        <li <eq name="i" value="1">class="cur"</eq>><b></b><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title|msubstr=0,7,'utf-8',false}</a><span>
+                     <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($previewimg[0],'path')}"></a>
+                     <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="rankt">{$article.title|msubstr=0,7,'utf-8',false}</a><a href="{$info['downAll'][0]['url']}" class="down"></a></span></li>
+                    </Think:article>
+                </ul>
+            </div>
+        </div>
+        <!-----热门计算机软件-end----->
+    </div>
+    <!-----subject-right-end----->
+</div>

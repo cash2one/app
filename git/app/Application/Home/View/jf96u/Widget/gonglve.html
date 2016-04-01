@@ -1,0 +1,22 @@
+<div class="area-tab">
+  <ul class="tab-hd">
+      <volist name="tags" id="vo">
+       <eq name="key" value="0">
+           <li class="active">{$vo['title']}</li>
+       <else/>
+           <li>{$vo['title']}</li>
+       </eq>
+  </volist>
+  </ul>
+  <div class="tab-bd">
+     <volist name="tags" id="vo">
+      <div class="cont <eq name="key" value="0">current<else/></eq>">
+        {~W('Home/Jf96u/getTagGame',array($vo['id']))}
+      <ul class="cont-ul">
+          {~W('Home/Jf96u/getTagNews',array($vo['id']))}
+      </ul>
+    </div>
+    </volist>
+
+  </div>
+</div>

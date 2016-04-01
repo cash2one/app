@@ -1,0 +1,27 @@
+<!--列表 start-->
+<notempty name="relatedoclist">
+<section class="hotwrap about-rec-ul dis-bot">
+    <div class="wrap-tit"><h3>相关文章</h3></div>
+    <div class="news-list-ul relate-page-ul">
+        <volist name="relatedoclist" id="vo">
+            <?php
+             if($vo['previewimg'] && (count($vo['previewimg'] = explode(',',$vo['previewimg'])) >2)){
+            ?>
+            <div class="middle_mode"><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}"><div class="mid-text"><p class="mid-tit">{$vo['title']}</p><p class="mid-info">{$vo['description']}</p></div><div class="mid-pic"><ul class="mid-ul pic-adaptive-wrap2">
+                <volist name="vo['previewimg']" id="vc">
+                    <li class="pic-adaptive2"><img src="{:get_cover($vc,'path',1,200,100)}"></li>
+                </volist>
+            </ul></div></a></div>
+            <?php }else{ ?>
+            <div class="has-action"><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}"><div class="pic"><img src="{:get_cover($vo['smallimg'],'path',1,200,100)}"></div><div class="text"><p class="tit">{$vo['title']}</p><p class="info">{$vo['description']}</p></div></a></div>
+            <?php } ?>
+        </volist>
+    </div>
+    <div class="loading relate-page-loading">拼命加载中...</div>
+    <input type="hidden" id="relate-doc-id" value="{$info['id']}"/>
+    <input type="hidden" id="relate-doc-cid" value="{$info['category_id']}"/>
+    <input type="hidden" id="relate-doc-ids" value="{$ids_str}"/>
+    <input type="hidden" id="relate-doc-tags" value="{$tid_str}"/>
+</section>
+</notempty>
+<!--列表 end-->

@@ -1,0 +1,70 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/7230/css/libao.css"/></block>
+<block name="body">
+    <div id="libao-main">
+        <div class="libao-top">
+            <div class="lb-topl">
+                <span>
+                    <Think:article basename="package" order="create_time desc" limit="10" where="brecom_id !=0 AND position & 2">
+                    <i {$i===1?'class="cur"':''}>{$i}</i>
+                    </Think:article>
+                </span>
+                    <ul class="libaoul">
+                        <Think:article basename="package" order="create_time desc" limit="10" where="brecom_id !=0 AND position & 2">
+                        <li {$i===1?'class="current"':''}><a href="{:staticUrl('detail',$article['id'])}" target="_blank"><img src="{:get_cover($article['brecom_id'],'path')}" alt="{$article.title}"></a></li>
+                        </Think:article>
+                    </ul>
+                <p class="biaoti"><em></em><b></b></p>
+            </div>
+            <!----轮播结束，顶部右边开始----->
+            <div class="lb-topr">
+                <Think:article basename="package" order="create_time desc" limit="4" where="srecom_id != 0 AND position & 4">
+                <a href="{:staticUrl('detail',$article['id'])}" target="_blank"><i><s>{$article.title}</s><s class="time">{:date('Y-m-d  H:i',$article['create_time'])}入库</s></i><img src="{:get_cover($article['srecom_id'],'path')}"></a>
+                </Think:article>
+            </div>
+        </div>
+
+       <!----礼包顶部结束,主体左边开始----->
+
+        <!--#include virtual="{:getWidgetPath('22')}"-->
+
+       <!----礼包顶部结束,主体右边开始----->
+        <div class="libao-right">
+
+            <!--#include virtual="{:getWidgetPath('23')}"-->
+
+            <!----礼包顶部结束,主体右边开始----->
+            <div class="syxsk">
+                <p class="title"><span><i class="cur">礼包</i><a href="{:staticUrl('lists', 4)}" target="_blank">更多</a></span><b>手游新手卡</b></p>
+                <ul>
+                    <Think:article basename="package" name="pmain" order="create_time desc" limit="6" where="category_id = 4">
+                        <li><b class="pictit"><a href="{:staticUrl('detail',$article['id'])}" target="_blank" class="pic"><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail',$article['id'])}" target="_blank">{$article.title}</a></b><b>{:date("Y-m-d",$article['create_time'])}</b><b>入库</b><b class="azpg"><a class="anzhuo {$article['conditions']==1?'':'az-now'}"></a><a class="apple {$article['conditions']==2?'':'ap-now'}"></a></b><b class="lb">礼</b></li>
+                    </Think:article>
+                </ul>
+            </div>
+
+            <!----礼包顶部结束,主体右边开始----->
+            <div class="syxsk lbyd">
+                <p class="title"><span></span><b>礼包预定</b></p>
+                <div class="lbyd-left">
+                    <p class="azxsk"><a href="{:getWidgetPath('24', true)}" target="_blank">更多+</a>安卓礼包</p>
+                    <ul>
+                        <Think:article basename="package" name="pmain" order="create_time desc" limit="6" where="category_id = 1 AND conditions IN (0,1)">
+                            <li><b class="lb">礼</b><b class="pictit"><a href="{:staticUrl('detail',$article['id'])}" target="_blank" class="pic"><i></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail',$article['id'])}" target="_blank">{$article.title}</a></b></li>
+                        </Think:article>
+                    </ul>
+                </div>
+                <div class="lbyd-right">
+                    <p class="azxsk"><a href="{:getWidgetPath('26', true)}" target="_blank">更多+</a>IOS礼包</p>
+                    <ul>
+                        <Think:article basename="package" name="pmain" order="create_time desc" limit="6" where="category_id = 1 AND conditions IN (0,2)">
+                            <li><b class="lb">礼</b><b class="pictit"><a href="{:staticUrl('detail',$article['id'])}" target="_blank" class="pic"><i></i><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail',$article['id'])}" target="_blank">{$article.title}</a></b></li>
+                        </Think:article>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</block>

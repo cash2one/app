@@ -1,0 +1,74 @@
+<extend name="Home@gfw/Base/commonWebsite" />
+
+<block name="style">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/website.css"/>
+</block>
+
+<block name="body">
+	<div class="h10"></div>
+	<div class="p-novel">
+		<!-- 频道左侧分类树 -->
+		<div class="mlife gf-border">
+			<h3 class="yule-title" title="{$info['title']}">
+				<img src="__PUBLIC__/Home/gfw/images/website_cate_{:$info['id']}.png" />
+	        	{:$info['title']}
+			</h3>
+			<ul class="yule-items">
+				<volist name="hotCateList" id="cate">
+					<li>
+						<a href="{:staticUrl('lists',$cate['id'],'Package')}">
+							<img src="{:get_cover($cate['icon'],'path')}" width="29" height="29" />
+						</a>
+						<p>
+							<a href="{:staticUrl('lists',$cate['id'],'Package')}">
+								<if condition="!empty($cate['recommend_view_name'])">
+									{:$cate['recommend_view_name']}
+								<else />
+									{:$cate['title']}
+								</if>
+							</a>
+						</p>
+					</li>
+				</volist>
+			</ul>
+	    </div>
+	    <!-- 最新收录网站推荐 -->
+    	{:W('Gfw/websiteRecommended',array(30,'new',$category_id))}
+    	<!-- 网站右侧会员模块 -->
+    	<div class="main-right cfr">{:W('Home/Gfw/rightUser',array('all',$category_id))}</div>
+	    <div id="banner-1" class="gf1000"><center><!-- 广告位：网站大全所有频道首页Banner1 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123281");</script></center></div>
+	<!-----banner-1-end-----> 
+	<div class="corp">
+		<div class="corp-m">
+			<!-- begin 二级分类极其网站 -->
+			{~$cateCount=0;}
+			<volist name="cateList" id="cate" key="i">
+			{~$cateCount++;}
+			<if condition="$cateCount gt 20">{~$cateCount=1;}</if>
+			<ul class="firm">
+                <span class="firm-pic">
+                	<a href="{:staticUrl('lists',$cate['id'],'Package')}">
+                	<img src="{:get_cover($cate['vertical_pic'],'path')}" width="240" height="123" title="{:$cate['title']}" />
+                	<i class="labe{:$cateCount}"><b>{:$cate['title']}</b></i>
+                	</a>
+                </span>
+                <volist name="cate['webSiteList']" id="website" key="j">
+                	<li>
+                		<a href="{:staticUrl('detail',$website['id'],'Package')}" class="<if condition='$website[position]&1'>orange</if>" title="{:$website['title']}">
+                			{:$website['title']}
+                		</a>
+                	</li>
+                </volist>
+            </ul>
+            </volist>
+			<!-- end 二级分类极其网站 -->
+		</div>
+		<!-----corp-m-end-----> 
+	</div>
+    <!-- 广告位：网站大全所有频道首页原生广告1 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123284");</script>
+	  <!-----corp-end-----> 
+	</div>
+	<!-----p-novel   -end----->
+</block>

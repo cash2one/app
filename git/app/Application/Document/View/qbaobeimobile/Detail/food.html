@@ -1,0 +1,15 @@
+<extend name="Home@qbaobeimobile/Base/common2d"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/spk.css"/>
+</block>
+<block name="breadcrumbnav">{:W('Qbaobeimobile/ty_xq_mbx',array($info['category_id']))}</block>
+<block name="body">
+    {:W('Qbaobeimobile/d_food2',array($info,$tags))}
+    <input type="hidden" id="tj-user" name="tj-user" value="{$info['uid']}"/>
+    <input type="hidden" id="doc-id" name="doc-id" value="{$info['id']}"/>
+    <input type="hidden" id="doc-cid" name="doc-cid" value="{$info['category_id']}"/>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.relate.js"></script>
+</block>

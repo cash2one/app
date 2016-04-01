@@ -1,0 +1,21 @@
+{:W('Home/Jf96ufeature/head')}
+<div class="dragable" widget="zq1_zx_mobile"></div>
+<php>$jfzt = $info;</php>
+<include file="Home@jf96umobile/Public/head"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css">
+{:W('Home/Jf96ufeature/body')}
+<include file="Home@jf96umobile/Public/otherheader"/>
+<!--资讯导航-->
+<nav class="news-nav">
+<a href="{$nav2['gl']['url']}">攻略</a><a href="{$nav2['zx']['url']}" class="active">资讯</a>
+</nav>
+<section class="news-list-wrap">
+    <ul class="news-list-ul">
+        <volist name="lists" id="val">
+            <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a><div class="text"><a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a><p class="info">{$val['description']}</p></div></li>
+        </volist>
+    </ul>
+    <div class="page">{$page}</div>
+</section>
+<include file="Home@jf96umobile/Public/otherfoot" />
+{:W('Home/Jf96ufeature/foot')}

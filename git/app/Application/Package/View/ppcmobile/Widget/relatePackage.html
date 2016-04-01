@@ -1,0 +1,17 @@
+<empty name="package">
+没有相关礼包
+<else /> 
+<ul class="mod-app-intro">
+    <volist name="package" id="vo" offset="0" length="4">
+        <li>
+            <figure data-url="{:staticUrlMobile('detail', $vo['id'],'Package')}">
+                <figcaption>
+                    <h3 class="tit">{$vo['title']}</h3>
+                </figcaption>
+                         <strong class="card_all" card-id="{$info['id']}" style="display:none;"></strong> 
+                         <strong class="card_surplus" card-id="{$info['id']}" style="display:none;"></strong>
+                <span class="btn btn-d" data-url="{:staticUrlMobile('detail', $vo['id'],'Package')}">领取</span> </figure>
+        </li>
+    </volist>
+</ul>
+</empty> 

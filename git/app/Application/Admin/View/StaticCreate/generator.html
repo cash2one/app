@@ -1,0 +1,248 @@
+<extend name="Public/base"/>
+
+<block name="body">
+
+    <style>
+        *{ padding:0; margin:0;}
+        ul li{ list-style:none}
+        .tab-waper{ overflow:hidden;zoom:1;}
+        .nav-tabs{ height:31px; width:100%; overflow:hidden;zoom:1;}.nav-tabs li{ float:left; height:30px; line-height:30px; padding:0 10px; border-bottom:1px solid #dfdfdf}
+        .nav-tabs .active{ border:1px solid #dfdfdf; border-bottom:none}
+        .tab-main .wrap{ display:none; padding:10px;}.tab-main .current{ display:block}
+    </style>
+    <div class="main-title">
+        <h2>{$main_title}按栏目生成</h2>
+    </div>
+
+    <div class="tab-waper">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><b>整站生成</b></li>
+            <li role="presentation"><b>按栏目生成</b></li>
+            <li role="presentation"><b>按内容生成</b></li>
+            <li role="presentation"><b>厂商内容页生成</b></li>
+        </ul>
+        <div class="tab-main">
+            <div class="wrap current" name="整站">
+
+                <form action="{:U('allGenerator')}" method="post" target="operator_window" name="all_operator_window">
+                    <input type="hidden" name="step" value="1" class="step">
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">起始时间<span class="check-tips"></span></label>
+                        <div class="controls" style="width: 200px;">
+                            <input type="text" value="<?php echo (date("Y-m-d",strtotime('-1 days'))); ?>" name="last_updated_time" class="text input-large time" placeholder="请选择起始时间">
+                        </div>
+                    </div>
+
+                    <div class="form-item form-horizontal">
+                        <button target-form="form-horizontal" type="submit" class="btn submit-btn" onclick="document.all_operator_window.submit();">确 定</button>
+                        <button onclick="javascript:history.back(-1);return false;" class="btn btn-return">返 回</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="wrap" name="按栏目">
+
+                <form action="{:U('subjectGenerator')}" method="post" target="operator_window" name="subject_operator_window">
+                    <input type="hidden" name="step" value="1" class="step">
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">选择栏目<span class="check-tips"></span></label>
+                        <select name="subject" style="width: 200px;" class="subject">
+                            <!--volist name="subject" id="sj"-->
+                            <foreach name="subject" item="val" key="key" >
+                                <option value="{$key}">{$val}</option>
+                            </foreach>
+                            <!--/volist-->
+                        </select>
+                    </div>
+
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">选择栏目<span class="check-tips"></span></label>
+                        <select name="category_id" style="width: 200px;" class="category_id">
+                            <option value="0">选择分类</option>
+                            <!--volist name="subject" id="sj"-->
+                            <foreach name="category_data" item="val" key="key" >
+                                <option value="{$val.id}">{$val.title}</option>
+                            </foreach>
+                            <!--/volist-->
+                        </select>
+                    </div>
+
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">更新最新数量<span class="check-tips"></span></label>
+                        <div class="controls" style="width: 200px;">
+                            <input type="text" value="50" name="last_updated_num" class="text input-large" placeholder="请输入更新最新数量">
+                        </div>
+                    </div>
+                    <div class="form-item form-horizontal">
+                        <button target-form="form-horizontal" type="submit" class="btn submit-btn" onclick="document.subject_operator_window.submit();">确 定</button>
+                        <button onclick="javascript:history.back(-1);return false;" class="btn btn-return">返 回</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="wrap" name="按内容">
+
+                <form action="{:U('contentGenerator')}" method="post" target="operator_window" name="content_operator_window">
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">选择栏目<span class="check-tips"></span></label>
+                        <select name="subject" style="width: 200px;" class="subject">
+                            <!--volist name="subject" id="sj"-->
+                            <foreach name="subject" item="val" key="key" >
+                                <option value="{$key}">{$val}</option>
+                            </foreach>
+                            <!--/volist-->
+                        </select>
+                    </div>
+
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">选择栏目<span class="check-tips"></span></label>
+                        <select name="category_id" style="width: 200px;" class="category_id">
+                            <option value="0">选择分类</option>
+                            <!--volist name="subject" id="sj"-->
+                            <foreach name="category_data" item="val" key="key" >
+                                <option value="{$val.id}">{$val.title}</option>
+                            </foreach>
+                            <!--/volist-->
+                        </select>
+                    </div>
+
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">开始ID<span class="check-tips"></span></label>
+                        <div class="controls" style="width: 200px;">
+                            <input type="text" value="" name="start_id" class="text input-large" placeholder="请输入开始ID">
+                        </div>
+                    </div>
+
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">结束ID<span class="check-tips"></span></label>
+                        <div class="controls" style="width: 200px;">
+                            <input type="text" value="" name="end_id" class="text input-large" placeholder="请输入结束ID">
+                        </div>
+                    </div>
+
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">起始时间<span class="check-tips"></span></label>
+                        <div class="controls" style="width: 200px;">
+                            <input type="text" value="<?php echo (date("Y-m-d",strtotime('-1 days'))); ?>" name="start_time" class="text input-large time" placeholder="请选择起始时间">
+                        </div>
+                    </div>
+
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">更新最新数量<span class="check-tips"></span></label>
+                        <div class="controls" style="width: 200px;">
+                            <input type="text" value="50" name="last_updated_num" class="text input-large" placeholder="请输入更新最新数量">
+                        </div>
+                    </div>
+                    <div class="form-item form-horizontal">
+                        <button target-form="form-horizontal" type="submit" id="submit" class="btn submit-btn" onclick="document.content_operator_window.submit();">确 定</button>
+                        <button onclick="javascript:history.back(-1);return false;" class="btn btn-return">返 回</button>
+                    </div>
+                </form>
+
+
+            </div>
+
+
+            <div class="wrap" name="按栏目">
+
+                <form action="{:U('companyDetail')}" method="post" target="operator_window" name="subject_operator_window">
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">厂商ID<span class="check-tips"></span></label>
+                        <div class="controls" style="width: 200px;">
+                            <input type="text" value="" name="id" class="text input-large" placeholder="请输入厂商ID[不填写生成全部]">
+                        </div>
+                    </div>
+                    <div class="form-item cf form-horizontal">
+                        <label class="item-label">更新时间<span class="check-tips"></span></label>
+                        <div class="controls" style="width: 200px;">
+                            <input type="text" value="<?php echo (date("Y-m-d",strtotime('-1 days'))); ?>" name="last_updated_time" class="text input-large time" placeholder="请选择起始时间">
+                        </div>
+                    </div>
+                    <div class="form-item form-horizontal">
+                        <button target-form="form-horizontal" type="submit" class="btn submit-btn" onclick="document.subject_operator_window.submit();">确 定</button>
+                        <button onclick="javascript:history.back(-1);return false;" class="btn btn-return">返 回</button>
+                    </div>
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+    <div style="width: 1000px;height: 500px;;">
+    <iframe width="100%" height="100%" frameborder="0" id="operator_window" name="operator_window"></iframe>
+    </div>
+
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        $(function(){
+            $('.time').datetimepicker({
+                format: 'yyyy-mm-dd',
+                language:"zh-CN",
+                minView:2,
+                autoclose:true
+            });
+
+            $('.subject').change(function(){
+
+                var url, param, subject, html, tmp_data;
+
+                subject = $(this).val();
+                if ('undefined' == typeof(subject))
+                    return false;
+
+
+                url = '/admin.php?s=StaticCreate/get_category';
+                param = 'subject='+subject;
+
+                /*ajax操作并回调*/
+                jf.ajax_callback(url, param, function(data){
+                    if (1 != data.status_code)
+                        updateAlert(data.message, 'alert-success');
+
+
+                    html = '<option value="0">选择分类</option>';;
+                    tmp_data = data.data;
+                    for (i in tmp_data) {
+                        html += '<option value="'+ tmp_data[i].id+'">'+ tmp_data[i].title+'</option>';
+                    }
+
+
+                    $('.category_id').html(html);
+                });
+            });
+
+            //选择分类 修改步骤
+            $('.category_id').change(function(){
+                var subject = $(this).val();
+                var step = 0 >= subject ? 1 : 2;
+
+                $('.step').val(step);
+            });
+
+            function tabAuto(cur, current) {
+                var ocur = $(cur);
+                var ocurrent = $(current);
+                ocur.click(function() {
+                    var oIndex = $(this).index();
+                    $(this).addClass('active').siblings().removeClass('active');
+                    ocurrent.eq(oIndex).addClass('current').siblings().removeClass('current');
+                });
+            };
+            tabAuto('.nav-tabs li', '.tab-main .wrap');
+
+
+        });
+    </script>
+</block>

@@ -1,0 +1,79 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>APP管理</h2>
+    </div>
+
+    <div class="cf">
+        <a class="btn" href="{:U('add',array('model_id'=>$model['id']))}">新增</a>
+    </div>
+
+    <div class="data-table table-striped">
+        <table>
+            <thead>
+            <tr>
+                <th class="row-selected"><input class="checkbox check-all" type="checkbox"></th>
+                <th>ID</th>
+                <th>版本号</th>
+                <th>版本名称</th>
+                <th>版本内容</th>
+                <th>类型</th>
+                <th>更新时间</th>
+                <th style="width:9%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <notempty name="lists">
+                <volist name="lists" id="v">
+                    <tr>
+                        <td><input class="ids row-selected comment_ids" type="checkbox" name="comment_ids[]" id="" value="{$v['id']}"></td>
+                        <td>{$v.id}</td>
+                        <td>{$v.code}</td>
+                        <td><a href="{:U('edit',array('id'=>$v['id'],'model_id'=>$model['id']))}">{$v.title}</a></td>
+                        <td>{$v.content}</td>
+                        <td>{$v['type']=='1'?'安卓':'苹果'}</td>
+                        <td>{$v.update_time|date='Y-m-d H:i:s',###}</td>
+                        <td>
+                            <!--a title="编辑" href="{:U('edit?id='.$v['id'])}">编辑</a-->
+                            <a href="{:U('edit',array('id'=>$v['id'],'model_id'=>$model['id']))}">编辑</a>
+                            <a href="{:U('setStatus?id='.$v['id'].'&status='.abs(1-$v['status']))}" class="ajax-get">{$v.status|show_status_op}</a>
+                            <a class="confirm ajax-get" title="删除" href="{:U('remove?id='.$v['id'])}">删除</a>
+                        </td>
+                    </tr>
+
+                </volist>
+                <else/>
+                <td colspan="6" class="text-center"> aOh! 暂时还没有内容!</td>
+            </notempty>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        {$page}
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        $(function () {
+            //点击排序
+            $('.list_sort').click(function () {
+                var url = $(this).attr('url');
+                var ids = $('.ids:checked');
+                var param = '';
+                if (ids.length > 0) {
+                    var str = new Array();
+                    ids.each(function () {
+                        str.push($(this).val());
+                    });
+                    param = str.join(',');
+                }
+
+                if (url != undefined && url != '') {
+                    window.location.href = url + '/ids/' + param;
+                }
+            });
+        });
+    </script>
+</block>

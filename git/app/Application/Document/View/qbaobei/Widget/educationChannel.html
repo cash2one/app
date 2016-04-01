@@ -1,0 +1,153 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/channel.css">
+</block>
+<block name="body">
+<!--head部分-->
+{:W('Qbaobei/header',array(5))}
+<!--频道主体部分 start-->
+<div class="channel-main">
+<div class="wrap channel-wraper">
+<!--chanbox-->
+{:W('Qbaobei/channelPosition',array(5,18))}
+<!--chanbox 教育咨询-->
+<div class="fn-area chanbox2">
+    <div class="left">
+        <div class="fn-title fn-title-l"><span class="fn-about-title"><volist name="zx['tags']" id="val"><a href="{:C('STATIC_URL')}/tag/{$val['name']}/" target="_blank">{$val['title']}</a></volist></span><h2>教育资讯</h2></div>
+        <ul class="meishi-pic">
+            <volist name="zx['img']" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"><span class="info"><i>{$val['title']}</i><em>{$val['description']}</em></span></a></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="right">
+        <div class="fn-title"><a href="{:staticUrl('lists',198,'Document')}" target="_blank" class="more">更多</a><h2>最新资讯</h2></div>
+        <div class="fn-ul-list">
+            <ul class="meishi-news">
+                <volist name="newZx" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a><p class="info">{$val['description']}</p></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--chanbox 早期教育 -->
+<div class="fn-area chanbox2 autoTab">
+    <div class="left">
+        <div class="fn-title fn-title-l"><span class="fn-about-title"><volist name="tj['tags']" id="val"><a href="{:C('STATIC_URL')}/tag/{$val['name']}/" target="_blank">{$val['title']}</a></volist></span><h2>早期教育</h2><span class="fn-zaoj-l"><em class="active">婴儿教育</em>|<em>幼儿教育</em>|<em>学龄前教育</em></span></div>
+        <div class="taijiao-main">
+            <div class="taijiao current">
+                <div class="left-l-pic">
+                    <ul class="fn-leftBox">
+                        <volist name="tj['position']" id="val">
+                            <li><div class="show"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></div><div class="hide"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><span class="tit">{$val['title']}</span><span class="info">{$val['description']}</span></a></div></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="left-l-news">
+                    <ul class="fn-news">
+                        <volist name="tj['new']" id="val">
+                         <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="title">{$val['title']}</a><p class="info">{$val['description']}</p></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            <div class="taijiao">
+                <div class="left-l-pic">
+                    <ul class="fn-leftBox">
+                        <volist name="ye['position']" id="val">
+                            <li><div class="show"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></div><div class="hide"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><span class="tit">{$val['title']}</span><span class="info">{$val['description']}</span></a></div></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="left-l-news">
+                    <ul class="fn-news">
+                        <volist name="ye['new']" id="val">
+                            <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="title">{$val['title']}</a><p class="info">{$val['description']}</p></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            <div class="taijiao">
+                <div class="left-l-pic">
+                    <ul class="fn-leftBox">
+                        <volist name="xl['position']" id="val">
+                            <li><div class="show"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></div><div class="hide"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><span class="tit">{$val['title']}</span><span class="info">{$val['description']}</span></a></div></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="left-l-news">
+                    <ul class="fn-news">
+                        <volist name="xl['new']" id="val">
+                            <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="title">{$val['title']}</a><p class="info">{$val['description']}</p></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right" id="meishi-dis">
+        <div class="fn-title"><h2><span class="active">早教视频</span><span>早教专题</span></h2></div>
+        <div class="fn-ul-list">
+            <ul class="fn-pic-list fn-video current">
+                <php>if($sp){</php>
+                <volist name="sp" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"><span>{$val['title']}</span><em></em><b></b></a></li>
+                </volist>
+                <php>}else{</php>
+                <li><a href="http://donghua.qbaobei.com/lvdouwagy/209485.html" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/dh/2012/9/201209141059454007.jpg"><span>天宫逸事</span><em></em><b></b></a></li>
+                <li><a href="http://donghua.qbaobei.com/lvdouwagy/208555.html" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/dh/2012/9/201209141100216148.jpg"><span>谁动了我的大腿</span><em></em><b></b></a></li>
+                <li><a href="http://donghua.qbaobei.com/lvdouwagy/208541.html" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/dh/2012/9/201209141100594286.jpg"><span>史前巨蟒</span><em></em><b></b></a></li>
+                <li><a href="http://donghua.qbaobei.com/lvdouwagy/208121.html" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/dh/2012/9/201209141101158038.jpg"><span>声控刷卡机</span><em></em><b></b></a></li>
+                <li><a href="http://donghua.qbaobei.com/lvdouwagy/208109.html" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/dh/2012/9/201209141110281558.jpg"><span>末班车乘客</span><em></em><b></b></a></li>
+                <li><a href="http://donghua.qbaobei.com/lvdouwagy/208097.html" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/dh/2012/9/201209141111297225.jpg"><span>摩托圣斗士</span><em></em><b></b></a></li>
+                <php>}</php>
+            </ul>
+            <ul class="fn-pic-list fn-video">
+                <li><a href="http://www.qbaobei.com/plans/familyedu/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/6/201406041705253065.jpg"><span>家庭教育小故事</span></a></li>
+                <li><a href="http://www.qbaobei.com/plans/xionghaizi/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2014/2/201402211512287379.jpg"><span>如何教育熊孩子</span></a></li>
+                <li><a href="http://www.qbaobei.com/plans/pnq/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/12/201312161152042781.jpg"><span>宝宝叛逆期怎么办</span></a></li>
+                <li><a href="http://www.qbaobei.com/plans/whitelie/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/12/201312131139292337.jpg"><span>善意的谎言作文</span></a></li>
+                <li><a href="http://www.qbaobei.com/plans/babayuer/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/11/201311141405204408.jpg"><span>爸爸育儿方法</span></a></li>
+                <li><a href="http://www.qbaobei.com/plans/jiatingjiaoyu/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/10/201310141515292183.jpg"><span>家庭教育经验</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--chanbox 特色教育-->
+<div class="fn-area chanbox2">
+    <div class="left">
+        <div class="fn-title fn-title-l"><span class="fn-about-title"><volist name="tsjy['tags']" id="val"><a href="{:C('STATIC_URL')}/tag/{$val['name']}/" target="_blank">{$val['title']}</a></volist></span><h2>特色教育</h2></div>
+        <div class="zaoj-tsjy">
+            <ul class="zaoj-tsjy-li">
+                <volist name="tsjy['data']" id="val">
+                <li><a href="{:staticUrl('detail',$val['position'][0]['id'])}" target="_blank" class="picTit"><img src="{:get_cover($val['position'][0]['smallimg'],'path')}" alt="{$val['position'][0]['title']}"><span>{$val['position'][0]['title']}</span><b></b></a>
+                    <div class="text-main">
+                        <volist name="val['new']" id="vo">
+                        <div class="text"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a><p class="info">{$vo['description']}</p></div>
+                        </volist>
+                    </div>
+                </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+    <div class="right">
+        <div class="fn-title"><a href="http://bbs.qbaobei.com/forum-19-1.html" target="_blank" class="more">更多</a><h2>教育交流</h2></div>
+        <div class="recNews-wraper">
+            <div class="recNews">
+                <div class="disBox-top"><a href="http://bbs.qbaobei.com/thread-245904-1-1.html" target="_blank" class="name">如何为小升初做从容准备</a><p>从五年级开始，学习重点知识和难点逐渐和孩子们见面，这些知识点不仅是历年来......</p></div>
+                <div class="disBox-top"><a href="http://bbs.qbaobei.com/thread-245888-1-1.html" target="_blank" class="name">孩子的入园准备我是这么做的，孩子在幼儿园适应的很好</a><p>小妞三岁二，之前没上过早教班或小小班。8月10日开始上小小班作为过渡，9月1......</p></div>
+                <div class="disBox-top"><a href="http://bbs.qbaobei.com/thread-245886-1-1.html" target="_blank" class="name">马上幼儿园就要开学了，提前训练孩子自立很重要哦</a><p>马上又到上学季，家里有小朋友的粑粑麻麻，都提前很久开始寻找好的幼儿园，可......</p></div>
+                <div class="disBox-top"><a href="http://bbs.qbaobei.com/thread-245885-1-1.html" target="_blank" class="name">别以为孩子什么都不懂，其实你的喜怒哀乐他都明白</a><p>今天早上有一个旧同事，也是新手妈妈半夜起来喂奶，在朋友圈感慨“理解不了的......</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--广告-->
+<div class="wrap adv1200_103"><script type="text/javascript">BAIDU_CLB_fillSlot("1135975");</script></div>
+{:W('Qbaobei/hotWord',array(748,'早教热词'))}
+</div>
+</div>
+<!--频道主体部分 end-->
+</block>

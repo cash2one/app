@@ -1,0 +1,322 @@
+<extend name="Public/base"/>
+<block name="sidebar"></block>
+<block name="style">
+  <style>
+body { padding: 0 }
+.m-export { overflow: hidden; }
+.m-export h2 { overflow: hidden; color: #008200; margin: 10px 0 0 20px; }
+.sep-line { clear: both; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: #CCC; }
+.c-datepicker{margin-right:10px;}
+</style>
+</block>
+<block name="body">
+<!-- 主体 -->
+<div id="indexMain" class="index-main">
+  <div class="m-export">
+    <h2>当日内容地址导出</h2>
+    <form action="{:U('Index/exportRecord')}" method="post">
+      <div class="btn-group-click adv-sch-pannel fl" style=" margin: 20px 0; margin-left:18px;">
+        <div class="row">
+          <label>选择日期：</label>
+          <input type="text" id="datepicker" name="datetime" class="text input-2x c-datepicker" value="{$date_time}" placeholder="请选择日期">
+          <label><input name="type" type="radio" value="1" checked>PC版</label><label><input name="type" type="radio" value="2">手机版</label>
+        </div>
+        <button class="btn export-btn">导出</button>
+      </div>
+    </form>
+  </div>
+  <div class="sep-line"></div>
+  <form action="{:U('Index/index')}" method="post">
+    <div class="btn-group-click adv-sch-pannel fl" style=" margin: 20px 0; margin-left:18px;">
+      <div class="row">
+        <label>更新时间：</label>
+        <!--<input type="text" id="time-start" name="time-start" class="text input-2x" value="" placeholder="起始时间"> - -->
+        <input type="text" id="time-end" name="time-end" class="text input-2x" value="{$date_time}" placeholder="请选择日期">
+      </div>
+      <button class="btn btn-searcher">搜 索</button>
+    </div>
+  </form>
+  <div style="clear: both;">
+      <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+      <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+      <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-combined.min.css" type="text/css">
+      <div class="overlay">
+          <div class="controls">
+
+              <div id="modal1" class="modal" style="top: 115px; left: 681.5px; display: block;">
+                  <h4 style="padding: 9px 15px;"><span>标题</span> <span class="intitle">标题</span></h4>
+                  <h4 style="padding: 9px 15px;"><span>作者</span> <span class="inauthor">作者</span></h4>
+                  <h4 style="padding: 9px 15px;"><span>时间</span> <span class="intime">时间</span></h4>
+                  <h4 style="padding: 9px 15px;"><span>内容</span> </h4>
+                  <div class="incontent" style="height: auto;min-height: 150px;padding: 9px 15px;">内容</div>
+
+                  <a href="#" class="myButton btn btn-primary" style="margin-left: 15px;margin-bottom: 15px;" >确定查看</a>
+
+              </div>
+
+          </div>
+      </div>
+    <style>
+                #selectTable{ margin: 20px 0; margin-left:18px;}
+                #selectTable tr{ height: 35px;}
+                #selectTable tr td{width: 120px; border: 1px solid #CDCDCD;border-collapse:collapse; text-align: center;}
+                .overlay {
+                    width: 100%;
+                    height: 100%;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    z-index: 1000;
+                    opacity: 1;
+
+                    display: none;
+                }
+                .modal {
+                    display: none;
+
+
+                }
+                .tooltip{
+                    z-index: 999;
+                }
+            </style>
+    <table id="selectTable">
+      <tr>
+        <td>名称</td>
+        <td>新增下载</td>
+        <td>修改下载</td>
+        <td>新增文章</td>
+        <td>修改文章</td>
+        <td>新增礼包</td>
+        <td>新增开测开服表</td>
+        <td>新增K页面</td>
+        <td>新增专题</td>
+        <td>新增专区</td>
+        <td>新增厂商</td>
+        <td>当日新加内容总量</td>
+        <td>当日修改内容总量</td>
+        <td>当日文章总点击量</td>
+        <td>当日下载总点击量</td>
+        <td>当月文章总点击量</td>
+        <td>当月下载总点击量</td>
+        <td>文章总点击量</td>
+        <td>文章总数量</td>
+        <td>下载总点击量</td>
+        <td>当日18:00后更新量</td>
+      </tr>
+      <volist name="work" id="item">
+        <tr>
+          <td>{$item.nickname}({$item.username})</td>
+          <td>{$item.down_0}</td>
+          <td>{$item.down_1}</td>
+          <td>{$item.document_0}</td>
+          <td>{$item.document_1}</td>
+          <td>{$item.package}</td>
+          <td>{$item.package_3_5}</td>
+          <td>{$item.special}</td>
+          <td>{$item.feature}</td>
+          <td>{$item.batch}</td>
+          <td>{$item.company}</td>
+          <td>{$item.add_count}</td>
+          <td>{$item.edit_count}</td>
+          <td>{$item.document_view}</td>
+          <td>{$item.down_view}</td>
+          <td>{$item.document_month_view}</td>
+          <td>{$item.down_month_view}</td>
+          <td>{$item.document_all_view}</td>
+          <td>{$item.document_all}</td>
+          <td>{$item.down_all_view}</td>
+          <td>{$item.edit_18count}</td>
+        </tr>
+      </volist>
+    </table>
+  </div>
+
+  <!-- 插件块 -->
+  <div class="container-span">{:hook('AdminIndex')}</div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12" id="inform" style="width: 49%;">
+                <table class="table table-bordered">
+                    <thead>
+
+                    <tr>
+                        <td  style="text-align: center" >
+                            标题
+                        </td>
+                        <td style="text-align: center">
+                            作者
+                        </td >
+                        <td style="text-align: center"  data-toggle="tooltip"
+                            data-placement="top" title="有新的通知">
+                            时间
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+</block>
+<block name="script">
+  <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+  <php>if(C('COLOR_STYLE')=='blue_color') echo '
+    <link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+    ';</php>
+  <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+  <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+  <script type="text/javascript">
+    /* 插件块关闭操作 */
+    $(".title-opt .wm-slide").each(function(){
+        $(this).click(function(){
+            $(this).closest(".columns-mod").find(".bd").toggle();
+            $(this).find("i").toggleClass("mod-up");
+        });
+    })
+    $(function(){
+        // $('#main').attr({'id': 'indexMain','class': 'index-main'});
+        $('.copyright').html('<div class="copyright"> </div>');
+        $('.sidebar').remove();
+    })
+
+    $('.btn-searcher').click(function(){
+        var end = $('#time-end').val();
+        if(end.length == ''){
+            alert('日期不能为空！');
+            return false;
+        }
+    });
+  $('.export-btn').click(function(){
+        var end = $('#datepicker').val();
+        if(end.length == ''){
+            alert('日期不能为空！');
+            return false;
+        }
+    });
+
+    $(function(){
+                $('#time-end').datetimepicker({
+                    format: 'yyyy-mm-dd',
+                    language:"zh-CN",
+                    minView:2,
+                    autoclose:true
+                });
+				  $('#datepicker').datetimepicker({
+                    format: 'yyyy-mm-dd',
+                    language:"zh-CN",
+                    minView:2,
+                    autoclose:true
+                });
+            })
+</script>
+
+
+    <script>
+        $(document).ready(function(){
+            //站点ID  用户ID
+            siteid='{:C(APP_ID)}';
+            uid= {:UID};
+            datacenter='http://dc.20hn.cn/v1/inform/';
+
+
+        var data = {
+                url: datacenter+'get.json',
+                siteid:siteid,
+                uid:uid,
+
+
+        };
+        $.ajax({
+            type:'post',
+            dataType:'JSON',
+            data:data,
+            url: '{:U(getinform)}',
+            success:function(data ){
+                var  html='';
+
+                for(i in data) {
+                    if (i == 3) {
+                        i = 0
+                    }
+
+                    if (i == 0) {
+                        var cl = 'success';
+                    } else if (i == 1) {
+                        var cl = 'error';
+                    } else if (i == 2) {
+                        var cl = 'warning';
+                    } else if (i == 3) {
+                        var cl = 'info';
+                    }
+                    html += "<tr" + " id='" + data[i].id + "'" + " class='" + " " + cl + "  '" + "><td>" + data[i].title + "</td><td>" + data[i].author + "</td>" +
+                            "<td>" + data[i].create_time + "</td>";
+
+                }
+                if(data){
+                    $("#inform tbody").html(html);
+                    tips();
+                    $("[data-toggle='tooltip']").tooltip('show');
+                }
+            }
+        });
+
+        })
+
+        function tips(){
+            $("#inform tr").not(':eq(0)').click(function(){
+                var index=  $(this).attr('id');
+                $(".overlay").toggle();
+                var data = {
+                    informid:index,
+                     siteid:siteid,
+                    url: datacenter+'getone.json',
+                };
+                $.ajax({
+                    type:'post',
+                    dataType:'JSON',
+                    data:data,
+                    url: '{:U(getinform)}',
+
+                    success:function(data ){
+                        $(".intitle").text(data.title);
+                        $(".inauthor").text(data.author);
+                        $(".intime").text(data.create_time);
+                        $(".incontent").html(data.content);
+                        $(".myButton").attr('id',data.id);
+                    }
+                });
+
+
+            })
+        }
+        $(".overlay").click(function(){
+            $(".overlay").toggle()
+        })
+
+        $(".myButton").click(function(){
+            var  informid=$(this).attr('id');
+
+            var data = {
+                informid:informid,
+                siteid:siteid,
+                uid:uid,
+                url: datacenter+'read.json',
+
+            };
+            $.ajax({
+                type:'post',
+                dataType:'JSON',
+                data:data,
+                url: '{:U(getinform)}',
+            });
+
+        });
+
+    </script>
+</block>

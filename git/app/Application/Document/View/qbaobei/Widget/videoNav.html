@@ -1,0 +1,6 @@
+<div class="video-nav">
+    <ul class="video-cata">
+        <li class="pd"><span class="tit">频道：</span><volist name="topCate" id="val"><a href="{:staticUrl('lists',$val['id'],'Document')}" <php>if($val['id'] == $topId){echo 'class="active"';}</php> >{$val['title']}</a></volist></li>
+        <li class="lx"><span class="tit">类型：</span><volist name="childCate" id="val"><a href="{:staticUrl('lists',$val['id'],'Document')}" <php>if($val['id'] == $childId){echo 'class="active"';}</php>>{$val['title']}</a></volist></li>
+    </ul>
+</div>

@@ -1,0 +1,23 @@
+<extend name="Home@afsmobile/Base/commonDown"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+   <!--game_rec-->
+   <section id="game_rec" class="game kaice">
+           <ul>
+            <volist name="lists" id="vo">
+               <li>
+                   <a href="{:staticUrlMobile('detail',$vo['id'],'Package')}" class="pic"><img src="{:get_cover($vo['cover_id'],'path')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail',$vo['id'],'Package')}">{$vo['title']}</a></div>
+                       <div><i>{$vo['server']}</i></div>
+                       <div><i>运营商：{~W('Package/Afsmobile/showCompany',array($vo['id']))}</i><i>{$vo['create_time']|time_format="m-d H:i:s"}</i></div>
+                   </div>
+                   <a href="{~W('Package/Afsmobile/showDown',array($vo['id']))}" class="down">下载</a>
+               </li>
+               </volist>
+           </ul>
+   </section>
+  <div class="page">{$page}</div>
+</block>

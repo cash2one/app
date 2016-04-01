@@ -1,0 +1,29 @@
+<div class="cnt-r-hot">
+  <div class="cnt-r-title"> <a href="http://www.qbaobei.com/plans/">更多>></a>热点关注</div>
+  <div class="cnt-r-hot-details">
+    <div class="cnt-r-hot-imglist">
+        <volist name="lists" id="vo">
+         <switch name="key" >
+          <case value="0">
+          <div class="cnt-r-hot-img-box">
+        <div class="cnt-r-hot-img"><a href="{:staticUrl('detail', $vo['id'],'Document')}"><img  alt="{$vo.title}" src="{:get_cover($vo['smallimg'],'path')}"></a></div>
+        <a href="{:staticUrl('detail', $vo['id'],'Document')}">{$vo.title|msubstr=###,0,10,'utf-8',false}</a></div>
+          </case>
+       <case value="1">
+           <div class="cnt-r-hot-img-box">
+        <div class="cnt-r-hot-img"><a href="{:staticUrl('detail', $vo['id'],'Document')}"><img  alt="{$vo.title}" src="{:get_cover($vo['smallimg'],'path')}"></a></div>
+        <a href="{:staticUrl('detail', $vo['id'],'Document')}">{$vo.title|msubstr=###,0,10,'utf-8',false}</a></div>
+         </case>
+        <case value="2">
+          </div>
+          <div class="cnt-r-hot-ul">
+          <ul class="cnt-r-hot-details-ul">
+          <li><a href="{:staticUrl('detail', $vo['id'],'Document')}" title="{$vo.title}" target="_blank">{$vo.title|msubstr=###,0,18,'utf-8',false}</a></li>
+        </case>   
+         <default /> <li><a href="{:staticUrl('detail', $vo['id'],'Document')}" title="{$vo.title}" target="_blank">{$vo.title|msubstr=###,0,18,'utf-8',false}</a></li>
+        </switch>
+        </volist>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<extend name="Home@7230mobile/Base/common2"/>
+<block name="style">
+    <link href="__PUBLIC__/Home/7230mobile2/css/tags.css" rel="stylesheet" type="text/css">
+</block>
+<block name="body">
+<div class="page_title"><span><a href="javascript:void(0);" class="back"></a></span><h2>标签首页</h2></div>
+
+<section>
+    <div class="tags">
+        <div class="tit"><h3 class="cur">手机游戏</h3><h3>手机软件</h3></div>
+        <!-- 手机游戏内容 -->
+        <div class="tags_cont cur">
+            <ul class="tags_list">
+                <volist name="game" id="val">
+                    <li><a href="#m2_{$val['name']}">{$val['title']}</a></li>
+                </volist>
+            </ul>
+            <volist name="game" id="val">
+            <div class="tags_cate1" id="m2_{$val['name']}">{$val['title']}</div>
+            <ul class="tags_cate">
+                <volist name="val['child']" id="vo">
+                <li><a href="{$url}/tag/{$vo['name']}">{$vo['title']}</a></li>
+                </volist>
+            </ul>
+            </volist>
+            <div class="clear"></div>
+        </div>
+
+        <div class="tags_cont">
+            <ul class="tags_list">
+                <volist name="soft" id="val">
+                    <li><a href="#m2_{$val['name']}">{$val['title']}</a></li>
+                </volist>
+            </ul>
+            <volist name="soft" id="val">
+                <div class="tags_cate1" id="m2_{$val['name']}">{$val['title']}</div>
+                <ul class="tags_cate">
+                    <volist name="val['child']" id="vo">
+                        <li><a href="{$url}/tag/{$vo['name']}">{$vo['title']}</a></li>
+                    </volist>
+                </ul>
+            </volist>
+            <div class="clear"></div>
+        </div>
+    </div>
+</section>
+</block>

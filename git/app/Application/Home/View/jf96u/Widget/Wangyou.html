@@ -1,0 +1,19 @@
+<div class="mid-tit">
+  <h3>手机网游资料</h3>
+  <a href="{:staticUrl('lists','1666','Down')}" target="_blank" class="more">更多</a></div>
+<ul class="game-zl">
+  <volist name="lists" id="vo">
+    <li><a href="{$vo['url']}" target="_blank" title="{$vo.title}"><img src="{$vo['icon']}" alt="{$vo.title}"></a>
+      <div class="info"><a href="{$vo['url']}" target="_blank" class="tit">{$vo.title}</a>
+        <p>
+        <notempty name="vo.gonglve"><a href="{$vo.gonglve}" target="_blank">攻略</a><em>|</em> </notempty> 
+        <notempty name="vo.jietu"><a href="{$vo.jietu}" target="_blank">截图</a><em>|</em></notempty> 
+        <notempty name="vo.wenda"><a href="{$vo.wenda}" target="_blank">问答</a><em>|</em></notempty> 
+        <notempty name="vo.zixun"><a href="{$vo.zixun}" target="_blank">资讯</a><em>|</em></notempty> 
+        <notempty name="vo.shipin"><a href="{$vo.shipin}" target="_blank">精彩视频</a><em>|</em></notempty> 
+        <notempty name="vo.pingce"><a href="{$vo.pingce}" target="_blank">游戏评测</a><em>|</em></notempty> 
+        </p>
+      </div>
+    </li>
+  </volist>
+</ul>

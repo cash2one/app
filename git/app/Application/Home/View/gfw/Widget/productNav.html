@@ -1,0 +1,5 @@
+<ul class="menu-main1">
+<volist name="root_cate" id="vo" key="k">
+    <li><a href="{:staticUrl('lists',$vo['id'],'Down')}"<if condition="$vo['id'] eq $sid"> class="yellow"</if>>{$vo.title}</a></li>
+</volist>
+</ul>

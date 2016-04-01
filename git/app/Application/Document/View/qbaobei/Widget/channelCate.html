@@ -1,0 +1,17 @@
+<div class="left">
+    <div class="fn-title fn-title-l"><span class="fn-about-title"><volist name="data['tags']" id="val"><a href="{:C('STATIC_URL')}/tag/{$val['name']}/" target="_blank">{$val['title']}</a></volist></span><h2>{$data['title']}</h2></div>
+    <div class="left-l-pic">
+        <ul class="fn-leftBox">
+            <volist name="data['img']" id="val">
+                <li><div class="show"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></div><div class="hide"><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><span class="tit">{$val['title']}</span><span class="info">{$val['description']}</span></a></div></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="left-l-news">
+        <ul class="fn-news">
+            <volist name="data['new']" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" class="title">{$val['title']}</a><p class="info">{$val['description']}</p></li>
+            </volist>
+        </ul>
+    </div>
+</div>

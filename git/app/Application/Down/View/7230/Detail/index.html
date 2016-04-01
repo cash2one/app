@@ -1,0 +1,121 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style">
+    <script src="http://wandoujia.com/api/wdapi.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/7230/css/down.css"/></block>
+<block name="body">
+<php>
+    if($info['productTags'][0]['id']){
+        $libao = M('ProductTagsMap')->alias('a')->field('b.id')->join('__PACKAGE__ b ON a.did = b.id')->where('a.tid = '.$info['productTags'][0]['id'].' AND a.type = "package" AND b.category_id IN(1,2,4) AND b.status = 1')->limit(2)->order('b.id DESC')->select();
+        $zq    = M('ProductTagsMap')->alias('a')->field('b.url_token')->join('__BATCH__ b ON a.did = b.id')->where('a.tid = '.$info['productTags'][0]['id'].' AND a.type = "batch" AND b.pid = 0 AND b.enabled = 1')->find();
+    }
+</php>
+<div id="down-main">
+    <p class="page-nav">当前位置：{:getCrumbs(array('detail',$info['id'],'Down'))}</p>
+    <div class="down-xql">
+        <h1 class="title">{$info['title']}</h1>
+        <div class="down-xqlm">
+            <i class="pic"><img src="{:get_cover($info['smallimg'],'path')}"></i>
+            <i class="zan praise_api" data-id="{$info.id}" data-model="Down">{$info['abet']}</i>
+            <php>if(!$info['down']){</php>
+            <div class="down-btn1"></div>
+            <php>}elseif($info['system']=='2'){</php>
+            <div class="down-btn ios"><a href="{$info['down']}" target="_blank">苹果下载</a><i></i><em><img src="{$info['qrcode']}"></em></div>
+            <php>}else{</php>
+            <div class="down-btn"><a href="{$info['down']}">安卓下载</a><i></i><em><img src="{$info['qrcode']}"></em></div>
+            <php>}</php>
+        <span class="jbxx">
+            <i>版本：<s>{:$info['version']}</s></i>
+            <i>大小：<s>{:format_size($info['size'])}</s></i>
+            <i>运营状态：<s>{:showText($info['state'],'state')}</s></i>
+            <i>适用：<s>{:showText($info['system'],'system')}&nbsp;{$info.system_version}</s></i>
+            <i class="tag">标签：
+                <volist name="info['tags']" id="val">
+                    <a href="{:W('Home/P7230/tagsUrl',array($val['name']))}" target="_blank">{$val['title']}</a>
+                </volist>
+            </i>
+            <i>类型：<s>{$info['cate']}</s></i>
+            <i>开发商：<s>{$info['company']?$info['company']:'未知'}</s></i>
+            <i>更新时间：<s>{:date('Y-m-d',$info['update_time'])}</s></i>
+            <i>语言：<s>{:showText($info['language'],'language')}</s></i>
+        </span>
+            <php>if($libao){</php>
+            <a href="{:staticUrl('detail',$libao[0]['id'],'Package')}" target="_blank" class="down"></a>
+            <php>}</php>
+        </div>
+    </div>
+    <div class="down-xqr">
+        <p class="down-title"><i class="cur">全部内容</i><i>视频图片</i><i>游戏攻略</i><i>评论</i></p>
+        <div class="down-xqrm">
+            <!------全部内容------->
+            <div class="djxq">
+                <div class="djxq-info">
+                    <php>if($zq || $libao[1]['id']){</php>
+                    <div class="djxq-info-top"><h1>{$info['productTags'][0]['title']}</h1>
+                        <php>if($zq){</php>
+                        <a href="/{:C('FEATURE_ZQ_DIR')}/{$zq['url_token']}" class="zq">进入专区</a>
+                        <php>} if($libao[1]['id']){</php>
+                        <a href="{:staticUrl('detail',$libao[1]['id'],'Package')}" target="_blank" class="lb">领取礼包</a>
+                        <php>}</php>
+                    </div>
+                    <php>}</php>
+                    <div class="djxq-info-intro">
+                        <div class="djxq-info-text">
+                            <b>编辑点评：</b>
+                            <p>{$info['conductor']}</p>
+                        </div>
+                        <span class="user-img"><em></em><img src="{:get_cover($info['smallimg'],'path')}" alt="头像"></span>
+                    </div>
+                </div>
+                <div class="qbnr">
+                    {$info['content']}
+                </div>
+                <i class="zkxq">展开详情+</i>
+            </div>
+            {:W('P7230/otherDown',array($info['id']))}
+            <!--游戏图片-->
+            <p class="yxcp-title"><em>视频图片</em></p>
+            <div class="sptp">
+                <div id="waic">
+                    <div class="div1"></div>
+                </div>
+                <div class="xxx">
+                    <ul class="gdt" id="img">
+                        <volist name="info['previewimg']" id="img">
+                            <li><img src="{:get_cover($img,'path')}"></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            {:W('P7230/detailRight',array($info['id'],$info['tags'],$info['company_id'],$info['category_id']))}
+            <!--网友评论-->
+            <p class="yxcp-title"><em>网友评论</em></p>
+            <div id="pinglun">
+                <form action="" method="" name="" id="pl"  data-id="{$info['id']}" data-model="down">
+                    <p><input type="text" value="游客" id="user"><span><i class="qd">值得期待，赞！</i><i class="jy"> 打个酱油！</i><i class="ca">踩一脚！</i></span></p>
+                    <p class="bot"><b></b><textarea></textarea><input type="button" value="发表评论" id="btn"></p>
+                </form>
+                <ul class="comment_lists" data-id="{$info['id']}" data-model="down"></ul>
+                <p class="more"><a href="{:C('STATIC_URL')}/P7230/commentIndex/id/{$info['id']}/model/down" target="_blank">点击查看更多评论</a></p>
+            </div>
+        </div>
+        <!--主体内容 END-->
+    </div>
+</div>
+</block>
+<block name="Commonscript">
+    <!--代码结束-->
+    <script type="text/javascript" src="__PUBLIC__/static/layer/layer.min.js"></script>
+    <script>
+        layer.use('extend/layer.ext.js', function(){
+            //初始加载即调用，所以需放在ext回调里
+            layer.ext = function(){
+                layer.photosPage({
+                    title: "{$info['title']}",
+                    parent:'#img'
+                });
+            };
+        });
+    </script>
+    <script type="text/javascript"> var _webInfo = {};_webInfo={ Username:"{$info['uid']}",Type:"0",DateTime:"{:specialDate($info['update_time'])}",Id:"{$info['id']}" };</script>
+</block>

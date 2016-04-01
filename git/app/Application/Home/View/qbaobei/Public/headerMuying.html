@@ -1,0 +1,122 @@
+<script language="javascript"> window.DYNAMIC_SERVER_URL = '{:C("DYNAMIC_SERVER_URL")}';</script>
+<div class="mainguide">
+    <div class="guidecontant">
+        <div class="g-c-left">
+            <ul>
+                <li><a class="mouseon" href="/" target="_blank">首页</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/yq/" target="_blank">备孕</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/yunqi/" target="_blank">孕期</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/fm/" target="_blank">分娩</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/ye/" target="_blank">0-1岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/youer/" target="_blank">1-3岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/xlq/" target="_blank">3-6岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/jiankang/" target="_blank">健康</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/jiaoyu/" target="_blank">教育</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/baobaoleyuan/" target="_blank">儿歌</a></li>
+                <li><a href="http://home.qbaobei.com/" target="_blank">小家</a></li>
+                <li><a class="mouseon" href="http://bbs.qbaobei.com/" target="_blank">论坛</a></li>
+            </ul>
+        </div>
+        <div class="g-c-right"></div>
+    </div>
+</div>
+<div class="header">
+    <div class="cont">
+        <h1> <a href="/" target="_blank" title="亲亲宝贝网" class="logo">亲亲宝贝网</a></h1>
+        <p class="theme"> 母婴健康</p>
+        <p class="linkarae"> <a href="http://www.qbaobei.com/qinbi/" target="_blank">亲币</a>|<a target="_blank"
+                                                                                               href="http://www.qbaobei.com/huodong/index.aspx">活动</a></p>
+        <div class="searchbar" onmouseover="this.className='searchbar-hover'" onmouseout="this.className='searchbar'">
+            <input type="text" class="searchText" />
+            <a class="searchBtn">搜索</a></div>
+    </div>
+    <div class="mainnav">
+        <ul>
+            <li class="current" list-id="1"><a href="http://www.qbaobei.com/jiankang/" target="_blank"> 健康首页</a></li>
+            <li list-id="2"><a href="{:staticUrl('lists',19,'Document')}" target="_blank">孕前</a></li>
+            <li list-id="3"><a href="{:staticUrl('lists',21,'Document')}" target="_blank">孕中</a></li>
+            <li list-id="4"><a href="{:staticUrl('lists',192,'Document')}" target="_blank">分娩</a></li>
+            <li list-id="5"><a href="{:staticUrl('lists',22,'Document')}" target="_blank">产后</a></li>
+            <li list-id="6"><span class="zeroto1week"></span><a href="{:staticUrl('lists',934,'Document')}" target="_blank">新生儿</a></li>
+            <li list-id="7"><span class="baby"></span><a href="{:staticUrl('lists',129,'Document')}" target="_blank">婴儿</a></li>
+            <li list-id="8"><span class="infant"></span><a href="{:staticUrl('lists',130,'Document')}" target="_blank">幼儿</a></li>
+            <li list-id="9"><span class="child"></span><a href="{:staticUrl('lists',131,'Document')}" target="_blank">学龄前</a></li>
+            <li class="nopop"><a href="http://www.qbaobei.com/jieti/28537.html" target="_blank"> 成长阶梯</a></li>
+            <li list-id="10"><a href="{:staticUrl('lists',80,'Document')}" target="_blank">生活</a></li>
+        </ul>
+    </div>
+</div>
+<div class="secondnav" id="tab-1" style="display: block;">
+    {:W('Home/Qbaobei/healthNav',array(4))}
+</div>
+<div class="secondnav" id="tab-2">
+    {:W('Home/Qbaobei/healthNav',array(19))}
+</div>
+<div class="secondnav" id="tab-3">
+    {:W('Home/Qbaobei/healthNav',array(21))}
+</div>
+<div class="secondnav" id="tab-4">
+    {:W('Home/Qbaobei/healthNav',array(192))}
+</div>
+<div class="secondnav" id="tab-5">
+    {:W('Home/Qbaobei/healthNav',array(22))}
+</div>
+<div class="secondnav" id="tab-6">
+    {:W('Home/Qbaobei/healthNav',array(934))}
+</div>
+<div class="secondnav" id="tab-7">
+    {:W('Home/Qbaobei/healthNav',array(129))}
+</div>
+<div class="secondnav" id="tab-8">
+    {:W('Home/Qbaobei/healthNav',array(130))}
+</div>
+<div class="secondnav" id="tab-9">
+    {:W('Home/Qbaobei/healthNav',array(131))}
+</div>
+<div class="secondnav" id="tab-10">
+    {:W('Home/Qbaobei/healthNav',array(80))}
+</div>
+<script type="text/javascript">
+        //导航 =====================================
+        var url = window.location.href;
+        $('.mainnav li').each(function(index) {
+            var obj = $(this).find('a').attr('href');
+            var curUrl = url.substring(0, url.lastIndexOf('/'));
+            var hrefUrl = obj.substring(0, obj.lastIndexOf('/'));
+            if (curUrl == hrefUrl) {
+                $(".mainnav li").removeClass("current");
+                $(this).addClass("current");
+                var listContentID = $(this).attr("list-id");
+                if (listContentID == undefined || listContentID == null)
+                    return;
+                listContentID = "#tab-" + listContentID;
+                $(".secondnav").hide();
+                $(listContentID).show();
+            }
+        });
+
+        $(".mainnav li ").hover(function() {
+            var listContentID = $(this).attr("list-id");
+            if (listContentID == undefined || listContentID == null)
+                return;
+            listContentID = "#tab-" + listContentID;
+            $(".secondnav").hide();
+            $(listContentID).show();
+            $(".mainnav li").removeClass("current");
+            $(this).addClass("current");
+        }, function() {
+
+        });
+
+        //搜索 ========================================
+        $(".searchBtn").click(function() {
+            var keyword = $(".searchText").val();
+            if (keyword == "") {
+                alert("请输入关键字");
+                return;
+            } else {
+                this.target = "_blank";
+                this.href = "http://www.qbaobei.com/search.aspx?keyword=" + escape(keyword);
+                this.click();
+            }
+        });    </script>

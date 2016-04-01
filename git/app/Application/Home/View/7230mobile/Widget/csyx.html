@@ -1,0 +1,46 @@
+
+<extend name="Home@7230mobile/Base/common2"/>
+<block name="style">
+    <link href="__PUBLIC__/Home/7230mobile2/css/tags.css" rel="stylesheet" type="text/css">
+</block>
+<block name="body">
+<section class="tags_head">
+    <div class="page_title"><span><a href="javascript:void(0);" class="back"></a></span><h2>{$info['name']}</h2></div>
+    <div class="page_cont">
+        <img src="{:get_cover($info['img'],'path')}">
+        <p>{$info['intro']}</p>
+    </div>
+</section>
+
+<notempty name="lists">
+<section>
+    <div class="down_list">
+        <ul>
+            <volist name="lists" id="val">
+            <li>
+                <a href="{:staticUrlMobile('detail',$val['id'],'Down')}">
+                    <div class="yx_left"><img src="{:get_cover($val['smallimg'],'path')}"></div>
+                    <div class="yx_right">
+                        <div class="rgt_l">
+                            <div class="right1"><span class="title">{$val['title']}</span><span class="yx_cate">{$val['cate']}</span></div>
+                            <div class="right2"><span class="num">{$val['view']}人已下载</span><span class="size">{:format_size($val['size'])}</span></div>
+                        </div>
+                        <div class="rgt_r"><span class="down">下载</span></div>
+                    </div>
+                    <div class="yx_txt">{$val['intro']}</div>
+                </a>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    <notempty name="page">
+    <div class="page">
+        {$page}
+    </div>
+    </notempty>
+</section>
+</notempty>
+</block>
+<block name="script">
+<script type="text/javascript"> var _webInfo = {};_webInfo={ Username:"{$info['uid']}",Type:"4",DateTime:"{:specialDate($info['update_time'])}",Id:"{$info['id']}" };</script>
+</block>

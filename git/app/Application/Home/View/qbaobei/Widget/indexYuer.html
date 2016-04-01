@@ -1,0 +1,9 @@
+<volist name="lists" id="article">
+       <switch name="key" >
+       <case value="0"><dt class="avata"><a target="_blank" href="{:staticUrl('detail', $article['id'],'Document')}" title="{$article.title}"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a><span class="info"><a target="_blank" href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a></span></dt></case>
+       <case value="1"><dd class="tile"><a target="_blank" href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a></dd><dd><ul></case>
+       <default /> <li><a target="_blank" href="{:staticUrl('detail', $article['id'],'Document')}"><span>▪ </span>{$article.title}</a></li>
+       </switch>
+      </volist>
+     </ul>
+</dd>

@@ -1,0 +1,131 @@
+<!--食谱内容-->
+<section class="ship-detail">
+    <div class="head-pic"><img src="{:get_cover($info['smallimg'],'path')}" alt="{$info['title']}"><p class="title">{$info['title']}</p></div>
+    <article class="art-body">
+        <notempty name="info['age']">
+        <dl>
+            <dt>适宜年龄</dt>
+            <dd><span class="tag">{$info['age']}</span></dd>
+        </dl>
+        </notempty>
+        <notempty name="info['efficacy']">
+        <dl>
+            <dt>功效</dt>
+            <dd><volist name="info['efficacy']" id="val"><span class="tag">{$val}</span></volist></dd>
+        </dl>
+        </notempty>
+        <notempty name="info['description']">
+        <dl>
+            <dt>简介</dt>
+            <dd>{$info['description']}</dd>
+        </dl>
+        </notempty>
+        <notempty name="info['foodstuff']">
+        <dl>
+            <dt>主料</dt>
+            <dd><ul class="dd-material">
+                <volist name="info['foodstuff']" id="val">
+                <li><span class="tit">{$val[0]}</span><span class="kg">{$val[1]}</span></li>
+                </volist>
+            </ul></dd>
+        </dl>
+        </notempty>
+        <notempty name="info['accessories']">
+        <dl>
+            <dt>辅料</dt>
+            <dd><ul class="dd-material">
+                <volist name="info['accessories']" id="val">
+                <li><span class="tit">{$val[0]}</span><span class="kg">{$val[1]}</span></li>
+                </volist>
+            </ul></dd>
+        </dl>
+        </notempty>
+
+        <php>if($info['step_read'] == '1' && !empty($info['stepList']) && $time_key == true){</php>
+
+        <dl>
+            <dt>制作步骤</dt>
+            <dd><ul class="dd-steps">
+                <volist name="info['stepList']" id="val">
+                <li><span class="tit">{$val['number']}.{$val['title']}</span><img src="{$val['img']}"></li>
+                </volist>
+            </ul></dd>
+        </dl>
+        <php>}elseif($info['step_read'] == '1' && !empty($info['stepList'])){</php>
+        <!--模板3 start-->
+        <div class="detail-art-main">
+            <div class="art-body art-body3">
+                <volist name="info['stepList']" id="val">
+                <div class="item">
+                    <div class="item-nub"><em class="nub">{$val['number']}</em><em class="bg"></em></div>
+                    <p class="introTit">{$val['title']}</p>
+                    {$val['content']}
+                </div>
+                </volist>
+            </div>
+        </div>
+        <!--模板3 end-->
+        <php>}else{</php>
+        <!--模板2 start-->
+        <div class="detail-art-main">
+            <div class="art-body">
+                {$info['content']}
+            </div>
+        </div>
+        <!--模板2 end-->
+        <php>}</php>
+
+        <notempty name="info['tips']">
+        <dl>
+            <dt>小贴士</dt>
+            <volist name="info['tips']" id="val">
+            <dd>{$val}</dd>
+            </volist>
+        </dl>
+        </notempty>
+    </article>
+
+    <div class="share">
+        <div id="nativeShare"><span class="nativeShare-tit">分享：</span></div>
+        <div class="bdsharebuttonbox">
+            <a href="#" class="sina bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="qq bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+            <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+        </div>
+    </div>
+</section>
+<section id="weixin-code">
+</section>
+<notempty name="tag_list">
+<section class="ship-cata dis-bot">
+    <div class="wrap-tit"><h3>相关食谱</h3></div>
+    <ul class="ship-cata-ul pic-adaptive-wrap2">
+        <volist name="tag_list" id="val">
+        <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" class="pic-adaptive2" title="{$val['title']}"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" class="title">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</section>
+</notempty>
+
+<notempty name="tj">
+    <section class="ship-cata dis-bot">
+        <div class="wrap-tit"><h3>特别推荐</h3></div>
+        <ul class="ship-cata-ul pic-adaptive-wrap2">
+            <volist name="tj" id="val">
+                <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" class="pic-adaptive2" title="{$val['title']}"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" class="title">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </section>
+</notempty>
+
+<notempty name="tag_zs">
+<section class="about-tags dis-bot">
+    <div class="wrap-tit"><h3>相关知识</h3></div>
+    <ul class="about-news">
+        <volist name="tag_zs" id="val">
+        <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}" title="{$val['title']}">{$val['title']}</a><em class="ico"></em></li>
+        </volist>
+    </ul>
+</section>
+</notempty>
+{:W('Qbaobeimobile/getRelateDoc',array($info['id'],$info['category_id'],$ids,$tags))}

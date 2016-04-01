@@ -1,0 +1,36 @@
+<extend name="Home@7230mobile/Base/common2_404"/>
+<block name="style">
+    <style>
+        body{ background-color: #FFFFFF;}
+        .d1{ width: 100%; height: 36px; background-color: #CEE5EE;}
+        .b2{ width: 100%;}
+        .d3{ padding-top: 2px; width: 100%; overflow: hidden; margin: 0px auto; }
+        .d3 .d3_top{ width: 212px; overflow: hidden; margin: 0px auto;}
+        .d3_top .d3_tit,.d3_top ul{ float: left; font-size: 16px; line-height: 22px;}
+        .d3_top ul li{ font-size: 16px;line-height: 22px;}
+        .d3_btn{ width: 260px; overflow: hidden; margin: 16px auto 0px auto;}
+        .d3_btn span,.d3_btn a{ display: inline-block; width: 100px; height: 25px; font-size: 18px; padding-left: 24px; color: #FF7D00;background: url("__PUBLIC__/Home/7230mobile2/img/404_back1.png") 0px 2px no-repeat; background-size: 22px;}
+        .d3_btn .btn1{ float: left;}
+        .d3_btn .back{float: right;background-position:0px -32px; }
+    </style>
+</block>
+<block name="body">
+
+<div class="d1"></div>
+<img class="b2" src="__PUBLIC__/Home/7230mobile2/img/404.png">
+<div class="d3">
+    <div class="d3_top">
+        <div class="d3_tit">可能原因：</div>
+        <ul>
+            <li>网络信号弱</li>
+            <li>找不到请求页面</li>
+            <li>输入的网址不正确</li>
+        </ul>
+    </div>
+    <div class="d3_btn"><a href="{:C('MOBILE_STATIC_URL')}" class="btn1">返回首页</a><span class="back">返回上一页</span></div>
+</div>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/7230mobile2/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/7230mobile2/js/mb.js"></script>
+</block>

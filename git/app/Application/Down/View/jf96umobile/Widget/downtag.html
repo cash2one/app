@@ -1,0 +1,47 @@
+<if condition="$count gt 0">
+<div class="game-cnxh">
+	<div class="cnxh-title"><span>猜你喜欢</span></div>
+	<div class="cnxh-nav swiper-hd">
+		<div class="swiper-wrapper pagination1">
+            <php>$flag=0;</php>
+			<volist name="ptag" id="vq">
+                <php>$flag++;</php>
+                <if condition="$flag eq 1"><div class="swiper-slide tab-li active" >{$vq.title}</div> <else/><div class="swiper-slide tab-li" >{$vq.title}</div></if>
+			</volist>
+
+		</div>
+		<div class="swiper-wrapper pagination2"></div>
+	</div>
+	<div class="swiper-tab">
+		<div class="swiper-wrapper">
+
+			<volist name="ptag" id="va">
+                <php>$fkey=$va['id'];</php>
+				<div class="swiper-slide tab-bd">
+					<div class="text">
+						<foreach name="wdata[$fkey]" item="v">
+
+								<a href="{:C('MOBILE_STATIC_URL')}/{:getCPath($v['id'],'feature')}" title="{$v.title}" class="title">{$v.title}</a>
+								<p class="info"><a href="{:C('MOBILE_STATIC_URL')}/{:getCPath($v['id'],'feature')}">{$v.description}
+									<span href="" class="more">[更多]</span></a>
+								</p>
+						</foreach>
+					</div>
+					<ul class="text-ul">
+						<foreach name="data[$fkey]" item="vo">
+							<li>
+								<a href="{:str_replace('index.html','',staticUrlMobile('detail',$vo['id'],'Down'))}" title="{$vo.title}">
+									<img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo.title}">
+									<span class="tit">{$vo.title}</span>
+								</a>
+								<a href="{:str_replace('index.html','',staticUrlMobile('detail',$vo['id'],'Down'))}" style="height: 24px;" class="down">下载</a>
+							</li>
+						</foreach>
+
+					</ul>
+				</div>
+			</volist>
+		</div>
+	</div>
+</div>
+</if>

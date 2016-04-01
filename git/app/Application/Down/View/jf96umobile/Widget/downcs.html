@@ -1,0 +1,26 @@
+<if condition="$csdata NEQ	 0 ">
+	<section class="game-xtcs dis-bot">
+
+		<div class="mid-title"><h2>相同厂商</h2></div>
+		<ul class="xtcs-ul">
+<volist  name="csdata" id="article">
+			<li>
+				<a href="{:str_replace('index.html','',staticUrlMobile('detail',$article['id'],'Down'))}" title="{$article.title}">
+					<img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}">
+					<span class="tit">{$article.title}</span>
+				</a>
+				<a href="{:str_replace('index.html','',staticUrlMobile('detail',$article['id'],'Down'))}" class="down">下载</a>
+			</li>
+			</volist>
+		</ul>
+		<php>  $company=M('company')->where("id=$info[company_id]")->getField('path');</php>
+		<p class="mid-more bottom-more">
+
+			<a href="/{$company}">
+				<span>点击查看更多</span>
+				<em class="arr"></em>
+			</a>
+		</p>
+
+	</section>
+</if>

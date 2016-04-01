@@ -1,0 +1,133 @@
+<extend name="Home@dongdong/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/dongdong/css/down.css"/>
+</block>
+<block name="body">
+<div class="page_main">
+<!--当前位置-->
+<div class="go_home">当前位置:{~W('Down/Dongdong/dongdongCrumb',array($info['id']))}{$info['title']}</div>
+<!--网络游戏推荐-->
+<php>
+    if($info['downAll']){
+        $down = array();
+        foreach($info['downAll'] as $k=>$v){
+                if(!$down['pc'] && substr($v['url'],-4)=='.exe'){
+                    $down['pc'] = $v;
+                }elseif(!$down['adr']){
+                    $down['adr'] = $v;
+                    $qrcode = $v['qrcode'];
+            }
+        }
+    }
+    if(!$down['pc']){
+        $down['pc']['url']=C('PHONE_GAME_INFO')['download_address'];
+        if(substr($down['pc']['url'],0,8) != "https://" && substr($down['pc']['url'],0,7) != "http://"){
+            $down['pc']['url'] = "http://".$down['pc']['url'];
+        }
+    }
+</php>
+<div class="wraper" id="down_detail">
+    <div class="down_detail_left"> 
+        <!--游戏详情-->
+        <div class="wrap" id="down_xq0">
+            <div class="left">
+                <div class="left-m"> <img src="{:get_cover($info['smallimg'],'path',1,148,148)}">
+                    <div class="info">
+                        <p class="tit" id="downID" data-id="{$info['id']}"><em>{$info['title']}</em><em class="star{$info['score']}" id="star"></em></p>
+                        <p>语言：{:showText($info['language'],'language')}　版本：{$info['version']}</p>
+                        <p>大小：{:format_size($info['size'])}</p>
+                        <p>更新日期：{:date('Y-m-d',$info['update_time'])}</p>
+                        <p>软件分类：{$info['cate']}</p>
+                        <p>软件授权:  {:showText($info['licence'],'licence')}</p>
+                    </div>
+                    <div class="ewm_pf">
+                        <div class="pf"><span><em>0</em>条评论</span><span class="yxpf"><em>{$info['score']}</em>评分</span></div>
+                        <php>if($down['adr']){</php>
+                        <div class="ewm"><img src="{$qrcode}" alt="{$info['title']}二维码">手机扫码直接下载安装</div>
+                        <php>}</php>
+                    </div>
+                </div>
+                <div class="click">
+                    <div class="down">
+                        <php>if($down['adr']){</php>
+                        <a href="{$down['adr']['url']}" class="adr">下载安卓版</a>
+                        <php>} if($down['pc']){</php>
+                        <a href="{$down['pc']['url']}">下载电脑版</a>
+                        <php>}</php>
+                    </div>
+                    <div class="score" data-id="{$info['id']}" data-model="down">
+                        <p><em class="good">好玩</em><span><b><i></i></b><s>0</s></span></p>
+                        <p><em class="bad">不好玩</em><span><b><i></i></b><s>0</s></span></p>
+                    </div>
+                    <div class="fxan"> 
+                        <!-- JiaThis Button BEGIN -->
+                        <div class="jiathis_style"> <span>分享到：</span> <a class="jiathis_button_qzone"></a> <a class="jiathis_button_tsina"></a> <a class="jiathis_button_tqq"></a> <a class="jiathis_button_weixin"></a> <a class="jiathis_button_renren"></a> <a class="jiathis_button_xiaoyou"></a> <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a> <a class="jiathis_counter_style"></a> </div>
+                        <!-- JiaThis Button END --> 
+                    </div>
+                </div>
+                <php>$product = get_tags($info['id'],'down','product')[0]['id'];
+                    if($product){
+                    $otherDown = M('ProductTagsMap')->alias('a')->field('b.id,b.title')->join('__DOWN__ b ON a.did=b.id')->where('a.tid = '.$product.' AND a.type = "down" AND a.did != '.$info['id'].' AND b.status = 1')->select();
+                    if($otherDown){
+                </php>
+                <div class="xg-down">
+                    <volist name="otherDown" id="val">
+                        <a href="{:staticUrl('detail',$val['id'],'Down')}">{$val['title']}</a>
+                    </volist>
+                </div>
+                <php>}}</php>
+            </div>
+        </div>
+        <!--游戏简介-->
+        <div class="wrap" id="down_xq1">
+            <div class="left">
+                <div class="title"><i class="cur">应用介绍</i></div>
+                <div class="main">
+                    <div class="jj"> {$info['content']} </div>
+                    <div class="get_more"><em>展开详情</em></div>
+                </div>
+            </div>
+            <!--游戏截图-->
+            <div class="left" id="focus-pic">
+                <div class="title"><i class="cur">游戏截图</i></div>
+                <div class="main">
+                    <div class="prev"><span></span><em>向左</em></div>
+                    <ul class="focus">
+                        <volist name="info['previewimg']" id="val">
+                            <li><img src="{:get_cover($val,'path')}" alt="{$info['title']}"></li>
+                        </volist>
+                    </ul>
+                    <div class="next"><span></span><em>向右</em></div>
+                </div>
+            </div>
+        </div>
+        <!-- 相关游戏 --> 
+        {:W('Dongdong/detailGame',array($info['id'],$info['category_id']))}
+        
+        <!--评论-->
+        <div class="wrap" id="pinglun" name="pinglun">
+            <div class="title">
+                <h3><a name="pingl">发表评论</a></h3>
+            </div>
+            <form action="" method="post" id="cmtForm" data-id="{$info['id']}" data-model="down">
+                <p id="userName-wrap">
+                    <input name="UserName" type="text" id="userName" class="input-bg grey9" maxlength="10" value="东东网友">
+                    (您的评论需要经过审核才能显示)</p>
+                <p>
+                    <textarea name="content" id="cmtMsg" class="input-bor">请输入您的评论，也可以对我们提出提出您的建议与意见...</textarea>
+                </p>
+                <p>
+                    <a class="btn-submit button btnOrg fr" id="subCmt">提交评论</a>
+                </p>
+            </form>
+            <div class="hot"><span>热门评论</span></div>
+            <ul class="pl_list" data-id="{$info['id']}" data-model="down">
+<p style="text-align:center;margin:10px 0;">暂无评论</p>
+            </ul>
+        </div>
+    </div>
+    {:W('Dongdong/detailRight',array($info['id'],$info['tags']))}
+</div>
+</block>
+ <block name="script"><script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+</block>

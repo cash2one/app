@@ -1,0 +1,42 @@
+<volist name="data" id="v">
+
+ <php>   if($i==3) {
+	 $b=$i-1;
+ unset($data[$b]);
+ </php>
+	<a href="{:staticUrl('lists',$v['id'], 'down')}" <php>
+	if($cid==$v['id']){
+	echo "class='active'";}
+	if($info['rootid']===$info['pid']){
+	if($info['id']==$v['id']){
+	echo "class='active'";}
+	}
+</php>>{$v.title}</a>
+<php>}</php>
+	<php>   if($i==4) {
+		$b=$i-1;
+		unset($data[$b]);
+	</php>
+	<a href="{:staticUrl('lists',$v['id'], 'down')}" <php>
+	if($cid==$v['id']){
+	echo "class='active'";}
+	if($info['rootid']===$info['pid']){
+	if($info['id']==$v['id']){
+	echo "class='active'";}
+	}
+</php>>{$v.title}</a>
+	<php>}</php>
+</volist>
+
+<volist name="data" id="v">
+
+	<a href="{:staticUrl('lists',$v['id'], 'down')}" <php>
+	if($cid==$v['id']){
+	echo "class='active'";}
+	if($info['rootid']===$info['pid']){
+	if($info['id']==$v['id']){
+	echo "class='active'";}
+	}
+</php>>{$v.title}</a>
+
+</volist>

@@ -1,0 +1,83 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/yxk.css">
+</block>
+<block name="body">
+<div class="main1200">
+  <div class="goback">当前位置：
+    <position />
+  </div>
+  <div class="container">
+    <div class="down-home">
+      <div class="fl cata-l">
+        <div class="down-home-tit">
+          <div class="down-home-l"><h3>{$categoryName}</h3></div>
+        </div>
+        <div class="down-nav"> <a href="{:staticUrl('lists',$cid, 'down')}" class="active">最新</a> <a href="{:staticUrl('lists',$cid,'down',null,false,true)}">最热</a> </div>
+        <ul class="down-ul">
+          <if condition="$lists eq 0 ">
+            <php>$lists=M('down')->alias('a')->join('__DOWN_DSOFT__  b')->where("a.id=b.id and a.status=1")->limit(20)
+              ->select(); </php>
+          </if>
+          <volist name="lists" id="v">
+            <li><a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" title="{$v.title}" class="pic"> <img src="{:get_cover($v['smallimg'],'path')}" alt="{$v.title}"> <span class="down">下载</span></a>
+              <div class="text"> <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" title="{$v.title}" class="title">{$v.title}</a>
+                <p> {:get_game_typedown($v['category_id'])}</p>
+                <p>{$v.create_time|date="m-d",###} | {$v['size']}</p>
+                <p>版本：{$v.version}
+                  <if condition="$v['version'] eq 0 ">1.0</if>
+                </p>
+                <p class="info">{$v.description}</p>
+              </div>
+            </li>
+          </volist>
+        </ul>
+        <div class="page"> {$page} </div>
+      </div>
+      <div class="fr cata-r"> {:W('jf96u/softcate',array($cid))}
+        <div class="down-box dis-bot">
+          <div class="mid-tit">
+            <h3>应用推荐</h3>
+          </div>
+          <ul class="downUl2">
+            <Think:article basename="Down" name="dsoft" where="category_rootid = '1857' AND home_position & 64" limit="10"  order="update_time desc">
+              <li> <a href="{:str_replace('index.html','',staticUrl('detail',$article['id'],'Down'))}" target="_blank" title="{$article.title}"> <img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"> </a>
+                <div class="text"> <a href="{:str_replace('index.html','',staticUrl('detail',$article['id'],'Down'))}" target="_blank" title="{$article.title}">{$article.title}</a>
+                  <p class="star star{:round($article['soft_socre'])}"></p>
+                  <p class="cata">{:get_game_type($article['game_type'])}</p>
+                </div>
+              </li>
+            </Think:article>
+          </ul>
+        </div>
+        <div class="down-box dis-bot rank-cont">
+          <div class="mid-tit">
+            <h3>热门应用排行榜</h3>
+          </div>
+          <ul class="rank-ul">
+            <Think:article basename="Down" name="dsoft" where="category_rootid = '1857'" limit="10"  order="view"   >
+              <php> if($i==1){
+                echo '
+                <li class="active">';}
+                  else{
+                  echo '
+                
+                <li>';
+                  } 
+              </php>
+              <em></em> <a href="{:str_replace('index.html','',staticUrl('detail',$article['id'],'Down'))}" target="_blank" class="title" title="{$article.title}">{$article.title}</a>
+              <div class="game-cont"> <a href="{:str_replace('index.html','',staticUrl('detail',$article['id'],'Down'))}" target="" title="{$article.title}"> <img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a>
+                <div class="text"> <a href="{:str_replace('index.html','',staticUrl('detail',$article['id'],'Down'))}" target="">{$article.title}</a> <span class="star star{:round($article['soft_socre'])}"></span> <span class="cata">{:get_game_type($article['game_type'])}</span> </div>
+                <a href="{:str_replace('index.html','',staticUrl('detail',$article['id'],'Down'))}" target="_blank" class="down">下载</a> </div>
+              </li>
+            </Think:article>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</block>
+<block name="script">
+    <script src="__PUBLIC__/Home/jf96umobile/js/down.cnzz.js"></script>
+</block>

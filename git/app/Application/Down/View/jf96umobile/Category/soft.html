@@ -1,0 +1,43 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css">
+</block>
+<block name="title">{$info.title}</block>
+<block name="bar">
+    <div class="list-nav">
+        <span>分类</span>
+        <span class="active">推荐</span>
+        <span>最新</span>
+    </div>
+</block>
+<block name="body">
+<section class="down-list">
+    <!--弹出分类 start-->
+    {~W('Home/Jf96umobile/softCate')}
+    <!--弹出分类 end-->
+    <div class="down-tab current">
+        <ul class="down-game-ul" id="commend_list">
+           {~W('Down/Jf96umobile/commendedSoft',array($info['id']))}
+        </ul>
+        <p class="mid-more"><a id="moreCommend" data-id="{$info['id']}" href="javascript:void(0)"><span>点击查看更多</span><em class="arr"></em></a></p>
+    </div>
+    <div class="down-tab">
+        <ul class="down-game-ul" id="new_list">
+          <volist name="lists" id="vo" offset="0" length="10">
+            <li><a href="{:str_replace('index.html','',staticUrlMobile('detail',$vo['id'],'Down'))}" title="{$vo['title']}" class="pic"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"></a>
+                <div class="text">
+                    <a href="{:str_replace('index.html','',staticUrlMobile('detail',$vo['id'],'Down'))}" title="{$vo['title']}">{$vo['title']}</a>
+                    <p>{:format_size($vo['size'])}<if condition="$vo[size] EQ 0 "> 未知 </if>/{:get_game_typedown($vo['category_id'])}</p>
+                </div>
+                <a href="{:str_replace('index.html','',staticUrlMobile('detail',$vo['id'],'Down'))}" class="down">下载</a>
+            </li>
+      </volist>
+        </ul>
+          <p class="mid-more" id="more"><a id="newList" href="javascript:void(0)"  data-id="{$info['id']}"><span>点击查看更多</span><em class="arr"></em></a></p>
+    </div>
+</section>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/jf96umobile/js/ajax_soft.js"></script>
+    <script src="__PUBLIC__/Home/jf96umobile/js/down.cnzz.js"></script>
+</block>

@@ -1,0 +1,42 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/index.css">
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > {$title}</block>
+<block name="nav">
+    <notempty name="isshow">
+        <nav class="channel-nav">
+            <if condition="$allcount gt 0">
+                <a <if condition="$flag eq 'all'">class="active"</if> href="{$Think.config.MOBILE_STATIC_URL}/tag/{$name}/">全部</a>
+            </if>
+            <if condition="$doccount gt 0">
+                <a <if condition="$flag eq '1'">class="active"</if> href="{$Think.config.MOBILE_STATIC_URL}/tag/{$name}/1/">文章</a>
+            </if>
+            <if condition="$videocount gt 0">
+                <a <if condition="$flag eq '2'">class="active"</if> href="{$Think.config.MOBILE_STATIC_URL}/tag/{$name}/2/">视频</a>
+            </if>
+            <if condition="$foodcount gt 0">
+                <a <if condition="$flag eq '3'">class="active"</if> href="{$Think.config.MOBILE_STATIC_URL}/tag/{$name}/3/">食谱</a>
+            </if>
+        </nav>
+    </notempty>
+</block>
+<block name="body">
+<section class="news-list dis-bot  <empty name="isshow">beiyun-news</empty>">
+    <div class="news-list-ul tag-page-ul">
+        <volist name="lists" id="list">
+            <if condition="$list['images'] gt 0">
+                <div class="middle_mode"><a href="{:staticUrlMobile('detail',$list['id'],'Document')}"><div class="mid-text"><p class="mid-tit">{$list.title}</p><p class="mid-info">{$list.description}</p></div><div class="mid-pic"><ul class="mid-ul pic-adaptive-wrap2"><li class="pic-adaptive2"><img src="{:get_cover($list['smallimg1'],'path',1,200,100)}"></li><li class="pic-adaptive2"><img src="{:get_cover($list['smallimg2'],'path',1,200,100)}"></li><li class="pic-adaptive2"><img src="{:get_cover($list['smallimg3'],'path',1,200,100)}"></li></ul></div></a></div>
+                <else/>
+                <div class="has-action"><a href="{:staticUrlMobile('detail',$list['id'],'Document')}"><div class="pic"><img src="{:get_cover($list['smallimg'],'path',1,200,100)}"></div><div class="text"><p class="tit">{$list.title}</p><p class="info">{$list.description}</p></div></a></div>
+            </if>
+        </volist>
+   </div>
+    <div class="get-more tag-page-loading"><span><if condition="$count lt 6">没有数据了<else/>点击加载更多</if><em class="arr"></em></span></div>
+    <input type="hidden" id="tag-flag" value="{$flag}"/>
+    <input type="hidden" id="tag-tid" value="{$tid}"/>
+</section>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.tag.js"></script>
+</block>

@@ -1,0 +1,353 @@
+<extend name="Home@qbaobei/Base/commonGanmaoIndex"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/ganmao.css"/>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/lazyload.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/ganmaoindex.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/slide.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/subscription.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/jkImg.js"></script>
+</block>
+<block name="body">
+    <div class="commonbox box1">
+        <div class="boxleft">
+            <div class="slide">
+                <div style="position: relative; width: 330px; overflow: hidden; height:430px;" id="jFlowSlide1">
+                    <input type="hidden" value="1" id="hidAd">
+                    <div id="slides1">
+                        <div class="slide_wrap">
+                            <div class="jFlowSlideContainer">
+                                <div class="pic-box"><a target="_blank" href="http://www.qbaobei.com/plans/fashao/" alt="发烧怎么退烧"><img src="http://www.qbaobei.com/UploadFiles/ganmao/2014/2/201402201727129553.jpg" alt="发烧怎么退烧"></a></div>
+                            </div>
+                        </div>
+                        <div class="slide_wrap">
+                            <div class="jFlowSlideContainer">
+                                <div class="pic-box"><a target="_blank" href="http://www.qbaobei.com/plans/xiajiganmao/" alt="宝宝夏季感冒怎么办"><img src="http://www.qbaobei.com/UploadFiles/ganmao/2014/5/201405091150445172.jpg" alt="宝宝夏季感冒怎么办"></a></div>
+                            </div>
+                        </div>
+                        <div class="slide_wrap">
+                            <div class="jFlowSlideContainer">
+                                <div class="pic-box"><a target="_blank" href="http://www.qbaobei.com/plans/2013yapei/" alt="雅培奶粉最新事件2013"><img src="http://www.qbaobei.com/UploadFiles/ganmao/2013/8/201308141654135653.jpg" alt="雅培奶粉最新事件2013"></a></div>
+                            </div>
+                        </div>
+                        <div class="slide_wrap">
+                            <div class="jFlowSlideContainer">
+                                <div class="pic-box"><a target="_blank" href="http://www.qbaobei.com/plans/doudoutiaoli/" alt="脸上长痘痘怎么调理"><img src="http://www.qbaobei.com/UploadFiles/ganmao/2012/12/201212291645003204.jpg" alt="脸上长痘痘怎么调理"></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="myController1"><span class="jPrev" style="display: none; background: none repeat scroll 0% 0% transparent;&#xD;&#xA;                -moz-background-inline-policy: continuous;">&lt;</span>
+                    <div class="jFlowControl1 jFlowSelected1"><a target="_blank" href="http://www.qbaobei.com/plans/fashao/" alt="发烧怎么退烧" title="发烧怎么退烧">1 </a></div>
+                    <div class="jFlowControl1"><a target="_blank" href="http://www.qbaobei.com/plans/xiajiganmao/" alt="宝宝夏季感冒怎么办" title="宝宝夏季感冒怎么办">2 </a></div>
+                    <div class="jFlowControl1"><a target="_blank" href="http://www.qbaobei.com/plans/2013yapei/" alt="雅培奶粉最新事件2013" title="雅培奶粉最新事件2013">3 </a></div>
+                    <div class="jFlowControl1" style="margin-right: 0pt;"><a target="_blank" href="http://www.qbaobei.com/plans/doudoutiaoli/" alt="脸上长痘痘怎么调理" title="脸上长痘痘怎么调理">4 </a></div>
+                    <span class="jNext" style="display: none; background: none repeat scroll 0% 0% transparent;&#xD;&#xA;                -moz-background-inline-policy: continuous;">&gt;</span></div>
+            </div>
+        </div>
+        <div class="boxmiddle">
+            <div class="topnews">
+                <volist name="top_list" id="val">
+                    <h2><a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val['title']}</a></h2>
+                    <p>{$val.description|msubstr=###,0,45,'utf-8',false}... <a class="gray-a" target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}"> [详细] </a></p>
+                </volist>
+                <div class="clear"> </div>
+            </div>
+            <ul class="imgfcous">
+                <volist name="editor_list" id="editor">
+                    <li><a target="_blank" href="{:staticUrl('detail',$editor['id'],'Document')}" title="{$editor['title']}"><img alt="{$editor['title']}" src="{:get_cover($editor['smallimg'],'path')}"></a><a target="_blank" href="{:staticUrl('detail',$editor['id'],'Document')}" title="{$editor['title']}">{$editor['title']}</a></li>
+                </volist>
+            </ul>
+        </div>
+        <div class="boxright">
+            <div class="milk-tit"><span>今日热点</span></div>
+            <ul class="milk-ul">
+                <volist name="hot_list" id="val" >
+                    <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a></li>
+                </volist>
+            </ul>
+            <div class="hot_pic">
+                <volist name="hot_pic" id="val">
+                    <a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">
+                        <img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}">
+                        <span>{$val['title']}</span>
+                    </a>
+                    <b></b>
+                </volist>
+            </div>
+        </div>
+        <div class="clear"> </div>
+        <div class="l-ad">
+            <script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+            <script type="text/javascript">BAIDU_CLB_fillSlot("779264");</script>
+        </div>
+    </div>
+    <div class="commonbox box1">
+        <div class="classtify-tt stepedu">
+            <ul>
+                <li><span>关于感冒</span></li>
+            </ul>
+        </div>
+        <div class="boxleft">
+            <div class="slide"> <a target="_blank" href="http://www.qbaobei.com/plans/fengrefenghan/" title="风热感冒与风寒感冒的区别"><img class="lazyload" original="http://www.qbaobei.com/UploadFiles/ganmao/2013/1/201301171012567774.jpg" alt="风热感冒与风寒感冒的区别"></a> </div>
+            <div class="parg-contact">
+                <div class="commontitle"> <b>其他病症</b> <a class="more" href="http://www.qbaobei.com/jiankang/bbjb/" target="_blank">更多>></a> </div>
+                <div class="disease"> <a target="_blank" href="http://www.qbaobei.com/yebk/xlq/jb/20121015_229504.html" title="小儿地中海贫血">小儿地中海贫血</a><a target="_blank" class="d-red" href="http://www.qbaobei.com/yebk/xlq/jb/20120814_218093.html" title="手足口病">手足口病</a><a target="_blank" class="d-green" href="http://www.qbaobei.com/yebk/youer/jb/20120816_218943.html" title="小儿咳嗽">小儿咳嗽</a><a target="_blank" href="http://www.qbaobei.com/yebk/ye/jb/20121115_237196.html" title="小儿呕吐">小儿呕吐</a><a target="_blank" class="d-red" href="http://www.qbaobei.com/yebk/ye/jb/20120809_217078.html" title="婴儿湿疹">婴儿湿疹</a><a target="_blank" href="http://www.qbaobei.com/yebk/ye/jb/20120808_216754.html" title="荨麻疹">荨麻疹</a><a target="_blank" href="http://www.qbaobei.com/yebk/xse/jb/20120822_220738.html" title="新生儿产伤">新生儿产伤</a><a target="_blank" href="http://www.qbaobei.com/jiankang/bbjb/chushengjibing/" title="初生疾病">初生疾病</a><a target="_blank" href="http://www.qbaobei.com/jiankang/bbjb/chuanranbing/" title="传染病">传染病</a><a target="_blank" href="http://www.qbaobei.com/jiankang/bbjb/huxixitong/" title="呼吸系统">呼吸系统</a><a target="_blank" href="http://www.qbaobei.com/jiankang/bbjb/xiaohuaxitong/" title="消化系统">消化系统</a><a target="_blank" href="http://www.qbaobei.com/jiankang/bbjb/pifuwuguan/" title="皮肤五官">皮肤五官</a><a target="_blank" href="http://www.qbaobei.com/jiankang/bbjb/kouqiangjibing/" title="口腔疾病">口腔疾病</a><a target="_blank" class="d-red" href="http://www.qbaobei.com/hybk/yq/myxby/20120814_217984.html" title="子宫肌瘤">子宫肌瘤</a><a target="_blank" href="http://www.qbaobei.com/hybk/yq/myxby/20120815_218207.html" title="宫颈糜烂">宫颈糜烂</a><a target="_blank" class="d-green" href="http://www.qbaobei.com/hybk/yq/myxby/20121007_228165.html" title="孕前阴道炎">孕前阴道炎</a><a target="_blank" href="http://www.qbaobei.com/hybk/yq/myxby/20121015_229754.html" title="宫外孕">宫外孕</a><a target="_blank" href="http://www.qbaobei.com/hybk/yq/myxby/20121015_229757.html" title="前列腺炎">前列腺炎</a><a target="_blank" class="d-red" href="http://www.qbaobei.com/yebk/xse/jb/20121217_242986.html" title="乙肝">乙肝</a><a target="_blank" href="http://www.qbaobei.com/yebk/xse/jb/20121214_242798.html" title="新生儿便秘">新生儿便秘</a><a target="_blank" class="d-green" href="http://www.qbaobei.com/jiankang/beiyun/buyunbuyu/" title="不孕不育">不孕不育</a><a target="_blank" href="http://www.qbaobei.com/jiankang/bbhl/tijianmianyi/" title="体检免疫">体检免疫</a><a target="_blank" href="http://www.qbaobei.com/jiankang/fenmian/zcnc/" title="早产难产">早产难产</a><a target="_blank" href="http://www.qbaobei.com/jiankang/huaiyun/liuchan/" title="流产胎停">流产胎停</a> </div>
+            </div>
+        </div>
+        <div class="boxmiddle">
+            <div class="agestep">
+                <div class="as-title">
+                    <a class="sort" target="_blank" href="http://www.qbaobei.com/ganmao/gmzhengzhuang/" title="感冒症状">感冒症状</a>
+                    <volist name="cold_zz" id="val" offset="0" length='1'>
+                        <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">
+                            <h3>{$val.title|msubstr=###,0,15,'utf-8',false}</h3>
+                        </a>
+                    </volist>
+                </div>
+                <ul>
+                    <volist name="cold_zz" id="val" offset="1" length='10'>
+                        <li> <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val.title|msubstr=###,0,13,'utf-8',false}</a> </li>
+                    </volist>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="agestep">
+                <div class="as-title">
+                    <a class="sort" target="_blank" href="http://www.qbaobei.com/ganmao/gmyufang/" title="感冒预防">感冒预防</a>
+                    <volist name="cold_yf" id="val" offset="0" length='1'>
+                        <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">
+                            <h3>{$val.title|msubstr=###,0,15,'utf-8',false}</h3>
+                        </a>
+                    </volist>
+                </div>
+                <ul>
+                    <volist name="cold_yf" id="val" offset="1" length='10'>
+                        <li> <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val.title|msubstr=###,0,13,'utf-8',false}</a> </li>
+                    </volist>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="agestep">
+                <div class="as-title">
+                    <a class="sort" target="_blank" href="http://www.qbaobei.com/ganmao/gmyaopin/" title="感冒用药">感冒用药</a>
+                    <volist name="cold_yf" id="val" offset="0" length='1'>
+                        <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">
+                            <h3>{$val.title|msubstr=###,0,15,'utf-8',false}</h3>
+                        </a>
+                    </volist>
+                </div>
+                <ul>
+                    <volist name="cold_yf" id="val" offset="1" length='10'>
+                        <li> <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val.title|msubstr=###,0,13,'utf-8',false}</a> </li>
+                    </volist>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="boxright">
+            <div class="zhuanti">
+                <div class="commontitle"> <b>治疗感冒</b> <a class="more" href="http://www.qbaobei.com/ganmao/gmzhiliao/" target="_blank">更多>></a> </div>
+                <div class="imgshot">
+                    <volist name="cold_zl" id="val" offset="0" length='1'>
+                        <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">
+                            <img class="lazyload" original="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}">
+                        </a>
+                    </volist>
+                </div>
+                <ul>
+                    <volist name="cold_zl" id="val" offset="1" length='5'>
+                        <li> <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val.title|msubstr=###,0,18,'utf-8',false}</a> </li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="zhuanti">
+                <div class="commontitle"> <b>感冒食疗</b> <a class="more" href="http://www.qbaobei.com/ganmao/gmshiliao/" target="_blank">更多>></a> </div>
+                <div class="imgshot">
+                    <volist name="cold_sl" id="val" offset="0" length='1'>
+                        <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">
+                            <img class="lazyload" original="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}">
+                        </a>
+                    </volist>
+                </div>
+                <ul>
+                    <volist name="cold_sl" id="val" offset="1" length='5'>
+                        <li> <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val.title|msubstr=###,0,18,'utf-8',false}</a> </li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="l-ad">
+            <script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+            <script type="text/javascript">BAIDU_CLB_fillSlot("779268");</script>
+        </div>
+    </div>
+    <div class="commonbox box1">
+        <div class="classtify-tt mygm">
+            <ul>
+                <li><span>母婴感冒</span></li>
+            </ul>
+        </div>
+        <div class="boxleft">
+            <div class="slide"> <a target="_blank" href="http://www.qbaobei.com/plans/buruqiganmao/" title="哺乳期感冒吃什么药"><img class="lazyload" original="http://www.qbaobei.com/UploadFiles/ganmao/2013/1/201301190955012468.jpg" alt="哺乳期感冒吃什么药"></a> </div>
+            <div class="parg-contact">
+                <div class="commontitle"> <b>感冒分类</b> <a target="_blank" href="http://www.qbaobei.com/ganmao/gmfenlei/" class="more"> 更多>></a> </div>
+                <ul>
+                    <li> <a href="/ganmao/gmfenlei/frgm/" target="_self"> [风热感冒] </a> <a target="_blank" href="/ganmao/gmfenlei/frgm/20140514_302650.html" title="适用于风热感冒的几个食疗法">适用于风热感冒的几个食疗法</a> </li>
+                    <li> <a href="/ganmao/gmfenlei/fhgm/" target="_self"> [风寒感冒] </a> <a target="_blank" href="/ganmao/gmfenlei/fhgm/20140514_302652.html" title="适用于风寒感冒的几大疗法">适用于风寒感冒的几大疗法</a> </li>
+                    <li> <a href="/ganmao/gmfenlei/frgm/" target="_self"> [风热感冒] </a> <a target="_blank" href="/ganmao/gmfenlei/frgm/20140514_302654.html" title="治疗风热感冒吃六种水果">治疗风热感冒吃六种水果</a> </li>
+                    <li> <a href="/ganmao/gmfenlei/frgm/" target="_self"> [风热感冒] </a> <a target="_blank" href="/ganmao/gmfenlei/frgm/20140514_302658.html" title="孕妇风寒风热感冒怎么办">孕妇风寒风热感冒怎么办</a> </li>
+                    <li> <a href="/ganmao/gmfenlei/bdxgm/" target="_self"> [病毒性感冒] </a> <a target="_blank" href="/ganmao/gmfenlei/bdxgm/20140514_302667.html" title="“网上问诊”不靠谱">“网上问诊”不靠谱</a> </li>
+                    <li> <a href="/ganmao/gmfenlei/ssgm/" target="_self"> [暑湿感冒] </a> <a target="_blank" href="/ganmao/gmfenlei/ssgm/20140514_302696.html" title="暑湿感冒：不同病情症状不同">暑湿感冒：不同病情症状不同</a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="boxmiddle">
+            <div class="agestep">
+                <div class="as-title"><a class="sort" target="_blank" href="http://www.qbaobei.com/ganmao/yunfugm/" title="孕妇感冒">孕妇感冒</a>
+                    <volist name="cold_yunfu" id="val" offset="0" length='1'>
+                        <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">
+                            <h3>{$val.title|msubstr=###,0,15,'utf-8',false}</h3>
+                        </a>
+                    </volist>
+                </div>
+                <ul>
+                    <volist name="cold_yunfu" id="val" offset="1" length='10'>
+                        <li> <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val.title|msubstr=###,0,13,'utf-8',false}</a> </li>
+                    </volist>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="agestep">
+                <div class="as-title"><a class="sort" target="_blank" href="http://www.qbaobei.com/ganmao/buruqigm/" title="哺乳期感冒">哺乳期感冒</a>
+                    <volist name="cold_prq" id="val" offset="0" length='1'>
+                        <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">
+                            <h3>{$val.title|msubstr=###,0,15,'utf-8',false}</h3>
+                        </a>
+                    </volist>
+                </div>
+                <ul>
+                    <volist name="cold_prq" id="val" offset="1" length='10'>
+                        <li> <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val.title|msubstr=###,0,13,'utf-8',false}</a> </li>
+                    </volist>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="agestep">
+                <div class="as-title"><a class="sort" target="_blank" href="http://www.qbaobei.com/ganmao/xiaoergm/" title="小儿感冒">小儿感冒</a>
+                    <volist name="cold_xe" id="val" offset="0" length='1'>
+                        <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">
+                            <h3>{$val.title|msubstr=###,0,15,'utf-8',false}</h3>
+                        </a>
+                    </volist>
+                </div>
+                <ul>
+                    <volist name="cold_xe" id="val" offset="1" length='10'>
+                        <li> <a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val.title|msubstr=###,0,13,'utf-8',false}</a> </li>
+                    </volist>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="clear"> </div>
+        </div>
+        <div class="boxright">
+            <div class="shipu">
+                <div class="commontitle"> <b>妈妈食谱</b> <a target="_blank" class="more" href="http://www.qbaobei.com/mysp/mmsp/"> 更多>></a> </div>
+                <ul>
+                    <volist name="mother_food" id="val">
+                        <li><a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}"><img class="lazyload" original="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a><a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val['title']}</a></li>
+                    </volist>
+                </ul>
+                <div class="clear"> </div>
+            </div>
+            <div class="shipu">
+                <div class="commontitle"> <b>宝宝食谱</b> <a target="_blank" class="more" href="http://www.qbaobei.com/mysp/bbsp/"> 更多>></a> </div>
+                <ul>
+                    <volist name="child_food" id="val">
+                        <li><a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}"><img class="lazyload" original="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a><a target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}" title="{$val['title']}">{$val['title']}</a></li>
+                    </volist>
+                </ul>
+                <div class="clear"> </div>
+            </div>
+        </div>
+        <div class="clear"> </div>
+        <div class="l-ad">
+            <div class="boxB1">
+                <script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+
+                <script type="text/javascript">BAIDU_CLB_fillSlot("779264");</script>
+            </div>
+            <div class="boxB2"> <a href="http://www.qbaobei.com/plans/fenghanganmaoyao/" target="_blank"> <img src="http://www.qbaobei.com/Template/Qbaobei/Skin/images/ganmao/fhgm-230-90.gif" border="0"/></a> </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="commonbox box1">
+        <div class="classtify-tt yuer">
+            <ul>
+                <li><span>育儿百科</span></li>
+            </ul>
+            <div class="y-alink"> <a target="_blank" href="http://www.qbaobei.com/yebk/">更多>></a></div>
+        </div>
+        <div class="boxleft">
+            <div class="slide"> <a target="_blank" href="http://www.qbaobei.com/plans/naiping/" title="奶瓶什么牌子好"><img class="lazyload" original="http://www.qbaobei.com/UploadFiles/ganmao/2012/12/201212191001119958.jpg" alt="奶瓶什么牌子好"></a> </div>
+        </div>
+        <div class="boxmiddle">
+            <ul class="yuerlist">
+                <volist name="yuer_baike" id="val">
+                    <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}" width="160" height="120"></a><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a></li>
+                </volist>
+            </ul>
+            <div class="clear"> </div>
+        </div>
+        <div class="boxright">
+            <div class="YEcenter">
+                <div class="commontitle"> <b>育儿中心</b> <a target="_blank" class="more" href="http://bbs.qbaobei.com/showforum-9.html"> 更多>></a> </div>
+                <ul>
+                    <li><a target="_blank" href="http://bbs.qbaobei.com/forum.php?mod=viewthread&amp;tid=214930" title="早教的早晚对宝宝的影响">早教的早晚对宝宝的影响</a></li>
+                    <li><a target="_blank" href="http://bbs.qbaobei.com/forum.php?mod=viewthread&amp;tid=199751" title="暑假 引导孩子健康上网">暑假 引导孩子健康上网</a></li>
+                    <li><a target="_blank" href="http://bbs.qbaobei.com/forum.php?mod=viewthread&amp;tid=213354" title="3岁女孩拔电扇插头触电身亡，家有小宝宝的要重视了，快彻底检查">3岁女孩拔电扇插头触电身亡，家有小宝</a></li>
+                    <li><a target="_blank" href="http://bbs.qbaobei.com/forum.php?mod=viewthread&amp;tid=214282" title="正确胎教 有益于胎儿健康发育">正确胎教 有益于胎儿健康发育</a></li>
+                    <li><a target="_blank" href="http://bbs.qbaobei.com/forum.php?mod=viewthread&amp;tid=211900" title="深圳1岁男童触电 奶奶拉救双亡 这种悲剧应该避免">深圳1岁男童触电 奶奶拉救双亡 这种悲</a></li>
+                    <li><a target="_blank" href="http://bbs.qbaobei.com/forum.php?mod=viewthread&amp;tid=214892" title="大人和孩子的漫画 《美丽的翅膀》第29期">大人和孩子的漫画 《美丽的翅膀》第29</a></li>
+                    <li><a target="_blank" href="http://bbs.qbaobei.com/forum.php?mod=viewthread&amp;tid=214890" title="警惕宝宝的缺铁信号，专家教您如何有效补铁">警惕宝宝的缺铁信号，专家教您如何有</a></li>
+                    <li><a target="_blank" href="http://bbs.qbaobei.com/forum.php?mod=viewthread&amp;tid=214889" title="爱孩子，从爱自己开始">爱孩子，从爱自己开始</a></li>
+                    <li><a target="_blank" href="http://bbs.qbaobei.com/forum.php?mod=viewthread&amp;tid=214888" title="怎样教育让孩子更听话">怎样教育让孩子更听话</a></li>
+                    <li><a target="_blank" href="http://bbs.qbaobei.com/forum.php?mod=viewthread&amp;tid=214763" title="我爱我家宝贝">我爱我家宝贝</a></li>
+                </ul>
+                <div class="ad"> <a target="_blank" href="http://www.qbaobei.com/plans/shengyuanyoubo/" title="圣元优博奶粉怎么样"><img class="lazyload" original="http://www.qbaobei.com/UploadFiles/ganmao/2012/12/201212031515302081.jpg" alt="圣元优博奶粉怎么样"></a></div>
+            </div>
+        </div>
+        <div class="clear"> </div>
+        <div class="l-ad">
+            <div class="boxB1">
+                <script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+                <script type="text/javascript">BAIDU_CLB_fillSlot("779264");</script>
+            </div>
+            <div class="boxB2"> <a href="http://www.qbaobei.com/plans/bbganmao/" target="_blank"><img  src="http://www.qbaobei.com/Template/Qbaobei/Skin/images/ganmao/ganmaoyi.jpg" border="0"/></a> </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="commonbox box1">
+        <div class="pic">
+            <div class="pictitle"> <span>精彩贴图</span> </div>
+            <div class="pic-content">
+                <div class="showbox">
+                    <ul>
+                        <volist name="pic_list" id="val">
+                            <li>
+                                <a target="_blank" href="{:staticUrl('detail',$val['id'],'Gallery')}" alt="{$val['title']}"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a><br>
+                                <a target="_blank" href="{:staticUrl('detail',$val['id'],'Gallery')}" title="{$val['title']}" alt="{$val['title']}">{$val['title']}</a>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"> </div>
+        </div>
+    </div>
+
+</block>

@@ -1,0 +1,27 @@
+<div class="gameName">
+    <h1>{$down['title']}</h1>
+    <div class="gameName-main">
+        <div class="gameName-about">
+            <img src="{:get_cover($down['smallimg'],'path')}" alt="{$down['title']}">
+            <ul>
+                <li><span>类型：</span>{$down['cate']}</li>
+                <li><span>标签：</span><volist name="down['tags']" id="val" empty="暂无标签">{$val}</volist></li>
+                <li><span>语言：</span>{$down['language']}</li>
+                <li><span>更新时间：</span>{:date('Y-m-d',$down['update_time'])}</li>
+            </ul>
+        </div>
+        <div class="gameName-info">
+            {$down['description']}<span>[详情]</span>
+        </div>
+        <div class="gameName-infoMore">
+            <div>{$down['description']}</div>
+        </div>
+        <div class="gameName-li">
+        <volist name="down['sys']" id="val">
+            <if condition="($val['sys_id'] eq 1) OR ($val['sys_id'] eq 2)">
+                <a href="{:str_replace('index.html','',staticUrl('detail',$val['id'],'Down'))}" target="_blank" class="down qt"><em></em><span>[{$val['sys']}]&nbsp;&nbsp;{$val['title']}{$k1}</span></a><else/><a href="{:str_replace('index.html','',staticUrl('detail',$val['id'],'Down'))}" target="_blank" class="down pc"><em></em><span>[{$val['sys']}]&nbsp;&nbsp;{$val['title']}{$k1}</span></a>
+            </if>
+        </volist>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<extend name="Home@gfwmobile/Base/commonIndex" />
+
+<block name="body">
+<include file="Home@gfwmobile/Public/search" />
+<section class="brand">
+    <div class="art">
+        <div class="title"><h2>{$info['title']}</h2></div>
+        <ul class="product-ul">
+            <volist name="lists" id="val">
+            <li><a href="{:C('MOBILE_STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$val['url_token']}" class="pic"><img src="{:get_cover($val['icon'],'path')}" alt="{$val['title']}"></a>
+                <div class="info">
+                    <a href="{:C('MOBILE_STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$val['url_token']}">{$val['title']}</a>
+                    <p>{$val['description']}</p>
+                </div>
+            </li>
+            </volist>
+        </ul>
+    </div>
+    <p class="page">{$page}</p>
+</section>
+{:W('Home/Gfwmobile/zttj',array($info['id']))}
+</block>

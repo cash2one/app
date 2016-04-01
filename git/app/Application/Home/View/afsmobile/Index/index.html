@@ -1,0 +1,254 @@
+<extend name="Home@afsmobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afsmobile/css/index.css"/>
+</block>
+<block name="body">
+    <!--banner-->
+    {:W('Afsmobile/bannerDown')}
+
+   <!--四个圆盘-->
+   <section id="four_circle">
+       <span class="game">
+           <a href="{:C('MOBILE_STATIC_URL')}/ka/" class="pic" ></a>
+           <a href="{:C('MOBILE_STATIC_URL')}/ka/">礼包</a>
+       </span>
+       <span class="web">
+            <a href="{:C('MOBILE_STATIC_URL')}{:getWidgetPath('47')}" class="pic" ></a>
+           <a href="{:C('MOBILE_STATIC_URL')}{:getWidgetPath('47')}">专区</a>
+       </span>
+       <span class="adr">
+          <a href="http://m.anfensi.com/special/" class="pic" ></a>
+           <a href="http://m.anfensi.com/special/">集合</a>
+       </span>
+       <span class="app">
+           <a href="{:C('MOBILE_STATIC_URL')}/cs/" class="pic" ></a>
+           <a href="{:C('MOBILE_STATIC_URL')}/cs/">厂商</a>
+       </span>
+   </section>
+ <!--zhuanqu-->
+   <section id="wraper" class="syWrap zhuanqu">
+       <div class="syWrapIner">
+           <p class="title newTitle"><a href="javascript:;" class="hyp">换一批</a><span>装机必备</span></p>
+               <Think:article basename="Down"  where="home_position & 4"  order="update_time desc" limit="24">
+               <switch name="key" >
+               <case value="0">
+               <ul class="current">
+                 <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="tit">{$article['title']}</a>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+               </case>
+               <case value="8">
+               </ul>
+               </case>
+               <case value="9|17">
+                <ul>
+                 <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="tit">{$article['title']}</a>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+               </case>
+               <case value="16">
+                <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="tit">{$article['title']}</a>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+               </ul></case>
+
+             <case value="24">
+              <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="tit">{$article['title']}</a>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+             </ul>
+             </case>
+               
+               <default />  <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="tit">{$article['title']}</a>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+               </switch>
+
+               </Think:article>
+               
+               
+               
+        
+       </div>
+   </section>
+   <!--news-->
+   
+      <section id="wraper" class="syWrap syGame game">
+       <div class="syWrapIner">
+           <p class="title newTitle"><em class="right wy"><i class="cur">热门</i><i>最新</i></em><span>好玩的手游</span></p>
+           <ul class="current">
+                <Think:article basename="Down" name="dmain"  where="position & 64 AND category_rootid=2"  order="update_time desc" limit="5">
+               <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></div>
+                       <div><i>{$article['size']}</i><i class="otit">{:getCateName($article['id'],'Down')}</i></div>
+                       <div>{$article.update_time|time_format="Y-m-d"}</div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+            </Think:article>
+           </ul>
+           <ul>
+                    <Think:article basename="Down" name="dmain"  where="category_rootid=2"  order="update_time desc" limit="5">
+               <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></div>
+                       <div><i>{$article['size']}</i><i class="otit">{:getCateName($article['id'],'Down')}</i></div>
+                       <div>{$article.update_time|time_format="Y-m-d"}</div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+            </Think:article>
+           </ul>
+           <p class="more"><a href="http://m.anfensi.com/shouyou/">查看更多 ></a></p>
+       </div>
+   </section>
+   
+   <section id="wraper" class="syWrap syGame game">
+       <div class="syWrapIner">
+           <p class="title newTitle"><em class="right dj"><i class="cur">热门</i><i>最新</i></em><span>好玩的单机</span></p>
+           <ul class="current dj">
+                     <Think:article basename="Down" name="dmain"  where="smallimg!=0&&position & 64 AND category_rootid=1"  order="update_time desc" limit="5">
+               <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></div>
+                       <div><i>{$article['size']}</i><i class="otit">{:getCateName($article['id'],'Down')}</i></div>
+                       <div>{$article.update_time|time_format="Y-m-d"}</div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+            </Think:article>
+           </ul>
+           <ul class="dj">
+                   <Think:article basename="Down" name="dmain"  where="category_rootid=1"  order="update_time desc" limit="5">
+               <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></div>
+                       <div><i>{$article['size']}</i><i class="otit">{:getCateName($article['id'],'Down')}</i></div>
+                       <div>{$article.update_time|time_format="Y-m-d"}</div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+            </Think:article>
+           </ul>
+           <p class="more"><a href="http://m.anfensi.com/danji/">查看更多 ></a></p>
+       </div>
+   </section>
+   <!--酷游合集-->
+   <section id="wraper" class="syWrap kyhj">
+       <div class="syWrapIner">
+       <p class="title newTitle"><a href="http://m.anfensi.com/special/">更多></a><span>酷游合集</span></p>
+        <IndexTag:k name="f" limit="2" where="Interface=0">
+            <a href="{:getCPath($f['id'],'special')}" class="mainPic"><img src="{:get_cover($f['icon'],'path',1,900,70)}" alt="{$f.title}"><span>{$f.title}</span></a>
+        </IndexTag:k>
+       </div>
+   </section>
+   <!--好玩的应用-->
+   <section id="wraper" class="syWrap game hwdyy">
+       <div class="syWrapIner">
+           <p class="title newTitle"><em class="right"><i class="cur">热门</i><i>最新</i></em><span>好玩的应用</span></p>
+           
+           <ul class="current">
+             <Think:article basename="Down" name="dsoft"  where="smallimg!=0&&position & 64 AND category_rootid=48"  order="update_time desc" limit="5">
+               <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></div>
+                       <div><i>{$article['size']}</i><i class="otit">{:getCateName($article['id'],'Down')}</i></div>
+                       <div>{$article.create_time|time_format="Y-m-d"}</div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+            </Think:article>
+           </ul>
+           <ul>
+                   <Think:article basename="Down" name="dsoft"  where="category_rootid=48"  order="update_time desc" limit="5">
+               <li>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="pic"><img src="{:get_cover($article['smallimg'],'path','1','66','66')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></div>
+                       <div><i>{$article['size']}</i><i class="otit">{:getCateName($article['id'],'Down')}</i></div>
+                       <div>{$article.create_time|time_format="Y-m-d"}</div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down">下载</a>
+               </li>
+            </Think:article>
+           </ul>
+           <p class="more"><a href="http://m.anfensi.com/soft/">查看更多 ></a></p>
+       </div>
+   </section>
+   <!--titGames-->
+    <section id="azyx" class="syWrap titGames">
+       <div class="syWrapIner">
+           <p class="titGames-tit"><span>安卓游戏</span></p>
+           <div class="titGames-box">                                           
+               <a href="http://m.anfensi.com/dongyou/">动作单机</a>
+               <a href="http://m.anfensi.com/yizhi/">益智休闲</a>
+               <a href="http://m.anfensi.com/jingsu/">竞速游戏</a>
+               <a href="http://m.anfensi.com/jiaose/">角色扮演</a>
+               <a href="http://m.anfensi.com/sheji/">射击飞行</a>
+               <a href="http://m.anfensi.com/ceta/">策略塔防</a>
+               <a href="http://m.anfensi.com/qipai/">棋牌桌游</a>
+               <a href="http://m.anfensi.com/sanguo/">三国游戏</a>
+               <a href="http://m.anfensi.com/kapai/">卡牌游戏</a>
+               <a href="http://m.anfensi.com/celue/">策略游戏</a>
+               <a href="http://m.anfensi.com/tafang/">塔防游戏</a>
+               <a href="http://m.anfensi.com/dongzuo/">动作网游</a>
+               <a href="http://m.anfensi.com/rpg/">RPG游戏</a>
+           </div>
+       </div>
+   </section>
+   <section id="azrj" class="syWrap titGames">
+       <div class="syWrapIner">
+           <p class="titGames-tit"><span>安卓软件</span></p>
+           <div class="titGames-box">                                           
+               <a href="http://m.anfensi.com/gongju/">工具</a>
+               <a href="http://m.anfensi.com/shejiao/">社交</a>
+               <a href="http://m.anfensi.com/xitong/">系统</a>
+               <a href="http://m.anfensi.com/shipin/">视频</a>
+               <a href="http://m.anfensi.com/yinyue/">音乐</a>
+               <a href="http://m.anfensi.com/meihua/">美化</a>
+               <a href="http://m.anfensi.com/shenghuo/">生活</a>
+               <a href="http://m.anfensi.com/anquan/">安全</a>
+               <a href="http://m.anfensi.com/gouwu/">购物</a>
+               <a href="http://m.anfensi.com/sheying/">摄影</a>
+               <a href="http://m.anfensi.com/xinxi/">资讯</a>
+               <a href="http://m.anfensi.com/yuedu/">阅读</a>
+               <a href="http://m.anfensi.com/licai/">理财</a>
+               <a href="http://m.anfensi.com/tongxun/">通讯</a>
+               <a href="http://m.anfensi.com/bangong/">办公</a>
+               <a href="http://m.anfensi.com/jiaoyu/">教育</a>
+               <a href="http://m.anfensi.com/lvyou/">旅游</a>
+               <a href="http://m.anfensi.com/yule/">娱乐</a>
+               <a href="http://m.anfensi.com/ertong/">儿童</a>
+               <a href="http://m.anfensi.com/jiankang/">健康</a>
+           </div>
+       </div>
+   </section>                                   
+   <!--LINKs-->
+    <section id="wraper" class="syWrap game links">
+       <div class="syWrapIner">
+           <p class="title newTitle"><span>友情链接</span></p>
+           <div>                                           
+                 <IndexTag:friendlink name="n" group="3" count="100">
+                     <a href="{$n['url_token']}" target="_blank">{$n['title']}</a>
+                  </IndexTag:friendlink>  
+           </div>
+       </div>
+   </section>
+
+</block>

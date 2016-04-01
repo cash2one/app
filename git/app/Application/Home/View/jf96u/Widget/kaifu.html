@@ -1,0 +1,27 @@
+    <volist  name='kaifu' id='v'  >
+        <php>
+            $ktid=M('tags_map')->where("did=$v[id] and type='package'")->getField('tid',true);
+            if(!empty($ktid))
+            {
+                 $where = array();
+                 $where['a.tid'] = array('in',$ktid);
+                 $where['a.type'] = 'down';
+                 $where['b.status'] = 1;
+                 $xid=M('tags_map')->alias('a')->join('__DOWN__ b on a.did=b.id')
+                 ->where($where)
+                 ->getField('b.id');
+                unset($where,$ktid);
+            }
+        </php>
+                    <li>
+                        <span>{$v.start_time|date="m-d",###}</span>
+                        <a class="tit">{$v.title}</a>
+                        <span>{$v.server}</span>
+                        <if condition="$xid  gt 0 ">
+                            <a href="{:staticUrl('detail',$xid,'down')}" target="_blank" class="down"></a>
+                            <else />
+                            <a href="#" onclick='alert("暂时没有游戏下载")' class="down"></a>
+                        </if>
+                    </li>
+      <php>unset($xid);</php>
+    </volist>

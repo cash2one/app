@@ -1,0 +1,83 @@
+<div class="mainguide">
+    <div class="guidecontant">
+        <div class="g-c-left">
+            <ul>
+                <li><a class="mouseon" href="http://www.qbaobei.com/" target="_blank">首页</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/yq/" target="_blank">备孕</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/yunqi/" target="_blank">孕期</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/hybk/fm/" target="_blank">分娩</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/ye/" target="_blank">0-1岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/youer/" target="_blank">1-3岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/yebk/xlq/" target="_blank">3-6岁</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/jiankang/" target="_blank">健康</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/jiaoyu/" target="_blank">教育</a></li>
+                <li><a class="mouseon" href="http://www.qbaobei.com/baobaoleyuan/" target="_blank">儿歌</a></li>
+                <li><a href="http://home.qbaobei.com/" target="_blank">小家</a></li>
+                <li><a class="mouseon" href="http://bbs.qbaobei.com/" target="_blank">论坛</a></li>
+            </ul>
+        </div>
+        <div class="g-c-right">
+        </div>
+    </div>
+</div>
+<div class="header">
+    <div class="cont">
+        <h1> <a href="/" title="亲亲宝贝网" class="logo">亲亲宝贝网</a></h1>
+        <p class="linkarae">
+
+        </p>
+        <div class="searchbar" onmouseover="this.className='searchbar-hover'" onmouseout="this.className='searchbar'">
+            <input type="text" class="searchText" />
+            <a href="javascript:;" class="searchBtn">搜索</a></div>
+    </div>
+    <div class="mainnav">
+        <ul>
+            <li class="current" list-id="1"><a href="http://www.qbaobei.com/ganmao/" target="_blank"> 感冒首页</a></li>
+            <li list-id="2"><a href="http://www.qbaobei.com/ganmao/gmzhengzhuang/" target="_blank"> 感冒症状</a></li>
+            <li list-id="3"><a href="http://www.qbaobei.com/ganmao/gmyufang/" target="_blank">感冒预防</a></li>
+            <li list-id="4"><a href="http://www.qbaobei.com/ganmao/gmshiliao/" target="_blank">感冒食疗</a></li>
+            <li list-id="5"><a href="http://www.qbaobei.com/ganmao/xiaoergm/" target="_blank">小儿感冒</a></li>
+            <li list-id="6"><a href="http://www.qbaobei.com/ganmao/yunfugm/" target="_blank">孕妇感冒</a></li>
+            <li list-id="7"><a href="http://www.qbaobei.com/ganmao/buruqigm/" target="_blank">哺乳期感冒</a></li>
+            <li list-id="8"><a href="http://www.qbaobei.com/ganmao/gmyaopin/" target="_blank">感冒药</a></li>
+            <li list-id="9"><a href="http://www.qbaobei.com/ganmao/gmzhiliao/" target="_blank">治疗感冒</a></li>
+        </ul>
+    </div>
+</div>
+<div class="secondnav" id="tab-1" style="display: block;"> <a href="http://www.qbaobei.com/ganmao/gmfenlei/fhgm/" target="_blank">风寒感冒</a> | <a target="_blank" href="http://www.qbaobei.com/ganmao/gmfenlei/frgm/"> 风热感冒</a> | <a href="http://www.qbaobei.com/ganmao/gmfenlei/bdxgm/" target="_blank"> 病毒性感冒</a> | <a href="http://www.qbaobei.com/ganmao/gmfenlei/ssgm/" target="_blank">暑湿感冒</a> | <a target="_blank" href="http://www.qbaobei.com/ganmao/xiaoergm/xsegm/"> 新生儿感冒</a> | <a href="http://www.qbaobei.com/ganmao/xiaoergm/yingegm/" target="_blank">婴儿感冒</a> | <a href="http://www.qbaobei.com/ganmao/xiaoergm/youegm/" target="_blank">幼儿感冒</a> | <a target="_blank" href="http://www.qbaobei.com/ganmao/xiaoergm/etgm/"> 儿童感冒</a> | <a href="http://www.qbaobei.com/ganmao/gmyaopin/minjianpianfang/" target="_blank">民间偏方</a> | <a href="http://www.qbaobei.com/ganmao/gmyaopin/gmxiyao/" target="_blank">中西药</a> </div>
+<div class="secondnav" id="tab-2"> </div>
+<div class="secondnav" id="tab-3"> </div>
+<div class="secondnav" id="tab-4"> </div>
+<div class="secondnav" id="tab-5"> </div>
+<div class="secondnav" id="tab-6"> </div>
+<div class="secondnav" id="tab-7"> </div>
+<div class="secondnav" id="tab-8"> </div>
+<div class="secondnav" id="tab-9"> </div>
+<script type="text/javascript">
+    //导航 =====================================
+
+    $(".mainnav li ").hover(function () {
+        var listContentID = $(this).attr("list-id");
+        if (listContentID == undefined || listContentID == null)
+            return;
+        listContentID = "#tab-" + listContentID;
+        $(".secondnav").hide();
+        $(listContentID).show();
+        $(".mainnav li").removeClass("current");
+        $(this).addClass("current");
+    }, function () {
+
+    });
+    //搜索 ========================================
+    $(".searchBtn").click(function() {
+        var keyword = $(".searchText").val();
+        if (keyword == "") {
+            alert("请输入关键字");
+            return;
+        } else {
+            this.target = "_blank";
+            this.href = "http://s.qbaobei.com/cse/search?s=9283565739734765726&q=" + keyword;
+            this.click();
+        }
+    });
+</script>

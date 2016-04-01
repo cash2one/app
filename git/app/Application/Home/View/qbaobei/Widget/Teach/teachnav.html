@@ -1,0 +1,46 @@
+<div class="header">
+    <div class="cont">
+        <h1><a href="/" title="亲亲宝贝网" class="logo">亲亲宝贝网</a></h1>
+        <p class="theme">早期教育</p>
+        <p class="linkarae"><a href="http://www.qbaobei.com/qinbi/" target="_blank">亲币</a>|<a target="_blank"
+                                                                                              href="http://www.qbaobei.com/huodong/index.aspx">活动</a></p>
+        <div class="searchbar" onmouseover="this.className='searchbar-hover'" onmouseout="this.className='searchbar'">
+            <input type="text" class="searchText" />
+            <a href="javascript:;" class="searchBtn">搜索</a>
+        </div>
+    </div>
+    <div class="mainnav">
+        <ul>
+            <volist name="lists" id="list">
+                <li <eq name="i" value="1">class="current"</eq> list-id="{$i}"><a href="{$list.url}" target="_blank">{$list.title}</a></li>
+            </volist>
+
+        </ul>
+    </div>
+</div>
+
+    <volist name="child_lists" id="child_list" key="j">
+        <div class="secondnav" id="tab-{$j}" <eq name="j" value="1">style="display: block;" </eq>>
+            <volist name="child_list" id="children" key="k">
+                <a href="{:staticUrl('lists',$children['id'], 'Document')}" target="_blank">{$children.title}</a> |
+            </volist>
+            </div>
+    </volist>
+
+<script type="text/javascript">
+    //导航 =====================================
+
+    $(".mainnav li ").hover(function() {
+        var listContentID = $(this).attr("list-id");
+        if (listContentID == undefined || listContentID == null)
+            return;
+        listContentID = "#tab-" + listContentID;
+        $(".secondnav").hide();
+        $(listContentID).show();
+        $(".mainnav li").removeClass("current");
+        $(this).addClass("current");
+    }, function() {
+
+    });
+
+</script>

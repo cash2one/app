@@ -1,0 +1,35 @@
+<extend name="Base/common"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230/css/ycpd.css"/>
+</block>
+<block name="body">
+<div id="zixun-main">
+    <p class="page-nav">当前位置：<a href="{:C('STATIC_URL')}">首页</a>-><a href="{:getWidgetPath('16')}">专题</a>->专区</p>
+    <div id="ycpd-left">
+        <div class="zqlb">
+            <p class="title">热门专区</p>
+            <span>
+                <volist name="hotArea" id="val">
+                <p class="ycwz"><a href="/{:C(FEATURE_ZQ_DIR)}/{:$val['url_token']}" target="_blank" class="pic"><img src="{:get_cover($val['icon'],'path')}"></a><a href="/{:C(FEATURE_ZQ_DIR)}/{:$val['url_token']}" target="_blank" class="tit">{$val.title}</a></p>
+                </volist>
+            </span>
+        </div>
+        <div class="zqlb">
+            <p class="title">所有专区</p>
+            <span>
+                <volist name="lists" id="val">
+                    <p class="ycwz"><a href="/{:C(FEATURE_ZQ_DIR)}/{:$val['url_token']}" target="_blank" class="pic"><img src="{:get_cover($val['icon'],'path')}"></a><a href="/{:C(FEATURE_ZQ_DIR)}/{:$val['url_token']}" target="_blank" class="tit">{$val.title}</a></p>
+                </volist>
+                <div style=" clear:both"></div>
+                <!----fenye--->
+               <div class="page">
+                   {$page}
+               </div>
+                <!---fenye---->
+            </span>
+        </div>
+    </div>
+    <!----left -END-->
+    <!--#include virtual="{:getWidgetPath('21')}"-->
+</div>
+</block>

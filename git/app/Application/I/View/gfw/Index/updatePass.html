@@ -1,0 +1,26 @@
+<extend name="Home@gfw/Base/commonUcent" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/validate.css"/>
+</block>
+
+<block name="body">
+    <div class="user-wraper-right">
+        <div class="user-right-chapter" id="modify">
+            <h3>修改密码</h3>
+            <form action="{:U('Api/editPassWord')}" method="post" class="modify-form" id="uc-editPwd">
+                <div class="info_list"><em>旧密码：</em><input type="password" class="username" name="oldPwd" id="oldPwd"></div>
+                <div class="info_list"><em>新密码：</em><input type="password"  name="password" id="password"></div>
+                <div class="info_list"><em>重新输入：</em><input type="password"  name="password_c" id="password_c"></div>
+                <input name="uid" type="hidden" value="{$uid}" />
+                <div class="info_list btn"><input type="submit" name="btn" value="提交"></div>
+            </form>
+        </div>
+    </div>
+</div>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+</block>

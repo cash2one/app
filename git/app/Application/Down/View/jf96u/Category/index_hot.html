@@ -1,0 +1,98 @@
+<extend name="Home@jf96u/Base/common" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/yxk.css">
+</block>
+<block name="body">
+    <div class="main1200">
+        <div class="goback">当前位置：      <position /></div>
+        <div class="container">
+            <div class="down-home">
+                <div class="fl cata-l">
+                    <div class="down-home-tit">
+                        <div class="down-home-l">
+                            {:W('jf96u/downtop',array($info[pid]))}
+
+                        </div>
+
+                    </div>
+                    <div class="down-nav">
+                        <a href="{:staticUrl('lists',$cid, 'down')}"  >最新</a>
+                        <a href="{:staticUrl('lists',$cid,'down',null,false,true)}"   class="active">最热</a>
+
+                    </div>
+                    <ul class="down-ul">
+                        <volist name="lists" id="v">
+
+                            <li><a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" title="{$v.title}" class="pic">
+                                <img src="{:get_cover($v['smallimg'],'path')}" alt="{$v.title}">
+                                <span class="down">下载</span></a>
+                                <div class="text">
+                                    <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" title="{$v.title}" class="title">{$v.title}</a>
+                                    <p> {:get_game_typedown($v['category_id'])}</p>
+                                    <p>{$v.create_time|date="m-d",###} | {$v['size']}</p>
+                                    <p>版本：{$v.version} <if condition="$v['version'] eq 0 ">1.0</if></p>
+                                    <p class="info">{$v.description}</p>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                    <div class="page">
+                        {$page}
+                    </div>
+                </div>
+                <div class="fr cata-r">
+                {:W('jf96u/downcate',array($cid))}
+
+                <div class="down-box dis-bot">
+                    <div class="mid-tit"><h3>游戏推荐</h3></div>
+                    <ul class="downUl2">
+                        {:W('jf96u/antj',array($info[pid]))}
+
+                    </ul>
+                </div>
+                <div class="down-box dis-bot rank-cont">
+                    <div class="mid-tit"><h3>热门手游排行榜</h3></div>
+                    <ul class="rank-ul">
+
+                        <Think:article basename="Down" name="dmain" limit="10"  order="view"   >
+                            <php>
+                                if($i==1){
+                                echo '<li class="active">';}
+                                else{
+                                echo '<li>';
+                                }
+
+                            </php><em></em>
+                            <a href="{:staticUrl('detail', $article['id'],'down')}" target="_blank" class="title" title="{$article.title}">{$article.title}</a>
+                            <div class="game-cont">
+                                <a href="{:staticUrl('detail', $article['id'],'down')}" target="" title="{$article.title}">
+                                    <img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a>
+                                <div class="text">
+                                    <a href="" target="">{$article.title}</a>
+                                    <span class="star star{:round($article['soft_socre'])}"></span>
+                                    <span class="cata">{:get_game_type($article['game_type'])}</span>
+                                </div>
+                                <a href="{:staticUrl('detail', $article['id'],'down')}" target="_blank" class="down">下载</a>
+                            </div>
+                            </li>
+                        </Think:article>
+                    </ul>
+                </div>
+
+</div>
+
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+</block>
+<block name="script">
+    <script src="__PUBLIC__/Home/jf96umobile/js/down.cnzz.js"></script>
+</block>

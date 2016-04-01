@@ -1,0 +1,46 @@
+<extend name="Home@gfw/Base/commonBaike" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/baike.css"/>
+</block>
+<block name="body">
+<p class="page-nav"><span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">></span>{~W('Document/Gfw/baikeCrumb',array($info['category_id'],$info['id']))}&gt;{$info.title}</p>
+<div id="baike-main">
+    <div class="baike-detail-left">
+        <div class="baike-detail-title">
+            <div class="baike-detail-img"><img src="{:get_cover($info['smallimg'],'path')}"></div>
+            <h1>{$info.title}</h1>
+            {$info.description}
+            <div class="xiao-title"> {~W('Document/Gfw/baikeIntro',array($info['entry']))} </div>
+            <div class="clear"></div>
+        </div>
+        <div class="baike-detail-dir">
+            <div class="dir"><span>目录</span></div>
+            {~W('Document/Gfw/getColumn',array($info['content']))} </div>
+        <div class="baike-detail-content"> {~W('Document/Gfw/handleContent',array($info['content']))} </div>
+    </div>
+    <!-- 相关百科 --> 
+    
+    {~W('Document/Gfw/relateBaike',array($info['id']))}
+  <div class="baike-ad-right mt20">
+<!-- 广告位：百科详情右侧原生广告1 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123379");</script>
+    </div>
+    <div class="baike-detail-right mt20">
+        <h2>热门百科</h2>
+        <ul>
+          <Think:article basename="Document" name="article" where="position & 1" limit="5" order="update_time desc">
+            <li><a href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a></li>
+          </Think:article>
+        </ul>
+    </div>
+     <div class="baike-ad-right mt20">
+ <!-- 广告位：百科详情右侧原生广告2 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123380");</script>
+    </div>
+    <!-- TOP -->
+    <div id="back-top" class="baike-detail-top"> <a class="baike-detail-cate"></a> <a class="baike-detail-up"></a> </div>
+</div>
+<!-----baike-main-end----->
+
+</block>

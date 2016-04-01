@@ -1,0 +1,107 @@
+<div id="tabDown" class="tab-pane tabDown">
+    <div class="form-item cf">
+        <label class="item-label">添加下载<span class="check-tips">（填写需要添加的下载数目）</span></label>
+        <div class="controls">
+            <input type="text"  style="width:70px" class="text input-large">
+            <div  class="btn" id="numberDown">添加</div>
+        </div>
+
+        <label class="item-label">下载列表<span class="check-tips">（鼠标移到区块上右边显示删除按钮）</span></label>
+        <ul id="sortUl" class="dragsort">
+            <volist name="down_address" id="ad" key="itemid">
+                <li class="down">
+                    <b>&times;</b>
+                    <div>
+                        <label >
+                           <strong>预定义站点  :</strong>
+                           <select  name="down_address_siteid[{$itemid-1}]">
+								<volist name="presetsite" id="vo">                       
+									<option value="{$vo.id}" <eq name="ad['site_id']" value="$vo['id']">selected</eq>>{$vo.site_name}</option>
+								</volist>
+                           </select>
+                         </label>
+						 运营包  :&nbsp;
+						 <input type="checkbox" value="1" name="down_address_busine[{$itemid-1}]" <eq name="ad.isbusine" value="1">checked</eq>>
+                         <label ><strong>名称：</strong><input type="text"  class="controls text input-large" name="down_address_name[{$itemid-1}]" value="{$ad.name}"></label>
+                         <label ><strong>地址 : </strong><input type="text"  class="controls text input-large"  name="down_address_url[{$itemid-1}]" value="{$ad.url}"></label>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+
+        <script type="text/javascript">
+			$(function(){
+                //点击添加下载 修改人：朱德胜 日期：2016/3/10 因checkbox类型未选中时，提交数据，无法获取，进行改造.
+                window.down_extend ={
+					itemid : 0,
+                    down_temp : '<li class="down">' + 
+									'<div>' +
+										'<b>&times;</b>' +
+										'<div>' +
+											'<label>' +
+												'<strong>预定义站点  :</strong>' +
+												'<select  name="down_address_siteid[#ITEM#]">' +                            
+													'<volist name="presetsite" id="vo"><option value="{$vo.id}">{$vo.site_name}</option></volist>' +             
+												'</select>' +
+											'</label>' +
+											'运营包  :&nbsp;' +
+											'<input type="checkbox" value="1" name="down_address_busine[#ITEM#]">' +
+				 
+											'<label ><strong>名称：</strong><input type="text"  class="controls text input-large" name="down_address_name[#ITEM#]"></label>' +
+											'<label ><strong>地址 : </strong><input type="text"  class="controls text input-large"  name="down_address_url[#ITEM#]"></label>' +
+										'</div>' +
+									'</div>' +
+								'</li>',
+                    add : function(){
+							$('#numberDown').click(function() {
+								$('#sortUl').append(down_extend.down_temp.replace(/#ITEM#/ig, down_extend.itemid));
+								down_extend.itemid++;
+							});
+                    },
+
+                    close : function() {
+						$('#sortUl').on('click', '.down b', function(){
+							$(this).closest('.down').remove();
+						});
+
+						/*
+						$('#sortUl li b').click(function(){
+							$(this).parent().remove();
+							down_extend.update();
+						});
+						*/
+                    },
+
+                    internalAdd : function(args){
+						$('#numberDown').click();
+						for(var dom in args) {
+							var ob = $("input[name='"+ dom +"["+ (down_extend.itemid-1) +"]']");
+							if(ob.attr('type')=='text') {
+								ob.val(args[dom]);
+							}
+						}
+                    },
+
+                    update : function(){
+						/*
+						// 更新排序后的隐藏域的值
+						var sortVal = [];
+						$('#sortUl li').each(function(){
+							sortVal.push($('em',this).text());
+						});
+						$("input[name='down_extend_lists']").val(sortVal.join(','));
+						*/
+                    },
+                };
+				
+				<if condition="$down_address">
+					down_extend.itemid = {:count($down_address)}
+				</if>
+
+                down_extend.add();
+
+				down_extend.close();
+            })
+        </script>
+    </div>
+</div>

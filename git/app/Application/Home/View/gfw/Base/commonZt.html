@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Home@gfw/Public/head" />
+</head>
+<body>
+<!---头部--->
+<include file="Home@gfw/Public/headerTop" />
+<div id="header">
+    <include file="Home@gfw/Public/headerSearch" />
+    <div id="baike-nav">
+        <ul class="nav" id="navZt">
+            <li class="red"><a href="{:getWidgetPath('66',ture)}">专题合集</a></li>
+            <!--#include virtual="{:getWidgetPath('77')}"-->
+        </ul>
+    </div>
+</div>
+<!---头部END--->
+
+<!---body--->
+<include file="Home@gfw/Public/body" />
+<!---bodyEND--->
+
+<!---脚部--->
+<include file="Home@gfw/Public/foot" />
+
+<!---脚部END--->
+
+<!---JS--->
+<block name="script"></block>
+<!---JS--->
+</body>
+</html>

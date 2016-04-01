@@ -1,0 +1,130 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/channel.css">
+</block>
+<block name="body">
+<!--head部分-->
+{:W('Qbaobei/header',array(array(115,117,688,119),'资讯'))}
+<div class="channel-nav show-channel-nav">
+    <div class=" wrap nav-main">
+        <ul class="nav-ul">
+            <li><a href="{:C('STATIC_URL')}">首页</a></li>
+            <li><a href="{:staticUrl('lists',115,'Document')}" target="_blank">焦点关注</a></li>
+            <li><a href="{:staticUrl('lists',117,'Document')}" target="_blank">明星娱乐</a></li>
+            {:W('Qbaobei/navChild',array(198,'教育资讯'))}
+            {:W('Qbaobei/navChild',array(688,'美食资讯'))}
+            <li><a href="{:staticUrl('lists',119,'Document')}" target="_blank">社会聚焦</a></li>
+        </ul>
+        {:W('Qbaobei/navTag',array(array(115,117,688,119)))}
+    </div>
+</div>
+<!--频道主体部分 start-->
+<div class="channel-main">
+    <div class="wrap channel-wraper">
+        <!--chanbox-->
+        {:W('Qbaobei/channelPosition',array(array(115,117,688,119),117))}
+        <!--chanbox 焦点关注-->
+        <div class="fn-area chanbox2">
+            <div class="left">
+                <div class="fn-title fn-title-l"><span class="fn-about-title"><volist name="jd['tags']" id="val"><a href="{:C('STATIC_URL')}/tag/{$val['name']}/" target="_blank">{$val['title']}</a></volist></span><h2>焦点关注</h2></div>
+                <ul class="meishi-pic">
+                    <volist name="jd[img]" id="val">
+                    <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"><span class="info"><i>{$val['title']}</i><em>{$val['description']}</em></span></a></li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="right">
+                <div class="fn-title"><a href="{:staticUrl('lists',115,'Document')}" target="_blank" class="more">更多</a><h2>最新资讯</h2></div>
+                <div class="fn-ul-list">
+                    <ul class="meishi-news">
+                        <volist name="jd['new']" id="val">
+                        <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a><p class="info">{$val['description']}</p></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--chanbox 明星娱乐-->
+        <div class="fn-area pic-list starman">
+            <div class="fn-title fn-title-l"><span class="fn-about-title"><volist name="yl['tags']" id="val"><a href="{:C('STATIC_URL')}/tag/{$val['name']}/" target="_blank">{$val['title']}</a></volist></span><h2>明星娱乐</h2></div>
+            <div class="starman-main">
+                <div class="starman-in">
+                    <ul class="starman-ul">
+                        <volist name="yl['img']" id="val">
+                        <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"><span class="tit">{$val['title']}</span></a></li>
+                        </volist>
+                    </ul>
+                </div>
+                <span class="btn prev"></span>
+                <span class="btn next"></span>
+            </div>
+        </div>
+        <!--chanbox 教育资讯-->
+        <div class="fn-area chanbox2">
+            <div class="left">
+                <div class="fn-title fn-title-l"><span class="fn-about-title"><volist name="jy['tags']" id="val"><a href="{:C('STATIC_URL')}/tag/{$val['name']}/" target="_blank">{$val['title']}</a></volist></span><h2>教育资讯</h2></div>
+                <div class="zaoj-tsjy">
+                    <ul class="zaoj-tsjy-li">
+                        <volist name="jy['data']" id="val">
+                        <li><a href="{:staticUrl('detail',$val['position'][0]['id'],'Document')}" target="_blank" class="picTit"><img src="{:get_cover($val['position'][0]['smallimg'],'path')}" alt="{$val['position'][0]['title']}"><span>{$val['position'][0]['title']}</span><b></b></a>
+                            <div class="text-main">
+                                <volist name="val['new']" id="vo">
+                                <div class="text"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a><p class="info">{$vo['description']}</p></div>
+                                </volist>
+                            </div>
+                        </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            <div class="right" id="meishi-dis">
+                <div class="fn-title"><h2><span class="active">教育视频</span><span>教育专题</span></h2></div>
+                <div class="fn-ul-list">
+                    <ul class="fn-pic-list fn-video current">
+                        <volist name="jy['video']" id="val">
+                        <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"><span>{$val['title']}</span><em></em><b></b></a></li>
+                        </volist>
+                    </ul>
+                    <ul class="fn-pic-list fn-video">
+                        <li><a href="http://www.qbaobei.com/plans/minjiangushi/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/9/201309161636167441.jpg"><span>中国民间故事大全</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/teachersday/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/9/201309061748047296.jpg"><span>教师节手抄报</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/chinadream/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/8/201308281446038409.jpg"><span>我的梦中国梦作文</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/baobaoxueyingyu/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/8/201308191030088721.jpg"><span>宝宝学英语有妙法</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/gantongxunlian/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/5/201305311405475825.jpg"><span>感统训练游戏</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/yuyanxiaogushi/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/1/201301181132322413.jpg"><span>寓言故事大全</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--chanbox 美食资讯-->
+        <div class="fn-area chanbox2">
+            {:W('Qbaobei/channelCate',array($ms,'美食资讯'))}
+            <div class="right">
+                <div class="fn-title"><a href="http://www.qbaobei.com/plans/yingyang/" target="_blank" class="more">更多</a><h2>营养专题</h2></div>
+                <div class="fn-ul-list">
+                    <ul class="fn-pic-list">
+                        <li><a href="http://www.qbaobei.com/plans/xiaritianpin/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/8/201308051014210840.jpg"><span>儿童夏日甜品做法大全</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/liqiuyangsheng/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/7/201307301400302151.jpg"><span>立秋如何养生</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/baoboafushi/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/4/201304031109336833.jpg"><span>宝宝辅食制作100款</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/liusuibbshipu/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/3/201303291345331122.jpg"><span>6岁儿童食谱大全</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/tudouzuofa/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/3/201303180958348500.jpg"><span>土豆的做法大全</span></a></li>
+                        <li><a href="http://www.qbaobei.com/plans/zaocanshipu/" target="_blank"><img src="http://www.qbaobei.com/UploadFiles/2013/3/201303110933415276.jpg"><span>早餐食谱大全</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--chanbox 社会聚焦-->
+        <div class="fn-area shjj">
+                <div class="fn-title fn-title-l"><span class="fn-about-title"><volist name="sh['tags']" id="val"><a href="{:C('STATIC_URL')}/tag/{$val['name']}/" target="_blank">{$val['title']}</a></volist></span><h2>社会聚焦</h2></div>
+            <ul class="shjj-ul">
+                <volist name="sh['img']" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"><span class="tit">{$val['title']}</span></a></li>
+                </volist>
+            </ul>
+        </div>
+        <!--广告-->
+        <div class="wrap adv1200_103"><script type="text/javascript">BAIDU_CLB_fillSlot("1135975");</script></div>
+    </div>
+</div>
+<!--频道主体部分 end-->
+</block>

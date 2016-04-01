@@ -1,0 +1,114 @@
+<extend name="Public/base"/>
+
+<block name="header">
+    <li class="active"><a href="javascript:;">安装协议</a></li>
+    <li class="active"><a href="javascript:;">环境检测</a></li>
+    <li class="active"><a href="javascript:;">创建数据库</a></li>
+    <li><a href="javascript:;"><eq name="Think.session.update" value="1">升级<else/>安装</eq></a></li>
+    <li><a href="javascript:;">完成</a></li>
+</block>
+
+<block name="body">
+    <h1>创建数据库</h1>
+    <form action="__SELF__" method="post" target="_self">
+        <div class="create-database">
+            <div>
+                <select name="db[]">
+	                <option>mysql</option>
+                </select>
+                <span>数据库类型</span>
+            </div>
+            <div>
+                <input type="text" name="db[]" value="127.0.0.1">
+                <span>数据库服务器，数据库服务器IP，一般为127.0.0.1</span>
+            </div>
+            <div>
+                <input type="text" name="db[]" value="">
+                <span>数据库名</span>
+            </div>
+            <div>
+                <input type="text" name="db[]" value="">
+                <span>数据库用户名</span>
+            </div>
+            <div>
+                <input type="password" name="db[]" value="">
+                <span>数据库密码</span>
+            </div>
+            <div>
+                <input type="text" name="db[]" value="3306">
+                <span>数据库端口，数据库服务连接端口，一般为3306</span>
+            </div>
+
+<!--             <div>
+                <input type="text" name="db[]" value="onethink_">
+                <span>数据表前缀，同一个数据库运行多个系统时请修改为不同的前缀</span>
+            </div> -->
+        </div>
+
+        <div class="create-database">
+            <h2>创始人帐号信息</h2>
+            <div>
+                <input type="text" name="admin[]" value="admin">
+                <span>用户名</span>
+            </div>
+            <div>
+                <input type="password" name="admin[]" value="">
+                <span>密码</span>
+            </div>
+            <div>
+                <input type="password" name="admin[]" value="">
+                <span>确认密码</span>
+            </div>
+         <!--    <div>
+                <input type="text" name="admin[]" value="">
+                <span>邮箱，请填写正确的邮箱便于收取提醒邮件</span>
+            </div> -->
+        </div>
+
+        <div class="create-database">
+            <h2>其他配置</h2>
+            <div>
+                <input type="text" name="other[]" value="">
+                <span>主题名</span>
+            </div>
+            <div>
+                <input type="text" name="other[]" value="http://admin.host.com/">
+                <span>静态生成地址,一般为后台地址，请用斜杠结尾</span>
+            </div>
+            <div>
+                <input type="text" name="other[]" value="http://pic.host.com">
+                <span>图片访问地址</span>
+            </div>
+            <div>
+                <input type="text" name="other[]" value="['http://pic.host.com']">
+                <span>负载均衡图片访问地址，可做负载均衡，写成 ['http://pic1.h.com','http://pic1.h.com',..]</span>
+            </div>
+            <div>
+                <input type="text" name="other[]" value="['*']">
+                <span>动态访问模块的CORS允许列表，无限制默认为 ['*']，写成 ['http://www.a.com','http://www.b.com',..]</span>
+            </div>
+        </div>
+
+        <div class="create-database">
+            <h2>内部接口配置(IAPI)</h2>
+            <div>
+                <input type="text" name="iapi[]" value="">
+                <span>APP_ID</span>
+            </div>
+            <div>
+                <input type="text" name="iapi[]" value="">
+                <span>APP_TOKEN</span>
+            </div>
+            <div>
+                <input type="text" name="iapi[]" value="['127.0.0.1']">
+                <span>允许数据调用IP组，写成 ['127.0.0.1','222.363.1.25',..]</span>
+            </div>
+        </div>
+
+    </form>
+</block>
+
+<block name="footer">
+    <a class="btn btn-success btn-large" href="{:U('Install/step1')}">上一步</a>
+    <button id="submit" type="button" class="btn btn-primary btn-large" onclick="$('form').submit();return false;">下一步</button>
+</block>

@@ -1,0 +1,22 @@
+<div class="novel-cate">
+    <div class="hd">
+        <h3>{$tree.title}</h3>
+    </div>
+    <volist name="tree['_']" id="two" key="k">
+        <div class="cate-item">
+            <div class="hd">
+                <h4><empty name="two['_']"><i class="hd-cur1"></i><else /><i></i></empty>
+                <a href="{:staticUrl('lists',$two['id'],'Down')}" <if condition="$cid eq $two['id'] ">class="colour"</if>>{$two.title|msubstr=0,10,'utf-8',false}</a>
+                </h4>
+            </div>
+            <ul <if condition="($cid eq $two['id']) || ($two['id'] eq $info['pid']) ">style="display:block;"</if>>
+            <volist name="two['_']" id="three" key="k">
+                <li <if condition="$k eq count($two['_'])">class="nob"</if>><a href="{:staticUrl('lists',$three['id'],'Down')}" <if condition="$cid eq $three['id'] ">class="colour"</if>><i></i>{$three.title|msubstr=0,8,'utf-8',false}</a></li>
+            </volist>
+            </ul>
+        </div>
+        <!-----cate-item   -end----->
+    </volist>
+</div>
+<!-----novel-cate   -end----->
+

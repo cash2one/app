@@ -1,0 +1,24 @@
+<extend name="Home@dongdong/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/dongdong/css/index.css"/></block>
+<block name="body">
+<div class="page_main">
+   <!--网络游戏推荐-->
+   <div class="wraper game_rec" id="search">
+   <div class="wraper_left"> 
+       <div class="wytj"> 
+       <div class="results">为您搜索到<b>{$totals}</b>个相关结果</div> 
+           <ul class="sear_list">
+            <volist name="lists" id="vo">
+               <li><a href="{:staticUrl('detail', $vo['id'],'Down')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"></a>
+               <p><a href="{:staticUrl('detail', $vo['id'],'Down')}" target="_blank" class="tit">{$vo['title']}</a><em class="star{:getBannerscore($vo['id'])}"></em><em class="right">安全无毒</em></p>
+               <p class="info">{$vo['description']}<a href="{:staticUrl('detail', $vo['id'],'Down')}" target="_blank">[详情]</a></p>
+               <p class="down_num"><i>总{$vo['hits_today']}次下载</i><i>大小:{:kbToMb($vo['size'])}M</i></p></li>
+               </volist>
+           </ul>                                              
+       </div>
+       <div id="paging">
+           {$page}
+       </div>  
+       </div>
+   </div>
+</block>

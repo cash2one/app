@@ -1,0 +1,67 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/news.css"/>
+</block>
+<block name="body">
+<div class="main1200">
+    <div class="goback">当前位置：<position /> > {$info['title']}</div>
+    <div class="container">
+        <input type="hidden"  id="hitid"   name="id"  value="{$info.id}">
+        <input type="hidden"  id="hituid"  name="uid"  value="{$info.uid}">
+        <input type="hidden"  id="hittype"  name="type"  value="{:MODULE_NAME}">
+        <div class="cata-l">
+            <div class="news-detail">
+                <div class="art-tit">
+                    <h1>{$info['title']}</h1>
+
+                    <div class="art-info"><span>发表时间：{:date('Y-m-d H:i:s',$info['create_time'])}</span><span>来源：{$info['source']}</span><span>作者：{$info['author']}</span></div>
+                </div>
+                <div class="art-body">
+                    <!--相关游戏 start-->
+                    {~W('Document/Jf96u/relateDown',array($info['id']))}
+                    <!--相关游戏 end-->
+                   {$info['content']}
+                </div>
+            </div>
+            <div class="about-news dis-top">
+                <div class="mid-tit"><h3>相关阅读</h3><a href="/news/" target="_blank" class="more">更多</a></div>
+                <ul class="about-ul">
+                  <PHP> $totalCount = 0;</PHP>
+                     <related model="2" order="hot" limit="0,10" extend="start" key="k">
+                            <PHP> $totalCount = $totalCount+1;</PHP>
+                         <li><a href="{$related.url}" target="_blank" class="cata">[{:str_replace('我的世界','',$related['typename'])}]</a><a class="tit" href="{$related.url}" target="_blank" title="{$related.title}">{$related.title}</a></li>
+                     </related>
+                     <PHP>
+                         $countNeed = 10 - $totalCount ;
+                     </PHP>
+                    <if condition="$countNeed gt 0">
+                        <document model="2" order="create_time" limit="$countNeed"  key="key">
+                            <li><a href="{$document.url}" target="_blank" class="cata">[{:str_replace('我的世界','',$document['typename'])}]</a><a class="tit" href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a></li>
+                        </document>
+                    </if>
+                </ul>
+            </div>
+            <!--评论-->
+            <div class="comment">
+                <div class="mid-tit"><h3>独家评论</h3></div>
+                <form action="" method="" name="" id="pl" data-id="{$info['id']}" data-model="document">
+                    <p><input type="text" placeholder="请输入用户名" id="user"></p>
+                    <p><textarea placeholder="这里输入您想和大家说的，也可以是对我们的建议……"></textarea></p>
+                    <p class="bot"><span>本站为防止低俗内容出现，用户发表的评论需经过审核，谢谢 ！</span><input type="button" value="发表评论" id="btn"></p>
+                </form>
+                <ul class="comment-list" data-id="{$info['id']}" data-model="document">
+                </ul>
+                <div class="gdmore">查看更多 ↓</div>
+            </div>
+        </div>
+        <div class="cata-r">
+               {~W('Document/Jf96u/hotPackage',array($info['id']))}
+               {~W('Document/Jf96u/gameVideo',array($info['id']))}
+               {~W('Document/Jf96u/gamePingce',array($info['id']))}
+        </div>
+    </div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/jf96u/js/ajax.js"></script>
+</block>

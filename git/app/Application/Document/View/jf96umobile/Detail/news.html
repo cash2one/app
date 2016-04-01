@@ -1,0 +1,43 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css"/>
+</block>
+<block name="title">{:getCateName($info['id'],'document')}</block>
+<block name="body">
+<section class="article-outwrap dis-bot">
+    <input type="hidden"  id="hitid"   name="id"  value="{$info.id}">
+    <input type="hidden"  id="hituid"  name="uid"  value="{$info.uid}">
+    <input type="hidden"  id="hittype"  name="type"  value="{:MODULE_NAME}">
+    <div class="article-inwrap">
+        <div class="article-head">
+            <h1>{$info['title']}</h1>
+            <div class="info"><span>{$info['author']}</span><span>发布时间：{:date('Y-m-d H:i:s',$info['create_time'])}</span></div>
+        </div>
+        <div class="article-content">
+            <!--插入部分1-->
+              {~W('Document/Jf96umobile/relatePackage',array($info['id']))}
+              {$info['content']}
+          </div>
+            <!--插入部分2-->
+              {~W('Document/Jf96umobile/relateDown',array($info['id']))}
+     
+        </div>
+</section>
+<!--相关攻略-->
+ {~W('Document/Jf96umobile/sameGonglve',array($info['id']))}
+<!--相同厂商-->
+ {~W('Document/Jf96umobile/sameCompany',array($info['id']))}
+<!--相同厂商-->
+ {~W('Document/Jf96umobile/sameGame',array($info['id']))}
+<!--评论-->
+<section class="comment">
+           <form action="" method="" name="" id="pl" data-id="{$info['id']}" data-model="document">
+                <input name="author" id="tj-user" type="hidden" value="{$info['uid']}">
+
+                <textarea  class="commentForm"  ></textarea>
+                <p class="bot"><input type="button" class="comment_submit" value="发表评论" id="btn"></p>
+            </form>
+       <ul class="commentInfo" data-id="{$info['id']}" data-model="document">
+       </ul>
+</section>
+</block>

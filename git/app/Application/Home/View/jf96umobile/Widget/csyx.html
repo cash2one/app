@@ -1,0 +1,31 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css"/>
+</block>
+<block name="title">{$info['name']}</block>
+<block name="body">
+<section class="zq-game dis-bot picauto-box">
+    <div class="picauto"><img src="{:get_cover($info['img'],'path')}"><p class="tit">{$info['name']}</p></div>
+    <div class="game-intro">
+        <div id="details">{$info['description']}</div>
+        <p class="mid-more bottom-more"><a href="javascript:;"><span>点击查看更多</span><em class="arr"></em></a></p>
+    </div>
+</section>
+<section class="down-list dis-bot">
+    <div class="mid-title"><h2>{$info['name']}<strong style="color:#ff6008; font-size:1.5rem;">{$count}</strong>款</h2></div>
+    <ul class="down-game-ul">
+        <volist name="lists" id="val">
+        <li><a href="{:str_replace('index.html','',staticUrlMobile('detail',$val['id'],'Down'))}" title="{$val['title']}" class="pic"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a>
+            <div class="text">
+                <a href="{:str_replace('index.html','',staticUrlMobile('detail',$val['id'],'Down'))}" title="{$val['title']}">{$val['title']}</a>
+                <p>{:format_size($val['size'])}/{$val['cate']}</p>
+            </div>
+            <a href="{:str_replace('index.html','',staticUrlMobile('detail',$val['id'],'Down'))}" class="down">下载</a>
+        </li>
+        </volist>
+    </ul>
+    <div class="page">{$page}</div>
+</section>
+<!-- 其他厂商 -->
+{:W('Jf96umobile/cs',array($info['id']))}
+</block>

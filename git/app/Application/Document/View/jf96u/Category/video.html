@@ -1,0 +1,22 @@
+<extend name="Home@jf96u/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/kfkc.css"/>
+</block>
+<block name="body">
+<div class="main1200">
+    <div class="goback">当前位置：<a href="{:C('STATIC_URL')}">首页</a> > 手游视频</div>
+    <div class="container">
+        <div class="video-list wrap">
+            <div class="mid-tit"><h3>手游视频</h3></div>
+            <ul class="video-ul">
+             <volist  name="lists" id="article">
+                <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" title="{$article.title}"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"><span class="tit">{$article.title}</span><b class="bg"></b></a><span class="paly"></span><p class="info">{$article.content}</p></li>
+              </volist>
+            </ul>
+        </div>
+        <div class="page">
+            {$page}
+        </div>
+    </div>
+</div>
+</block>

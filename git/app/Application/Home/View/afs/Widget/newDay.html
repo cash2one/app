@@ -1,0 +1,27 @@
+<div id="title-nav"><b></b><h2>今日更新</h2></div>
+    <div class="today-update">
+        <div class="update-bd">
+
+            <ul class="current">
+                <volist name="soft" id="val">
+                <li><span><font color="red">{$val.update_time|date='m-d',###}</font></span><i><a href='<php> $SURL = C('STATIC_URL'); $SURL =substr($SURL, -1) == '/' ? substr($SURL, 0, strrpos($SURL,'/')) : $SURL;echo $SURL."/soft/".$val['category_id']."_1_1.html"; </php> '>{$val.category_title}</a></i><a href="{:staticUrl('detail',$val['id'],'Down')}">{$val.title}</a></li>
+                </volist>
+            </ul>
+
+            <ul>
+                <volist name="game" id="val">
+                <li><span><font color="red">{$val.update_time|date='m-d',###}</font></span><i><a href='<php> $SURL = C('STATIC_URL'); $SURL =substr($SURL, -1) == '/' ? substr($SURL, 0, strrpos($SURL,'/')) : $SURL;echo $SURL."/game/1_".$val['category_id']."_0_1_1.html"; </php> '>{$val.category_title}</a></i><a href="{:staticUrl('detail',$val['id'],'Down')}">{$val.title}</a></li>
+                </volist>
+            </ul>
+
+            <ul>
+                <volist name="game_net" id="val">
+                    <li><span><font color="red">{$val.update_time|date='m-d',###}</font></span><i><a href='<php> $SURL = C('STATIC_URL'); $SURL =substr($SURL, -1) == '/' ? substr($SURL, 0, strrpos($SURL,'/')) : $SURL;echo $SURL."/game/2_".$val['category_id']."_0_1_1.html"; </php> '>{$val.category_title}</a></i><a href="{:staticUrl('detail',$val['id'],'Down')}">{$val.title}</a></li>
+                </volist>
+            </ul>
+
+        </div>
+        <div class="update-hd">
+            <a href="{:C('STATIC_URL')}/soft/" target="_blank" class="active">软件</a><a href="{:C('STATIC_URL')}/game/" target="_blank">游戏</a><a href="{:C('STATIC_URL')}/game/" target="_blank">安卓</a>
+        </div>
+    </div>

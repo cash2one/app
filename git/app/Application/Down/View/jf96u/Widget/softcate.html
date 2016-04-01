@@ -1,0 +1,21 @@
+
+<div class="down-box dis-bot">
+	<div class="mid-tit"><h3>应用分类</h3></div>
+	<ul class="downUl1">
+<if condition='$tid eq 2' ><li class="active"><a href=""  >全部</a></li>
+	<else /><li><a href="" >全部</a></li>
+</if>
+	<volist name="data" id="v">
+	<php>
+       if($cate==$v['id']){
+		echo '<li class="active">';}
+		else{
+		echo '<li>';
+		}
+
+	</php>
+ <a href="{:staticUrl('lists',$v['id'],'Down')}"  >{$v.title}</a></li>
+</volist>
+
+	</ul>
+</div>

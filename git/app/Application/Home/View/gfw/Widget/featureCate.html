@@ -1,0 +1,33 @@
+<extend name="Home@gfw/Base/commonZt" />
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/subject.css"/>
+</block>
+<block name="body">
+<!-----header-end----->
+<input type="hidden" id="navIndex" value="4" />
+<div class="page-nav"><div class="page-left"><span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">></span>专题合集</div></div>
+<div id="subject" class="gf1000">
+    <div class="subject-left gf-border cfl">
+        <volist name="cate" id="val">
+        <div class="title">
+            <h2>{$val['title']}</h2><a href="{:staticUrl('lists',$val['id'],'Feature')}" target="_blank">更多></a>
+        </div>
+        <ul class="pic">
+            <volist name="val['lists']" id="rel">
+            <li>
+                <a href="{:C('STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$rel['url_token']}" target="_blank" class="s-pic"><img src="{:get_cover($rel['icon'],'path')}" width="242" height="135"></a>
+                <p class="s-title"><a href="{:C('STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$rel['url_token']}" target="_blank">{$rel['title']}</a></p>
+            </li>
+            </volist>
+        </ul>
+        </volist>
+    </div>
+    <!-----subject-left-end----->
+    <div class="subject-right cfr">
+        <!--#include virtual="{:getWidgetPath('67')}"-->
+        {:W('Home/Gfw/otherFeature')}
+        <!--#include virtual="{:getWidgetPath('68')}"-->
+    </div>
+    <!-----subject-right-end----->
+</div>
+</block>

@@ -1,0 +1,133 @@
+<div class="dragable" widget="zq1_index"></div>
+{:W('Home/Jf96ubatch/zq1_header',array($SEO,$nav,$info['id'],$nav_index))}
+<div class="wraper">
+{:W('Home/Jf96ubatch/zq1_top',array($base,$tag))}
+<!--主题左右分块-->
+<div class="wraper-main">
+    <div class="wraper-left">
+        <!-- 幻灯区 -->
+        <div class="focus-out">
+            <ul>
+                <volist name="slide" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover(($val['cover_id']?$val['cover_id']:$val['smallimg']),'path')}" alt="{$val['title']}"></a></li>
+                </volist>
+            </ul>
+            <div class="circle"><a href="#"></a><p class="pBot"></p><p class="bb"></p></div>
+        </div>
+
+        <!-- 新闻区 -->
+        <div class="zoneNews">
+            <div class="nghotLine">
+                <h2><a href="{:staticUrl('detail',$head['id'],'Document')}" target="_blank" title="{$head['title']}">{$head['title']}</a></h2>
+                <p>{:msubstr($head['description'],0,25)}<a href="{:staticUrl('detail',$head['id'],'Document')}" title="查看详情" target="_blank" class="hui">[详情]</a></p>
+            </div>
+            <ul class="news-ul">
+                <volist name="news" id="val">
+                <li><span class="ttone">[{:substr($cate[$val['category_id']],6,6)}]</span> <a class="nstwo" title="{$val['title']}" target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}">{$val['title']}</a> <span class="time">{:date('m-d',$val['update_time'])}</span></li>
+                </volist>
+            </ul>
+        </div>
+        <div style="clear:both"></div>
+
+        <!--资讯活动区-->
+        <div class="newsList">
+            <div class="midtit"><a href="{$nav2['zx']['url']}" target="_blank">更多</a><h3>资讯活动</h3></div>
+            <ul class="news-pic">
+                <volist name="zxImg" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"><em>{$val['title']}</em></a><span></span></li>
+                </volist>
+            </ul>
+            <ul class="news-ul">
+                <volist name="zx" id="val">
+                <li><a title="{$val['title']}" target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}">{$val['title']}</a><span>{:date('m-d',$val['update_time'])}</span></li>
+                </volist>
+            </ul>
+        </div>
+
+        <!--综合攻略区-->
+        <div class="newsList right">
+            <div class="midtit"><a href="{$nav2['gl']['url']}" target="_blank">更多</a><h3>综合攻略</h3></div>
+            <ul class="news-pic">
+                <volist name="glImg" id="val">
+                    <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"><em>{$val['title']}</em></a><span></span></li>
+                </volist>
+            </ul>
+            <ul class="news-ul">
+                <volist name="gl" id="val">
+                    <li><a title="{$val['title']}" target="_blank" href="{:staticUrl('detail',$val['id'],'Document')}">{$val['title']}</a><span>{:date('m-d',$val['update_time'])}</span></li>
+                </volist>
+            </ul>
+        </div>
+        <div style="clear:both"></div>
+
+        <!-- 游戏视频区 -->
+        <div class="video">
+            <div class="midtit"><a href="{$nav2['sp']['url']}" target="_blank">更多</a><h3>游戏视频</h3></div>
+            <ul>
+                <volist name="sp" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" title="{$val['title']}"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"><span class="tit">{$val['title']}!</span><em class="play"></em></a><b class="bg"></b></li>
+                </volist>
+            </ul>
+        </div>
+        <div style="clear:both"></div>
+
+        <!-- 游戏截图区 -->
+        <div class="game-pic">
+            <div class="midtit"><h3>游戏截图</h3></div>
+            <div class="game-pic-main">
+                <span class=" btn prev"></span>
+                <ul class="gameMain-ul">
+                    <volist name="img" id="val">
+                    <li><img src="{:get_cover($val,'path')}"></li>
+                    </volist>
+                </ul>
+                <span class="btn next"></span>
+            </div>
+        </div>
+        <!--截图查看-->
+        <div id="big-pic">
+            <span class="close">close</span>
+            <div class="big-ul"><ul></ul></div>
+            <div class="small-ul"><ul></ul></div>
+            <span class="btn prev"></span>
+            <span class="btn next"></span>
+        </div>
+        <!--评论-->
+        <div class="comment">
+            <div class="midtit"><h3>玩家评论</h3></div>
+            <form action="" method="" name="" id="pl" data-id="111837" data-model="document">
+                <input name="author" id="tj-user" type="hidden" value="47">
+                <p><input type="text" placeholder="请输入用户名" id="user"></p>
+                <p><textarea placeholder="这里输入您想和大家说的，也可以是对我们的建议……"></textarea></p>
+                <p class="bot"><span>本站为防止低俗内容出现，用户发表的评论需经过审核，谢谢 ！</span><input type="button" value="发表评论" id="btn"></p>
+            </form>
+            <ul class="comment-list">
+            </ul>
+            <div class="gdmore">查看更多 ↓</div>
+        </div>
+        <!--评论 end-->
+    </div>
+    <!--right部分-->
+    <div class="wraper-right">
+        <!-- 详情栏目 -->
+        {:W('Home/Jf96ubatch/zq1_right1',array($tag))}
+        <!-- 礼包栏目 -->
+        {:W('Home/Jf96ubatch/zq1_package',array($tag))}
+        <!-- 问答栏目 -->
+        <notempty name="wd">
+        <div class="dlList mid-news yxwd">
+            <div class="tit"><a href="{$nav2['wd']['url']}" target="_blank">更多</a><span>游戏问答</span></div>
+            <ul class="wenda-ul">
+                <volist name="wd" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" title="{$val['title']}">{$val['title']}</a></li>
+                </volist>
+            </ul>
+        </div>
+        </notempty>
+        <!-- 游戏热门攻略 -->
+        {:W('Home/Jf96ubatch/zq1_hot_gl',array($tag,$nav2['gl']['url']))}
+    </div>
+    <!--right end-->
+</div>
+</div>
+{:W('Home/Jf96ubatch/zq1_footer')}

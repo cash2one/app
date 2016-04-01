@@ -1,0 +1,67 @@
+<div class="p-novel">
+    <notempty name="catelist['_']">
+    <div class="introduce gf-border gf980">
+        <a class="pic1" href="{:staticUrl('lists',$catelist['id'],'Down')}"><img src="{:get_cover($catelist['vertical_pic'],'path')}" width="242" height="133"></a>
+        <P class="in-text"><a href="{:staticUrl('lists',$catelist['id'],'Down')}" class="text1">{$catelist.title}</a>
+            <notempty name="catelist['_']"><span class="text2">主要包括：<volist name="catelist['_']" id="vo" key="k" offset="0" length='17'><neq name="k" value="1">、</neq>{$vo.title}</volist></span></notempty>
+        </P>
+    </div>
+    </notempty>
+<div class="novel-left">
+    {:W('Down/Gfw/listLTree')}
+    <!-----novel-left  -end----->
+</div>
+    <div class="ptshow">
+        <!--
+   <notempty name="catelist['_']">
+    <div class="ptshownav">
+       <h3 class="classify">{$catelist.title}</h3>
+        <!--按分类检索-->
+        <!--<div class="subclass">
+            <ul>
+                <li><a href="{:staticUrl('lists',$catelist['id'],'Down')}">全部</a></li>
+                <volist name="catelist['_']" id="vo">
+                    <li><a href="{:staticUrl('lists',$vo['id'],'Down')}" <eq name="vo.selected" value="1">class="click"</eq>>{$vo.title}</a></li>
+                </volist>
+
+            </ul>
+        </div>
+    </div>-->
+ <!--  </notempty>-->
+        <notempty name="lists">
+            <ul class="ptlist gf-border">
+                <volist name="lists" id="vo">
+                    <php>
+                        $previewimg = explode(',', $vo['previewimg']);
+                        $comName=M('package')->where('id='.$vo['package_id'])->getField('title');
+                        $adress_info = M('package_particle')->field('province_id, city_id')->where('id='.$vo['package_id'])->find();
+                        $province = getProvince($adress_info['province_id']);
+                        $getCity = getCity($adress_info['city_id']);
+                        $parameter = explode('|', $vo['parameter']);
+                    </php>
+                    <li>
+                        <p class="ptleft"><a href="{:staticUrl('Detail',$vo['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" width="149" height="113"></a></p>
+                        <dl class="ptmiddle">
+                            <dt class="pttitle"><a href="{:staticUrl('Detail',$vo['id'],'Down')}">{$vo.title}</a></dt>
+                                <dd class="feature">
+                                    品牌：{$vo.brand} | 材质：{$vo.material} | 型号：{$vo.model}<br/>
+                                    供应商：{$vo.supplier} | 最小购买数：{$vo.limit} | 库存量：{$vo.stock}
+                                </dd>
+                            <dd class="relation">[{$province['name']}{$getCity['name']}]  {$comName} | <a href="{:staticUrl('detail',$vo['package_id'],'Package')}">查看联系方式</a></dd>
+
+                        </dl>
+                <span class="ptright">
+                    <em class="price">￥{:sprintf("%01.2f", $vo['price'])}元/件</em>
+                    <a href="{:staticUrl('Detail',$vo['id'],'Down')}" class="check">查看详情</a>
+                </span>
+                    </li>
+                </volist>
+            </ul>
+            <p id="fenye">{$page}</p>
+        <else />
+            <ul class="ptlist gf-border" style="line-height: 30px;">
+            暂无产品信息!
+                </ul>
+        </notempty>
+    </div>
+</div>

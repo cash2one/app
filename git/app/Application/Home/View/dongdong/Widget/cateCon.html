@@ -1,0 +1,3 @@
+<volist name="game" id="g">
+  <li><a href="{:staticUrl('detail', $g['id'],'Down')}" class="pic"><img src="{:get_cover($g['smallimg'],'path',1,72,72)}"><b>{$g['title']}</b><i>{:getCateName($g['id'],"Down")}</i></a><a href="{:staticUrl('detail', $g['id'],'Down')}" class="down">立即下载</a></li>
+</volist>

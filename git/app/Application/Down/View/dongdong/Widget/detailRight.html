@@ -1,0 +1,11 @@
+<div class="down_detail_right">
+    <div class="wyxz">
+        <h3>相关推荐</h3>
+        <ul class="current">
+            <volist name="game" id="val">
+            <li {$key == 0?'class="cur"':''}><em>1</em><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val['title']}</a><span class="num">{$val['hits']}次下载</span>
+                <p><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path',1,60,60)}"><b>{$val['title']}</b></a><br>{$val['hits']}次下载<a href="{:staticUrl('detail',$val['id'],'Down')}" class="down">下载</a></p></li>
+            </volist>
+        </ul>
+    </div>
+</div>

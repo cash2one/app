@@ -1,0 +1,68 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>{$operate}标签</h2>
+	</div>
+    
+	<div class="tab-wrap">
+		<div class="tab-content">
+                    <div style="margin-bottom:10px"><input type="search" name="search" id="search_val" /></div>
+                    <div style="margin-bottom:10px"><button id="search_btn" class="btn submit-btn">搜 索</button><div>
+                    <script>
+                        //新增标签搜索 sunjianhua 2016.1.8
+                        $(function(){
+                            $("#search_btn").click(function(){
+                                var flag = false;
+                                var search_val = $.trim($("#search_val").val());
+                                if (search_val.length === 0){
+                                    alert('请先输入标签名称');
+                                    return;
+                                }
+                                $("select[name=to] option").each(function(){
+                                    //精确匹配
+                                    if($(this).text() === search_val) {
+                                        $(this).attr("selected", "selected");
+                                        flag = true;
+                                    }
+                                });
+                                if (!flag) {
+                                    //尝试模糊匹配
+                                    $("select[name=to] option").each(function(){
+                                        if($(this).text().indexOf(search_val) !== -1) {
+                                            $(this).attr("selected", "selected");
+                                            flag = true;
+                                            if(!confirm("已找到目标标签，是否继续搜索？")) {
+                                                return false;
+                                            }
+                                        }
+                                    });
+                                }
+                                flag || alert('未搜索到指定标签，请尝试更换关键词重新搜索');
+                            });
+                        });
+                    </script>
+			<form action="{:U($type)}" method="post" class="form-horizontal">
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item">
+						<label class="item-label">目标标签<span class="check-tips">（将{$operate}至的分类）</span></label>
+						<div class="controls">
+							<select name="to">
+								<volist name="list" id="vo">
+									<option value="{$vo.id}">{$vo.title}</option>
+								</volist>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-item">
+					<input type="hidden" name="from" value="{$from}">
+					<button type="submit" id="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</block>
+

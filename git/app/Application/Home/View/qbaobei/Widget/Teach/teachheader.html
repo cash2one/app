@@ -1,0 +1,20 @@
+<script language="javascript"> window.DYNAMIC_SERVER_URL = '{:C("DYNAMIC_SERVER_URL")}';</script>
+<div class="mainguide">
+    <div class="guidecontant">
+        <div class="g-c-left">
+            <ul>
+                <li><a class="mouseon" href="{$static_url}/" target="_blank">首页</a></li>
+                <li><a class="mouseon" href="{$static_url}/hybk/yq/" target="_blank">备孕</a></li>
+                <volist name="lists" id="list">
+                    <li><a class="mouseon" href="{$list.url}" target="_blank">{$list.title}</a></li>
+                </volist>
+                <li><a class="mouseon" href="{$static_url}/jiankang/" target="_blank">健康</a></li>
+                <li><a class="mouseon" href="{$static_url}/jiaoyu/" target="_blank">教育</a></li>
+                <li><a class="mouseon" href="{$static_url}/baobaoleyuan/" target="_blank">儿歌</a></li>
+                <li><a href="{$home_url}" target="_blank">小家</a></li>
+                <li><a class="mouseon" href="{$bbs_url}" target="_blank">论坛</a></li>
+            </ul>
+        </div>
+        <div class="g-c-right"></div>
+    </div>
+</div>

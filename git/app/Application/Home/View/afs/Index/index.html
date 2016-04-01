@@ -1,0 +1,278 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/afs/css/index1.css"/>
+</block>
+<block name="body">
+    <!--main-->
+    <div id="main" class="shoy">
+        <!--游戏推荐-->
+        <div class="game_rec">
+            <div class="left-nav">
+                <p class="hot cur">单机</p>
+                <p class="adr">网游</p>
+                <p class="app">软件</p>
+            </div>
+            <div class="right current">
+                <p class="top">
+                    <Think:article basename="Down" name="dmain"  where="category_rootid=1 AND position & 1"  order="update_time desc" limit="34">
+                        <between name="key" value="0,8">
+                            <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article['title']}</b></a>
+                        </between>
+                        <eq name="key" value="9">
+                            <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article['title']}</b></a>
+                </p>
+                <p class="bottom">
+                  <span>
+                 </eq>
+                      <between name="key" value="10,21">
+                          <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" title="{$article['title']}">{$article['title']}</a><i>|</i>
+                      </between>
+                 <eq name="key" value="21">
+                      </span><span>
+                 </eq>
+                    <between name="key" value="22,33">
+                        <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" title="{$article['title']}">{$article['title']}</a><i>|</i>
+                    </between>
+                    </Think:article></span></p>
+            </div>
+            <div class="right">
+                <p class="top">
+                    <Think:article basename="Down" name="dmain"  where="category_rootid=2 AND position & 1"  order="update_time desc" limit="34">
+                        <between name="key" value="0,8">
+                            <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article['title']}</b></a>
+                        </between>
+                        <eq name="key" value="9">
+                            <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article['title']}</b></a>
+                </p>
+                <p class="bottom">
+                  <span>
+                 </eq>
+                      <between name="key" value="10,21">
+                          <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" title="{$article['title']}">{$article['title']}</a><i>|</i>
+                      </between>
+                 <eq name="key" value="21">
+                      </span><span>
+                 </eq>
+                    <between name="key" value="22,33">
+                        <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" title="{$article['title']}">{$article['title']}</a><i>|</i>
+                    </between>
+                    </Think:article></span></p>
+            </div>
+            <div class="right">
+                <p class="top">
+                    <Think:article basename="Down" name="dsoft"  where="position & 1"  order="update_time desc" limit="34">
+                        <between name="key" value="0,8">
+                            <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article['title']}</b></a>
+                        </between>
+                        <eq name="key" value="9">
+                            <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article['title']}</b></a>
+                </p>
+                <p class="bottom">
+                  <span>
+                 </eq>
+                      <between name="key" value="10,21">
+                          <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" title="{$article['title']}">{$article['title']}</a><i>|</i>
+                      </between>
+                 <eq name="key" value="21">
+                      </span><span>
+                 </eq>
+                    <between name="key" value="22,33">
+                        <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" title="{$article['title']}">{$article['title']}</a><i>|</i>
+                    </between>
+                    </Think:article></span></p>
+            </div>
+        </div>
+        <!--新闻推荐-->
+        <div class="news_rec">
+            <div class="left">
+                <Think:article basename="Document" name="article" where="category_rootid=80&&position & 2"  limit="3" order="update_time desc">
+                    <div class="wz wz0{$key+1}">
+                        <eq name="key" value="1">
+                            <div><b></b><h3><a rel="nofollow" href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a></h3><p>{$article.description}</p></div>
+                            <a rel="nofollow" href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"></a>
+                            <else/>
+                            <a rel="nofollow" href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"></a>
+                            <div><b></b><h3><a rel="nofollow" href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a></h3><p>{$article.description}</p></div>
+                        </eq>
+                    </div>
+
+                </Think:article>
+            </div>
+            <!--今日热点/更新 -->
+            <div class="right">
+                {~W('Home/Afs/newDay')}
+            </div>
+            <!--今日热点/更新 -->
+        </div>
+        <!--热门专区-->
+        <div class="libao_rec">
+            <div class="qlb">
+                <div class="title"><a href="/zhuanqu/" target="_blank">更多>></a><h2>热门专区</h2></div>
+                <ul>
+                    <IndexTag:collection name="f" limit="6" where="Interface=0">
+                        <li><a href="{:getCPath($f['id'],'batch')}" target="_blank"><img src="{:get_cover($f['icon'],'path')}"><span>{$f.title}</span></a></li>
+                    </IndexTag:collection>
+                </ul>
+            </div>
+            <div class="yxzx">
+                <div id="title-nav"><a href="{:staticUrl('lists',182, 'Document')}" target="_blank">更多>></a><b></b><h2>游戏资讯</h2></div>
+                <Think:article basename="Document" name="article" limit="2" where="category_rootid=80&&position & 8" order="create_time desc">
+                    <div class="dulo">
+                        <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank"><img src="{:get_cover($article['cover_id'],'path')}" alt="{$article.title}"></a>
+                        <div><h3><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a></h3>
+                            <p>{$article.description}</p></div>
+                    </div>
+                </Think:article>
+                <ul>
+                    <Think:article basename="Document" name="article" limit="5"  where="category_rootid=80" order="create_time desc">
+                        <li><b>{$article.create_time|time_format="Y-m-d"}</b><a href="{:getCateUrl($article['id'],'Document')}" target="_blank" class="fenl">[{:getCateName($article['id'],'Document')}]</a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" title="{$article.title}">{$article.title}</a></li>
+                    </Think:article>
+                </ul>
+                </ul>
+            </div>
+            <div class="qlb pjyx">
+                <div class="title"><a href="http://www.anfensi.com/tag/pj/" target="_blank">更多>></a><h2>破解游戏</h2></div>
+                <ul>
+                    <Think:article basename="Down" name="dmain"   where="smallimg!=0 AND data_type=2"  order="update_time desc" limit="9">
+                        <li><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><span>{$article['title']}</span></a><em><img src="__PUBLIC__/Home/afs/images/poji.png"></em></li>
+                    </Think:article>
+                </ul>
+            </div>
+        </div>
+        <!--新版修改 start-->
+        <div class="newbox">
+            <div class="game_down">
+                <div class="game_top">
+                    <div id="title-nav"><a href="/shouyou/" target="_blank">更多>></a><b></b><h2>网络游戏</h2></div>
+                    <ul class="yxfl-u">
+                        <Think:article basename="Down" name="dmain" where="category_rootid=2 AND position & 2"  order="update_time desc" limit="24">
+                            <li><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article['title']}</b><i>{:getCateName($article['id'],'Down')}</i></a><a href="{:staticUrl('detail',$article['id'],'Down')}" class="down">立即下载</a></li>
+                        </Think:article>
+                    </ul>
+                </div>
+            </div>
+            <!--游戏标签-->
+            <div class="game_tags">
+                <div class="tags-tit">网游分类</div>
+                <div class="game_tags-main">
+                    <a href="http://www.anfensi.com/game/2_10_0_1_1.html" target="_blank">三国游戏</a><a href="http://www.anfensi.com/game/2_11_0_1_1.html" target="_blank">卡牌游戏</a><a href="http://www.anfensi.com/game/2_12_0_1_1.html" target="_blank">策略游戏</a>
+                    <a href="http://www.anfensi.com/game/2_13_0_1_1.html" target="_blank">塔防游戏</a><a href="http://www.anfensi.com/game/2_14_0_1_1.html" target="_blank">动作游戏</a><a href="http://www.anfensi.com/game/2_15_0_1_1.html" target="_blank">RPG游戏</a>
+                </div>
+                <div class="tags-tit xqtj">游戏兴趣推荐</div>
+                <div class="game_tags-main">
+                    {~W('Home/Afs/indexTag',array('1'))}
+                </div>
+            </div>
+        </div>
+        <div class="newbox">
+            <div class="game_down">
+                <div class="game_top">
+                    <div id="title-nav"><a href="/danji/" target="_blank">更多>></a><b></b><h2>单机游戏</h2></div>
+                    <ul class="yxfl-u">
+                        <Think:article basename="Down" name="dmain" where="category_rootid=1 AND position & 2"  order="update_time desc"  limit="24">
+                            <li><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article['title']}</b><i>{:getCateName($article['id'],'Down')}</i></a><a href="{:staticUrl('detail',$article['id'],'Down')}" class="down">立即下载</a></li>
+                        </Think:article>
+                    </ul>
+                </div>
+            </div>
+            <!--游戏标签-->
+            <div class="game_tags">
+                <div class="tags-tit">单机分类</div>
+                <div class="game_tags-main">
+                    <a href="http://www.anfensi.com/game/1_3_0_1_1.html" target="_blank">动作游戏</a><a href="http://www.anfensi.com/game/1_4_0_1_1.html" target="_blank">益智休闲</a><a href="http://www.anfensi.com/game/1_5_0_1_1.html" target="_blank">竞速游戏</a>
+                    <a href="http://www.anfensi.com/game/1_6_0_1_1.html" target="_blank">角色扮演</a><a href="http://www.anfensi.com/game/1_7_0_1_1.html" target="_blank">射击飞行</a><a href="http://www.anfensi.com/game/1_8_0_1_1.html" target="_blank">策略塔防</a>
+                    <a href="http://www.anfensi.com/game/1_9_0_1_1.html" target="_blank">棋牌桌游</a>
+                </div>
+                <div class="tags-tit xqtj">游戏兴趣推荐</div>
+                <div class="game_tags-main">
+                    {~W('Home/Afs/indexTag',array('2'))}
+                </div>
+            </div>
+        </div>
+        <div class="newbox">
+            <div class="game_down">
+                <div class="game_top">
+                    <div id="title-nav"><a href="/soft/" target="_blank">更多>></a><b></b><h2>安卓软件</h2></div>
+                    <ul class="yxfl-u">
+                        <Think:article basename="Down" name="dsoft" where="position & 2" order="update_time desc"  limit="24">
+                            <li><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($article['smallimg'],'path',1,100,100)}"><b>{$article['title']}</b><i>{:getCateName($article['id'],'Down')}</i></a><a href="{:staticUrl('detail',$article['id'],'Down')}" class="down">立即下载</a></li>
+                        </Think:article>
+                    </ul>
+                </div>
+            </div>
+            <!--游戏标签-->
+            <div class="game_tags game_tags_rj">
+                <div class="tags-tit">软件分类</div>
+                <div class="game_tags-main">
+                    <a href="http://www.anfensi.com/soft/49_1_1.html">工具</a><a href="http://www.anfensi.com/soft/50_1_1.html" >社交</a><a href="http://www.anfensi.com/soft/51_1_1.html" >系统</a><a href="http://www.anfensi.com/soft/52_1_1.html" >视频</a><a href="http://www.anfensi.com/soft/53_1_1.html" >音乐</a><a href="http://www.anfensi.com/soft/54_1_1.html" >美化</a><a href="http://www.anfensi.com/soft/55_1_1.html" >生活</a><a href="http://www.anfensi.com/soft/56_1_1.html" >安全</a><a href="http://www.anfensi.com/soft/57_1_1.html" >购物</a><a href="http://www.anfensi.com/soft/58_1_1.html" >摄影</a><a href="http://www.anfensi.com/soft/59_1_1.html" >资讯</a><a href="http://www.anfensi.com/soft/60_1_1.html" >阅读</a><a href="http://www.anfensi.com/soft/61_1_1.html" >理财</a><a href="http://www.anfensi.com/soft/62_1_1.html" >通讯</a><a href="http://www.anfensi.com/soft/63_1_1.html" >办公</a><a href="http://www.anfensi.com/soft/64_1_1.html" >教育</a><a href="http://www.anfensi.com/soft/65_1_1.html" >旅游</a><a href="http://www.anfensi.com/soft/66_1_1.html" >娱乐</a><a href="http://www.anfensi.com/soft/67_1_1.html" >儿童</a><a href="http://www.anfensi.com/soft/68_1_1.html" >健康</a>
+                </div>
+                <div class="tags-tit">应用兴趣推荐</div>
+                <div class="game_tags-main">
+                    {~W('Home/Afs/indexTag',array('3'))}
+                </div>
+            </div>
+        </div>
+        <!--新版修改 end-->
+        <div style=" clear:both"></div>
+        <!--游戏排行-->
+        <div class="game_rank">
+            <div>
+                <h2><a href="/top/2014/">手游排行榜</a></h2>
+                <ul>
+                    {~W('Down/Afs/rankCon',array('105641','2'))}
+                </ul>
+            </div>
+            <div>
+                <h2><a href="/top/wangyou/">网游排行榜</a></h2>
+                <ul>
+                    {~W('Down/Afs/rankCon',array('105638','2'))}
+                </ul>
+            </div>
+            <div>
+                <h2><a href="/top/danji/">单机排行榜</a></h2>
+                <ul>
+                    {~W('Down/Afs/rankCon',array('105639','2'))}
+                </ul>
+            </div>
+            <div>
+                <h2><a href="/top/android/">安卓排行榜</a></h2>
+                <ul>
+                    {~W('Down/Afs/rankCon',array('105640','2'))}
+                </ul>
+            </div>
+        </div>
+        <!--自动滚动-->
+        <div class="banner2 ">
+            <span class="prev"><em class="ico">prev</em></span><span class="next"><em class="ico">next</em></span>
+            <div class="img-list">
+                {~W('Home/Afs/indexCompany')}
+            </div>
+        </div>
+        <div class="jqgx">
+            <h2>最近更新</h2>
+            <ul class="jqgx-ul">
+                {~W('Home/Afs/indexDown')}
+            </ul>
+        </div>
+        <!--热门关注-->
+        <div class="links">
+            <h2>友情链接</h2>
+            <div class="link-m">
+                <IndexTag:friendlink name="n" where="group=1" count="100">
+                    <a href="{$n['url_token']}" target="_blank" title="{$n['title']}">{$n['title']}</a>|
+                </IndexTag:friendlink>
+            </div>
+        </div>
+        <!--友情链接-->
+        <div class="links">
+            <div class="link-m">
+                <IndexTag:friendlink name="n" group="5" count="100">
+                    <a href="{$n['url_token']}" target="_blank" title="{$n['title']}">{$n['title']}</a>|
+                </IndexTag:friendlink>
+            </div>
+        </div>
+    </div>
+    <!--返回顶部-->
+    <div id="go_top"><b></b></div>
+    <div style=" clear:both"></div>
+</block>

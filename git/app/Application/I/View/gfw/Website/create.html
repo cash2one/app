@@ -1,0 +1,328 @@
+<extend name="Home@gfw/Base/commonUcent" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+
+<block name="body">
+
+    <div class="user-wraper-right" id="product">
+        <div class="user-right-chapter">
+            <h3>发布网站</h3>
+            <div class="product-nav">
+                <ul>
+                    <li class="yes"><span>1</span>填写网站标题与分类</li>
+                    <li><span>2</span>产品详细介绍</li>
+                    <li><span>3</span>提交成功</li>
+                </ul>
+            </div>
+            <!--div class="product-tip">发布产品前一定要先发布公司或商铺的网站，只有发布了网站才能发布网站下的产品！</div-->
+            <div class="product-input">
+                <form class="product-form" action="{:U('Website/save');}" method="post" id="form1" name="form1" onsubmit="return check_field();">
+                    <input type="hidden" name="step" value="detail">
+                    <input type="hidden" name="wid" value="{:isset($data['id']) ? $data['id'] : '';}">
+                    <input type="hidden" name="token" value="{$token}"/>
+                    <div class="info-input text">
+                        <em>网站名称：</em><input type="text" name="title" value="{:isset($data['title']) ? $data['title'] : '';}" id="title">
+                        <span class="title_pop">*</span>
+                    </div>
+                    <div class="info-input text"><em>网站地址：</em>
+                        <input type="text" name="url" value="{:isset($data['url']) ? $data['url'] : '';}" id="url">
+                        <span class="url_pop">*</span>
+                    </div>
+                    <div class="info-input text" id="xzfl">
+                        <em>选择分类：</em>
+                        <empty name="cate_data[0]['name']">
+                            <select name="category_id[]" size="6" onclick="change_category(this)" class="category_id_1">
+                                <foreach name="cate_data[0]" item="cd" key="cdk">
+                                    <option value="{$cdk}">{$cd['title']}</option>
+                                </foreach>
+                            </select>
+                            <else/>
+
+                            <foreach name="cate_data" item="cd" key="cdk">
+                                <select name="category_id[]" size="6" onclick="change_category(this)" class="category_id_{$cdk}">
+                                <foreach name="cd['data']" item="v" key="k">
+                                    <php>$selected = ($v['id'] == $cd['id']) ? 'selected' : '';</php>
+                                    <option value="{$k}" {$selected}>{$v['title']}</option>
+                                </foreach>
+                                </select>
+                            </foreach>
+                        </empty>
+                        <span class="category_pop">*</span>
+                    </div>
+                    <div class="info-input text" id="province">
+                        <em>所属省份：</em>
+
+                        <select name="province_id" size="6" class="province" onclick="change_area(this)">
+                            <foreach name="province_data" item="pd" key="pdk">
+                            <php>
+                                $selected = (isset($data['province_id']) && $pd['id'] == $data['province_id']) ? 'selected' : '';
+                            </php>
+                            <option value="{$pd.id}" {$selected}>{$pd.name}</option>
+                            </foreach>
+                        </select>
+
+                        <empty name="city_data">
+                            <else/>
+                            <select name="city_id" size="6" class="city" onclick="change_area(this)">
+                                <foreach name="city_data" item="ci" key="cik">
+                                    <php>
+                                        $selected = (isset($data['city_id']) && $ci['id'] == $data['city_id']) ? 'selected' : '';
+                                    </php>
+                                    <option value="{$ci.id}" {$selected}>{$ci.name}</option>
+                                </foreach>
+                            </select>
+                        </empty>
+                               <input name="judgeNext" id="judgeNext" type="hidden" value="1" />  <input name="judgeNext1" id="judgeNext1" type="hidden" value="1" />
+                        <empty name="area_data">
+                            <else/>
+                            <select name="area_id" size="6" class="area" onclick="change_area(this)">
+                                <foreach name="area_data" item="ai" key="aik">
+                                    <php>
+                                        $selected = (isset($data['area_id']) && $ai['id'] == $data['area_id']) ? 'selected' : '';
+                                    </php>
+                                    <option value="{$ai.id}" {$selected}>{$ai.name}</option>
+                                </foreach>
+                            </select>
+                        </empty>
+                        <span class="area_pop">*</span>
+                    </div>
+                    <div class="info-input text">
+                        <em>联系人：</em>
+                        <input type="text" name="contacts" id="contacts" value="{:isset($data['contacts']) ? $data['contacts'] : '';}"/>
+                        <span class="contacts_pop">*</span>
+                    </div>
+                    <div class="info-input text">
+                        <em>联系电话：</em>
+                        <input type="text" name="phone" id="phone" value="{:isset($data['phone']) ? $data['phone'] : '';}">
+                        <span class="phone_pop">* 例:0731-80088008</span>
+                    </div>
+                    <div class="info-input text">
+                        <em>联系手机：</em>
+                        <input type="text" name="telphone" id="telphone" value="{:isset($data['telphone']) ? $data['telphone'] : '';}">
+                        <span class="telphone_pop">*</span>
+                    </div>
+                    <div class="info-input text">
+                        <em>联系地址：</em>
+                        <input type="text" name="address" id="address" value="{:isset($data['address']) ? $data['address'] : '';}">
+                        <span class="address_pop">*</span>
+                    </div>
+                    <div class="info-input btn"><input type="submit" value="下一步" name="next"></div>
+                </form>
+            <!--说明 start-->
+            <div style="clear:both"></div>
+            <div class="product-info">
+                <p class="product-info-tit">说明</p>
+                <div class="product-info-main">
+                    <p>1. 网站名称为必填项目,请填写真实名称,勿用关键词.</p>
+                    <p>2. 请输入首页网址,如: http://www.guanfang123.com/ ; 普通链接收录仅支持顶级域名.</p>
+                    <p>3. 必须选择网站所属的分类,如分类不正确,将不能通过审核.</p>
+                    <p>4. 选择网站所在城市或内容所属城市、联系人及联系方式.</p>
+                </div>
+            </div>
+            <!--说明 end-->
+        </div>
+    </div>
+  </div>
+
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/user_center.js"></script>
+    
+    <script type="text/javascript">
+	$(function(){
+		$("#form1").validate({
+               errorPlacement: function(error, element) {
+               if (element.is(":radio")) error.appendTo(element.parent());
+               else if (element.is(":checkbox")) error.appendTo(element.parent());
+               else if (element.is("input[name=captcha]")) error.appendTo(element.parent());
+               else if (element.is("input[name=email]")) error.appendTo(element.parent());
+               else error.insertAfter(element);
+        },
+       // submitHandler: function(form) {
+       //     form.submit();
+      //  },
+        rules: {
+			 title: {
+                required: true,
+				remote: {
+                    url: I_URL+ "/Api/validateSiteName",
+                    //后台处理程序 
+                    type: "post",
+                    //数据发送方式 
+                    dataType: "json",
+                    //接受数据格式 
+                    data: {
+                        title: function() {
+                            return $("#title").val();
+                        }
+                    }
+                }
+            }
+        },
+        messages: {
+			title: {
+                required: "网站名不能为空",
+                remote: "网站已存在,若有问题联系我们"
+           }
+        }
+
+   }); 
+	 });
+        function check_field() {
+            var title = $('#title').val();
+            var url = $('#url').val();
+            var contacts = $('#contacts').val();
+            var phone = $('#phone').val();
+            var telphone = $('#telphone').val();
+            var address = $('#address').val();
+            var category = $('.category_id_2').val();
+            var area = $('.area').val();
+
+
+            $('.title_pop').text('');
+            $('.url_pop').text('');
+            $('.contacts_pop').text('');
+            $('.phone_pop').text('');
+            $('.telphone_pop').text('');
+            $('.address_pop').text('');
+            $('.category_pop').text('');
+            $('.area_pop').text('');
+
+            $('.title_pop .url_pop').text('aaa');
+           // if ('' == title) {
+//                $('.title_pop').text('请填写网站名称！');
+//                return false;
+//            }
+
+
+            if ('' == url || !is_url(url)) {
+                $('.url_pop').text('网站地址为空或地址格式错误！');
+                return false;
+            }
+
+            if ('' == category || undefined == category)
+            {
+               
+				if($("#judgeNext1").val()!='0'){
+						 $('.category_pop').text('请选择分类！');
+                          return false;
+				  }
+            }
+
+            if ('' == area || undefined == area )
+            {
+				  if($("#judgeNext").val()!='0'){
+						$('.area_pop').text('请选择省份！');
+                         return false; 
+				   }
+					   
+            }
+
+            var contacts_re = /[^\x00-\xff]/g;
+            if (true != contacts_re.test(contacts) || contacts.length < 2)
+            {
+                $('.contacts_pop').text('联系人必须是中文或小于2个字');
+                return false;
+            }
+			
+			if(phone.length<2 && telphone.length<2){
+			    $('.phone_pop').text('电话号码和手机号码必须填一项');
+                return false;
+			}
+            var phone_re = /(^[0-9]{3,4}\-[0-9]{3,8}$)|(^[0-9]{3,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)/;
+			if(phone.length > 2){
+				if (!phone_re.test(phone))
+                   {
+                       $('.phone_pop').text('电话号码格式错误');
+                       return false;
+                 }
+			}
+            
+
+            var telphone_re = /^0?1[3|4|5|8][0-9]\d{8}$/;
+            if (!telphone_re.test(telphone))
+            {
+				if(telphone.length > 2){
+					 $('.telphone_pop').text('手机号码格式错误');
+                     return false;
+				}
+               
+            }
+
+            var telphone_re = /^0\d{2,3}-?\d{7,8}$/;
+            if ('' == address)
+            {
+                $('.address_pop').text('地址不能为空');
+                return false;
+            }
+
+            return true;
+        }
+
+        function is_url(url)
+        {
+            if ('' == url)
+                return false;
+
+            var strRegex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+
+            var re = new RegExp(strRegex);
+            return (re.test(url)) ? true : false;
+        }
+
+
+
+        function change_area(t)
+        {
+            var classs = $(t).attr('class');
+            var id = $(t).find('option:selected').val();
+            var next_class = '';
+
+            switch (classs)
+            {
+                case 'province':
+                    $('.city').remove();
+                    $('.area').remove();
+                    next_class = 'city';
+                    break;
+                case 'city':
+                    $('.area').remove();
+                    next_class = 'area';
+                    break;
+            }
+
+
+            $.ajax({
+                url: '/Website/get_area_next_tree',
+                data: 'id='+id+'&type='+classs,
+                success: function(res){
+					  if (res.data==null){
+						$("#judgeNext").val('0');
+					}else{
+						$("#judgeNext").val('1');
+					}
+                    if (0 == res.status || res.data.length < 1)
+                        return false;
+
+                    var res_data = res.data, html = '';
+				
+				
+                    for (var i in res_data)
+                    {
+                        html += '<option value="'+res_data[i]['id']+'">'+res_data[i]['name']+'</option>';
+                    }
+                    var template = '<select name="'+next_class+'_id" size="6" class="'+next_class+'" onclick="change_area(this)">'+html+'</select>';
+
+                    $('.'+classs).after(template);
+                }
+            });
+        }
+
+        //勿删，调用URL
+        var url = '/Website/get_category';
+    </script>
+</block>

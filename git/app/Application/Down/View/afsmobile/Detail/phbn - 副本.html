@@ -1,0 +1,30 @@
+<extend name="Home@afsmobile/Base/commonDown" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+   <!--game_rec-->
+   <section id="rank" class="game">
+       <p id="title-nav">
+       
+       <a <php>if($info['id']=='105641'){echo "class='cur'";}</php> href="{:C('MOBILE_STATIC_URL')}/top/">总榜</a>
+       <a <php>if($info['id']=='105639'){echo "class='cur'";}</php> href="{:C('MOBILE_STATIC_URL')}/top/danji/">单机</a>
+       <a <php>if($info['id']=='105638'){echo "class='cur'";}</php> href="{:C('MOBILE_STATIC_URL')}/top/wangyou/">网游</a>
+       <a <php>if($info['id']=='105640'){echo "class='cur'";}</php> href="{:C('MOBILE_STATIC_URL')}/top/android/">安卓</a>
+       
+       
+       </p>
+           <ul>
+              {~W('Down/Afsmobile/rankConList',array($info['id']))}
+           </ul>
+       <!--更多排行-->
+       <div class="rank-more" id="wraper">
+           <p class="title"><span>更多排行榜 <b>TOP</b></span></p>
+           <ul>
+        <Think:article basename="Down" name="paihang"  cate="20" order="create_time desc">
+         <li><a href="{~W('Home/Afsmobile/rankUrl',array($article['path_detail']))}" class="tit">{$article.title}</a><a href="{~W('Home/Afsmobile/rankUrl',array($article['path_detail']))}" class="tzgd"></a></li>
+        </Think:article>
+           </ul>
+       </div>
+   </section>
+</block>

@@ -1,0 +1,13 @@
+<ul class="ul1">
+  <volist name="lists" id="vo" offset="0" length="10">
+    <li><a href="{:getCPath($vo['id'],'feature')}" target="_blank" title="{$vo.title}"><img src="{:get_cover($vo['icon'],'path')}" alt="{$vo.title}"><span class="tit">{$vo.title}</span></a></li>
+  </volist>
+</ul>
+<div class="cont-text">
+  <div class="line"><span class="line-tit"></span></div>
+  <div class="cont-main"> 
+      <volist name="lists" id="vo" offset="10" length="10">
+           <a href="{:getCPath($vo['id'],'feature')}" target="_blank" title="{$vo.title}">{$vo.title}</a><em>|</em>
+      </volist>
+  </div>
+</div>

@@ -1,0 +1,142 @@
+<div class="topbar">
+    <div class="main1200 topbar-main">
+        <div class="fl">96U手游网—最好玩的手机游戏网站！</div>
+        <div class="fr">
+            <div class="schome"><span class="sethome">设为首页</span> | <span class="setup">加入收藏</span></div>
+            <a href="http://m.96u.com" target="_blank" class="mobile">手机版</a>
+        </div>
+    </div>
+</div>
+<div id="banner"><img src="__PUBLIC__/Home/jf96u/images/world_bg.jpg"></div>
+<div class="nav">
+    <div class="main1200">
+        <ul class="nav-ul">
+            <li <if condition="$cid eq 65">class="active"</if> ><a href="{:C('STATIC_URL')}{:getWidgetPath(65)}">官网</a></li>
+            <li <if condition="$cid eq 1824">class="active"</if> ><a href="{:staticUrl('lists',1824, 'Document')}" >新闻</a></li>
+            <li <if condition="$cid eq 1822">class="active"</if> ><a href="{:staticUrl('lists',1822, 'Document')}" >攻略</a></li>
+            <li <if condition="$cid eq 1827">class="active"</if> ><a href="{:staticUrl('lists',1827, 'Document')}" >合成表</a></li>
+            <li <if condition="$cid eq 1825">class="active"</if> ><a href="{:staticUrl('lists',1825, 'Document')}" >建筑物</a></li>
+            <li <if condition="$cid eq 1828">class="active"</if> ><a href="{:staticUrl('lists',1828, 'Document')}" >地图包</a></li>
+            <li <if condition="$cid eq 1823">class="active"</if> ><a href="{:staticUrl('lists',1823, 'Document')}" >视频</a></li>
+            <li <if condition="$cid eq 1826">class="active"</if> ><a href="{:staticUrl('lists',1826, 'Document')}" >MOD</a></li>
+            <li <if condition="$cid eq 1829">class="active"</if> ><a href="{:staticUrl('lists',1829, 'Document')}" >皮肤</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="wraper">
+    <!--主题左右分块-->
+    <div class="wraper-main">
+        <block name="body"></block>
+        <!--right部分-->
+        <div class="wraper-right">
+            <document model="13" id="186720" extend="start">
+                <div class="gameName">
+                    <h1><a href="{$document.url}" target="_blank">{$document.title}</a></h1>
+                    <div class="gameName-main">
+                        <div class="gameName-about">
+                            <a href="{$document.url}" target="_blank"><img src='<pic name="$document.smallimg"/>' alt="{$document.title}"/></a>
+                            <ul>
+                                <li><span>类型：</span>
+                                    <switch name="document.game_type">
+                                        <case value="1">角色扮演</case>
+                                        <case value="2">射击枪战</case>
+                                        <case value="3">策略战棋</case>
+                                        <case value="4">模拟经营</case>
+                                        <case value="5">休闲益智</case>
+                                        <case value="6">体育运动</case>
+                                        <case value="7">动作闯关</case>
+                                        <case value="8">赛车竞速</case>
+                                        <case value="9">棋牌卡牌</case>
+                                        <case value="10">音乐舞蹈</case>
+                                        <default />模拟经营
+                                    </switch>
+                                </li>
+                                <li><span>平台：</span>
+                                    <switch name="document.system">
+                                        <case value="1">Android</case>
+                                        <case value="2">IOS</case>
+                                        <case value="3">Widows</case>
+                                        <case value="4">WP</case>
+                                        <case value="5">Htm5</case>
+                                        <case value="6">其它</case>
+                                        <default />Android
+                                    </switch>
+                                </li>
+                                <li><span>状态：</span>
+                                    <switch name="document.rank">
+                                        <case value="1">封测</case>
+                                        <case value="2">内测</case>
+                                        <case value="3">公测</case>
+                                        <case value="4">正式运营</case>
+                                        <case value="5">停止运营</case>
+                                        <default />正式运营
+                                    </switch>
+                                </li>
+                                <li><span>版本号：</span><if condition="$document.version eq ''">1.0.0<else/>{$document.version}</if></li>
+                                <li><span>更新时间：</span>{:date('Y-m-d',$document['update_time'])}</li>
+                            </ul>
+                        </div>
+                        <div class="gameName-info">
+                                {$document[description]}
+                            <span>[详情]</span>
+                        </div>
+                        <div class="gameName-infoMore">
+                            <div>
+                                <if condition="$document.content eq ''">
+                                    {$document.description}
+                                    <else/>
+                                    {$document.content}
+                                </if>
+                            </div>
+                        </div>
+                        <div class="gameName-li">
+                        <a href="{:getFileUrl('230241')}" class="down qt"><em></em><span>下载手机Android版</span></a>
+                        <a href="{:getFileUrl('230245')}" class="down qt"><em></em><span>下载手机IOS版</span></a>
+                        <a href="{:getFileUrl('240400')}" class="down pc"><em></em><span>下载电脑版</span></a>
+                        <a href="{:getFileUrl('234404')}" class="down pc"><em></em><span>下载电脑WIN10版</span></a>
+                        </div>
+                    </div>
+                </div>
+            </document>
+            <div class="game-hot cata-tab dlList">
+                <div class="mid-tit"><h3>热门手游排行榜</h3><p class="tab-hd"><span class="active">日榜</span><span>周榜</span></p></div>
+                <ul class="tab-cont current">
+                    <document model="13" rootid="1645" order="hot" limit="10"  index="ids">
+                    </document>
+                    <if condition="substr_count($ids, ',') eq '9'">
+                        <document model="13" rootid="1645" order="hot" limit="10"  index="ids">
+                            <li><em>1</em><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a><span class="down-nub">{$document.view}</span></li>
+                        </document>
+                        <else/>
+                        <document model="13" rootid="1645" order="click" limit="10"  index="ids">
+                            <li><em>1</em><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a><span class="down-nub">{$document.view}</span></li>
+                        </document>
+                    </if>
+                </ul>
+                <ul class="tab-cont">
+                    <document model="13" rootid="1645" order="hot7" limit="10"  index="ids">
+                    </document>
+                    <if condition="substr_count($ids, ',') eq '9'">
+                        <document model="13" rootid="1645" order="hot7" limit="10"  index="ids">
+                            <li><em>1</em><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a><span class="down-nub">{$document.view}</span></li>
+                        </document>
+                        <else/>
+                        <document model="13" rootid="1645" order="click" limit="10"  index="ids">
+                            <li><em>1</em><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a><span class="down-nub">{$document.view}</span></li>
+                        </document>
+                    </if>
+                </ul>
+            </div>
+            <div class="dlList mid-news rmgl">
+                <div class="mid-tit"><h3>热门攻略</h3><a href="{:staticUrl('lists',1590, 'Document')}" target="_blank" class="more">更多</a></div>
+                <ul class="wenda-ul list-rmgl">
+                    <document model="2"  typeid="1590" order="click" limit="10">
+                        <li><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a></li>
+                    </document>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

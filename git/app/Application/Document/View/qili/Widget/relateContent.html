@@ -1,0 +1,25 @@
+<div class="about-news">
+  <div class="det-title">
+    <h3>相关内容</h3>
+  </div>
+  <ul class="news-ul">
+		<if condition="$list1">
+			<document model="2" id="$list1">
+				<li><a href="{$document.url}" title="{$document.title}">{$document.title}</a></li>
+			</document>
+		</if>
+  </ul>
+</div>
+<div class="about-vis">
+	<div class="det-title">
+		<h3>热门推荐</h3>
+	</div>
+
+	<ul class="vis-ul">
+		<if condition="$list2">
+			<document model="2" id="$list2">
+				<li><a href="{$document.url}" title="{$document.title}">{$document.title}</a></li>
+			</document>
+		</if>
+	</ul>
+</div>

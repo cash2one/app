@@ -1,0 +1,3 @@
+<volist name="lists" id="vo">
+<li><a href="{:staticUrlMobile('detail', $vo['id'],'Document')}" class="pic-adaptive2" title="{$vo.title}"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo.title}"><p class="text"><span class="length">{:date('h:i',$vo['update_time'])}</span></p></a><a href="{:staticUrlMobile('detail', $vo['id'],'Document')}" class="title">{$vo.title}</a></li>
+</volist>

@@ -1,0 +1,139 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/channel.css"/></block>
+
+<block name="header">
+	<include file="Home@qili/Public/header" />
+</block>
+
+<block name="body">  
+<div class="tupage-nav">
+    <div class="qnx1200">
+        <div class="tupage-left">
+            <h3>图库</h3>
+			<classify model="4" typeid="0">
+				<if condition="$key eq 7">
+					<a href="{$classify.url}">{$classify.title}</a>
+				<else />
+					<a href="{$classify.url}">{$classify.title}</a><em>|</em>
+				</if>
+			</classify>
+        </div>
+
+        <div class="tupage-right">
+            <document model="4" typeid="$cid" flag="list_recom,1" limit="1" order="desc">
+				 <span>热点：</span>     
+				<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a>
+			</document>
+        </div>
+    </div>
+</div>
+<!--图库列表-->
+<list order="desc" return="data">
+</list>
+
+<div class="qnx1200 channel tuku-list">
+<ul id="piclist">
+	<list order="desc">
+		<li><a href="{$list.url}" target="_blank" title="{$list.title}"><span class="zzc"><img src="{:get_thumb($list[atlas_c], $list[atlas], '285x380')}"></span><span class="tit">{$list.title}</span></a></li>
+	</list>
+</ul>
+</div>
+</block>
+
+<block name="script">  
+<script>
+	var lock = false;
+		
+	var page = 1;
+	var oflag=true;
+
+	$(function(){
+		var arr=[];
+		var count=0;
+		//图库瀑布流
+		function fall(){
+			var oul=$('#piclist');
+			var oulW=oul.width();
+			var oli=$('#piclist li');
+			var oliW=oli.outerWidth(true);
+			var oliL=$('#piclist li').length;
+			var arr1=[350,380,300]
+			for(var i=0; i<oliL;i++){
+				oli.eq(i).find('.zzc').css('height',arr1[i%3])
+			}
+		
+			oli.each(function(i){
+			   if(i<count){
+				   return;
+			   }
+			   var oliH=oli.eq(i).outerHeight(true);
+			   if(i<4){
+					arr[i]=oliH;
+					oli.eq(i).css({'top':'10px','left':i*oliW});
+					var maxH=Math.max.apply('',arr);
+					oul.css('height',maxH)
+				  }else{
+					 var minH=Math.min.apply('',arr);
+					 var minK=get_key(arr,minH);
+					 arr[minK]+=oliH;
+					 oli.eq(i).css({'top':minH+10,'left':oli.eq(minK).css('left')});
+					 oul.css('height',arr[minK]+25);
+				  }; 
+				  count=i+1;
+				  oflag=true;
+			  });
+		
+			 //获取最小值的键值
+			 function get_key(array,min_h){
+				 for(var i in array){
+					if(array[i]==min_h){
+					  return i;
+					};
+				 };
+			 };
+		 };
+
+		//创建节点
+		function ceratNod(data){
+			$.each(data, function(i, val){
+				$('#piclist').append('<li><a href="'+val.url+'" target="_blank" title="'+val.title+'"><span class="zzc"><img src="'+val.atlas_c+'"></span><span class="tit">'+val.title+'</span></a></li>')
+			});
+
+			fall();
+		};
+
+		function api_news(fa){
+			var ul = $(fa);
+			var li = ul.find('li');
+			var num=li.length;
+			
+			$.ajax({
+				type:'get',
+				dataType:'json',
+				url: '/dynamic.php?s=Qili/galleryList/typeid/{$cid}/page/'+page++,
+				success:function(params){
+					if(params){
+						ceratNod(params.data) 
+					}
+				}
+			});
+		};
+		
+		fall();
+
+		$(window).scroll(function(){
+			var minH=Math.min.apply('',arr);
+			if($(window).scrollTop()+$(window).height()>=minH && oflag){
+			   oflag=false;
+			   api_news('#piclist');
+			  
+			};
+		});
+
+
+});
+
+
+
+</script>
+</block>

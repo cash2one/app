@@ -1,0 +1,24 @@
+<div class="zqmain-right" id="nm-right">
+    <!----游戏下载---->
+    <div class="zqmain-rm">
+        <b>游戏下载</b>
+        <volist name="down" id="val">
+            <php>if($val['system'] == '1'){</php>
+            <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="andro">安卓版</a>
+            <php>}elseif($val['system'] == '2'){</php>
+            <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="apple">苹果版</a>
+            <php>}elseif($val['system'] == '4'){</php>
+            <a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pc">电脑版</a>
+            <php>}</php>
+        </volist>
+    </div>
+    <!--相关软件合集-->
+    <div class="hj-xgrj">
+        <p class="title">相关合集<a href="{:getWidgetPath('18', true)}" target="_blank" class="more"></a></p>
+        <ul>
+            <volist name="xgk" id="val">
+                <li><a href="{:C('STATIC_URL')}/{:C('FEATURE_K_DIR')}/{$val['url_token']}" target="_blank"><img src="{:get_cover($val['icon'],'path')}"><span>{$val['title']}</span></a></li>
+            </volist>
+        </ul>
+    </div>
+</div>

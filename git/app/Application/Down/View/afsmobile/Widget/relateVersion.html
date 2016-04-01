@@ -1,0 +1,14 @@
+<notempty name="lists">
+<div class="downTit">
+  <p>其他版本</p>
+</div>
+<ul class="downUl">
+<volist name="lists" id="vo" offset="0" length="4">
+  <li>
+    <div class="top"><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="tit">{$vo.title}</a><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="down">下载</a></div>
+    <div class="bot"><span>版本：{$vo['version']}</span><span>大小：{$vo['size']}</span></div>
+  </li>
+</volist>
+</ul>
+
+</notempty>

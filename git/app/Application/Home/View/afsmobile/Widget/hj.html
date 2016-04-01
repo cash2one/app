@@ -1,0 +1,17 @@
+<extend name="Home@afsmobile/Base/commonDown" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/afsmobile/css/yxzq.css"/>
+</block>
+<block name="body">
+    <!--game_rec-->
+    <section class="zhuan-list">
+        <div class="list">
+            <ul class="zq-list">
+                <volist name="lists" id="val">
+                    <li><a href="{$val['staticUrl']}"><img src="{:get_cover($val['icon'],'path')}"><b>{$val['title']}</b></a></li>
+                </volist>
+            </ul>
+            <div class="page">{$page}</div>
+        </div>
+    </section>
+</block>

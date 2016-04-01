@@ -1,0 +1,58 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/channel.css">
+</block>
+<block name="body">
+    <!--head部分-->
+    <php>
+        if(is_numeric($info['id'] && false)){
+        //获取所有子分类
+        $cates = R('Document/Qbaobei/getCate',array($info['id'],true),'Widget');
+
+        //相关文章标签
+        $tag    = M('TagsMap')->alias('a')->field('b.id,b.name,b.title,c.title dd')->join('__TAGS__ b ON a.tid = b.id')->join('__GALLERY__ c ON a.did = c.id')
+        ->where("a.type ='gallery' AND c.status = 1 AND c.category_id IN($cates)")->order('c.view DESC')->group('a.tid')->limit(4)->select();
+        }
+    </php>
+    <div class="wrap channel-head">
+        <div class="wrap adv1200_103"><center><script type="text/javascript">BAIDU_CLB_fillSlot("1135447");</script></center></div>
+        <div class="head-main">
+            <div class="left">
+                <a href="{:C('STATIC_URL')}" class="logo">亲亲宝贝网</a>
+                <h1>图库</h1>
+            </div>
+
+            <include file="Home@qbaobei/Public/PC2/search" />
+        </div>
+    </div>
+    <!--频道主体部分 start-->
+    <div class="channel-main allpic-list">
+        <div class="wrap baike-list-wrap">
+            <div class="cont-goback"><span>您的位置：</span><a href="{:C('STATIC_URL')}">首页</a>>
+                <php>
+                    $pid = (int)$info['pid'];
+                    $mbx = '';
+                    while($pid>0){
+                    $p_category = M('GalleryCategory')->field('id,title,pid')->where('id = '.$pid)->find();
+                    $pid        = (int) $p_category['pid'];
+                    $mbx        = '<a href="'.staticUrl('lists',$p_category['id'],'Gallery').'">'.$p_category['title'].'</a>>'.$mbx;
+                    }
+                    echo $mbx;
+                </php>
+                <span>{$info['title']}</span></div>
+            <div class="list-nav"><a href="{:staticUrl('lists',$info['id'],'Gallery')}">最新</a><a href="{:staticUrl('lists',$info['id'],'Gallery',null,false,true)}" class="active">最热</a></div>
+            <div class="allpic-main">
+                <div class="fn-title fn-title-l"><h2>{$info['title']}</h2></div>
+                <ul class="allpic-ul">
+                    <volist name="lists" id="val">
+                        <li><a href="{:staticUrl('detail',$val['id'],'Gallery')}" target="_blank" title="{$val['title']}"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"><span>{$val['title']}</span></a></li>
+                    </volist>
+                </ul>
+                <!--分页 start-->
+                <div class="page">{$page}</div>
+                <!--分页 end-->
+            </div>
+        </div>
+    </div>
+    <!--频道主体部分 end-->
+</block>

@@ -1,0 +1,14 @@
+<notempty name="lists">
+<div class="detail-xgtj pic-xgtp">
+  <div class="fn-title fn-title-l">
+    <h2>相关图片</h2>
+  </div>
+  <div class="pic-xgtp-main">
+    <ul class="pic-xgtp-ul">
+    <volist name="lists" id="vo" offset="0" length="12">
+      <li><a href="{:staticUrl('detail',$vo['id'],'Gallery')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><span class="tit">{$vo['title']}</span></a></li>
+      </volist>
+    </ul>
+  </div>
+</div>
+</notempty>

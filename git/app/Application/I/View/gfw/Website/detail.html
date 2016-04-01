@@ -1,0 +1,102 @@
+<extend name="Home@gfw/Base/commonUcent" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+
+<block name="body">
+
+    <div class="user-wraper-right" id="product">
+        <div class="user-right-chapter">
+            <h3>发布网站</h3>
+            <div class="product-nav">
+                <ul>
+                    <li class="yes"><span>1</span>填写网站标题与分类</li>
+                    <li class="yes"><span>2</span>产品详细介绍</li>
+                    <li><span>3</span>提交成功</li>
+                </ul>
+            </div>
+            <!--div class="product-tip">发布产品前一定要先发布公司或商铺的网站，只有发不了网站才能发布网站下的产品！</div-->
+            <div class="product-input">
+                <form class="product-form" action="{:U('Website/save');}" method="post" enctype="multipart/form-data" onsubmit="return check_field();">
+                    <input type="hidden" name="step" value="save">
+                    <input type="hidden" name="wid" value="{:isset($data['id']) ? $data['id'] : '';}">
+                    <!--input type="file" name="logo"/>
+                    <input type="file" multiple="" name="images[]" class="btn-img" value="上传图片"-->
+                    <div class="product-attr-chapter">
+                        <div class="product-attr-tit">上传网站Logo</div>
+                        <div class="add-pic">
+                            <input type="file" name="images" class="btn-img" value="上传图片">
+                            <p class="img-tips">请上传网站的Logo图，建议Logo图片不超过5M,图片内容避免全文字。</p></div>
+                        <br/>
+
+                        <div class="product-img">
+                            <php> if (empty($data['srecom_id'])):</php>
+                                <br/>
+                            <php> else:</php>
+                                <img src="{:isset($data['srecom_id']) ? get_cover($data['srecom_id'], 'path') : '';}" style="width: 160px;height: 120px;"/>
+                            <php>endif;</php>
+
+
+                            <div style="margin-top: 50px;" class="product-attr-tit"><b>网站详细介绍</b></div>
+                        </div>
+
+                    </div>
+                    <textarea name="description" id="content">{:isset($data['content']) ? $data['content'] : '';}</textarea>
+                    <link rel="stylesheet" href="__STATIC__/kindeditor/default/default.css" />
+                    <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-min.js"></script>
+                    <script charset="utf-8" src="__STATIC__/kindeditor/zh_CN.js"></script>
+                    <script type="text/javascript">
+                        $(function(){
+                            var editor = KindEditor.create('textarea[name="description"]', {
+                                //uploadJson:'/administrator/attached/upload',
+                                //fileManagerJson:'/administrator/attached/manager',
+                                resizeType:1,
+                                allowPreviewEmoticons:false,
+                                allowFileManager:true,
+                                allowImageUpload:true,
+                                minWidth:700,
+                                minHeight:300,
+                                items:[
+                                    'source', 'preview', 'fullscreen','|','fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                    'insertunorderedlist', '|', 'emoticons', 'link', 'unlink']
+                            });
+                        });
+                    </script>
+                    <div class="info-input btn"><input type="submit" value="下一步" name="save"></div>
+                </form>
+            </div>
+            <!--说明 start-->
+            <div style="clear:both"></div>
+            <div class="product-info">
+                <p class="product-info-tit">说明</p>
+                <div class="product-info-main">
+                    <p>1.网站内容不少于200字，通常为一个网站的重要介绍，可以为公司介绍，相关产品介绍，联系方式等。</p>
+                    <p>2.网站结构条理清楚，不能带其他网址与链接，否则可能无法通过审核。</p>
+                    <p>3.在贵站上添加官方网友情链接，将更快得到收录。本网站名为"官方网"，地址：http://www.guanfang123.com。</p>
+                </div>
+            </div>
+            <!--说明 end-->
+        </div>
+    </div>
+
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/user_center.js"></script>
+    <script type="text/javascript">
+        function check_field()
+        {
+            var content = $('#content').val();
+            if ('' == content || content.length < 200)
+            {
+                alert('请输入网站的详细介绍，最好不少于200字');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</block>

@@ -1,0 +1,100 @@
+<extend name="Package@pc6mobile/Base/common" />
+<block name="body">
+    <article class="content">
+        <section class="col-box">
+            <header class="col-hd">
+                <h2 class="title">最新礼包</h2>
+            </header>
+            <div class="mod-list-box">
+                <ul class="mod-app-intro">
+                    <Think:article basename="Package" name="pmain" limit="4" order="create_time desc">
+                        <li>
+                            <figure> <a href="{:staticUrlMobile('detail',$article['id'],'Package')}"><img src="{:get_cover($article['cover_id'],'path')}"/></a>
+                                <figcaption>
+                                    <h3 class="tit"><a href="{:staticUrlMobile('detail',$article['id'],'Package')}">{$article.title}</a></h3>
+                                    <div class="syspuls">
+                                        <div class="c"> <span><code id="percent" style="width:14%;"></code><i>14%</i></span> </div>
+                                        <strong class="card_all" card-id="{$article['id']}" style="display:none;"></strong> <strong class="card_surplus" card-id="{$article['id']}" style="display:none;"></strong> </div>
+                                </figcaption>
+                                <a href="{:staticUrlMobile('detail',$article['id'],'Package')}" class="btn btn-c lqhl" >领取</a> </figure>
+                        </li>
+                    </Think:article>
+                </ul>
+            </div>
+            <div class="app-more"> <a href="{:C('MOBILE_STATIC_URL')}/libao/">查看更多礼包>></a> </div>
+        </section>
+        <section class="col-box">
+            <ul class="mod-tab">
+                <li><a onclick="tabShow('menu_','con_',1,2);" id="menu_1" class="cur">热门礼包</a></li>
+                <li><a onclick="tabShow('menu_','con_',2,2);" id="menu_2">独家礼包</a></li>
+            </ul>
+            <div id="con_1">
+                <ul class="mod-app-intro">
+                    <Think:article basename="Package" name="pmain" limit="4" where="position & 1" order="create_time desc">
+                        <li>
+                            <figure><a href="{:staticUrlMobile('detail',$article['id'],'Package')}"><img src="{:get_cover($article['cover_id'],'path')}"/></a>
+                                <figcaption>
+                                    <h3 class="tit"><a href="{:staticUrlMobile('detail',$article['id'],'Package')}">{$article.title}</a></h3>
+                                </figcaption>
+                                <a class="btn btn-e yydd" href="{:staticUrlMobile('detail',$article['id'],'Package')}">预定</a> </figure>
+                        </li>
+                    </Think:article>
+                </ul>
+                <div class="app-more"> <a href="{:C('MOBILE_STATIC_URL')}/libao/">查看更多热门礼包>></a> </div>
+            </div>
+            <div id="con_2" style="display:none;">
+                <ul class="mod-app-intro">
+                    <Think:article basename="Package" name="pmain" limit="4" where="position & 2" order="create_time desc">
+                        <li>
+                            <figure><a href="{:staticUrlMobile('detail',$article['id'],'Package')}"><img src="{:get_cover($article['cover_id'],'path')}"/></a>
+                                <figcaption>
+                                    <h3 class="tit"><a href="{:staticUrlMobile('detail',$article['id'],'Package')}">{$article.title}</a></h3>
+                                </figcaption>
+                                <a class="btn btn-e yydd" href="{:staticUrlMobile('detail',$article['id'],'Package')}">预定</a> </figure>
+                        </li>
+                    </Think:article>
+                </ul>
+                <div class="app-more"> <a href="{:C('MOBILE_STATIC_URL')}/libao/">查看更多独家礼包>></a> </div>
+            </div>
+        </section>
+        <section class="col-box">
+            <div class="hr_10"></div>
+            <header class="col-hd">
+                <h2 class="title">热门手游</h2>
+            </header>
+            <div class="mod-list-box">
+                <ul class="game-like ">
+                    <li> <a href="http://www.pc6.com/azyx/134809.html"><img src="http://pic.pc6.com/up/2015-6/2015060209164016204.jpg"/></a>
+                        <h3> <a href="http://www.pc6.com/azyx/134809.html">梦幻西游</a> </h3>
+                    </li>
+                    <li> <a href="http://www.pc6.com/azyx/125722.html"><img src="http://pic.pc6.com/up/2015-6/2015060209164044246.jpg"/></a>
+                        <h3> <a href="http://www.pc6.com/azyx/125722.html">乱斗西游</a> </h3>
+                    </li>
+                    <li> <a href="http://www.pc6.com/azyx/109066.html"><img src="http://pic.pc6.com/up/2015-6/2015060209164061072.jpg"/></a>
+                        <h3> <a href="http://www.pc6.com/azyx/109066.html">刀塔传奇</a> </h3>
+                    </li>
+                    <li> <a href="http://www.pc6.com/azyx/121231.html"><img src="http://pic.pc6.com/up/2015-6/2015060209164077897.png"/></a>
+                        <h3> <a href="http://www.pc6.com/azyx/121231.html">我叫MT2</a> </h3>
+                    </li>
+                </ul>
+                <ul class="game-like ">
+                    <li> <a href="http://www.pc6.com/azyx/139539.html"><img src="http://pic.pc6.com/up/2015-6/2015060209164094723.jpg"/></a>
+                        <h3> <a href="http://www.pc6.com/azyx/139539.html">新仙剑奇侠传</a> </h3>
+                    </li>
+                    <li> <a href="http://www.pc6.com/azyx/126521.html"> <img src="http://pic.pc6.com/up/2015-6/2015060209164021549.jpg"/></a>
+                        <h3> <a href="http://www.pc6.com/azyx/126521.html">大主宰</a> </h3>
+                    </li>
+                    <li> <a href="http://www.pc6.com/azyx/113651.html"><img src="http://pic.pc6.com/up/2015-6/2015060209164032766.jpg"/></a>
+                        <h3> <a href="http://www.pc6.com/azyx/113651.html">海岛奇兵</a> </h3>
+                    </li>
+                    <li> <a href="http://www.pc6.com/azyx/123420.html"><img src="http://pic.pc6.com/up/2015-6/2015060209164049591.jpg"/></a>
+                        <h3> <a href="http://www.pc6.com/azyx/123420.html">太极熊猫</a> </h3>
+                    </li>
+                </ul>
+                <ul class='game-like' >
+                </ul>
+            </div>
+            <div class="app-more"> <a href="http://az.pc6.com/" >查看更多游戏</a> </div>
+        </section>
+    </article>
+</block>

@@ -1,0 +1,301 @@
+<extend name="Base/commonIndex"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/index.css"/>
+</block>
+<block name="body">
+<!-----头部tab---->
+<div id="index-tab">
+  <p class="left"><b class="cur yx">游戏</b><b class="zt">专题</b><b class="hj">合集</b><b class="cs">厂商</b></p>
+  <p class="right current"> <span class="right-t">
+    <Think:article basename="Down" name="dmain" limit="30" where="category_rootid=1" order="create_time desc"  >
+     <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank">{$article.title}</a> 
+     </Think:article>
+    </span>
+     <span class="right-b yxhj">
+    <Think:article basename="Down" name="dmain" limit="10" order="create_time desc" where='category_rootid=1&&cover_id!=0'> 
+    <i><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic">
+        <img src="{:get_cover($article['smallimg'],'path')}">
+        <php>if($article['iconcorner'] == '1'){</php><em class="jiaob-jp2"></em><php>}</php>
+    </a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title}</a><b><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['cover_id'],'path')}"><u>{$article.title}</u></a><s></s></b></i>
+    </Think:article>
+    </span> </p>
+  <p class="right">
+   <span class="right-t">
+    <IndexTag:feature name="f" limit="30" > 
+    <a href="{:getCPath($f['id'],'feature')}" target="_blank">{$f.title}</a>
+    </IndexTag:feature>
+    </span> 
+ <span class="right-b">
+ <IndexTag:feature name="f" limit="6" > 
+   <i class="cur"><a href="{:getCPath($f['id'],'feature')}" target="_blank"><img src="{:get_cover($f['icon'],'path')}"><u>{$f.title}</u></a><s></s></i>
+  </IndexTag:feature> 
+   </span> </p>
+  <p class="right"> <span class="right-t">
+   <IndexTag:k name="f" limit="30" > <a href="{:getCPath($f['id'],'special')}" target="_blank">{$f.title}</a> </IndexTag:k>
+    </span> <span class="right-b"> 
+      <IndexTag:k name="f" limit="6" >
+      <i class="cur"><a href="{:getCPath($f['id'],'special')}" target="_blank"><img src="{:get_cover($f['icon'],'path')}"><u>{$f.title}</u></a><s></s></i>
+        </IndexTag:k>
+    </span> </p>
+  <p class="right"> <span class="right-t">
+    <IndexTag:company name="f" limit="30" >
+     <a href="{:getCPath($f['id'],'company')}" target="_blank">{$f.name}</a> 
+     </IndexTag:company>
+    </span>
+    <span class="right-b">
+     <IndexTag:company name="f" limit="6" >
+         <i class="cur"><a href="{:getCPath($f['id'],'company')}" target="_blank"><img src="{:get_cover($f['img'],'path')}"><u>{$f.name}</u></a><s></s></i>
+     </IndexTag:company>
+ </span>
+        </p>
+</div>
+<!-----banner部分------>
+ {~W('P7230/banner')}
+<div id="index-main"> 
+
+  <div id="jdgz" class="tycl">
+    <div class="index_tit index_o">
+      <h2>焦点关注</h2>
+      <i><a href="{:staticUrl('lists',95, 'Document')}" target="_blank">更多+</a></i></div>
+    <div class="jdgz-left">
+      <div class="l_pic">
+        <ul>
+     <Think:article basename="Document" name="article" cate="95" limit="1" where="position & 4" order="create_time desc">
+     <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i>{$article.title}</i><s></s><img src="{:get_cover($article['cover_id'],'path')}"></a></li> 
+    </Think:article>
+      <Think:article basename="Document" name="article" cate="92" limit="1" where="position & 4" order="create_time desc">
+     <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i>{$article.title}</i><s></s><img src="{:get_cover($article['cover_id'],'path')}"></a></li> 
+    </Think:article>
+      <Think:article basename="Document" name="article" cate="89" limit="1" where="position & 4" order="create_time desc">
+     <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i>{$article.title}</i><s></s><img src="{:get_cover($article['cover_id'],'path')}"></a></li> 
+    </Think:article>
+        </ul>
+      </div>
+
+      <div class="sb">
+        <div> 
+        <h3><a href="{:staticUrl('lists',95, 'Document')}" target="_blank" class="tit">【网游攻略】</a>
+       <Think:article basename="Document" name="article"  limit="1" cate="95" where="position & 4" order="create_time desc">
+        <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a></h3>
+        <i class="info">{:clean_str($article['description'])}</i>
+        </Think:article>
+         <Think:article basename="Document" name="article" limit="6" cate="95" order="create_time desc" > <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="xw">{$article.title}</a> </Think:article>
+     </div>
+      </div>
+      <div class="sb">
+        <div> 
+       <h3><a href="{:staticUrl('lists',92, 'Document')}" target="_blank" class="tit">【单机攻略】</a>
+             <Think:article basename="Document" name="article"  limit="1" cate="92" where="position & 4" order="create_time desc">
+        <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a></h3> <i class="info">{:clean_str($article['description'])}</i>
+        </Think:article>
+             <Think:article basename="Document" name="article" limit="6" cate="92" order="create_time desc" >
+              <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="xw">{$article.title}</a> 
+             </Think:article>
+        </div>
+      </div>
+      
+       <div class="sb">
+        <div>
+          <h3><a href="{:staticUrl('lists',89, 'Document')}" target="_blank" class="tit">【软件教程】</a>
+        <Think:article basename="Document" name="article"  limit="1" cate="89" where="position & 4" order="create_time desc">
+        <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a> </h3>
+        <i class="info">{:clean_str($article['description'])}</i>
+        </Think:article>
+      <Think:article basename="Document" name="article" limit="6" cate="89" order="create_time desc" >
+     <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="xw">{$article.title}</a>
+      </Think:article>
+         </div>
+      </div>
+      
+      
+    </div>
+    
+
+    
+    
+    
+    <div class="jdgz-right"> 
+      <!---每日推荐插件----> 
+      {~W('Home/p7230/everydayRecommend')}
+      <div class="recom rmlb" id="recomtab">
+         <Think:article basename="Package"  limit="1" where="cover_id!=0 and (position & 2)">
+        <p class="title">热门礼包<a href="{:staticUrl('index',$article['id'],'Package')}" target="_blank" class="more"></a></p>
+        <span>
+     
+          <p class="recom-top"> <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" class="pic3"><img src="{:get_cover($article['cover_id'],'path')}"></a> <b> <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" class="title">{$article.title}</a> <i><s>礼包类型</s><s>{:getPackageType($article['category_id'])}</s></i> <i><s>礼包余量/总量</s><s>{$article.id|showCardSur}/{$article.id|showCardAll}</s></i> <a href="{:staticUrl('detail',$article['id'],'Package')}" class="down">礼包领取</a> </b> </p>
+        </Think:article>
+        <Think:article basename="Package" name="pmain" limit="6">
+         <a href="{:staticUrl('detail',$article['id'],'Package')}" target="_blank" class="lblq">{$article.title}</a> 
+         </Think:article>
+        </span> </div>
+    </div>
+  </div>
+    
+    <!-----b报告玩家----->
+    <div id="jdgz" class="clearfix">
+         <div class="index_tit index_one"><h2>报告玩家</h2><i><a href="{:staticUrl('lists',81, 'Document')}" target="_blank">更多+</a></i></div>
+         
+        <div class="jdgz-left">
+         <div class="l_pic">
+    <ul>
+    <Think:article basename="Document" name="article" cate="93" limit="3">
+     <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="pic"><i>{$article.title}</i><s></s><img src="{:get_cover($article['cover_id'],'path')}"></a></li> 
+    </Think:article>
+    </ul>
+    </div>
+    
+    
+      <div class="sb">
+        <div> 
+       <h3><a href="{:staticUrl('lists',90, 'Document')}" target="_blank" class="tit">【新游】</a>
+             <Think:article basename="Document" name="article"  limit="1" cate="90" where="position & 4" order="create_time desc">
+        <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a></h3> <i class="info">{:clean_str($article['description'])}</i>
+        </Think:article>
+             <Think:article basename="Document" name="article" limit="6" cate="90" order="create_time desc" >
+              <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="xw">{$article.title}</a> 
+             </Think:article>
+        </div>
+      </div>
+      
+          <div class="sb">
+        <div> 
+       <h3><a href="{:staticUrl('lists',94, 'Document')}" target="_blank" class="tit">【活动】</a>
+             <Think:article basename="Document" name="article"  limit="1" cate="94" where="position & 4" order="create_time desc">
+        <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a></h3> <i class="info">{:clean_str($article['description'])}</i>
+        </Think:article>
+             <Think:article basename="Document" name="article" limit="6" cate="94" order="create_time desc" >
+              <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="xw">{$article.title}</a> 
+             </Think:article>
+        </div>
+      </div>
+      
+          <div class="sb">
+        <div> 
+       <h3><a href="{:staticUrl('lists',87, 'Document')}" target="_blank" class="tit">【业界】</a>
+             <Think:article basename="Document" name="article"  limit="1" cate="87" where="position & 4" order="create_time desc">
+        <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a></h3> <i class="info">{:clean_str($article['description'])}</i>
+        </Think:article>
+             <Think:article basename="Document" name="article" limit="6" cate="87" order="create_time desc" >
+              <a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="xw">{$article.title}</a> 
+             </Think:article>
+        </div>
+      </div>
+        </div>
+
+        {~W('Home/P7230/testServerList')}
+  </div>
+  <!-----游戏评测---->
+  <div id="yxpc">
+        <div class="index_tit index_three"><h2>游戏评测</h2><i><a href="{:staticUrl('lists',91, 'Document')}" target="_blank">更多+</a></i></div>
+        
+        
+    <Think:article basename="Document" name="article" cate="91" limit="8"> <span><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank"><s class="demo3"><em></em>
+      <input class="knob" value="{:get_score_other($article['id'],'document',true)}">
+      </s><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a></span>
+       </Think:article>
+  </div>
+  <!-----游戏库---->
+  <div id="jdgz" class="yxk">
+     <div class="index_tit index_four"><h2>游戏库</h2><i><a href="{:C('STATIC_URL')}/yx" target="_blank">更多+</a></i></div>
+    <div class="jdgz-left">
+      <p class="rmbq"><a class="fm">热门标签</a>
+        <IndexTag:tags name="f" limit="5" > <a href="{:C('STATIC_URL')}/yx/0_0_0_{$f.id}_1_1.html" target="_blank">{$f.title}</a> </IndexTag:tags>
+        <Think:article basename="Down" name="dmain" limit="16" where='cover_id!=0&&category_rootid=1'>
+      <dl>
+        <dt><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><s></s><img src="{:get_cover($article['smallimg'],'path')}"><php>if($article['iconcorner'] == '1'){</php><em class="jiaob-jp2"></em><php>}</php></a></dt>
+        <dd><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank">{$article.title}</a></dd>
+      </dl>
+      </Think:article>
+      <span class="tjyx">
+      <IndexTag:collection name="f" limit="6" where="Interface=0">
+       <a href="{:getCPath($f['id'],'batch')}" target="_blank" class="pic">
+       <i>{$f.title}</i>
+       <s></s>
+       <img src="{:get_cover($f['icon'],'path')}">
+       </a>
+     </IndexTag:collection>
+      </span>
+     </div>
+    <div class="jdgz-right">
+      <div class="recom">
+        <p class="title">游戏合集<a href="{:C('STATIC_URL')}/k/" target="_blank" class="more"></a><!--连接到游戏合集--></p>
+        <span> <b class="nav"><i class="cur"></i><i></i><i></i></b>
+        <div class="zhez">
+      <php>$list_num=1;  echo '<ul>';</php>            
+     <IndexTag:k name="f" limit="9" where="Interface=0">
+     <php>
+            if ($list_num==1||$list_num==4||$list_num==7){
+                echo '<li><a target="_blank" href="'.getCPath($f['id'],'special').'"><i>'.msubstr($f['title'],0,26,'utf-8',false).'</i><s></s><img src="'.get_cover($f['icon'],'path').'" /></a>'.PHP_EOL; 
+            }else  if ($list_num==3||$list_num==6){
+                echo '<a target="_blank" href="'.getCPath($f['id'],'special').'"><i>'.msubstr($f['title'],0,26,'utf-8',false).'</i><s></s><img src="'.get_cover($f['icon'],'path').'" /></a></li>'.PHP_EOL;
+            }else{
+               echo '<a target="_blank" href="'.getCPath($f['id'],'special').'"><i>'.msubstr($f['title'],0,26,'utf-8',false).'</i><s></s><img src="'.get_cover($f['icon'],'path').'" /></a>'.PHP_EOL;
+            }
+           $list_num++;
+            </php>  
+       </IndexTag:k>
+  <php> echo '<li></ul>';   </php>           
+        </div>
+        </span> </div>
+    </div>
+    <!------游戏排行------->
+    <p class="syfgx"></p>
+    <div class="yxflph"> <b class="phul-nav"><h2 class="index_c_tit">网游排行</h2></b> <b class="nav"><i class="pm">排名</i><i class="yx">游戏</i><i class="df">得分</i><i class="hz">获赞</i></b>
+      <ul class="phul">
+        <Think:article basename="Down" name="dmain"  where="category_rootid=1&&network=2&&cover_id!=0" limit="5">
+          <li><i>{$key+1}</i><span><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="title">{$article.title}</a><b>{:getDownTag($article['id'])}</b><u class="demo2"><em></em>
+            <input class="knob" value="{:get_score($article['id'],true)}">
+            </u><s>{$article.abet}人赞</s></span></li>
+        </Think:article>
+      </ul>
+    </div>
+    <div class="yxflph"> <b class="phul-nav"><h2 class="index_c_tit">单机排行</h2></b> <b class="nav"><i class="pm">排名</i><i class="yx">游戏</i><i class="df">得分</i><i class="hz">获赞</i></b>
+      <ul class="phul">
+        <Think:article basename="Down" name="dmain"  where="category_rootid=1&&network=1&&cover_id!=0"  limit="5">
+          <li><i>{$key+1}</i><span><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="title">{$article.title}</a><b>{:getDownTag($article['id'])}</b><u class="demo2"><em></em>
+            <input class="knob" value="{:get_score($article['id'],true)}">
+            </u><s>{$article.abet}人赞</s></span></li>
+        </Think:article>
+      </ul>
+    </div>
+    <div class="yxflph" id="yxph-right"> <b class="phul-nav"><h2 class="index_c_tit">评分排行</h2></b> <b class="nav"><i class="pm">排名</i><i class="yx">游戏</i><i class="df">得分</i><i class="hz">获赞</i></b>
+      <ul class="phul">
+        <Think:article basename="Down" name="dmain" limit="5" order="comment"  where="category_rootid=1&&cover_id!=0" >
+          <li><i>{$key+1}</i><span><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="title">{$article.title}</a><b>{:getDownTag($article['id'])}</b><u class="demo2"><em></em>
+            <input class="knob" value="{:get_score($article['id'],true)}">
+            </u><s>{$article.abet}人赞</s></span></li>
+        </Think:article>
+      </ul>
+    </div>
+  </div>
+  <!-----媒体库------>
+  <div id="mtk">
+         <div class="index_tit index_two"><h2>媒体库</h2><i><a href="{:getWidgetPath('10')}" target="_blank">更多+</a></i></div>
+         
+    <ul>
+      <Think:article basename="Document" name="article" limit="4" where="video=1" order="create_time desc" >
+        <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank"><s></s><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank" class="tit">{$article.title}</a></li>
+      </Think:article>
+    </ul>
+  </div>
+  <!-----图片库------>
+  <div class="mntp">
+          <div class="index_tit index_five"><h2>图片库</h2><i><a href="/pic/" target="_blank">更多+</a></i></div>
+          
+    <Think:article basename="Down" name="dmain" cate="4" limit="5"  where="cover_id!=0" order="create_time desc">
+      <p class="tpbz01"><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($article['cover_id'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title}<s></s></a>
+      <p> 
+    </Think:article>
+  </div>
+</div>
+<!---侧边导航---->
+<div id="right-nav">
+ <i id="ojdgz" class="o">焦点关注</i>
+  <i id="obgwj" class="one cur">报告玩家</i> 
+  <i id="oyxpc" class="three">游戏评测</i> 
+  <i id="oyxk" class="four">游戏库</i> 
+  <i id="omtk" class="two">媒体库</i> 
+  <i id="ofhdb"></i> 
+  </div>
+<!---侧边导航---->
+</block>

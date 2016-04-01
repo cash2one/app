@@ -1,0 +1,14 @@
+<extend name="Home@qbaobeiMobile/Base/common" />
+<block name="body">
+    {~W('Home/qbaobeiMobile/getCategoryInfo')}
+    <section class="news">
+        <div class="index-news" id="hot-list">
+            <div class="title"><h3>热门推荐</h3></div>
+            <ul class="index-ul">
+                <volist name="lists" id="list">
+                    <li><div class="n-info"><a href="{:staticUrlMobile('detail',$list['id'],'Document')}">{$list.title}</a><span><a target="_blank" href="{:staticUrlMobile('list',$list['category_id'],'Document')}">[{$list.cate_title}]</a></span></div><a href="{:staticUrlMobile('detail',$list['id'],'Document')}" class="pic"><img src="{$list.smallimg|get_cover='path'}" alt="{$list.title}"></a></li>
+                </volist> </ul>
+            <div class="page">{$page}</div>
+        </div>
+    </section>
+</block>

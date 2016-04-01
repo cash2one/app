@@ -1,0 +1,103 @@
+
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css">
+</block>
+<block name="title">{:getCateName($info['id'],'down')}</block>
+<block name="body">
+
+    <input type="hidden"  id="hitid"   name="id"  value="{$info.id}">
+    <input type="hidden"  id="hituid"  name="uid"  value="{$info.uid}">
+    <input type="hidden"  id="hittype"  name="type"  value="{:MODULE_NAME}">
+    <section class="down-detail-mid1 dis-bot">
+        <div class="mid1-top">
+            <a href="{:str_replace('index.html','',staticUrlMobile('detail',$info['id'],'Down'))}" title="{$info.title}" class="pic"><img src="{:get_cover($info['smallimg'],'path')}" alt="{$info.title}"></a>
+            <div class="text">
+                <a href="{:str_replace('index.html','',staticUrlMobile('detail',$info['id'],'Down'))}" title="{$info.title}">{$info.title}</a>
+                <p>类型：{$info.cate}
+                </p>
+                <p>{:format_size($info['size'])}</p>
+            </div>
+
+            <div class="like"><em>{$info.view}</em>人喜欢</div>
+        </div>
+        <div class="mid1-bot">
+            <a href="/gonglue/{$info.id}.html">
+                <span><em class="ico"></em>攻略</span>
+            </a>
+            <a href="/zixun/{$info.id}.html">
+                <span><em class="ico"></em>资讯</span>
+            </a>
+            <a href="/libao/d_{$info.id}.html">
+                <span><em class="ico"></em>礼包</span>
+            </a>
+        </div>
+
+        <if condition="$info[down] neq	 '' ">
+            <div class="down-wrap">
+                <volist name="info[downAll]" id="v">
+                    <a href="{$v.url}">{$v.title}</a>
+
+                </volist>
+            </div>
+
+        </if>
+    </section>
+
+    {:W('jf96umobile/downpack',array('id'=>$info['id']))}
+
+    <section class="down-detail-mid4 dis-bot">
+
+
+            <div class="mid-title"><h2>游戏标签</h2></div>
+            <div class="mid4-list">
+
+                <tag>
+                    <a href="/tag/{$tag.name}">{$tag.title}</a>
+
+                </tag>
+            </div>
+
+    </section>
+    <section class="down-detail-mid4 dis-bot">
+        <div class="mid-title"><h2>游戏介绍</h2></div>
+        <div class="swiper-container1">
+            <div class="swiper-wrapper">
+
+                <foreach name="info['previewimg']" item="vo" >
+
+                    <div class="swiper-slide"><img src="{:get_cover($vo,'path')}"></div>
+                </foreach>
+            </div>
+        </div>
+        <div class="game-intro">
+            <div id="details">
+                {$info.content}
+            </div>
+            <p class="mid-more bottom-more"><a href="javascript:;"><span>点击查看更多</span><em class="arr"></em></a></p>
+        </div>
+        <!--猜你喜欢-->
+        {:W('jf96umobile/downtag',array('aid'=>$info[id]))}
+
+        <!--相同厂商-->
+    {:W('jf96umobile/downcs',array($info['id']))}
+
+
+    <!--相关攻略-->
+    {:W('jf96umobile/downgl',array('id'=>$info[id]))}
+
+    <!--评论-->
+    <section class="comment">
+            <div class="comment-tit"></div>
+            <form action="" method="" name="" id="pl" data-id="{$info['id']}" data-model="down">
+                <input name="author" id="tj-user" type="hidden" value="{$info['uid']}">
+                <textarea  class="commentForm"  ></textarea>
+                <p class="bot"><input type="button" class="comment_submit" value="发表评论" id="btn"></p>
+            </form>
+            <ul class="commentInfo" data-id="{$info['id']}" data-model="down">
+            </ul>
+    </section>
+</block>
+<block name="script">
+    <script src="__PUBLIC__/Home/jf96umobile/js/down.cnzz.js"></script>
+</block>

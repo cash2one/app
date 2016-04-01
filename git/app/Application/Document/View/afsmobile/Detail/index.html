@@ -1,0 +1,44 @@
+<extend name="Home@afsmobile/Base/commonNew"/>
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/afsmobile/css/news.css"/></block>
+<block name="body">
+   <!--game_rec-->
+   <script>a()</script>
+   <section class="news_xq">
+   <!--详情部分-->
+   <div class="wzxq">
+       <div class="title">
+           <h1>{$info['title']}</h1>
+           <p>作者：{$info['author']} 时间：{$info['create_time']|time_format="Y-m-d H:i:s"} </p>
+       </div>
+           {~W('Down/afsmobile/relateDown',array($info['id']))}
+        <script>b()</script>
+        <div class="jc-main">
+           {~W('Home/P7230/contentProcess',array($info['content']))} 
+        </div>
+   </div>
+    <script>c()</script>
+   <!--猜你喜欢-->
+     {~W('Document/afsmobile/sameStyle',array($info['id']))} 
+    <script>d()</script>
+     {~W('Document/afsmobile/relateArticle',array($info['id']))}
+  <div class="sm-article">
+  
+  </div>
+       <!--pinglun-->
+        <script>e()</script>
+       <div class="gameQtbb" id="smData" data-model="Document">
+         <input name="author" id="tj-user" type="hidden" value="{$info['uid']}" />
+           <div class="downWrap">
+               <div class="downTit"><p>网友评论</p></div>
+               <div id="SOHUCS"></div>
+<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" 
+	src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=cysbq8tSM&conf=prod_c8a5d4fa2096d62172fa06c823267fd5">
+</script>
+           </div>
+       </div>
+   </section>
+</block>
+<block name="script"> 
+    <script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/common.js"></script> 
+    <script type="text/javascript" src="__PUBLIC__/Down/afsmobile/js/iscrollc.js"></script> 
+</block>

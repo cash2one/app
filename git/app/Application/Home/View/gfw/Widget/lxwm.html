@@ -1,0 +1,92 @@
+<extend name="Home@gfw/Base/commonProduct" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/about.css"/>
+</block>
+
+<block name="body">
+<div class="page-nav"><div class="page-left"><span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">&gt;</span>联系我们</div><span class="sum"></span></div>
+<div id="about" class="gf1000">
+    {:W('Home/gfw/navgywm',array($tm))}
+    <!-----nav-gy-end----->
+    <div class="contact gf-border">
+        <h1 class="title">联系我们</h1>
+        <div class="m20">
+            <p class="linkqq">友情链接请直接加QQ:3199573394,非友情链接勿扰</p>
+            <p class="title-s">联系本站<span></span></p>
+            <form action="#" method="post" id="lxwm" onsubmit="return Lxwm();">
+                <ul class="frm">
+                    <li><span class="frm-text">用户名：</span><input id="userName" name="userName" value="" placeholder="请输入用户名" class="box1"></li>
+                    <li><span class="frm-text">联系方式：</span><input id="contact" placeholder="请输入联系方式" name="contact" value="" class="box1"></li>
+                    <li><span class="frm-text">主题：</span><input id="tm" name="tm" value="" placeholder="请输入主题（必填）" class="box1"></li>
+                    <li class="frm1"><span class="frm-text">留言内容：</span>
+                        <textarea id="content" name="content" placeholder="请输入留言内容（必填）" class="box2"></textarea>
+                    </li>
+                </ul>
+                <p><input type="submit" value="" class="btn-submit1"><input id="reset" type="reset" value="" style="display: none;"></p>
+            </form>
+            <div class="zigray">
+                <p>如果通过上面的表单无法与本站取得联系，请直接发送邮件到下面的邮箱。</p>
+                <p class="mailbox">本站邮箱：wq@952.com</p>
+            </div>
+        </div>
+    </div>
+    <!-----about-content-end----->
+
+</div>
+<!-----about-end----->
+</block>
+<block name="script">
+    <script>
+        //window.DYNAMIC_SERVER_URL
+        function Lxwm(){
+            var lx      = getCookie('lx');
+            if(lx){alert('请勿在一小时内留言多次，谢谢。'); return false;}
+            var userName= $("#userName").val().replace(/(^\s*)|(\s*$)/g,'');
+            var contact = $("#contact").val().replace(/(^\s*)|(\s*$)/g,'');
+            var tm      = isnull($("#tm"),'主题');
+            var content = isnull($("#content"),'留言内容');
+            if( tm && content){
+                $.ajax({
+                    dataType:"jsonp",
+                    jsonp:"callback",
+                    url:  DYNAMIC_SERVER_URL + '/dynamic.php?s=/gfw/lxwm',
+                    data:"userName="+userName +"&&contact="+contact+"&&tm="+tm+"&&content="+content,
+                    success:function(data){
+                        if(data){
+                            alert('留言成功，感谢您的来访！');
+                            setCookie('lx',true);
+                            $("#reset").click();
+                        }else{
+                            alert('对不起，留言失败！');
+                        }
+                        return false;
+                    }
+                });
+            }
+            return false;
+        }
+        function isnull(v,name){
+            if(v.val().replace(/(^\s*)|(\s*$)/g,'')  == ''){
+                alert(name+'必须填写！！');
+                return false;
+            }else{return v.val();}
+        }
+
+        function setCookie(name,value)
+        {
+            var exp = new Date();
+            exp.setTime(exp.getTime() + 3600000);
+            document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+        }
+
+        function getCookie(name)
+        {
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if(arr=document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        }
+    </script>
+</block>

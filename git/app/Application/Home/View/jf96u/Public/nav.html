@@ -1,0 +1,15 @@
+<div class="nav">
+    <div class="main1200">
+        <ul class="nav-ul">
+            <li <if condition="$class eq 'index'">class="active"</if> ><a href="{$Think.config.STATIC_URL}">首页</a></li>
+            <li <if condition="$cid eq 9999">class="active"</if> ><a href="{$Think.config.STATIC_URL}/yxksx/1_1_all_all_all_all_all.html">手游库</a></li>
+            <li <if condition="$cid eq 72">class="active"</if>><a href="{:C('STATIC_URL')}{:getWidgetPath(72)}">新手游</a></li>
+            <li <if condition="$cid eq 75">class="active"</if>><a href="{:C('STATIC_URL')}/top/">排行榜</a></li>
+            <li  <if condition="$class eq 'package'">class="active"</if>><a href="{:staticUrl('index','', 'Package')}">礼包</a></li>
+            <li  <if condition="$cid eq 1586">class="active"</if>><a href="{:staticUrl('lists',1586, 'Document')}">资讯</a></li>
+            <li <if condition="$key eq f">class="active"</if>><a href="{:getWidgetPath(76)}">专题</a></li>
+            <li <if condition="$cid eq 1831">class="active"</if>><a href="{:staticUrl('lists',1831, 'Down')}">下载</a></li>
+            <li <if condition="$cid eq 1857">class="active"</if>><a href="{:staticUrl('lists',1857, 'Down')}">软件</a></li>
+        </ul>
+    </div>
+</div>

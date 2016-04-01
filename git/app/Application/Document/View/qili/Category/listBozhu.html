@@ -1,0 +1,68 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/detail.css"/></block>
+
+<block name="header">
+	<include file="Home@qili/Public/header" />
+</block>
+
+<block name="body">
+<div class="qnx1200 bowen-list">
+    <div class="location">
+		<a href="/">首页</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+		
+		<a href="/shishang.html">时尚</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+		
+		<a href="/bozhu/">博主</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+
+		<classify model="2" id="$cid">
+			<a href="{$classify.url}">{$classify.title}</a>&nbsp;&nbsp;
+		</classify>
+	</div>
+
+    <div class="bozhu-wrap">
+        <div class="bozhu-banner">
+			<classify model="2" id="$cid">
+				<div class="head"><img src="<pic name="$classify.icon" />"></div>
+				<div class="name">{$classify.title}</div>
+				<div class="line"><span class="left-line"></span>国际时尚博主<span class="right-line"></span></div>
+				<p class="bzjj">{$classify.describe}</p>
+			</classify>
+        </div>
+		
+		<php>
+			$date = array(1=> 'Jan', 2=>'February', 3=>'March', 4=>'April', 5=>'On may', 6=>'June', 7=>'July', 8=>'August', 9=>'Sep', 10=>'October', 11=>'November', 12=>'December');
+		</php>
+
+        <div class="bozhu-news">
+			<ul class="bw-ul">
+				<list order="desc" callback="parseDocumentImg" extend="start">
+					<li>
+						<div class="data"><b>{$list.create_time|date='m',###}</b><span>{$date[date('m', $list['create_time'])]}</span></div>
+						<div class="news-box">
+							<a href="{$list.url}" target="_blank" class="title">{$list.title}</a>
+							<div class="tags">
+								<div class="left"><span>标签：</span>
+									<volist name="list.classify" id="project">
+										<a href="{$project.url}">{$project.title}</a>　
+									</volist>
+								</div>
+								<span class="vis">{$list.view}</span>
+							</div>
+
+							<div class="bozhu-body">
+								<if condition="!empty($list['image'])">
+									<p><img src="{$list.image}"></p>
+								</if>
+								<p>{$list.description}</p>
+							</div>
+
+							<div class="get_more"><a href="{$list.url}">查看全文>></a></div>
+						</div>
+					</li>
+				</list>
+			</ul>
+			<div class="page-box">{$page}</div>
+        </div> 
+    </div>
+</div>
+</block>

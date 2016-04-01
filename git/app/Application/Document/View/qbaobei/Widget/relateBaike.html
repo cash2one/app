@@ -1,0 +1,13 @@
+<notempty name="lists">
+<div class="detail-xgtj">
+  <div class="fn-title fn-title-l">
+    <h2>相关百科推荐</h2>
+  </div>
+  <ul class="meishi-pic">
+  <volist name="lists" id="vo" offset="0" length="8">
+    <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><span class="info"><i>{$vo['title']}</i><em>{$vo['description']}</em></span></a></li>
+  </volist>
+  </ul>
+</div>
+
+</notempty>

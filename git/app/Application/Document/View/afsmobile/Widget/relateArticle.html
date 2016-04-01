@@ -1,0 +1,11 @@
+ <!--相关文章-->
+   <div class="xgwz gameQtbb">
+       <div class="downWrap">
+           <div class="downTit"><p>相关文章</p></div>
+           <ul>
+              <volist name="result" id="vo" offset="0" length='5'>
+               <li><a href="{:staticUrlMobile('detail', $vo['id'],'Document')}">{$vo['title']}</a> </li>
+              </volist>
+           </ul>
+       </div>
+    </div>

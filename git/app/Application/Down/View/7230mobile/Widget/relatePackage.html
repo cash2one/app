@@ -1,0 +1,15 @@
+<div class="pack_li">
+    <ul>
+        <volist name="data" id="val">
+        <li>
+            <a href="{:staticUrlMobile('detail',$val['id'],'Package')}">
+                <div class="pack_cont">
+                    <span class="pack_tit">{$val['title']}</span>
+                    <span>{:clean_str($val['content'])}</span>
+                </div>
+                <div class="pack_lh"><span>领号</span></div>
+            </a>
+        </li>
+        </volist>
+    </ul>
+</div>

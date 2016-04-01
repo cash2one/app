@@ -1,0 +1,48 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>{:isset($info['id'])?'编辑':'新增'}{$name}</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);">基 础</a></li>
+			
+		</ul>
+		<div class="tab-content">
+			<form action="{:U()}" method="post" class="form-horizontal">
+				<!-- 基础 -->
+				<div id="tab1" class="tab-pane in tab1">
+					<div class="form-item">
+						<label class="item-label">
+							{$name}号码<span class="check-tips">（号码不能为空）</span>
+						</label>
+						<div class="controls">
+							<input type="text" name="number" class="text input-large" value="{$info.number|default=''}">
+						</div>
+					</div>
+
+				</div>
+
+
+				<div class="form-item">
+					<input type="hidden" name="id" value="{$info.id|default=''}">
+					<input type="hidden" name="status" value="1">
+					<button type="submit" id="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+		<present name="info.id">
+		Think.setValue("type", "{$info.type|default=0}");
+		</present>
+		//导航高亮
+		highlight_subnav('{:U('Template/index')}');
+	</script>
+</block>

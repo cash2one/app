@@ -1,0 +1,23 @@
+<extend name="Home@7230mobile/Base/common2"/>
+<block name="style">
+    <link href="__PUBLIC__/Home/7230mobile2/css/k.css" rel="stylesheet" type="text/css">
+</block>
+<block name="body">
+    <div class="page_title"><span><a href="javascript:void(0);" class="back"></a></span><h2>厂商列表</h2></div>
+
+<section>
+    <ul class="k_li">
+        <volist name="lists" id="val">
+        <li>
+            <a href="{:C('MOBILE_STATIC_URL')}/{$val['path']}/">
+                <img src="{:get_cover($val['img'],'path')}">
+                <h3>{$val['name']}</h3>
+            </a>
+        </li>
+        </volist>
+    </ul>
+    <div class="page">
+        {$page}
+    </div>
+</section>
+</block>

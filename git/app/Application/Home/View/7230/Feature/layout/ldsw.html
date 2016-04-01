@@ -1,0 +1,21 @@
+
+<extend name="Base/common"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/ycpd.css"/>
+</block>
+<block name="body">
+<div id="zixun-main">
+    <p class="page-nav">当前位置：<a href="">首页</a>　0度试玩</p>
+    <div id="ldsw">
+        <volist name="lists" id="val">
+        <p class="ycwz"><a href="{$val.url_token}" target="_blank" class="pic"><img src="{:get_cover($val['icon'],'path')}"></a><a href="{$val.url_token}" target="_blank" class="tit">{$val.title}</a>
+        <i class="info">{$val.description}</i><b><s>9998</s>{:date('Y-m-d H:i:s',$val['update_time'])}</b></p>
+        </volist>
+    </div>
+<div style=" clear:both"></div>
+<!----fenye--->
+<div class="page">{$page}</div>
+<!---fenye---->
+    <!----left -END-->
+</div>
+</block>

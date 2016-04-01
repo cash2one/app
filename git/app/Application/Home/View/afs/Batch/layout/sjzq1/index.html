@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Home@afsmobile/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/afsmobile/css/yxzq.css" />
+</head>
+
+<body>
+<div class="dragable" widget="mobileIndex" style=" width: 100%; height: 2px; border: 1px solid #ff0000;">
+</div>
+<header id="inpage_head">
+    <a href="{:C('MOBILE_STATIC_URL')}" class="home"></a>
+    <b>{$game['title']}</b>
+    <em id="head-nav"></em>
+</header>
+<!--弹出菜单-->
+<div id="case-main">
+    <include file="Home@afsmobile/Public/popup" />
+</div>
+<!--zq-->
+<section class="zqsy">
+    <div class="head_pic"><img src="{:get_cover($home['themeimg'],'path')}"></div>
+    <div class="jj">
+        <a href="{:staticUrlMobile('detail',$game['id'],'Down')}" class="pic"><img src="{:get_cover($game['smallimg'],'path')}"></a>
+        <span><a href="{:staticUrlMobile('detail',$game['id'],'Down')}">{$game['title']}</a><b>{$game['category']}|{:showText($game['rank'],'rank',false,'Down')}|{$game['size']}</b></span>
+        <php>if($package){</php>
+        <a href="{:staticUrlMobile('detail',$package[0]['id'],'Package')}" class="lq">领取</a>
+        <php>}</php>
+    </div>
+    <ul class="down">
+        <php>if($game['androidUrl']){</php>
+        <volist name="game['androidDownAll']" id="val">
+        <li><a href="{$val['url']}">{$val['title']}</a></li>
+        </volist>
+        <php>} if($game['IOSUrl']){</php>
+        <volist name="game['IOSDownAll']" id="val">
+        <li><a href="{$val['url']}">{$val['title']}</a></li>
+        </volist>
+        <php>}</php>
+    </ul>
+    <div class="zqjj">
+        <b class="zqjj_jj">简介：</b>
+        <div class="zqjj_m">
+            {$batch['description']?$batch['description']:$game['description']}
+        </div>
+        <a class="smore">展开内容</a>
+    </div>
+
+    <php>if($server){</php>
+    <div class="game_flow">
+        <volist name="server" id="val">
+        <div class="item">
+            <span class="pull-arrow-label">{$val['server']}</span>
+            <span class="state"><i></i><s></s></span>
+            <span class="date">{:date('m-d H:i',$val['start_time'])}</span>
+        </div>
+        </volist>
+        <div class="more">
+            <span class="pull-arrow-label"><a href="{$more['server']}" class="inner">更多</a></span>
+            <span class="state"><i></i><s></s></span>
+            <span class="date"></span>
+        </div>
+    </div>
+    <php>}</php>
+    <!--libao-->
+    <php>if($package){</php>
+    <div class="wrap lizx">
+        <p class="title"><span>礼包中心</span></p>
+        <ul class="new_list">
+            <volist name="package" id="val" offset="0" length="2">
+            <li>
+                <div class="main">
+                    <a href="{:staticUrlMobile('detail',$val['id'],'Package')}">{$val['title']}</a>
+                    <p>{$val['content']}</p>
+                </div>
+                <a href="{:staticUrlMobile('detail',$val['id'],'Package')}" class="lq">领取</a>
+            </li>
+            </volist>
+        </ul>
+        <a href="{:C('MOBILE_STATIC_URL')}/li/" class="h-more">更多礼包<span>→</span></a>
+    </div>
+    <php>}</php>
+    <!--news-->
+    <php>if($news){</php>
+    <div class="wrap xwhd">
+        <p class="title"><span>新闻活动</span></p>
+        <ul class="new_list">
+            <volist name="news" id="val" offset="0" length="4">
+            <li>
+                <em>新闻</em>
+                <a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a>
+            </li>
+            </volist>
+        </ul>
+        <a href="{$more['news']}" class="h-more">更多新闻活动<span>→</span></a>
+    </div>
+    <php>}</php>
+    <!--news-->
+    <div class="wrap xwhd yxgl">
+        <p class="title"><span>游戏攻略</span></p>
+        <ul class="new_list">
+            <volist name="guide" id="val" offset="0" length="4">
+            <li>
+                <em>攻略</em>
+                <a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a>
+            </li>
+            </volist>
+        </ul>
+        <ul class="tips">
+            <volist name="tags" id ="val">
+            <li><a href="{$val['url']}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+        <a href="{$more['guide']}" class="h-more">更多游戏攻略<span>→</span></a>
+    </div>
+
+
+    <!--游戏图鉴-->
+    <php>if($handBook){</php>
+    <div class="wrap yxzl">
+        <p class="title"><span>游戏图鉴</span></p>
+        <volist name="handBook" id="tu">
+        <div class="xfl zlxfl">
+            <div class="xfl_tit">
+                <b>{$tu['title']}</b>
+                <php>if($tu['child']){</php>
+                <ul class="news-nav">
+                    <volist name="tu['child']" id="jian" key="j" offset="0" length="2">
+                        <php>$cur=''; if($j == 1){ $cur='class="cur"'; }</php>
+                    <li {$cur}>{$jian['title']}</li>
+                    </volist>
+                </ul>
+                <php>}</php>
+                <a href="{:C('MOBILE_STATIC_URL')}/handbook/{$product['name']}/{$tu['id']}.html" class="handMore">更多></a>
+            </div>
+
+
+            <php>if($tu['child']){</php>
+            <volist name="tu['child']" id="jian" key="jk" offset="0" length="2">
+                <php>$curr=''; if($jk == 1){ $curr='current'; }</php>
+            <ul class="zl-list {$curr}">
+                <volist name="jian['data']" id="val" offset="0" length="8">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}"><img src="{:get_cover($val['smallimg']?$val['smallimg']:$val['cover_id'],'path')}"><em>{$val['sub_title']}</em></a></li>
+                </volist>
+            </ul>
+            </volist>
+            <php>}else{</php>
+            <ul class="zl-list current">
+                <volist name="tu['data']" id="rel" offset="0" length="8">
+                <li><a href="{:staticUrl('detail',$rel['id'],'Document')}"><img src="{:get_cover($rel['smallimg']?$rel['smallimg']:$rel['cover_id'],'path')}"><em>{$rel['sub_title']}</em></a></li>
+                </volist>
+            </ul>
+            <php>}</php>
+        </div>
+        </volist>
+    </div>
+    <php>}</php>
+    <!--news-->
+    <php>if($ask){</php>
+    <div class="wrap xwhd">
+        <p class="title"><span>常见问题</span></p>
+        <ul class="new_list">
+            <volist name="ask" id="val" offset="0" length="4">
+            <li><a href="{:staticUrlMobile('detail',$val['id'],'Document')}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+        <a href="{$more['ask']}" class="h-more">更多常见问题<span>→</span></a>
+    </div>
+    <php>}</php>
+    <!--pinglun-->
+    <!--评论-->
+    <div class="wrap" id="pingl">
+    <p class="title"><span>评论列表</span></p>
+    <div id="pinglun" name="pinglun">
+        <form action="" method="" name="" id="pl"  data-id="{$batch['id']}" data-model="batch">
+            <p><input type="text"  placeholder="游客" id="user" value="游客" class="commentUserForm"></p>
+            <p><textarea class="con" ></textarea></p>
+            <p><input type="button" value="发表评论" class="btn" id="btn"></p>
+        </form>
+        <p class="newset_list">最新评论</p>
+        <div class="m-comment-lists " data-id="{$batch['id']}" data-model="batch">
+            <p class="no-comment" style="text-align:center;display:block;padding:10px 0;">暂无评论</p>
+        </div>
+    </div>
+    </div>
+    <!--评论结束-->
+
+    <!--游戏推荐-->
+    <div class="wrap cnxh">
+        <p class="title"><span>猜你喜欢</span></p>
+        <ul class="cnxh">
+            <volist name="hotBatch" id="val" offset="0" length="4">
+            <li><a href="{$val['url_token']}"><img src="{:get_cover($val['icon'],'path')}"><em>{$val['title']}</em></a></li>
+            </volist>
+        </ul>
+    </div>
+</section>
+<!--footer-->
+<include file="Home@afsmobile/Public/zq/foot"/>
+<script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/common.js"></script>
+</body>
+</html>

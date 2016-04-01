@@ -1,0 +1,25 @@
+<extend name="Package@9ht/Base/common"/>
+<block name="style">
+    <link href="__PUBLIC__/Package/9ht/css/qhfy.css" rel="stylesheet" type="text/css">
+</block>
+<block name="body">
+    <dl class="con">
+        <dd class="left">
+            <p id="picshow">
+                <include file="Package@9ht/Widget/bigPic"/>
+            </p>
+            <p class="list">
+                <b>当前位置：<a href="http://libao.9ht.com/">首页</a> →　{$info.title}</b>
+                <volist  name="lists" id="article">
+                    <span><a href="{:staticUrl('detail', $article['id'])}"><img src="{:get_cover($article['cover_id'],'path')}"><font></font><em> {$article.title}</em></a><u>有效时间： {$article.start_time|time_format="Y-m-d"} 至 {$article.end_time|time_format="Y-m-d"}</u><br/>已领取：<strong class="card_all" card-id="{$article.id}"></strong> / 剩余：<strong class="card_surplus" card-id="{$article.id}"></strong>&nbsp;&nbsp; 设备：{:showText($article['conditions'],'conditions',true)} <br/>
+                    平台：{$article.platform} 　&nbsp;&nbsp;   状态：{$article.status|showFormat="status"}<s><a href="{:staticUrl('detail', $article['id'])}">立即领取</a></s></span>
+                   
+                </volist>
+        </p>
+        <div class="pag">{$page}</div>
+    </dd>
+    <dt class="right"> 
+        <include file="Package@9ht/Public/sideR"/>
+    </dt>
+</dl>
+</block>

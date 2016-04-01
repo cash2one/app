@@ -1,0 +1,46 @@
+<extend name="Home@gfwmobile/Base/commonIndex" />
+<block name="body">
+  <include file="Home@gfwmobile/Public/search" />
+    <nav>
+        <div class="nav-left"> <a href="{:C('MOBILE_STATIC_URL')}/baike/" class="hywz top p1">
+            <p>首页</p>
+            </a>
+            <div class="hywz"> <a href="{:staticUrlMobile('lists',98, 'Document')}" class="ylxx p1">
+                <p>行业</p>
+                </a> <a href="{:staticUrlMobile('lists',96, 'Document')}" class="shfw p2">
+                <p><span></span>娱乐</p>
+                </a> </div>
+        </div>
+        <div class="nav-main"> <a href="{:staticUrlMobile('lists',90, 'Document')}" class="whjy p2">
+            <p><span></span>文化</p>
+            </a> <a href="{:staticUrlMobile('lists',87, 'Document')}" class="zthj p2">
+            <p><span></span>生活</p>
+            </a> </div>
+        <a href="{:staticUrlMobile('lists',94, 'Document')}" class="nav-right">
+        <p><span></span>IT</p>
+        </a> </nav>
+    <section class="news">
+        <div class="art">
+            <div class="title">
+                <h2>热门百科</h2></div>
+            <ul class="art-list company">
+               <Think:article basename="Document" name="article"  limit="5" where="category_rootid=80 AND position&1" order="update_time desc">
+                  <li><a href="{:staticUrlMobile('detail', $article['id'],'Document')}">{$article.title}</a><span></span></li>
+                </Think:article>
+            </ul>
+        </div>
+        <div class="art">
+            <div class="title">
+                <h2>{$categoryName}</h2>
+               </div>
+            <ul class="art-list baike">
+                <volist  name="lists" id="article">
+                    <li><span>{$article.create_time|time_format="m-d"}</span><a href="{:staticUrlMobile('detail', $article['id'],'Document')}">{$article.title}</a></li>
+                </volist>
+            </ul>
+            <div class="page">{$page}</div>
+        </div>
+         {~W('Document/Gfwmobile/categoryPage',array('row'=>$info['list_row'],'count'=>$count,'cate'=>$cid))}
+        
+    </section>
+</block>

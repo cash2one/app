@@ -1,0 +1,35 @@
+<extend name="Home@gfw/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/validate.css"/>
+</block>
+<block name="body">
+<!--注册-->
+<div class="main" id="pass-wraper">
+    <div class="pass-login">已有官方网账户了？<a href="{:U('Index/login')}" target="_blank">立即登录</a></div>
+    <div class="pass-inwraper">
+        <div class="pass-inwraper-title">找回密码<span></span></div>
+        <div class="pass-inwraper-main">
+            <ul class="pass-ul-title">
+                <li class="yes"><span>1</span>填写用户名</li>
+                <li><span>2</span>验证身份</li>
+                <li><span>3</span>重置密码</li>
+                <li><span>4</span>成功找回</li>
+            </ul>
+            <div class="pass-inwraper-input">
+                <form class="pass-form" id="findPass1" method="post" action="{:U('Api/step1')}">
+                    <div class="info_list text"><em>用户名：</em><input type="text" id="username" name="username" placeholder="已通过验证的邮箱" class="username"></div>
+                    <div class="info_list text yzm-img"><em>验证码：</em><input type="text" name="captcha" id="captcha" placeholder="不区分大小写" class="yzm"><span><img src="{:U('Api/captcha')}" onclick="this.src='{:U('Api/captcha')}&r='+Math.round(Math.random()*1000000)" alt="验证码"></span></div>
+                    <div class="info_list btn"><input type="submit" class="submit" value="下一步"></div>
+                </form>
+                <div class="tip">如果您忘了用户名，将无法找回您的账户信息，您还可以<a href="{:U('Index/register')}" target="_blank">重新注册</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+</block>

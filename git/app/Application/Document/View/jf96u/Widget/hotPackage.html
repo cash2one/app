@@ -1,0 +1,12 @@
+<div class="cata-video dis-bot wrap">
+  <div class="mid-tit">
+    <h3>热门礼包</h3>
+    <a href="/fahao/" target="_blank" class="more">更多</a></div>
+  <ul class="gift-zx">
+    <volist name="lists" id="vo">
+      <li><a href="{:staticUrl('detail', $vo['id'],'Package')}" target="_blank" title="{$vo['title']}" class="pic"><img src="{:get_cover($vo['cover_id'],'path')}" alt="{$vo['title']}"></a>
+        <div class="text"> <a href="{:staticUrl('detail', $vo['id'],'Package')}" target="_blank" title="{$vo['title']}">{$vo['title']}</a><span>新年大礼包</span><span class="sylb">剩余：0%</span> </div>
+        <a href="{:staticUrl('detail', $vo['id'],'Package')}" target="_blank" class="lq">领取</a> <strong style="display:none;" class="card_surplus" card-id="{$vo.id}"></strong><strong style="display:none;" class="card_all" card-id="{$vo.id}"></strong></li>
+    </volist>
+  </ul>
+</div>

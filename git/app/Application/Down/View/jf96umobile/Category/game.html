@@ -1,0 +1,169 @@
+
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css">
+</block>
+<block name="title">{$info.title}</block>
+<block name="bar">
+    <div class="list-nav">
+        <span>分类</span>
+        <span class="active">推荐</span>
+        <span>最新</span>
+    </div>
+
+</block>
+
+<block name="body">
+    <section class="down-list">
+        {~W('Home/Jf96umobile/gameCate')}
+        <div class="down-tab current">
+            <ul class="down-game-ul down-game-ulb">
+                <php>$key=0;</php>
+                <document model="13" typeid='$info[id]'  extend="start"   flag="position,4" order="edit"  key="k">
+                     <li><a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" title="{$document.title}" class="pic">
+                        <img src="{:get_cover($document['smallimg'],'path')}" alt="{$document.title}"></a>
+                        <div class="text">
+                            <a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" title="{$document.title}">{$document.title}</a>
+                            <p>{:format_size($document['size'])}<if condition="$document[size] EQ 0 "> 未知 </if>
+                                /{:get_game_typedown($document['category_id'])}</p>
+                        </div>
+                        <a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" class="down">下载</a>
+                    </li>
+                </document>
+                <php>$category_id=M("down_category")->where("pid=$info[id]")->getField('id',true);
+                    foreach($category_id as $k=>$v){
+                    $caid.=""."$v".",";
+                    }
+
+                    $aid = substr($caid, 0, -1);
+
+                    $aid=empty($caid)? NULL :$aid;
+
+
+                </php>
+                <if condition="$key eq 0 ">
+
+                    <document model="13" typeid="$aid" extend="start"  limit="0,10"   flag="position,4" key="k">
+
+                        <li><a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" title="{$document.title}" class="pic">
+                            <img src="{:get_cover($document['smallimg'],'path')}" alt="{$document.title}"></a>
+                            <div class="text">
+                                <a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" title="{$document.title}">{$document.title}</a>
+                                <p>{:format_size($document['size'])}<if condition="$document[size] EQ 0 "> 未知 </if>
+                                    /{:get_game_typedown($document['category_id'])}</p>
+                            </div>
+                            <a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" class="down">下载</a>
+                        </li>
+
+                    </document>
+                </if>
+
+            </ul>
+            <p class="mid-more" id="more"  onclick="m2more()"><span>点击查看更多</span><em class="arr"></em></p>
+        </div>
+        <div class="down-tab">
+            <ul class="down-game-ul down-game-ula">
+                <php>$key=0;</php>
+
+                <document model="13" typeid='$info[id]'  extend="start" limit="0,10"  order="create"  key="k">
+
+                    <li><a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" title="{$document.title}" class="pic">
+                        <img src="{:get_cover($document['smallimg'],'path')}" alt="{$document.title}"></a>
+                        <div class="text">
+                            <a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" title="{$document.title}">{$document.title}</a>
+                            <p>{:format_size($document['size'])}<if condition="$document[size] EQ 0 "> 未知 </if>/{:get_game_typedown($document['category_id'])}</p>
+                        </div>
+                        <a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" class="down">下载</a>
+                    </li>
+
+
+                </document>
+                <if condition="$key eq 0 ">
+
+                    <document model="13" typeid="$aid" extend="start"  limit="0,10" order="create_time desc"   key="k">
+
+                        <li><a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" title="{$document.title}" class="pic">
+                            <img src="{:get_cover($document['smallimg'],'path')}" alt="{$document.title}"></a>
+                            <div class="text">
+                                <a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" title="{$document.title}">{$document.title}</a>
+                                <p>{:format_size($document['size'])}<if condition="$document[size] EQ 0 "> 未知 </if>
+                                    /{:get_game_typedown($document['category_id'])}</p>
+                            </div>
+                            <a href="{:str_replace('index.html','',staticUrlMobile('detail', $document['id'],'Down'))}" class="down">下载</a>
+                        </li>
+
+                    </document>
+                </if>
+
+            </ul>
+            <p class="mid-more"  id="morea" onclick="m2morea()"  ><span>点击查看更多</span><em class="arr"></em></p>
+        </div>
+<php>  if(empty($aid)){
+    $aid=$info['id'];
+    }</php>
+        <script>
+            var page=0;
+
+            function m2more(){
+                page=page+10;
+
+                $.ajax({
+                    dataType:"jsonp",
+                    jsonp:"callback",
+                    url: '/index.php?s=/Down/Widget/index/theme/Jf96umobile/type/1/method/downajax/category_id/'+'{$aid}'+'/page/' +page,
+                    success:function(data){
+                        var html = '';
+                        if(data){
+                            for(i in data){
+                                html+= "<li><a href=\""+data[i].url+"\" title=\""+data[i].title+"\" class=\"pic\">"+
+                                        "<img src=\""+data[i].smallimg+"\" alt=\""+data[i].title+"\"></a> <div class=\"text\">" +
+                                        "<a href='"+data[i].url+"' title=' "+data[i].title+"' >"+data[i].title+'</a><p>'+
+                                        data[i].size+'/'+data[i].game_type+'</p></div> <a href="'+data[i].url+'"'+"class='down'" + ">下载</a></li>"
+
+                            }
+                            $(".down-game-ulb").append(html);
+                        }else{
+                            $('#more').html("没有更多数据了");
+                            $('#more').removeAttr('onclick');
+                        }
+                    }
+                });
+            }
+        </script>
+
+        <script>
+            var pagea=0;
+
+            function m2morea(){
+                pagea=pagea+10;
+
+                $.ajax({
+                    dataType:"jsonp",
+                    jsonp:"callback",
+                    url: '/index.php?s=/Down/Widget/index/theme/Jf96umobile/type/1/order/create/method/downajax/category_id/'+'{$aid}'+'/page/' +pagea,
+                    success:function(data){
+                        var html = '';
+                        if(data){
+                            for(i in data){
+                                html+= "<li><a href=\""+data[i].url+"\" title=\""+data[i].title+"\" class=\"pic\">"+
+                                        "<img src=\""+data[i].smallimg+"\" alt=\""+data[i].title+"\"></a> <div class=\"text\">" +
+                                        "<a href='"+data[i].url+"' title=' "+data[i].title+"' >"+data[i].title+'</a><p>'+
+                                        data[i].size+'/'+data[i].game_type+'</p></div> <a href="'+data[i].url+'"'+"class='down'" + ">下载</a></li>"
+
+                            }
+                            $(".down-game-ula").append(html);
+                        }else{
+                            $('#morea').html("没有更多数据了");
+                            $('#morea').removeAttr('onclick');
+                        }
+                    }
+                });
+            }
+        </script>
+
+
+    </section>
+</block>
+<block name="script">
+    <script src="__PUBLIC__/Home/jf96umobile/js/down.cnzz.js"></script>
+</block>

@@ -1,0 +1,170 @@
+<extend name="Home@jf96umobile/Base/commonIndex" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/main.css"/>
+</block>
+<block name="body">
+<div class="picauto-box">
+    <div class="swiper-container picauto">
+      <div class="swiper-wrapper">
+         {~W('Home/Jf96umobile/indexSlider',array('1'))}
+          <document model="21"  flag="position,1" limit="0,4" order="update_time desc" key="k">
+                        <div class="swiper-slide"><a href="{$document.url}"><img src="{:get_cover($document['cover_id'],'path')}"></a></div>
+          </document>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+</div>
+<section class="mid0">
+    <ul class="cata-nav">
+        <li><a href="/fahao/"><span class="bg"></span>礼包</a></li>
+        <li><a href="/zq/"><span class="bg"></span>专区</a></li>
+        <li><a href="/zt/"><span class="bg"></span>专题</a></li>
+        <li><a href="/cs/"><span class="bg"></span>厂商</a></li>
+    </ul>
+</section>
+<!--mid1-->
+<section class="mid1 dis-bot fresh-tab">
+    <div class="mid-title"><h2>推荐游戏</h2><span class="rfresh">换一批</span></div>
+    <div class="fresh-box">
+        <ul class="app-list">
+              <Think:article basename="Down" name="dmain" where="position & 2" limit="16" order="update_time DESC">
+               <li><a href="{:str_replace('index.html','',staticUrlMobile('detail', $article['id'],'Down'))}" title="{$article['title']}" class="title"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article['title']}"><span>{$article['title']}</span></a><a href="{:str_replace('index.html','',staticUrlMobile('detail', $article['id'],'Down'))}" class="down">下载</a></li>
+         </Think:article>
+        </ul>
+    </div>
+    <p class="mid-more"><a href="/sy/ol/"><span>点击查看更多</span><em class="arr"></em></a></p>
+</section>
+<!--mid2-->
+    <classify model="21" typeid="1831" order="sort"  key="k" index="android"></classify>
+<section class="mid2 dis-bot mid-tab">
+    <div class="mid-title"><h2>安卓游戏</h2><span class="tab tab-hd"><em class="active">热门</em><em>最新</em></span></div>
+    <ul class="app2-list tab-bd current">
+     <document model="21" typeid="$android" flag="position,2"  order="update_time desc" limit="0,6" key="k" extend="start">
+        <li><a href="{$document.url}" title="{$document['title']}"><img src="{:get_cover($document['smallimg'],'path')}" alt="{$document['title']}">
+            <div class="text">
+                <p class="title">{$document.title}</p>
+                <p class="cata">{:empty($document['size'])?"未知":strtoupper($document['size'])}/{$document.typename}</p>
+                <p class="down">下载</p>
+            </div></a>
+        </li>
+       </document>
+    </ul>
+    <ul class="app2-list tab-bd">
+          <document model="21" typeid="$android"  limit="0,6" order="create_time desc" key="k" extend="start">
+        <li><a href="{$document.url}" title="{$document['title']}"><img src="{:get_cover($document['smallimg'],'path')}" alt="{$document['title']}">
+            <div class="text">
+                <p class="title">{$document.title}</p>
+                <p class="cata">{:empty($document['size'])?"未知":strtoupper($document['size'])}/{$document.typename}</p>
+                <p class="down">下载</p>
+            </div></a>
+        </li>
+       </document>
+    </ul>
+    <p class="mid-more"><a href="{:staticUrlMobile('lists','1831','Down')}"><span>点击查看更多</span><em class="arr"></em></a></p>
+</section>
+<!--mid2-->
+<section class="mid2 dis-bot mid-tab">
+ <classify model="21" typeid="1830" order="sort"  key="k" index="ios"></classify>
+    <div class="mid-title"><h2>苹果游戏</h2><span class="tab tab-hd"><em class="active">热门</em><em>最新</em></span></div>
+    <ul class="app2-list tab-bd current">
+           <document model="21" typeid="$ios" flag="position,2"  order="update_time desc" limit="0,6" key="k" extend="start">
+        <li><a href="{$document.url}" title="{$document['title']}"><img src="{:get_cover($document['smallimg'],'path')}" alt="{$document['title']}">
+            <div class="text">
+                <p class="title">{$document.title}</p>
+                <p class="cata">{:empty($document['size'])?"未知":strtoupper($document['size'])}/{$document.typename}</p>
+                <p class="down">下载</p>
+            </div></a>
+        </li>
+       </document>
+    </ul>
+    <ul class="app2-list tab-bd">
+           <document model="21" typeid="$ios"  limit="0,6" order="create_time desc" key="k" extend="start">
+        <li><a href="{$document.url}" title="{$document['title']}"><img src="{:get_cover($document['smallimg'],'path')}" alt="{$document['title']}">
+            <div class="text">
+                <p class="title">{$document.title}</p>
+                <p class="cata">{:empty($document['size'])?"未知":strtoupper($document['size'])}/{$document.typename}</p>
+                <p class="down">下载</p>
+            </div></a>
+        </li>
+       </document>
+    </ul>
+    <p class="mid-more"><a href="{:staticUrlMobile('lists','1830','Down')}"><span>点击查看更多</span><em class="arr"></em></a></p>
+</section>
+<!--mid3-->
+<section class="mid2 dis-bot mid-tab">
+ <classify model="21" typeid="1858,1858" order="sort"  key="k" index="soft"></classify>
+    <div class="mid-title"><h2>手机软件</h2><span class="tab tab-hd"><em class="active">热门</em><em>最新</em></span></div>
+    <ul class="app2-list tab-bd current">
+           <document model="21" typeid="$soft" flag="position,2"  order="update_time desc" limit="0,6" key="k" extend="start">
+        <li><a href="{$document.url}" title="{$document['title']}"><img src="{:get_cover($document['smallimg'],'path')}" alt="{$document['title']}">
+            <div class="text">
+                <p class="title">{$document.title}</p>
+                <p class="cata">{:empty($document['size'])?"未知":strtoupper($document['size'])}/{$document.typename}</p>
+                <p class="down">下载</p>
+            </div></a>
+        </li>
+       </document>
+    </ul>
+    <ul class="app2-list tab-bd">
+           <document model="21" typeid="$soft"  limit="0,6" order="create_time desc" key="k" extend="start">
+        <li><a href="{$document.url}" title="{$document['title']}"><img src="{:get_cover($document['smallimg'],'path')}" alt="{$document['title']}">
+            <div class="text">
+                <p class="title">{$document.title}</p>
+                <p class="cata">{:empty($document['size'])?"未知":strtoupper($document['size'])}/{$document.typename}</p>
+                <p class="down">下载</p>
+            </div></a>
+        </li>
+       </document>
+    </ul>
+    <p class="mid-more"><a href="{:staticUrlMobile('lists','1857','Down')}"><span>点击查看更多</span><em class="arr"></em></a></p>
+</section>
+<!--mid4-->
+<section class="mid3 dis-bot">
+    <div class="mid-title"><h2>手游攻略</h2><a href="{:staticUrlMobile('lists','1588','Document')}"><span>更多</span><em class="arr"></em></a></div>
+    <ul class="news-list">
+        <document model="2" typeid="1588"  limit="0,5" order="create_time desc" key="k">
+          <li><span>[{$document.typename}]</span><a href="{$document.url}" title="{$document.title}">{$document.title}</a></li>
+       </document>
+    </ul>
+</section>
+<!--mid4-->
+<section class="mid4 dis-bot picauto-box mid-tab">
+    <div class="mid-title"><h2>精品专题</h2><span class="tab tab-hd"><em class="active">热门</em><em>最新</em></span></div>
+    <ul class="pic-list current tab-bd">
+        <IndexTag:feature name="f" limit="4" where="Interface=1 AND position & 1">
+            <li class="picauto"><a href="{:getCPath($f['id'],'feature')}" title="{$f.title}"><img src="{:get_cover($f['icon'],'path')}" alt="{$f.title}"><span class="tit">{$f.title}</span></a></li>
+        </IndexTag:feature>
+    </ul>
+    <ul class="pic-list tab-bd">
+       <IndexTag:feature name="f" limit="4" where="Interface=1">
+            <li class="picauto"><a href="{:getCPath($f['id'],'feature')}" title="{$f.title}"><img src="{:get_cover($f['icon'],'path')}" alt="{$f.title}"><span class="tit">{$f.title}</span></a></li>
+        </IndexTag:feature>
+    </ul>
+    <p class="mid-more"><a href="/zt/"><span>点击查看更多</span><em class="arr"></em></a></p>
+</section>
+<!--mid5-->
+<section class="mid5 dis-bot">
+    <div class="mid-title"><h2>游戏分类</h2></div>
+    <ul class="cata-list">
+        <li><a href="{:staticUrlMobile('lists','1724','Down')}"><span class="bg"></span>角色扮演</a></li>
+        <li><a href="{:staticUrlMobile('lists','1725','Down')}"><span class="bg"></span>模拟经营</a></li>
+        <li><a href="{:staticUrlMobile('lists','1726','Down')}"><span class="bg"></span>射击枪战</a></li>
+        <li><a href="{:staticUrlMobile('lists','1727','Down')}"><span class="bg"></span>体育运动</a></li>
+        <li><a href="{:staticUrlMobile('lists','1728','Down')}"><span class="bg"></span>赛车竞速</a></li>
+        <li><a href="{:staticUrlMobile('lists','1729','Down')}"><span class="bg"></span>工作闯关</a></li>
+        <li><a href="{:staticUrlMobile('lists','1730','Down')}"><span class="bg"></span>休闲益智</a></li>
+        <li><a href="{:staticUrlMobile('lists','1731','Down')}"><span class="bg"></span>策略棋牌</a></li>
+        <li><a href="{:staticUrlMobile('lists','1732','Down')}"><span class="bg"></span>棋牌卡牌</a></li>
+        <li><a href="{:staticUrlMobile('lists','1733','Down')}"><span class="bg"></span>音乐舞蹈</a></li>
+    </ul>
+</section>
+<!--links-->
+<section class="links">
+    <div class="mid-title"><h2>友情链接</h2></div>
+    <div class="links-box">
+    <IndexTag:friendlink name="n" group="3" count="100">
+          <a href="{$n['url_token']}" target="_blank">{$n['title']}</a>
+    </IndexTag:friendlink>  
+    </div>
+</section>
+</block>

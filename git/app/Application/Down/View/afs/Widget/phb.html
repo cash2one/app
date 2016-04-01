@@ -1,0 +1,41 @@
+<extend name="Home@afs/Base/common" />
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afs/css/phb.css"/>
+</block>
+<block name="body">
+<!--main-->
+<div id="main" class="paihb">
+  <div class="phb-left">
+    <Think:article basename="Down" name="paihang"  cate="20" order="create_time desc" limit="100"> <a 
+      <PHP>if($key=='0'){echo "class='cur'";}</PHP>
+      href="{:str_replace("index.html","",staticUrl('detail', $article['id'],'Down'))}" >{$article.title}</a> </Think:article>
+  </div>
+  <div class="phb-right" id="phb">
+    <div class="ph">
+      <h2><a href="/top/pingfen/">手游排行榜</a></h2>
+      <ul>
+        {~W('Down/Afs/rankCon',array('105641','1'))}
+      </ul>
+    </div>
+    <div class="ph">
+      <h2 class="title"><a href="/top/wangyou/">网游排行榜</a></h2>
+      <ul>
+        {~W('Down/Afs/rankCon',array('105638','1'))}
+      </ul>
+    </div>
+    <div class="ph">
+      <h2><a href="/top/danji/">单机排行榜</a></h2>
+      <ul>
+        {~W('Down/Afs/rankCon',array('105639','1'))}
+      </ul>
+    </div>
+    <div class="ph">
+      <h2><a href="/top/android/">安卓排行榜</a></h2>
+      <ul>
+        {~W('Down/Afs/rankCon',array('105640','1'))}
+      </ul>
+    </div>
+  </div>
+</div>
+<div style=" clear:both"></div>
+</block>

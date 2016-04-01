@@ -1,0 +1,54 @@
+<extend name="Home@7230mobile/Base/common"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230mobile/css/news.css"/>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/7230mobile/css/libao.css"/>
+</block>
+<block name="body">
+  {~W('Home/p7230mobile/navi')}
+	<!-- 发号中心 和 存号箱 -->
+	<section class="libao">
+		<!-- 搜索 -->
+		<div class="search_wrap">
+			<form method="get" action="{:C('MOBILE_STATIC_URL')}/search.html"  class="search" id="sub">
+				<input type="text" name="keyword" class="sipt" id="sipt" placeholder="搜礼包" value="">
+                <input name="type" type="hidden" value="Package" />
+				<a href="javascript:void(0)" class="sbtn" id="sbtn"></a>
+			</form>
+		</div>
+         
+    <div class="glnav">
+        <i <php>if($cate=='1'){echo "class='cur'";}</php>><a href="{:getWidgetPath('44')}">大礼包</a></i>
+        <i <php>if($cate=='2'){echo "class='cur'";}</php>><a href="{:getWidgetPath('45')}">激活码</a></i>
+        <i <php>if($cate=='4'){echo "class='cur'";}</php>><a href="{:getWidgetPath('46')}">新手卡</a></i>
+    </div>
+	</section>
+<!-- 热门礼包 -->
+	<section class="gift_wrap" data-sudaclick="main_hlibao">
+		<div class="gift_box">
+			<ul>
+             <volist  name="lists" id="article">
+				<li>
+					<h4><a href="{:staticUrlMobile('detail', $article['id'],'Package')}">{$article.title}</a></h4>
+					<div class="gift">
+						<a href="{:staticUrlMobile('detail', $article['id'],'Package')}"><img alt="{$article.title}" src="{:get_cover($article['cover_id'],'path')}"></a>
+						<div class="gift_cont">
+							<div>
+								<span>剩余：</span><strong><i style="width:38%;"></i></strong><span class="percent">38%</span>
+                                  <strong class="card_all" card-id="{$article.id}" style="display:none;"></strong> 
+                                <strong class="card_surplus" card-id="{$article.id}" style="display:none;"></strong>
+							</div>
+														<div>
+							<span>截止：{$article.end_time|time_format="Y-m-d"}</span>
+							</div>
+						</div>
+						<a class="card_btn ling" href="{:staticUrlMobile('detail', $article['id'],'Package')}">领号</a>
+					</div>
+				</li>
+                  </volist>
+             </ul>
+		</div>
+<!--	<a class="recom_more" href="">更多新游推荐<span></span></a>-->
+    <div class="page">{$page}</div>
+	</section>
+	 {~W('Home/p7230mobile/tools')}
+</block>

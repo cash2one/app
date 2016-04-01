@@ -1,0 +1,9 @@
+<include file="Package@pc6/Widget/djdw"/>
+<p class="yxzt">
+    <b><u class="cur">游戏开服</u></b>
+    <i class="on">
+        <Think:article basename="Package" name="particle" cate="3" limit="10">
+        <span><em>{$article.start_time|time_format="m-d"}</em><a href="{$article.link|formatUrl}">{$article.title}</a><u>{$article.server}</u>{$article.game_type|showCheckbox="card_type", 1}</span>
+    </Think:article>
+</i>
+</p>

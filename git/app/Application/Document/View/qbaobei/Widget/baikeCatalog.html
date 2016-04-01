@@ -1,0 +1,11 @@
+<div class="navAll"> <span class="leftLine"></span>
+  <ul class="baike-title">
+    <volist name="lists" id="vo">
+    <eq name="key" value="1">
+     <li class="active">{$vo['title']}<i></i></li>
+     <else/>
+     <li>{$vo['title']}<i></i></li>
+     </eq>
+    </volist>
+  </ul>
+</div>

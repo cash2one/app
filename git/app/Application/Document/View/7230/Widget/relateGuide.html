@@ -1,0 +1,19 @@
+<!-- ------攻略礼包------- -->
+<div class="guidePack">
+    <div class="g_block">
+        <div class="gTitle"><span>相关攻略</span></div>
+        <ul>
+            <volist name="guide" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a><i>{:date('Y-m-d',$val['update_time'])}</i></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="g_block">
+        <div class="gTitle"><span>相关礼包</span></div>
+        <ul>
+            <volist name="package" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank">{$val['title']}</a><a class="g_btn" href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank">领取</a></li>
+            </volist>
+        </ul>
+    </div>
+</div>

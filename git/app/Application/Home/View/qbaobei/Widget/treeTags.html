@@ -1,0 +1,22 @@
+<div class="item-nav">
+  <p class="item-nav-tit {$ico}"><s></s><a href="{$url}">{$name}</a><i></i></p>
+  <p class="item-box">
+       <volist name="lists" id="vo"><a href="{:C('STATIC_URL')}/tag/{$vo['name']}/" target="_blank">{$vo['title']}</a></volist>
+  </p>
+  <div class="fast-nav">
+    <div class="fast-nav-text">
+      <ul class="subitem-gs">
+       <volist name="cateList" id="vo">
+        <li>
+          <p class="title"><a href="{:staticUrl('lists',$vo['id'],'Document')}">{$vo['title']}</a></p>
+            {~W('Home/Qbaobei/childCateTag',array($vo['id']))}
+       
+        </li>
+       </volist>
+      </ul>
+    </div>
+      <!-- 广告位：首页树形菜单广告<script type="text/javascript">BAIDU_CLB_fillSlot("1136212");</script> -->
+      <!--div class="fast-nav-pic">
+      </div-->
+    </div>
+  </div>

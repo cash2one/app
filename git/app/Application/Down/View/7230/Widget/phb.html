@@ -1,0 +1,61 @@
+<extend name="Home@7230/Base/common"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/7230/css/phb.css"/></block>
+<block name="body">
+<div style=" clear:both"></div>
+    <!--main-->
+  <div id="main" class="paihb">
+      <div class="phb-left">
+             <Think:article basename="Down" name="paihang"  cate="38" order="create_time desc" limit="15">
+            <a <PHP>if($info['id']==$article['id']){echo "class='cur'";}</PHP> href="{:str_replace("index.html","",staticUrl('detail', $article['id'],'Down'))}" >{$article.title}</a>
+        </Think:article>
+      </div>
+      <div class="phb-right" id="phb">
+          <div class="ph">
+              <h2 class="title">网游排行榜</h2>
+              <ul>
+                 {~W('Down/P7230/rankCon',array('31845','1'))}
+              </ul>
+          </div>
+          <div class="ph">
+              <h2>单机排行榜</h2>
+              <ul>
+                 {~W('Down/P7230/rankCon',array('31846','1'))}
+              </ul>
+          </div>
+          <div class="ph">
+              <h2>手游排行榜</h2>
+              <ul>
+                 {~W('Down/P7230/rankCon',array('31849','1'))}
+              </ul>
+          </div>
+          <div class="ph">
+              <h2>评分排行榜</h2>
+              <ul>
+                 {~W('Down/P7230/rankCon',array('31851','1'))}
+              </ul>
+          </div>
+        <!--游戏排行-->
+        <div class="game_rank">
+            <div>
+                <h2>安卓排行榜</h2>
+                <ul>
+                   {~W('Down/P7230/rankCon',array('31853','3'))}
+                </ul>
+            </div>
+            <div>
+                <h2>苹果排行榜</h2>
+                <ul>
+                {~W('Down/P7230/rankCon',array('31855','3'))}
+                </ul>
+            </div>
+            <div>
+                <h2>电脑版排行榜</h2>
+                <ul> {~W('Down/P7230/rankCon',array('31856','3'))}
+                </ul>
+            </div>
+        </div>
+      </div>
+  </div>
+ <div style=" clear:both"></div>
+</block>

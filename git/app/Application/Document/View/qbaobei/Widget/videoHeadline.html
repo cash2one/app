@@ -1,0 +1,27 @@
+<div class="left">
+  <div class="picFocus"> <span class="focus-btn prev"></span> <span class="focus-btn next"></span>
+    <ul>
+         <volist name="slider" id="vo">
+                 <eq name="key" value="0">
+                        <li class="current"><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"></a></li>
+                 <else/>
+                       <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"></a></li>
+                 </eq>
+        </volist>
+    </ul>
+    <div class="circle"></div>
+    <p class="focusTitle"><a href="javascript:;" target="_blank" class="focusa"></a><b></b></p>
+  </div>
+   <div class="chanbox1-rec">
+          <volist name="headline" id="vo">
+                <div class="chanbox1-info"> <a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank">{$vo['title']}</a>
+                  <p class="info">{$vo['description']}</p>
+                </div>
+           </volist>
+    <ul class="chanbox1-ul">
+            <volist name="latest" id="vo">
+                    <li><a href="{:staticUrl('detail',$vo['id'],'Document')}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+           </volist>
+    </ul>
+  </div>
+</div>

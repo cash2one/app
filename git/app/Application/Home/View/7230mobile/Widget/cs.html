@@ -1,0 +1,17 @@
+<extend name="Home@7230mobile/Base/common"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/7230mobile/css/news.css"/>
+</block>
+<block name="body">
+    {~W('Home/p7230mobile/navi')}
+    <section class="news_wrap" id="syxw" style="margin-top: 40px;">
+        <div data-sudaclick="main_rnews" class="atten">
+            <ul class="clear">
+                <volist name="lists" id="val">
+                    <li><a href={$val['url']}><img src="{:get_cover($val['img'],'path')}" alt="{$val['name']}"><p>{$val['name']}</p></a></li>
+                </volist>
+            </ul>
+        </div>
+        <div class="page">{$page}</div>
+    </section>
+</block>

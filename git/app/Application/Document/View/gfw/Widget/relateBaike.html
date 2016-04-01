@@ -1,0 +1,11 @@
+<notempty name="lists">
+  <!-- 相关百科 -->
+    <div class="baike-detail-right">
+    <h2>相关百科</h2>
+    <ul>
+        <volist name="lists" id="vo" offset="0" length="5">
+            <li><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank">{$vo['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+</notempty>

@@ -1,0 +1,14 @@
+<div class="paih" id="indexTestServer">
+    <p class="title"><i class="cur">开服</i><i>开测</i></p>
+    <b class="nav"><i>时间</i><i>游戏名称</i><i>服务器名</i></b>
+    <ul class="cur">
+        <volist name="server" id="val">
+            <li><i>{:date('Y-m-d',$val['start_time'])}</i><a href="{:$val['androidId']?staticUrl('detail',$val['androidId'],'Down'):'javascript:void(0)'}" target="{$val['androidId']?'_blank':'_self'}">{$val['title']}</a><i>{$val['server']}</i></li>
+        </volist>
+    </ul>
+    <ul>
+        <volist name="test" id="val">
+            <li><i>{:date('Y-m-d',$val['start_time'])}</i><a href="{:$val['androidId']?staticUrl('detail',$val['androidId'],'Down'):'javascript:void(0)'}" target="{$val['androidId']?'_blank':'_self'}">{$val['title']}</a><i>{$val['server']}</i></li>
+        </volist>
+    </ul>
+</div>

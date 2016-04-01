@@ -1,0 +1,94 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/channel.css"/></block>
+
+<block name="header">
+	<include file="Home@qili/Public/header" />
+</block>
+
+<block name="body">            
+<div class="tupage-nav">
+    <div class="qnx1200">
+        <div class="tupage-left">
+            <h3>图库</h3>
+            <classify model="4" typeid="0" limit="7">
+				<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				<if condition="$key != 7"> 
+					<em>|</em>
+				</if>
+            </classify>
+        </div>
+
+        <div class="tupage-right">
+            <span>热点：</span>     
+			<document model="4" limit="2" flag="channel_recom,16" order="edit">
+				<a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title|msubstr=0,8}</a>
+			</document>
+        </div>
+    </div>
+</div>
+
+<div class="qnx1200 banner">
+    <div class="focus6">
+        <ul class="focus6-ul">
+			<document model="4" limit="5" flag="channel_recom,1" order="edit">
+				<li><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '790x470')}" alt="{$document.title|msubstr=0,18}"></a></li>
+			</document>
+        </ul>
+
+        <div class="focus-info"><a href="javascript:;" target="_blank"></a><div class="circle"></div><div class="bg"></div></div>
+    </div>
+
+    <div class="right tab-nub">
+        <p class="tab-tit"><span>TOP LINE<em></em></span><span class="active">今日头条<em></em></span></p>
+
+        <ul class="right-ul current">   
+			<document model="4" limit="10" flag="channel_recom,2" order="edit">
+				<li><a href="{$document.url}" target="_blank" title="{$document.title}">{$document.title}</a></li>
+			</document>
+        </ul>
+     
+        <div class="fresh"><span><i></i>换一组</span></div>
+    </div>
+</div>
+
+<classify model="4" id="1,2,3,7,6,5,4">
+	<if condition="$key % 2"> 
+		<div class="qnx1200 channel tuku">
+			<div class="title">
+				<h3>
+					<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				</h3>
+			</div>
+
+			<ul class="tuku-ul">
+				<document limit="1" flag="channel_recom,4" order="edit">
+					 <li class="one">
+						<a href="{$document.url}" target="_blank" title="{$document.title}">
+							<img src="{:get_thumb($document[atlas_c], $document[atlas], '383x490')}" alt="{$document.title}">
+							<span><em class="tit">{$document.title}</em><b class="bg"></b></span>
+						</a>
+					</li>
+				</document>
+				
+				<document limit="4" flag="channel_recom,8" order="edit">
+					<li><a href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_b], $document[atlas], '390x235')}" alt="{$document.title}"><span><em class="tit">{$document.title}</em><b class="bg"></b></span></a></li>
+				</document>
+			</ul>
+		</div>
+	<else />
+		<div class="qnx1200 channel meifa">
+			<div class="title">
+				<h3>
+					<a href="{$classify.url}" target="_blank">{$classify.title}</a>
+				</h3>
+			</div>
+
+			<ul class="meifa-ul pdpic4 tupag-li">
+				<document limit="4" flag="channel_recom,8" order="edit">
+					<li><a class="pic" href="{$document.url}" target="_blank" title="{$document.title}"><img src="{:get_thumb($document[atlas_c], $document[atlas], '284x380')}" alt="{$document.title}"><span><em class="tit">{$document.title}</em><b class="bg"></b></span></a></li>
+				</document>
+			</ul>
+		</div>
+	</if>
+</classify>
+</block>

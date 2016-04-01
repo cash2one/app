@@ -1,0 +1,73 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>分类管理</h2>
+	</div>
+
+	<!-- 表格列表 -->
+	<div class="tb-unit posr">
+		<div class="tb-unit-bar">
+			<a class="btn" href="/admin.php?s=/FeatureCategory/add.html">新 增</a>
+		</div>
+		<div class="category">
+			<div class="hd cf">
+				<div class="name"><span>id</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>名称(点击折叠)</span></div>
+				<div class="order"></div>
+				<!--div class="name">操作</div-->
+			</div>
+<ul>
+	<php>foreach($results as $v):</php>
+	<li style="line-height:34px;padding:5px">
+
+	<b>
+        {$v.id}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<php>if($v['is_parent']):</php><i class="fa fa-expand" onclick="<?php echo 'load(\''.$v['id'].'\');$(\'#'.$v['id'].'\').toggle();$(this).toggleClass(\'fa-compress\')' ?>"></i><php>endif;</php>
+		<!--$child.$split.$v['title']-->{$v.title}
+	</b>
+	<span style="float:right;margin-right:60%">
+			<a href="admin.php?s=/FeatureCategory/add/pid/{$v.id}.html" title="添加子分类" class="add-sub-cate">
+		<i class="fa fa-plus-circle"></i>添加
+	</a>
+	<a title="编辑" href="/admin.php?s=/FeatureCategory/edit/id/{$v.id}/pid/{$v.pid}.html">
+		<i class="fa fa-edit"></i>编辑</a>
+		
+	<!--a href="/admin.php?s=/FeatureCategory/operate/type/move/from/{$v.id}.html" title="移动"><i class="fa fa-retweet"></i>移动</a-->
+	
+	<a title="删除" href="/admin.php?s=/FeatureCategory/remove/id/{$v.id}.html" class="confirm ajax-get">
+		<i class="fa fa-trash-o"></i>删除</a>
+
+	</span>
+	<hr width=99% size=1 color=#eee style="FILTER: alpha(opacity=100,finishopacity=0,style=1)"> 
+	<ul id="{$v.id}" style="display:none"></ul>
+	</li>
+	<php>endforeach;</php>
+</ul>
+
+			
+		</div>
+	</div>
+	<!-- /表格列表 -->
+
+</block>
+
+<block name="script">
+<script type="text/javascript">
+function load(pid){
+	$.ajax({
+        type: "GET",
+        url: "/admin.php?s=/FeatureCategory/child&time="+new Date(),
+        //fileType:'json',
+        data: {'pid':pid},
+        success: function(data){
+					if(data){
+			    		$('#'+pid).html(data);
+					}else{
+						//do nothing
+					}
+                 }
+    });	
+}
+
+	</script>
+</block>

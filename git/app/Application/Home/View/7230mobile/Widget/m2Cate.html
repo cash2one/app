@@ -1,0 +1,93 @@
+<extend name="Home@7230mobile/Base/common2"/>
+<block name="style">
+    <link href="__PUBLIC__/Home/7230mobile2/css/down.css" rel="stylesheet" type="text/css">
+</block>
+<block name="body">
+<div class="page_title"><span><a href="javascript:void(0);" class="back"></a></span><h2>{$title}</h2></div>
+
+<section>
+<div class="tags">
+<div class="tit"><h3>分类</h3><h3 class="cur">最新</h3><h3>推荐</h3></div>
+<!-- 手机游戏内容 -->
+<div class="tags_cont cur">
+    <ul class="{$info['id'] == 1?'cate':'soft'}">
+        <volist name="cate" id="val">
+        <li>
+            <a href="{$url}/cat{$val['id']}">
+                <span class="img"></span>
+                <span class="tit">{$val['title']}</span>
+            </a>
+        </li>
+        </volist>
+    </ul>
+</div>
+<div class="tags_cont ">
+    <ul class="down_list">
+        <volist name="new" id="val">
+            <li>
+                <a href="{:staticUrlMobile('detail',$val['id'],'Down')}">
+                    <div class="yx_left"><img src="{:get_cover($val['smallimg'],'path')}"></div>
+                    <div class="yx_right">
+                        <div class="rgt_l">
+                            <div class="right1"><span class="title">{$val['title']}</span><span class="yx_cate">{$val['cate']}</span></div>
+                            <div class="right2"><span class="num">{$val['view']}人已下载</span><span class="size">{:format_size($val['size'])}</span></div>
+                        </div>
+                        <div class="rgt_r"><span class="down">下载</span></div>
+                    </div>
+                    <div class="yx_txt">{$val['description']}</div>
+                </a>
+            </li>
+        </volist>
+    </ul>
+    <div class="yx_more" onclick="m2more($(this),{$info['id']},{$network},0)">点击加载更多>></div>
+</div>
+<div class="tags_cont">
+    <ul class="down_list">
+        <volist name="position" id="val">
+            <li>
+                <a href="{:staticUrlMobile('detail',$val['id'],'Down')}">
+                    <div class="yx_left"><img src="{:get_cover($val['smallimg'],'path')}"></div>
+                    <div class="yx_right">
+                        <div class="rgt_l">
+                            <div class="right1"><span class="title">{$val['title']}</span><span class="yx_cate">{$val['cate']}</span></div>
+                            <div class="right2"><span class="num">{$val['view']}人已下载</span><span class="size">{:format_size($val['size'])}</span></div>
+                        </div>
+                        <div class="rgt_r"><span class="down">下载</span></div>
+                    </div>
+                    <div class="yx_txt">{$val['description']}</div>
+                </a>
+            </li>
+        </volist>
+    </ul>
+    <div class="yx_more" onclick="m2more($(this),{$info['id']},{$network},1)">点击加载更多>></div>
+</div>
+</div>
+</section>
+</block>
+<block name="script">
+    <script>
+        function m2more(more,cate,net,pos){
+            var t_li = more.siblings('.down_list').find('li');
+            $.ajax({
+                dataType:"jsonp",
+                jsonp:"callback",
+                url: window.DYNAMIC_SERVER_URL + '/dynamic.php?s=/P7230mobile/API_down/cate/'+cate+ '/net/' + net + '/pos/' + pos +'/star/' + t_li.length,
+                success:function(data){
+                    if(data){
+                        var li_html = '';
+                        for(i in data){
+                            li_html +=  '<li><a href="'+data[i].url+'"><div class="yx_left"><img src="'+data[i].smallimg+'"></div><div class="yx_right"><div class="rgt_l">';
+                            li_html +=  '<div class="right1"><span class="title">'+data[i].title+'</span><span class="yx_cate">'+data[i].cate+'</span></div>';
+                            li_html +=  '<div class="right2"><span class="num">'+data[i].view+'人已下载</span><span class="size">'+data[i].size+'</span></div>';
+                            li_html +=  '</div><div class="rgt_r"><span class="down">下载</span></div></div><div class="yx_txt">'+data[i].description +'</div></a></li>';
+                        }
+                        t_li.last().after(li_html);
+                    }else{
+                        more.html("没有更多数据了");
+                        more.removeAttr('onclick');
+                    }
+                }
+            });
+        }
+    </script>
+</block>

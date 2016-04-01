@@ -1,0 +1,43 @@
+<extend name="Home@dongdong/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/dongdong/css/yxlist.css"/>
+</block>
+
+<block name="body">
+<div class="page_main">
+   <!--flsy-->
+   <div class="wraper">
+        <div class="flsy_l">
+		<!-- 分类树 -->
+		<notempty name="tree">
+		<volist name="tree" id="vo" key="i">
+		<dl class="<if condition='$vo.id eq $pid || $vo.id eq $rootid'>cur</if>">
+			<dt onclick="javascript:window.location.href='{:U('Dynamic/Dongdong/category',array('cid'=>$vo['id']))}';">{$vo['title']}</dt>
+			<dd>
+				<ul>
+					<volist name="vo['_']" id="vc" key="j">
+					<li><a href="{:U('Dynamic/Dongdong/category',array('cid'=>$vc['id']))}" class="<if condition='$vc.id eq $cid'>cur</if>">{$vc['title']}</a></li>
+					</volist>
+				</ul>
+			</dd>
+		</dl>
+		</volist>
+		</notempty>
+       </div>
+       <div class="flsy_r">
+           <ul>
+               <!-- begin 下载软件列表 -->
+               <volist name="downList" id="v" key="i">
+               	<li>
+               		<a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" title="{$v['title']}">
+               			<img src="{:get_cover($v['smallimg'],'path')}" alt="{$v['title']}"><span>{$v['title']}</span>
+               		</a>
+               	</li>
+               </volist>
+               <!-- end 下载软件列表 -->
+           </ul>
+          <div id="paging">{$page}</div>
+       </div>
+   </div>
+</div>
+</block>

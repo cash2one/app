@@ -1,0 +1,25 @@
+<div class="libao-left">
+    <div class="sykc">
+        <p class="title"><a href="{:getWidgetPath('31', true)}" target="_blank" id="jump">更多+</a><i>新手开测</i></p>
+        <input name="kaice" type="hidden" id="kaiceUrl" value="{:getWidgetPath('31', true)}" />
+        <input name="kaifu" type="hidden" id="kaifuUrl" value="{:getWidgetPath('30', true)}" />
+        {~W('Package/P7230/testServerList')}
+    </div>
+
+    <div class="sykc">
+        <p class="title"><a href="{:getWidgetPath('24', true)}" target="_blank" id="packsort">更多+</a><i>礼包排行</i></p>
+        <input name="kaice" type="hidden" id="androidUrl" value="{:getWidgetPath('24', true)}" />
+        <input name="kaifu" type="hidden" id="IOSUrl" value="{:getWidgetPath('26', true)}" />
+        <span class="nav"><i class="cur">安卓</i><i>IOS</i></span>
+        <ul class="current">
+            <Think:article basename="package" name="pmain" where="category_id = 1 AND conditions & 1" order="create_time desc" limit="10">
+                <li><i class="fenl">礼</i><i class="time">{:date('Y-m-d',$article['create_time'])}</i><a href="{:staticUrl('detail',$article['id'])}" target="_blank">{$article.title}</a><i>公测</i></li>
+            </Think:article>
+        </ul>
+        <ul>
+            <Think:article basename="package" name="pmain" where="category_id = 1 AND conditions & 2" order="create_time desc" limit="10">
+                <li><i class="fenl">礼</i><i class="time">{:date('Y-m-d',$article['create_time'])}</i><a href="{:staticUrl('detail',$article['id'])}" target="_blank">{$article.title}</a><i>公测</i></li>
+            </Think:article>
+        </ul>
+    </div>
+</div>

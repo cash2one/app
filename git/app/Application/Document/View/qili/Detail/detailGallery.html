@@ -1,0 +1,148 @@
+<extend name="Home@qili/Base/common" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qili/css/detail.css"/></block>
+
+<block name="header">
+	<include file="Home@qili/Public/header" />
+</block>
+
+<block name="body">
+<?php
+	list($imgpack, $text) = explode('[page][/page]', $info['content']);
+	
+	if($imgpack){
+		preg_match_all('/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/',$imgpack,$match);
+		
+		if($match[1]){
+			$imgpack = $match[1];
+			$text = '　　'.strip_tags($text);
+		}
+	}
+?>
+<div class="qnx1200 pic-detail">
+    <div class="location">
+		<a href="/">首页</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+		<a href="/shishang.html">时尚</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+		<a href="/bozhu/">博主</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+
+		<classify model="2" id="$info[category_id]">
+			<a href="{$classify.url}">{$classify.title}</a>&nbsp;&nbsp;<span class="gt">&gt;</span>&nbsp;&nbsp;
+		</classify>
+		正文
+	</div>
+    
+	<div class="pic-title">
+        <h1>{$info.title}</h1>
+        <div class="share">
+            <div class="bot-r">
+                <div>分享：</div>
+
+                <div class="bdsharebuttonbox bdshare-button-style2-24" data-bd-bind="1444991245986">
+					<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+					<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+					<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+					<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pic-auto">
+        <div class="pic-bigger">
+            <div class="pic-main">
+                <div class="pic-mainBox">
+                    <ul class="pic-ul">
+                        <volist name="imgpack" id="image">
+							<li><a href="javascript:void(0)" target="_blank" class="pic"><img src="{$image}"></a></li>
+						</volist>
+                    </ul>
+                </div>
+                <div class="bigBtn left"><span></span></div>
+                <div class="bigBtn right"><span></span></div>
+            </div>
+
+            <div class="pic-info">{$text}</div>
+            <div class="pic-nub">
+                <div class="nub-l"><span class="now-nub"><em class="now">1</em>/<em class="all">0</em></span><span class="vis">{$info.view_sc}</span></div>
+                <div class="nub-r">
+					<span>标签：</span>
+					
+					<document model="2" id="$info[id]" callback="classify" order="desc">
+						<volist name="document.classify" id="project" offset="0" length='3'>
+							<a href="{$project.url}" target="_blank">{$project.title}</a>　
+						</volist>
+					</document>
+				</div>
+            </div>
+
+            <div class="pic-small">
+				<pre return="pre" />
+				<if condition="$pre">
+					<document model="2" id="$pre[id]">
+						<div class="small-btn small-l">
+							<a href="{$document.url}"><img src="{:get_thumb($document[atlas_a], $document[atlas], '100x80')}"><span>上一博文</span></a>
+						</div>
+					</document>
+				<else />
+					<div class="small-btn small-l">
+						<a href="{$document.url}"><span>没有了</span></a>
+					</div>
+				</if>
+
+                <div class="small-main">
+                    <span class="btn prev">向左</span>
+                    <div class="small-mainBox">
+                        <ul class="small-ul"></ul>
+                    </div>
+                    <span class="btn next">向右</span>
+                </div>
+
+                <div class="small-btn small-r">
+					<next return="next" />
+					<if condition="$next">
+						<document model="2" id="$next[id]">
+							<div class="small-btn small-l">
+								<a href="{$document.url}"><img src="{:get_thumb($document[atlas_a], $document[atlas], '100x80')}"><span>下一博文</span></a>
+							</div>
+						</document>
+					<else />
+						<div class="small-btn small-l">
+							<a href="{$document.url}"><span>没有了</span></a>
+						</div>
+					</if>
+				</div>
+            </div>
+        </div> 
+    </div>
+    
+</div>
+
+<div class="qnx1200 pic4">
+    <div class="tit">
+        <div class="det-title"><h3>猜你喜欢</h3></div>
+    </div>
+    <div class="autopic">
+      <span class="btn prev">prev</span>
+      <span class="btn next">next</span>
+      <div class="img-list">
+        <ul class="clearfix">
+			<php>$key = 0; $ids = '';</php>
+            <document model="2" typeid="$info[category_id]" limit="9" notin="$info[id]" index="ids">
+				<li><a href="{$document.url}"><img src="{:get_thumb($document[atlas_a], $document[atlas], '266x261')}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a></li>
+			</document>
+
+			<if condition="$key elt 4">
+				<if condition="$ids"> 
+					<php>$ids .= ','.$info[id];</php>
+				<else />
+					<php>$ids = $info[id];</php>
+				</if>
+
+				<document model="2" rootid="$info[category_rootid]" limit="5" order="view desc" notin="$ids">
+					<li><a href="{$document.url}"><img src="{:get_thumb($document[atlas_e], $document[atlas], '364x218')}"><span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span></a></li>
+				</document>
+			</if>
+        </ul>
+      </div>
+    </div>  
+</div>
+</block>

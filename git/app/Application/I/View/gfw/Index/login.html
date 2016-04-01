@@ -1,0 +1,32 @@
+<extend name="Home@gfw/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/validate.css"/>
+</block>
+<block name="body">
+<!--登录框-->
+<div class="main" id="login-wraper">
+    <div class="login-left"> <img src="__PUBLIC__/Home/gfw/images/login_07.jpg" alt="欢迎来登录官方网"> </div>
+    <div class="login-right">
+        <div class="login-right-user">用户登录</div>
+        <div class="login-qq"> <a href="{:U('Api/api_login?type=sina')}" target="_blank" title="新浪微博登录" class="sina">使用新浪微博账号登录</a> <a href="{:U('Api/api_login?type=qq')}" target="_blank" title="qq登录" class="qq">使用QQ账号登录</a> </div>
+        <em class="or"><i>或者</i></em>
+        <div class="login-input">
+            <form class="login-form" method="post" action="{:U('Api/submitLogin')}" id="formLogin">
+                <div class="errorTip"></div>
+                <input type="text" placeholder="请输入用户名" id="username" class="username" name="username">
+                <input type="password" placeholder="请输入密码" id="password" class="password" name="password">
+                <input type="submit" value="登录" class="l-btn" name="btn">
+            </form>
+            <div class="find-pass"><a href="{:U('Index/findpass')}" target="">找回密码</a> | <a href="{:U('Index/register')}" target="_blank" class="reg">免费注册>></a></div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="script"> 
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/qtip/jquery.qtip.min.css"/>
+    <script type="text/javascript" src="__STATIC__/qtip/jquery.qtip.min.js.js"></script> 
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script> 
+</block>

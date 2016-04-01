@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<include file="Home@7230/Public/head"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/kpage.css" />
+</head>
+<body>
+
+<include file="Home@7230/Public/header"/>
+
+
+<div id="kpage">
+    <p class="page-nav">当前位置：<a href="/">首页</a><a href="/k/">游戏合集</a></p>
+    <div id="banner">
+    	<div class="dragable" widget="image"><img src="__PUBLIC__/static/kindeditor/plugins/widget/select.png"></div>
+        <div class="dragable" widget="html">
+                <p>
+                    <b>这是编辑大人可修改的标题</b>
+                    <i class="info">编辑大人忘记得修改标题了哟，这是编辑大人可修改的内容！编辑大人放假了交流交流看了看看没看见考虑考虑可怜的程序猿码砖力度...</i>
+                    <i class="more"><a href="/k/" target="_blank">更多合集>></a></i>
+                </p>
+        </div>
+    </div>
+    <div class="dragable" widget="down__product_tags">
+		<ul class="klb">
+            <volist name="lists" id="v">
+            <li>
+                <p>
+                    <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($v['smallimg'],'path')}"></a>
+                    <span>
+                        <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank">{$v.name}</a>
+                        <i class="star{:get_score($v['id'])} star"></i><i class="size">{$v['size']}</i>
+                        <a href="{$v.url}" class="down">下载</a></span>
+                </p>
+               <b>{$v['description']}</b>
+            </li>
+            </volist>
+        </ul>
+        <php>unset($lists);</php>
+    </div>
+    <!--底部轮播-->
+    <div id="lunbo">
+        <p class="title"><i></i>推荐合集<a href="" target="_blank" class="more"></a></p>
+        <div class="lbmain">
+            <span class="prev"></span>
+            <div class="lunbo-m">
+            	<div class="dragable" widget="batch__product_tags">
+                <ul>
+                	<volist name="lists" id="v">
+                    <li>
+                        <a href="{:C('STATIC_URL')}/{:C('FEATURE_K_DIR')}/{:$v['url_token']}" target="_blank"><img src="{:get_cover($v['icon'],'path')}"></a>
+                        <a href="{:C('STATIC_URL')}/{:C('FEATURE_K_DIR')}/{:$v['url_token']}" target="_blank" class="title">{$v.title}</a>
+                    </li>
+					</volist>
+                </ul>
+                    <php>unset($lists);</php>
+                </div>
+            </div>
+            <span class="next"></span>
+        </div>
+    </div>
+</div>
+<div class="dragable" widget="base"></div>
+<include file="Home@7230/Public/footer"/>
+</body>
+</html>

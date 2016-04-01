@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <include file="Home@7230mobile/Public/head" />
+    <link href="__PUBLIC__/Home/7230mobile2/css/search.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<header>
+    <div class="page_search">
+        <form action="http://s.7230.com/cse/search" method="get">
+            <div class="search_div">
+                <input type="hidden" value="17256763110727190540" name="s">
+                <input type="hidden" value="1" name="entry">
+                <input type="text" name="q" class="ipt_txt" placeholder="请在此搜索关键词">
+                <input type="submit" class="ipt_sub">
+            </div>
+        </form>
+    </div>
+</header>
+
+<section>
+    {:W('P7230mobile/jx')}
+    <div class="search_back"><span onclick="get_back()"></span></div>
+</section>
+
+<script>
+    function get_back(){
+        var onowurl = document.domain;
+        var str = document.referrer;
+        if(str.indexOf(onowurl)>-1 && window.history.length>0){
+                window.history.go(-1);
+                return false;
+        }else{window.location.href='/';}
+    }
+
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?171cbd72d221ce8019efee12c4bb9e90";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+    //ku统计
+    document.write(unescape("%3Cscript src='http://s1.kutongji.com/stat.php?site=21821' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

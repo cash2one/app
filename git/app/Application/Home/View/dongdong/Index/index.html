@@ -1,0 +1,139 @@
+        <extend name="Home@dongdong/Base/common" />
+        <block name="style">
+            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/dongdong/css/index.css"/>
+        </block>
+        <block name="body">
+        <input type="hidden" id="nav_cur" value="sy">
+        <div class="page_main">
+        <!--推荐-->
+        <div id="game_rec">
+            <p class="rec"><b>推荐</b>
+                <Think:article basename="Down" name="dmain"  where="position & 8" order="update_time desc" limit="15"> <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank">{$article.title}</a>| </Think:article>
+            </p>
+            <p class="hot"><b>热门</b>
+                <Think:article basename="Down" name="dmain"  where="position & 16"  order="update_time desc" limit="15"> <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank">{$article.title}</a>| </Think:article>
+            </p>
+            <p class="new"><b>最新</b>
+                <Think:article basename="Down" name="dmain"  order="create_time desc" limit="15"> <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank">{$article.title}</a>| </Think:article>
+            </p>
+        </div>
+        <!--banner--> 
+        {:W('Down/Dongdong/todaySlide',array('index'))} 
+        <!--最新首发-->
+        <div class="wraper game_pic" id="zxsf">
+            <div class="title zxsf">
+                <h3>最新首发</h3>
+                <a href="{:getWidgetPath('11')}" target="_blank">软件首发</a><a href="{:getWidgetPath('10')}" target="_blank">游戏首发</a><a href="{:getWidgetPath('9')}" target="_blank">更多首发</a></div>
+            <ul class="sf_game">
+                <Think:article basename="Down" name="dmain"  where="position & 64"  order="update_time desc" limit="4">
+                    <li><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['sfimg'],'path',1,280,164)}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="tit">{$article.title}</a></li>
+                </Think:article>
+            </ul>
+        </div>
+        <!--网络游戏推荐-->
+        
+        <div class="wraper game_rec" id="tjxz">
+            <div class="wytj">
+                <div class="title tjxz">
+                    <h3>网络游戏推荐</h3>
+                    <ul class="game-title">
+                        {~W('Home/Dongdong/indexCate',array('1'))}
+                    </ul>
+                    <a href="{:getWidgetPath('7')}" target="_blank" class="more">+更多</a> </div>
+                {~W('Home/Dongdong/cateList',array('1'))} </div>
+            <div class="wyxz">
+                <h3>网络游戏下载排行</h3>
+                <span class="time"><i class="cur">本日</i><i>本周</i><i>本月</i></span>
+                <ul class="current">
+                    {~W('Home/Dongdong/indexRank',array('1','1'))}
+                </ul>
+                <ul>
+                    {~W('Home/Dongdong/indexRank',array('1','2'))}
+                </ul>
+                <ul>
+                    {~W('Home/Dongdong/indexRank',array('1','3'))}
+                </ul>
+            </div>
+        </div>
+       
+     
+        <!--单机游戏推荐-->
+        <div class="wraper game_rec" id="djtj">
+            <div class="wytj">
+                <div class="title djtj">
+                    <h3>单机游戏推荐</h3>
+                    <ul class="game-title">
+                        {~W('Home/Dongdong/indexCate',array('116'))}
+                    </ul>
+                    <a href="{:getWidgetPath('8')}" target="_blank" class="more">+更多</a> </div>
+                {~W('Home/Dongdong/cateList',array('116'))} </div>
+            <div class="wyxz">
+                <h3>单机游戏下载排行</h3>
+                <span class="time"><i class="cur">本日</i><i>本周</i><i>本月</i></span>
+                <ul class="current">
+                    {~W('Home/Dongdong/indexRank',array('116','1'))}
+                </ul>
+                <ul>
+                    {~W('Home/Dongdong/indexRank',array('116','2'))}
+                </ul>
+                <ul>
+                    {~W('Home/Dongdong/indexRank',array('116','3'))}
+                </ul>
+            </div>
+        </div>
+        <!--常用软件推荐-->
+        <div class="wraper game_rec" id="rjtj">
+            <div class="wytj">
+                <div class="title rjtj">
+                    <h3>常用软件推荐</h3>
+                    <ul class="game-title">
+                        {~W('Home/Dongdong/indexCate',array('12'))}
+                    </ul>
+                    <a href="" target="_blank" class="more">+更多</a> </div>
+                {~W('Home/Dongdong/cateList',array('12'))} </div>
+            <div class="wyxz">
+                <h3>软件下载排行</h3>
+                <span class="time"><i class="cur">本日</i><i>本周</i><i>本月</i></span>
+                <ul class="current">
+                    {~W('Home/Dongdong/indexRank',array('12','1'))}
+                </ul>
+                <ul>
+                    {~W('Home/Dongdong/indexRank',array('12','2'))}
+                </ul>
+                <ul>
+                    {~W('Home/Dongdong/indexRank',array('12','3'))}
+                </ul>
+            </div>
+        </div>
+        <!--新游试玩-->
+        <div class="wraper game_pic" id="xysw">
+            <div class="title xysw">
+                <h3>新游试玩</h3>
+                <a href="{:getWidgetPath('7')}" target="_blank"  class="more">+更多新游</a></div>
+            <ul class="sf_game">
+                <Think:article basename="Down" name="dmain"  where="position & 2"  order="update_time desc" limit="4">
+                    <li><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank"><img src="{:get_cover($article['sfimg'],'path',1,280,164)}"></a><i><a href="{:staticUrl('detail', $article['id'],'Down')}" class="apk">下载APK</a><a href="{:staticUrl('detail', $article['id'],'Down')}" class="pcb">下载电脑版</a></i></li>
+                </Think:article>
+            </ul>
+        </div>
+        <!--搜索-->
+        <div class="search" id="search_bottom">
+            <form action="{:C('STATIC_URL')}/search.html" method="get" id="Search_form1" name="Search_form" target="_blank" class="searchform">
+                <input type="text" name="keyword" id="searchbox" class="searchbox" autocomplete="off" value="在此搜索游戏或资讯...">
+                <button type="submit" id="searchBtn" class="btn-submit"></button>
+            </form>
+            <a href="{:getWidgetPath('1')}" class="down">↓东东客户端下载</a>
+            <p class="hot_tags" id="bottom_tags"><b>热词搜索：</b>
+                <Think:article basename="Down" name="dmain"  where="position & 32" order="update_time desc" limit="4"> <a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank">{$article.title}</a> </Think:article>
+            </p>
+        </div>
+        <!--友情链接-->
+        <div  class="wraper" id="links">
+            <div class="title">友情链接</div>
+            <ul>
+                <IndexTag:friendlink name="n" group="1" count="100">
+                    <li> <a href="{$n['url_token']}" target="_blank" title="{$n['title']}">{$n['title']}</a></li>
+                </IndexTag:friendlink>
+            </ul>
+        </div>
+        </block>

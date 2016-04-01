@@ -1,0 +1,8 @@
+<div class="yxgl">
+      <h3><i>游戏攻略</i></h3>
+      <ul>
+      <volist name="result" id="vo" offset="0" length='5'>
+          <li><i>{$vo['update_time']|time_format="Y-m-d"}</i><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank" title="{$vo.title}">{$vo.title}</a></li>
+       </volist>
+      </ul>
+  </div>

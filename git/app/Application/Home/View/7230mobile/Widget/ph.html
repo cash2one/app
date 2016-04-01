@@ -1,0 +1,89 @@
+<extend name="Home@7230mobile/Base/common2"/>
+<block name="style">
+    <link href="__PUBLIC__/Home/7230mobile2/css/ph.css" rel="stylesheet" type="text/css">
+</block>
+<block name="body">
+<div class="page_title"><span><a href="javascript:void(0);" class="back"></a></span><h2>手游排行榜</h2></div>
+
+<section>
+<div class="tags">
+<div class="tit"><h3 class="cur">总榜</h3><h3>安卓</h3><h3>IOS</h3></div>
+<!-- 手机游戏内容 -->
+    <div class="tags_cont cur">
+        <ul class="down_list">
+                  <volist name="zdata" id="vo">
+            <li>
+                <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">
+                    <div class="yx_left"><img src="{:get_cover($vo['smallimg'],'path')}"></div>
+                    <div class="yx_right">
+                        <div class="rgt_l">
+                            <div class="right1">
+                                <span class="ranking">{$i}</span>
+                                <div class="cr"><span class="title">{$vo.title}</span><span class="yx_cate">{$vo.categoryname}</span></div>
+                            </div>
+                            <div class="right2"><span class="num">{$vo.view}人已下载</span><span class="size">{:format_size($vo['size'])}</span></div>
+                        </div>
+                        <div class="rgt_r"><span class="down">下载</span></div>
+                    </div>
+                    <div class="yx_txt">{$vo.description}</div>
+                </a>
+            </li>
+         </volist>
+
+        </ul>
+    </div>
+
+    <div class="tags_cont">
+        <ul class="down_list">
+ 
+             <volist name="adata" id="vo">
+            <li>
+                <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">
+                    <div class="yx_left"><img src="{:get_cover($vo['smallimg'],'path')}"></div>
+                    <div class="yx_right">
+                        <div class="rgt_l">
+                            <div class="right1">
+                                <span class="ranking">{$i}</span>
+                                <div class="cr"><span class="title">{$vo.title}</span><span class="yx_cate">{$vo.categoryname}</span></div>
+                            </div>
+                            <div class="right2"><span class="num">{$vo.view}人已下载</span><span class="size">{:format_size($vo['size'])}</span></div>
+                        </div>
+                        <div class="rgt_r"><span class="down">下载</span></div>
+                    </div>
+                    <div class="yx_txt">{$vo.description}</div>
+                </a>
+            </li>
+         </volist>
+ 
+        </ul>
+    </div>
+
+    <div class="tags_cont">
+        <ul class="down_list">
+              <volist name="idata" id="vo">
+            <li>
+                <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">
+                    <div class="yx_left"><img src="{:get_cover($vo['smallimg'],'path')}"></div>
+                    <div class="yx_right">
+                        <div class="rgt_l">
+                            <div class="right1">
+                                <span class="ranking">{$i}</span>
+                                <div class="cr"><span class="title">{$vo.title}</span><span class="yx_cate">{$vo.categoryname}</span></div>
+                            </div>
+                            <div class="right2"><span class="num">{$vo.view}人已下载</span><span class="size">{:format_size($vo['size'])}</span></div>
+                        </div>
+                        <div class="rgt_r"><span class="down">下载</span></div>
+                    </div>
+                    <div class="yx_txt">{$vo.description}</div>
+                </a>
+            </li>
+         </volist>
+
+        </ul>
+    </div>
+</div>
+</section>
+
+{:W('Down/P7230mobile/morePh',array(array(31853,31855,31849)))}
+
+</block>

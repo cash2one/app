@@ -1,0 +1,13 @@
+ <div class="paih" id="paihtab">
+            <p class="title"><i class="cur">排行榜</i><i>最新</i></p>
+            <ul class="cur ulTab">
+        <Think:article basename="Down" name="dmain" limit="5" where='cover_id!=0&&category_rootid=1'>  
+<li><span><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="title">{$article.title} </a><b>{:getDownTag($article['id'])}</b><u class="rank01"></u></span></li>
+</Think:article>
+            </ul>
+            <ul class="ulTab">
+           <Think:article basename="Down" name="dmain" limit="5" where='cover_id!=0&&category_rootid=1' order="create_time">  
+<li><span><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $article['id'],'Down')}" target="_blank" class="title">{$article.title} </a><b>{:getDownTag($article['id'])}</b><u class="rank01"></u></span></li>
+</Think:article> 
+            </ul>
+        </div>

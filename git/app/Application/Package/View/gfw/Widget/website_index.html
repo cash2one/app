@@ -1,0 +1,45 @@
+<extend name="Home@gfw/Base/commonWebsite" />
+
+<block name="style">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/website.css"/>
+</block>
+
+<block name="body">
+<div class="h10"></div>
+<div class="p-novel">
+    <div class="web gf-border">
+        <h3 class="yule-title"><img src="__PUBLIC__/Home/gfw/images/yueleiicon22.png" width="17" height="18">热门点击</h3>
+        <ul class="web-icon">
+        	<volist name="hotList" id="hot" key="i">
+            	<li>
+            		<if condition='$i elt 3'>
+            			<b class="webicon1">{:$i}</b>
+            			<a href="{:staticUrl('detail',$hot['id'],'Package')}" target="_blank" class="ctext" title="{:$hot['title']}">{$hot['title']|msubstr=0,10,'utf-8',false}</a>
+            			<span class="gif-news1"></span>
+            		<else/>
+            			<b class="webicon2">{:$i}</b>
+            			<a href="{:staticUrl('detail',$hot['id'],'Package')}" target="_blank" title="{:$hot['title']}">{$hot['title']|msubstr=0,10,'utf-8',false}</a>
+            		</if>
+            	</li>
+        	</volist>
+        </ul>
+    </div>    
+    <!-----web-end----->
+    <!-- 最新收录网站推荐 -->
+    {:W('Gfw/websiteRecommended',array(30,'new'))}
+    <!-- 网站右侧会员模块 -->
+    <div class="main-right cfr">{:W('Home/Gfw/rightUser',array('all'))}</div>
+    <div id="banner-1" class="gf1000"><!-- 广告位：网站大全首页 --><center><script type="text/javascript">BAIDU_CLB_fillSlot("1123279");</script></center></div>
+	<!-----banner-1-end-----> 
+	<!-- 分类和网站列表 [参数:分类Id,层级,记录数]-->
+    {:W('Gfw/websiteList',array(5,2,32))}
+    {:W('Gfw/websiteList',array(1,2,20))}
+    {:W('Gfw/websiteList',array(2,2,28))}
+    {:W('Gfw/websiteList',array(3,2,20))}
+    {:W('Gfw/websiteList',array(4,2,16))}
+	<!-----website-end----->
+	<div id="place" class="gf-border">{:W('Gfw/websiteProvince')}</div>
+	<!-----place-end----->
+</div>
+<!-----p-novel   -end----->
+</block>

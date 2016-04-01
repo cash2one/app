@@ -1,0 +1,13 @@
+<!--相关推荐-->
+<section class="about-rec">
+    <if condition="$hot gt 0 ">
+    <div class="about-box">
+        <div class="title"><h3>热门推荐</h3></div>
+        <ul class="about-news">
+            <volist name="hot_list" id="hotlist">
+                <li><a href="{:staticUrlMobile('detail',$hotlist['id'],'Document')}">{$hotlist.title}</a></li>
+            </volist>
+        </ul>
+    </div>
+    </if>
+</section>

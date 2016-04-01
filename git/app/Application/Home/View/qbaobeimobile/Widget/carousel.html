@@ -1,0 +1,15 @@
+<!-- 轮播图 -->
+<eq name="count" value="1">
+    <section class="img-focus">
+        <div id="wraper2">
+            <div id="scroller">
+                <ul class="focus-pic">
+                    <volist name="list" id="list">
+                    <li><a href="{:staticUrlMobile('detail',$list['id'],'Document')}"><img src="{$list.smallimg|get_cover='path'}" alt="{$list.title}"></a></li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="circle"></div>
+        </div>
+    </section>
+</eq>

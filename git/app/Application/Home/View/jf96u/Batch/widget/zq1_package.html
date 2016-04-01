@@ -1,0 +1,8 @@
+<div class="game-libao dlList">
+    <div class="tit"><a href="{:staticUrl('detail',$package[0]['id'],'Package')}" target="_blank">更多</a><span>礼包领取</span></div>
+    <ul>
+        <volist name="package" id="val">
+        <li><a href="{:staticUrl('detail',$val['id'],'Package')}" class="otit" target="_blank">{$val['title']}</a><a href="{:staticUrl('detail',$val['id'],'Package')}" class="lq">领取</a></li>
+        </volist>
+    </ul>
+</div>

@@ -1,0 +1,12 @@
+<volist name="tree" id="val">
+    <dl id="{$val['id']}">
+        <dt>{$val['title']}</dt>
+        <dd>
+            <ul>
+                <volist name="val['child']" id="rel">
+                    <li id="{$rel['id']}"><a href="{:staticUrl('lists',$rel['id'],'Down')}">{$rel['title']}</a></li>
+                </volist>
+            </ul>
+        </dd>
+    </dl>
+</volist>

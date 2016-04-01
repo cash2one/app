@@ -1,0 +1,106 @@
+{:W('Home/Jf96ufeature/head')}
+<div class="dragable" widget="featureBase"></div>
+    <meta charset="utf-8">
+    <title>{$SEO['title']}</title>
+    <meta name="keywords" content="{$SEO['keywords']}"/>
+    <meta name="description" content="{$SEO['description']}"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/base.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/kfkc.css">
+    <script language="javascript"> window.DYNAMIC_SERVER_URL = '{$Think.config.DYNAMIC_SERVER_URL}';</script>
+{:W('Home/Jf96ufeature/body')}
+
+<include file="Home@jf96u/Public/topbar"/>
+
+<include file="Home@jf96u/Public/nav"/>
+<div class="main1200">
+    <div class="goback">当前位置：<a href="{:C('STATIC_URL')}">首页</a> > <a href="{:getWidgetPath(76,ture)}">专题合集</a> > {$info['title']}</div>
+    <div class="container">
+        <div class="kpage-top">
+            <div class="dragable" widget="image" style="background-color: #008000; border-color: #008000 !important;"><img src="http://www.96u.com/uploads/150205/1569-150205103S2609.jpg"></div>
+            <div class="kpage-des">
+                <h1><div class="dragable" widget="html" style="background-color: #008000;">模拟驾驶游戏大全</div></h1>
+                <div class="info"><div class="dragable" widget="html" style="background-color: #008000;">模拟驾驶游戏是模拟游戏中的一个分支，主要是模拟一些交通工具的驾驶技术，有些贴近我们的生活，有些会觉得异常刺激,模拟驾驶游戏是模拟游戏中的一个分支，主要是模拟一些交通工具的驾驶技术，有些贴近我们的生活，有些会觉得异常刺激</div></div>
+            </div>
+        </div>
+        <php>
+            $tid    =   M('ProductTagsMap')->field('tid')->where("did = ".$info['id']." and type = 'feature'")->getField('tid');
+        </php>
+        <div class="kpage-main">
+            <ul class="kpage-ul">
+                <div class="dragable" widget="down__down_category" style="background-color: #008000; width: 420px;">
+                <volist name="lists" id="val">
+                <li><a href="{:str_replace('index.html','',staticUrl('detail',$val['id'],'Down'))}" target="_blank" title="{$val['title']}"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a>
+                    <span class="text"><a href="{:str_replace('index.html','',staticUrl('detail',$val['id'],'Down'))}" target="_blank">{$val['name']}</a><p>{$val['title']}</p><p>{:date('Y-m-d',$val['update_time'])} | {$val['size']?$val['size']:'未知'}</p><p>版本：<php>echo $val['version']?$val['version']:"1.0";</php></p></span>
+                    <p class="info">{$val['description']}</p>
+                </li>
+                </volist>
+                </div>
+                <php>
+                    $num = count($lists);
+                    unset($lists);
+                    if($tid){
+                    W('Home/Jf96ufeature/get_tag',array($info['id'],$list_num,feature,false));
+                    }
+                </php>
+            </ul>
+        </div>
+        <notempty name="tid">
+        <div class="zt_more"><span onclick="ztmore($(this))">点击加载更多</span></div>
+        </notempty>
+        <!--合辑-->
+        <div class="kpage-hj">
+            <div class="mid-tit"><h3>推荐合集</h3><a href="{:C('STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/" target="_blank" class="more">更多</a></div>
+            <div class="autopic">
+                <span class="btn prev">prev</span>
+                <span class="btn next">next</span>
+                <div class="img-list">
+                    <ul class="clearfix">
+                        <!--li至少为6个-->
+                        <div class="dragable" widget="feature__tags" style="background-color: #008000; width: 360px;">
+                        <volist name="lists" id="val">
+                        <li><a href="{:C('STATIC_URL')}{$val['url']}" target="_blank"><img src="{:get_cover($val['icon'],'path')}"><span class="all-tit">{$val['title']}</span><b class="bg"></b></a></li>
+                        </volist>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Home@jf96u/Public/foot" />
+<notempty name="tid">
+<script>
+    function ztmore(self){
+        var li      =   $('.kpage-ul').find('.tag');
+        var t_li    = $('.kpage-ul').find('li');
+        var after_li = li;
+        if(!(li.length > 0)){
+            after_li = t_li;
+        }
+
+        $.ajax({
+            dataType:"jsonp",
+            jsonp:"callback",
+            url: DYNAMIC_SERVER_URL + '/dynamic.php?s=/Jf96u/API_tags/key/'+'{$tid}'+'/star/' + li.length,
+            success:function(data){
+                if(data){
+                    var li_html = '';
+                    for(i in data){
+                        li_html +=  '<li class="tag"><a href="'+data[i].url+'" target="_blank"><img src="'+data[i].img+'" alt="'+data[i].title+'"></a>';
+                        li_html +=  '<span class="text"><a href="'+data[i].url+'" target="_blank">'+data[i].title+'</a><p>'+data[i].cate+'</p><p>'+data[i].update_time+' | '+(data[i].size?data[i].size:'未知')+'</p>';
+                        li_html +=  '<p>版本：'+data[i].version+'</p></span><p class="info">'+data[i].description+'</p></li>';
+                    }
+                    after_li.last().after(li_html);
+                }else{
+                    self.html("没有更多数据了");
+                    self.css('background','none');
+                    self.css('cursor','auto');
+                    self.removeAttr('onclick');
+                }
+            }
+        });
+    }
+</script>
+</notempty>
+{:W('Home/Jf96ufeature/foot')}

@@ -1,0 +1,32 @@
+<ul class="baike-main-ul {$curr}">
+<volist name="cateList" id="vo">
+<PHP>
+$className = "one fgx";
+switch($key){
+   case '0' :
+   $className = "one fgx";
+   break;
+   case '1' :
+   $className = "two";
+   break;
+   case '2' :
+   $className = "three";
+   break;
+   case '3' :
+   $className = "four";
+   break;
+   case '4' :
+   $className = "five";
+   break;
+   case '5' :
+   $className = "six";
+   break;
+}
+
+ echo "<li class=".$className.">"; 
+</PHP>
+    <p class="title">{$vo['title']}</p>
+     {~W('Home/Qbaobei/cateContentList',array($vo['id']))}
+  </li>
+</volist>
+</ul>

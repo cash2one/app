@@ -1,0 +1,50 @@
+<extend name="Home@qbaobei/Base/commonJkms"/>
+<block name="body">
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("img").lazyload({ effect: "fadeIn" });
+        $("#featured").tabs({ fx: { opacity: "toggle"} }).tabs("rotate", 3000, true);
+        $("#featured").hover(
+			function() {
+				$("#featured").tabs("rotate", 0, true);
+			},function() {
+				$("#featured").tabs("rotate", 3000, true);
+			}
+		);
+    });
+</script>
+<div class="food-box">
+  <div class="food-line">
+  	<!-- 推荐图片 -->
+    {:W('Qbaobei/jkmsBanner')}
+    <div class="food-mini">
+      <!-- 热门推荐 -->
+      {:W('Qbaobei/jkmsPosition',array(8,1))}
+      <div class="clear"></div>
+      <!-- 热门专题 -->
+      {:W('Qbaobei/jkmsSubject')}
+    </div>
+    <div class="food-right-box">
+      <div class=" food-color2f8e00 food-right-box-tit">热门文章推荐</div>
+      <div class="food-right-box-nr">
+        {:W('Qbaobei/jkmsPosition',array(16,10,1,3))}
+        <div class="ads_top">
+        	<a href="http://www.qbaobei.com/hongbei/" target="_blank" >
+        	<img border="0" src="http://www.qbaobei.com/Template/Qbaobei/Skin/images/meishi/meishiindex20130306210-70.jpg" />
+        	</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="food-ad">
+    <div class="boxB1"> 
+    <!-- 广告位：美食频道 -->
+            <script type="text/javascript">BAIDU_CLB_fillSlot("1100785");</script>
+    </div>
+    <div class="boxB2">{:W('Qbaobei/jkmsBanner',array(3))}</div>
+  </div>
+  <div class="food-search-ad"> </div>
+  {:W('Qbaobei/jkmsCategoryList')}
+</div>
+</block>

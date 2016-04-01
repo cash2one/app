@@ -1,0 +1,9 @@
+     <!--热门专区-->
+        <div class="wrap-r" id="hot">
+            <h2><i>热门专区</i></h2>
+            <ul>
+                 <IndexTag:collection name="f" limit="10" where="Interface=0">
+                <li><a href="{:getCPath($f['id'],'batch')}" target="_blank"><img src="{:get_cover($f['icon'],'path')}"></a><a href="{:getCPath($f['id'],'batch')}" target="_blank" class="tit">{$f.title}</a></li>
+                  </IndexTag:collection>
+            </ul>
+        </div>

@@ -1,0 +1,6 @@
+<volist name="lists" id="val">
+    <li class="tag"><a href="{:str_replace('index.html','',staticUrl('detail',$val['id'],'Down'))}" target="_blank" title="{$val['title']}"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['title']}"></a>
+        <span class="text"><a href="{:str_replace('index.html','',staticUrl('detail',$val['id'],'Down'))}" target="_blank">{$val['title']}</a><p>{$val['cate']}</p><p>{:date('Y-m-d',$val['update_time'])} | {$val['size']?$val['size']:'未知'}</p><p>版本：<php>echo $val['version']?$val['version']:"1.0";</php></p></span>
+        <p class="info">{$val['description']}</p>
+    </li>
+</volist>

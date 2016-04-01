@@ -1,0 +1,108 @@
+<extend name="Package@ppcmobile/Base/common" />
+<block name="body">
+    <article class="content">
+        <section class="col-box">
+            <header class="col-hd">
+                <h2 class="title">最新礼包</h2>
+            </header>
+            <div class="mod-list-box">
+                <ul class="mod-app-intro">
+                    <Think:article basename="Package" name="pmain" limit="4" order="create_time desc">
+                        <li>
+                            <figure  data-url="{:staticUrlMobile('detail',$article['id'],'Package')}"> <img src="{:get_cover($article['cover_id'],'path')}"/>
+                                <figcaption>
+                                    <h3 class="tit">{$article.title}</h3>
+                                    <div class="syspuls"> 剩余：
+                                        <div class="c"> <span><code id="percent" style="width:14%;"></code><i>14%</i></span> </div>
+                                        <strong class="card_all" card-id="{$article['id']}" style="display:none;"></strong> <strong class="card_surplus" card-id="{$article['id']}" style="display:none;"></strong> </div>
+                                </figcaption>
+                                <span class="btn btn-c lqhl" data-url="{:staticUrlMobile('detail',$article['id'],'Package')}">领取</span> </figure>
+                        </li>
+                    </Think:article>
+                </ul>
+            </div>
+            <div class="app-more">
+                <p data-url="{:C('MOBILE_STATIC_URL')}/libao/">查看更多礼包</p>
+            </div>
+        </section>
+        <section class="col-box">
+            <ul class="mod-tab">
+                <li><a onclick="tabShow('menu_','con_',1,2);" id="menu_1" class="cur">热门礼包</a></li>
+                <li><a onclick="tabShow('menu_','con_',2,2);" id="menu_2">独家礼包</a></li>
+            </ul>
+            <div id="con_1">
+                <ul class="mod-app-intro">
+                    <Think:article basename="Package" name="pmain" limit="4" where="position & 1" order="create_time desc">
+                        <li>
+                            <figure  data-url="{:staticUrlMobile('detail',$article['id'],'Package')}"> <img src="{:get_cover($article['cover_id'],'path')}"/>
+                                <figcaption>
+                                    <h3 class="tit">{$article.title}</h3>
+                                </figcaption>
+                                <span class="btn btn-e yydd" data-url="{:staticUrlMobile('detail',$article['id'],'Package')}">预定</span> </figure>
+                        </li>
+                    </Think:article>
+                </ul>
+                <div class="app-more">
+                    <p data-url="{:C('MOBILE_STATIC_URL')}/libao/">查看更多热门礼包</p>
+                </div>
+            </div>
+            <div id="con_2" style="display:none;">
+                <ul class="mod-app-intro">
+                    <Think:article basename="Package" name="pmain" limit="4" where="position & 2" order="create_time desc">
+                        <li>
+                            <figure  data-url="{:staticUrlMobile('detail',$article['id'],'Package')}"> <img src="{:get_cover($article['cover_id'],'path')}"/>
+                                <figcaption>
+                                    <h3 class="tit">{$article.title}</h3>
+                                </figcaption>
+                                <span class="btn btn-e yydd" data-url="{:staticUrlMobile('detail',$article['id'],'Package')}">预定</span> </figure>
+                        </li>
+                    </Think:article>
+                </ul>
+                <div class="app-more">
+                    <p data-url="{:C('MOBILE_STATIC_URL')}/libao/">查看更多独家礼包</p>
+                </div>
+            </div>
+        </section>
+        <section class="col-box">
+            <div class="hr_10"></div>
+            <header class="col-hd">
+                <h2 class="title">热门手游</h2>
+            </header>
+            <div class="mod-list-box">
+                 <ul class="game-like">
+                    <li data-url="http://m.paopaoche.net/xia/80251/"> <img src="http://pic.paopaoche.net/up/2015-5/201557171746.jpg"/>
+                        <h3>梦幻西游</h3>
+                    </li>
+                    <li data-url="http://m.paopaoche.net/xia/68600/"> <img src="http://pic.paopaoche.net/up/2014-12/2014122515287.png"/>
+                        <h3>乱斗西游</h3>
+                    </li>
+                    <li data-url="http://m.paopaoche.net/xia/46871/"> <img src="http://pic.paopaoche.net/up/2015-4/201542315959.jpg"/>
+                        <h3>刀塔传奇</h3>
+                    </li>
+                    <li data-url="http://m.paopaoche.net/xia/83007/"> <img src="http://pic.paopaoche.net/up/2015-4/2015423163918.png"/>
+                        <h3>我叫MT2</h3>
+                    </li>
+                </ul>
+                <ul class='game-like' >
+                    <li data-url="http://m.paopaoche.net/xia/79341/"> <img src="http://pic.paopaoche.net/up/2015-3/2015320103348.jpg"/>
+                        <h3>新仙剑奇侠传</h3>
+                    </li>
+                    <li data-url="http://m.paopaoche.net/xia/76398/"> <img src="http://pic.paopaoche.net/up/2015-2/201523172645.jpg"/>
+                        <h3>大主宰</h3>
+                    </li>
+                    <li data-url="http://m.paopaoche.net/xia/54602/"> <img src="http://pic.paopaoche.net/up/2015-3/2015310141647.jpg"/>
+                        <h3>海岛奇兵</h3>
+                    </li>
+                    <li data-url="http://m.paopaoche.net/xia/55410/"> <img src="http://pic.paopaoche.net/up/2014-6/201462511248.jpg"/>
+                        <h3>太极熊猫</h3>
+                    </li>
+                </ul>
+                <ul class='game-like' >
+                </ul>
+            </div>
+            <div class="app-more">
+                <p data-url="http://m.paopaoche.net/wtui.html" >查看更多游戏</p>
+            </div>
+        </section>
+    </article>
+</block>

@@ -1,0 +1,86 @@
+{:W('Home/Jf96ufeature/head')}
+<div class="dragable" widget="featureBase"></div>
+    <php>$jfzt = $info;</php>
+    <include file="Home@jf96umobile/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/down.css">
+{:W('Home/Jf96ufeature/body')}
+<include file="Home@jf96umobile/Public/otherheader"/>
+<section class="zq-game dis-bot picauto-box">
+    <div class="picauto">
+        <div class="dragable" widget="image" style="width: 100%;background-color: #008000; border-color: #008000 !important;"><img src="http://m.pc6.com/public/img/huangtu.jpg"></div>
+        <div class="tit"> <div class="dragable" widget="html" style="background-color: #008000;">坦克世界开发商曝太空新游</div></div>
+    </div>
+    <div class="game-intro">
+        <div id="details"><div class="dragable" widget="html" style="background-color: #008000; height: 80px;">刀塔传奇：是一款卡牌类游戏，游戏在流畅度和画面上都做得非常不错，在以往的卡牌游戏上添加了自己一些新颖的玩法和特,刀塔传奇：是一款卡牌类游戏，游戏在流畅度和画面上都做得非常不错，在以往的卡牌游戏上添加了自己一些新颖的玩法和特。</div></div>
+        <p class="mid-more bottom-more"><a href="javascript:;"><span>点击查看更多</span><em class="arr"></em></a></p>
+    </div>
+</section>
+<section class="down-list dis-bot">
+    <div class="mid-title"><h2><div class="dragable" widget="html" style="background-color: #008000; width: 329px">安卓策略游戏</div></h2></div>
+    <ul class="down-game-ul">
+        <php>$list_num = 0;</php>
+        <div class="dragable" widget="down__down_category" style="background-color: #008000;">
+            <volist name="lists" id="val">
+            <php>$list_num++;</php>
+        <li><a href="{:str_replace('index.html','',staticUrlMobile('detail',$val['id'],'Down'))}" title="{$val['name']}" class="pic"><img src="{:get_cover($val['smallimg'],'path')}" alt="{$val['name']}"></a>
+            <span class="text">
+                <a href="{:str_replace('index.html','',staticUrlMobile('detail',$val['id'],'Down'))}" title="{$val['name']}">{$val['name']}</a>
+                <p>{$val['size']?$val['size']:'未知'}/{$val['title']}</p>
+            </span>
+            <a href="{:str_replace('index.html','',staticUrlMobile('detail',$val['id'],'Down'))}" class="down">下载</a>
+        </li>
+            </volist>
+            {:W('Home/Jf96ufeature/get_tag',array($info['id'],$list_num))}
+        </div>
+    </ul>
+    <php>
+        $tid    =   M('ProductTagsMap')->field('tid')->where("did = ".$info['id']." and type = 'feature'")->getField('tid');
+    </php>
+    <notempty name="tid">
+        <p class="mid-more bottom-more"><a href="javascript:void(0);" onclick="ztmore($(this))"><span>点击查看更多</span><em class="arr"></em></a></p>
+    </notempty>
+</section>
+        <php>unset($lists);</php>
+<section class="zq-list picauto-box">
+    <div class="mid-title"><h2>其他专题</h2></div>
+    <ul class="pic-list">
+        <div class="dragable" widget="feature__tags" style="background-color: #008000; width: 100%;">
+        <volist name="lists" id="val">
+        <li class="picauto"><a href="{:C('MOBILE_STATIC_URL')}{$val['url']}" title="{$val['title']}"><img src="{:get_cover($val['icon'],'path')}" alt="{$val['title']}"></a><a href="{:C('MOBILE_STATIC_URL')}{$val['url']}" class="tit">{$val['title']}</a></li>
+        </volist>
+        </div>
+        <php>unset($lists);</php>
+    </ul>
+</section>
+<include file="Home@jf96umobile/Public/otherfoot" />
+<script>
+    function ztmore(self){
+        var li      =   $('.down-game-ul').find('.tag');
+        var t_li    = $('.down-game-ul').find('li');
+        var after_li = li;
+        if(!(li.length > 0)){
+            after_li = t_li;
+        }
+
+        $.ajax({
+            dataType:"jsonp",
+            jsonp:"callback",
+            url: DYNAMIC_SERVER_URL + '/dynamic.php?s=/Jf96umobile/API_tags/key/'+'{$tid}'+'/star/' + li.length,
+            success:function(data){
+                if(data){
+                    var li_html = '';
+                    for(i in data){
+                        li_html +=  '<li class="tag"><a href="'+data[i].url+'" title="'+data[i].title+'" class="pic"><img src="'+data[i].img+'" alt="'+data[i].title+'"></a>';
+                        li_html +=  '<span class="text"><a href="'+data[i].url+'" title="'+data[i].title+'">'+data[i].title+'</a>';
+                        li_html +=  '<p>'+(data[i].size?data[i].size:'未知')+'/'+data[i].cate+'</p></span><a href="'+data[i].url+'" class="down">下载</a></li>';
+                    }
+                    after_li.last().after(li_html);
+                }else{
+                    self.html("没有更多数据了");
+                    self.removeAttr('onclick');
+                }
+            }
+        });
+    }
+</script>
+{:W('Home/Jf96ufeature/foot')}

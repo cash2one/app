@@ -1,0 +1,8 @@
+<section class="zq-list picauto-box">
+    <div class="mid-title"><h2>其他厂商</h2></div>
+    <ul class="pic-list">
+        <volist name="lists" id="val">
+        <li class="picauto"><a href="{$val['url']}" title="{$val['name']}"><img src="{:get_cover($val['img'],'path')}" alt="{$val['name']}"></a><a href="{$val['url']}" class="tit">{$val['name']}</a></li>
+        </volist>
+    </ul>
+</section>

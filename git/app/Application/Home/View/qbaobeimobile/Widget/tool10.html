@@ -1,0 +1,236 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/tools.css">
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > <a href="/tools/">工具</a> > 疫苗接种时间表</block>
+<block name="body">
+<!--工具详情-->
+<section class="tool-detail dis-bot">
+<h1>疫苗接种时间表</h1>
+<style>
+table th, table td{border:none;}
+</style>
+<div class="m-section">出生日期</div>
+<div class="m-input"><input type="date" name="" id="Jdata" /></div>
+<div class="m-work"><input type="submit" id="JworkOut" value="点击计算" /></div>
+<div class="m-result" id="Jresult">
+<div class="m-result-tit">查询结果</div>
+<p class="" style="color:#7CD3C7">疫苗接种时间表</p>
+<div class="" id="JresultTable" style="color:#333;display:none;font-size:12px;">
+<table width="100%" bgcolor="ffffff">
+<tr>
+<td width="27%" height="24" align="center" bgcolor="e7f2f8"> 接种日期 </td>
+<td width="19%" align="center" bgcolor="e7f2f8"> 年 龄 </td>
+<td width="29%" align="center" bgcolor="e7f2f8">疫苗种类</td>
+<td width="25%" align="center" bgcolor="e7f2f8"> 说 明 </td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate1"></span></td>
+<td align="center">出生时</td>
+<td align="center" bgcolor="#FAFAFA">卡介苗</td>
+<td align="center">初种</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate2"></span></td>
+<td align="center">出生时</td>
+<td align="center" bgcolor="#FAFAFA">乙肝疫苗</td>
+<td align="center">第一针</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate3"></span></td>
+<td align="center">1月足</td>
+<td align="center" bgcolor="#FAFAFA">乙肝疫苗</td>
+<td align="center">第二针</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate4"></span></td>
+<td align="center">2月足</td>
+<td align="center" bgcolor="#FAFAFA">脊髓灰质炎活疫苗</td>
+<td align="center">第一次</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate5"></span></td>
+<td align="center">3月足</td>
+<td align="center" bgcolor="#FAFAFA">卡介苗</td>
+<td align="center">OT复查</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate6"></span></td>
+<td align="center">3月足</td>
+<td align="center" bgcolor="#FAFAFA">脊髓灰质炎活疫苗</td>
+<td align="center">第二次</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate7"></span></td>
+<td align="center">3月足</td>
+<td align="center" bgcolor="#FAFAFA">百白破制剂</td>
+<td align="center">第一次</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate8"></span></td>
+<td align="center">4月足</td>
+<td align="center" bgcolor="#FAFAFA">脊髓灰质炎活疫苗</td>
+<td align="center">第三次</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate9"></span></td>
+<td align="center">4月足</td>
+<td align="center" bgcolor="#FAFAFA">百白破制剂</td>
+<td align="center">第二次</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate10"></span></td>
+<td align="center">5月足</td>
+<td align="center" bgcolor="#FAFAFA">百白破制剂</td>
+<td align="center">第三次</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate11"></span></td>
+<td align="center">6月足</td>
+<td align="center" bgcolor="#FAFAFA">乙肝疫苗</td>
+<td align="center">第三针</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate12"></span></td>
+<td align="center">8月足</td>
+<td align="center" bgcolor="#FAFAFA">麻疹活疫</td>
+<td align="center">第一针</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate13"></span></td>
+<td align="center">1岁</td>
+<td align="center" bgcolor="#FAFAFA">乙脑疫苗</td>
+<td align="center">初免两针</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate14"></span></td>
+<td align="center">1岁半至2岁</td>
+<td align="center" bgcolor="#FAFAFA">脊髓灰质炎活疫苗</td>
+<td align="center">加强</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate15"></span></td>
+<td align="center">1岁半至2岁</td>
+<td align="center" bgcolor="#FAFAFA">百白破制剂</td>
+<td align="center">加强</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate16"></span></td>
+<td align="center">1岁半至2岁</td>
+<td align="center" bgcolor="#FAFAFA">乙脑疫苗</td>
+<td align="center">加强</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate17"></span></td>
+
+<td align="center">4岁</td>
+<td align="center" bgcolor="#FAFAFA">脊髓灰质炎活疫苗</td>
+<td align="center">加强</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate18"></span></td>
+<td align="center">4岁</td>
+<td align="center" bgcolor="#FAFAFA">麻疹活疫</td>
+<td align="center">加强</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate19"></span></td>
+<td align="center">7岁</td>
+<td align="center" bgcolor="#FAFAFA">百白破制剂</td>
+<td align="center">加强(白破)</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate20"></span></td>
+<td align="center">7岁</td>
+<td align="center" bgcolor="#FAFAFA">麻疹活疫</td>
+<td align="center">加强</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate21"></span></td>
+<td align="center">7岁</td>
+<td align="center" bgcolor="#FAFAFA">乙脑疫苗</td>
+<td align="center">初免两针</td>
+</tr>
+<tr>
+<td height="24" align="center" bgcolor="#FAFAFA"><span id="ymDate22"></span></td>
+<td align="center">12岁</td>
+<td align="center" bgcolor="#FAFAFA">卡介苗</td>
+<td align="center">加强(农村)</td>
+</tr>
+</table>
+</div>
+</div>
+</section>
+</block>
+<block name="script">
+<script type="text/javascript">
+function $$(id) {
+return (typeof id == "object") ? id : document.getElementById(id);
+}
+function touchEvent(elm, fn) {
+if ("ontouchstart" in document.documentElement) {
+elm.addEventListener("touchstart", fn, false);
+} else {
+elm.addEventListener("click", fn, false);
+}
+}
+//写入当前日期
+function checkTime(num) {
+if (num < 10) {
+num = "0" + num;
+}
+return num;
+}
+$(function(){
+    var d = new Date();
+	var year = d.getFullYear();
+	var month = d.getMonth()+1;
+	var date = d.getDate();
+	var bIsi9300 = navigator.userAgent.toLowerCase().match(/i9300/i) == "i9300";
+	if (!bIsi9300) {
+		$("#Jdata").val(year + '-' + checkTime(month) + '-' + checkTime(date));
+	};
+	$("#Jdata").attr("placeholder",'请输入日期，格式：' + year + '-' + checkTime(month) + '-' + checkTime(date));
+});
+var JworkOut = $$("JworkOut"),
+Jdata = $$("Jdata"),
+JresultTable = $$("JresultTable");
+touchEvent(JworkOut, function() {
+var y = Jdata.value.split("-")[0],
+m = Jdata.value.split("-")[1],
+d = Jdata.value.split("-")[2];
+var birthDate = new Date(y, m, d);
+$$("ymDate1").innerHTML = dateByMonth(birthDate, 0);
+$$("ymDate2").innerHTML = dateByMonth(birthDate, 0);
+$$("ymDate3").innerHTML = dateByMonth(birthDate, 1);
+$$("ymDate4").innerHTML = dateByMonth(birthDate, 2);
+$$("ymDate5").innerHTML = dateByMonth(birthDate, 3);
+$$("ymDate6").innerHTML = dateByMonth(birthDate, 3);
+$$("ymDate7").innerHTML = dateByMonth(birthDate, 3);
+$$("ymDate8").innerHTML = dateByMonth(birthDate, 4);
+$$("ymDate9").innerHTML = dateByMonth(birthDate, 4);
+$$("ymDate10").innerHTML = dateByMonth(birthDate, 5);
+$$("ymDate11").innerHTML = dateByMonth(birthDate, 6);
+$$("ymDate12").innerHTML = dateByMonth(birthDate, 8);
+$$("ymDate13").innerHTML = dateByMonth(birthDate, 12);
+$$("ymDate14").innerHTML = dateByMonth(birthDate, 18) + " ～ " + dateByMonth(birthDate, 24);
+$$("ymDate15").innerHTML = dateByMonth(birthDate, 18) + " ～ " + dateByMonth(birthDate, 24);
+$$("ymDate16").innerHTML = dateByMonth(birthDate, 18) + " ～ " + dateByMonth(birthDate, 24);
+$$("ymDate17").innerHTML = dateByMonth(birthDate, 48);
+$$("ymDate18").innerHTML = dateByMonth(birthDate, 48);
+$$("ymDate19").innerHTML = dateByMonth(birthDate, 84);
+$$("ymDate20").innerHTML = dateByMonth(birthDate, 84);
+$$("ymDate21").innerHTML = dateByMonth(birthDate, 84);
+$$("ymDate22").innerHTML = dateByMonth(birthDate, 144);
+JresultTable.style.display = "block";
+$$("Jresult").style.display = "block";
+// $$("Jtip").style.display = "none";
+});
+function dateByMonth(myDate, month) {
+var tempDate = new Date(myDate);
+tempDate.setMonth(tempDate.getMonth() + month);
+var dateString = tempDate.getFullYear() + "-" + (tempDate.getMonth() + 1) + "-" + tempDate.getDate();
+return dateString;
+}
+</script>
+</block>

@@ -1,0 +1,13 @@
+<div class="focus5">
+	<ul class="focus5-ul">
+	  <document model="2" typeid="$info[category_id]" flag="detail_recom,1" limit="3" notin="$info[id]">
+		<li>
+			<a href="{$document.url}" title="{$document.title}">
+				<img src="{:get_thumb($document[atlas_c], $document[atlas], '380x430')}" alt="{$document.title}">
+				<span class="all-tit"><em class="left-arr"></em><i class="text">{$document.title}</i><em class="right-arr"></em><b class="bg"></b></span>
+			</a>
+		</li>
+	  </document>
+	</ul>
+	<div class="circle"></div>
+</div>

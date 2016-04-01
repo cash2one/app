@@ -1,0 +1,7 @@
+ <volist name="ranks"  id="f" >
+   <li><a href="{:staticUrl('detail', $f['id'],'Down')}" target="_blank"><img src="{:get_cover($f['smallimg'],'path')}"></a>
+              <div><a href="{:staticUrl('detail', $f['id'],'Down')}" target="_blank" class="tit">{$f['title']}</a><b><i>{$f['size']}</i><i>{:getCateName($f['id'],'Down')}</i><i class="adr"></i><a href="{:staticUrl('detail', $f['id'],'Down')}">游戏下载</a></b>
+              <b class="info">{$f['description']}</b></div>
+              <em>{$key+1}</em>
+              </li>
+       </volist>

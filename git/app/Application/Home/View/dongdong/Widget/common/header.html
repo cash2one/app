@@ -1,0 +1,27 @@
+<block name="header">
+
+<div id="nav">
+    <div class="main">
+        <a href="{:getWidgetPath(1, true)}" class="logo">
+            <img src="__PUBLIC__/Home/dongdong/gw/images/ddgw-logo.png" alt="首页">
+        </a>
+        <php>
+            function is_current($cur_str)
+            {
+                $method = strtolower(I('method'));
+                echo ($method == $cur_str) ? 'class="cur"' : '';
+            }
+
+        </php>
+        <span>
+            <a href="{:getWidgetPath(1, true)}" <php>is_current('index')</php>>首页</a>
+            <a href="{:C('STATIC_URL')}" >应用中心</a>
+            <a href="{:staticUrl('lists',2,'Document')}" <php>echo MODULE_NAME === 'Document'?'class="cur"' : '';</php>>助手教程</a>
+            <a href="{:getWidgetPath(2, true)}" <php>is_current('update_log')</php>>更新日志</a>
+            <a href="{:getWidgetPath(3, true)}" <php>is_current('help')</php>>帮助中心</a>
+            <a href="{:getWidgetPath(4, true)}" <php>is_current('feedback')</php>>问题反馈</a>
+        </span>
+    </div>
+</div>
+
+</block>

@@ -1,0 +1,27 @@
+<volist name="productList" id="product">
+<?php 
+$imgId = 0;
+if(!empty($product['previewimg'])){
+	$imgArr = explode(',', $product['previewimg']);
+	$imgId = $imgArr[0];
+}
+?>
+<dl class="hot-main">
+	<dt class="hot-pic">
+		<a href="{:staticUrl('detail',$product['id'],'Down')}"> <img
+			src="{:get_cover($imgId,'path')}" width="150"
+			height="150" title="{:$product['title']}" />
+		</a>
+	</dt>
+	<dd class="hot-title">
+		<a href="{:staticUrl('detail',$product['id'],'Down')}">{:$product['title']}</a>
+	</dd>
+	<dd class="price">
+		<span class="red"> ￥ <if condition="empty($product['price'])">
+			0.00 <else /> {:$product['price']} </if>
+		</span> <em> ￥ <if condition="empty($product['price'])"> 0.00 <else />
+			{:$product['market_price']} </if>
+		</em>
+	</dd>
+</dl>
+</volist>

@@ -1,0 +1,69 @@
+<extend name="Home@qbaobei/Base/commonPC2" />
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/css/channel.css" /></block>
+<block name="body">
+<!--head部分-->
+<div class="wrap channel-head">
+    <div class="wrap adv1200_103"><center><script type="text/javascript">BAIDU_CLB_fillSlot("1135455");</script></center></div>
+    <div class="head-main">
+        <div class="left">
+            <a href="{:C('STATIC_URL')}" class="logo">亲亲宝贝网</a>
+            <h1>图库</h1>
+        </div>
+        <div class="middle"><p class="goback"><span>您的位置：</span><a href="{:C('STATIC_URL')}">亲亲宝贝网</a>><span>图库首页</span></p></div>
+        <include file="Home@qbaobei/Public/PC2/search" />
+    </div>
+</div>
+<div class="channel-nav  show-channel-nav">
+  <div class="wrap nav-main">
+        <ul class="nav-ul">                                                         
+            <li><a href="{:C('STATIC_URL')}/tuku/">图库首页</a></li>
+            <li><a href="{:staticUrl('lists',360,'Gallery')}">宝宝图库</a>
+                {~W('Gallery/Qbaobei/showChildMenu',array('360'))}
+            </li>
+            <li><a href="{:staticUrl('lists',374,'Gallery')}">明星亲子</a>
+                {~W('Gallery/Qbaobei/showChildMenu',array('374'))}
+            </li>
+            <li><a href="{:staticUrl('lists',369,'Gallery')}">儿童摄影</a>
+              {~W('Gallery/Qbaobei/showChildMenu',array('369'))}
+            </li>
+            <li><a href="{:staticUrl('lists',377,'Gallery')}">生活图库</a>
+              {~W('Gallery/Qbaobei/showChildMenu',array('377'))}
+            </li>
+             <li><a href="{:staticUrl('lists',365,'Gallery')}">孕产图库</a>
+              {~W('Gallery/Qbaobei/showChildMenu',array('365'))}
+            </li>
+        </ul>
+            {~W('Gallery/Qbaobei/showMenuTag')}
+    </div>
+
+</div>
+<!--频道主体部分 start-->
+<div class="channel-main">
+    <div class="wrap baike-list-wrap">
+    <!--chanbox-->
+    <div class="fn-area chanbox1">
+      {~W('Document/Qbaobei/tukuHeadline')}
+    </div>
+    <div class="baike-main">
+        <div class="baike-main-l">
+            <!--广告-->
+            <div class="adv927_103">
+            <!-- 广告位：频道页横幅广告 -->
+                  <center><script type="text/javascript">BAIDU_CLB_fillSlot("1135455");</script> </center>
+            </div>
+             <!--图库list-->
+        {~W('Document/Qbaobei/tukuIndexList',array('360','1','宝宝','one'))}
+            <!--图库list-->
+        {~W('Document/Qbaobei/tukuIndexList',array('365','2','孕产','two'))}
+            <!--图库list-->
+        {~W('Document/Qbaobei/tukuIndexList',array('369','1','儿童','three'))}
+            <!--图库list-->
+        {~W('Document/Qbaobei/tukuIndexList',array('374','2','开心','four'))}
+            <!--图库list-->
+        {~W('Document/Qbaobei/tukuIndexList',array('377','1','生活','five'))}
+        </div>
+    </div>
+ </div>
+</div>
+<!--频道主体部分 end-->
+</block>

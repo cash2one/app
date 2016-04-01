@@ -1,0 +1,26 @@
+<div class="pic-list">
+  <div class="fn-title fn-title-l"><em class="ico {$ico}"></em><a href="{:staticUrl('lists',$cate,'Gallery')}" target="_blank" class="more">更多{$title}图库>></a>
+    <h2><i>{$title}</i>图库</h2>
+  </div>
+  <div class="pic-list-main">
+     <volist name="lists" id="vo">
+          <switch name="key" >
+          <case value="0">
+           <div class="pic-l"><a href="{:staticUrl('detail', $vo['id'],'Gallery')}" title="{$vo['title']}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><span class="tit">{$vo['title']}</span></a></div>
+          </case>
+          <case value="1">
+           <div class="pic-r">
+                <ul class="pic-ul">
+                <li><a href="{:staticUrl('detail', $vo['id'],'Gallery')}" title="{$vo['title']}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><span>{$vo['title']}</span></a></li>
+          </case>
+          <case value="10">
+                   <li><a href="{:staticUrl('detail', $vo['id'],'Gallery')}" title="{$vo['title']}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><span>{$vo['title']}</span></a></li>
+                   </ul>
+          </case>
+          <default /> <li><a href="{:staticUrl('detail', $vo['id'],'Gallery')}" title="{$vo['title']}" target="_blank"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo['title']}"><span>{$vo['title']}</span></a></li>
+          </switch>
+     </volist>
+
+    </div>
+  </div>
+</div>

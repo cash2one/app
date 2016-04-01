@@ -1,0 +1,15 @@
+<extend name="Home@afsmobile/Base/common"/>
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Document/afsmobile/css/news.css"/>
+</block>
+<block name="body">
+   <!--game_rec-->
+   <section id="game_rec" class="news_list">
+       <ul>
+        <volist  name="lists" id="article">
+            <li><a href="{:staticUrlMobile('detail', $article['id'],'Document')}"><img src="{:get_cover($article['cover_id'],'path')}"></a><span><a href="{:staticUrlMobile('detail', $article['id'],'Document')}">{$article.title}</a><i>{$article.description}</i></span></li>
+        </volist>
+       </ul>
+        <div class="page">{$page}</div>
+   </section>
+</block>

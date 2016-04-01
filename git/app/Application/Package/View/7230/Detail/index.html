@@ -1,0 +1,111 @@
+<extend name="Home@7230/Base/common" xmlns:Think="http://www.w3.org/1999/html"/>
+        
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Package/7230/css/libao.css"/></block>
+<block name="body">
+    <div id="libao-main">
+    <p class="page-nav">当前位置：{:getCrumbs(array('detail',$info['id'],'Package'))}</p>
+       <!--主体左边开始-->
+        <div id="lbxq-left">
+            <div class="xql-top">
+                <a href="" target="_blank" class="pic"><s>礼</s><img src="{:get_cover($info['cover_id'],'path')}"></a>
+                <span>
+                    <a href="" target="_blank">{$info.title}</a>
+                    <i class="time">有效期：{:date('Y.m.d',$info['start_time'])}-{:date('Y.m.d',$info['end_time'])}</i>
+                    <i class="wail">
+                        <s class="lh" id="draw">领号</s>
+                        <b>
+                         {:W('P7230/official',array($info['id']))}
+                        </b>
+                    </i>
+                    <i class="info">主评推荐：{$info.description}</i>
+                        <i class="zan praise_api" data-id="{$info.id}" data-model="Down">{$info.abet}</i>
+                        </span>
+                        <div class="demo">
+                            <b></b>
+                            <input class="card_all card_surplus card_per" card-id="{$info.id}" data-width="100" data-displayinput="true" data-displayprevious="true" value="0" >
+                            <p>库存量</p>
+                        </div>
+                        <div class="lbxxk"><b>您今天已经领过了！</b>你领取的卡号为：1631A4E6F9CMR　　点击<a href="" target="_blank">进入官网</a></div>
+                    </div>
+
+                    <!--礼包说明-->
+                    <div class="lbsm">
+                        <p class="lbxg"><i class="cur">礼包说明</i><i>相关礼包</i></p>
+                        <!-- JiaThis Button BEGIN -->
+                        <div class="wyfx">
+                            <div class="jiathis_style">
+                                <b>我要分享：</b>
+                                <a class="jiathis_button_qzone"></a>
+                        <a class="jiathis_button_tsina"></a>
+                        <a class="jiathis_button_tqq"></a>
+                        <a class="jiathis_button_weixin"></a>
+                        <a class="jiathis_button_renren"></a>
+                        <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                        <a class="jiathis_counter_style"></a>
+                    </div>
+                </div>
+                <!-- JiaThis Button END -->                
+                <div class="nrong current">
+                    <p class="lbjh"><i>礼包内容</i><b></b></p>
+                    <div class="neir">
+                        {$info.content}
+                    </div>
+                    <p class="lbjh"><i>激活方法</i><b></b></p>
+                    <div class="neir">
+                        {$info.activation}
+                    </div>
+                </div>
+                <div class="nrong ">
+                    <ul>
+                        {:W('P7230/otherPackage',array($info['id']))}
+                    </ul>
+                </div>
+            </div>
+            
+            <!--评论部分-->
+            <p class="yxcp-title"><em>网友评论</em></p>
+            <div id="pinglun">
+                <form action="" method="" name="" id="pl"  data-id="{$info['id']}" data-model="package">
+                    <p><input type="text" value="游客" id="user"><span><i class="qd">值得期待，赞！</i><i class="jy"> 打个酱油！</i><i class="ca">踩一脚！</i></span></p>
+                    <p class="bot"><b></b><textarea></textarea><input type="button" value="发表评论" id="btn"></p>
+                </form>
+                <ul class="comment_lists" data-id="{$info['id']}" data-model="package"></ul>
+                <p class="more"><a href="{:C('STATIC_URL')}/P7230/commentIndex/id/{$info['id']}/model/package" target="_blank">点击查看更多评论</a></p>
+            </div>
+        </div>
+       <!--主体右边开始-->
+        {:W('P7230/packageRankNew',array($info['id']))}
+    </div>
+</block>
+
+<block name="Commonscript">
+    <script language="javascript"> 
+    $(function(){ 
+        //领取
+        $('#draw').click(function() {
+            $.ajax({
+                type : "get",
+                dataType:"jsonp",
+                jsonp:"callback",
+                jsonpCallback:"drawCard",
+                url: DYNAMIC_SERVER_URL + '/Card/drawCard/id/{$info.id}.html',
+                //data: {id : draw_id},
+                success: function(data){
+                    if(data){
+                        data = eval(data);
+                        if(data.error){
+                            $('.xql-top .lbxxk').html('<b>'+data.error+'<b>');
+                        }else{
+                            $('.xql-top .lbxxk').html('你领取的卡号为：'+ data.row +'　　点击<a href="/" target="_blank">进入官网</a>');
+                        }
+                        $('.xql-top .lbxxk').slideDown();                        
+                        $('#lbxq-left .xql-top span i.wail s').css('backgroundColor', '#ccc');
+                        $('#draw').unbind("click");
+                    }
+                }
+            });
+        });       
+    }); 
+    </script>
+
+</block>

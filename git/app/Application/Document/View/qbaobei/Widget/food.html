@@ -1,0 +1,50 @@
+<div class="detail-area shipu-detail">
+    <notempty name="info['age']">
+        <dl>
+            <dt class="title">适宜年龄</dt>
+            <dd class="gongx-tag"><span class="tag">{$info['age']}</span></dd>
+        </dl>
+    </notempty>
+    <notempty name="info['efficacy']">
+        <dl>
+            <dt class="title">功效</dt>
+            <dd class="gongx-tag"><volist name="info['efficacy']" id="val"><span class="tag">{$val}</span></volist></dd>
+        </dl>
+    </notempty>
+    <notempty name="info['foodstuff']">
+        <dl>
+            <dt class="title">主料</dt>
+            <dd><ul class="dd-material">
+                <volist name="info['foodstuff']" id="val">
+                    <li><span class="tit">{$val[0]}</span><span class="kg">{$val[1]}</span></li>
+                </volist>
+            </ul></dd>
+        </dl>
+    </notempty>
+    <notempty name="info['accessories']">
+        <dl>
+            <dt class="title">辅料</dt>
+            <dd><ul class="dd-material">
+                <volist name="info['accessories']" id="val">
+                    <li><span class="tit">{$val[0]}</span><span class="kg">{$val[1]}</span></li>
+                </volist>
+            </ul></dd>
+        </dl>
+    </notempty>
+    <dl>
+        <dt class="title">制作步骤</dt>
+        <dd><ul class="dd-steps">
+            <volist name="info['stepList']" id="val">
+                <li><img src="{$val['img']}"><div class="tit"><div>{$val['number']}.{$val['title']}</div></div></li>
+            </volist>
+        </ul></dd>
+    </dl>
+    <notempty name="info['tips']">
+        <dl class="tishi">
+            <dt class="title">小贴士</dt>
+            <volist name="info['tips']" id="val">
+                <dd>{$val}</dd>
+            </volist>
+        </dl>
+    </notempty>
+</div>

@@ -1,0 +1,53 @@
+<!--游戏攻略-->
+<php>if($gl){</php>
+<p class="yxcp-title"><em>游戏攻略</em></p>
+<div class="yxgl">
+    <ul>
+        <volist name="gl" id="val">
+        <li><i>{:date('m-d',$val['create_time'])}</i><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+<php>}</php>
+<!--礼包开测-->
+<div class="libao-kaice">
+    <div class="libao">
+        <p class="yxcp-title"><em>游戏礼包</em></p>
+        <ul>
+            <volist name="lb" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank" class="title">{$val['title']}</a><b>{:date('Y-m-d',$val['start_time'])} 至 {:date('Y-m-d',$val['end_time'])}</b><b>库存：30%</b><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank" class="lq">领取</a></li>
+            </volist>
+        </ul>
+    </div>
+    <div class="kaice">
+        <p class="yxcp-title"><em>开服表</em></p>
+        <ul>
+            <volist name="kf" id="val">
+            <li><span>{:date('Y-m-d H:i:s',$val['start_time'])}</span><i>{$val['server']}</i></li>
+            </volist>
+        </ul>
+
+    </div>
+</div>
+<!--相关应用-->
+<p class="yxcp-title"><em>相关应用</em></p>
+<div class="xgyy">
+    <ul>
+        <volist name="xgyy" id="val">
+        <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+
+<!--同一开发者-->
+<php>if($cs){</php>
+<p class="yxcp-title"><em>相同厂商</em></p>
+<div class="xgyy">
+    <ul>
+        <li class="fm"><a href="{:C('STATIC_URL')}/{$cs['path']}/" target="_blank"><img src="{:get_cover($cs['img'],'path')}"><u>{$cs['name']}</u><s></s></a></li>
+        <volist name="csyx" id="val">
+        <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+<php>}</php>

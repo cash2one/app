@@ -1,0 +1,22 @@
+<div class="paih" id="paihtab">
+    <p class="title"><i class="cur">安卓</i><i>IOS</i></p>
+    <ul class="cur ulTab">
+        <volist name="data['adr']" id="val">
+            <li><span><a href="{:staticUrl('detail', $val['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $val['id'],'Down')}" target="_blank" class="title">{$val.title} </a><b>{$val['tag']}</b><u class="rank01"></u></span></li>
+        </volist>
+    </ul>
+    <ul class="ulTab">
+        <volist name="data['ios']" id="val">
+            <li><span><a href="{:staticUrl('detail', $val['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail', $val['id'],'Down')}" target="_blank" class="title">{$val.title} </a><b>{$val['tag']}</b><u class="rank01"></u></span></li>
+        </volist>
+    </ul>
+</div>
+
+<div class="rmzq">
+    <p class="title">热门专区<a href="{:C('STATIC_URL')}/zq/" target="_blank" class="more"></a></p>
+    <span>
+    <volist name="batch" id="val">
+        <a href="{:C('STATIC_URL')}/{:C('FEATURE_ZQ_DIR')}/{$val['url_token']}" target="_blank"><img src="{:get_cover($val['icon'],'path')}"></a>
+    </volist>
+</span>
+</div>

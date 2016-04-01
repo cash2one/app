@@ -1,0 +1,11 @@
+<div class="myjk-zhou">
+    <div class="myjk-tit"><span>编辑推荐</span></div>
+    <div class="myjk-main">
+        <a href="{:staticUrl('detail',$first['id'],'Document')}" target="_blank"><img src="{$first.smallimg|get_cover='path'}"></a>
+        <div class="myjk-m-right">
+            <volist name="lists" id="list" key="j">
+                <a href="{:staticUrl('detail',$list['id'],'Document')}" target="_blank" <if condition="$j eq 1 ">class="tit" </if>>{$list.title}</a>
+            </volist>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<!-- 大家爱玩 -->
+
+<section class="play_wrap" data-sudaclick="main_love">
+  <h3><i>大家爱玩</i><span><a href="javascript:void(0);" id="reflesh"><strong class="sx"></strong>换一换</a></span></h3>
+  <div class="play_box">
+    <ul class="clear">
+      <volist name="lists" id="vo" offset="0" length='8'>
+        <li><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo.title}">
+          <p>{$vo.title}</p>
+          </a></li>
+      </volist>
+    </ul>
+    <ul class="clear" style="display:none;">
+      <volist name="lists" id="vo" offset="8" length='8'>
+        <li><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo.title}">
+          <p>{$vo.title}</p>
+          </a></li>
+      </volist>
+    </ul>
+    <ul class="clear" style="display:none;">
+      <volist name="lists" id="vo" offset="16" length='8'>
+        <li><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}"><img src="{:get_cover($vo['smallimg'],'path')}" alt="{$vo.title}">
+          <p>{$vo.title}</p>
+          </a></li>
+      </volist>
+    </ul>
+  </div>
+</section>

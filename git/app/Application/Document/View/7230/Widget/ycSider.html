@@ -1,0 +1,10 @@
+ <div class="hot" id="hottab">
+            <p class="title">最新资讯<a href="" target="_blank" class="more"></a></p>
+            <ul class="ulTab">
+                 <Think:article basename="Document" name="article" limit="8" order="create_time" >    
+                 <li><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a><b>{$article.abet}人觉得非常赞</b></li>
+               </Think:article> 
+            </ul>
+        </div>
+        <!---热点资讯(hot) END---->
+    {~W('P7230/Latest')}

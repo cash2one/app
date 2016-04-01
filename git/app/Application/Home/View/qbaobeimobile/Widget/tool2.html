@@ -1,0 +1,132 @@
+<extend name="Home@qbaobeimobile/Base/common2"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/tools.css">
+</block>
+<block name="breadcrumbnav"><a href="{$Think.config.MOBILE_STATIC_URL}">首页</a> > <a href="/tools/">工具</a> > 预产期计算器</block>
+<block name="body">
+<!--工具详情-->
+<section class="tool-detail dis-bot">
+    <h1>预产期计算器</h1>
+<div class="m-section">平均月经周期(周)</div>
+<div class="itemA" id="JitemA">
+<a class="l" id="Jminus">-</a>
+<span class="m" id="Jnums">4</span>
+<a class="r" id="Jadds">+</a>
+</div>
+<div class="m-section">最后一次月经</div>
+<div class="m-input"><input type="date" name="" id="Jdata" /></div>
+<div class="m-work"><input type="submit" id="JworkOut" value="点击计算" /></div>
+<div class="m-result" id="Jresult">
+<div class="m-result-tit">查询结果</div>
+<p>您的预产期为：<em id="rA">~</em></p>
+<p>您现在正处于孕期的第<em id="rB">~</em>周</p>
+</div>
+
+</section>
+</block>
+<block name="script">
+<script type="text/javascript">
+function $$(id) {
+return (typeof id == "object") ? id : document.getElementById(id);
+}
+//写入当前如期
+function checkTime(num){
+if (num < 10) {
+num = "0" + num;
+}
+return num;
+}
+$(function(){
+    var d = new Date();
+	var year = d.getFullYear();
+	var month = d.getMonth()+1;
+	var date = d.getDate();
+	var bIsi9300 = navigator.userAgent.toLowerCase().match(/i9300/i) == "i9300";
+	if (!bIsi9300) {
+		$("#Jdata").val(year + '-' + checkTime(month) + '-' + checkTime(date));
+	};
+	$("#Jdata").attr("placeholder",'请输入日期，格式：' + year + '-' + checkTime(month) + '-' + checkTime(date));
+});
+var JitemA = $$("JitemA");
+var Jminus = $$("Jminus"),
+Jadds = $$("Jadds"),
+Jnums = $$("Jnums"),
+Jdata = $$("Jdata"),
+yueWeek = parseInt(Jnums.innerHTML), //月经周期
+JworkOut = $$("JworkOut"),
+rA = $$("rA"),
+rB = $$("rB");
+function touchEvent(elm, fn) {
+if ("ontouchstart" in document.documentElement) {
+elm.addEventListener("touchstart", fn, false);
+} else {
+elm.addEventListener("click", fn, false);
+}
+}
+touchEvent(Jminus, function() {
+if (yueWeek > 3) {
+yueWeek--;
+Jnums.innerHTML = yueWeek;
+}
+return;
+});
+touchEvent(Jadds, function() {
+if (yueWeek < 5) {
+yueWeek++;
+Jnums.innerHTML = yueWeek;
+}
+return;
+});
+touchEvent(JworkOut, function() {
+var y = Jdata.value.split("-")[0], //年
+m = Jdata.value.split("-")[1], //月
+d = Jdata.value.split("-")[2]; //日
+if (y == "" || m == "" || d == "") {
+showTopTip("请输入日期!");
+hideTopTip();
+return false;
+}
+var stime = m + "/" + d + "/" + y;
+var stime2 = Date.parse(stime) + (36 + yueWeek * 1) * 7 * 24 * 3600 * 1000;
+var yuchan2 = new Date(stime2);
+var yuchan = yuchan2.getFullYear() + "-" + (yuchan2.getMonth() + 1) + "-" + yuchan2.getDate();
+var nowt = new Date();
+var nowtime = nowt.getTime();
+var chatime = nowtime - Date.parse(stime);
+var chaweek = Math.ceil((chatime) / (1000 * 3600 * 24 * 7));
+if (chaweek < 1) chaweek = 1;
+if (chaweek > 43) {
+showTopTip("你的预产期已过!");
+hideTopTip();
+}
+$$("Jresult").style.display = "block";
+rA.innerHTML = yuchan;
+rB.innerHTML = chaweek;
+});
+function showTopTip(msg) {
+var tipEle = document.getElementById("JtopTipMsg");
+if (!tipEle) {
+tipEle = document.createElement("div");
+tipEle.id = "JtopTipMsg";
+tipEle.style.cssText = "display:none;width:120px;padding:10px;line-height:20px;font-size:12px;background-color:rgba(000,000,000,0.9);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;color:#fff;text-align:center;-webkit-transition:all 0.3s ease-in;transition:all 0.3s ease-in;position:fixed;top:50%;left:50%;margin-left:-70px;margin-top:-20px;opacity:1;z-index:999;";
+document.body.appendChild(tipEle);
+}
+tipEle.innerHTML = msg;
+tipEle.style.display = "block";
+setTimeout(function() {
+tipEle.style.opacity = "1";
+}, 0);
+}
+function hideTopTip() {
+var tipEle = document.getElementById("JtopTipMsg");
+if (tipEle) {
+setTimeout(function() {
+tipEle.style.opacity = "0";
+setTimeout(function() {
+tipEle.style.display = "none";
+}, 300);
+}, 1500);
+}
+}
+</script>
+</block>

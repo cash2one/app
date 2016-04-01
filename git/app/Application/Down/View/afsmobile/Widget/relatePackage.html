@@ -1,0 +1,15 @@
+<notempty name="package">
+<p class="title" style=" border-bottom:1px solid #e5e5e5">礼包中心</p>
+<div class="lizx">
+  <ul class="new_list">
+        <volist name="package" id="vo" offset="0" length="5">
+            <li>
+                <div class="main"><a href="{:staticUrlMobile('detail',$vo['id'],'Package')}">{$vo['title']}</a>
+                    <p>{:strip_tags($vo['content'])}</p>
+                </div>
+                <a href="{:staticUrlMobile('detail',$vo['id'],'Package')}" class="lq">领取</a> </li>
+        </volist>
+    </ul>
+    <a href="http://m.anfensi.com/lb/" class="h-more">更多礼包<span>→</span></a> 
+    </div>
+</notempty>

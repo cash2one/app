@@ -1,0 +1,57 @@
+<div class="yxzq-right">
+    <!--游戏简介-->
+    <div class="yxjj">
+        <a href=""><img src="{:get_cover($game['smallimg'],'path')}"></a>
+        <h2><a href="" class="tit">{$game['title']}</a></h2>
+        <em>大小：{$game['size']}</em>
+        <em>类型：{$game['category']}</em>
+        <em><i>平台：</i>
+            <php>if($game['IOSUrl']){</php>
+            <i class="app"></i>
+            <php>} if($game['androidUrl']){</php>
+            <i class="adr"></i>
+            <php>}</php>
+        </em>
+        <b class="qq">{$home['hint']}</b>
+                <span id="game-down">
+                    <php>if($game['IOSUrl']){</php>
+                    <b class="app"><a href="{$game['IOSUrl']}">苹果下载</a><i></i><em><img src="{$game['IOSCode']}"></em></b>
+                    <php>} if($game['androidUrl']){</php>
+                    <b class="adr" style="margin-top: 0px;"><a href="{$game['androidUrl']}">安卓下载</a><i></i><em><img src="{$game['androidCode']}"></em></b>
+                    <php>}</php>
+                </span>
+    </div>
+    <!--礼包领取-->
+    <php>if(!empty($package)){</php>
+    <div class="lbdy" id="lb">
+        <h3>礼包领取</h3>
+        <volist name="package" id="val">
+        <span><b><a href="{:staticUrl('detail',$val['id'],'Package')}" target="_blank" class="tit">{$val['title']}</a><a href="{:staticUrl('detail',$val['id'],'Package')}" class="lq">领取</a></b><b>
+            <php>if($val['conditions']&1){</php>
+            <i class="adr"></i>
+            <php>} if($val['conditions']&2){</php>
+            <i class="app"></i>
+            <php>}</php>
+        </b></span>
+        </volist>
+    </div>
+    <php>}</php>
+    <!--小编答疑-->
+    <div class="lbdy" id="dy">
+        <h3><a href="" target="_blank">更多>></a>小编答疑</h3>
+        <ul>
+            <volist name="ask" id="val">
+            <li><a href="{:staticUrl('detail',$val['id'],'Document')}" target="_blank" title="{$val['title']}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+    <!--热门专区-->
+    <div class="lbdy" id="zq">
+        <h3>热门专区</h3>
+        <ul>
+            <volist name="hotBatch" id="val">
+            <li><a href="" target="_blank"><img src="{:get_cover($val['icon'],'path')}"></a><a href="" target="_blank" class="tit">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+</div>

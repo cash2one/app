@@ -1,0 +1,83 @@
+<extend name="Home@qbaobeimobile/Base/common2d" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobeimobile2/css/channel.css"/>
+</block><block name="breadcrumbnav">{~W('Home/Qbaobeimobile/wbreadCrumb',array($info['id']))}</block>
+<block name="body">
+<script>a();</script>
+<section class="baike-detail dis-bot">
+    <div class="detail-art-main">
+        <div class="art-title"><h1>{$info['title']}</h1><span class="glass">大字</span></div>
+        <!--标签-->
+        <notempty name="tags">
+        <div class="add-tags">
+            <div class="ico"></div>
+            <div class="ico-tags-main">
+                <div class="swiper-container6">
+                    <div class="swiper-wrapper">
+                        <volist name="tags" id="val"><a href="{:C('MOBILE_STATIC_URL')}/tag/{$val['name']}/" class="swiper-slide">{$val['title']}</a></volist>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </notempty>
+        <!--标签-->
+        <notempty name="info['introduce']"><div class="art-intro">{$info['introduce']}</div></notempty>
+
+        <article class="art-body">
+                <!-- 广告位：手机版文章详情广告 -->
+          <script> a();</script>
+
+           {~W('Document/Qbaobeimobile/baikeContent',array($info['content']))}
+        </article>
+    </div>
+    <div class="share">
+            <div id="nativeShare"><span class="nativeShare-tit">分享：</span></div>
+        <div class="bdsharebuttonbox">
+            <a href="#" class="sina bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="qq bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+            <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+        </div>
+    </div>
+</section>
+<!-- 二维码-->
+<section id="weixin-code">
+</section>
+<section class="hotwrap about-words dis-bot">
+  <script>c();</script>
+  <div class="wrap-tit">
+    <h3>相关词条</h3>
+  </div>
+  <div class="hotwrap-main">
+      <div class="hidebox-wrap">
+       {~W('Document/Qbaobeimobile/baikeDetailRelate',array($info['id'],$info['category_id']))}
+  </div>
+  <div class="get-more"><span>全部<em class="arr"></em></span></div>
+</section>
+<script>b();</script>
+<section class="hotwrap">
+  <div class="wrap-tit">
+    <h3>热点推荐</h3>
+  </div>
+  <div class="hotwrap-main"> 
+    {~W('Document/Qbaobeimobile/baikeDetailCommended',array($info['category_id'],$info['id']))}
+   </div>
+</section>
+<!--词条 start-->
+<aside>
+    <div class="catalog-tip"></div>
+    <h3>百科词条</h3>
+    <ul class="aside-words">
+    </ul>
+</aside>
+<span class="asidenav"></span>
+<!--词条 end-->
+<script>d();</script>
+    {~W('Document/Qbaobeimobile/getRelateDoc',array($info['id'],$info['category_id'],'',$tags))}
+<input type="hidden" id="tj-user" name="tj-user" value="{$info['uid']}"/>
+<input type="hidden" id="doc-id" name="doc-id" value="{$info['id']}"/>
+<input type="hidden" id="doc-cid" name="doc-cid" value="{$info['category_id']}"/>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobeimobile2/js/ajax.relate.js"></script>
+</block>

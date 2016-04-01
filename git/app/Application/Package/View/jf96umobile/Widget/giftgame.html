@@ -1,0 +1,35 @@
+<extend name="Home@jf96umobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96umobile/css/gift.css"/>
+</block>
+<block name="body">
+<div class="about-game">
+    <a href="{:str_replace('index.html','',staticUrlMobile('detail', $down['id'],'Down'))}" title="{$down['title']}"><img src="{:get_cover($down['smallimg'],'path')}" alt="{$down['title']}"></a>
+    <div class="text">
+        <a href="{:str_replace('index.html','',staticUrlMobile('detail', $down['id'],'Down'))}" class="title" title="{$down['title']}">{$down['title']}</a>
+        <p>礼包共{$count}款</p>
+        <p class="xzlq"><a href="{:str_replace('index.html','',staticUrlMobile('detail', $down['id'],'Down'))}">下载</a>
+        <notempty name="batch">
+                <a href="{:getCPath($batch['id'],'batch')}">专区</a>
+         </notempty>
+       
+        </p>
+    </div>
+</div>
+<section class="gift-list">
+    <ul class="gift-game-ul">
+    <volist name="lists" id="article">
+        <li>
+            <div class="text">
+                <a href="{:staticUrlMobile('detail', $article['id'],'Package')}" title="{$article.title}">{$article.title}</a>
+                <p class="vis"><span class="adr"></span><span class="iph"></span></p>
+            </div>
+            <div class="lqbox"><p>库存40%</p><a href="{:staticUrlMobile('detail', $article['id'],'Package')}" class="lq">领取</a><strong style="display:none;" class="card_surplus" card-id="{$article.id}"></strong><strong style="display:none;" class="card_all" card-id="{$article.id}"></strong></div>
+        </li>
+     </volist>
+    </ul>
+</section>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/jf96u/js/ajax.js"></script>
+</block>

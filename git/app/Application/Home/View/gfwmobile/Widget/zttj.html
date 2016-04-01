@@ -1,0 +1,10 @@
+<section class="baike-news">
+    <div class="Introd">
+        <div class="title"><h2>相关专题</h2></div>
+        <ul class="art-list">
+            <volist name="lists" id="val">
+                <li><a href="{:C('MOBILE_STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{$val['url_token']}">{$val['title']}</a></li>
+            </volist>
+        </ul>
+    </div>
+</section>

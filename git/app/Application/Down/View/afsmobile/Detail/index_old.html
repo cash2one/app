@@ -1,0 +1,90 @@
+<extend name="Home@afsmobile/Base/commonDown" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+<!--游戏信息-->
+<section class="yxxq">
+    <div class="yxxq-info"> <a href="{:staticUrlMobile('detail', $info['id'],'Down')}" class="pic"><img src="{:get_cover($info['smallimg'],'path','1','66','66')}"></a> <span><b class="tit">{$info.title}</b><b>{:getCateName($info['id'],'down')} | {$info.size} </b><b>更新时间：{$info['update_time']|time_format="Y-m-d H:i:s"}</b></span> </div>
+    <div class="xq-down">
+        <php>
+            $info['downAll'] = M('downAddress')->alias('a')->field('a.url,a.site_id,b.site_name title')->join('__PRESET_SITE__ b ON a.site_id = b.id','left')->where('did = '.$info['id'])->order('b.level DESC')->select();
+            foreach($info['downAll'] as $k=>&$v){
+            $v['url'] = formatAddress($v['url'],$v['site_id']);
+            }
+            unset($v);
+        </php>
+        <volist name="info['downAll']" id="val">
+            <if condition="$val.url eq '' "> <a href="javascript:void(0)">正在上传</a>
+              <else/>
+                <if condition="$val.title eq '本地下载' ">
+                  <a href="#" onclick="goDown('{$val['url']}')">{$val['title']}</a> 
+                 <else/>
+               <a href="{$val['url']}">{$val['title']}</a> 
+                </if>
+           </if>
+        </volist>
+    </div>
+</section>
+<!--游戏详情主体-->
+<section id="yxjj">
+    <p class="title" style=" border-top:1px solid #e5e5e5">游戏简介</p>
+    <div class="yxjs"> {~W('Afsmobile/specialText',array($info['keytext']))}
+        <div class="main"> {~W('Home/P7230/contentProcess',array($info['content']))} </div>
+        <p class="zkxq">展开内容</p>
+    </div>
+    <notempty name="info['tags']">
+        <div class="tags">
+            <volist name="info['tags']" id="vo">
+                <a href="{:C('MOBILE_STATIC_URL')}/tag/{$vo['name']}/">{$vo.title}</a>
+            </volist>
+        </div>
+    </notempty>
+    <!--libao--> 
+    {~W('Afsmobile/detailRelatePackage',array($info['id']))} 
+    
+    <!--游戏截图-->
+    <div class="yxjj-xbtj">
+    <p class="title">游戏截图</p>
+    <div class="cont xyc">
+        <div id="wrapper">
+            <div id="scroller">
+                <ul id="thelist">
+                    <volist name="info['previewimg']" id="val">
+                        <li style="width: 235px;"><img alt="{$info.title}" src="{:get_cover($val,'path',1,200,200,'jpg','0','70')}"></li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--猜你喜欢-->
+        {~W('Afsmobile/detailRelate',array($info['productTags']['id'],$info['tags'],$info['id']))}
+    <!--pinglun-->
+    <div class="xgwz">
+        <p class="title"><span>评论列表</span></p>
+        <!--评论-->
+        <div id="pinglun" name="pinglun">
+            <form action="" method="" name="" id="pl"  data-id="{$info['id']}" data-model="down">
+                <p>
+                    <input type="text"  placeholder="游客" id="user" class="commentUserForm">
+                </p>
+                <p>
+                    <textarea class="con" ></textarea>
+                </p>
+                <p>
+                    <input type="button" value="发表评论" class="btn" id="btn">
+                </p>
+            </form>
+            <p class="newset_list">最新评论</p>
+            <div class="m-comment-lists" data-id="{$info['id']}" data-model="down">
+                <p style="text-align:center;display:block;padding:10px 0;">暂无评论</p>
+            </div>
+        </div>
+    </div>
+</section>
+<div style=" clear:both"></div>
+</block>
+<block name="script"> 
+    <script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/common.js"></script> 
+    <script type="text/javascript" src="__PUBLIC__/Down/afsmobile/js/iscrollc.js"></script> 
+</block>

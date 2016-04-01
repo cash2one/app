@@ -1,0 +1,50 @@
+<extend name="Home@7230mobile/Base/commonDown"/>
+
+<block name="style">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/7230mobile/css/game.css"/>
+</block>
+
+<block name="body">
+<header class="wytop">
+   <span class="back"></span>
+   <b> {$info.title} 游戏排行榜</b>
+   <a href="{:C('MOBILE_STATIC_URL')}/search.html" class="search"></a>
+</header>
+<!-- 首页搜索 和 新闻-->
+<section class="news_wrap" id="syxw">
+    <div class="glnav" id="phb">
+        <i <eq name="sort" value="0">class="cur"</eq>>最新</i>
+        <i <eq name="sort" value="1">class="cur"</eq>>最热</i>
+    </div>
+    <div>
+        <div class="rank_box  <eq name="sort" value="0">showcurrent</eq>">
+          <ul>	
+          <volist name="update_time" id="article">
+              <li>
+                  <php>if($article['iconcorner'] == '1'){</php><em class="jiaob-jp"></em><php>}</php>
+                  <a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a><a href="{:getFileUrl($article['id'])}" class="down_btn">下载</a><h6><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></h6><p>评分：<span>{:get_score($article['id'],true)}分</span></p><p> {:showText($article['licence'],'licence',false,'Down')} <i>|</i> {:format_size($article['size'])}MB</p></li>
+          </volist>
+          </ul>
+          <p class="page">{$page_0}</p>
+        </div>
+        <div  class="rank_box  <eq name="sort" value="1">showcurrent</eq>">
+          <ul>	
+          <volist name="view" id="article">
+              <li>
+                  <php>if($article['iconcorner'] == '1'){</php><em class="jiaob-jp"></em><php>}</php>
+                  <a href="{:staticUrlMobile('detail', $article['id'],'Down')}"><img src="{:get_cover($article['smallimg'],'path')}" alt="{$article.title}"></a><a href="{:staticUrlMobile('detail', $article['id'],'Down')}" class="down_btn">下载</a><h6><a href="{:staticUrlMobile('detail', $article['id'],'Down')}">{$article.title}</a></h6><p>评分：<span>{:get_score($article['id'],true)}分</span></p><p> {:showText($article['licence'],'licence',false,'Down')} <i>|</i> {:format_size($article['size'])}MB</p></li>
+          </volist>
+          </ul>
+          <p class="page">{$page_1}</p>
+        </div>
+    </div>
+</section>	
+    <!-- 搜索 -->
+    <section class="search_wrap">
+    <form method="get" action="{:C('MOBILE_STATIC_URL')}/search.html" class="search">
+        <input type="text" name="keyword" class="sipt" id="sipt" placeholder="搜游戏" value="">
+        <input type="hidden" name="type" value="down">
+        <a href="javascript:void(0)" class="sbtn"></a>
+    </form>
+	</section>
+</block>

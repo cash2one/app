@@ -1,0 +1,64 @@
+<extend name="Home@dongdong/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/dongdong/css/index.css"/>
+</block>
+
+<block name="body">
+<div class="page_main">
+    <!--当前位置-->
+    <div class="go_home">当前位置：<a href="">首页</a> > 最新首发</div>
+    <!--banner-->
+    {:W('Down/Dongdong/todaySlide',array('new'))}
+   <!-- 最新首发||游戏首发||软件首发 -->
+   <div class="wraper game_rec" id="xytj">
+   <div class="wraper_left"> 
+       <div class="wytj"> 
+           <div class="title">
+               <a href="{:U('Dynamic/Dongdong/newest',array('cid'=>88))}" class="<if condition='$cid eq 88'>cur</if>">最新首发</a>
+               <a href="{:U('Dynamic/Dongdong/newest',array('cid'=>89))}" class="<if condition='$cid eq 89'>cur</if>">游戏首发</a>
+               <a href="{:U('Dynamic/Dongdong/newest',array('cid'=>90))}" class="<if condition='$cid eq 90'>cur</if>">软件首发</a>
+                <!-- <form action="" method="get" id="Search_form2" name="Search_form" target="_blank" class="searchform">
+                    <input type="text" name="keyword" id="searchbox" class="searchbox" autocomplete="off" value="在此搜索游戏或资讯...">
+                    <button type="submit" id="searchBtn" class="btn-submit" >搜分类</button>
+                </form> -->
+           </div>
+           <ul>
+           	 <volist name="downList" id="v" key="i">
+           	 <li>
+	           	 <a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank" title="{:$v['description']}">
+	           	 	<img src="{:get_cover($v['smallimg'],'path')}" alt="{:$v['title']}">
+	           	 </a>
+	           	 <i>
+	           	 	<a href="{:staticUrl('detail',$v['id'],'Down')}" target="_blank">{:$v['title']}</a>
+	           	 	<a href="{:staticUrl('detail',$v['id'],'Down')}" class="down">下载</a>
+	           	 </i>
+           	 </li>
+             </volist>
+           </ul>                                              
+       </div>
+       <div id="paging">{$page}</div>  
+       </div>
+       <!-- 相关推荐 -->
+       <div class="wyxz">
+			<h3>相关推荐</h3>
+			<ul class="current">
+				<volist name="recommendList" id="v" key="i">
+				<li class="<if condition='$i eq 1'>cur</if>">
+					<em>{:$i}</em>
+					<a href="{:staticUrl('detail',$v['id'],'Down')}" class="tit">{:$v['title']}</a>
+					<span class="num">{:$v['downhits']}次下载</span>
+					<p>
+						<a href="{:staticUrl('detail',$v['id'],'Down')}">
+							<img src="{:get_cover($v['smallimg'],'path')}" />
+							<b>{:$v['title']}</b>
+						</a>
+						<br>{:$v['downhits']}次下载 
+						<a href="{:staticUrl('detail',$v['id'],'Down')}" class="down">下载</a>
+					</p>
+				</li>
+				</volist>
+			</ul>
+	</div>
+   </div>
+</div>
+</block>

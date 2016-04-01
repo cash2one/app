@@ -1,0 +1,29 @@
+<extend name="Document@jf96u/Base/wdsjcommon"/>
+<block name="body">
+<div class="goback">您的位置： <position /></div>
+<div class="wraper-left">
+    <div class="mid-tit"><h2>我的世界{$categoryName}</h2></div>
+    <!--div class="nav-list"><a href="" class="active">全部</a></div-->
+    <ul class="list-ul">
+        <list order="desc">
+            <li>
+                <div class="bt">
+                    <a href="{$list.url}" target="_blank" title="{$list.title}">{$list.title}</a>
+                    <span class="time">{:date('Y-m-h',$list[create_time])}</span>
+                </div>
+                <p class="info">
+                    <if condition="$list.description eq ''">
+                        {:mb_substr($list[title],0,120,'UTF-8')}
+                        <else/>
+                        {:mb_substr($list[description],0,120,'UTF-8')}
+                    </if>
+                    <a href="{$list.url}" target="_blank" style="color:orange" class="xq">[详情]</a>
+                </p>
+            </li>
+        </list>
+    </ul>
+    <div class="page">
+        {$page}
+    </div>
+</div>
+</block>

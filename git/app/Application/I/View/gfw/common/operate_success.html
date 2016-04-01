@@ -1,0 +1,31 @@
+<extend name="Home@gfw/Base/common" />
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+<block name="body">
+<!--error-->
+<div class="main error" id="reg-wraper">
+    <div class="error-box success">
+        <span class="error-ico"></span>
+        <p class="bold"><b><?php echo($message); ?></b><a href="<?php echo($jumpUrl); ?>">立即跳转</a></p>
+        <p class="jump">
+页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b>
+</p>
+    </div>
+</div>
+</block>
+<block name="script">
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+</block>

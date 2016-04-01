@@ -1,0 +1,62 @@
+<extend name="Public/base"/>
+
+
+
+<block name="body">
+    <style>.cf{width: 400px;.main-title:400px;}</style>
+    <!--<div class="main-title"> <h2> 手机版全站相关页面生成 </h2></div>-->
+    <!--</br>-->
+    <!--div class="main-title"> <h2> 网站大全模块生成 </h2> </div>
+    <div class="cf">
+        <div class="fl">
+            <a class="btn"  href="{:U("moduleIndex",array("model"=>"Package","method"=>"createStaticIndexM"))}">首 页</a>
+            <a class="btn"  href="{:U("moduleLists",array("model"=>"Package","method"=>"createStaticListsM"))}">列 表 页</a>
+            <a class="btn"  href="{:U("moduleDetail",array("model"=>"Package","method"=>"createStaticDetailM"))}">内 容 页</a>
+        </div>
+    </div>
+    </br-->
+    <!--<div class="main-title"> <h2> 产品中心模块生成 </h2> </div>-->
+    <!--<div class="cf">-->
+        <!--<div class="fl">-->
+            <!--<a class="btn"  href="{:U("moduleIndex",array("model"=>"Down","method"=>"createStaticIndexM"))}">首 页</a>-->
+            <!--&lt;!&ndash;a class="btn"  href="{:U("moduleLists",array("model"=>"Down","method"=>"createStaticListsM"))}">列 表 页</a>-->
+            <!--<a class="btn"  href="{:U("moduleDetail",array("model"=>"Down","method"=>"createStaticDetailM"))}">内 容 页</a&ndash;&gt;-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--</br>-->
+    <!--<div class="main-title"> <h2> 百事百科模块生成 </h2> </div>-->
+    <!--<div class="cf">-->
+        <!--<div class="fl">-->
+            <!--<a class="btn"  href="{:U("moduleIndex",array("model"=>"Document","method"=>"createStaticIndexM"))}">首 页</a>-->
+            <!--<a class="btn"  href="{:U("moduleLists",array("model"=>"Document","method"=>"createStaticListsM"))}">列 表 页</a>-->
+            <!--<a class="btn"  href="{:U("moduleDetail",array("model"=>"Document","method"=>"createStaticDetailM"))}">内 容 页</a>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--</br>-->
+    <!--<div class="main-title"> <h2>专题页面生成 </h2> </div>-->
+    <!--<div class="cf">-->
+        <!--<div class="fl">-->
+            <!--<a class="btn"  href="{:U("moduleLists",array("model"=>"Feature","method"=>"createStaticListsM"))}">列 表 页</a>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--</br>-->
+
+    <div class="main-title"> <h2> 下载分类页生成 </h2> </div>
+    <div class="cf">
+    <div class="fl">
+    <!--<a class="btn"  href="{:U("moduleIndex",array("model"=>"Down","method"=>"createStaticIndexM"))}">首 页</a>-->
+    <a class="btn" target="_blank"  href="{:U("moduleLists",array("model"=>"Down","method"=>"createStaticListsM","category_id"=>48,"level"=>1))}">安卓软件</a>
+    <!--<a class="btn"  href="{:U("moduleDetail",array("model"=>"Down","method"=>"createStaticDetailM"))}">内 容 页</a>-->
+    </div>
+    </div>
+
+    </br>
+    <div class="main-title"> <h2> 手机厂商生成 </h2> </div>
+    <div class="cf">
+        <div class="fl">
+            <a class="btn" target="_blank" href="{:U("companyDetail",array("type"=>1))}">厂商详情页</a>
+        </div>
+    </div>
+    </br>
+
+</block>

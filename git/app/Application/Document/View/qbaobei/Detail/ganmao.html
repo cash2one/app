@@ -1,0 +1,23 @@
+<extend name="Home@qbaobei/Base/commonGanmao"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/healthdetail.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/common1.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/commonlist.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/newnav.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/newhead.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/qbaobei2/cold/css/ganmaohead.css"/>
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/jquery.peex.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/information-details.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/qbaobei2/cold/js/newnavigation.js"></script>
+    <script type="text/javascript">
+        var siteSetup = { sitePath: '/', ajaxPath: '/ajax.aspx', skinPath: '/Template/Qbaobei/Skin/' };
+    </script>
+</block>
+<block name="body">
+    {:W('Qbaobei/compositionDetail',array($info,$tags))}
+</block>

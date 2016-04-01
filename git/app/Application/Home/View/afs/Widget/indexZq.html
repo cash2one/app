@@ -1,0 +1,9 @@
+<div><a href="{:staticUrl('detail', $game[0]['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($game[0]['smallimg'],'path')}"></a><b><a href="{:getCPath($zid,'batch')}" class="title">{$game[0]['title']}</a><i><em>类型：{:getCateName($game[0]['id'],'Down')}</em><em>平台：{:getSystem($game[0]['id'])}</em></i><i>
+    <volist name="subnavi" id="vo"><a href="{:getCPath($vo['id'],'batch')}" target="_blank">{$vo['title']}</a>|</volist>
+    </i></b></div>
+<ul>
+    <volist name="news" id="vo" offset="0" length="5">
+        <li><b>{$vo.create_time|time_format="m-d"}</b><a href="{:staticUrl('detail', $vo['id'],'Document')}" target="_blank" title="{$vo['title']}">{$vo['title']}</a></li>
+    </volist>
+</ul>
+</div>

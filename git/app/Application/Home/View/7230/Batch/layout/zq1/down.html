@@ -1,0 +1,110 @@
+<include file="Home@7230/Public/zqHeader"/>
+<script language="javascript"> window.DYNAMIC_SERVER_URL = '{:C('DYNAMIC_SERVER_URL')}';</script>
+<!---------------------------------------------------------------------------->
+<div class="nav_zq">
+    <div>
+        <div class="dragable" widget="menus">
+            <span class="left">
+                <a href="{:'/'.C(FEATURE_ZQ_DIR)}/{$home['url_token']}" target="_blank" class="cur">首页</a>|
+                <volist name="menus" id="v">
+                    <a href="{:'/'.C(FEATURE_ZQ_DIR)}{$v.url_token}" target="_blank">{$v['title']}</a>|
+                </volist>
+            </span>
+        </div>
+        <form  action="{:C('STATIC_URL')}/search.html" method="get" id="Search_form" name="Search_form" target="_blank" class="">
+            <input type="text" name="keyword" id="searchBox" autocomplete="off" class="" value="输入你想搜索的游戏..." >
+            <button type="submit" id="searchBtn" class="btn-submit"></button>
+        </form>
+
+        <div class="share">分享
+            <!-- JiaThis Button BEGIN -->
+            <div class="jiathis_style_24x24">
+                <a class="jiathis_button_qzone"></a>
+                <a class="jiathis_button_tsina"></a>
+                <a class="jiathis_button_tqq"></a>
+                <a class="jiathis_button_weixin"></a>
+                <a class="jiathis_button_renren"></a>
+                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                <a class="jiathis_counter_style"></a>
+            </div>
+            <!-- JiaThis Button END -->
+        </div>
+
+    </div>
+</div>
+
+<div id="zqmain">
+    <p class="page-nav">当前位置：<a href="{:'/'.C(FEATURE_ZQ_DIR)}/{$home['url_token']}">首页</a>->下载</p>
+
+    <div class="dragable" widget="down"></div>
+
+    <div class="zqdown-nav">
+        <volist name="down" id="val">
+            <i class="qie {:$i==1?'cur':''}" id="{$i==1?'az':($i==2?'pg':'pc')}" >{$i==1?'安卓':($i==2?'苹果':'PC')}下载</i>
+        </volist>
+    </div>
+
+
+    <div class="zqdown">
+       <volist name="down" id="val">
+           <div class="zq_yxjj {$i==1?'current':''}">
+               <p class="yxjj">
+                   <span class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></span>
+
+                   <span class="yxxq">
+                    <span class="title">{$val.name}</span>
+                    <b>
+                        <i>游戏大小：{:format_size($val['size'])}</i>
+                        <i>下载次数：{$val.hits}次</i>
+                        <i>授权：{:showText($val['licence'],'licence',false,'Down')}</i>
+                        <i>游戏版本：{$val.version}</i>
+                        <i>游戏类型：{$val.title}</i>
+                        <i>语言：{:showText($val['language'],'language',false,'Down')}</i>
+                        <i>更新时间：{:date('Y-m-d',$val['update_time'])}</i>
+                    </b>
+                </span>
+                <span class="ewm"><img src="{$val['erCode']}"><b>扫扫二维码立即下载</b></span>
+               </p>
+               <p class="down"><a href="{$val['down']?$val['down']:'javascript:void(0)'}" target="{$i==2?'_blank':'_self'}">{$i==1?'安卓':($i==2?'苹果':($i==3?'PC':'TV'))}版下载</a></p>
+           </div>
+       </volist>
+       <div class="info"><b>游戏介绍</b><div>{~W('Home/P7230/contentProcess',array($game['content']))}</div></div>
+       <div class="yxjt">
+           <b>游戏截图</b>
+           <div>
+           <volist name="down" id="val">
+               <volist name="val['previewimg']" id="img">
+               <img src="{:get_cover($img,'path')}">
+               </volist>
+           </volist>
+           </div>
+       </div>
+    </div>
+
+
+    <div id="pinglun">
+        <b class="title">网友点评</b>
+        <form action="" method="" name="" id="pl"  data-id="{$batch['id']}" data-model="batch">
+            <p><input type="text" value="游客" id="user"><span><i class="qd">值得期待，赞！</i><i class="jy"> 打个酱油！</i><i class="ca">踩一脚！</i></span></p>
+            <p class="bot"><b></b><textarea></textarea><input type="button" value="发表评论" id="btn"></p>
+        </form>
+        <ul class="comment_lists" data-id="{$batch['id']}" data-model="batch"></ul>
+        <p class="more"><a href="{:C('STATIC_URL')}/P7230/commentIndex/id/{$batch['id']}/model/batch" target="_blank">点击查看更多评论</a></p>
+    </div>
+
+
+
+    <!------推荐游戏------> 
+    <div class="djdzw" id="lunbo">
+        <p class="title"><i></i>大家都在玩<a href="{:C('STATIC_URL')}/yx/" target="_blank" class="more"></a></p>
+        <div class="dragable" widget="everyone">
+        <ul>
+            <volist name="everyone" id="val">
+                <li><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" class="tit" target="_blank">{$val.title}</a></li>
+            </volist>
+        </ul>
+        </div>
+    </div> 
+
+</div>
+<include file="Home@7230/Public/zqFooter"/>

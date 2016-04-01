@@ -1,0 +1,13 @@
+<!--轮播-->
+<if condition="count($list) gt 0">
+    <div class="picauto-box pic-adaptive-wrap">
+        <div class="swiper-container3 pic-adaptive">
+            <div class="swiper-wrapper">
+                <volist name="list" id="vo">
+                    <div class="swiper-slide"><a href="{:staticUrlMobile('detail',$vo['id'],'Document')}"><img src="{$vo.smallimg|get_cover='path'}" alt="{$vo.title}"></a><div class="autoTitle"><p class="title">{$vo.title}</p></div></div>
+                </volist>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</if>

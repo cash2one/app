@@ -1,0 +1,56 @@
+<extend name="Home@afsmobile/Base/commonDown" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Down/afsmobile/css/game.css"/>
+</block>
+<block name="body">
+   <!--game_rec-->
+   <section id="game_rec" class="game">
+       <p id="title-nav"><i class="cur">分类</i><i>推荐</i><i>最新</i></p>
+       <div class="xfl current">
+           <p><a href="">动作游戏</a></p>
+           <p><a href="">棋牌桌游</a></p>
+           <p><a href="">策略塔防</a></p>
+           <p><a href="">射击飞行</a></p>
+           <p><a href="">角色扮演</a></p>
+           <p><a href="">竞速游戏</a></p>
+           <p><a href="">益智休闲</a></p>
+       </div>
+       <div class="xfl" id="commendedGameList">
+           <ul>
+                <volist name="commendedGame" id="vo">
+            <li>
+                   <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="pic"><img src="{:get_cover($vo['smallimg'],'path','1','66','66')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">{$vo.title}</a></div>
+                       <div><i>{:getCateName($vo['id'],'Down')}</i><i>{$vo['size']}</i><i>{:getLanguage($vo['id'])}</i></div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="down">下载</a>
+               </li>
+           
+           </volist>
+           </ul>
+          <a href="javascript:void(0)" class="ajaxCommended" data-type="danji" id="get_more">点击加载更多</a>
+       </div>
+       <div class="xfl" id="newGameList">
+           <ul>
+           <volist name="newGame" id="vo">
+            <li>
+                   <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="pic"><img src="{:get_cover($vo['smallimg'],'path','1','66','66')}"></a>
+                   <div class="main">
+                       <div><a href="{:staticUrlMobile('detail', $vo['id'],'Down')}">{$vo.title}</a></div>
+                       <div><i>{:getCateName($vo['id'],'Down')}</i><i>{$vo['size']}</i><i>{:getLanguage($vo['id'])}</i></div>
+                   </div>
+                   <a href="{:staticUrlMobile('detail', $vo['id'],'Down')}" class="down">下载</a>
+               </li>
+           
+           </volist>
+              
+           
+           </ul>
+          <a href="javascript:void(0)" class="ajaxNewList" data-type="danji" id="get_more">点击加载更多</a>
+       </div>
+   </section>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Home/afsmobile/js/common.js"></script>
+</block>

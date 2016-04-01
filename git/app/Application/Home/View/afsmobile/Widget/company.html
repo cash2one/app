@@ -1,0 +1,17 @@
+<extend name="Home@afsmobile/Base/common" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/afsmobile/css/yxzq.css"/>
+</block>
+<block name="body">
+    <!--game_rec-->
+    <section class="zhuan-list">
+        <div class="list">
+            <ul class="zq-list">
+                <volist name="lists" id="val">
+                    <li><a href="{:C('MOBILE_STATIC_URL')}/{$val['path']}"><img src="{:get_cover($val['img'],'path')}"><b>{$val['name']}</b></a></li>
+                </volist>
+            </ul>
+            <div class="page">{$page}</div>
+        </div>
+    </section>
+</block>

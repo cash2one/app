@@ -1,0 +1,88 @@
+<extend name="Home@jf96u/Base/common" />
+
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/jf96u/css/yxk.css">
+</block>
+
+
+<block name="body">
+<div class="main1200">
+    <div class="goback">当前位置：   <position />
+        > 新手游</div>
+    <div class="container">
+        <!--删选-->
+        <div class="yxk-listNav dis-bot wrap">
+            <div class="top">共计<em>{$count}</em>款游戏，本周新增<em>{$week}</em>款</div>
+            <ul class="listNav-ul">
+                <li class="plat"><span class="title">游戏平台</span>{$sysurl}</li>
+                <li class="wifi"><span class="title">游戏连网</span>{$neturl}</li>
+                <li class="cata"><span class="title">游戏类型</span>{$typeurl}</li>
+                <li class="yxtz"><span class="title">游戏特征</span>{$imageurl}</li>
+                <li class="stat"><span class="title">运营状态</span>{$rankurl}</li>
+            </ul>
+        </div>
+        <!--main-->
+        <div class="yxk-list-wrap dis-bot wrap">
+            <div class="yxk-wrapNav"><div class="fl">
+               {$orurl}
+            </div><div class="fr">共找到<em class="orange">{$listscount}</em>个</div></div>
+            <ul class="yxkwrap-ul">
+                <volist name="lists" id="v">
+
+                    <php>
+                        $tid=M('tags_map')->where("did=$v[id]")->getField('tid');
+                        $did=M('tags_map')->alias('a')->join('__PACKAGE__ b')
+                        ->where("a.tid='$tid' and a.type='package' and a.did=b.id and b.status=1  and b.category_id=1")
+                        ->getField('b.id');
+
+                    </php>
+                    <tag model="13" id="$v[id]">
+
+                       <php>  $zt=M('tags_map')->alias('a')
+                        ->join('__BATCH__ b')
+                        ->where("a.tid=$tag[id] and a.did=b.id and b.pid=0")->getField('url_token');
+
+                       </php>
+                    </tag>
+
+                    <li><a href="{:str_replace('index.html','',staticUrl('detail',$v['id'],'Down'))}" target="_blank" title="{$vo.title}">
+                        <img src="{:get_cover($v['smallimg'],'path')}" alt="{$vo.title}"></a>
+                    <div class="text">
+                        <p class="title"><a href="{:str_replace('index.html','',staticUrl('detail',$v['id'],'Down'))}" target="_blank" title="{$vo.title}">{$v.title}</a><span></span></p>
+                        <p class="yxjj"><span><b>{:str_replace('m','M',format_size($v['size']))}</b></span><span><s>平台：</s>
+           <if condition="$v.system eq 1">
+
+               <i class="adr"></i>
+           <elseif condition="$v.system eq 2"/>
+               <i class="iph"></i>
+           </if>
+                       </span><span>类型：<b><php>$gd=$v['game_type']; echo $game_type[$gd]; </php></b></span>
+                            <span><php> if(!empty(get_server_type($v['id']))){echo "状态:";}    </php><b>{:get_server_type($v[id])}</b></span><span>更新时间：<b>{:date('Y-m-d',$v['update_time'])}</b></span></p>
+                        <p class="info">
+                            {$v.description}
+                        </p>
+                        <p class="btn">
+                            <if condition="$zt  NEQ null ">
+                            <a href="/{:C(FEATURE_ZQ_DIR)}/{$zt}" target="_blank" class="zq"><span>游戏专区</span></a>
+                                </if>
+                            <if condition="$did  NEQ null ">
+                                <a href="{:staticUrl('detail',$did,'package')}" target="_blank" class="lb"><span>领取礼包</span></a>
+                            </if>
+                                <a href="{:str_replace('index.html','',staticUrl('detail',$v['id'],'Down'))}" target="_blank" class="xz"><span>点击下载</span></a>
+                            <!--<a href="" target="_blank" class="lt"><span>进入论坛</span></a>-->
+                        </p>
+                    </div>
+                </li>
+                </volist>
+            </ul>
+        </div>
+
+        <div class="page">
+          {$show}
+        </div>
+    </div>
+</div>
+ </block>
+
+
+

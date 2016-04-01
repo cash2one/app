@@ -1,0 +1,244 @@
+<extend name="Home@gfw/Base/commonUcent" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/login.css"/>
+</block>
+
+<block name="body">
+
+    <div class="user-wraper-right" id="product">
+        <div class="user-right-chapter">
+            <h3>发布产品</h3>
+            <div class="product-nav">
+                <ul>
+                    <li class="yes"><span>1</span>填写网站标题与分类</li>
+                    <li class="yes"><span>2</span>产品详细介绍</li>
+                    <li><span>3</span>提交成功</li>
+                </ul>
+            </div>
+            <!--产品属性 start-->
+            <form action="{:U('I/Product/save')}" method="post" onsubmit="return check_field();" enctype="multipart/form-data">
+                <input type="hidden" name="save_step" value="detail">
+                <input type="hidden" name="pid" value="{:isset($pid) ? $pid : '';}">
+            <div class="product-attr">
+                <div class="product-attr-chapter">
+                    <div class="product-attr-tit">产品属性</div>
+                    <div class="product-attr-input">
+                        <div class="info-input">
+                            <em>软件大小：</em>
+                            <input type="text" name="size" value="{:isset($data['size']) ? $data['size'] : '';}" id="size"/>
+                            <span class="size_pop">*</span>
+                        </div>
+                        <div class="info-input">
+                            <em>软件版本：</em>
+                            <input type="text" name="version" value="{:isset($data['version']) ? $data['version'] : '';}" id="version"/>
+                            <span class="version_pop">*</span>
+                        </div>
+                        <div class="info-input">
+                            <em>软件语言：</em>
+                            <input type="text" name="language" value="{:isset($data['language']) ? $data['language'] : '';}" id="language"/>
+                            <span class="language_pop">*</span>
+                        </div>
+                        <div class="info-input">
+                            <em>软件授权：</em>
+                            <input type="text" name="licence" value="{:isset($data['licence']) ? $data['licence'] : '';}" id="licence"/>
+                            <span class="licence_pop">*</span>
+                        </div>
+                        <div class="info-input">
+                            <em>是否联网：</em>
+                            <input type="text" name="network" value="{:isset($data['network']) ? $data['network'] : '';}" id="network"/>
+                            <span class="network_pop">*</span>
+                        </div>
+                        <div class="info-input">
+                            <em>等级：</em>
+                            <input type="text" name="rank" value="{:isset($data['rank']) ? $data['rank'] : '';}" id="rank"/>
+                            <span class="rank_pop">*</span>
+                        </div>
+                        <div class="info-input">
+                            <em>供应商：</em>
+                            <input type="text" name="supplier" value="{:isset($data['supplier']) ? $data['supplier'] : '';}" id="supplier"/>
+                            <span class="supplier_pop">*</span>
+                        </div>
+                        <div class="info-input">
+                            <em>更新时间：</em>
+                            <input type="text" name="update_time" value="{:isset($data['update_time']) ? date('Y-m-d H:i:s', $data['update_time']) : '';}" id="update_time"/>
+                            <span class="update_time_pop">*</span>
+                        </div>
+                        <div class="info-input">
+                            <em>应用平台：</em>
+                            <input type="text" name="system" value="{:isset($data['system']) ? $data['system'] : '';}" id="system"/>
+                            <span class="system_pop">*</span>
+                        </div>
+                        <empty name="download_data">
+                            <div class="info-input">
+                                <em>下载地址：</em>
+                                <input type="text" name="download[1][url]" id="url"/>
+                                <span class="url_pop">*</span>
+                            </div>
+                            <div class="info-input">
+                                <em>附加下载地址：</em>
+                                <input type="text" name="download[2][url]" value=""/>不可不填
+                            </div>
+                        <else/>
+                        <php>$i = 0;</php>
+                        <foreach name="download_data" item="dd" key="ddk">
+                            <div class="info-input">
+                                <em><if condition="$i == 0 ">下载地址：<else/>附加下载地址：</if></em>
+                                <input type="hidden" name="download[{$ddk}][id]" value="{$dd['id']}" id="url">
+                                <span class="url_pop">*</span>
+                                <input type="text" name="download[{$ddk}][url]" value="{$dd['url']}"/>不可不填
+                            </div>
+                            <php>$i++;</php>
+                        </foreach>
+                        </empty>
+                    </div>
+                </div>
+                <div class="product-attr-chapter">
+                    <div class="product-attr-tit">自定义参数</div>
+                    <div class="product-attr-input" id="zdy">
+                        <div class="zdy-main">
+                        <empty name="data['parameter']">
+                            <!--div class="sdy-input">
+                                <input type="text" value="参数1" class="cs" name="custom_param[1][key]">
+                                <input type="text" value="参数值1" class="cs right" name="custom_param[1][val]">
+                                <span>×</span>
+                            </div>
+                            <div class="sdy-input">
+                                <input type="text" value="参数2" class="cs" name="custom_param[2][key]">
+                                <input type="text" value="参数值2" class="cs right" name="custom_param[2][val]">
+                                <span>×</span>
+                            </div-->
+                        <else/>
+                        <php>
+                            $custom_param = array();
+                            $tmp_data = explode('|', $data['parameter']);
+                            foreach ($tmp_data as $value) {
+                                $tmp = explode(':', $value);
+                                if (empty($tmp[0]) || empty($tmp[1]))
+                                    continue;
+
+                                $custom_param[] = array('key' => $tmp[0], 'val' => $tmp[1]);
+                            }
+                        </php>
+                        <foreach name="custom_param" item="cp" key="cpk">
+                            <div class="sdy-input">
+                                <input type="text" value="{$cp['key']}" class="cs" name="custom_param[{$cpk}][key]">
+                                <input type="text" value="{$cp['val']}" class="cs right" name="custom_param[{$cpk}][val]">
+                                <span>×</span>
+                            </div>
+                        </foreach>
+
+                        </empty>
+                        </div>
+                        <input type="button" value="增加更多参数" class="btn-more">
+                    </div>
+                    <p class="zdy-tips">您可以根据产品特性自定义其参数，让更丰富的产品信息展示给客户。</p>
+                </div>
+                <div class="product-attr-chapter">
+                    <div class="product-attr-tit">添加产品图片</div>
+                    <div class="add-pic">
+                        <input type="file" value="上传图片" class="btn-img" name="images[]" multiple>
+                        <p class="img-tips">可以上传多张产品图片，第一张图片为主图，建议每张图片不超过3M,图片内容避免全文字。</p></div>
+                    <div class="product-img">
+                        <empty name="picture_data">
+                            <div style="margin-top: 100px;">请上传图片</div>
+                        <else/>
+                        <ul class="product-img-ul">
+                            <foreach name="picture_data" item="pd">
+                            <li><img src="{$pd['path']}" alt="{$pd['path']}"><span id="{$pd['id']}">×</span></li>
+                            </foreach>
+                        </ul>
+                        </empty>
+                    </div>
+                </div>
+                <div style=" clear:both"></div>
+                <div class="product-attr-chapter">
+                    <div class="product-attr-tit">产品详细介绍</div>
+                    <div class="product-attr-info">
+                        <textarea name="content" id="content">{:isset($data['content']) ? $data['content'] : '';}</textarea>
+                        <link rel="stylesheet" href="__STATIC__/kindeditor/default/default.css" />
+                        <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-min.js"></script>
+                        <script charset="utf-8" src="__STATIC__/kindeditor/zh_CN.js"></script>
+                        <script type="text/javascript">
+                            $(function(){
+                                var editor = KindEditor.create('textarea[name="content"]', {
+                                    uploadJson:'/index.php?s=/administrator/attached/upload',
+                                    fileManagerJson:'/index.php?s=/administrator/attached/manager',
+                                    resizeType:1,
+                                    allowPreviewEmoticons:false,
+                                    allowFileManager:true,
+                                    allowImageUpload:true,
+                                    minWidth:740,
+                                    minHeight:300,
+                                    items:[
+                                        'source', 'preview', 'fullscreen','|','fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                                        'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                        'insertunorderedlist', '|', 'emoticons', 'link', 'unlink']
+                                });
+                            });
+                        </script>
+                    </div>
+                    <br/>
+                    <input type="submit" value="提交" class="product-btn">
+                </div>
+            </div>
+            </form>
+            <!--产品属性 end-->
+        </div>
+    </div>
+    </div>
+
+</block>
+<block name="script">
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/ucValidate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/gfw/js/user_center.js"></script>
+    <script type="text/javascript">
+        function check_field()
+        {
+            var param = {
+                'size':{'val':$('#size').val(), 'text':'软件太小不能为空'},
+                'version':{'val':$('#version').val(), 'text':'软件版本不能为空'},
+                'language':{'val':$('#language').val(), 'text':'软件语言不能为空'},
+                'licence':{'val':$('#licence').val(), 'text':'授权不能为空'},
+                'network':{'val':$('#network').val(), 'text':'是否联网不能为空'},
+                'rank':{'val':$('#rank').val(), 'text':'等级不能为空'},
+                'supplier':{'val':$('#supplier').val(), 'text':'供应商不能为空'},
+                'update_time':{'val':$('#update_time').val(), 'text':'更新时间不能为空'},
+                'system':{'val':$('#system').val(), 'text':'应用平台不能为空'},
+                'url':{'val':$('#url').val(), 'text':'下载地址不能为空'}
+            };
+
+
+            for (var i in param)
+            {
+                if ('' == param[i]['val'])
+                {
+                    $('.'+i.toString()+'_pop').text(param[i]['text']);
+                    return false;
+                }
+            }
+
+            var custom_default = ['参数1','参数2','参数值1','参数值2'], status = true;
+            $('.cs').each(function(){
+                if (1 < $.inArray($(this).val(), custom_default))
+                    status = false;
+            });
+
+            if (!status)
+            {
+                alert('请输入参数及参数值');
+                return false;
+            }
+
+            var content = $('#content').val();
+            if ('' == content || content.length < 200)
+            {
+                alert('请输入描述或小于200字');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</block>

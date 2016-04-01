@@ -1,0 +1,73 @@
+<extend name="Home@qilimobile/Base/common" />
+
+<block name="body">
+<include file="Home@qilimobile/Public/header" />
+
+<div class="mui-content">
+	<section class="y7-category-list mui-clearfix">
+		<aside class="mui-clearfix">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<volist name="lists" id="details">
+						<a rootid="{$details.id}" <eq name="i" value="1">class="active"</eq> href="javascript:void(0)">{$details['title']}</a>
+					</volist>
+				</div>
+			</div>
+		</aside>
+
+		<article>
+			<volist name="lists" id="details">
+				<if condition="isset($details['_'])">
+					<neq name="i" value="1">
+						<ul class="hidden" id="node_{$details.id}">
+							<volist name="details['_']" id="menu">
+								<li>
+									<a href="/{$menu['name']}/"><img src="__PUBLIC__/Home/qilimobile/img/null.gif" id="sonid_{$menu.id}">{$menu.title}</a>
+								</li>
+							</volist>
+						</ul>
+					<else/ >
+						<ul id="node_{$details.id}">
+							<volist name="details['_']" id="menu">
+								<li>
+									<a href="/{$menu['name']}/"><img src="{$menu.icon.path}" id="sonid_{$menu.id}">{$menu.title|msubstr=0,2,'utf-8',false}</a>
+								</li>
+							</volist>
+						</ul>
+					</neq>
+				</if>
+			</volist>
+		</article>
+	</section>
+</div>
+</block>
+
+<block name="script">
+<script src="__PUBLIC__/Home/qilimobile/js/index.js"></script>
+<script src="__PUBLIC__/Home/qilimobile/js/category.js"></script>
+<script>
+var menu = {$lists|json_encode};
+
+$(document).ready(function(){
+	$('.mui-clearfix aside a').click(function(){
+		
+		$('.mui-clearfix .active').removeClass('active');
+
+		$(this).addClass('active');
+
+		var rootid = $(this).attr('rootid').replace(/[^0-9]/ig,"");
+		
+		var node = $('#node_' + rootid);
+
+		if(menu[rootid]['_'] != 'undefined'){
+			$('.mui-clearfix article ul').addClass('hidden');
+			node.removeClass('hidden');
+
+			$.each(menu[rootid]['_'], function(i, e){
+				$('#sonid_' + e.id).attr('src', e['icon']['path']);
+			});
+		}
+	});
+});
+</script>
+</block>

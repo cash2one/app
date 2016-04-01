@@ -1,0 +1,58 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style"><link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/wjgzb.css"/></block>
+
+<block name="body">
+<div id="wjgzb-main">
+    <P class="wjgz phpd">7230手游总排行榜<a href="{:C('STATIC_URL')}/yx/0_0_0_0_1_1.html" target="_blank">更多+</a></P>
+    <div class="phpd">
+        <p class="nav"><i class="cur">年度下载量TOP30</i><i>玩家好评度TOP30</i></p>
+        <ul class="phul ulTab">
+            <volist name="lists" id="val">
+                 <li><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="title">{$val.title}</a><b>{:implode(',',array_column(get_tags($val['id'],'Down'),'title'))}</b><u class="demo2"><em></em><input class="knob" value="{:get_score($val['id'],true)}"></u><s>{$val.abet}人赞</s></span></li>
+            </volist>
+        </ul>
+        <ul class="phul ulTab">
+            <Think:article basename="down" name="dmain" order="abet desc" limit="30">
+                <li><span><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="title">{$article.title}</a><b>{:implode(',',array_column(get_tags($article['id'],'Down'),'title'))}</b><u class="demo2"><em></em><input class="knob" value="{:get_score($article['id'],true)}"></u><s>{$article.abet}人赞</s></span></li>
+            </Think:article>
+        </ul>
+    </div>
+    <!------即将开测------->
+    <P class="wjgz jjkc phpd">7230网游总排行榜<a href="{:C('STATIC_URL')}/yx/0_2_0_0_1_1.html" target="_blank">更多+</a></P>
+    <div class="yxflph">
+    <b class="phul-nav">休闲</b>
+        <ul class="phul ulTab">
+            <Think:article basename="down" name="dmain" where="category_id = 10 AND network = 2"  order="abet desc" limit="10">
+            <li><span><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="title">{$article.title}</a><b>{:implode(',',array_column(get_tags($article['id'],'Down'),'title'))}</b><u class="demo2"><em></em><input class="knob" value="{:get_score($article['id'],true)}"></u><s>{$article.abet}人赞</s></span></li>
+            </Think:article>
+        </ul>
+    </div>
+    <div class="yxflph right">
+    <b class="phul-nav">角色</b>
+        <ul class="phul ulTab">
+            <Think:article basename="down" name="dmain" where="category_id = 6 AND network = 2"  order="abet desc" limit="10">
+            <li><span><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="title">{$article.title}</a><b>{:implode(',',array_column(get_tags($article['id'],'Down'),'title'))}</b><u class="demo2"><em></em><input class="knob" value="{:get_score($article['id'],true)}"></u><s>{$article.abet}人赞</s></span></li>
+            </Think:article>
+        </ul>
+    </div>
+    <!------即将开测------->
+        <P class="wjgz djph phpd">7230单机总排行榜<a href="{:C('STATIC_URL')}/yx/0_1_0_0_1_1.html" target="_blank">更多+</a></P>
+    <div class="yxflph">
+    <b class="phul-nav">休闲</b>
+        <ul class="phul ulTab">
+            <Think:article basename="down" name="dmain" where="category_id = 10 AND network = 1"  order="abet desc" limit="10">
+            <li><span><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="title">{$article.title}</a><b>{:implode(',',array_column(get_tags($article['id'],'Down'),'title'))}</b><u class="demo2"><em></em><input class="knob" value="{:get_score($article['id'],true)}"></u><s>{$article.abet}人赞</s></span></li>
+            </Think:article>
+        </ul>
+    </div>
+    <div class="yxflph right">
+    <b class="phul-nav">角色</b>
+        <ul class="phul ulTab">
+            <Think:article basename="down" name="dmain" where="category_id = 6 AND network = 1"  order="abet desc" limit="10">
+            <li><span><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="pic4"><img src="{:get_cover($article['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$article['id'],'Down')}" target="_blank" class="title">{$article.title}</a><b>{:implode(',',array_column(get_tags($article['id'],'Down'),'title'))}</b><u class="demo2"><em></em><input class="knob" value="{:get_score($article['id'],true)}"></u><s>{$article.abet}人赞</s></span></li>
+            </Think:article>
+        </ul>
+    </div>
+</div>
+</block>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="Home@7230mobile/Public/head"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zq/7230mobile/css/k.css"/>
+</head>
+
+<body id="kc">
+<include file="Home@7230mobile/Public/header"/>
+<div class="g">
+    <header style=" background-color:#fff; height:46px; border-bottom:1px solid #e7e7e7;">
+        <div class="dragable" widget="base">
+        <span style=" background-color:#fff; color:#333; height:46px; line-height:46px; text-align:center">{$base['title']}</span>
+        </div>
+        <a href="javascript:history.go(-1)" class="back" style="background: url(http://m.7230.com/Public/Home/7230mobile/images/sprite2.png) -5px 0px no-repeat;"></a>
+    </header>
+    <section id="ztc" class="cfix" style="padding-bottom:0px;">
+        <dl id="ztinfo">
+            <dt><img src="{:get_cover($base['icon'],'path')}"></dt>
+            <div class="dragable" widget="html">
+            <dd>
+                不管是手游还是端游，玩家都在寻觅一种版本，那就是破解版。为什么呢？因为这是屌丝逆袭的最好选择，可以轻轻松松就超越其他小伙伴，不用破解版就是sz了。so，为了所有爱玩游戏的小伙伴，小编为大家带来了安卓网游破解版大全，希望有你想要的！
+            </dd>
+            </div>
+        </dl>
+        <p id="acount">{$base['title']}<b>36</b>款:</p>
+        <ul class="heapp">
+
+            <div class="dragable" widget="down__product_tags">
+                <volist name="lists" id="val" offset="0" length="2">
+                    <li><a href="{:staticUrlMobile('detail',$val['id'],'Down')}" class="img">
+                        <img src="{:get_cover($val['smallimg'],'path')}"></a>
+                        <p><a href="{:staticUrlMobile('detail',$val['id'],'Down')}">{$val['name']}</a><span><i>{$val['title']}</i><i>{:showText($val['language'],'language',false,'down')}</i></span><span>{$val['size']}</span></p>
+                        <a href="{$val['url']}" class="bxz">下载</a>
+                    </li>
+                </volist>
+                <php>unset($lists);</php>
+            </div>
+
+            <div class="dragable" widget="down__down_category">
+                <volist name="lists" id="val">
+                    <li><a href="{:staticUrlMobile('detail',$val['id'],'Down')}" class="img">
+                        <img src="{:get_cover($val['smallimg'],'path')}"></a>
+                        <p><a href="{:staticUrlMobile('detail',$val['id'],'Down')}">{$val['name']}</a><span><i>{$val['title']}</i><i>{:showText($val['language'],'language',false,'down')}</i></span><span>{$val['size']}</span></p>
+                        <a href="{$val['url']}" class="bxz">下载</a>
+                    </li>
+                </volist>
+            </div>
+
+        </ul>
+        <php>unset($lists);</php>
+        <p class="more-tags"><em>更多集合:</em>
+        <div class="dragable" widget="batch__product_tags">
+            <span>
+                <volist name="lists" id="val">
+                <a href="{:C('STATIC_URL')}/{:C('FEATURE_ZT_DIR')}/{:$val['url_token']}"><img src="{:get_cover($val['icon'],'path')}"><b>{$val.title}</b></a>
+                </volist>
+            </span>
+        </div>
+        </p>
+    </section>
+</div>
+<include file="Home@7230mobile/Public/footer"/>
+<script>
+    var num = $('.heapp li').length;
+    $('#acount b').html(num);
+</script>
+
+</body>
+</html>

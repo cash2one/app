@@ -1,0 +1,28 @@
+<!--开服开测-->
+<div class="kfkc" id="news-kfkc">
+    <div class="title"><b class="cur">开服表</b><b>开测表</b></div>
+    <ul class="current">
+        <li class="keyTitle"><i>时间</i><i>游戏名</i><i>服务器名</i></li>
+        <volist name="server" id="article">
+            <li><i class="date">{:date('m-d H:i',$article['start_time'])}</i><a href="{:staticUrl('detail',$article['game'],'Down')}" target="_blank" class="game">{$article['title']}</a><i class="server">{$article['server']}</i></li>
+        </volist>
+    </ul>
+    <ul>
+        <li class="keyTitle"><i>时间</i><i>游戏名</i><i>测试类型</i></li>
+        <volist name="server" id="article">
+            <li><i class="date">{:date('m-d H:i',$article['start_time'])}</i><a href="{:staticUrl('detail',$article['game'],'Down')}" target="_blank" class="game">{$article['title']}</a><i class="server">{$article['server']}</i></li>
+        </volist>
+    </ul>
+</div>
+<!--本月评分-->
+<div class="game_rank wrap-r" id="pfph">
+    <h2><i>本月评分排行榜</i></h2>
+    <div class="current">
+    <ul>
+        <volist name="games" id="val">
+        <php> if($key == 0)$cur = 'class="cur"';else $cur='';</php>
+        <li {$cur}><b></b><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="tit">{$val['title']}</a><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank"><img src="{:get_cover($val['smallimg'],'path')}"></a><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic">{$val['title']}</a><em><i>大小：{$val['size']}</i><i>{$val['cate']}</i></em></span></li>
+        </volist>
+    </ul>
+    </div>
+</div>

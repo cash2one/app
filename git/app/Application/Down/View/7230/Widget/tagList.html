@@ -1,0 +1,29 @@
+<extend name="Home@7230/Base/common"/>
+
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/7230/css/kpage.css"/>
+</block>
+<block name="body">
+<!-----head-END----->
+<div id="kpage">
+    <p class="page-nav">当前位置：<a href="/">首页</a>-><a href="/{$info['category']=='1'?'yx/':'rj/'}">{$info['category']=='1'?'游戏':'软件'}</a>->{$info['title']}</p>
+    <div id="banner">
+        <img src="{:get_cover($info['icon'],'path')}">
+        <p>
+            <b>{$info['title']}</b>
+            <i class="info">{$info['description']}</i>
+            <i class="more"><a href="/tags/" target="_blank">更多标签>></a></i>
+        </p>
+    </div>
+    <ul class="klb">
+        <volist name="lists" id="val">
+        <li>
+            <p><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="pic"><img src="{:get_cover($val['smallimg'],'path')}"></a><span><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank">{$val['title']}</a><i class="star{$val['rank']} star"></i><i>{:format_size($val['size'])}</i><a href="{:staticUrl('detail',$val['id'],'Down')}" target="_blank" class="down">下载</a></span></p>
+            <b>{$val['description']}</b>
+        </li>
+        </volist>
+    </ul>
+    <div class="page">{$page}</div>
+</div>
+</block>
+

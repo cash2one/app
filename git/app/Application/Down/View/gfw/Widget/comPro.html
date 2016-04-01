@@ -1,0 +1,21 @@
+<div class="related  gf-border">
+    <div class="title">
+        <h2>公司相关产品</h2>
+    </div>
+    <empty name="info['package_id']">
+        <div style="padding-left: 20px; line-height: 36px;">暂无相关产品</div>
+    <else />
+        <php>$where="package_id=".$info['package_id']</php>
+        <Think:article basename="Down" name="product" where="$where" order="create_time desc" limit="1,4">
+        <php>$previewimg = explode(',', $article['previewimg']);</php>
+        <dl class="phot">
+            <dt class="phot-pic"><a href="{:staticUrl('detail', $article['id'],'Down')}"><img src="{:get_cover($previewimg[0],'path')}" width="174" height="173"></a></dt>
+            <dd class="price">￥{:sprintf("%01.2f", $article['price'])}</dd>
+            <dd  class="name"><a href="{:staticUrl('detail', $article['id'],'Down')}">{$article.title|msubstr=0,18,'utf-8',false}</a></dd>
+        </dl>
+        </Think:article>
+        <notempty name="info['package_id']">
+        <div class="pmore"><a href="{:C('STATIC_URL')}/company_products/{$info['package_id']}/">更多产品></a></div>
+        </notempty>
+    </empty>
+</div>

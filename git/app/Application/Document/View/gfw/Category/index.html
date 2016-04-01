@@ -1,0 +1,62 @@
+<extend name="Home@gfw/Base/commonBaike" />
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/gfw/css/baike.css"/>
+</block>
+<block name="body">
+<p class="page-nav"><span class="location">当前位置：</span><a href="{:C('STATIC_URL')}">首页</a><span class="grey">></span><a href="{:staticUrl('lists','80', 'Document')}">百科</a><span class="grey">></span>{$categoryName}</p>
+<div id="baike-main">
+    <div class="baike-top">
+        <!-- 幻灯片 -->
+       {~W('Document/Gfw/cateSlider',array($cid,2))}
+        
+        <!-- 热门百科 -->
+        <div class="ranklist gf-border">
+            <h2 class="bkicon1">热门百科</h2>
+           {~W('Document/Gfw/hotBaike',array($cid))}
+        </div>
+        <div class="id flclr">
+            <div class="size">
+        <!-- 广告位：百科列表页Banner广告 -->
+        <script type="text/javascript">BAIDU_CLB_fillSlot("1123376");</script></div>
+            <ul class="news">
+               <Think:article basename="Document" name="article"  limit="4" cate="90" order="update_time desc">
+                    <li><a href="{:staticUrl('detail', $article['id'],'Document')}">{$article.title}</a></li>
+                </Think:article>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 娱乐百科 -->
+    
+    
+    
+    <div class="baike-yule">
+        <div class="baike-yule-title"><h2>{$categoryName}</h2><a href="{:staticUrl('lists',$cid, 'Document')}" class="more" target="_blank">更多></a></div>
+        <div class="baike-yule-list">
+            <ul>
+             <volist  name="lists" id="article">
+                <li>
+                    <div class="img"><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank"><img src="{:get_cover($article['vertical_pic'],'path')}"></a></div>
+                    <div class="description">
+                        <h3><a href="{:staticUrl('detail', $article['id'],'Document')}" target="_blank">{$article.title}</a></h3>
+                        <p>{:clean_str($article['description'])}</p>
+                       {~W('Document/Gfw/relateCi',array($cid))}
+                    </div>
+                </li>
+    </volist>
+  
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <!-- 广告位：百科列表页原生广告 -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("1123378");</script>
+    </div>
+
+
+    <!-- 分页 -->
+    <p id="fenye">{$page}</p>
+
+</div>
+<!-----baike-main-end----->
+</block>

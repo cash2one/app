@@ -1,0 +1,94 @@
+<extend name="Home@7230mobile/Base/common2"/>
+<block name="style">
+    <link href="__PUBLIC__/Home/7230mobile2/css/downDetail.css" rel="stylesheet" type="text/css">
+</block>
+<block name="body">
+    <!-- 下载部分 -->
+    <section>
+        <div class="page_title"><span><a href="javascript:void(0);" class="back"></a></span><h2>{$info['title']}</h2></div>
+        <div class="down_cont">
+            <div class="art_down">
+                <div class="down_left">
+                    <img src="{:get_cover($info['smallimg'],'path')}">
+                </div>
+                <div class="down_right">
+                    <div class="rgt1">
+                        <h3>{$info['title']}</h3>
+                        <span data_id ="{$info['id']}" data_model="Down" id="zan">{$info['abet']}</span>
+                    </div>
+                    <div class="rgt2">
+                        <span class="size">大小：{:format_size($info['size'])}</span>
+                        <span class="language">语言：{:showText($info['language'],'language')}</span>
+                    </div>
+                    <div class="rgt3">
+                        <span class="cate">{:$info['system']=='0'?'类别：'.$info['cate']:'平台：'.showText($info['system'],'system')}</span>
+                        <span class="system">版本：{$info['version']}</span>
+                    </div>
+                </div>
+            </div>
+            <notempty name="info['tags']">
+                <ul class="down_tags">
+                    <li class="tags_tit">标签:</li>
+                    <volist name="info['tags']" id="val">
+                        <li><a href="{$url}/tag/{$val['name']}">{$val['title']}</a></li>
+                    </volist>
+                </ul>
+            </notempty>
+            <!-- 子下载 -->
+            <div class="pack_bottom">
+                <notempty name="info['down']">
+                    <a href="#" onclick="goDown('{$info['down']}','{$info['system']}')" class="pack_down"><span>{$info['title']}下载</span></a>
+                    <else />
+                    <span class="no_down">不好意思，暂未提供下载</span>
+                </notempty>
+                {:W('P7230mobile/childDown',array($info['id'],$info['id']))}
+            </div>
+        </div>
+    </section>
+
+    <!-- 图片、内容 -->
+    <section>
+        <div class="down_img" id="wrapper">
+            <ul>
+                <volist name="info['previewimg']" id="val">
+                    <li><img src="{:get_cover($val,'path')}"></li>
+                </volist>
+            </ul>
+        </div>
+        <div id="down_info">
+            <div class="info_ms">{$info['description']}</div>
+            <div class="info_cont">
+                {$info['content']}
+            </div>
+            <div class="info_more"><span id="down_info_more">显示全部</span></div>
+        </div>
+    </section>
+
+    {:W('P7230mobile/downFoot',array($info))}
+
+    <!-- 相关评论 -->
+    <section>
+        <div class="top_tit"><span>相关评论</span></div>
+        <div data_id="{$info['id']}" data_type="down" id="comment">
+            <div class="art_pl">
+                <form id="pl" method="post" onsubmit="return pl_comment()">
+                    <div class="pl_txt"><textarea placeholder="我要评论！" rows="2" id="pl_info" name="message"></textarea></div>
+                    <div class="pl_btn"><input type="submit" value="发表"> </div>
+                </form>
+            </div>
+            <div class="pl_head">
+                <span class="pl_tit">最新评论</span><span class="pl_count">(0条)</span>
+            </div>
+            <ul id="pl_ul">
+                <li>
+                    <div class="pl_empty">暂无评论</div>
+                </li>
+            </ul>
+
+        </div>
+    </section>
+</block>
+<block name="script">
+<script type="text/javascript"> var _webInfo = {};_webInfo={ Username:"{$info['uid']}",Type:"0",DateTime:"{:specialDate($info['update_time'])}",Id:"{$info['id']}" };</script>
+<script type="text/javascript" src="__PUBLIC__/Home/7230mobile2/js/iscroll.js"></script>
+</block>
